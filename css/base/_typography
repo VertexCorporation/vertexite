@@ -1,0 +1,23 @@
+/* =========================================
+   BASE - TYPOGRAPHY
+   ========================================= */
+
+/* Headings (H1 - H6) */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+}
+
+/* Text Utilities */
+.gradient-text {
+    background: var(--gradient-main);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

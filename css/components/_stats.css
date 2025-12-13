@@ -1,0 +1,31 @@
+/* =========================================
+   COMPONENTS - STATISTICS
+   ========================================= */
+
+/* Note: .stats-container grid layout is defined in layout/_grid.css */
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    font-size: 56px;
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 8px;
+    line-height: 1;
+}
+
+.stat-label {
+    color: var(--text-muted);
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+/* --- Mobile Responsiveness --- */
+@media (max-width: 768px) {
+    .stat-number {
+        font-size: 48px;
+    }
+}

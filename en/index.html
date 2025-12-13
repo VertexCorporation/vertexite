@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 🎯 SEO & Meta Tags -->
+  <title>Vertex | The Peak of Technology</title>
+  <meta name="description"
+    content="⭐ Vertex: Turkey's youngest tech company. Pioneering in AI with Cortex & Mergen, mobile gaming, and next-gen software solutions.">
+  <meta name="keywords"
+    content="vertex, vertex corporation, cortex, mergen ai, drome lang, solar browser, ally health, young tech entrepreneurs, software company turkey">
+  <meta name="author" content="Vertex Corporation">
+  <meta name="theme-color" content="#0a0a0a">
+
+  <!-- 🌍 Hreflang Tags (Crucial for SEO) -->
+  <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
+  <link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
+  <link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
+  <link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
+
+  <!-- 🖼️ Open Graph (Social Media) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vertexishere.com/en/">
+  <meta property="og:title" content="Vertex | The Peak of Technology">
+  <meta property="og:description" content="Turkey's youngest tech giants. Building the future with AI and Software.">
+  <meta property="og:image" content="../assets/og-image.jpg">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vertex | The Peak of Technology">
+  <meta name="twitter:description" content="Discover Cortex, Mergen, and the future of tech.">
+  <meta name="twitter:image" content="../assets/og-image.jpg">
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/main.css">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+
+  <!-- 🔧 CSS Patches (Overrides without touching main.css) -->
+  <style>
+    /* 1. Flexbox Centering Logic (Fixes the last row alignment issue) */
+    .centered-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+    }
+    
+    .centered-grid > * {
+      flex: 0 1 calc(33.333% - 32px); /* Default: 3 items per row */
+      min-width: 300px; /* Prevent squishing on smaller screens */
+    }
+
+    /* 2. Fix Icon Colors on Light Mode Hover */
+    [data-theme="light"] .social-links a:hover img {
+       filter: invert(1) !important; /* Make white on hover/dark bg */
+    }
+    
+    /* 3. Inline Style Cleanup Helpers */
+    .section-dark { background: var(--bg-secondary); }
+    .text-center { text-align: center; }
+    .mb-4 { margin-bottom: 24px; }
+    .mb-6 { margin-bottom: 48px; }
+    
+    /* Mobile Grid Adjustments */
+    @media (max-width: 768px) {
+      .centered-grid > * {
+        flex: 0 1 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <canvas id="particle-canvas"></canvas>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo">Vertex</a>
+
+      <nav class="nav-links">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#tech" class="nav-link">Technologies</a>
+        <a href="#team" class="nav-link">Team</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="language-dropdown">
+          <button class="lang-btn-trigger">
+          <span class="lang-text">EN</span> ▼
+          </button>
+          <div class="lang-menu">
+            <a href="../tr/" class="lang-item">Turkish</a>
+            <a href="../en/" class="lang-item active">English</a>
+            <a href="../hi/" class="lang-item">Hindi</a>
+          </div>
+        </div>
+        <button class="theme-toggle-btn btn-outline" aria-label="Toggle Theme"
+          style="padding: 8px; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+          <div class="theme-icon"></div>
+        </button>
+        <a href="mailto:contact@vertexishere.com" class="btn btn-outline btn-sm">Contact Us</a>
+        <a href="#projects" class="btn btn-primary btn-sm">View Projects</a>
+        <button class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <nav class="mobile-nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projects</a>
+      <a href="#vision">Vision</a>
+      <a href="#team">Team</a>
+      <div class="mobile-lang-selector">
+        <a href="../tr/">TR</a>
+        <a href="../en/" class="active">EN</a>
+        <a href="../hi/">HI</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-bg-glow"></div>
+      <div class="container fade-up">
+        <div class="badge">Turkey's Youngest Tech Company</div>
+        <h1><span class="gradient-text">The Peak of Technology</span><br>Shaping the Future</h1>
+        <p>Founded by Turkey's brightest young talents, Vertex is revolutionizing the world of AI and software.</p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">Start Exploring</a>
+          <a href="#vision" class="btn btn-outline">Our Vision</a>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-container fade-up">
+          <div class="stat-item">
+            <div class="stat-number gradient-text">10M+</div>
+            <div class="stat-label">Target Downloads</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number gradient-text">5k+</div>
+            <div class="stat-label">Active Users</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number gradient-text">15</div>
+            <div class="stat-label">Average Age</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number gradient-text">164</div>
+            <div class="stat-label">Countries</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="grid-3">
+          <div class="card fade-up animated-border">
+            <div class="card-content">
+              <div class="card-icon">
+                <div class="visual-youth">
+                  <div class="youth-orbit"></div>
+                  <div class="youth-orbit"></div>
+                  <div class="youth-core"></div>
+                </div>
+              </div>
+              <h3>Young Innovators</h3>
+              <p>Our team, averaging 15 years old, represents the next generation of tech visionaries dedicated to
+                pushing boundaries and creating revolutionary solutions.</p>
+            </div>
+          </div>
+          <div class="card fade-up animated-border">
+            <div class="card-content">
+              <div class="card-icon">
+                <div class="visual-multi">
+                  <div class="multi-layer"></div>
+                  <div class="multi-layer"></div>
+                  <div class="multi-layer"></div>
+                </div>
+              </div>
+              <h3>Multidisciplinary Expertise</h3>
+              <p>We innovate across a wide range of skills, from software development to AI, gaming, music
+                production, and browser technologies.</p>
+            </div>
+          </div>
+          <div class="card fade-up animated-border">
+            <div class="card-content">
+              <div class="card-icon">
+                <div class="visual-global">
+                  <div class="global-grid"></div>
+                  <div class="global-scan"></div>
+                  <div class="global-dot"></div>
+                </div>
+              </div>
+              <h3>Global Vision</h3>
+              <p>We are dedicated to positioning Turkey as a global technology leader by developing world-class
+                products.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">Our Projects</h2>
+        <div class="grid-3">
+          
+          <!-- Cortex -->
+          <a href="https://github.com/VertexCorporation/Cortex" target="_blank"
+            class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="../assets/cortex.jpg" alt="Cortex AI" loading="lazy">
+            </div>
+            <div class="card-content">
+              <h3>Cortex</h3>
+              <p>A revolutionary online and offline AI platform with advanced capabilities.</p>
+            </div>
+          </a>
+
+          <!-- Mergen (Formerly Sureward) -->
+          <a href="https://github.com/VertexCorporation/Mergen" target="_blank"
+            class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="../assets/mergen.jpg" alt="Mergen AI" loading="lazy" onerror="this.src='../assets/comingsoon.png'">
+            </div>
+            <div class="card-content">
+              <h3>Mergen</h3>
+              <p>Scalable AI architecture designed for high-performance data processing and machine learning models.</p>
+            </div>
+          </a>
+
+          <!-- Drome -->
+          <a href="https://github.com/VertexCorporation/Drome" target="_blank"
+            class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="../assets/drome.jpg" alt="Drome" loading="lazy">
+            </div>
+            <div class="card-content">
+              <h3>Drome</h3>
+              <p>An innovative programming language offering versatile and efficient tools for developers.</p>
+            </div>
+          </a>
+
+          <!-- Solar -->
+          <a href="https://github.com/SolarBrowser/" target="_blank" class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="../assets/solar.jpg" alt="Solar Browser" loading="lazy">
+            </div>
+            <div class="card-content">
+              <h3>Solar Browser</h3>
+              <p>A next-generation web browser built from scratch for performance and privacy.</p>
+            </div>
+          </a>
+
+          <!-- All Star -->
+          <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank"
+            class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="../assets/allstar.jpg" alt="All Star" loading="lazy">
+            </div>
+            <div class="card-content">
+              <h3>All Star</h3>
+              <p>Our mobile game that reached 5 million+ people in 48 hours with 20,000+ downloads.</p>
+            </div>
+          </a>
+
+          <!-- Ally (Formerly Polyhedron) - No Link -->
+          <div class="card fade-up project-card animated-border" style="cursor: default;">
+            <div class="project-img-container">
+              <img src="../assets/ally.jpg" alt="Ally Health" loading="lazy" onerror="this.src='../assets/comingsoon.png'">
+            </div>
+            <div class="card-content">
+              <h3>Ally</h3>
+              <p>Your intelligent health assistant. Providing real-time monitoring and personalized wellness advice.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <section id="tech" class="section section-dark">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="fade-up">Our Technology Ecosystem</h2>
+          <p class="fade-up" style="color: var(--text-muted); margin-top: 16px;">
+            We use the most powerful tools and modern languages to build the future.
+          </p>
+        </div>
+
+        <div class="tech-grid fade-up">
+          <div class="feature-card" style="padding: 24px;">
+            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+              <div class="visual-ai">
+                <div class="ai-node"></div><div class="ai-node"></div><div class="ai-node"></div><div class="ai-node"></div><div class="ai-line"></div>
+              </div>
+            </div>
+            <h4>Artificial Intelligence</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Python, TensorFlow, PyTorch</p>
+          </div>
+          <div class="feature-card" style="padding: 24px;">
+            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+              <div class="visual-web">
+                <div class="web-header"><div class="web-dot"></div><div class="web-dot"></div></div>
+                <div class="web-content"><div class="web-block"></div><div class="web-block"></div></div>
+              </div>
+            </div>
+            <h4>Web Technologies</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">React, Node.js, WebAssembly</p>
+          </div>
+          <div class="feature-card" style="padding: 24px;">
+            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+              <div class="visual-mobile">
+                <div class="mobile-screen"><div class="mobile-item"></div><div class="mobile-item"></div><div class="mobile-item"></div></div>
+              </div>
+            </div>
+            <h4>Mobile App</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Flutter, React Native, Swift</p>
+          </div>
+          <div class="feature-card" style="padding: 24px;">
+            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+              <div class="visual-game">
+                <div class="game-stick"></div>
+                <div class="game-btns"><div class="game-btn"></div><div class="game-btn"></div></div>
+              </div>
+            </div>
+            <h4>Game Development</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Unity, C#, Unreal Engine</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision" class="section">
+      <div class="container">
+        <div class="card fade-up" style="flex-direction: row; align-items: center; gap: 40px; padding: 60px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 300px;">
+            <h2 style="font-size: 32px; margin-bottom: 24px;">2030 Vision</h2>
+            <p style="font-size: 18px; margin-bottom: 24px;">By 2030, Vertex aims to establish a global presence in all
+              markets worldwide, reaching millions of active users on our platforms and becoming a recognized leading
+              force in the global technology industry.</p>
+            <p style="color: var(--text-muted);">We are committed to continuous innovation, developing our own operating
+              system, and further expanding our AI capabilities to shape the digital future.</p>
+          </div>
+          <div style="flex: 1; display: flex; justify-content: center; min-width: 300px;">
+            <img src="../assets/vision.png" alt="Global Vision"
+              style="border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); width: 100%; max-width: 400px;" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section (Updated & Centered) -->
+    <section id="team" class="section">
+      <div class="container">
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">Our Team</h2>
+        
+        <!-- Changed to centered-grid (Flexbox) for perfect centering of 5 items -->
+        <div class="centered-grid">
+          
+          <!-- Mustafa -->
+          <div class="card fade-up team-card">
+            <img src="../assets/MUSTAFACAKI.jpg" alt="Mustafa Çakı" class="team-img" loading="lazy">
+            <h3>Mustafa Çakı</h3>
+            <p class="team-role">Co-Founder & CEO</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/mustawtfa/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="mailto:mustafacaki@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
+            </div>
+          </div>
+
+          <!-- Ata Türkçü -->
+          <div class="card fade-up team-card">
+            <img src="../assets/ATATURKCU.jpg" alt="Ata Türkçü" class="team-img" loading="lazy">
+            <h3>Ata Türkçü</h3>
+            <p class="team-role">Co-Founder & CTO</p>
+            <div class="social-links">
+              <a href="https://www.instagram.com/miniikbirkuss/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+
+          <!-- Murat Coşkun -->
+          <div class="card fade-up team-card">
+            <img src="../assets/MURATCOSKUN.jpg" alt="Murat Coşkun" class="team-img" loading="lazy">
+            <h3>Murat Coşkun</h3>
+            <p class="team-role">Chief Architect</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/muratck/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="mailto:murat@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
+            </div>
+          </div>
+
+          <!-- Selim Doğan -->
+          <div class="card fade-up team-card">
+            <img src="../assets/selim.jpg" alt="Selim Doğan" class="team-img" loading="lazy">
+            <h3>Selim Doğan</h3>
+            <p class="team-role">Senior Web Developer</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/selim-doğan-865380320/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/selim.rar/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+
+          <!-- Mir Emir Kaya -->
+          <div class="card fade-up team-card">
+            <img src="../assets/mir.jpg" alt="Mir Emir Kaya" class="team-img" loading="lazy">
+            <h3>Mir Emir Kaya</h3>
+            <p class="team-role">App Developer</p>
+            <div class="social-links">
+              <a href="https://www.instagram.com/miremirkaya0/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Final CTA -->
+  <section class="container">
+    <div class="cta-section fade-up">
+      <div class="cta-bg-animation">
+        <div class="cta-grid"></div>
+        <div class="cta-orb"></div><div class="cta-orb"></div><div class="cta-orb"></div>
+        <div class="cta-shooting-line"></div><div class="cta-shooting-line"></div><div class="cta-shooting-line"></div><div class="cta-shooting-line"></div>
+        <div class="cta-overlay"></div>
+      </div>
+      <div class="cta-content">
+        <h2 style="font-size: 42px; margin-bottom: 24px;">Be Part of the Future</h2>
+        <p style="font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px;">
+          Push the boundaries of technology with Vertex. Explore our projects or join our team.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center;">
+          <a href="#projects" class="btn btn-primary">Explore Projects</a>
+          <a href="mailto:contact@vertexishere.com" class="btn btn-outline">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-expanded">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;">Vertex</a>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            Turkey's youngest tech company. Revolutionizing AI, software, and gaming with an average age of 15.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Projects</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/VertexCorporation/Cortex">Cortex</a></li>
+            <li><a href="https://github.com/SolarBrowser/">Solar Browser</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar">All Star</a></li>
+            <li><a href="https://github.com/VertexCorporation/Mergen">Mergen</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Company</h4>
+          <ul class="footer-links">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#vision">Vision</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:contact@vertexishere.com">Send Email</a></li>
+            <li><a href="https://www.linkedin.com/company/106897671/">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/vertex.23/">Instagram</a></li>
+            <li><a href="#">Discord</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div class="copyright">
+          &copy; 2025 Vertex Corporation. All rights reserved.
+        </div>
+        <div class="footer-legal-links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="../js/main.js"></script>
+</body>
+
+</html>

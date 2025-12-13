@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 
+      SEO: Prevents indexing of this specific routing page. 
+      We want Google to index /en/, /tr/, and /hi/ specifically.
+    -->
+    <meta name="robots" content="noindex, follow">
+    
+    <title>Vertex | Redirecting...</title>
+    <meta name="description" content="Vertex - The Future of Technology. Redirecting to your local version.">
+    <meta name="theme-color" content="#050505">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- 
+      Styles: 
+      Set background to dark immediately to prevent "White Flash" during redirect.
+    -->
+    <style>
+        html, body {
+            background-color: #050505;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: sans-serif;
+            color: #333;
+        }
+        /* Fallback text style for noscript */
+        .noscript-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+            text-align: center;
+        }
+        .noscript-container a {
+            color: #fff;
+            margin: 10px;
+            font-size: 1.2rem;
+        }
+    </style>
+
+    <!-- 
+      LOGIC: 
+      Placed in <head> for immediate execution.
+      No spinners, no waiting.
+    -->
+    <script>
+        (function() {
+            // --- Configuration ---
+            // English is the default fallback, so we only list others here.
+            const SUPPORTED_LANGS = ['tr', 'hi']; 
+            const DEFAULT_LANG = 'en';
+            const STORAGE_KEY = 'vertex_lang';
+
+            // --- Path Resolver ---
+            // Handles Localhost (file://), GitHub Pages, and Root Domains robustly.
+            function getBasePath() {
+                const path = window.location.pathname;
+                
+                // If hosted in a subfolder (e.g., /vertexite/)
+                if (path.includes('/vertexite/')) {
+                    return '/vertexite';
+                }
+                
+                // If running locally via filesystem
+                if (window.location.protocol === 'file:') {
+                    return path.substring(0, path.lastIndexOf('/')).replace(/\/index\.html$/, '');
+                }
+                
+                // Standard Root Domain
+                return '';
+            }
+
+            try {
+                // 1. Check if user has a saved preference from a previous visit
+                const savedLang = localStorage.getItem(STORAGE_KEY);
+                
+                // 2. Detect Browser Language (Instant)
+                // Returns "en", "tr", "hi", etc.
+                const userLang = navigator.language || navigator.userLanguage; 
+                const shortLang = userLang ? userLang.substring(0, 2) : 'en';
+
+                // 3. Determine Target Language
+                // Priority: Saved Preference > Browser Language > Default (English)
+                let targetLang = DEFAULT_LANG;
+
+                if (savedLang) {
+                    targetLang = savedLang;
+                } else if (SUPPORTED_LANGS.includes(shortLang)) {
+                    targetLang = shortLang;
+                }
+
+                // 4. Save Preference for future visits (Cache)
+                localStorage.setItem(STORAGE_KEY, targetLang);
+
+                // 5. Construct Final URL
+                const basePath = getBasePath();
+                const targetUrl = `${window.location.origin}${basePath}/${targetLang}/`;
+
+                // 6. Redirect
+                // .replace() is crucial: It removes this routing page from History.
+                // If user clicks "Back" on the next page, they won't get stuck in a loop here.
+                window.location.replace(targetUrl);
+
+            } catch (e) {
+                // Fail-safe: If anything breaks, force English
+                console.error("Redirect logic failed", e);
+                window.location.replace('./en/');
+            }
+        })();
+    </script>
+</head>
+<body>
+    <!-- 
+      Fallback for users/bots with JavaScript disabled.
+      Essential for SEO crawlers to find your sub-pages.
+    -->
+    <noscript>
+        <div class="noscript-container">
+            <h1>Select your language / Dil seçiniz</h1>
+            <p>JavaScript seems to be disabled. Please choose your region:</p>
+            <div>
+                <a href="./tr/">Türkçe</a>
+                <a href="./en/">English</a>
+                <a href="./hi/">Hindi</a>
+            </div>
+        </div>
+    </noscript>
+</body>
+</html>

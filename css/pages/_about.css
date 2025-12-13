@@ -1,0 +1,76 @@
+/* =========================================
+   PAGE - ABOUT & VISION SECTION
+   ========================================= */
+
+/* --- Video Placeholder --- */
+.video-placeholder {
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+    border-radius: var(--radius-lg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.video-placeholder:hover {
+    transform: scale(1.02);
+    border-color: var(--primary);
+}
+
+/* Play Button */
+.play-button {
+    width: 80px;
+    height: 80px;
+    background: rgba(var(--primary-rgb), 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(var(--primary-rgb), 0.2);
+    transition: all 0.3s ease;
+}
+
+.video-placeholder:hover .play-button {
+    background: var(--primary);
+    transform: scale(1.1);
+    border-color: transparent;
+}
+
+.play-icon {
+    width: 0;
+    height: 0;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 20px solid var(--btn-text-color);
+    margin-left: 4px;
+}
+
+/* --- Vision Section Responsive Overrides --- */
+/* Typically used for id="vision" */
+@media (max-width: 768px) {
+    #vision .grid-3 {
+        grid-template-columns: 1fr !important;
+        gap: 40px;
+    }
+
+    #vision h2 {
+        font-size: 32px !important;
+        text-align: center;
+    }
+
+    #vision p {
+        text-align: center;
+    }
+
+    #vision ul {
+        align-items: center;
+    }
+}

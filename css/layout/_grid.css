@@ -1,0 +1,78 @@
+/* =========================================
+   LAYOUT - GRID & UTILITIES
+   ========================================= */
+
+/* --- Main Container --- */
+.container {
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* --- Section Spacing --- */
+.section {
+    padding: 100px 0;
+    position: relative;
+}
+
+/* --- Grid Systems --- */
+.grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+}
+
+/* Tech Stack Grid */
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+}
+
+/* Stats Grid */
+.stats-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    background: rgba(var(--primary-rgb), 0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 48px;
+    margin-top: 80px;
+}
+
+/* --- Responsive Layouts --- */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 20px;
+    }
+    
+    .stats-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .section {
+        padding: 60px 0;
+    }
+
+    .grid-3 {
+        grid-template-columns: 1fr; /* Stack vertically */
+        gap: 20px;
+    }
+
+    .tech-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .stats-container {
+        grid-template-columns: 1fr;
+        padding: 24px;
+        margin-top: 40px;
+        gap: 32px;
+    }
+}

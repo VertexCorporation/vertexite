@@ -1,0 +1,67 @@
+/* =========================================
+   BASE - VARIABLES & THEME CONFIGURATION
+   ========================================= */
+
+:root {
+    /* --- Core Colors --- */
+    --bg-color: #050505;
+    --bg-secondary: #0a0a0a;
+    --bg-card: #121212;
+    --text-main: #ffffff;
+    --text-muted: #a1a1aa;
+
+    /* --- Monochrome Dark Mode (White Primary) --- */
+    --primary: #ffffff;
+    --primary-rgb: 255, 255, 255;
+    --primary-hover: #e4e4e7;
+    --accent: #d4d4d8;
+    --btn-text-color: #000000;
+
+    /* --- Gradients --- */
+    --gradient-main: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
+    --gradient-text: linear-gradient(135deg, #ffffff 0%, #71717a 100%);
+    --cta-bg-gradient: linear-gradient(-45deg, #000000, #1a1a1a, #2a2a2a, #000000);
+
+    /* --- UI Elements --- */
+    --border-color: #27272a;
+    --glass-bg: rgba(10, 10, 10, 0.8);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    
+    /* --- Layout & Spacing --- */
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 24px;
+    --container-width: 1200px;
+    
+    /* --- Typography --- */
+    --font-main: 'Inter', sans-serif;
+    
+    /* --- Header States --- */
+    --header-bg-scrolled: rgba(10, 10, 10, 0.6);
+    --header-border-scrolled: rgba(255, 255, 255, 0.08);
+}
+
+/* --- Light Theme Overrides --- */
+[data-theme="light"] {
+    --bg-color: #ffffff;
+    --bg-secondary: #f4f4f5;
+    --bg-card: #ffffff;
+    --text-main: #18181b;
+    --text-muted: #71717a;
+    --border-color: #e4e4e7;
+
+    /* Monochrome Light Mode (Black Primary) */
+    --primary: #000000;
+    --primary-rgb: 0, 0, 0;
+    --primary-hover: #333333;
+    --accent: #52525b;
+    --btn-text-color: #ffffff;
+
+    --gradient-main: linear-gradient(135deg, #000000 0%, #52525b 100%);
+    --cta-bg-gradient: linear-gradient(-45deg, #000000, #1a1a1a, #2a2a2a, #000000);
+
+    --glass-bg: rgba(255, 255, 255, 0.8);
+    --glass-border: rgba(0, 0, 0, 0.1);
+    --header-bg-scrolled: rgba(255, 255, 255, 0.7);
+    --header-border-scrolled: rgba(0, 0, 0, 0.05);
+}
