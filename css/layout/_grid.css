@@ -43,6 +43,34 @@
     margin-top: 80px;
 }
 
+/* --- Centered Grid (For Team Section) --- */
+.centered-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 32px;
+}
+
+.centered-grid > * {
+    flex: 0 1 calc(33.333% - 32px);
+    min-width: 300px;
+}
+
+@media (max-width: 768px) {
+    .centered-grid > * {
+        flex: 0 1 100%;
+    }
+}
+
+/* --- Utility Helpers --- */
+.mb-4 { margin-bottom: 24px; }
+.mb-6 { margin-bottom: 48px; }
+
+/* Section Backgrounds */
+.section-dark {
+    background: var(--bg-secondary);
+}
+
 /* --- Responsive Layouts --- */
 @media (max-width: 1024px) {
     .container {

@@ -36,7 +36,7 @@
 
 /* --- Logo --- */
 .logo {
-    font-size: 32px !important; /* Adjusted from 48px for better fit */
+    font-size: 32px !important;
     font-weight: 700;
     color: var(--text-main);
     display: flex;
@@ -97,6 +97,20 @@
     gap: 16px;
 }
 
+.theme-toggle-btn {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+    
+    border: 1px solid transparent !important;
+    
+    background: transparent;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--text-main) !important;
+    
+    background: rgba(128, 128, 128, 0.1);
+}
+
 /* Theme Icon Animation (Sun/Moon) */
 .theme-icon {
     width: 20px;
@@ -107,11 +121,14 @@
     cursor: pointer;
 }
 
-/* Sun State (Light Mode) */
+/* 
+   ☀️ SUN STATE (Light Mode) - YENİLENMİŞ BASİT TASARIM
+   Merkezde siyah top, etrafında dönen net ışınlar.
+*/
 [data-theme="light"] .theme-icon {
-    background: black;
-    transform: scale(1) rotate(0deg);
+    background: black; /* Güneşin gövdesi */
     box-shadow: none;
+    transform: scale(0.55); /* Boyutu biraz küçültüyoruz ki ışınlara yer kalsın */
 }
 
 [data-theme="light"] .theme-icon::before {
@@ -119,21 +136,38 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    width: 160%;
-    height: 160%;
+    /* Işınların yayılma alanı */
+    width: 34px; 
+    height: 34px;
     border-radius: 50%;
-    border: 2px dotted black;
     transform: translate(-50%, -50%);
-    animation: rotate-sun 10s linear infinite;
+    border: none; /* O eski kesikli çizgiyi kaldırdık */
+    
+    /* 
+       CSS ile 8 adet net ışın çiziyoruz (Box Shadow tekniği)
+       Bu yöntem SVG kullanmadan en temiz ikonu verir.
+    */
+    box-shadow: 
+        0 -11px 0 -3.5px black, /* Üst */
+        0 11px 0 -3.5px black,  /* Alt */
+        11px 0 0 -3.5px black,  /* Sağ */
+        -11px 0 0 -3.5px black, /* Sol */
+        7.5px 7.5px 0 -3.5px black,  /* Sağ Alt */
+        -7.5px -7.5px 0 -3.5px black, /* Sol Üst */
+        7.5px -7.5px 0 -3.5px black, /* Sağ Üst */
+        -7.5px 7.5px 0 -3.5px black; /* Sol Alt */
+        
+    animation: rotate-sun 12s linear infinite; /* Yavaşça dönme efekti */
 }
 
-/* Moon State (Dark Mode) */
+/* 🌙 MOON STATE (Dark Mode) - AYNI KALDI */
 [data-theme="dark"] .theme-icon {
     background: transparent;
     box-shadow: inset 8px -4px 0px 0px white;
     transform: rotate(-30deg) scale(0.9);
 }
 
+/* Dönme Animasyonu */
 @keyframes rotate-sun {
     from { transform: translate(-50%, -50%) rotate(0deg); }
     to { transform: translate(-50%, -50%) rotate(360deg); }
@@ -141,7 +175,7 @@
 
 /* --- Mobile Menu Trigger --- */
 .mobile-menu-btn {
-    display: none; /* Hidden on Desktop */
+    display: none;
     background: rgba(var(--primary-rgb), 0.1);
     border: 1px solid var(--border-color);
     color: var(--text-main);
@@ -256,11 +290,11 @@
     .nav-links,
     .header-actions .btn,
     .header-actions .language-dropdown {
-        display: none; /* Hide desktop elements */
+        display: none;
     }
 
     .mobile-menu-btn {
-        display: flex; /* Show hamburger */
+        display: flex;
     }
 
     .header-actions {

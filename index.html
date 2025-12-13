@@ -5,21 +5,48 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- 
-      SEO: Prevents indexing of this specific routing page. 
-      We want Google to index /en/, /tr/, and /hi/ specifically.
+      SEO & CRAWLER SETTINGS:
+      We allow bots to index this entry point so they can discover the language sub-folders.
     -->
-    <meta name="robots" content="noindex, follow">
+    <meta name="robots" content="index, follow">
     
-    <title>Vertex | Redirecting...</title>
-    <meta name="description" content="Vertex - The Future of Technology. Redirecting to your local version.">
+    <!-- PAGE TITLE & DESCRIPTION -->
+    <title>Vertex | The Peak of Technology</title>
+    <meta name="description" content="Vertex - Turkiye's youngest tech company. Shaping the future with AI, Software, and Gaming. Redirecting to your local version...">
+    <meta name="author" content="Vertex Corporation">
     <meta name="theme-color" content="#050505">
 
-    <!-- Favicon -->
+    <!-- FAVICON -->
     <link rel="icon" type="image/png" href="assets/favicon.png">
+    
+    <!-- 
+      ========================================
+      SOCIAL MEDIA PREVIEW (OPEN GRAPH)
+      Critical for WhatsApp, LinkedIn, Discord
+      ========================================
+    -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vertexishere.com/">
+    <meta property="og:site_name" content="Vertex Corporation">
+    <meta property="og:title" content="Vertex | The Peak of Technology">
+    <meta property="og:description" content="Discover the future of AI and Software with Vertex. Turkiye's youngest tech giants.">
+    
+    <!-- 
+      ✅ WHATSAPP FIX:
+      Using absolute path (https://...) for the favicon to ensure it appears on shares.
+    -->
+    <meta property="og:image" content="https://vertexishere.com/assets/favicon.png">
+
+    <!-- TWITTER CARD -->
+    <!-- 'summary' is better for square logos -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vertex | The Peak of Technology">
+    <meta name="twitter:description" content="Discover the future of AI and Software with Vertex.">
+    <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.png">
 
     <!-- 
-      Styles: 
-      Set background to dark immediately to prevent "White Flash" during redirect.
+      STYLES: 
+      Dark background to prevent "White Flash" during redirect.
     -->
     <style>
         html, body {
@@ -29,10 +56,10 @@
             height: 100%;
             width: 100%;
             overflow: hidden;
-            font-family: sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             color: #333;
         }
-        /* Fallback text style for noscript */
+        /* Fallback text style for noscript users/bots */
         .noscript-container {
             display: flex;
             flex-direction: column;
@@ -41,38 +68,42 @@
             height: 100vh;
             color: #fff;
             text-align: center;
+            padding: 20px;
         }
-        .noscript-container a {
+        .noscript-container h1 { font-size: 1.5rem; margin-bottom: 1rem; color: #fff; }
+        .noscript-container p { margin-bottom: 2rem; color: #888; }
+        .noscript-links { display: flex; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .noscript-links a {
             color: #fff;
-            margin: 10px;
-            font-size: 1.2rem;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            transition: background 0.3s;
         }
+        .noscript-links a:hover { background: #1a1a1a; }
     </style>
 
     <!-- 
-      LOGIC: 
-      Placed in <head> for immediate execution.
-      No spinners, no waiting.
+      REDIRECT LOGIC:
+      Executes immediately to route the user to the correct language.
     -->
     <script>
         (function() {
             // --- Configuration ---
-            // English is the default fallback, so we only list others here.
             const SUPPORTED_LANGS = ['tr', 'hi']; 
-            const DEFAULT_LANG = 'en';
+            const DEFAULT_LANG = 'en'; // Fallback language
             const STORAGE_KEY = 'vertex_lang';
 
             // --- Path Resolver ---
-            // Handles Localhost (file://), GitHub Pages, and Root Domains robustly.
+            // Handles Localhost, Subfolders, and Root Domains safely.
             function getBasePath() {
                 const path = window.location.pathname;
                 
-                // If hosted in a subfolder (e.g., /vertexite/)
-                if (path.includes('/vertexite/')) {
-                    return '/vertexite';
-                }
+                // If hosted in a subfolder
+                if (path.includes('/vertexite/')) return '/vertexite';
                 
-                // If running locally via filesystem
+                // If running locally (file://)
                 if (window.location.protocol === 'file:') {
                     return path.substring(0, path.lastIndexOf('/')).replace(/\/index\.html$/, '');
                 }
@@ -82,16 +113,14 @@
             }
 
             try {
-                // 1. Check if user has a saved preference from a previous visit
+                // 1. Check saved preference
                 const savedLang = localStorage.getItem(STORAGE_KEY);
                 
-                // 2. Detect Browser Language (Instant)
-                // Returns "en", "tr", "hi", etc.
+                // 2. Detect Browser Language
                 const userLang = navigator.language || navigator.userLanguage; 
                 const shortLang = userLang ? userLang.substring(0, 2) : 'en';
 
-                // 3. Determine Target Language
-                // Priority: Saved Preference > Browser Language > Default (English)
+                // 3. Determine Target
                 let targetLang = DEFAULT_LANG;
 
                 if (savedLang) {
@@ -100,16 +129,14 @@
                     targetLang = shortLang;
                 }
 
-                // 4. Save Preference for future visits (Cache)
+                // 4. Save to Cache
                 localStorage.setItem(STORAGE_KEY, targetLang);
 
-                // 5. Construct Final URL
+                // 5. Construct URL & Redirect
                 const basePath = getBasePath();
                 const targetUrl = `${window.location.origin}${basePath}/${targetLang}/`;
 
-                // 6. Redirect
-                // .replace() is crucial: It removes this routing page from History.
-                // If user clicks "Back" on the next page, they won't get stuck in a loop here.
+                // .replace() keeps the history clean (prevents back button loops)
                 window.location.replace(targetUrl);
 
             } catch (e) {
@@ -122,14 +149,15 @@
 </head>
 <body>
     <!-- 
-      Fallback for users/bots with JavaScript disabled.
-      Essential for SEO crawlers to find your sub-pages.
+      FALLBACK:
+      Crucial for SEO Bots (Googlebot) and users with No-JS.
+      This allows crawlers to find your sub-pages.
     -->
     <noscript>
         <div class="noscript-container">
-            <h1>Select your language / Dil seçiniz</h1>
-            <p>JavaScript seems to be disabled. Please choose your region:</p>
-            <div>
+            <h1>Vertex Corporation</h1>
+            <p>Please select your region / Lütfen bölgenizi seçin:</p>
+            <div class="noscript-links">
                 <a href="./tr/">Türkçe</a>
                 <a href="./en/">English</a>
                 <a href="./hi/">Hindi</a>

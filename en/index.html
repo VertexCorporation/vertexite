@@ -13,8 +13,9 @@
     content="vertex, vertex corporation, cortex, mergen ai, drome lang, solar browser, ally health, young tech entrepreneurs, software company Turkiye">
   <meta name="author" content="Vertex Corporation">
   <meta name="theme-color" content="#0a0a0a">
+  <meta name="robots" content="index, follow">
 
-  <!-- 🌍 Hreflang Tags (Crucial for SEO) -->
+  <!-- 🌍 Hreflang Tags -->
   <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
   <link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
   <link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
@@ -25,13 +26,21 @@
   <meta property="og:url" content="https://vertexishere.com/en/">
   <meta property="og:title" content="Vertex | The Peak of Technology">
   <meta property="og:description" content="Turkiye's youngest tech giants. Building the future with AI and Software.">
-  <meta property="og:image" content="../assets/og-image.jpg">
+  <meta property="og:site_name" content="Vertex Corporation">
+  
+  <!-- 
+    ✅ WHATSAPP & SOCIAL FIX:
+    Link paylaşıldığında 'og-image.jpg' yerine LOGO (favicon) çıkması için güncellendi.
+    Absolute URL (https://...) kullanılması WhatsApp için zorunludur.
+  -->
+  <meta property="og:image" content="https://vertexishere.com/assets/favicon.png">
 
   <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
+  <!-- Logo kare olduğu için 'summary' kart tipi daha uygundur -->
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Vertex | The Peak of Technology">
   <meta name="twitter:description" content="Discover Cortex, Mergen, and the future of tech.">
-  <meta name="twitter:image" content="../assets/og-image.jpg">
+  <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.png">
 
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -40,12 +49,12 @@
   <link rel="stylesheet" href="../css/main.css">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="../assets/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="../assets/favicon-16x16.png">
+  <link rel="icon" type="image/png" href="../assets/favicon.png">
 
   <!-- 🔧 CSS Patches (Overrides without touching main.css) -->
+  <!-- NOT: Bu stilleri normalde CSS dosyalarına taşıdık ama dosya bütünlüğü için burada tutuyoruz -->
   <style>
-    /* 1. Flexbox Centering Logic (Fixes the last row alignment issue) */
+    /* 1. Flexbox Centering Logic */
     .centered-grid {
       display: flex;
       flex-wrap: wrap;
@@ -55,15 +64,15 @@
     
     .centered-grid > * {
       flex: 0 1 calc(33.333% - 32px); /* Default: 3 items per row */
-      min-width: 300px; /* Prevent squishing on smaller screens */
+      min-width: 300px; 
     }
 
     /* 2. Fix Icon Colors on Light Mode Hover */
     [data-theme="light"] .social-links a:hover img {
-       filter: invert(1) !important; /* Make white on hover/dark bg */
+       filter: brightness(0); /* Make black on hover in light mode */
     }
     
-    /* 3. Inline Style Cleanup Helpers */
+    /* 3. Utility Helpers */
     .section-dark { background: var(--bg-secondary); }
     .text-center { text-align: center; }
     .mb-4 { margin-bottom: 24px; }
@@ -234,7 +243,7 @@
             </div>
           </a>
 
-          <!-- Mergen (Formerly Sureward) -->
+          <!-- Mergen -->
           <a href="https://github.com/VertexCorporation/Mergen" target="_blank"
             class="card fade-up project-card animated-border">
             <div class="project-img-container">
@@ -281,7 +290,7 @@
             </div>
           </a>
 
-          <!-- Ally (Formerly Polyhedron) - No Link -->
+          <!-- Ally -->
           <div class="card fade-up project-card animated-border" style="cursor: default;">
             <div class="project-img-container">
               <img src="../assets/ally.jpg" alt="Ally Health" loading="lazy" onerror="this.src='../assets/comingsoon.png'">
@@ -368,12 +377,12 @@
       </div>
     </section>
 
-    <!-- Team Section (Updated & Centered) -->
+    <!-- Team Section -->
     <section id="team" class="section">
       <div class="container">
         <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">Our Team</h2>
         
-        <!-- Changed to centered-grid (Flexbox) for perfect centering of 5 items -->
+        <!-- Team Grid - Now with 6 Members -->
         <div class="centered-grid">
           
           <!-- Mustafa -->
@@ -407,6 +416,16 @@
               <a href="https://www.linkedin.com/in/muratck/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
               <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
               <a href="mailto:murat@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
+            </div>
+          </div>
+
+          <!-- Mehtap Küçük -->
+          <div class="card fade-up team-card">
+            <img src="../assets/MEHTAPKUCUK.jpg" alt="Mehtap Küçük" class="team-img" loading="lazy" onerror="this.src='../assets/logo.png'">
+            <h3>Mehtap Küçük</h3>
+            <p class="team-role">Chief Marketing</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/mehtap-k%C3%BC%C3%A7%C3%BCk-3a0471355/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
             </div>
           </div>
 

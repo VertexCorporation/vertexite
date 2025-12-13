@@ -1,19 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <!-- 🇺🇸 ENGLISH MAIN PAGE -->
+  <url>
+    <loc>https://vertexishere.com/en/</loc>
+    <lastmod>2024-02-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    
+    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/" />
+    
+    <image:image>
+      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
+      <image:title>Vertex - The Peak of Technology</image:title>
+    </image:image>
+  </url>
+
+  <!-- 🇹🇷 TURKISH MAIN PAGE -->
+  <url>
+    <loc>https://vertexishere.com/tr/</loc>
+    <lastmod>2024-02-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    
+    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/" />
+    
+    <image:image>
+      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
+      <image:title>Vertex - Teknolojinin Zirvesi</image:title>
+    </image:image>
+  </url>
+
+  <!-- 🇮🇳 HINDI MAIN PAGE -->
+  <url>
+    <loc>https://vertexishere.com/hi/</loc>
+    <lastmod>2024-02-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    
+    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/" />
+  </url>
   
-  <sitemap>
-    <loc>https://vertexishere.com/sitemap-en.xml</loc>
-    <lastmod>2025-02-24</lastmod>
-  </sitemap>
+  <!-- 🌐 ROOT REDIRECT PAGE -->
+  <url>
+    <loc>https://vertexishere.com/</loc>
+    <lastmod>2024-02-24</lastmod>
+    <priority>0.5</priority>
+  </url>
 
-  <sitemap>
-    <loc>https://vertexishere.com/sitemap-tr.xml</loc>
-    <lastmod>2025-02-24</lastmod>
-  </sitemap>
-
-  <sitemap>
-    <loc>https://vertexishere.com/sitemap-hi.xml</loc>
-    <lastmod>2025-02-24</lastmod>
-  </sitemap>
-
-</sitemapindex>
+</urlset>

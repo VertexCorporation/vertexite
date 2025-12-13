@@ -21,3 +21,7 @@ h6 {
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
+
+.text-center {
+    text-align: center;
+}

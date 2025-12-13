@@ -57,11 +57,11 @@
     z-index: 2;
 }
 
-/* --- Card Content --- */
+/* --- Card Icon (CSS ART CONTAINER) --- */
 .card-icon {
     width: 56px;
     height: 56px;
-    background: rgba(var(--primary-rgb), 0.1);
+    background: rgba(var(--primary-rgb), 0.1); /* Normal hali hafif renkli */
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -69,13 +69,19 @@
     color: var(--primary);
     margin-bottom: 24px;
     font-size: 28px;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
 
+/* 
+   🔥🔥🔥 DÜZELTME BURADA YAPILDI 🔥🔥🔥
+   Eskiden burada background: var(--primary) vardı, bu da siyah yapıyordu.
+   Şimdi sadece hafifçe koyulaştırıyoruz (0.2 opaklık).
+   Böylece ikonun içindeki detaylar kaybolmuyor.
+*/
 .card:hover .card-icon {
     transform: scale(1.1) rotate(5deg);
-    background: var(--primary);
-    color: var(--btn-text-color);
+    background: rgba(var(--primary-rgb), 0.2); /* Sadece biraz daha belirginleşsin */
+    color: var(--primary); /* Rengi değiştirmeyelim, aynı kalsın */
 }
 
 .card h3 {
@@ -122,7 +128,7 @@
     letter-spacing: 0.05em;
 }
 
-/* Social Links (Inside Cards) */
+/* --- Social Links (Inside Cards) - DÜZELTİLMİŞ VERSİYON --- */
 .social-links {
     display: flex;
     gap: 16px;
@@ -132,6 +138,8 @@
 .social-links a {
     opacity: 0.7;
     transition: opacity 0.3s ease, transform 0.3s ease;
+    display: flex;
+    align-items: center;
 }
 
 .social-links a:hover {
@@ -142,12 +150,21 @@
 .social-links img {
     width: 24px;
     height: 24px;
-    filter: invert(1);
+    /* Karanlık Modda Beyaz İkonlar */
+    filter: brightness(0) invert(1);
+    transition: filter 0.3s ease;
 }
 
+/* Aydınlık Modda İkon Rengi Düzeltmesi */
 [data-theme="light"] .social-links img {
-    filter: invert(0);
+    filter: brightness(0); /* Siyah */
 }
+
+/* Aydınlık Modda Hover Yapınca Siyah Kalmaya Devam Etmeli */
+[data-theme="light"] .social-links a:hover img {
+    filter: brightness(0); /* Rengi koru */
+}
+
 
 /* --- Project Card Variant --- */
 .project-card {
