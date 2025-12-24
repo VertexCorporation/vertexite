@@ -141,26 +141,22 @@
     height: 34px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
-    border: none; /* O eski kesikli çizgiyi kaldırdık */
+    border: none;
     
-    /* 
-       CSS ile 8 adet net ışın çiziyoruz (Box Shadow tekniği)
-       Bu yöntem SVG kullanmadan en temiz ikonu verir.
-    */
     box-shadow: 
-        0 -11px 0 -3.5px black, /* Üst */
-        0 11px 0 -3.5px black,  /* Alt */
-        11px 0 0 -3.5px black,  /* Sağ */
-        -11px 0 0 -3.5px black, /* Sol */
-        7.5px 7.5px 0 -3.5px black,  /* Sağ Alt */
-        -7.5px -7.5px 0 -3.5px black, /* Sol Üst */
-        7.5px -7.5px 0 -3.5px black, /* Sağ Üst */
-        -7.5px 7.5px 0 -3.5px black; /* Sol Alt */
+        0 -11px 0 -3.5px black,
+        0 11px 0 -3.5px black,
+        11px 0 0 -3.5px black,
+        -11px 0 0 -3.5px black,
+        7.5px 7.5px 0 -3.5px black,
+        -7.5px -7.5px 0 -3.5px black, 
+        7.5px -7.5px 0 -3.5px black,
+        -7.5px 7.5px 0 -3.5px black; 
         
-    animation: rotate-sun 12s linear infinite; /* Yavaşça dönme efekti */
+    animation: rotate-sun 12s linear infinite;
 }
 
-/* 🌙 MOON STATE (Dark Mode) - AYNI KALDI */
+/* 🌙 MOON STATE (Dark Mode) */
 [data-theme="dark"] .theme-icon {
     background: transparent;
     box-shadow: inset 8px -4px 0px 0px white;
