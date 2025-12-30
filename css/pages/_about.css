@@ -61,6 +61,11 @@
         gap: 40px;
     }
 
+    #vision .card {
+        justify-content: center !important;
+        padding: 30px !important;
+    }
+
     #vision h2 {
         font-size: 32px !important;
         text-align: center;
