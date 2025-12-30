@@ -26,6 +26,12 @@ body::before {
     mix-blend-mode: multiply;
 }
 
+@media (max-width: 768px) {
+    body::before {
+        display: none;
+    }
+}
+
 /* --- Animated Gradient Borders --- */
 @keyframes rotate {
     from { transform: rotate(0deg); }
