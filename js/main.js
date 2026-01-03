@@ -1,13 +1,28 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Sticky Header
+    // Utility: Throttle Function
+    function throttle(func, limit) {
+        let inThrottle;
+        return function () {
+            const args = arguments;
+            const context = this;
+            if (!inThrottle) {
+                func.apply(context, args);
+                inThrottle = true;
+                setTimeout(() => inThrottle = false, limit);
+            }
+        }
+    }
+
+    // Sticky Header
     const header = document.querySelector('.header');
-    window.addEventListener('scroll', () => {
+    window.addEventListener('scroll', throttle(() => {
         if (window.scrollY > 50) {
             header.classList.add('scrolled');
         } else {
             header.classList.remove('scrolled');
         }
-    });
+    }, 100));
 
     // Mobile Menu
     const mobileBtn = document.querySelector('.mobile-menu-btn');
@@ -115,12 +130,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroGlow = document.querySelector('.hero-bg-glow');
 
     if (hero && heroGlow) {
-        hero.addEventListener('mousemove', (e) => {
+        hero.addEventListener('mousemove', throttle((e) => {
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;
 
             heroGlow.style.transform = `translate(-${50 + x * 10}%, -${50 + y * 10}%)`;
-        });
+        }, 50));
     }
 
     // Language Dropdown
@@ -141,12 +156,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Mouse Spotlight Effect
-    document.addEventListener('mousemove', (e) => {
+    document.addEventListener('mousemove', throttle((e) => {
         const x = e.clientX;
         const y = e.clientY;
         document.body.style.setProperty('--mouse-x', `${x}px`);
         document.body.style.setProperty('--mouse-y', `${y}px`);
-    });
+    }, 50));
 
     // Particle System
     const canvas = document.getElementById('particle-canvas');
@@ -154,10 +169,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const ctx = canvas.getContext('2d');
         let particles = [];
 
-        const resizeCanvas = () => {
+        const resizeCanvas = throttle(() => {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-        };
+        }, 100);
 
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
