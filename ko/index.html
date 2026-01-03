@@ -15,7 +15,7 @@
   <meta name="theme-color" content="#0a0a0a">
   <meta name="robots" content="index, follow">
 
-    <!-- 🌍 Hreflang Tags -->
+  <!-- 🌍 Hreflang Tags -->
   <link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
   <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
   <link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
@@ -40,7 +40,7 @@
   <meta property="og:title" content="Vertex | 기술의 정점">
   <meta property="og:description" content="Turkiye's youngest tech giants. Building the future with AI and Software.">
   <meta property="og:site_name" content="Vertex Corporation">
-  
+
   <!-- 
     ✅ WHATSAPP & SOCIAL FIX:
     Link paylaşıldığında 'og-image.webp' yerine LOGO (favicon) çıkması için güncellendi.
@@ -74,26 +74,39 @@
       justify-content: center;
       gap: 32px;
     }
-    
-    .centered-grid > * {
-      flex: 0 1 calc(33.333% - 32px); /* Default: 3 items per row */
-      min-width: 300px; 
+
+    .centered-grid>* {
+      flex: 0 1 calc(33.333% - 32px);
+      /* Default: 3 items per row */
+      min-width: 300px;
     }
 
     /* 2. Fix Icon Colors on Light Mode Hover */
     [data-theme="light"] .social-links a:hover img {
-       filter: brightness(0); /* Make black on hover in light mode */
+      filter: brightness(0);
+      /* Make black on hover in light mode */
     }
-    
+
     /* 3. Utility Helpers */
-    .section-dark { background: var(--bg-secondary); }
-    .text-center { text-align: center; }
-    .mb-4 { margin-bottom: 24px; }
-    .mb-6 { margin-bottom: 48px; }
-    
+    .section-dark {
+      background: var(--bg-secondary);
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .mb-4 {
+      margin-bottom: 24px;
+    }
+
+    .mb-6 {
+      margin-bottom: 48px;
+    }
+
     /* Mobile Grid Adjustments */
     @media (max-width: 768px) {
-      .centered-grid > * {
+      .centered-grid>* {
         flex: 0 1 100%;
       }
     }
@@ -102,7 +115,7 @@
 
 <body>
   <canvas id="particle-canvas"></canvas>
-  
+
   <!-- Header -->
   <header class="header">
     <div class="container nav-container">
@@ -112,13 +125,14 @@
         <a href="#home" class="nav-link">홈</a>
         <a href="#projects" class="nav-link">프로젝트</a>
         <a href="#tech" class="nav-link">기술</a>
+        <a href="#partners" class="nav-link">파트너</a>
         <a href="#team" class="nav-link">팀</a>
       </nav>
 
       <div class="header-actions">
-                <div class="language-dropdown">
+        <div class="language-dropdown">
           <button class="lang-btn-trigger">
-          <span class="lang-text">KO</span> ▼
+            <span class="lang-text">KO</span> ▼
           </button>
           <div class="lang-menu">
             <a href="../en/" class="lang-item">English</a>
@@ -157,6 +171,7 @@
       <a href="#about">About</a>
       <a href="#projects">프로젝트</a>
       <a href="#vision">Vision</a>
+      <a href="#partners">파트너</a>
       <a href="#team">팀</a>
       <div class="mobile-lang-selector">
         <a href="../tr/">TR</a>
@@ -253,7 +268,7 @@
       <div class="container">
         <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">우리의 프로젝트</h2>
         <div class="grid-3">
-          
+
           <!-- Cortex -->
           <a href="https://github.com/VertexCorporation/Cortex" target="_blank"
             class="card fade-up project-card animated-border">
@@ -270,7 +285,8 @@
           <a href="https://github.com/VertexCorporation/Mergen" target="_blank"
             class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="../assets/comingsoon.webp" alt="Mergen AI" loading="lazy" onerror="this.src='../assets/comingsoon.webp'">
+              <img src="../assets/comingsoon.webp" alt="Mergen AI" loading="lazy"
+                onerror="this.src='../assets/comingsoon.webp'">
             </div>
             <div class="card-content">
               <h3>Mergen</h3>
@@ -316,7 +332,8 @@
           <!-- Ally -->
           <div class="card fade-up project-card animated-border" style="cursor: default;">
             <div class="project-img-container">
-              <img src="../assets/ally.webp" alt="Ally Health" loading="lazy" onerror="this.src='../assets/comingsoon.webp'">
+              <img src="../assets/ally.webp" alt="Ally Health" loading="lazy"
+                onerror="this.src='../assets/comingsoon.webp'">
             </div>
             <div class="card-content">
               <h3>Ally</h3>
@@ -341,7 +358,11 @@
           <div class="feature-card" style="padding: 24px;">
             <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
               <div class="visual-ai">
-                <div class="ai-node"></div><div class="ai-node"></div><div class="ai-node"></div><div class="ai-node"></div><div class="ai-line"></div>
+                <div class="ai-node"></div>
+                <div class="ai-node"></div>
+                <div class="ai-node"></div>
+                <div class="ai-node"></div>
+                <div class="ai-line"></div>
               </div>
             </div>
             <h4>인공 지능 (AI)</h4>
@@ -350,8 +371,14 @@
           <div class="feature-card" style="padding: 24px;">
             <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
               <div class="visual-web">
-                <div class="web-header"><div class="web-dot"></div><div class="web-dot"></div></div>
-                <div class="web-content"><div class="web-block"></div><div class="web-block"></div></div>
+                <div class="web-header">
+                  <div class="web-dot"></div>
+                  <div class="web-dot"></div>
+                </div>
+                <div class="web-content">
+                  <div class="web-block"></div>
+                  <div class="web-block"></div>
+                </div>
               </div>
             </div>
             <h4>웹 기술</h4>
@@ -360,7 +387,11 @@
           <div class="feature-card" style="padding: 24px;">
             <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
               <div class="visual-mobile">
-                <div class="mobile-screen"><div class="mobile-item"></div><div class="mobile-item"></div><div class="mobile-item"></div></div>
+                <div class="mobile-screen">
+                  <div class="mobile-item"></div>
+                  <div class="mobile-item"></div>
+                  <div class="mobile-item"></div>
+                </div>
               </div>
             </div>
             <h4>모바일 앱</h4>
@@ -370,7 +401,10 @@
             <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
               <div class="visual-game">
                 <div class="game-stick"></div>
-                <div class="game-btns"><div class="game-btn"></div><div class="game-btn"></div></div>
+                <div class="game-btns">
+                  <div class="game-btn"></div>
+                  <div class="game-btn"></div>
+                </div>
               </div>
             </div>
             <h4>게임 개발</h4>
@@ -383,7 +417,8 @@
     <!-- Vision Section -->
     <section id="vision" class="section">
       <div class="container">
-        <div class="card fade-up" style="flex-direction: row; align-items: center; gap: 40px; padding: 60px; flex-wrap: wrap;">
+        <div class="card fade-up"
+          style="flex-direction: row; align-items: center; gap: 40px; padding: 60px; flex-wrap: wrap;">
           <div style="flex: 1; min-width: 300px;">
             <h2 style="font-size: 32px; margin-bottom: 24px;">2030 비전</h2>
             <p style="font-size: 18px; margin-bottom: 24px;">2030년까지 Vertex는 전 세계 모든 시장에서 글로벌 입지를 구축하는 것을 목표로 합니다.</p>
@@ -391,7 +426,28 @@
           </div>
           <div style="flex: 1; display: flex; justify-content: center; min-width: 300px;">
             <img src="../assets/vision.webp" alt="글로벌 비전"
-              style="border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); width: 100%; max-width: 400px;" loading="lazy">
+              style="border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); width: 100%; max-width: 400px;"
+              loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="section">
+      <div class="container">
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">우리의 파트너</h2>
+
+        <div class="centered-grid">
+          <!-- Arcane Anlatıyor -->
+          <div class="card fade-up team-card">
+            <img src="../assets/partners/arcane_anlatiyor.jpg" alt="Arcane Anlatıyor" class="team-img" loading="lazy">
+            <h3>Arcane Anlatıyor</h3>
+            <p class="team-role">콘텐츠 크리에이터</p>
+            <div class="social-links">
+              <a href="https://www.youtube.com/@arcaneanlatıyor" target="_blank"><img src="../assets/youtube.svg"
+                  alt="YouTube"></a>
+            </div>
           </div>
         </div>
       </div>
@@ -401,7 +457,7 @@
     <section id="team" class="section">
       <div class="container">
         <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">우리 팀</h2>
-        
+
         <!-- 팀 Grid - Now with 6 Members -->
         <div class="centered-grid">
 
@@ -411,86 +467,100 @@
             <h3>Mustafa Çakı</h3>
             <p class="team-role">공동 설립자 & CEO</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/mustawtfa/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank"><img src="../assets/linkedin.svg"
+                  alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/mustawtfa/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
               <a href="mailto:mustafacaki@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
             </div>
           </div>
 
-<!-- Ata Türkçü -->
+          <!-- Ata Türkçü -->
           <div class="card fade-up team-card">
             <img src="../assets/ATATURKCU.webp" alt="Ata Türkçü" class="team-img" loading="lazy">
             <h3>Ata Türkçü</h3>
             <p class="team-role">공동 설립자 & CTO</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/ataturkcu/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/re4lata/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/ataturkcu/" target="_blank"><img src="../assets/linkedin.svg"
+                  alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/re4lata/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
               <a href="mailto:ata@vertexishere.com" target="_blank"><img src="../assets/email.svg" alt="Email"></a>
             </div>
           </div>
 
-<!-- Murat Coşkun -->
+          <!-- Murat Coşkun -->
           <div class="card fade-up team-card">
             <img src="../assets/MURATCOSKUN.webp" alt="Murat Coşkun" class="team-img" loading="lazy">
             <h3>Murat Coşkun</h3>
             <p class="team-role">수석 아키텍트</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/muratck/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/muratck/" target="_blank"><img src="../assets/linkedin.svg"
+                  alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
               <a href="mailto:murat@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
             </div>
           </div>
 
-<!-- Mehtap Küçük -->
+          <!-- Mehtap Küçük -->
           <div class="card fade-up team-card">
-            <img src="../assets/MEHTAPKUCUK.webp" alt="Mehtap Küçük" class="team-img" loading="lazy" onerror="this.src='../assets/logo.webp'">
+            <img src="../assets/MEHTAPKUCUK.webp" alt="Mehtap Küçük" class="team-img" loading="lazy"
+              onerror="this.src='../assets/logo.webp'">
             <h3>Mehtap Küçük</h3>
             <p class="team-role">마케팅 책임자</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/mehtap-k%C3%BC%C3%A7%C3%BCk-3a0471355/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.linkedin.com/in/mehtap-k%C3%BC%C3%A7%C3%BCk-3a0471355/" target="_blank"><img
+                  src="../assets/linkedin.svg" alt="LinkedIn"></a>
             </div>
           </div>
 
-<!-- Selim Doğan -->
+          <!-- Selim Doğan -->
           <div class="card fade-up team-card">
             <img src="../assets/selim.webp" alt="Selim Doğan" class="team-img" loading="lazy">
             <h3>Selim Doğan</h3>
             <p class="team-role">수석 웹 개발자</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/selim-doğan-865380320/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/selim.rar/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/selim-doğan-865380320/" target="_blank"><img
+                  src="../assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/selim.rar/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
             </div>
           </div>
 
-<!-- Mir Emir Kaya -->
+          <!-- Mir Emir Kaya -->
           <div class="card fade-up team-card">
             <img src="../assets/mir.webp" alt="Mir Emir Kaya" class="team-img" loading="lazy">
             <h3>Mir Emir Kaya</h3>
             <p class="team-role">앱 개발자</p>
             <div class="social-links">
-              <a href="https://www.instagram.com/miremirkaya0/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.instagram.com/miremirkaya0/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
             </div>
           </div>
 
-<!-- Gökalp Baylan -->
+          <!-- Gökalp Baylan -->
           <!-- Gökalp Baylan -->
           <div class="card fade-up team-card">
             <img src="../assets/GOKALPBAYLAN.webp" alt="Gökalp Baylan" class="team-img" loading="lazy">
             <h3>Gökalp Baylan</h3>
             <p class="team-role">이사회 멤버</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/gökalp-baylan-96786b251/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.linkedin.com/in/gökalp-baylan-96786b251/" target="_blank"><img
+                  src="../assets/linkedin.svg" alt="LinkedIn"></a>
             </div>
           </div>
 
-<!-- Kerem Arda Işık -->
+          <!-- Kerem Arda Işık -->
           <div class="card fade-up team-card">
             <img src="../assets/KEREMARDA.webp" alt="Kerem Arda Işık" class="team-img" loading="lazy">
             <h3>Kerem Arda Işık</h3>
             <p class="team-role">이사회 멤버</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/keremardaisik/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/keremardaisik?utm_source=qr&igsh=MTBmNGZxMjMxZjl1aA==" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/keremardaisik/" target="_blank"><img src="../assets/linkedin.svg"
+                  alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/keremardaisik?utm_source=qr&igsh=MTBmNGZxMjMxZjl1aA=="
+                target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
               <a href="mailto:ardakeroo@gmail.com"><img src="../assets/email.svg" alt="Email"></a>
             </div>
           </div>
@@ -505,8 +575,13 @@
     <div class="cta-section fade-up">
       <div class="cta-bg-animation">
         <div class="cta-grid"></div>
-        <div class="cta-orb"></div><div class="cta-orb"></div><div class="cta-orb"></div>
-        <div class="cta-shooting-line"></div><div class="cta-shooting-line"></div><div class="cta-shooting-line"></div><div class="cta-shooting-line"></div>
+        <div class="cta-orb"></div>
+        <div class="cta-orb"></div>
+        <div class="cta-orb"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-shooting-line"></div>
         <div class="cta-overlay"></div>
       </div>
       <div class="cta-content">

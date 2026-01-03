@@ -15,7 +15,7 @@
   <meta name="theme-color" content="#0a0a0a">
   <meta name="robots" content="index, follow">
 
-    <!-- 🌍 Hreflang Tags -->
+  <!-- 🌍 Hreflang Tags -->
   <link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
   <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
   <link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
@@ -38,9 +38,10 @@
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://vertexishere.com/hi/">
   <meta property="og:title" content="Vertex | प्रौद्योगिकी का शिखर">
-  <meta property="og:description" content="तुर्की की सबसे युवा तकनीकी दिग्गज। AI और सॉफ्टवेयर के साथ भविष्य का निर्माण।">
+  <meta property="og:description"
+    content="तुर्की की सबसे युवा तकनीकी दिग्गज। AI और सॉफ्टवेयर के साथ भविष्य का निर्माण।">
   <meta property="og:site_name" content="Vertex Corporation">
-  
+
   <!-- 
     ✅ WHATSAPP FIX:
     Link paylaşıldığında logonun (favicon) çıkması için tam yol (https://...) eklendi.
@@ -72,26 +73,38 @@
       justify-content: center;
       gap: 32px;
     }
-    
-    .centered-grid > * {
+
+    .centered-grid>* {
       flex: 0 1 calc(33.333% - 32px);
       min-width: 300px;
     }
 
     /* 2. Fix Icon Colors on Light Mode Hover */
     [data-theme="light"] .social-links a:hover img {
-       filter: brightness(0); /* Make black on hover in light mode */
+      filter: brightness(0);
+      /* Make black on hover in light mode */
     }
-    
+
     /* 3. Utility Helpers */
-    .section-dark { background: var(--bg-secondary); }
-    .text-center { text-align: center; }
-    .mb-4 { margin-bottom: 24px; }
-    .mb-6 { margin-bottom: 48px; }
-    
+    .section-dark {
+      background: var(--bg-secondary);
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .mb-4 {
+      margin-bottom: 24px;
+    }
+
+    .mb-6 {
+      margin-bottom: 48px;
+    }
+
     /* Mobile Grid Adjustments */
     @media (max-width: 768px) {
-      .centered-grid > * {
+      .centered-grid>* {
         flex: 0 1 100%;
       }
     }
@@ -100,7 +113,7 @@
 
 <body>
   <canvas id="particle-canvas"></canvas>
-  
+
   <!-- Header -->
   <header class="header">
     <div class="container nav-container">
@@ -110,13 +123,14 @@
         <a href="#home" class="nav-link">होम</a>
         <a href="#projects" class="nav-link">परियोजनाएं</a>
         <a href="#tech" class="nav-link">प्रौद्योगिकियां</a>
+        <a href="#partners" class="nav-link">साझेदार</a>
         <a href="#team" class="nav-link">टीम</a>
       </nav>
 
       <div class="header-actions">
-                <div class="language-dropdown">
+        <div class="language-dropdown">
           <button class="lang-btn-trigger">
-          <span class="lang-text">HI</span> ▼
+            <span class="lang-text">HI</span> ▼
           </button>
           <div class="lang-menu">
             <a href="../en/" class="lang-item">English</a>
@@ -155,6 +169,7 @@
       <a href="#about">हमारे बारे में</a>
       <a href="#projects">परियोजनाएं</a>
       <a href="#vision">दृष्टि</a>
+      <a href="#partners">साझेदार</a>
       <a href="#team">टीम</a>
       <div class="mobile-lang-selector">
         <a href="../tr/">TR</a>
@@ -171,7 +186,8 @@
       <div class="container fade-up">
         <div class="badge">तुर्की की सबसे युवा तकनीकी कंपनी</div>
         <h1><span class="gradient-text">प्रौद्योगिकी का शिखर</span><br>भविष्य को आकार देना</h1>
-        <p>तुर्की के सबसे प्रतिभाशाली युवा दिमागों द्वारा स्थापित, Vertex AI और सॉफ्टवेयर की दुनिया में क्रांति ला रहा है।</p>
+        <p>तुर्की के सबसे प्रतिभाशाली युवा दिमागों द्वारा स्थापित, Vertex AI और सॉफ्टवेयर की दुनिया में क्रांति ला रहा
+          है।</p>
         <div class="hero-buttons">
           <a href="#projects" class="btn btn-primary">अन्वेषण शुरू करें</a>
           <a href="#vision" class="btn btn-outline">हमारी दृष्टि</a>
@@ -207,33 +223,42 @@
             <div class="card-content">
               <div class="card-icon">
                 <div class="visual-youth">
-                  <div class="youth-orbit"></div><div class="youth-orbit"></div><div class="youth-core"></div>
+                  <div class="youth-orbit"></div>
+                  <div class="youth-orbit"></div>
+                  <div class="youth-core"></div>
                 </div>
               </div>
               <h3>युवा इनोवेटर्स</h3>
-              <p>15 वर्ष की औसत आयु के साथ, हमारी टीम प्रौद्योगिकी दूरदर्शियों की अगली पीढ़ी का प्रतिनिधित्व करती है जो सीमाओं को धकेलने के लिए प्रतिबद्ध हैं।</p>
+              <p>15 वर्ष की औसत आयु के साथ, हमारी टीम प्रौद्योगिकी दूरदर्शियों की अगली पीढ़ी का प्रतिनिधित्व करती है जो
+                सीमाओं को धकेलने के लिए प्रतिबद्ध हैं।</p>
             </div>
           </div>
           <div class="card fade-up animated-border">
             <div class="card-content">
               <div class="card-icon">
                 <div class="visual-multi">
-                  <div class="multi-layer"></div><div class="multi-layer"></div><div class="multi-layer"></div>
+                  <div class="multi-layer"></div>
+                  <div class="multi-layer"></div>
+                  <div class="multi-layer"></div>
                 </div>
               </div>
               <h3>बहु-क्षेत्र विशेषज्ञता</h3>
-              <p>सॉफ्टवेयर विकास से लेकर एआई, गेमिंग, संगीत उत्पादन और ब्राउज़र प्रौद्योगिकियों तक, हम नवाचार करते हैं।</p>
+              <p>सॉफ्टवेयर विकास से लेकर एआई, गेमिंग, संगीत उत्पादन और ब्राउज़र प्रौद्योगिकियों तक, हम नवाचार करते हैं।
+              </p>
             </div>
           </div>
           <div class="card fade-up animated-border">
             <div class="card-content">
               <div class="card-icon">
                 <div class="visual-global">
-                  <div class="global-grid"></div><div class="global-scan"></div><div class="global-dot"></div>
+                  <div class="global-grid"></div>
+                  <div class="global-scan"></div>
+                  <div class="global-dot"></div>
                 </div>
               </div>
               <h3>वैश्विक दृष्टि</h3>
-              <p>हम विश्व-स्तरीय उत्पादों को विकसित करके तुर्की को एक वैश्विक तकनीकी नेता के रूप में स्थापित करने के लिए समर्पित हैं।</p>
+              <p>हम विश्व-स्तरीय उत्पादों को विकसित करके तुर्की को एक वैश्विक तकनीकी नेता के रूप में स्थापित करने के लिए
+                समर्पित हैं।</p>
             </div>
           </div>
         </div>
@@ -245,7 +270,7 @@
       <div class="container">
         <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">हमारी परियोजनाएं</h2>
         <div class="grid-3">
-          
+
           <!-- Cortex -->
           <a href="https://github.com/VertexCorporation/Cortex" target="_blank"
             class="card fade-up project-card animated-border">
@@ -262,7 +287,8 @@
           <a href="https://github.com/VertexCorporation/Mergen" target="_blank"
             class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="../assets/mergen.webp" alt="Mergen AI" loading="lazy" onerror="this.src='../assets/comingsoon.webp'">
+              <img src="../assets/mergen.webp" alt="Mergen AI" loading="lazy"
+                onerror="this.src='../assets/comingsoon.webp'">
             </div>
             <div class="card-content">
               <h3>Mergen</h3>
@@ -308,7 +334,8 @@
           <!-- Ally -->
           <div class="card fade-up project-card animated-border" style="cursor: default;">
             <div class="project-img-container">
-              <img src="../assets/ally.webp" alt="Ally Health" loading="lazy" onerror="this.src='../assets/comingsoon.webp'">
+              <img src="../assets/ally.webp" alt="Ally Health" loading="lazy"
+                onerror="this.src='../assets/comingsoon.webp'">
             </div>
             <div class="card-content">
               <h3>Ally</h3>
@@ -333,7 +360,11 @@
           <div class="feature-card" style="padding: 24px;">
             <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
               <div class="visual-ai">
-                <div class="ai-node"></div><div class="ai-node"></div><div class="ai-node"></div><div class="ai-node"></div><div class="ai-line"></div>
+                <div class="ai-node"></div>
+                <div class="ai-node"></div>
+                <div class="ai-node"></div>
+                <div class="ai-node"></div>
+                <div class="ai-line"></div>
               </div>
             </div>
             <h4>कृत्रिम बुद्धिमत्ता</h4>
@@ -342,8 +373,14 @@
           <div class="feature-card" style="padding: 24px;">
             <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
               <div class="visual-web">
-                <div class="web-header"><div class="web-dot"></div><div class="web-dot"></div></div>
-                <div class="web-content"><div class="web-block"></div><div class="web-block"></div></div>
+                <div class="web-header">
+                  <div class="web-dot"></div>
+                  <div class="web-dot"></div>
+                </div>
+                <div class="web-content">
+                  <div class="web-block"></div>
+                  <div class="web-block"></div>
+                </div>
               </div>
             </div>
             <h4>वेब प्रौद्योगिकियां</h4>
@@ -352,7 +389,11 @@
           <div class="feature-card" style="padding: 24px;">
             <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
               <div class="visual-mobile">
-                <div class="mobile-screen"><div class="mobile-item"></div><div class="mobile-item"></div><div class="mobile-item"></div></div>
+                <div class="mobile-screen">
+                  <div class="mobile-item"></div>
+                  <div class="mobile-item"></div>
+                  <div class="mobile-item"></div>
+                </div>
               </div>
             </div>
             <h4>मोबाइल ऐप</h4>
@@ -362,7 +403,10 @@
             <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
               <div class="visual-game">
                 <div class="game-stick"></div>
-                <div class="game-btns"><div class="game-btn"></div><div class="game-btn"></div></div>
+                <div class="game-btns">
+                  <div class="game-btn"></div>
+                  <div class="game-btn"></div>
+                </div>
               </div>
             </div>
             <h4>खेल विकास</h4>
@@ -375,7 +419,8 @@
     <!-- Vision Section -->
     <section id="vision" class="section">
       <div class="container">
-        <div class="card fade-up" style="flex-direction: row; align-items: center; gap: 40px; padding: 60px; flex-wrap: wrap;">
+        <div class="card fade-up"
+          style="flex-direction: row; align-items: center; gap: 40px; padding: 60px; flex-wrap: wrap;">
           <div style="flex: 1; min-width: 300px;">
             <h2 style="font-size: 32px; margin-bottom: 24px;">2030 दृष्टि</h2>
             <p style="font-size: 18px; margin-bottom: 24px;">2030 तक, Vertex का लक्ष्य दुनिया भर के सभी बाजारों में
@@ -385,7 +430,28 @@
           </div>
           <div style="flex: 1; display: flex; justify-content: center; min-width: 300px;">
             <img src="../assets/vision.webp" alt="Global Vision"
-              style="border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); width: 100%; max-width: 400px;" loading="lazy">
+              style="border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); width: 100%; max-width: 400px;"
+              loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="section">
+      <div class="container">
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">हमारे साझेदार</h2>
+
+        <div class="centered-grid">
+          <!-- Arcane Anlatıyor -->
+          <div class="card fade-up team-card">
+            <img src="../assets/partners/arcane_anlatiyor.jpg" alt="Arcane Anlatıyor" class="team-img" loading="lazy">
+            <h3>Arcane Anlatıyor</h3>
+            <p class="team-role">सामग्री निर्माता</p>
+            <div class="social-links">
+              <a href="https://www.youtube.com/@arcaneanlatıyor" target="_blank"><img src="../assets/youtube.svg"
+                  alt="YouTube"></a>
+            </div>
           </div>
         </div>
       </div>
@@ -395,7 +461,7 @@
     <section id="team" class="section">
       <div class="container">
         <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">हमारी टीम</h2>
-        
+
         <!-- Centered Grid -->
         <div class="centered-grid">
 
@@ -405,86 +471,100 @@
             <h3>Mustafa Çakı</h3>
             <p class="team-role">सह-संस्थापक और सीईओ</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/mustawtfa/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank"><img src="../assets/linkedin.svg"
+                  alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/mustawtfa/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
               <a href="mailto:mustafacaki@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
             </div>
           </div>
 
-<!-- Ata Türkçü -->
+          <!-- Ata Türkçü -->
           <div class="card fade-up team-card">
             <img src="../assets/ATATURKCU.webp" alt="Ata Türkçü" class="team-img" loading="lazy">
             <h3>Ata Türkçü</h3>
             <p class="team-role">सह-संस्थापक और सीटीओ</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/ataturkcu/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/re4lata/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/ataturkcu/" target="_blank"><img src="../assets/linkedin.svg"
+                  alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/re4lata/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
               <a href="mailto:ata@vertexishere.com" target="_blank"><img src="../assets/email.svg" alt="Email"></a>
             </div>
           </div>
 
-<!-- Murat Coşkun -->
+          <!-- Murat Coşkun -->
           <div class="card fade-up team-card">
             <img src="../assets/MURATCOSKUN.webp" alt="Murat Coşkun" class="team-img" loading="lazy">
             <h3>Murat Coşkun</h3>
             <p class="team-role">मुख्य वास्तुकार</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/muratck/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/muratck/" target="_blank"><img src="../assets/linkedin.svg"
+                  alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
               <a href="mailto:murat@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
             </div>
           </div>
 
-<!-- Mehtap Küçük -->
+          <!-- Mehtap Küçük -->
           <div class="card fade-up team-card">
-            <img src="../assets/MEHTAPKUCUK.webp" alt="Mehtap Küçük" class="team-img" loading="lazy" onerror="this.src='../assets/logo.webp'">
+            <img src="../assets/MEHTAPKUCUK.webp" alt="Mehtap Küçük" class="team-img" loading="lazy"
+              onerror="this.src='../assets/logo.webp'">
             <h3>Mehtap Küçük</h3>
             <p class="team-role">चीफ मार्केटिंग</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/mehtap-k%C3%BC%C3%A7%C3%BCk-3a0471355/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.linkedin.com/in/mehtap-k%C3%BC%C3%A7%C3%BCk-3a0471355/" target="_blank"><img
+                  src="../assets/linkedin.svg" alt="LinkedIn"></a>
             </div>
           </div>
 
-<!-- Selim Doğan -->
+          <!-- Selim Doğan -->
           <div class="card fade-up team-card">
             <img src="../assets/selim.webp" alt="Selim Doğan" class="team-img" loading="lazy">
             <h3>Selim Doğan</h3>
             <p class="team-role">वरिष्ठ वेब डेवलपर</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/selim-doğan-865380320/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/selim.rar/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/selim-doğan-865380320/" target="_blank"><img
+                  src="../assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/selim.rar/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
             </div>
           </div>
 
-<!-- Mir Emir Kaya -->
+          <!-- Mir Emir Kaya -->
           <div class="card fade-up team-card">
             <img src="../assets/mir.webp" alt="Mir Emir Kaya" class="team-img" loading="lazy">
             <h3>Mir Emir Kaya</h3>
             <p class="team-role">ऐप डेवलपर</p>
             <div class="social-links">
-              <a href="https://www.instagram.com/miremirkaya0/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.instagram.com/miremirkaya0/" target="_blank"><img src="../assets/instagram.svg"
+                  alt="Instagram"></a>
             </div>
           </div>
 
-<!-- Gökalp Baylan -->
+          <!-- Gökalp Baylan -->
           <!-- Gökalp Baylan -->
           <div class="card fade-up team-card">
             <img src="../assets/GOKALPBAYLAN.webp" alt="Gökalp Baylan" class="team-img" loading="lazy">
             <h3>Gökalp Baylan</h3>
             <p class="team-role">बोर्ड सदस्य</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/gökalp-baylan-96786b251/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.linkedin.com/in/gökalp-baylan-96786b251/" target="_blank"><img
+                  src="../assets/linkedin.svg" alt="LinkedIn"></a>
             </div>
           </div>
 
-<!-- Kerem Arda Işık -->
+          <!-- Kerem Arda Işık -->
           <div class="card fade-up team-card">
             <img src="../assets/KEREMARDA.webp" alt="Kerem Arda Işık" class="team-img" loading="lazy">
             <h3>Kerem Arda Işık</h3>
             <p class="team-role">बोर्ड सदस्य</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/keremardaisik/" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/keremardaisik?utm_source=qr&igsh=MTBmNGZxMjMxZjl1aA==" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/keremardaisik/" target="_blank"><img src="../assets/linkedin.svg"
+                  alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/keremardaisik?utm_source=qr&igsh=MTBmNGZxMjMxZjl1aA=="
+                target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
               <a href="mailto:ardakeroo@gmail.com"><img src="../assets/email.svg" alt="Email"></a>
             </div>
           </div>
@@ -499,14 +579,20 @@
     <div class="cta-section fade-up">
       <div class="cta-bg-animation">
         <div class="cta-grid"></div>
-        <div class="cta-orb"></div><div class="cta-orb"></div><div class="cta-orb"></div>
-        <div class="cta-shooting-line"></div><div class="cta-shooting-line"></div><div class="cta-shooting-line"></div><div class="cta-shooting-line"></div>
+        <div class="cta-orb"></div>
+        <div class="cta-orb"></div>
+        <div class="cta-orb"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-shooting-line"></div>
         <div class="cta-overlay"></div>
       </div>
       <div class="cta-content">
         <h2 style="font-size: 42px; margin-bottom: 24px;">भविष्य का हिस्सा बनें</h2>
         <p style="font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px;">
-          Vertex के साथ प्रौद्योगिकी की सीमाओं को आगे बढ़ाएं। हमारी परियोजनाओं का अन्वेषण करें या हमारी टीम में शामिल हों।
+          Vertex के साथ प्रौद्योगिकी की सीमाओं को आगे बढ़ाएं। हमारी परियोजनाओं का अन्वेषण करें या हमारी टीम में शामिल
+          हों।
         </p>
         <div style="display: flex; gap: 16px; justify-content: center;">
           <a href="#projects" class="btn btn-primary">परियोजनाएं देखें</a>
@@ -523,7 +609,8 @@
         <div class="footer-brand">
           <a href="#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;">Vertex</a>
           <p style="color: var(--text-muted); line-height: 1.6;">
-            तुर्की की सबसे युवा तकनीकी कंपनी। 15 वर्ष की औसत आयु के साथ AI, सॉफ्टवेयर और गेमिंग की दुनिया में क्रांति ला रही है।
+            तुर्की की सबसे युवा तकनीकी कंपनी। 15 वर्ष की औसत आयु के साथ AI, सॉफ्टवेयर और गेमिंग की दुनिया में क्रांति ला
+            रही है।
           </p>
         </div>
 
