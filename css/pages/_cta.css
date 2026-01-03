@@ -1,0 +1,93 @@
+/* =========================================
+   PAGE - CTA SECTION
+   ========================================= */
+
+.cta-section {
+    background: var(--bg-card); /* Fallback */
+    background: #0f0c29; /* Deep dark bg for contrast */
+    border-radius: var(--radius-lg);
+    padding: 80px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 100px 0;
+    border: 1px solid var(--border-color);
+    z-index: 1;
+}
+
+/* Gradient Overlay */
+.cta-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 0%, rgba(var(--primary-rgb), 0.1) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Background Animation Container */
+/* Note: The @keyframes for this are in utils/_effects.css */
+.cta-bg-animation {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    background: var(--cta-bg-gradient);
+    background-size: 400% 400%;
+    animation: gradient-bg 15s ease infinite;
+}
+
+@keyframes gradient-bg {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* Content Wrapper (Glass Box) */
+.cta-content {
+    position: relative;
+    z-index: 2;
+    color: white; /* Always white regardless of theme */
+    background: rgba(10, 10, 10, 0.6);
+    backdrop-filter: blur(8px);
+    padding: 40px;
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Text Overrides for CTA (Always Dark Mode Style) */
+.cta-content h2 {
+    color: white;
+    margin-bottom: 16px;
+    font-size: 32px;
+}
+
+.cta-content p {
+    color: rgba(255, 255, 255, 0.7) !important;
+    margin-bottom: 32px;
+}
+
+/* Button Overrides inside CTA */
+.cta-content .btn-outline {
+    color: white !important;
+    border-color: rgba(255, 255, 255, 0.3);
+}
+
+.cta-content .btn-primary {
+    color: black !important; /* Specific styling for CTA primary btn */
+    background: white !important;
+}
+
+.cta-content .btn:hover {
+    border-color: white;
+    transform: translateY(-2px);
+}

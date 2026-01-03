@@ -1,0 +1,70 @@
+/* =========================================
+   COMPONENTS - INPUTS & DROPDOWNS
+   ========================================= */
+
+/* --- Language Selector --- */
+.language-dropdown {
+    position: relative;
+}
+
+/* Trigger Button */
+.lang-btn-trigger {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.lang-btn-trigger:hover {
+    background: rgba(var(--primary-rgb), 0.1);
+    border-color: var(--text-muted);
+}
+
+/* Dropdown Menu */
+.lang-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 8px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 8px;
+    min-width: 150px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    z-index: 1002;
+}
+
+/* Active State (Toggled via JS) */
+.language-dropdown.active .lang-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Menu Items */
+.lang-item {
+    display: block;
+    padding: 8px 12px;
+    color: var(--text-muted);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.lang-item:hover,
+.lang-item.active {
+    background: rgba(var(--primary-rgb), 0.1);
+    color: var(--text-main);
+}

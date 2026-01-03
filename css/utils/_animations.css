@@ -1,0 +1,54 @@
+/* =========================================
+   UTILS - GENERAL ANIMATIONS
+   ========================================= */
+
+/* --- Fade Up Entry Animation --- */
+.fade-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+.fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- Staggered Delays for Grids --- */
+/* Useful for grid items appearing one by one */
+.grid-3 > *:nth-child(1) { transition-delay: 0.1s; }
+.grid-3 > *:nth-child(2) { transition-delay: 0.2s; }
+.grid-3 > *:nth-child(3) { transition-delay: 0.3s; }
+.grid-3 > *:nth-child(4) { transition-delay: 0.4s; }
+.grid-3 > *:nth-child(5) { transition-delay: 0.5s; }
+.grid-3 > *:nth-child(6) { transition-delay: 0.6s; }
+
+/* --- Floating Animation (Hovering effect) --- */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0px); }
+}
+
+.floating {
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-delay-1 { animation-delay: 1s; }
+.floating-delay-2 { animation-delay: 2s; }
+
+/* --- Generic Pulse (Used in Hero) --- */
+@keyframes pulse {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+    50% {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+    }
+}

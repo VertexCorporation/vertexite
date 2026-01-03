@@ -1,0 +1,6 @@
+# 🤖 VERTEX - ROBOTS.TXT
+
+User-agent: *
+Allow: /
+
+Sitemap: https://vertexishere.com/sitemap.xml

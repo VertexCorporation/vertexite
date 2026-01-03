@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 
+      SEO & CRAWLER SETTINGS:
+      We allow bots to index this entry point so they can discover the language sub-folders.
+    -->
+    <meta name="robots" content="index, follow">
+
+    <!-- PAGE TITLE & DESCRIPTION -->
+    <title>Vertex | The Peak of Technology</title>
+    <meta name="description"
+        content="Vertex - Turkiye's youngest tech company. Shaping the future with AI, Software, and Gaming. Redirecting to your local version...">
+    <meta name="author" content="Vertex Corporation">
+    <meta name="theme-color" content="#050505">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="assets/favicon.webp">
+
+    <!-- 
+      ========================================
+      SOCIAL MEDIA PREVIEW (OPEN GRAPH)
+      Critical for WhatsApp, LinkedIn, Discord
+      ========================================
+    -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vertexishere.com/">
+    <meta property="og:site_name" content="Vertex Corporation">
+    <meta property="og:title" content="Vertex | The Peak of Technology">
+    <meta property="og:description"
+        content="Discover the future of AI and Software with Vertex. Turkiye's youngest tech giants.">
+
+    <!-- 
+      ✅ WHATSAPP:
+      Using absolute path (https://...) for the favicon to ensure it appears on shares.
+    -->
+    <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp">
+
+    <!-- TWITTER CARD -->
+    <!-- 'summary' is better for square logos -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vertex | The Peak of Technology">
+    <meta name="twitter:description" content="Discover the future of AI and Software with Vertex.">
+    <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp">
+
+    <!-- 
+      STYLES: 
+      Dark background to prevent "White Flash" during redirect.
+    -->
+    <style>
+        html,
+        body {
+            background-color: #050505;
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: #333;
+        }
+
+        /* Fallback text style for noscript users/bots */
+        .noscript-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .noscript-container h1 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: #fff;
+        }
+
+        .noscript-container p {
+            margin-bottom: 2rem;
+            color: #888;
+        }
+
+        .noscript-links {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .noscript-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            transition: background 0.3s;
+        }
+
+        .noscript-links a:hover {
+            background: #1a1a1a;
+        }
+    </style>
+
+    <!-- 
+      REDIRECT LOGIC:
+      Executes immediately to route the user to the correct language.
+    -->
+    <script>
+        (function () {
+            // --- Configuration ---
+            const SUPPORTED_LANGS = ['tr', 'hi', 'ar', 'az', 'pt', 'nl', 'id', 'it', 'es', 'ru', 'fr', 'ja', 'ko', 'zh', 'de'];
+            const DEFAULT_LANG = 'en'; // Fallback language
+            const STORAGE_KEY = 'vertex_lang';
+
+            // --- Path Resolver ---
+            // Handles Localhost, Subfolders, and Root Domains safely.
+            function getBasePath() {
+                const path = window.location.pathname;
+
+                // If hosted in a subfolder
+                if (path.includes('/vertexite/')) return '/vertexite';
+
+                // If running locally (file://)
+                if (window.location.protocol === 'file:') {
+                    return path.substring(0, path.lastIndexOf('/')).replace(/\/index\.html$/, '');
+                }
+
+                // Standard Root Domain
+                return '';
+            }
+
+            try {
+                // 1. Check saved preference
+                const savedLang = localStorage.getItem(STORAGE_KEY);
+
+                // 2. Detect Browser Language
+                const userLang = navigator.language || navigator.userLanguage;
+                const shortLang = userLang ? userLang.substring(0, 2) : 'en';
+
+                // 3. Determine Target
+                let targetLang = DEFAULT_LANG;
+
+                if (savedLang) {
+                    targetLang = savedLang;
+                } else if (SUPPORTED_LANGS.includes(shortLang)) {
+                    targetLang = shortLang;
+                }
+
+                // 4. Save to Cache
+                localStorage.setItem(STORAGE_KEY, targetLang);
+
+                // 5. Construct URL & Redirect
+                const basePath = getBasePath();
+                const targetUrl = `${window.location.origin}${basePath}/${targetLang}/`;
+
+                // .replace() keeps the history clean (prevents back button loops)
+                window.location.replace(targetUrl);
+
+            } catch (e) {
+                // Fail-safe: If anything breaks, force English
+                console.error("Redirect logic failed", e);
+                window.location.replace('./en/');
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- 
+      FALLBACK:
+      Crucial for SEO Bots (Googlebot) and users with No-JS.
+      This allows crawlers to find your sub-pages.
+    -->
+    <noscript>
+        <div class="noscript-container">
+            <h1>Vertex Corporation</h1>
+            <p>Please select your region / Lütfen bölgenizi seçin:</p>
+            <div class="noscript-links">
+                <a href="./tr/">Türkçe</a>
+                <a href="./en/">English</a>
+                <a href="./hi/">Hindi</a>
+                <a href="./ar/">العربية</a>
+                <a href="./az/">Azərbaycan</a>
+                <a href="./pt/">Português</a>
+                <a href="./nl/">Nederlands</a>
+                <a href="./id/">Indonesia</a>
+                <a href="./it/">Italiano</a>
+                <a href="./es/">Español</a>
+                <a href="./ru/">Русский</a>
+                <a href="./fr/">Français</a>
+                <a href="./ja/">日本語</a>
+                <a href="./ko/">한국어</a>
+                <a href="./zh/">简体中文</a>
+                <a href="./de/">Deutsch</a>
+            </div>
+        </div>
+    </noscript>
+</body>
+
+</html>

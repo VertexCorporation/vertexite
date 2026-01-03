@@ -1,0 +1,47 @@
+/* =========================================
+   BASE - RESET & NORMALIZATION
+   ========================================= */
+
+/* Box Sizing Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Global HTML Settings */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Body Styling & Global Background */
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-color);
+    color: var(--text-main);
+    line-height: 1.6;
+    overflow-x: hidden;
+    
+    /* Subtle Global Background Pattern */
+    background-image:
+        radial-gradient(circle at 15% 50%, rgba(var(--primary-rgb), 0.05) 0%, transparent 25%),
+        radial-gradient(circle at 85% 30%, rgba(var(--primary-rgb), 0.05) 0%, transparent 25%);
+}
+
+/* Link Resets */
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+/* List Resets */
+ul {
+    list-style: none;
+}
+
+/* Image Resets */
+img {
+    max-width: 100%;
+    display: block;
+}
