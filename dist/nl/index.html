@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- 🎯 SEO & Meta Tags -->
+  <title>Vertex | De Top van Technologie</title>
+  <meta name="description"
+    content="⭐ Vertex: Turkiye's youngest tech company. Pioneering in AI with Cortex & Mergen, mobile gaming, and next-gen software solutions.">
+  <meta name="keywords"
+    content="vertex, vertex corporation, cortex, mergen ai, drome lang, solar browser, ally health, young tech entrepreneurs, software company Turkiye">
+  <meta name="author" content="Vertex Corporation">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="robots" content="index, follow">
+
+    <!-- 🌍 Hreflang Tags -->
+  <link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
+  <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
+  <link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
+  <link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
+  <link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
+  <link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
+  <link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
+  <link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
+  <link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
+  <link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
+  <link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
+  <link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
+  <link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
+  <link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
+  <link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
+  <link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
+  <link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
+
+  <!-- 🖼️ Open Graph (Social Media) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vertexishere.com/en/">
+  <meta property="og:title" content="Vertex | De Top van Technologie">
+  <meta property="og:description" content="Turkiye's youngest tech giants. Building the future with AI and Software.">
+  <meta property="og:site_name" content="Vertex Corporation">
+  
+  <!-- 
+    ✅ WHATSAPP & SOCIAL FIX:
+    Link paylaşıldığında 'og-image.webp' yerine LOGO (favicon) çıkması için güncellendi.
+    Absolute URL (https://...) kullanılması WhatsApp için zorunludur.
+  -->
+  <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp">
+
+  <!-- Twitter Card -->
+  <!-- Logo kare olduğu için 'summary' kart tipi daha uygundur -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Vertex | De Top van Technologie">
+  <meta name="twitter:description" content="Discover Cortex, Mergen, and the future of tech.">
+  <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp">
+
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/favicon-Ccg6xBFf.webp">
+
+  <!-- 🔧 CSS Patches (Overrides without touching main.css) -->
+  <!-- NOT: Bu stilleri normalde CSS dosyalarına taşıdık ama dosya bütünlüğü için burada tutuyoruz -->
+  <style>
+    /* 1. Flexbox Centering Logic */
+    .centered-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 32px;
+    }
+    
+    .centered-grid > * {
+      flex: 0 1 calc(33.333% - 32px); /* Default: 3 items per row */
+      min-width: 300px; 
+    }
+
+    /* 2. Fix Icon Colors on Light Mode Hover */
+    [data-theme="light"] .social-links a:hover img {
+       filter: brightness(0); /* Make black on hover in light mode */
+    }
+    
+    /* 3. Utility Helpers */
+    .section-dark { background: var(--bg-secondary); }
+    .text-center { text-align: center; }
+    .mb-4 { margin-bottom: 24px; }
+    .mb-6 { margin-bottom: 48px; }
+    
+    /* Mobile Grid Adjustments */
+    @media (max-width: 768px) {
+      .centered-grid > * {
+        flex: 0 1 100%;
+      }
+    }
+  </style>
+  <script type="module" crossorigin src="/assets/main-BI0gkynH.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-DyvGR5Sz.css">
+</head>
+
+<body>
+  <canvas id="particle-canvas"></canvas>
+  
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="#" class="logo">Vertex</a>
+
+      <nav class="nav-links">
+        <a href="#home" class="nav-link">Home</a>
+        <a href="#projects" class="nav-link">Projecten</a>
+        <a href="#tech" class="nav-link">Technologieën</a>
+        <a href="#team" class="nav-link">Team</a>
+      </nav>
+
+      <div class="header-actions">
+                <div class="language-dropdown">
+          <button class="lang-btn-trigger">
+          <span class="lang-text">NL</span> ▼
+          </button>
+          <div class="lang-menu">
+            <a href="../en/" class="lang-item">English</a>
+            <a href="../tr/" class="lang-item">Türkçe</a>
+            <a href="../hi/" class="lang-item">Hindi</a>
+            <a href="../ar/" class="lang-item">العربية</a>
+            <a href="../az/" class="lang-item">Azərbaycan</a>
+            <a href="../pt/" class="lang-item">Português</a>
+            <a href="../nl/" class="lang-item active">Nederlands</a>
+            <a href="../id/" class="lang-item">Indonesia</a>
+            <a href="../it/" class="lang-item">Italiano</a>
+            <a href="../es/" class="lang-item">Español</a>
+            <a href="../ru/" class="lang-item">Русский</a>
+            <a href="../fr/" class="lang-item">Français</a>
+            <a href="../ja/" class="lang-item">日本語</a>
+            <a href="../ko/" class="lang-item">한국어</a>
+            <a href="../zh/" class="lang-item">简体中文</a>
+            <a href="../de/" class="lang-item">Deutsch</a>
+          </div>
+        </div>
+        <button class="theme-toggle-btn btn-outline" aria-label="Toggle Theme"
+          style="padding: 8px; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+          <div class="theme-icon"></div>
+        </button>
+        <a href="mailto:contact@vertexishere.com" class="btn btn-outline btn-sm">Neem Contact Op</a>
+        <a href="#projects" class="btn btn-primary btn-sm">Bekijk Projecten</a>
+        <button class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <nav class="mobile-nav-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#projects">Projecten</a>
+      <a href="#vision">Vision</a>
+      <a href="#team">Team</a>
+      <div class="mobile-lang-selector">
+        <a href="../tr/">TR</a>
+        <a href="../en/" class="active">EN</a>
+        <a href="../hi/">HI</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+      <div class="hero-bg-glow"></div>
+      <div class="container fade-up">
+        <div class="badge">Turkije's Jongste Techbedrijf</div>
+        <h1><span class="gradient-text">De Top van Technologie</span><br>De Toekomst Vormgeven</h1>
+        <p>Opgericht door de slimste jonge talenten van Turkije, revolutioneert Vertex de wereld van AI en software.</p>
+        <div class="hero-buttons">
+          <a href="#projects" class="btn btn-primary">Begin te Verkennen</a>
+          <a href="#vision" class="btn btn-outline">Onze Visie</a>
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-container fade-up">
+          <div class="stat-item">
+            <div class="stat-number gradient-text">10M+</div>
+            <div class="stat-label">Doel Downloads</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number gradient-text">10k+</div>
+            <div class="stat-label">Actieve Gebruikers</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number gradient-text">15</div>
+            <div class="stat-label">Gemiddelde Leeftijd</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number gradient-text">169</div>
+            <div class="stat-label">Landen</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+      <div class="container">
+        <div class="grid-3">
+          <div class="card fade-up animated-border">
+            <div class="card-content">
+              <div class="card-icon">
+                <div class="visual-youth">
+                  <div class="youth-orbit"></div>
+                  <div class="youth-orbit"></div>
+                  <div class="youth-core"></div>
+                </div>
+              </div>
+              <h3>Jonge Vernieuwers</h3>
+              <p>Ons team, met een gemiddelde leeftijd van 15 jaar, vertegenwoordigt de volgende generatie tech-visionairs.</p>
+            </div>
+          </div>
+          <div class="card fade-up animated-border">
+            <div class="card-content">
+              <div class="card-icon">
+                <div class="visual-multi">
+                  <div class="multi-layer"></div>
+                  <div class="multi-layer"></div>
+                  <div class="multi-layer"></div>
+                </div>
+              </div>
+              <h3>Multidisciplinaire Expertise</h3>
+              <p>We innoveren over een breed scala aan vaardigheden, van softwareontwikkeling tot AI.</p>
+            </div>
+          </div>
+          <div class="card fade-up animated-border">
+            <div class="card-content">
+              <div class="card-icon">
+                <div class="visual-global">
+                  <div class="global-grid"></div>
+                  <div class="global-scan"></div>
+                  <div class="global-dot"></div>
+                </div>
+              </div>
+              <h3>Wereldwijde Visie</h3>
+              <p>We zijn toegewijd om Turkije te positioneren als een wereldwijde technologieleider.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projecten Section -->
+    <section id="projects" class="section">
+      <div class="container">
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">Onze Projecten</h2>
+        <div class="grid-3">
+          
+          <!-- Cortex -->
+          <a href="https://github.com/VertexCorporation/Cortex" target="_blank"
+            class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="/assets/cortex-CCFjNAAW.webp" alt="Cortex AI" loading="lazy">
+            </div>
+            <div class="card-content">
+              <h3>Cortex</h3>
+              <p>Een revolutionair online en offline AI-platform met geavanceerde mogelijkheden.</p>
+            </div>
+          </a>
+
+          <!-- Mergen -->
+          <a href="https://github.com/VertexCorporation/Mergen" target="_blank"
+            class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="data:image/webp;base64,UklGRjIMAABXRUJQVlA4ICYMAAAQjQCdASptA/gBPm02m0mkIyKhINQIMIANiWlu4XdhG/Ol8sf0j8VfBn+59Fj5wlkXD/yL7H/l/JX/K+CPxA/j/UC9Y/5v8qv6JwtoAvyP+of5b82+YnxAP5Z/W/91xtFAD9L+qz/R/+H/G/ln7UPzz/A/9z/K/AL/L/7F/yvWe9hP7d+y5+5AJxBYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixYsWLFixTSTizCmTJkyZMmTJkyZMmTJkyZMmS8jYAu1Ub5JXO+3PBw3PZApCUVv4oFBHTe4Mc6j4VloJuCc/J424+6Y6XZKJyKmbNq1YbDfyVDacLp0LFgDsQR9eAR2OFBV+J8MetqrSACzEpv2QpvkfheADZeV6BIGzfK2BrCmTJkyZMmTJkMKZZIbFlh3gvGr9W4cgOnOBbACXhV/31RdEaH57LWK468mVSVw7C0t3H2xPTW7JezjdU3IXaUpDdXNyP2MzQPPkMTsQPMCl6kuPD43TfySEqpgSHw1AXZFMY1EMHgUwBXfsEq+xqRWgethnrfevXr169evXr2Ieqn6zBLIkddC0MxohChTMhsHN4DwK4gJugc2AmddJ2pB9nK2g6hkqwb2ahP1mCVMCBhsiAH1KwxwkDo5MePHjx48ePHjx48k59XXvbXGutTWuyIkgIiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiRIkSJEiQ+AAA/v/o0AAAAAAAAAAAAAAAAAAAAB54ced4ZkFr4mbJJTo3QzAv/RN2t/2qRw+ij1Sq9sjsR6h8CjS/VkHe/2mQtuozhRLH9EpZR5oChamtsj+G7tpMeBRvXQvMRX8ySLEtxz1H8Xf7yJ6xqQ3/vbwFgetRV7CFIvS/jmY3Ijc36DmxyysYnnTjGkHuU8RReMY9Io2xn8Skh6hxqDXzLBPirbG3MDdJOnRsZE3i8HdcHPzTTMEGZN6QI8wUVvTu0VB4vk7ISdW+KdCTeUN6WDr5HLLRa2JFHp5RY25u/e5gp0EelNolZ8DkN3BuS0lqVC6YcdmgWJfj3NlutVi37Iv7CufHb3/uN3RzAoKVS04lNM9iAAIv+uwz6PfRyc42sb4NPoT/cReBbf/Q7hexUJZzlHbrsOe5/liMhwLfvOy5m9PusfGiM3JsbfF6r4xWGsPfxuCqKgVx89pcL0hYMXReV6fD+7FPWjjUZlmwN5uaY+Q2vY+kD1d9Nw5hB5gIxDhMykmWltHkg/OzS39JU0RV1YfQ/b5N3Kfe13poDuj941jrdsmK+RrQpOTfxyRJooRMco848XUWT8tjfcYnaHc0kzcAE24U3qvqpK7ZJCCkmmSalxjtI330OQU02ILvAPtw78tfKKQuES/IhMwYGxO85+iGv4D3EXJ/F86CSUhkCUwOI7lpkYQCeJEN6wXYV+WAC/T+wWDTYSf+pk48WJOPOpgFAm5XGUvO0qg4zjyQiRJlMW9VxT76npFEQdGjiy7y+cP+AmEmiUq0c5NLswCS/W+Rn35SC/3P6Fp6YO/6JlfMqp/9/8LjyhphqmdLXMTGKYLed7uRqq/r0+1P4tExRdUg7POH4WzJ3ClG+Zs2FOnKM6R+a6mU1E261Y3YDjimhWl+WZsXfXl92kfh3bTw2i6ft+Kzp4XBzfwTVoiYWX0nprGBctDQ1CVIplznTDZF2Gzhq0zyGSXw86JF1TN/xz0aNn2hgmfy4qjXv8ZY0JSyZJ5pZ7MDNTbzn53Y2o4PTXUyzK0QOSRA2hcnnVRuS9FgaCOiP5dtCIUfgOWFXsRzLsItrI9uS7zo0H/3yca6CVBKabM+Puw2b/4gsRXt5pO8Hin5jmW2vqkRBouWH6/TYzA9g/9N5+PKP99YV1uAiWKZZpQiUpTRRxzh836AumIHDeKN3lY5Ga5hbWJ6g4JRcLbISinVEr0ic2Cu8Z2IbduZ/XhL9dRBLqMyeRDHc+mA1/tvcznHLksMB/4AoY9CyfRzrZZ8KKhfSU2yQzh9pxffvQg/G79Boq/kUI7cilQhKQIyUs9eNbYAxzvG2dS56qSPAVI3E6RgZ/iWWu2A79zgxcmjMRGH/xHF9mW/qIt+cTLxIrVv970i8Yp9zwV8mPICprXs7hJhzxJ7LqrqXRkQZeSOaA8VvjRi2/alt4gYSF/562IHW9exrnfe1A89QKqzHEElffGXylxX2yRdRrSD7O+xe8OvGGItx/FMZ/XQq+vDSOzH6ZJtBmwQNJDjal7kNXnHdeFlb9r8ps9JbID+XwxGqKJeQ5XX9yOcFx7Vfryhx38KemmrnjW0PHQ0clloWcCSYsxwRQ9hdgiwBsQM+L0vDSHV/RNJ4hPNws//vanbmTpGIK84aIcXQ7ML6LsfRt8ySXeM6Z4kwEVP0Ds0Ev7/LtbDGxKcu+unif3R3apAGn4AYfrd7LpiVDW+x8YxThZOwT8n7Gc4K4gxEM1mt60MAOLA/d22MhphQmONgc0r0ykVkXwmFvxVHVsypgxdfVcWg90lAsYmo58f0Qyt+v1Pv+riKc/z3+QwfvaX8z+jy1i1wjxh53BmMnfZd2TG1VyBf+DDVLNCrqcaGDBYK0cm3kWavg5PIoJ2497SMl8LsCQ007H+RlCw17G7Yn8iC8fdQZV9zPwMp9nUYWW+ZBwkauIQjvFjVQZFpvogoQ2pbq5V9cxrtN7mnaM/2qQd7rNAqDkdaSzQ1gFm9YDoyA489zZbCkImwPrCelhCdW+K9KxR0ZUVL6n1FeXbLRc+XPMtyP681PnBbEoS38r0b5XzxhZaLA3WEniGBcKFRKNpqcxJswnleTFmz1h47SfGqPUfqqzbABN4JvU1TRKjzY8chv2Xsg7m7FDIhAd6guq6woBBkH+569GU+JBjN1xmz23Sg5CJmLu4sNn3nABJ8QpS4xLWNB4+AQxcnIHp8R0wCytjyEaYFoUnpm8f0/dnioN7ZP0M4UukB5xxYByvEOuDLJOYlXoOrwVK/azGjUSeCEHEXtxK+baUV3MHrWY3v2Lxvf+L4pgjrliTonCNCifmMI03Tdzc4uPe6uqGF9npErCF5ZYFMkVVvs17P8vP1oPY1MDxktLRo3AS7zjLD76uOM9B04UqGHlbX5I0YoUslQyIw8J0KI2qSEc3PNDpAmkjzmN+PAqxZiixWLkUGr9ZTFKKGNt2mGt/AhIb4Hld8aViXavJEBskzcfE0paHvsbw5E9yhmLwqA0KTK5fGeZ5z8qUDwmGipjpNiJWlieE+6hoBL90eV8OkGS9uh93y4dIwNIzoHWoFWqNjT+YDVrMXHV1mr+JsAngdtuIVUOLWwnj9gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==" alt="Mergen AI" loading="lazy" onerror="this.src='../assets/comingsoon.webp'">
+            </div>
+            <div class="card-content">
+              <h3>Mergen</h3>
+              <p>Schaalbare AI-architectuur ontworpen voor hoogwaardige dataverwerking.</p>
+            </div>
+          </a>
+
+          <!-- Drome -->
+          <a href="https://github.com/VertexCorporation/Drome" target="_blank"
+            class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="data:image/webp;base64,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" alt="Drome" loading="lazy">
+            </div>
+            <div class="card-content">
+              <h3>Drome</h3>
+              <p>Een innovatieve programmeertaal die veelzijdige tools biedt.</p>
+            </div>
+          </a>
+
+          <!-- Solar -->
+          <a href="https://browser.solar" target="_blank" class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="/assets/solar-BoWBZ5VH.webp" alt="Solar Browser" loading="lazy">
+            </div>
+            <div class="card-content">
+              <h3>Solar Browser</h3>
+              <p>Een next-gen webbrowser die vanaf nul is opgebouwd voor prestaties en privacy.</p>
+            </div>
+          </a>
+
+          <!-- All Star -->
+          <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank"
+            class="card fade-up project-card animated-border">
+            <div class="project-img-container">
+              <img src="/assets/allstar-Pz6DTLfe.webp" alt="All Star" loading="lazy">
+            </div>
+            <div class="card-content">
+              <h3>All Star</h3>
+              <p>Onze mobiele game die binnen 48 uur 5 miljoen+ mensen bereikte.</p>
+            </div>
+          </a>
+
+          <!-- Ally -->
+          <div class="card fade-up project-card animated-border" style="cursor: default;">
+            <div class="project-img-container">
+              <img src="../assets/ally.webp" alt="Ally Health" loading="lazy" onerror="this.src='../assets/comingsoon.webp'">
+            </div>
+            <div class="card-content">
+              <h3>Ally</h3>
+              <p>Je intelligente gezondheidsassistent met real-time monitoring.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Technologieën Section -->
+    <section id="tech" class="section section-dark">
+      <div class="container">
+        <div class="section-header text-center">
+          <h2 class="fade-up">Ons Technologie-ecosysteem</h2>
+          <p class="fade-up" style="color: var(--text-muted); margin-top: 16px;">
+            We gebruiken de krachtigste tools en moderne talen om de toekomst te bouwen.
+          </p>
+        </div>
+
+        <div class="tech-grid fade-up">
+          <div class="feature-card" style="padding: 24px;">
+            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+              <div class="visual-ai">
+                <div class="ai-node"></div><div class="ai-node"></div><div class="ai-node"></div><div class="ai-node"></div><div class="ai-line"></div>
+              </div>
+            </div>
+            <h4>Kunstmatige Intelligentie</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Python, TensorFlow, PyTorch</p>
+          </div>
+          <div class="feature-card" style="padding: 24px;">
+            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+              <div class="visual-web">
+                <div class="web-header"><div class="web-dot"></div><div class="web-dot"></div></div>
+                <div class="web-content"><div class="web-block"></div><div class="web-block"></div></div>
+              </div>
+            </div>
+            <h4>Webtechnologieën</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">React, Node.js, WebAssembly</p>
+          </div>
+          <div class="feature-card" style="padding: 24px;">
+            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+              <div class="visual-mobile">
+                <div class="mobile-screen"><div class="mobile-item"></div><div class="mobile-item"></div><div class="mobile-item"></div></div>
+              </div>
+            </div>
+            <h4>Mobiele App</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Flutter, React Native, Swift</p>
+          </div>
+          <div class="feature-card" style="padding: 24px;">
+            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+              <div class="visual-game">
+                <div class="game-stick"></div>
+                <div class="game-btns"><div class="game-btn"></div><div class="game-btn"></div></div>
+              </div>
+            </div>
+            <h4>Game-ontwikkeling</h4>
+            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Unity, C#, Unreal Engine</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section id="vision" class="section">
+      <div class="container">
+        <div class="card fade-up" style="flex-direction: row; align-items: center; gap: 40px; padding: 60px; flex-wrap: wrap;">
+          <div style="flex: 1; min-width: 300px;">
+            <h2 style="font-size: 32px; margin-bottom: 24px;">2030 Visie</h2>
+            <p style="font-size: 18px; margin-bottom: 24px;">Tegen 2030 streeft Vertex ernaar een wereldwijde aanwezigheid in alle markten te vestigen.</p>
+            <p style="color: var(--text-muted);">We zijn toegewijd aan continue innovatie en het uitbreiden van onze AI-capaciteiten.</p>
+          </div>
+          <div style="flex: 1; display: flex; justify-content: center; min-width: 300px;">
+            <img src="/assets/vision-Bvt7i5u3.webp" alt="Wereldwijde Visie"
+              style="border-radius: 24px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); width: 100%; max-width: 400px;" loading="lazy">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="section">
+      <div class="container">
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">Ons Team</h2>
+        
+        <!-- Team Grid - Now with 6 Members -->
+        <div class="centered-grid">
+
+          <!-- Mustafa Çakı -->
+          <div class="card fade-up team-card">
+            <img src="/assets/MUSTAFACAKI-WAdCkenP.webp" alt="Mustafa Çakı" class="team-img" loading="lazy">
+            <h3>Mustafa Çakı</h3>
+            <p class="team-role">Medeoprichter & CEO</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/mustawtfa/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg" alt="Instagram"></a>
+              <a href="mailto:mustafacaki@vertexishere.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
+            </div>
+          </div>
+
+          <!-- Ata Türkçü -->
+          <div class="card fade-up team-card">
+            <img src="/assets/ATATURKCU-DGfjy30m.webp" alt="Ata Türkçü" class="team-img" loading="lazy">
+            <h3>Ata Türkçü</h3>
+            <p class="team-role">Medeoprichter & CTO</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/ataturkcu/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/re4lata/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg" alt="Instagram"></a>
+              <a href="mailto:ata@vertexishere.com" target="_blank"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
+            </div>
+          </div>
+
+          <!-- Murat Coşkun -->
+          <div class="card fade-up team-card">
+            <img src="/assets/MURATCOSKUN-DmLgWc-e.webp" alt="Murat Coşkun" class="team-img" loading="lazy">
+            <h3>Murat Coşkun</h3>
+            <p class="team-role">Hoofdarchitect</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/muratck/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg" alt="Instagram"></a>
+              <a href="mailto:murat@vertexishere.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
+            </div>
+          </div>
+
+          <!-- Kerem Arda Işık -->
+          <div class="card fade-up team-card">
+            <img src="/assets/KEREMARDA-CGCiL3Wg.webp" alt="Kerem Arda Işık" class="team-img" loading="lazy">
+            <h3>Kerem Arda Işık</h3>
+            <p class="team-role">Bestuurslid</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/keremardaisik/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/keremardaisik?utm_source=qr&igsh=MTBmNGZxMjMxZjl1aA==" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg" alt="Instagram"></a>
+              <a href="mailto:ardakeroo@gmail.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
+            </div>
+          </div>
+
+          <!-- Gökalp Baylan -->
+          <!-- Gökalp Baylan -->
+          <div class="card fade-up team-card">
+            <img src="/assets/GOKALPBAYLAN-CbCsm7hL.webp" alt="Gökalp Baylan" class="team-img" loading="lazy">
+            <h3>Gökalp Baylan</h3>
+            <p class="team-role">Bestuurslid</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/gökalp-baylan-96786b251/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+            </div>
+          </div>
+
+          <!-- Mehtap Küçük -->
+          <div class="card fade-up team-card">
+            <img src="/assets/MEHTAPKUCUK-Dx8ndPuR.webp" alt="Mehtap Küçük" class="team-img" loading="lazy" onerror="this.src='../assets/logo.webp'">
+            <h3>Mehtap Küçük</h3>
+            <p class="team-role">Hoofd Marketing</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/mehtap-k%C3%BC%C3%A7%C3%BCk-3a0471355/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+            </div>
+          </div>
+
+          <!-- Selim Doğan -->
+          <div class="card fade-up team-card">
+            <img src="/assets/selim-CX09JSGR.webp" alt="Selim Doğan" class="team-img" loading="lazy">
+            <h3>Selim Doğan</h3>
+            <p class="team-role">Senior Webontwikkelaar</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/selim-doğan-865380320/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/selim.rar/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg" alt="Instagram"></a>
+            </div>
+          </div>
+
+          <!-- Mir Emir Kaya -->
+          <div class="card fade-up team-card">
+            <img src="/assets/mir-Bi8fUHL2.webp" alt="Mir Emir Kaya" class="team-img" loading="lazy">
+            <h3>Mir Emir Kaya</h3>
+            <p class="team-role">App-ontwikkelaar</p>
+            <div class="social-links">
+              <a href="https://www.instagram.com/miremirkaya0/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg" alt="Instagram"></a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Final CTA -->
+  <section class="container">
+    <div class="cta-section fade-up">
+      <div class="cta-bg-animation">
+        <div class="cta-grid"></div>
+        <div class="cta-orb"></div><div class="cta-orb"></div><div class="cta-orb"></div>
+        <div class="cta-shooting-line"></div><div class="cta-shooting-line"></div><div class="cta-shooting-line"></div><div class="cta-shooting-line"></div>
+        <div class="cta-overlay"></div>
+      </div>
+      <div class="cta-content">
+        <h2 style="font-size: 42px; margin-bottom: 24px;">Maak Deel Uit van de Toekomst</h2>
+        <p style="font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px;">
+          Verleg de grenzen van technologie met Vertex. Verken onze projecten of sluit je aan bij ons team.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center;">
+          <a href="#projects" class="btn btn-primary">Verken Projecten</a>
+          <a href="mailto:contact@vertexishere.com" class="btn btn-outline">Neem Contact Op</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-expanded">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;">Vertex</a>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            Turkije's jongste techbedrijf. Revolutioneert AI, software en gaming.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Projecten</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/VertexCorporation/Cortex">Cortex</a></li>
+            <li><a href="https://github.com/SolarBrowser/">Solar Browser</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar">All Star</a></li>
+            <li><a href="https://github.com/VertexCorporation/Mergen">Mergen</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Bedrijf</h4>
+          <ul class="footer-links">
+            <li><a href="#about">Over Ons</a></li>
+            <li><a href="#team">Team</a></li>
+            <li><a href="#vision">Vision</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:contact@vertexishere.com">Stuur E-mail</a></li>
+            <li><a href="https://www.linkedin.com/company/106897671/">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/vertex.23/">Instagram</a></li>
+            <li><a href="#">Discord</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div class="copyright">
+          &copy; 2025 Vertex Corporation. All rights reserved.
+        </div>
+        <div class="footer-legal-links">
+          <a href="#">Privacybeleid</a>
+          <a href="#">Gebruiksvoorwaarden</a>
+          <a href="#">Cookiebeleid</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
