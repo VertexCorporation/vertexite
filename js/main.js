@@ -130,12 +130,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const heroGlow = document.querySelector('.hero-bg-glow');
 
     if (hero && heroGlow) {
-        hero.addEventListener('mousemove', throttle((e) => {
-            const x = e.clientX / window.innerWidth;
-            const y = e.clientY / window.innerHeight;
-
-            heroGlow.style.transform = `translate(-${50 + x * 10}%, -${50 + y * 10}%)`;
-        }, 50));
+        let ticking = false;
+        hero.addEventListener('mousemove', (e) => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const x = e.clientX / window.innerWidth;
+                    const y = e.clientY / window.innerHeight;
+                    heroGlow.style.transform = `translate(-${50 + x * 10}%, -${50 + y * 10}%)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        });
     }
 
     // Language Dropdown
@@ -156,12 +162,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Mouse Spotlight Effect
-    document.addEventListener('mousemove', throttle((e) => {
-        const x = e.clientX;
-        const y = e.clientY;
-        document.body.style.setProperty('--mouse-x', `${x}px`);
-        document.body.style.setProperty('--mouse-y', `${y}px`);
-    }, 50));
+    // Mouse Spotlight Effect
+    let spotlightTicking = false;
+    document.addEventListener('mousemove', (e) => {
+        if (!spotlightTicking) {
+            window.requestAnimationFrame(() => {
+                document.body.style.setProperty('--mouse-x', `${e.clientX}px`);
+                document.body.style.setProperty('--mouse-y', `${e.clientY}px`);
+                spotlightTicking = false;
+            });
+            spotlightTicking = true;
+        }
+    });
 
     // Particle System
     const canvas = document.getElementById('particle-canvas');

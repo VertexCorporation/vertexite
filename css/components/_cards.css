@@ -61,7 +61,8 @@
 .card-icon {
     width: 56px;
     height: 56px;
-    background: rgba(var(--primary-rgb), 0.1); /* Normal hali hafif renkli */
+    background: rgba(var(--primary-rgb), 0.1);
+    /* Normal hali hafif renkli */
     border-radius: 16px;
     display: flex;
     align-items: center;
@@ -80,8 +81,10 @@
 */
 .card:hover .card-icon {
     transform: scale(1.1) rotate(5deg);
-    background: rgba(var(--primary-rgb), 0.2); /* Sadece biraz daha belirginleşsin */
-    color: var(--primary); /* Rengi değiştirmeyelim, aynı kalsın */
+    background: rgba(var(--primary-rgb), 0.2);
+    /* Sadece biraz daha belirginleşsin */
+    color: var(--primary);
+    /* Rengi değiştirmeyelim, aynı kalsın */
 }
 
 .card h3 {
@@ -157,12 +160,14 @@
 
 /* Aydınlık Modda İkon Rengi Düzeltmesi */
 [data-theme="light"] .social-links img {
-    filter: brightness(0); /* Siyah */
+    filter: brightness(0);
+    /* Siyah */
 }
 
 /* Aydınlık Modda Hover Yapınca Siyah Kalmaya Devam Etmeli */
 [data-theme="light"] .social-links a:hover img {
-    filter: brightness(0); /* Rengi koru */
+    filter: brightness(0);
+    /* Rengi koru */
 }
 
 
@@ -242,7 +247,7 @@
     .card {
         padding: 24px;
     }
-    
+
     .project-img-container {
         height: 180px;
     }
