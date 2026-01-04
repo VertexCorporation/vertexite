@@ -1,4 +1,9 @@
+import { fetchNews } from './news.js';
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialize News
+    fetchNews();
+
     // Sticky Header
     // Utility: Throttle Function
     function throttle(func, limit) {
@@ -220,6 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 ctx.fill();
             }
         }
+
 
         const initParticles = () => {
             particles = [];
