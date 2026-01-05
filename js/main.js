@@ -248,3 +248,112 @@ document.addEventListener('DOMContentLoaded', () => {
         animateParticles();
     }
 });
+/* =========================================
+   🐰 EASTER EGG: Selim Doğan
+   ========================================= */
+const EASTER_EGG_I18N = {
+    'en': { tooltip: "As long as I build the site, I am the boss.", btn: "Click and see", boss: "Boss", employee: "Employee" },
+    'tr': { tooltip: "Siteyi ben yaptığım sürece patron benim.", btn: "Tıkla ve gör", boss: "Patron", employee: "Çalışan" },
+    'hi': { tooltip: "जब तक मैं साइट बना रहा हूँ, मैं ही बॉस हूँ।", btn: "क्लिक करें और देखें", boss: "बॉस", employee: "कर्मचारी" },
+    'ar': { tooltip: "طالما أنا من يبني الموقع، فأنا المدير.", btn: "انقر وانظر", boss: "المدير", employee: "موظف" },
+    'az': { tooltip: "Saytı mən düzəltdiyim müddətçə, müdür mənəm.", btn: "Kliklə və gör", boss: "Müdür", employee: "İşçi" },
+    'pt': { tooltip: "Enquanto eu construir o site, eu sou o chefe.", btn: "Clique e veja", boss: "Chefe", employee: "Funcionário" },
+    'nl': { tooltip: "Zolang ik de site bouw, ben ik de baas.", btn: "Klik en zie", boss: "Baas", employee: "Werknemer" },
+    'id': { tooltip: "Selama saya membangun situs ini, sayalah bosnya.", btn: "Klik dan lihat", boss: "Bos", employee: "Karyawan" },
+    'it': { tooltip: "Finché costruisco il sito, il capo sono io.", btn: "Clicca e vedi", boss: "Capo", employee: "Dipendente" },
+    'es': { tooltip: "Mientras yo construya el sitio, soy el jefe.", btn: "Haz clic y mira", boss: "Jefe", employee: "Empleado" },
+    'ru': { tooltip: "Пока я создаю сайт, я здесь босс.", btn: "Нажми и смотри", boss: "Босс", employee: "Сотрудник" },
+    'fr': { tooltip: "Tant que je construis le site, c'est moi le patron.", btn: "Cliquez et voyez", boss: "Patron", employee: "Employé" },
+    'ja': { tooltip: "私がサイトを作っている限り、私がボスだ。", btn: "クリックして見る", boss: "ボス", employee: "従業員" },
+    'ko': { tooltip: "내가 사이트를 만드는 한, 내가 보스다。", btn: "클릭하고 확인", boss: "보스", employee: "직원" },
+    'zh': { tooltip: "只要是我建的网站，我就是老板。", btn: "点击查看", boss: "老板", employee: "员工" },
+    'de': { tooltip: "Solange ich die Seite baue, bin ich der Boss.", btn: "Klick und sieh", boss: "Boss", employee: "Mitarbeiter" },
+};
+
+function initEasterEgg() {
+    const lang = document.documentElement.lang || 'en';
+    const strings = EASTER_EGG_I18N[lang] || EASTER_EGG_I18N['en'];
+
+    // 1. Find Selim Doğan's card
+    const teamCards = document.querySelectorAll('.team-card');
+    let selimCard = null;
+
+    teamCards.forEach(card => {
+        const h3 = card.querySelector('h3');
+        if (h3 && h3.textContent.includes('Selim Doğan')) {
+            selimCard = card;
+        }
+    });
+
+    if (!selimCard) return;
+
+    // 2. Create Tooltip Element
+    const tooltip = document.createElement('div');
+    tooltip.className = 'easter-egg-tooltip';
+    tooltip.innerHTML = `
+        <p style="margin-bottom:0; line-height:1.4;">${strings.tooltip}</p>
+        <button class="easter-egg-btn">${strings.btn}</button>
+    `;
+
+    // 3. Hover Events
+    let closeTimeout;
+
+    selimCard.addEventListener('mouseenter', () => {
+        clearTimeout(closeTimeout);
+        selimCard.style.overflow = 'visible';
+        selimCard.style.zIndex = '100';
+        if (!tooltip.parentNode) {
+            selimCard.appendChild(tooltip);
+        }
+    });
+
+    selimCard.addEventListener('mouseleave', () => {
+        closeTimeout = setTimeout(() => {
+            if (tooltip.parentNode) {
+                tooltip.parentNode.removeChild(tooltip);
+            }
+            selimCard.style.overflow = '';
+            selimCard.style.zIndex = '';
+        }, 300);
+    });
+
+    tooltip.addEventListener('mouseenter', () => clearTimeout(closeTimeout));
+
+    // 4. Click Event
+    const btn = tooltip.querySelector('.easter-egg-btn');
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+
+        const allCards = document.querySelectorAll('.team-card');
+        allCards.forEach(card => {
+            const roleEl = card.querySelector('.team-role');
+            const nameEl = card.querySelector('h3');
+
+            if (roleEl && nameEl) {
+                // 1. Add Animation Class
+                roleEl.classList.add('role-changing');
+
+                // 2. Change Text after 350ms
+                setTimeout(() => {
+                    if (nameEl.textContent.includes('Selim Doğan')) {
+                        roleEl.textContent = strings.boss;
+                        roleEl.style.color = '#ff0000';
+                        roleEl.style.fontWeight = '800';
+                    } else {
+                        roleEl.textContent = strings.employee;
+                        roleEl.style.color = '';
+                        roleEl.style.fontWeight = '';
+                    }
+                }, 350);
+
+                // 3. Remove class
+                setTimeout(() => {
+                    roleEl.classList.remove('role-changing');
+                }, 800);
+            }
+        });
+    });
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', initEasterEgg);
