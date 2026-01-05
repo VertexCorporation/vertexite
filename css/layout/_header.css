@@ -99,15 +99,15 @@
 
 .theme-toggle-btn {
     transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
-    
+
     border: 1px solid transparent !important;
-    
+
     background: transparent;
 }
 
 .theme-toggle-btn:hover {
     border-color: var(--text-main) !important;
-    
+
     background: rgba(128, 128, 128, 0.1);
 }
 
@@ -126,9 +126,11 @@
    Merkezde siyah top, etrafında dönen net ışınlar.
 */
 [data-theme="light"] .theme-icon {
-    background: black; /* Güneşin gövdesi */
+    background: black;
+    /* Güneşin gövdesi */
     box-shadow: none;
-    transform: scale(0.55); /* Boyutu biraz küçültüyoruz ki ışınlara yer kalsın */
+    transform: scale(0.55);
+    /* Boyutu biraz küçültüyoruz ki ışınlara yer kalsın */
 }
 
 [data-theme="light"] .theme-icon::before {
@@ -137,22 +139,22 @@
     top: 50%;
     left: 50%;
     /* Işınların yayılma alanı */
-    width: 34px; 
+    width: 34px;
     height: 34px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
     border: none;
-    
-    box-shadow: 
+
+    box-shadow:
         0 -11px 0 -3.5px black,
         0 11px 0 -3.5px black,
         11px 0 0 -3.5px black,
         -11px 0 0 -3.5px black,
         7.5px 7.5px 0 -3.5px black,
-        -7.5px -7.5px 0 -3.5px black, 
+        -7.5px -7.5px 0 -3.5px black,
         7.5px -7.5px 0 -3.5px black,
-        -7.5px 7.5px 0 -3.5px black; 
-        
+        -7.5px 7.5px 0 -3.5px black;
+
     animation: rotate-sun 12s linear infinite;
 }
 
@@ -165,8 +167,13 @@
 
 /* Dönme Animasyonu */
 @keyframes rotate-sun {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
 }
 
 /* --- Mobile Menu Trigger --- */
@@ -201,7 +208,8 @@
     height: 100vh;
     background: var(--bg-color);
     backdrop-filter: blur(20px) saturate(180%);
-    z-index: 1000;
+    z-index: 999;
+    /* Lower than header (1000) to keep button visible */
     padding: 100px 24px 40px;
     opacity: 0;
     visibility: hidden;
@@ -242,12 +250,30 @@
 }
 
 /* Staggered Animations for Mobile Links */
-.mobile-menu.active .mobile-nav-links a { opacity: 1; transform: translateY(0); }
-.mobile-menu.active .mobile-nav-links a:nth-child(1) { transition-delay: 0.1s; }
-.mobile-menu.active .mobile-nav-links a:nth-child(2) { transition-delay: 0.15s; }
-.mobile-menu.active .mobile-nav-links a:nth-child(3) { transition-delay: 0.2s; }
-.mobile-menu.active .mobile-nav-links a:nth-child(4) { transition-delay: 0.25s; }
-.mobile-menu.active .mobile-nav-links a:nth-child(5) { transition-delay: 0.3s; }
+.mobile-menu.active .mobile-nav-links a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(4) {
+    transition-delay: 0.25s;
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(5) {
+    transition-delay: 0.3s;
+}
 
 /* Mobile Language Selector */
 .mobile-lang-selector {
@@ -281,8 +307,42 @@
     color: var(--btn-text-color);
 }
 
+/* Mobile Menu Action Buttons */
+.mobile-menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+    width: 100%;
+}
+
+.mobile-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.mobile-menu.active .mobile-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger button animation after links */
+.mobile-menu.active .mobile-btn:nth-child(1) {
+    transition-delay: 0.4s;
+}
+
+.mobile-menu.active .mobile-btn:nth-child(2) {
+    transition-delay: 0.45s;
+}
+
 /* --- Responsive Header --- */
 @media (max-width: 768px) {
+
     .nav-links,
     .header-actions .btn {
         display: none;

@@ -251,4 +251,30 @@
     .project-img-container {
         height: 180px;
     }
+
+    /* Project Slider Item */
+    /* Project Slider Item */
+    #projects .project-card {
+        flex: 0 0 80%;
+        width: 80%;
+        height: auto !important;
+        min-height: 100%;
+        scroll-snap-align: start;
+        margin: 0;
+        align-self: stretch;
+        display: flex;
+        flex-direction: column;
+
+        /* Performance Optimization */
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+        background: var(--bg-secondary);
+        /* Solid/Opaque background instead of glass */
+        box-shadow: none;
+        /* Remove shadow during scroll for perf */
+        border: 1px solid var(--border-color);
+        /* Keep border */
+        transform: translateZ(0);
+        /* Hardware accelerate */
+    }
 }
