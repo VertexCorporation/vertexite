@@ -284,9 +284,12 @@
 /* --- Responsive Header --- */
 @media (max-width: 768px) {
     .nav-links,
-    .header-actions .btn,
-    .header-actions .language-dropdown {
+    .header-actions .btn {
         display: none;
+    }
+
+    .mobile-lang-selector {
+        display: none !important;
     }
 
     .mobile-menu-btn {
