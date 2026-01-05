@@ -151,3 +151,106 @@
     border: 1px solid var(--border-color);
   }
 }
+
+/* Easter Egg Tooltip */
+.easter-egg-tooltip {
+  position: absolute;
+  bottom: 100%;
+  /* Align to top of card */
+  margin-bottom: 15px;
+  /* Visual gap */
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--primary);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  width: 240px;
+  text-align: center;
+  z-index: 1000;
+  font-size: 14px;
+  color: var(--text-main);
+  animation: fadeIn 0.3s ease-out;
+  pointer-events: auto;
+}
+
+/* Invisible bridge to prevent closing when moving mouse from card to tooltip */
+.easter-egg-tooltip::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  /* Covers the margin-bottom gap */
+  background: transparent;
+}
+
+.easter-egg-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: var(--primary) transparent transparent transparent;
+}
+
+.easter-egg-btn {
+  margin-top: 12px;
+  background: var(--primary);
+  color: var(--btn-text-color) !important;
+  /* Dynamic color for proper contrast */
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
+}
+
+.easter-egg-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(var(--primary-rgb), 0.4);
+  filter: brightness(1.1);
+}
+
+/* Dust Effect for Role Change */
+@keyframes dustPuff {
+  0% {
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  40% {
+    transform: scale(1.2) translateY(-5px);
+    filter: blur(4px);
+    opacity: 0.5;
+    color: var(--text-muted);
+    /* Dusty grey */
+  }
+
+  60% {
+    transform: scale(0.9) translateY(2px);
+    filter: blur(2px);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.role-changing {
+  animation: dustPuff 0.8s ease-in-out forwards;
+}
