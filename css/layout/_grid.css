@@ -51,20 +51,33 @@
     gap: 32px;
 }
 
-.centered-grid > * {
+.centered-grid>* {
     flex: 0 1 calc(33.333% - 32px);
     min-width: 300px;
 }
 
 @media (max-width: 768px) {
-    .centered-grid > * {
-        flex: 0 1 100%;
+    .centered-grid {
+        gap: 16px;
+        /* Reduce gap for mobile */
+    }
+
+    .centered-grid>* {
+        flex: 0 0 calc(50% - 8px);
+        /* 2 columns */
+        min-width: 0;
+        /* Override desktop min-width */
     }
 }
 
 /* --- Utility Helpers --- */
-.mb-4 { margin-bottom: 24px; }
-.mb-6 { margin-bottom: 48px; }
+.mb-4 {
+    margin-bottom: 24px;
+}
+
+.mb-6 {
+    margin-bottom: 48px;
+}
 
 /* Section Backgrounds */
 .section-dark {
@@ -76,7 +89,7 @@
     .container {
         padding: 0 20px;
     }
-    
+
     .stats-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
@@ -89,7 +102,8 @@
     }
 
     .grid-3 {
-        grid-template-columns: 1fr; /* Stack vertically */
+        grid-template-columns: 1fr;
+        /* Stack vertically */
         gap: 20px;
     }
 
@@ -98,9 +112,45 @@
     }
 
     .stats-container {
-        grid-template-columns: 1fr;
-        padding: 24px;
-        margin-top: 40px;
-        gap: 32px;
+        grid-template-columns: repeat(4, 1fr);
+        padding: 16px;
+        margin-top: 32px;
+        gap: 8px;
+    }
+
+    /* About Section Grid (2 Top, 1 Bottom) */
+    #about .grid-3 {
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+    }
+
+    #about .grid-3>*:last-child {
+        grid-column: span 2;
+    }
+
+    /* Projects Slider */
+    #projects .grid-3 {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        gap: 16px;
+        padding-bottom: 24px;
+        margin-right: -24px;
+        padding-right: 24px;
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+        /* Firefox */
+        align-items: stretch;
+        /* Crucial for equal height */
+
+        /* Performance Optimization */
+        will-change: scroll-position;
+        transform: translateZ(0);
+    }
+
+    #projects .grid-3::-webkit-scrollbar {
+        display: none;
     }
 }

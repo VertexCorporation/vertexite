@@ -10,7 +10,8 @@
 /* 2. Utils - Helpers & Animations */
 @import 'utils/_animations.css';
 @import 'utils/_effects.css';
-@import 'utils/_visuals.css'; /* The CSS Art definitions */
+@import 'utils/_visuals.css';
+/* The CSS Art definitions */
 
 /* 3. Layout - Structural Elements */
 @import 'layout/_grid.css';
@@ -27,6 +28,7 @@
 @import 'pages/_hero.css';
 @import 'pages/_about.css';
 @import 'pages/_cta.css';
+
 /* --- News Section --- */
 .news-grid {
   display: grid;
@@ -86,4 +88,66 @@
 
 .news-card:hover .read-more {
   transform: translateX(5px);
+}
+
+/* --- Responsive Text Utilities --- */
+.mobile-text {
+  display: none;
+}
+
+.desktop-text {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .mobile-text {
+    display: block;
+  }
+
+  .desktop-text {
+    display: none;
+  }
+
+  /* --- News Slider --- */
+  .news-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 24px;
+    margin-right: -24px;
+    padding-right: 24px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    align-items: stretch;
+
+    /* Performance */
+    will-change: scroll-position;
+    transform: translateZ(0);
+    grid-template-columns: none;
+    /* Override grid */
+  }
+
+  .news-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .news-card {
+    flex: 0 0 85%;
+    width: 85%;
+    height: auto !important;
+    min-height: 100%;
+    scroll-snap-align: center;
+    margin: 0;
+    align-self: stretch;
+
+    /* Performance */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--bg-secondary);
+    box-shadow: none;
+    transform: translateZ(0);
+    border: 1px solid var(--border-color);
+  }
 }
