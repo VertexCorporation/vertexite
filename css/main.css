@@ -77,16 +77,19 @@
   font-weight: 600;
 }
 
-.read-more {
+.read-more-btn {
   display: inline-block;
   margin-top: auto;
+  /* Push to bottom */
   font-weight: 600;
   color: var(--primary-color);
   font-size: 0.9rem;
   transition: transform 0.2s ease;
+  padding-top: 16px;
+  /* Use padding instead of margin if space is needed */
 }
 
-.news-card:hover .read-more {
+.news-card:hover .read-more-btn {
   transform: translateX(5px);
 }
 
@@ -121,6 +124,7 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
     align-items: stretch;
+    /* Keep stretch for rows */
 
     /* Performance */
     will-change: scroll-position;
@@ -137,10 +141,12 @@
     flex: 0 0 85%;
     width: 85%;
     height: auto !important;
+    /* Allow auto height */
     min-height: 100%;
     scroll-snap-align: center;
     margin: 0;
     align-self: stretch;
+    /* Default stretch */
 
     /* Performance */
     backdrop-filter: none;
@@ -149,6 +155,13 @@
     box-shadow: none;
     transform: translateZ(0);
     border: 1px solid var(--border-color);
+  }
+
+  /* When expanded, allow grow (though flex item interactions can be tricky, height:auto usually works) */
+  .news-card.expanded {
+    height: auto !important;
+    align-self: flex-start;
+    /* Don't stretch others to match this big one */
   }
 }
 

@@ -63,10 +63,12 @@
     }
 
     .centered-grid>* {
-        flex: 0 0 calc(50% - 8px);
-        /* 2 columns */
-        min-width: 0;
-        /* Override desktop min-width */
+        flex: 0 0 calc(50% - 12px);
+        /* Safer 2-column width to prevent wrapping */
+        min-width: 140px;
+        /* Ensure cards don't get impossibly small, but fit in 2 cols */
+        max-width: 50%;
+        /* Prevent expanding beyond half */
     }
 }
 

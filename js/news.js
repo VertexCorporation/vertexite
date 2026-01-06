@@ -3,22 +3,22 @@ const API_ENDPOINT = "https://europe-west1-vertex-ai-1618.cloudfunctions.net/get
 const IMAGE_API_ENDPOINT = "https://europe-west1-vertex-ai-1618.cloudfunctions.net/getCoverDownloadUrl";
 
 const I18N = {
-    'en': { title: "Latest News", readMore: "Read More" },
-    'tr': { title: "Son Haberler", readMore: "Devamını Oku" },
-    'hi': { title: "नवीनतम समाचार", readMore: "और पढ़ें" },
-    'ar': { title: "آخر الأخبار", readMore: "اقرأ المزيد" },
-    'az': { title: "Son Xəbərlər", readMore: "Daha Çox Oxu" },
-    'pt': { title: "Últimas Notícias", readMore: "Leia Mais" },
-    'nl': { title: "Laatste Nieuws", readMore: "Lees Meer" },
-    'id': { title: "Berita Terbaru", readMore: "Baca Selengkapnya" },
-    'it': { title: "Ultime Novità", readMore: "Leggi Tutto" },
-    'es': { title: "Últimas Noticias", readMore: "Leer Más" },
-    'ru': { title: "Последние Новости", readMore: "Читать Далее" },
-    'fr': { title: "Dernières Actualités", readMore: "Lire La Suite" },
-    'ja': { title: "最新ニュース", readMore: "続きを読む" },
-    'ko': { title: "최신 뉴스", readMore: "더 보기" },
-    'zh': { title: "最新消息", readMore: "阅读更多" },
-    'de': { title: "Aktuelle Neuigkeiten", readMore: "Weiterlesen" },
+    'en': { title: "Latest News", readMore: "Read More", source: "Source", close: "Close" },
+    'tr': { title: "Son Haberler", readMore: "Devamını Oku", source: "Kaynak", close: "Kapat" },
+    'hi': { title: "नवीनतम समाचार", readMore: "और पढ़ें", source: "स्रोत", close: "बंद करें" },
+    'ar': { title: "آخر الأخبار", readMore: "اقرأ المزيد", source: "المصدر", close: "إغلاق" },
+    'az': { title: "Son Xəbərlər", readMore: "Daha Çox Oxu", source: "Mənbə", close: "Bağla" },
+    'pt': { title: "Últimas Notícias", readMore: "Leia Mais", source: "Fonte", close: "Fechar" },
+    'nl': { title: "Laatste Nieuws", readMore: "Lees Meer", source: "Bron", close: "Sluiten" },
+    'id': { title: "Berita Terbaru", readMore: "Baca Selengkapnya", source: "Sumber", close: "Tutup" },
+    'it': { title: "Ultime Novità", readMore: "Leggi Tutto", source: "Fonte", close: "Chiudi" },
+    'es': { title: "Últimas Noticias", readMore: "Leer Más", source: "Fuente", close: "Cerrar" },
+    'ru': { title: "Последние Новости", readMore: "Читать Далее", source: "Источник", close: "Закрыть" },
+    'fr': { title: "Dernières Actualités", readMore: "Lire La Suite", source: "Source", close: "Fermer" },
+    'ja': { title: "最新ニュース", readMore: "続きを読む", source: "ソース", close: "閉じる" },
+    'ko': { title: "최신 뉴스", readMore: "더 보기", source: "출처", close: "닫기" },
+    'zh': { title: "最新消息", readMore: "阅读更多", source: "来源", close: "关闭" },
+    'de': { title: "Aktuelle Neuigkeiten", readMore: "Weiterlesen", source: "Quelle", close: "Schließen" },
 };
 
 // Fallback data
@@ -87,11 +87,14 @@ async function renderNews(articles, container, lang, strings) {
     // Sort by date desc
     articles.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
 
-    let html = `
+    container.innerHTML = `
         <div class="container">
             <h2 class="section-title fade-up visible text-center mb-6" style="font-size: 36px;">${strings.title}</h2>
-            <div class="news-grid">
+            <div class="news-grid" id="news-grid-internal"></div>
+        </div>
     `;
+
+    const internalGrid = document.getElementById('news-grid-internal');
 
     // Process all images in parallel
     const articlesWithImages = await Promise.all(articles.map(async (article) => {
@@ -109,32 +112,64 @@ async function renderNews(articles, container, lang, strings) {
             year: 'numeric', month: 'long', day: 'numeric'
         });
 
-        // References
-        const link = (article.references && article.references.length > 0) ? article.references[0] : '#';
-        const hrefAttr = link === '#' ? 'javascript:void(0)' : link;
-        const targetAttr = link === '#' ? '' : 'target="_blank"';
+        // Prepare summary and Full Content
+        const summaryText = content.summary || (content.content ? content.content.substring(0, 100) + '...' : '');
+        // Replace newlines with <br> for HTML rendering
+        const fullText = (content.content || summaryText).replace(/\n/g, '<br>');
 
-        html += `
-            <a href="${hrefAttr}" ${targetAttr} class="card fade-up visible news-card animated-border">
-                <div class="news-img-container">
-                    <img src="${article.imageUrl}" alt="${content.title}" loading="lazy" onerror="this.src='../assets/favicon.webp'">
-                </div>
-                <div class="card-content">
-                    <div class="news-date">${date}</div>
-                    <h3>${content.title}</h3>
-                    <p>${content.summary || (content.content ? content.content.substring(0, 100) + '...' : '')}</p>
-                    <span class="read-more">${strings.readMore} &rarr;</span>
-                </div>
-            </a>
-        `;
-    });
+        const card = document.createElement('div');
+        card.className = "card fade-up visible news-card animated-border";
 
-    html += `
+        card.innerHTML = `
+            <div class="news-img-container">
+                <img src="${article.imageUrl}" alt="${content.title}" loading="lazy" onerror="this.src='../assets/favicon.webp'">
             </div>
-        </div>
-    `;
+            <div class="card-content">
+                <div class="news-date">${date}</div>
+                <h3>${content.title}</h3>
+                
+                <div class="news-summary">
+                    <p>${summaryText}</p>
+                </div>
+                
+                <div class="news-full-content" style="display: none;">
+                    <p>${fullText}</p>
+                    ${article.references && article.references.length > 0 ?
+                `<a href="${article.references[0]}" target="_blank" class="btn btn-outline btn-sm mt-4" style="margin-top: 16px;">${strings.source}</a>` : ''}
+                </div>
+                
+                <span class="read-more-btn">${strings.readMore} &darr;</span>
+            </div>
+        `;
 
-    container.innerHTML = html;
+        // Add Click Event Listener
+        card.addEventListener('click', (e) => {
+            // If clicking the source link, specific behaviors usually bubble
+            if (e.target.tagName === 'A') return;
+
+            // Toggle Expand
+            const isExpanded = card.classList.contains('expanded');
+            const summary = card.querySelector('.news-summary');
+            const fullContent = card.querySelector('.news-full-content');
+            const readMoreBtn = card.querySelector('.read-more-btn');
+
+            if (isExpanded) {
+                // Collapse
+                card.classList.remove('expanded');
+                summary.style.display = 'block';
+                fullContent.style.display = 'none';
+                readMoreBtn.innerHTML = `${strings.readMore} &darr;`;
+            } else {
+                // Expand
+                card.classList.add('expanded');
+                summary.style.display = 'none';
+                fullContent.style.display = 'block';
+                readMoreBtn.innerHTML = `${strings.close} &uarr;`;
+            }
+        });
+
+        internalGrid.appendChild(card);
+    });
 }
 
 export { fetchNews };
