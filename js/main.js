@@ -1,8 +1,12 @@
 import { fetchNews } from './news.js';
+import { initMobileCarousel } from './mobile-carousel.js';
 
 document.addEventListener('DOMContentLoaded', () => {
     // Initialize News
     fetchNews();
+
+    // Initialize Mobile Carousel for About Section
+    initMobileCarousel();
 
     // Sticky Header
     // Utility: Throttle Function
@@ -274,8 +278,8 @@ function initEasterEgg() {
     const lang = document.documentElement.lang || 'en';
     const strings = EASTER_EGG_I18N[lang] || EASTER_EGG_I18N['en'];
 
-    // 1. Find Selim Doğan's card
-    const teamCards = document.querySelectorAll('.team-card');
+    // 1. Find Selim Doğan's card within Team section only
+    const teamCards = document.querySelectorAll('#team .team-card');
     let selimCard = null;
 
     teamCards.forEach(card => {
@@ -324,7 +328,7 @@ function initEasterEgg() {
     btn.addEventListener('click', (e) => {
         e.stopPropagation();
 
-        const allCards = document.querySelectorAll('.team-card');
+        const allCards = document.querySelectorAll('#team .team-card');
         allCards.forEach(card => {
             const roleEl = card.querySelector('.team-role');
             const nameEl = card.querySelector('h3');

@@ -64,51 +64,7 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="../assets/favicon.webp">
 
-  <!-- 🔧 CSS Patches (Overrides without touching main.css) -->
-  <style>
-    /* 1. Flexbox Centering Logic */
-    .centered-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 32px;
-    }
-
-    .centered-grid>* {
-      flex: 0 1 calc(33.333% - 32px);
-      min-width: 300px;
-    }
-
-    /* 2. Fix Icon Colors on Light Mode Hover */
-    [data-theme="light"] .social-links a:hover img {
-      filter: brightness(0);
-      /* Make black on hover in light mode */
-    }
-
-    /* 3. Utility Helpers */
-    .section-dark {
-      background: var(--bg-secondary);
-    }
-
-    .text-center {
-      text-align: center;
-    }
-
-    .mb-4 {
-      margin-bottom: 24px;
-    }
-
-    .mb-6 {
-      margin-bottom: 48px;
-    }
-
-    /* Mobile Grid Adjustments */
-    @media (max-width: 768px) {
-      .centered-grid>* {
-        flex: 0 1 100%;
-      }
-    }
-  </style>
+  
 </head>
 
 <body>

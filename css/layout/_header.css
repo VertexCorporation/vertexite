@@ -192,6 +192,8 @@
     backdrop-filter: blur(10px);
     transition: all 0.3s ease;
     z-index: 1001;
+    -webkit-tap-highlight-color: transparent;
+    /* Remove blue highlight on tap */
 }
 
 .mobile-menu-btn:hover {

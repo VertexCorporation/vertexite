@@ -26,13 +26,13 @@
 /* --- Mobile Responsiveness --- */
 @media (max-width: 768px) {
     .stat-number {
-        font-size: 20px;
+        font-size: 28px;
         margin-bottom: 4px;
     }
 
     .stat-label {
-        font-size: 9px;
+        font-size: 12px;
         white-space: normal;
-        line-height: 1.1;
+        line-height: 1.2;
     }
 }
