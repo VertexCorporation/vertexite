@@ -253,7 +253,6 @@
     }
 
     /* Project Slider Item */
-    /* Project Slider Item */
     #projects .project-card {
         flex: 0 0 80%;
         width: 80%;
@@ -276,5 +275,27 @@
         /* Keep border */
         transform: translateZ(0);
         /* Hardware accelerate */
+    }
+
+    /* Compact Team Card for 2-Column Mobile Grid */
+    .team-card {
+        padding: 16px 8px !important;
+    }
+
+    .team-img {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 12px;
+        border-width: 2px;
+    }
+
+    .team-role {
+        font-size: 11px;
+        margin-bottom: 12px;
+    }
+
+    .team-card h3 {
+        font-size: 16px;
+        margin-bottom: 4px;
     }
 }
