@@ -12,6 +12,8 @@
 /* Global HTML Settings */
 html {
     scroll-behavior: smooth;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 /* Body Styling & Global Background */
@@ -21,7 +23,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     overflow-x: hidden;
-    
+
     /* Subtle Global Background Pattern */
     background-image:
         radial-gradient(circle at 15% 50%, rgba(var(--primary-rgb), 0.05) 0%, transparent 25%),
