@@ -259,6 +259,7 @@
         height: auto !important;
         min-height: 100%;
         scroll-snap-align: start;
+        scroll-snap-stop: always;
         margin: 0;
         align-self: stretch;
         display: flex;
