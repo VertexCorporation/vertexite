@@ -32,6 +32,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1350px;
+    /* Wider than 1200px but not full width */
+    padding: 0 40px;
+    /* Wider padding for logo position */
 }
 
 /* --- Logo --- */
@@ -49,12 +53,13 @@
 /* --- Desktop Navigation --- */
 .nav-links {
     display: flex;
-    gap: 32px;
+    gap: 20px;
     border-radius: 100px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(255, 255, 255, 0.03);
-    padding: 12px 32px;
+    padding: 10px 24px;
     backdrop-filter: blur(10px);
+    white-space: nowrap;
 }
 
 [data-theme="light"] .nav-links {

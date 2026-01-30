@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 🎯 SEO & Meta Tags -->
+    <title>Vertex | Our Partners</title>
+    <meta name="description" content="Vertex Corporation's strategic partners: Arcane Anlatıyor, RubbleTalk and more.">
+    <meta name="keywords" content="vertex, partners, arcane anlatıyor, rubbletalk, sponsors, collaboration">
+    <meta name="author" content="Vertex Corporation">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="robots" content="index, follow">
+
+    <!-- 🌍 Hreflang Tags -->
+    <link rel="alternate" hreflang="id" href="https://vertexishere.com/en/partners.html" />
+    <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/ortaklar.html" />
+    <link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/partners.html" />
+
+    <!-- 🖼️ Open Graph (Social Media) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vertexishere.com/en/partners.html">
+    <meta property="og:title" content="Vertex | Our Partners">
+    <meta property="og:description" content="Discover Vertex Corporation's valued partners.">
+    <meta property="og:site_name" content="Vertex Corporation">
+    <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vertex | Our Partners">
+    <meta name="twitter:description" content="Vertex Corporation partners.">
+    <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp">
+
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        .partners-hero {
+            padding-top: 120px;
+            padding-bottom: 30px;
+            text-align: center;
+        }
+
+        .partner-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+            margin-top: 0px;
+        }
+
+        .partner-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .partner-card:hover {
+            transform: translateY(-5px);
+            background: var(--bg-secondary);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .partner-img-container {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 24px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--border-color);
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .partner-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .partner-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            margin-bottom: 8px;
+        }
+
+        .partner-role {
+            font-size: 14px;
+            color: var(--primary-color);
+            margin-bottom: 16px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .partner-desc {
+            color: var(--text-muted);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 24px;
+        }
+
+        .btn-partner {
+            margin-top: auto;
+        }
+    
+        .partner-icon {
+            filter: brightness(0) invert(1); /* White for Dark Mode */
+            transition: filter 0.3s ease;
+        }
+
+        /* Light Mode Override */
+        [data-theme="light"] .partner-icon {
+            filter: brightness(0); /* Black for Light Mode */
+        }
+        
+        /* If button hover changes text to black/white, we might need hover rules too */
+        /* usually btn-outline hover fills it. Primary is white in dark mode. */
+        
+        .btn-partner:hover .partner-icon {
+             /* If hover makes background white/primary, icon should contrast. */
+             /* Assuming primary is white in dark mode -> icon black */
+             filter: brightness(0); 
+        }
+        
+        [data-theme="light"] .btn-partner:hover .partner-icon {
+             /* Light mode primary is black -> icon white */
+             filter: brightness(0) invert(1);
+        }
+    
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/favicon.webp">
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+    <div class="container nav-container">
+      <a href="index.html#" class="logo">Vertex</a>
+
+      <nav class="nav-links">
+        <a href="index.html#home" class="nav-link">Beranda</a>
+        <a href="index.html#projects" class="nav-link">Proyek</a>
+                <a href="index.html#news-section" class="nav-link">Berita</a>
+
+        <a href="partners.html" class="nav-link active">Mitra</a>
+        <a href="index.html#team" class="nav-link">Tim</a>
+      <a href="download.html" class="nav-link">Unduh</a>
+      <a href="documentation.html" class="nav-link">Dokumentasi</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="language-dropdown">
+          <button class="lang-btn-trigger">
+            <span class="lang-text">ID</span> ▼
+          </button>
+          <div class="lang-menu">
+            <a href="../en/" class="lang-item">English</a>
+            <a href="../tr/" class="lang-item">Türkçe</a>
+            <a href="../hi/" class="lang-item">Hindi</a>
+            <a href="../ar/" class="lang-item">العربية</a>
+            <a href="../az/" class="lang-item">Azərbaycan</a>
+            <a href="../pt/" class="lang-item">Português</a>
+            <a href="../nl/" class="lang-item">Nederlands</a>
+            <a href="../id/" class="lang-item active">Indonesia</a>
+            <a href="../it/" class="lang-item">Italiano</a>
+            <a href="../es/" class="lang-item">Español</a>
+            <a href="../ru/" class="lang-item">Русский</a>
+            <a href="../fr/" class="lang-item">Français</a>
+            <a href="../ja/" class="lang-item">日本語</a>
+            <a href="../ko/" class="lang-item">한국어</a>
+            <a href="../zh/" class="lang-item">简体中文</a>
+            <a href="../de/" class="lang-item">Deutsch</a>
+          </div>
+        </div>
+        <button class="theme-toggle-btn btn-outline" aria-label="Toggle Theme"
+          style="padding: 8px; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+          <div class="theme-icon"></div>
+        </button>
+        <a href="mailto:contact@vertexishere.com" class="btn btn-outline btn-sm">Hubungi Kami</a>
+        <a href="index.html#projects" class="btn btn-primary btn-sm">Lihat Proyek</a>
+        <button class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+    <nav class="mobile-nav-links">
+      <a href="index.html#home">Beranda</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#projects">Proyek</a>
+      <a href="index.html#vision">Vision</a>
+
+      <a href="partners.html" class="active">Mitra</a>
+      <a href="index.html#team">Tim</a>
+      <a href="download.html">Unduh</a>
+      <a href="documentation.html">Dokumentasi</a>
+      <div class="mobile-lang-selector">
+        <a href="../tr/">TR</a>
+        <a href="../en/" class="active">EN</a>
+        <a href="../hi/">HI</a>
+      </div>
+
+            <div class="mobile-menu-actions">
+                <a href="index.html#projects" class="btn btn-primary mobile-btn">View Projects</a>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="partners-hero container fade-up">
+            <div class="badge" style="margin-bottom: 24px;">Stronger Together</div>
+            <h1 style="font-size: 48px; margin-bottom: 24px;"><span class="gradient-text">Our Partners</span></h1>
+            <p style="font-size: 18px; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+                Our valued business partners and content creators who support us and share our vision.
+            </p>
+        </section>
+
+        <!-- Partners Grid -->
+        <section class="section">
+            <div class="container">
+                <div class="partner-grid fade-up">
+
+                    <!-- Arcane Anlatıyor -->
+                    <div class="partner-card">
+                        <div class="partner-img-container">
+                            <img src="../assets/partners/arcane_anlatiyor.jpg" alt="Arcane Anlatıyor"
+                                class="partner-img">
+                        </div>
+                        <h3 class="partner-title">Arcane Anlatıyor</h3>
+                        <div class="partner-role">Content Creator</div>
+                        <p class="partner-desc">
+                            A leading content channel providing deep analysis, theories, and storytelling on League of
+                            Legends and the Arcane universe.
+                        </p>
+                        <a href="https://www.youtube.com/@arcaneanlatıyor" target="_blank"
+                            class="btn btn-outline btn-partner">
+                            <img src="../assets/youtube.svg" alt="YouTube" class="partner-icon"
+                                style="width: 20px; height: 20px; margin-right: 8px;">
+                            Visit Channel
+                        </a>
+                    </div>
+
+                    <!-- RubbleTalk -->
+                    <div class="partner-card">
+                        <div class="partner-img-container"
+                            style="background: var(--bg-secondary); border-radius: 12px; overflow: hidden;">
+                            <img src="../assets/partners/rubbletalk.png" alt="RubbleTalk" class="partner-img"
+                                style="object-fit: contain;">
+                        </div>
+                        <h3 class="partner-title">RubbleTalk</h3>
+                        <div class="partner-role">Business Partner</div>
+                        <p class="partner-desc">
+                            Our strategic partner supporting Vertex Corporation's growth journey and collaborating on
+                            key business initiatives.
+                        </p>
+                        <a href="https://www.linkedin.com/company/rubbletalk/" target="_blank"
+                            class="btn btn-outline btn-partner">
+                            <img src="../assets/linkedin.svg" alt="LinkedIn" class="partner-icon"
+                                style="width: 20px; height: 20px; margin-right: 8px;">
+                            LinkedIn Profile
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-center" style="margin-top: 80px;">
+                    <p style="color: var(--text-muted); margin-bottom: 24px;">Want to partner with us?</p>
+                    <a href="mailto:contact@vertexishere.com" class="btn btn-primary">Contact Us -></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-expanded">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="footer-brand">
+          <a href="index.html#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;">Vertex</a>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            Perusahaan teknologi termuda di Turki. Merevolusi AI, perangkat lunak, dan game.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Proyek</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/VertexCorporation/Cortex">Cortex</a></li>
+            <li><a href="https://github.com/SolarBrowser/">Solar Browser</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar">All Star</a></li>
+            <li><a href="https://github.com/VertexCorporation/Mergen">Mergen</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Perusahaan</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#about">Tentang Kami</a></li>
+            <li><a href="index.html#team">Tim</a></li>
+            <li><a href="index.html#vision">Vision</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Kontak</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:contact@vertexishere.com">Kirim Email</a></li>
+            <li><a href="https://www.linkedin.com/company/106897671/">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/vertex.23/">Instagram</a></li>
+            <li><a href="index.html#">Discord</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div class="copyright">
+          &copy; 2025 Vertex Corporation. All rights reserved.
+        </div>
+        <div class="footer-legal-links">
+          <a href="index.html#">Kebijakan Privasi</a>
+          <a href="index.html#">Syarat Penggunaan</a>
+          <a href="index.html#">Kebijakan Cookie</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <script type="module" src="../js/main.js"></script>
+</body>
+
+</html>

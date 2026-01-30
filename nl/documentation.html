@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 🎯 SEO & Meta Tags -->
+    <title>Vertex | Documentation & Projects</title>
+    <meta name="description"
+        content="Vertex Corporation open source projects, API documentation, and developer resources. Discover Cortex, Mergen, and our other technologies.">
+    <meta name="keywords" content="vertex, documentation, github, open source, cortex, mergen, developer, code">
+    <meta name="author" content="Vertex Corporation">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="robots" content="index, follow">
+
+    <!-- 🌍 Hreflang Tags -->
+    <link rel="alternate" hreflang="nl" href="https://vertexishere.com/en/documentation.html" />
+    <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/dokumantasyon.html" />
+    <link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/documentation.html" />
+
+    <!-- 🖼️ Open Graph (Social Media) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vertexishere.com/en/documentation.html">
+    <meta property="og:title" content="Vertex | Developer Hub">
+    <meta property="og:description" content="Discover Vertex technologies, review source code, and contribute.">
+    <meta property="og:site_name" content="Vertex Corporation">
+    <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vertex | Developer Hub">
+    <meta name="twitter:description" content="Vertex open source projects and documentation.">
+    <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp">
+
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        .docs-hero {
+            padding-top: 120px;
+            padding-bottom: 30px;
+            text-align: center;
+        }
+
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+            margin-top: 0px;
+        }
+
+        .repo-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-5px);
+            background: var(--bg-secondary);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .repo-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .repo-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-muted);
+        }
+
+        .repo-status {
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: rgba(0, 230, 118, 0.1);
+            color: #00e676;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .repo-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 24px;
+        }
+
+        .repo-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 16px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .repo-lang-color {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .btn-repo {
+            width: 100%;
+            justify-content: center;
+            gap: 8px;
+        }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/favicon.webp">
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+    <div class="container nav-container">
+      <a href="index.html#" class="logo">Vertex</a>
+
+      <nav class="nav-links">
+        <a href="index.html#home" class="nav-link">Home</a>
+        <a href="index.html#projects" class="nav-link">Projecten</a>
+                <a href="index.html#news-section" class="nav-link">Nieuws</a>
+
+        <a href="partners.html" class="nav-link">Partners</a>
+        <a href="index.html#team" class="nav-link">Team</a>
+      <a href="download.html" class="nav-link">Downloaden</a>
+      <a href="documentation.html" class="nav-link active">Documentatie</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="language-dropdown">
+          <button class="lang-btn-trigger">
+            <span class="lang-text">NL</span> ▼
+          </button>
+          <div class="lang-menu">
+            <a href="../en/" class="lang-item">English</a>
+            <a href="../tr/" class="lang-item">Türkçe</a>
+            <a href="../hi/" class="lang-item">Hindi</a>
+            <a href="../ar/" class="lang-item">العربية</a>
+            <a href="../az/" class="lang-item">Azərbaycan</a>
+            <a href="../pt/" class="lang-item">Português</a>
+            <a href="../nl/" class="lang-item active">Nederlands</a>
+            <a href="../id/" class="lang-item">Indonesia</a>
+            <a href="../it/" class="lang-item">Italiano</a>
+            <a href="../es/" class="lang-item">Español</a>
+            <a href="../ru/" class="lang-item">Русский</a>
+            <a href="../fr/" class="lang-item">Français</a>
+            <a href="../ja/" class="lang-item">日本語</a>
+            <a href="../ko/" class="lang-item">한국어</a>
+            <a href="../zh/" class="lang-item">简体中文</a>
+            <a href="../de/" class="lang-item">Deutsch</a>
+          </div>
+        </div>
+        <button class="theme-toggle-btn btn-outline" aria-label="Toggle Theme"
+          style="padding: 8px; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+          <div class="theme-icon"></div>
+        </button>
+        <a href="mailto:contact@vertexishere.com" class="btn btn-outline btn-sm">Neem Contact Op</a>
+        <a href="index.html#projects" class="btn btn-primary btn-sm">Bekijk Projecten</a>
+        <button class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+    <nav class="mobile-nav-links">
+      <a href="index.html#home">Home</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#projects">Projecten</a>
+      <a href="index.html#vision">Vision</a>
+
+      <a href="partners.html">Partners</a>
+      <a href="index.html#team">Team</a>
+      <a href="download.html">Downloaden</a>
+      <a href="documentation.html" class="active">Documentatie</a>
+      <div class="mobile-lang-selector">
+        <a href="../tr/">TR</a>
+        <a href="../en/" class="active">EN</a>
+        <a href="../hi/">HI</a>
+      </div>
+
+            <div class="mobile-menu-actions">
+                <a href="https://github.com/VertexCorporation" class="btn btn-primary mobile-btn">GitHub</a>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="docs-hero container fade-up">
+            <div class="badge" style="margin-bottom: 24px;">Developer Hub</div>
+            <h1 style="font-size: 48px; margin-bottom: 24px;"><span class="gradient-text">Open Source</span> Ecosystem
+            </h1>
+            <p style="font-size: 18px; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+                Explore the source code of our projects, browse API documentation, and discover how Vertex technologies
+                work. Contribute to our community.
+            </p>
+        </section>
+
+        <!-- Repositories Grid -->
+        <section class="section">
+            <div class="container">
+                <div class="repo-grid fade-up">
+
+                    <!-- Cortex -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+                                </svg>
+                                Cortex
+                            </div>
+                            <span class="repo-status">Active</span>
+                        </div>
+                        <p class="repo-desc">Innovative AI platform capable of offline and online operation with
+                            advanced capabilities.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color"
+                                    style="background: #3572A5;"></span>Python</span>
+                            <span class="meta-item">⭐ 38</span>
+                            <span class="meta-item">🔱 4</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/Cortex" target="_blank"
+                            class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- Mergen -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+                                </svg>
+                                Mergen
+                            </div>
+                            <span class="repo-status">Dev</span>
+                        </div>
+                        <p class="repo-desc">Scalable AI architecture. Optimized for high-performance data processing
+                            and ML models.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color"
+                                    style="background: #e34c26;"></span>Rust</span>
+                            <span class="meta-item">⭐ 4</span>
+                            <span class="meta-item">🔱 0</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/Mergen" target="_blank"
+                            class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- Drome -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+                                </svg>
+                                Drome
+                            </div>
+                            <span class="repo-status">Experimental</span>
+                        </div>
+                        <p class="repo-desc">Compilable programming language designed for versatility and performance.
+                        </p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color"
+                                    style="background: #b07219;"></span>Java</span>
+                            <span class="meta-item">⭐ 0</span>
+                            <span class="meta-item">🔱 0</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/Drome" target="_blank"
+                            class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- Ally -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24">
+                                    <path
+                                        d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
+                                </svg>
+                                Ally
+                            </div>
+                            <span class="repo-status">Mobile</span>
+                        </div>
+                        <p class="repo-desc">iOS and Android development environment. Open source components for
+                            cross-platform solutions.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color"
+                                    style="background: #F05138;"></span>Swift</span>
+                            <span class="meta-item">⭐ 1</span>
+                            <span class="meta-item">🔱 0</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/Ally" target="_blank"
+                            class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+                
+
+                    <!-- Solar Browser -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24">
+                                    <path d="M12,2A10,10 0 0,0 2,12C2,17.5 6.5,22 12,22A10,10 0 0,0 22,12C22,6.5 17.5,2 12,2M12,4A8,8 0 0,1 20,12C20,16.4 16.4,20 12,20A8,8 0 0,1 4,12C4,7.6 7.6,4 12,4M12,6A6,6 0 0,0 6,12A6,6 0 0,0 12,18A6,6 0 0,0 18,12A6,6 0 0,0 12,6M12,8A4,4 0 0,1 16,12A4,4 0 0,1 12,16A4,4 0 0,1 8,12A4,4 0 0,1 12,8Z" />
+                                </svg>
+                                Solar Browser
+                            </div>
+                            <span class="repo-status" style="background: rgba(255, 152, 0, 0.1); color: #ff9800;">Beta</span>
+                        </div>
+                        <p class="repo-desc">Een next-gen webbrowser die vanaf nul is opgebouwd voor prestaties en privacy.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color" style="background: #e34c26;"></span>Web</span>
+                            <span class="meta-item">⭐ 4</span>
+                            <span class="meta-item">🔱 1</span>
+                        </div>
+                        <a href="https://github.com/SolarBrowser/" target="_blank" class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- All Star -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24">
+                                    <path d="M21,6H3C1.9,6 1,6.9 1,8V16C1,17.1 1.9,18 3,18H21C22.1,18 23,17.1 23,16V8C23,6.9 22.1,6 21,6M11,13H8V16H6V13H3V11H6V8H8V11H11V13M15.5,15C14.67,15 14,14.33 14,13.5C14,12.67 14.67,12 15.5,12C16.33,12 17,12.67 17,13.5C17,14.33 16.33,15 15.5,15M19.5,12C18.67,12 18,11.33 18,10.5C18,9.67 18.67,9 19.5,9C20.33,9 21,9.67 21,10.5C21,11.33 20.33,12 19.5,12Z" /> 
+                                     
+                                </svg>
+                                All Star
+                            </div>
+                            <span class="repo-status" style="background: rgba(156, 39, 176, 0.1); color: #9c27b0;">Live</span>
+                        </div>
+                        <p class="repo-desc">Onze mobiele game die binnen 48 uur 5 miljoen+ mensen bereikte.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color" style="background: #178600;"></span>C# / Unity</span>
+                            <span class="meta-item">⭐ 0</span> <!-- Fake stars? Or Downloads? Let's use downloads icon? No, keeping consistent. -->
+                            <span class="meta-item">📥 20k+</span>
+                        </div>
+                        <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank" class="btn btn-outline btn-repo">Download</a>
+                    </div>
+
+                    <!-- allyishere -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24"><path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z" /></svg>
+                                allyishere
+                            </div>
+                            <span class="repo-status" style="background: rgba(255, 255, 255, 0.1); color: var(--text-main);">Public</span>
+                        </div>
+                        <p class="repo-desc">Website for your Ally.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color" style="background: #e34c26;"></span>HTML</span>
+                            <span class="meta-item">⭐ 0</span>
+                            <span class="meta-item">🔱 0</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/allyishere" target="_blank" class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- cortexite -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24"><path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z" /></svg>
+                                cortexite
+                            </div>
+                            <span class="repo-status" style="background: rgba(255, 255, 255, 0.1); color: var(--text-main);">Public</span>
+                        </div>
+                        <p class="repo-desc">website for cortex the name is very creative right</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color" style="background: #e34c26;"></span>HTML</span>
+                            <span class="meta-item">⭐ 1</span>
+                            <span class="meta-item">🔱 0</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/cortexite" target="_blank" class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- CozmosAR -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24"><path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z" /></svg>
+                                CozmosAR
+                            </div>
+                            <span class="repo-status" style="background: rgba(255, 255, 255, 0.1); color: var(--text-main);">Public</span>
+                        </div>
+                        <p class="repo-desc">A New Layer of Reality.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color" style="background: #ccc;"></span>Dart</span>
+                            <span class="meta-item">⭐ 1</span>
+                            <span class="meta-item">🔱 0</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/CozmosAR" target="_blank" class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- cozmosite -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24"><path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z" /></svg>
+                                cozmosite
+                            </div>
+                            <span class="repo-status" style="background: rgba(255, 255, 255, 0.1); color: var(--text-main);">Public</span>
+                        </div>
+                        <p class="repo-desc">No description available.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color" style="background: #ccc;"></span>CSS</span>
+                            <span class="meta-item">⭐ 0</span>
+                            <span class="meta-item">🔱 0</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/cozmosite" target="_blank" class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- CozmosVR -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24"><path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z" /></svg>
+                                CozmosVR
+                            </div>
+                            <span class="repo-status" style="background: rgba(255, 255, 255, 0.1); color: var(--text-main);">Public</span>
+                        </div>
+                        <p class="repo-desc">A New Layer of Reality.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color" style="background: #ccc;"></span>Code</span>
+                            <span class="meta-item">⭐ 0</span>
+                            <span class="meta-item">🔱 0</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/CozmosVR" target="_blank" class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- Synapse -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24"><path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z" /></svg>
+                                Synapse
+                            </div>
+                            <span class="repo-status" style="background: rgba(255, 255, 255, 0.1); color: var(--text-main);">Public</span>
+                        </div>
+                        <p class="repo-desc">The Power Behind Intelligence</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color" style="background: #f1e05a;"></span>JavaScript</span>
+                            <span class="meta-item">⭐ 1</span>
+                            <span class="meta-item">🔱 0</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/Synapse" target="_blank" class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+
+                    <!-- vertexite -->
+                    <div class="repo-card">
+                        <div class="repo-header">
+                            <div class="repo-title">
+                                <svg class="repo-icon" viewBox="0 0 24 24"><path d="M14.6,16.6L19.2,12L14.6,7.4L16,6L22,12L16,18L14.6,16.6M9.4,16.6L4.8,12L9.4,7.4L8,6L2,12L8,18L9.4,16.6Z" /></svg>
+                                vertexite
+                            </div>
+                            <span class="repo-status" style="background: rgba(255, 255, 255, 0.1); color: var(--text-main);">Public</span>
+                        </div>
+                        <p class="repo-desc">No description available.</p>
+                        <div class="repo-meta">
+                            <span class="meta-item"><span class="repo-lang-color" style="background: #e34c26;"></span>HTML</span>
+                            <span class="meta-item">⭐ 4</span>
+                            <span class="meta-item">🔱 2</span>
+                        </div>
+                        <a href="https://github.com/VertexCorporation/vertexite" target="_blank" class="btn btn-outline btn-repo">View Repo</a>
+                    </div>
+</div>
+
+                <div class="text-center" style="margin-top: 60px;">
+                    <p style="color: var(--text-muted); margin-bottom: 24px;">Find all our projects and more on our
+                        GitHub organization.</p>
+                    <a href="https://github.com/VertexCorporation" target="_blank" class="btn btn-primary">View All
+                        Projects -></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-expanded">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="footer-brand">
+          <a href="index.html#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;">Vertex</a>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            Turkije's jongste techbedrijf. Revolutioneert AI, software en gaming.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Projecten</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/VertexCorporation/Cortex">Cortex</a></li>
+            <li><a href="https://github.com/SolarBrowser/">Solar Browser</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar">All Star</a></li>
+            <li><a href="https://github.com/VertexCorporation/Mergen">Mergen</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Bedrijf</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#about">Over Ons</a></li>
+            <li><a href="index.html#team">Team</a></li>
+            <li><a href="index.html#vision">Vision</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Contact</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:contact@vertexishere.com">Stuur E-mail</a></li>
+            <li><a href="https://www.linkedin.com/company/106897671/">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/vertex.23/">Instagram</a></li>
+            <li><a href="index.html#">Discord</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div class="copyright">
+          &copy; 2025 Vertex Corporation. All rights reserved.
+        </div>
+        <div class="footer-legal-links">
+          <a href="index.html#">Privacybeleid</a>
+          <a href="index.html#">Gebruiksvoorwaarden</a>
+          <a href="index.html#">Cookiebeleid</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <script type="module" src="../js/main.js"></script>
+</body>
+
+</html>
