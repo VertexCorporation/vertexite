@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 🎯 SEO & Meta Tags -->
+    <title>Vertex | Download</title>
+    <meta name="description"
+        content="Download Vertex apps. Get Cortex and our other applications for Android and iOS here.">
+    <meta name="keywords" content="vertex, download, cortex, android, ios, app, app store, play store">
+    <meta name="author" content="Vertex Corporation">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="robots" content="index, follow">
+
+    <!-- 🌍 Hreflang Tags -->
+    <link rel="alternate" hreflang="hi" href="https://vertexishere.com/en/download.html" />
+    <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/indir.html" />
+    <link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/download.html" />
+
+    <!-- 🖼️ Open Graph (Social Media) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vertexishere.com/en/download.html">
+    <meta property="og:title" content="Vertex | Download">
+    <meta property="og:description" content="Download Vertex apps now and discover the peak of technology.">
+    <meta property="og:site_name" content="Vertex Corporation">
+    <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Vertex | Download">
+    <meta name="twitter:description" content="Download Vertex apps now.">
+    <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp">
+
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/main.css">
+    <style>
+        .download-hero {
+            padding-top: 120px;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .app-links {
+            display: flex;
+            gap: 24px;
+            margin-top: 48px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .app-badge {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            padding: 16px 32px;
+            border-radius: 12px;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .app-badge:hover {
+            background: var(--bg-card); border-color: var(--primary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            border-color: var(--primary-color);
+        }
+
+        .app-badge img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .app-text {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        .app-label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .app-store-name {
+            font-size: 18px;
+            font-weight: 600;
+        }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/favicon.webp">
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+    <div class="container nav-container">
+      <a href="index.html#" class="logo">Vertex</a>
+
+      <nav class="nav-links">
+        <a href="index.html#home" class="nav-link">होम</a>
+        <a href="index.html#projects" class="nav-link">परियोजनाएं</a>
+                <a href="index.html#news-section" class="nav-link">समाचार</a>
+
+        <a href="partners.html" class="nav-link">साझेदार</a>
+        <a href="index.html#team" class="nav-link">टीम</a>
+      <a href="download.html" class="nav-link active">डाउनलोड</a>
+      <a href="documentation.html" class="nav-link">प्रलेखन</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="language-dropdown">
+          <button class="lang-btn-trigger">
+            <span class="lang-text">HI</span> ▼
+          </button>
+          <div class="lang-menu">
+            <a href="../en/" class="lang-item">English</a>
+            <a href="../tr/" class="lang-item">Türkçe</a>
+            <a href="../hi/" class="lang-item active">Hindi</a>
+            <a href="../ar/" class="lang-item">العربية</a>
+            <a href="../az/" class="lang-item">Azərbaycan</a>
+            <a href="../pt/" class="lang-item">Português</a>
+            <a href="../nl/" class="lang-item">Nederlands</a>
+            <a href="../id/" class="lang-item">Indonesia</a>
+            <a href="../it/" class="lang-item">Italiano</a>
+            <a href="../es/" class="lang-item">Español</a>
+            <a href="../ru/" class="lang-item">Русский</a>
+            <a href="../fr/" class="lang-item">Français</a>
+            <a href="../ja/" class="lang-item">日本語</a>
+            <a href="../ko/" class="lang-item">한국어</a>
+            <a href="../zh/" class="lang-item">简体中文</a>
+            <a href="../de/" class="lang-item">Deutsch</a>
+          </div>
+        </div>
+        <button class="theme-toggle-btn btn-outline" aria-label="Toggle Theme"
+          style="padding: 8px; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+          <div class="theme-icon"></div>
+        </button>
+        <a href="mailto:contact@vertexishere.com" class="btn btn-outline btn-sm">संपर्क करें</a>
+        <a href="index.html#projects" class="btn btn-primary btn-sm">परियोजनाएं देखें</a>
+        <button class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+    <nav class="mobile-nav-links">
+      <a href="index.html#home">होम</a>
+      <a href="index.html#about">हमारे बारे में</a>
+      <a href="index.html#projects">परियोजनाएं</a>
+      <a href="index.html#vision">दृष्टि</a>
+
+      <a href="partners.html">साझेदार</a>
+      <a href="index.html#team">टीम</a>
+      <a href="download.html" class="active">डाउनलोड</a>
+      <a href="documentation.html">प्रलेखन</a>
+      <div class="mobile-lang-selector">
+        <a href="../tr/">TR</a>
+        <a href="../en/">EN</a>
+        <a href="../hi/" class="active">HI</a>
+      </div>
+
+            <div class="mobile-menu-actions">
+                <a href="mailto:contact@vertexishere.com" class="btn btn-outline mobile-btn">Contact Us</a>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Hero / App Header -->
+        <section class="download-hero container fade-up"
+            style="padding-top: 140px; text-align: left; align-items: flex-start; display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+            <div class="app-info-col" style="display: flex; flex-direction: column; gap: 24px;">
+                <div style="display: flex; gap: 24px; align-items: center;">
+                    <img src="https://play-lh.googleusercontent.com/2dI_XojSZMkfHYEHlXxiGdJA7RqHzsVHWPA-rNTGFNSMqrnpWzVjWk7L-MSFLmk9VN_Y6-kOzbaCjfvF5qI74g=w240-h480-rw"
+                        alt="Cortex Icon"
+                        style="width: 120px; height: 120px; border-radius: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.5);">
+                    <div>
+                        <h1 style="font-size: 48px; line-height: 1.1; margin-bottom: 8px;"><span
+                                class="gradient-text">Cortex</span></h1>
+                        <div style="display: flex; gap: 12px; font-size: 14px; color: var(--text-muted);">
+                            <span
+                                style="background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 20px;">Artificial
+                                Intelligence</span>
+                            <span
+                                style="background: rgba(255,255,255,0.1); padding: 4px 12px; border-radius: 20px;">Productivity</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p style="color: var(--text-muted); font-size: 18px; line-height: 1.6;">
+                    With Offline and Online AI modes, customizable characters, and the ability to train your own models,
+                    Cortex completely revolutionizes your AI experience. Push the boundaries.
+                </p>
+
+                <div class="app-links" style="margin-top: 12px; justify-content: flex-start;">
+                    <a href="https://play.google.com/store/apps/details?id=com.vertex.cortex&pcampaignid=web_share"
+                        target="_blank" class="app-badge">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                            <path
+                                d="M3,20.5V3.5C3,2.91 3.34,2.39 3.84,2.15L13.69,12L3.84,21.85C3.34,21.6 3,21.09 3,20.5M16.81,15.12L6.05,21.34L14.54,12.85L16.81,15.12M20.16,10.81C20.5,11.08 20.75,11.5 20.75,12C20.75,12.5 20.5,12.92 20.16,13.19L17.89,14.5L15.39,12L17.89,9.5L20.16,10.81M6.05,2.66L16.81,8.88L14.54,11.15L6.05,2.66Z" />
+                        </svg>
+                        <div class="app-text">
+                            <span class="app-label">Download for Android</span>
+                            <span class="app-store-name">Google Play</span>
+                        </div>
+                    </a>
+
+                    <a href="https://apps.apple.com/tr/app/cortex-online-offline-ai/id6755621587" target="_blank"
+                        class="app-badge">
+                        <svg viewBox="0 0 24 24" fill="currentColor" width="32" height="32">
+                            <path
+                                d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.09,16.69C20.06,16.74 19.67,18.11 18.71,19.5M13,3.5C13.73,2.67 14.94,2.04 15.94,2C16.07,3.17 15.6,4.35 14.9,5.19C14.21,6.04 13.07,6.7 11.95,6.61C11.8,5.37 12.36,4.26 13,3.5Z" />
+                        </svg>
+                        <div class="app-text">
+                            <span class="app-label">Download for iOS</span>
+                            <span class="app-store-name">App Store</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- What's New Block -->
+                <div class="updates-box"
+                    style="margin-top: 24px; background: var(--bg-card); border: 1px solid var(--border-color); padding: 24px; border-radius: 16px;">
+                    <h4
+                        style="margin-bottom: 12px; color: var(--text-main); font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                        <span
+                            style="width: 8px; height: 8px; background: #00E676; border-radius: 50%; box-shadow: 0 0 10px #00E676;"></span>
+                        What's New (v5.7.0)
+                    </h4>
+                    <p style="font-size: 14px; color: var(--text-muted); margin: 0;">
+                        🚀 PUSHING LIMITS! New Tools: Models are now much more capable! Live stock data, weather info,
+                        and much more... Flow Mode: Chat between models and performance improvements.
+                    </p>
+                </div>
+
+            </div>
+
+            <!-- Screenshots Grid -->
+            <div class="screenshots-col" style="position: relative;">
+                <div class="screenshot-grid"
+                    style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; transform: rotate(-5deg) translateY(20px);">
+                    <img src="../assets/screenshots/cortex_en_1.jpg"
+                        style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                    <img src="../assets/screenshots/cortex_en_2.jpg"
+                        style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); grid-row: span 2;">
+                    <img src="../assets/screenshots/cortex_en_3.jpg"
+                        style="width: 100%; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                </div>
+                <div class="glow-effect"
+                    style="position: absolute; width: 300px; height: 300px; background: var(--primary-color); filter: blur(100px); opacity: 0.15; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: -1;">
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="section section-dark">
+            <div class="container">
+                <h2 class="section-title text-center fade-up" style="margin-bottom: 60px;">Key Features</h2>
+                <div class="grid-3">
+                    <div class="feature-card fade-up"
+                        style="padding: 32px; background: var(--bg-card); border: 1px solid var(--border-color);">
+                        
+                        <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+                            <div class="visual-offline">
+                                <div class="wifi-arc"></div>
+                                <div class="wifi-arc"></div>
+                                <div class="wifi-arc"></div>
+                                <div class="offline-line"></div>
+                            </div>
+                        </div>
+                    
+                        
+                    <h3>Offline AI</h3>
+                        <p style="color: var(--text-muted); font-size: 14px;">Run AI models with 100% privacy using your
+                            device's power, without needing an internet connection.</p>
+                    </div>
+                    <div class="feature-card fade-up"
+                        style="padding: 32px; background: var(--bg-card); border: 1px solid var(--border-color);">
+                        <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+                            <div class="visual-flask">
+                                <div class="flask-bubble"></div>
+                                <div class="flask-bubble"></div>
+                                <div class="flask-bubble"></div>
+                            </div>
+                        </div>
+                        
+                    <h3>Personal AI Lab</h3>
+                        <p style="color: var(--text-muted); font-size: 14px;">Upload your own models in GGUF format and
+                            experience them in the Cortex ecosystem.</p>
+                    </div>
+                    <div class="feature-card fade-up"
+                        style="padding: 32px; background: var(--bg-card); border: 1px solid var(--border-color);">
+                        <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
+                            <div class="visual-sliders">
+                                <div class="slider-track"><div class="slider-knob"></div></div>
+                                <div class="slider-track"><div class="slider-knob"></div></div>
+                                <div class="slider-track"><div class="slider-knob"></div></div>
+                            </div>
+                        </div>
+                        
+                    <h3>Full Customization</h3>
+                        <p style="color: var(--text-muted); font-size: 14px;">Completely customize Cortex with themes,
+                            user interface settings, and assistant personalities.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Screenshots (Scrollable) -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title text-center fade-up mb-6">Screenshots</h2>
+                <!-- Custom Scrollbar Container -->
+                                <div class="screenshot-scroller fade-up"
+                    style="display: flex; gap: 24px; overflow-x: auto; padding-bottom: 32px; scroll-snap-type: x mandatory;">
+                    <!-- All Screenshots -->
+                    <img src="../assets/screenshots/cortex_en_1.jpg"
+                        style="height: 500px; border-radius: 20px; scroll-snap-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    <img src="../assets/screenshots/cortex_en_2.jpg"
+                        style="height: 500px; border-radius: 20px; scroll-snap-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    <img src="../assets/screenshots/cortex_en_3.jpg"
+                        style="height: 500px; border-radius: 20px; scroll-snap-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    <img src="../assets/screenshots/cortex_en_4.jpg"
+                        style="height: 500px; border-radius: 20px; scroll-snap-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    <img src="../assets/screenshots/cortex_en_5.jpg"
+                        style="height: 500px; border-radius: 20px; scroll-snap-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    <img src="../assets/screenshots/cortex_en_6.jpg"
+                        style="height: 500px; border-radius: 20px; scroll-snap-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    <img src="../assets/screenshots/cortex_en_7.jpg"
+                        style="height: 500px; border-radius: 20px; scroll-snap-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                    <img src="../assets/screenshots/cortex_en_8.jpg"
+                        style="height: 500px; border-radius: 20px; scroll-snap-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                </div>
+            </div>
+        </section>
+
+        <!-- Custom CSS for this page's specific needs -->
+        <style>
+            .download-hero {
+                min-height: auto;
+                padding-bottom: 60px;
+            }
+
+            @media (max-width: 900px) {
+                .download-hero {
+                    grid-template-columns: 1fr;
+                    text-align: center;
+                    align-items: center;
+                    padding-top: 100px;
+                }
+
+                .app-info-col {
+                    align-items: center;
+                }
+
+                .app-info-col>div {
+                    /* Icon and Title container */
+                    flex-direction: column;
+                }
+
+                .app-links {
+                    justify-content: center !important;
+                }
+
+                .screenshot-grid {
+                    /* display: none !important; removed */
+                    /* Hide sophisticated 3D grid on mobile for simpler view */
+                }
+
+                .updates-box {
+                    text-align: left;
+                }
+            }
+
+            /* Hide scrollbar but keep functionality */
+            .screenshot-scroller::-webkit-scrollbar {
+                height: 8px;
+            }
+
+            .screenshot-scroller::-webkit-scrollbar-track {
+                background: var(--bg-secondary);
+                border-radius: 4px;
+            }
+
+            .screenshot-scroller::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 4px;
+            }
+        </style>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-expanded">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="footer-brand">
+          <a href="index.html#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;">Vertex</a>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            तुर्की की सबसे युवा तकनीकी कंपनी। 15 वर्ष की औसत आयु के साथ AI, सॉफ्टवेयर और गेमिंग की दुनिया में क्रांति ला
+            रही है।
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">उत्पाद</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/VertexCorporation/Cortex">Cortex</a></li>
+            <li><a href="https://github.com/SolarBrowser/">Solar Browser</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar">All Star</a></li>
+            <li><a href="https://github.com/VertexCorporation/Mergen">Mergen</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">कंपनी</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#about">हमारे बारे में</a></li>
+            <li><a href="index.html#team">टीम</a></li>
+            <li><a href="index.html#vision">दृष्टि</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">संपर्क</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:contact@vertexishere.com">ईमेल भेजें</a></li>
+            <li><a href="https://www.linkedin.com/company/106897671/">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/vertex.23/">Instagram</a></li>
+            <li><a href="index.html#">Discord</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div class="copyright">
+          &copy; 2025 Vertex Corporation. सर्वाधिकार सुरक्षित।
+        </div>
+        <div class="footer-legal-links">
+          <a href="index.html#">गोपनीयता नीति</a>
+          <a href="index.html#">उपयोग की शर्तें</a>
+          <a href="index.html#">कुकी नीति</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <script type="module" src="../js/main.js"></script>
+</body>
+
+</html>
