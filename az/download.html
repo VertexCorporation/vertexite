@@ -40,12 +40,13 @@
     <link rel="stylesheet" href="../css/main.css">
     <style>
         .download-hero {
-            padding-top: 120px;
+            padding-top: 140px;
             min-height: 80vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: flex-start;
+            text-align: left;
         }
 
         .app-links {
@@ -125,7 +126,7 @@
       <div class="header-actions">
         <div class="language-dropdown">
           <button class="lang-btn-trigger">
-            <span class="lang-text">AZ</span> ▼
+            <span class="lang-text">Azərbaycan</span> ▼
           </button>
           <div class="lang-menu">
             <a href="../en/" class="lang-item">English</a>
@@ -170,9 +171,9 @@
       <a href="download.html" class="active">Yüklə</a>
       <a href="documentation.html">Sənədləşdirmə</a>
       <div class="mobile-lang-selector">
-        <a href="../tr/">TR</a>
-        <a href="../en/" class="active">EN</a>
-        <a href="../hi/">HI</a>
+        <a href="../tr/">Türkçe</a>
+        <a href="../en/" class="active">English</a>
+        <a href="../hi/">Hindi</a>
       </div>
 
             <div class="mobile-menu-actions">
@@ -183,8 +184,7 @@
 
     <main>
         <!-- Hero / App Header -->
-        <section class="download-hero container fade-up"
-            style="padding-top: 140px; text-align: left; align-items: flex-start; display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+        <section class="download-hero container fade-up">
             <div class="app-info-col" style="display: flex; flex-direction: column; gap: 24px;">
                 <div style="display: flex; gap: 24px; align-items: center;">
                     <img src="https://play-lh.googleusercontent.com/2dI_XojSZMkfHYEHlXxiGdJA7RqHzsVHWPA-rNTGFNSMqrnpWzVjWk7L-MSFLmk9VN_Y6-kOzbaCjfvF5qI74g=w240-h480-rw"
@@ -379,8 +379,7 @@
                 }
 
                 .screenshot-grid {
-                    /* display: none !important; removed */
-                    /* Hide sophisticated 3D grid on mobile for simpler view */
+                    display: none !important;
                 }
 
                 .updates-box {
