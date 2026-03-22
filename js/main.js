@@ -252,10 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animateParticles();
     }
 });
-<<<<<<< HEAD
-/* =========================================
    🐰 EASTER EGG: Selim Doğan
-   ========================================= */
 const EASTER_EGG_I18N = {
     'en': { tooltip: "As long as I build the site, I am the boss.", btn: "Click and see", boss: "Boss", employee: "Employee" },
     'tr': { tooltip: "Siteyi ben yaptığım sürece patron benim.", btn: "Tıkla ve gör", boss: "Patron", employee: "Çalışan" },
@@ -362,7 +359,6 @@ function initEasterEgg() {
 
 // Initialize on load
 document.addEventListener('DOMContentLoaded', initEasterEgg);
-=======
 // Birthday Surprise
 window.addEventListener('load', () => {
     // Inject Styles
@@ -437,4 +433,3 @@ window.addEventListener('load', () => {
     };
     document.body.appendChild(script);
 });
->>>>>>> c690873 (feat: HAPPY BIRTHDAY ELA)
