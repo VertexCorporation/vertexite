@@ -252,7 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
         animateParticles();
     }
 });
+/* =========================================
    🐰 EASTER EGG: Selim Doğan
+   ========================================= */
 const EASTER_EGG_I18N = {
     'en': { tooltip: "As long as I build the site, I am the boss.", btn: "Click and see", boss: "Boss", employee: "Employee" },
     'tr': { tooltip: "Siteyi ben yaptığım sürece patron benim.", btn: "Tıkla ve gör", boss: "Patron", employee: "Çalışan" },
