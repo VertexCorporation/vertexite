@@ -26,7 +26,7 @@
 
 .marquee-container {
     width: 100%;
-    max-width: 1200px;
+    max-width: 650px;
     margin: 0 auto;
     display: flex;
     overflow: hidden;
@@ -34,8 +34,8 @@
     position: relative;
     align-items: center;
     /* Use mask-image to fade out left and right edges smoothly */
-    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
-    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
 }
 
 .marquee-content {
