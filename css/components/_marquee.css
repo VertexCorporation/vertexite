@@ -1,0 +1,103 @@
+/* =========================================
+   COMPONENTS - MARQUEE (PARTNERS/COLLABORATORS)
+   ========================================= */
+
+.collaborators-section {
+    padding: 60px 0;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+    border-top: none;
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.collaborators-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-main);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Remove old pseudoelement gradients for cleaner mask approach */
+
+.marquee-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    align-items: center;
+    /* Use mask-image to fade out left and right edges smoothly */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    align-items: center;
+    gap: 80px;
+    padding-left: 80px;
+    animation: marquee-scroll 25s linear infinite;
+    will-change: transform;
+}
+
+.marquee-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60px; /* larger for 1:1 logos */
+    flex-shrink: 0; /* Very small and clean */
+    filter: grayscale(100%) opacity(0.7); /* Super subdued like Lovable */
+    transition: filter 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
+}
+
+.marquee-item:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.05);
+}
+
+.marquee-item img {
+    max-height: 100%;
+    width: auto;
+    object-fit: contain;
+    display: block; /* Ensure it behaves as block to remove baseline gap */
+}
+
+.marquee-item svg {
+    height: 100%;
+    width: auto;
+    fill: currentColor;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+    .collaborators-section {
+        padding: 40px 0;
+    }
+    .collaborators-title {
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+    }
+    .marquee-content {
+        gap: 50px;
+        padding-left: 50px;
+        animation-duration: 20s;
+    }
+    .marquee-item {
+        height: 36px;
+    }
+    .marquee-container {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 25%, black 75%, transparent);
+    }
+}

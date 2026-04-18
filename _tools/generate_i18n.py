@@ -31,7 +31,7 @@ ENGLISH_MAP = {
     
     "hero_badge": "Turkiye's Youngest Tech Company",
     # "hero_title": Can't easily replace HTML with HTML in string replace without being exact.
-    # The JSON has HTML: <span class="gradient-text">The Peak of Technology</span><br>Shaping the Future
+    # The JSON has HTML: <span class="gradient-text">The Peak of Technology</span>
     
     "hero_desc": "Founded by Turkiye's brightest young talents, Vertex is revolutionizing the world of AI and software.",
     "stats_target": "Target Downloads",
@@ -192,7 +192,7 @@ def main():
         
         # Replace specific large blocks first
         # Handle HTML in Hero Title specifically
-        eng_hero_title = '<span class="gradient-text">The Peak of Technology</span><br>Shaping the Future'
+        eng_hero_title = '<span class="gradient-text">The Peak of Technology</span>'
         new_content = new_content.replace(eng_hero_title, trans_data.get('hero_title', eng_hero_title))
         
         # Handle simple map

@@ -5,13 +5,13 @@
 /* --- Fade Up Entry Animation --- */
 .fade-up {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 0.8s cubic-bezier(0.165, 0.84, 0.44, 1);
+    transform: translateY(40px) scale(0.98);
+    transition: all 1.2s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .fade-up.visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
 }
 
 /* --- Staggered Delays for Grids --- */

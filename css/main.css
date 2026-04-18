@@ -23,6 +23,7 @@
 @import 'components/_cards.css';
 @import 'components/_inputs.css';
 @import 'components/_stats.css';
+@import 'components/_marquee.css';
 
 /* 5. Pages - Specific Section Styles */
 @import 'pages/_hero.css';
@@ -267,4 +268,6 @@
 
 .role-changing {
   animation: dustPuff 0.8s ease-in-out forwards;
+
 }
+
