@@ -1,0 +1,77 @@
+/* =========================================
+   GEOMETRIC PROFESSIONAL BACKGROUND
+   Replaces the old particle canvas
+   ========================================= */
+
+.geo-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -2;
+    overflow: hidden;
+    pointer-events: none;
+    background-color: var(--bg-main);
+}
+
+.geo-blob {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.15; /* Subtle and professional */
+    animation: geo-float 20s infinite ease-in-out alternate;
+}
+
+/* Primary color blob (Top Right) */
+.geo-blob-1 {
+    top: -10%;
+    right: -10%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, var(--primary) 0%, rgba(var(--primary-rgb), 0) 70%);
+    animation-delay: 0s;
+}
+
+/* Secondary dark/blue blob (Bottom Left) */
+.geo-blob-2 {
+    bottom: -20%;
+    left: -10%;
+    width: 60vw;
+    height: 60vw;
+    background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+    animation-delay: -5s;
+    opacity: 0.1;
+}
+
+/* Accent purple/pink blob (Center) */
+.geo-blob-3 {
+    top: 30%;
+    left: 30%;
+    width: 40vw;
+    height: 40vw;
+    background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+    animation-delay: -10s;
+    opacity: 0.08;
+}
+
+@keyframes geo-float {
+    0% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(5%, 5%) scale(1.05); }
+    66% { transform: translate(-3%, 8%) scale(0.95); }
+    100% { transform: translate(0, 0) scale(1); }
+}
+
+[data-theme="light"] .geo-blob {
+    opacity: 0.4; /* Slightly more visible in light mode */
+    filter: blur(140px);
+}
+
+[data-theme="light"] .geo-bg {
+    background-color: #fafafa;
+}
+
+/* Clean up particle leftovers if still mapped */
+#particle-canvas {
+    display: none !important;
+}
