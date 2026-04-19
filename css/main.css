@@ -10,6 +10,7 @@
 /* 2. Utils - Helpers & Animations */
 @import 'utils/_animations.css';
 @import 'utils/_effects.css';
+@import 'utils/_geo.css';
 @import 'utils/_visuals.css';
 /* The CSS Art definitions */
 
@@ -271,3 +272,39 @@
 
 }
 
+
+/* --- Bento Grid Adjustments --- */
+#projects .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(300px, auto);
+    gap: 24px;
+}
+
+#projects .grid-3 > a:nth-child(1) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+#projects .grid-3 > a:nth-child(1) .project-img-container {
+    height: 350px; /* Taller image inside large card */
+}
+
+#projects .grid-3 > a:nth-child(2),
+#projects .grid-3 > a:nth-child(3) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+/* Ensure mobile bends properly */
+@media (max-width: 768px) {
+    #projects .grid-3 {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        grid-template-columns: none !important;
+    }
+    #projects .grid-3 > a:nth-child(1) .project-img-container {
+        height: 180px; 
+    }
+}
