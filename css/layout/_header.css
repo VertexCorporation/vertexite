@@ -48,9 +48,22 @@
     color: var(--text-main);
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 12px;
     letter-spacing: -0.03em;
     font-family: var(--font-main);
+}
+
+.nav-logo-icon {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    /* Optional: If it needs color inversion in light mode, you can add filters. Let's keep it default. */
+}
+
+.logo:hover .nav-logo-icon {
+    transform: scale(1.05) rotate(-5deg);
 }
 
 /* --- Desktop Navigation --- */

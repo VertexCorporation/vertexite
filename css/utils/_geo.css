@@ -1,6 +1,5 @@
 /* =========================================
-   GEOMETRIC PROFESSIONAL BACKGROUND
-   Replaces the old particle canvas
+   GEOMETRIC PROFESSIONAL BACKGROUND (Vercel/Linear Style Mesh + Grid)
    ========================================= */
 
 .geo-bg {
@@ -12,66 +11,87 @@
     z-index: -2;
     overflow: hidden;
     pointer-events: none;
-    background-color: var(--bg-main);
+    background-color: #030303; /* Almost black */
+}
+
+/* Minimalist Tech Grid */
+.geo-bg::before {
+    content: '';
+    position: absolute;
+    inset: -50%;
+    background-image: 
+        linear-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: center center;
+    /* Softly fade out grid at the edges */
+    -webkit-mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+    mask-image: radial-gradient(ellipse at center, rgba(0,0,0,1) 0%, rgba(0,0,0,0) 80%);
+    animation: grid-slide 40s linear infinite;
+}
+
+@keyframes grid-slide {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(60px); }
+}
+
+[data-theme="light"] .geo-bg {
+    background-color: #fafbfc;
+}
+
+[data-theme="light"] .geo-bg::before {
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
 }
 
 .geo-blob {
     position: absolute;
     border-radius: 50%;
-    filter: blur(120px);
-    opacity: 0.15; /* Subtle and professional */
-    animation: geo-float 20s infinite ease-in-out alternate;
+    filter: blur(100px);
+    opacity: 0.55; /* Rich colorful ambient blobs */
+    animation: ambient-drift 25s infinite alternate ease-in-out;
 }
 
-/* Primary color blob (Top Right) */
 .geo-blob-1 {
-    top: -10%;
-    right: -10%;
-    width: 50vw;
-    height: 50vw;
-    background: radial-gradient(circle, var(--primary) 0%, rgba(var(--primary-rgb), 0) 70%);
+    top: -20%;
+    left: -5%;
+    width: 70vw;
+    height: 70vw;
+    background: radial-gradient(circle, rgba(var(--primary-rgb), 0.45) 0%, transparent 65%);
     animation-delay: 0s;
 }
 
-/* Secondary dark/blue blob (Bottom Left) */
 .geo-blob-2 {
-    bottom: -20%;
-    left: -10%;
+    bottom: -15%;
+    right: -10%;
     width: 60vw;
     height: 60vw;
-    background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(46, 116, 255, 0.35) 0%, transparent 65%); /* Blue tint */
     animation-delay: -5s;
-    opacity: 0.1;
+    animation-direction: alternate-reverse;
 }
 
-/* Accent purple/pink blob (Center) */
 .geo-blob-3 {
-    top: 30%;
-    left: 30%;
-    width: 40vw;
-    height: 40vw;
-    background: radial-gradient(circle, #8b5cf6 0%, transparent 70%);
+    top: 25%;
+    left: 45%;
+    width: 50vw;
+    height: 50vw;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.25) 0%, transparent 60%); /* Violet tint */
     animation-delay: -10s;
-    opacity: 0.08;
 }
 
-@keyframes geo-float {
+@keyframes ambient-drift {
     0% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(5%, 5%) scale(1.05); }
-    66% { transform: translate(-3%, 8%) scale(0.95); }
-    100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(4%, 8%) scale(1.1); }
+    100% { transform: translate(-3%, -6%) scale(0.95); }
 }
 
 [data-theme="light"] .geo-blob {
-    opacity: 0.4; /* Slightly more visible in light mode */
-    filter: blur(140px);
+    opacity: 0.7;
+    filter: blur(120px);
 }
 
-[data-theme="light"] .geo-bg {
-    background-color: #fafafa;
-}
-
-/* Clean up particle leftovers if still mapped */
 #particle-canvas {
     display: none !important;
 }
