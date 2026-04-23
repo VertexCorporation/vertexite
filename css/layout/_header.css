@@ -369,6 +369,19 @@
 /* --- Responsive Header --- */
 @media (max-width: 768px) {
 
+    .nav-container {
+        padding: 0 20px; /* Reduce side padding to make room */
+    }
+
+    .logo {
+        font-size: 24px !important; /* Scale down logo text */
+        gap: 8px;
+    }
+
+    .nav-logo-icon {
+        height: 28px; /* Scale down logo icon */
+    }
+
     .nav-links,
     .header-actions .btn {
         display: none;
