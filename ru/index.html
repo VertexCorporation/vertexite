@@ -535,19 +535,7 @@
             </div>
           </div>
 
-          <!-- Murat Coşkun -->
-          <div class="card fade-up team-card">
-            <img src="../assets/MURATCOSKUN.webp" alt="Murat Coşkun" class="team-img" loading="lazy">
-            <h3>Murat Coşkun</h3>
-            <p class="team-role">Главный Архитектор</p>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/muratck/" target="_blank"><img src="../assets/linkedin.svg"
-                  alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="../assets/instagram.svg"
-                  alt="Instagram"></a>
-              <a href="mailto:murat@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
-            </div>
-          </div>
+          <!-- Murat Coşkun (removed) -->
 
 
           <!-- Mir Emir Kaya -->
@@ -573,18 +561,7 @@
           </div>
 
 
-          <!-- Selim Doğan -->
-          <div class="card fade-up team-card">
-            <img src="../assets/selim.webp" alt="Selim Doğan" class="team-img" loading="lazy">
-            <h3>Selim Doğan</h3>
-            <p class="team-role">Старший Веб-разработчик</p>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/selim-doğan-865380320/" target="_blank"><img
-                  src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/selim.rar/" target="_blank"><img src="../assets/instagram.svg"
-                  alt="Instagram"></a>
-            </div>
-          </div>
+          <!-- Selim Doğan (removed) -->
 
           <!-- Elif İrem Şahin -->
           <div class="card fade-up team-card">
@@ -608,6 +585,17 @@
                 target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
             </div>
           </div>
+          
+            <!-- Ekin Önal -->
+            <div class="card fade-up team-card">
+              <img src="../assets/EKINONAL.jpg" alt="Ekin Önal" class="team-img" loading="lazy">
+              <h3>Ekin Önal</h3>
+              <p class="team-role">Marketing</p>
+              <div class="social-links">
+                <a href="https://www.linkedin.com/in/ekin-önal-48b1493b1?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
+                <a href="https://www.instagram.com/ekin_nlll/" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
+              </div>
+            </div>
 
           <!-- Emre Baldemir -->
           <div class="card fade-up team-card">
@@ -627,6 +615,74 @@
   </main>
 
   <!-- Final CTA -->
+    <!-- Onur Tablosu (names-only honor roll) -->
+    <section id="onur-tablo" class="section">
+      <div class="container">
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">Доска почёта</h2>
+
+        <!-- Styles specific to Onur Tabulosu -->
+        <style>
+          .ot-row { overflow: hidden; margin: 12px 0; }
+          .ot-marquee { display: flex; align-items: center; }
+          .ot-marquee .ot-inner { display: inline-flex; white-space: nowrap; }
+          .ot-marquee span { display: inline-block; padding: 0 28px; font-size: 18px; color: var(--text-muted); }
+          .ot-marquee.scroll .ot-inner { will-change: transform; animation: ot-scroll linear infinite; }
+          .ot-marquee.scroll.reverse .ot-inner { animation-direction: reverse; }
+          @keyframes ot-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+          /* when there are few names, center them */
+          .ot-marquee.center { justify-content: center; }
+        </style>
+
+        <div id="onur-container">
+          <div class="ot-row">
+            <div class="ot-marquee" data-names="Selim Doğan|Murat Coşkun">
+              <div class="ot-inner">
+                <span>Selim Doğan</span>
+                <span>Murat Coşkun</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function(){
+            // For each marquee, if it has more than 2 names, duplicate inner content and enable scroll.
+            document.querySelectorAll('.ot-marquee').forEach(function(m, idx){
+              var inner = m.querySelector('.ot-inner');
+              var names = inner.querySelectorAll('span');
+              var count = names.length;
+              if (count === 0) return;
+              if (count <= 2) {
+                // center small rows
+                m.classList.add('center');
+                return;
+              }
+              // Duplicate content for seamless scrolling
+              inner.innerHTML = inner.innerHTML + inner.innerHTML;
+              // set animation duration proportional to content length
+              var charCount = inner.textContent.length;
+              var duration = Math.max(8, Math.min(60, Math.floor(charCount/2)));
+              m.classList.add('scroll');
+              // alternate direction for each row: even rows normal, odd rows reverse
+              if (idx % 2 === 1) {
+                m.classList.add('reverse');
+                inner.style.animationDirection = 'reverse';
+              } else {
+                inner.style.animationDirection = 'normal';
+              }
+              m.style.setProperty('--ot-duration', duration + 's');
+              inner.style.animationDuration = duration + 's';
+            });
+          })();
+        </script>
+
+        <!-- Disable site-wide mouse spotlight/ glow around cursor for this page -->
+        <style>
+          body::before { display: none !important; background: none !important; }
+        </style>
+
+      </div>
+    </section>
   <section class="container">
     <div class="cta-section fade-up">
       <div class="cta-bg-animation">
