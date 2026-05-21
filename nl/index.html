@@ -671,32 +671,61 @@
 
         <script>
           (function(){
-            // For each marquee, if it has 5 or more names, duplicate inner content and enable scroll.
-            document.querySelectorAll('.hr-marquee').forEach(function(m, idx){
-              var inner = m.querySelector('.hr-inner');
-              var names = inner.querySelectorAll('span');
-              var count = names.length;
-              if (count === 0) return;
-              if (count <= 4) {
-                // center small rows
-                m.classList.add('center');
-                return;
+            var lastWidth = window.innerWidth;
+            
+            function setupHonorRoll() {
+              var isMobile = window.innerWidth <= 768;
+              var scrollThreshold = isMobile ? 3 : 5;
+              
+              document.querySelectorAll('.hr-marquee').forEach(function(m, idx){
+                // Store original HTML if not already done
+                if (!m.dataset.originalHtml) {
+                  m.dataset.originalHtml = m.querySelector('.hr-inner').innerHTML;
+                }
+                
+                var inner = m.querySelector('.hr-inner');
+                inner.innerHTML = m.dataset.originalHtml;
+                
+                // Remove previous classes
+                m.classList.remove('scroll', 'center', 'reverse');
+                inner.style.animationDirection = '';
+                inner.style.animationDuration = '';
+                m.style.setProperty('--ot-duration', '');
+                
+                var names = inner.querySelectorAll('span');
+                var count = names.length;
+                if (count === 0) return;
+                
+                if (count < scrollThreshold) {
+                  m.classList.add('center');
+                  return;
+                }
+                
+                // Duplicate content for seamless scrolling
+                inner.innerHTML = inner.innerHTML + inner.innerHTML;
+                var charCount = inner.textContent.length;
+                var duration = Math.max(8, Math.min(60, Math.floor(charCount/2)));
+                m.classList.add('scroll');
+                
+                if (idx % 2 === 1) {
+                  m.classList.add('reverse');
+                  inner.style.animationDirection = 'reverse';
+                } else {
+                  inner.style.animationDirection = 'normal';
+                }
+                m.style.setProperty('--ot-duration', duration + 's');
+                inner.style.animationDuration = duration + 's';
+              });
+            }
+            
+            setupHonorRoll();
+            
+            // Re-run on window resize
+            window.addEventListener('resize', function() {
+              if (Math.abs(window.innerWidth - lastWidth) > 100) {
+                lastWidth = window.innerWidth;
+                setupHonorRoll();
               }
-              // Duplicate content for seamless scrolling
-              inner.innerHTML = inner.innerHTML + inner.innerHTML;
-              // set animation duration proportional to content length
-              var charCount = inner.textContent.length;
-              var duration = Math.max(8, Math.min(60, Math.floor(charCount/2)));
-              m.classList.add('scroll');
-              // alternate direction for each row: even rows normal, odd rows reverse
-              if (idx % 2 === 1) {
-                m.classList.add('reverse');
-                inner.style.animationDirection = 'reverse';
-              } else {
-                inner.style.animationDirection = 'normal';
-              }
-              m.style.setProperty('--ot-duration', duration + 's');
-              inner.style.animationDuration = duration + 's';
             });
           })();
         </script>
