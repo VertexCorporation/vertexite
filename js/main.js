@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mouse Spotlight Effect
-    // Mouse Spotlight Effect
+    // Mouse Spotlight Effect - COMPLETELY DISABLED
+    /*
     let spotlightTicking = false;
     document.addEventListener('mousemove', (e) => {
         if (!spotlightTicking) {
@@ -183,6 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
             spotlightTicking = true;
         }
     });
+    */
 
     // Particle System
     const canvas = document.getElementById('particle-canvas');

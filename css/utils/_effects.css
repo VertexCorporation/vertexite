@@ -2,35 +2,7 @@
    UTILS - GLOBAL EFFECTS & ATMOSPHERE
    ========================================= */
 
-/* --- Spotlight / Flashlight Effect on Body --- */
-/* Note: Requires JS to update --mouse-x and --mouse-y */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(
-        250px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-        var(--spotlight-color, rgba(var(--primary-rgb), 0.4)),
-        transparent 100%
-    );
-    z-index: 1000;
-    pointer-events: none;
-    mix-blend-mode: screen;
-}
-
-[data-theme="light"] body::before {
-    --spotlight-color: rgba(var(--primary-rgb), 0.15);
-    mix-blend-mode: multiply;
-}
-
-@media (max-width: 768px) {
-    body::before {
-        display: none;
-    }
-}
+/* --- Spotlight / Flashlight Effect on Body --- REMOVED --- */
 
 /* --- Animated Gradient Borders --- */
 @keyframes rotate {
