@@ -648,7 +648,8 @@
           .hr-row { overflow: hidden; margin: 12px 0; }
           .hr-marquee { display: flex; align-items: center; }
           .hr-marquee .hr-inner { display: inline-flex; white-space: nowrap; }
-          .hr-marquee span { display: inline-block; padding: 0 28px; font-size: 18px; color: var(--text-muted); }
+          .hr-marquee span, .hr-marquee a { display: inline-block; padding: 0 28px; font-size: 18px; color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+          .hr-marquee a:hover { color: var(--text-main); text-decoration: underline; }
           .hr-marquee.scroll .hr-inner { will-change: transform; animation: hr-scroll linear infinite; }
           .hr-marquee.scroll.reverse .hr-inner { animation-direction: reverse; }
           @keyframes hr-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
@@ -658,11 +659,12 @@
 
         <div id="hr-container">
           <div class="hr-row">
-            <div class="hr-marquee" data-names="Selim Doğan|Murat Coşkun|Burak İsa Şimşek">
+            <div class="hr-marquee" data-names="Selim Doğan|Murat Coşkun|Burak İsa Şimşek|Laboratorio Giovani BEL'TFL">
               <div class="hr-inner">
                 <span>Selim Doğan</span>
                 <span>Murat Coşkun</span>
                 <span>Burak İsa Şimşek</span>
+                <a href="https://www.instagram.com/beltflcalistay?igsh=ZGdreDd1MnphdHRj" target="_blank">Laboratorio Giovani BEL'TFL</a>
               </div>
             </div>
           </div>
