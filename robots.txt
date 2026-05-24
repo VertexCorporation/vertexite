@@ -3,4 +3,7 @@
 User-agent: *
 Allow: /
 
+# Prevent indexing of team member images in Google Images
+Disallow: /assets/team/
+
 Sitemap: https://vertexishere.com/sitemap.xml
