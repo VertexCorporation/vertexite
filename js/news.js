@@ -122,7 +122,7 @@ async function renderNews(articles, container, lang, strings) {
 
         card.innerHTML = `
             <div class="news-img-container">
-                <img src="${article.imageUrl}" alt="${content.title}" loading="lazy" onerror="this.src='../assets/favicon.webp'">
+                <img src="${article.imageUrl}" alt="${content.title}" loading="lazy" decoding="async" onerror="this.src='../assets/favicon.webp'">
             </div>
             <div class="card-content">
                 <div class="news-date">${date}</div>

@@ -58,9 +58,11 @@
     <!-- Fonts & Styles -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://europe-west1-vertex-ai-1618.cloudfunctions.net">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="preload" href="../css/main.css" as="style">
-  <link rel="stylesheet" href="../css/main.css">
+  <link rel="preload" href="../assets/favicon.webp" as="image" type="image/webp">
   
   <!-- DNS Prefetch for 3rd Party Domains -->
   <link rel="dns-prefetch" href="https://www.youtube.com">
@@ -92,7 +94,7 @@
   <!-- Header -->
   <header class="header">
     <div class="container nav-container">
-      <a href="#" class="logo"><img src="../assets/favicon.webp" alt="Vertex Logo" class="nav-logo-icon">Vertex</a>
+      <a href="#" class="logo"><img src="../assets/favicon.webp" alt="Vertex Logo" class="nav-logo-icon" fetchpriority="high" decoding="async">Vertex</a>
 
 
 
@@ -299,7 +301,7 @@
           <a href="download.html"
             class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="../assets/cortex.webp" alt="Cortex AI" loading="lazy">
+              <img src="../assets/cortex.webp" alt="Cortex AI" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <h3>Cortex</h3>
@@ -324,7 +326,7 @@
           <a href="https://github.com/VertexCorporation/Drome" target="_blank"
             class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="../assets/drome.webp" alt="Drome" loading="lazy">
+              <img src="../assets/drome.webp" alt="Drome" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <h3>Drome</h3>
@@ -335,7 +337,7 @@
           <!-- Solar -->
           <a href="https://browser.solar" target="_blank" class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="../assets/solar.webp" alt="Solar Browser" loading="lazy">
+              <img src="../assets/solar.webp" alt="Solar Browser" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <h3>Solar Browser</h3>
@@ -347,7 +349,7 @@
           <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank"
             class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="../assets/allstar.webp" alt="All Star" loading="lazy">
+              <img src="../assets/allstar.webp" alt="All Star" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <h3>All Star</h3>
@@ -830,6 +832,18 @@
   </footer>
 
   <script type="module" src="../js/main.js"></script>
+  
+  <!-- Service Worker Registration for Caching -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('../sw.js').then(
+          (registration) => console.log('[SW] Registered:', registration),
+          (error) => console.log('[SW] Registration failed:', error)
+        );
+      });
+    }
+  </script>
 </body>
 
 </html>
