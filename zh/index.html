@@ -59,11 +59,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/main.css">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../assets/favicon.webp">
-
+  <link rel="preload" href="../css/main.css" as="style">
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- DNS Prefetch for 3rd Party Domains -->
+  <link rel="dns-prefetch" href="https://www.youtube.com">
+  <link rel="dns-prefetch" href="https://github.com">
+  <link rel="dns-prefetch" href="https://www.linkedin.com">
+  <link rel="dns-prefetch" href="https://play.google.com">
+  <link rel="dns-prefetch" href="https://browser.solar">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   </head>
 
@@ -248,7 +255,7 @@
                   <div class="youth-core"></div>
                 </div>
               </div>
-              <h3>年轻创新者</h3>
+              <h2>年轻创新者</h2>
               <p>我们的团队平均年龄 15 岁，代表了致力于突破界限的下一代科技远见者。</p>
             </div>
           </div>
@@ -261,7 +268,7 @@
                   <div class="multi-layer"></div>
                 </div>
               </div>
-              <h3>多学科专业知识</h3>
+              <h2>多学科专业知识</h2>
               <p>我们在从软件开发到 AI、游戏和音乐制作的广泛技能中进行创新。</p>
             </div>
           </div>
@@ -274,7 +281,7 @@
                   <div class="global-dot"></div>
                 </div>
               </div>
-              <h3>全球视野</h3>
+              <h2>全球视野</h2>
               <p>我们致力于通过开发世界级产品，将土耳其定位为全球技术领导者。</p>
             </div>
           </div>
@@ -351,8 +358,7 @@
           <!-- Ally -->
           <div class="card fade-up project-card animated-border" style="cursor: default;">
             <div class="project-img-container">
-              <img src="../assets/ally.webp" alt="Ally Health" loading="lazy"
-                onerror="this.src='../assets/comingsoon.webp'">
+              <img src="../assets/comingsoon.webp" alt="Ally Health" loading="lazy">
             </div>
             <div class="card-content">
               <h3>Ally</h3>
@@ -384,7 +390,7 @@
                 <div class="ai-line"></div>
               </div>
             </div>
-            <h4>人工智能</h4>
+            <h3>人工智能</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Python, TensorFlow, PyTorch</p>
           </div>
           <div class="feature-card" style="padding: 24px;">
@@ -400,7 +406,7 @@
                 </div>
               </div>
             </div>
-            <h4>网络技术</h4>
+            <h3>网络技术</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">React, Node.js, WebAssembly</p>
           </div>
           <div class="feature-card" style="padding: 24px;">
@@ -413,7 +419,7 @@
                 </div>
               </div>
             </div>
-            <h4>移动应用</h4>
+            <h3>移动应用</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Flutter, React Native, Swift</p>
           </div>
           <div class="feature-card" style="padding: 24px;">
@@ -426,7 +432,7 @@
                 </div>
               </div>
             </div>
-            <h4>游戏开发</h4>
+            <h3>游戏开发</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Unity, C#, Unreal Engine</p>
           </div>
         </div>
