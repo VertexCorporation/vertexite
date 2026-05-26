@@ -19,7 +19,7 @@
 
     /* --- Gradients --- */
     --gradient-main: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
-    --gradient-text: linear-gradient(135deg, #ffffff 0%, #71717a 100%);
+    --gradient-text: linear-gradient(135deg, #ffffff 0%, #52525b 100%);
     --cta-bg-gradient: linear-gradient(-45deg, #000000, #1a1a1a, #2a2a2a, #000000);
 
     /* --- UI Elements --- */
@@ -47,17 +47,17 @@
     --bg-secondary: #f4f4f5;
     --bg-card: #ffffff;
     --text-main: #18181b;
-    --text-muted: #71717a;
+    --text-muted: #3f3f46;
     --border-color: #e4e4e7;
 
     /* Monochrome Light Mode (Black Primary) */
     --primary: #000000;
     --primary-rgb: 0, 0, 0;
     --primary-hover: #333333;
-    --accent: #52525b;
+    --accent: #27272a;
     --btn-text-color: #ffffff;
 
-    --gradient-main: linear-gradient(135deg, #000000 0%, #52525b 100%);
+    --gradient-main: linear-gradient(135deg, #000000 0%, #27272a 100%);
     --cta-bg-gradient: linear-gradient(-45deg, #000000, #1a1a1a, #2a2a2a, #000000);
 
     --glass-bg: rgba(255, 255, 255, 0.8);
