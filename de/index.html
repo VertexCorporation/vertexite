@@ -60,11 +60,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/main.css">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="../assets/favicon.webp">
-
+  <link rel="preload" href="../css/main.css" as="style">
+  <link rel="stylesheet" href="../css/main.css">
+  
+  <!-- DNS Prefetch for 3rd Party Domains -->
+  <link rel="dns-prefetch" href="https://www.youtube.com">
+  <link rel="dns-prefetch" href="https://github.com">
+  <link rel="dns-prefetch" href="https://www.linkedin.com">
+  <link rel="dns-prefetch" href="https://play.google.com">
+  <link rel="dns-prefetch" href="https://browser.solar">
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
 
   </head>
 
@@ -276,7 +283,7 @@
                   <div class="global-dot"></div>
                 </div>
               </div>
-              <h3>Globale Vision</h3>
+              <h2>Global Vision</h2>
               <p>Wir sind bestrebt, die Türkei als globalen Technologieführer zu positionieren.</p>
             </div>
           </div>
@@ -354,8 +361,7 @@
           <!-- Ally -->
           <div class="card fade-up project-card animated-border" style="cursor: default;">
             <div class="project-img-container">
-              <img src="../assets/ally.webp" alt="Ally Health" loading="lazy"
-                onerror="this.src='../assets/comingsoon.webp'">
+              <img src="../assets/comingsoon.webp" alt="Ally Health" loading="lazy">
             </div>
             <div class="card-content">
               <h3>Ally</h3>
@@ -416,7 +422,7 @@
                 </div>
               </div>
             </div>
-            <h4>Mobile App</h4>
+            <h3>Mobile App</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Flutter, React Native, Swift</p>
           </div>
           <div class="feature-card" style="padding: 24px;">
