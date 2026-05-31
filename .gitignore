@@ -68,4 +68,9 @@ dist-ssr/
 # Testing
 coverage/
 
-
+# AI Helper Scripts
+fix_*.py
+optimize_*.py
+reorder_*.py
+update_*.py
+# _tools/
