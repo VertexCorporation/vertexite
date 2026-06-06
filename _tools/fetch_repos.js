@@ -25,14 +25,18 @@ async function fetchRepos() {
     const response = await fetch(`https://api.github.com/users/${ORG}/repos?per_page=100`);
     const repos = await response.json();
     
-    const processed = repos.map(repo => ({
-      name: repo.name,
-      description: repo.description || 'No description',
-      language: repo.language || 'Other',
-      stars: repo.stargazers_count,
-      forks: repo.forks_count,
-      url: repo.html_url
-    }));
+    const IGNORED_REPOS = ['vertexite', 'cozmosite', 'cortexite', 'allyishere'];
+
+    const processed = repos
+      .filter(repo => !IGNORED_REPOS.includes(repo.name.toLowerCase()))
+      .map(repo => ({
+        name: repo.name,
+        description: repo.description || '',
+        language: repo.language || 'Other',
+        stars: repo.stargazers_count,
+        forks: repo.forks_count,
+        url: repo.html_url
+      }));
     
     // Star'a göre sırala (yüksekten düşüğe) - b - a = büyükleri başa
     processed.sort((a, b) => b.stars - a.stars);
@@ -101,7 +105,7 @@ function createRepoCard(repo, lang = 'en') {
         </div>
         <span class="repo-status">${t.active}</span>
       </div>
-      <p class="repo-desc">${repo.description}</p>
+      ${repo.description ? `<p class="repo-desc">${repo.description}</p>` : ''}
       <div class="repo-meta">
         <span class="meta-item"><span class="repo-lang-color" style="background: ${langColor[repo.language] || langColor['Other']};"></span>${repo.language}</span>
         <span class="meta-item">⭐ ${repo.stars}</span>
