@@ -13,7 +13,7 @@
     border: 1px solid var(--border-color);
     color: var(--text-main);
     padding: 8px 16px;
-    border-radius: var(--radius-sm);
+    border-radius: 20px;
     cursor: pointer;
     display: flex;
     align-items: center;
