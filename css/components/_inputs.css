@@ -68,3 +68,18 @@
     background: rgba(var(--primary-rgb), 0.1);
     color: var(--text-main);
 }
+
+/* Dropdown Arrow Icon */
+.dropdown-arrow {
+    display: inline-block;
+    margin-left: 6px;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    vertical-align: middle;
+    pointer-events: none;
+}
+
+/* Rotation when active */
+.language-dropdown.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
