@@ -2,6 +2,12 @@
 <html lang="ja">
 
 <head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -89,7 +95,7 @@
   <!-- Header -->
   <header class="header">
     <div class="container nav-container">
-      <a href="index.html" class="logo"><img src="../assets/favicon.webp" alt="Vertex Logo" class="nav-logo-icon" fetchpriority="high" decoding="async">Vertex</a>
+      <a href="index.html" class="logo"><img src="../assets/logo.svg" alt="Vertex Logo" class="nav-logo-icon" fetchpriority="high" decoding="async">Vertex</a>
 
       <nav class="nav-links">
         <a href="#home" class="nav-link">ホーム</a>
@@ -105,7 +111,7 @@
       <div class="header-actions">
         <div class="language-dropdown">
           <button class="lang-btn-trigger">
-            <span class="lang-text">日本語</span> ▼
+            <span class="lang-text">日本語</span> <svg class="dropdown-arrow" viewBox="0 0 24 24" style="width: 10px; height: 10px; fill: currentColor; stroke: currentColor; stroke-width: 4px; stroke-linejoin: round;"><path d="M5 7h14l-7 10z"></path></svg>
           </button>
           <div class="lang-menu">
             <a href="../en/" class="lang-item">English</a>
@@ -203,35 +209,35 @@
       <div class="collaborators-title fade-up">Powered by our technologies & infrastructure</div>
       <div class="marquee-container fade-up">
         <div class="marquee-content">
-          <a href="#" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
 
-          <a href="#" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
 
-          <a href="#" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
 
-          <a href="#" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
 
-          <a href="#" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
 
-          <a href="#" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="#" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
 
         </div>
       </div>
@@ -777,7 +783,7 @@
     <div class="container">
       <div class="footer-main-grid">
         <div class="footer-brand">
-          <a href="#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;"><img src="../assets/favicon.webp" alt="Vertex Logo" class="nav-logo-icon">Vertex</a>
+          <a href="#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;"><img src="../assets/logo.svg" alt="Vertex Logo" class="nav-logo-icon">Vertex</a>
           <p style="color: var(--text-muted); line-height: 1.6;">
             トルコで最も若いテクノロジー企業。平均年齢16歳でAI、ソフトウェア、ゲームに革命を起こしています。
           </p>
