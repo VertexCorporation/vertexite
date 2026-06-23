@@ -1,7 +1,13 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 
 <head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,7 +19,7 @@
     content="vertex, vertex corporation, cortex, mergen ai, drome lang, solar browser, ally health, young tech entrepreneurs, software company Turkiye">
   <meta name="author" content="Vertex Corporation">
   <meta name="theme-color" content="#0a0a0a">
-  <meta name="robots" content="index, follow">
+  <meta name="robots" content="index, follow, noimageindex">
 
   <!-- 🌍 Hreflang Tags -->
   <link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
@@ -57,24 +63,40 @@
 
   <!-- Fonts & Styles -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+  <link rel="preload" href="data:image/webp;base64,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" as="image" type="image/webp">
+  
+  <!-- DNS Prefetch for Essential Domains -->
+  <link rel="dns-prefetch" href="https://www.youtube.com">
+  <link rel="dns-prefetch" href="https://github.com">
+  <link rel="dns-prefetch" href="https://www.linkedin.com">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/favicon-Ccg6xBFf.webp">
 
 
-  <script type="module" crossorigin src="/assets/main-BREfa9uQ.js"></script>
-  <link rel="stylesheet" crossorigin href="/assets/main-Uq6eBdps.css">
+  <script type="module" crossorigin src="/assets/main-DjMnzpqT.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-w1CVLhJW.css">
 </head>
 
 <body>
-  <canvas id="particle-canvas"></canvas>
+  
+    <!-- Geometric Background Objects -->
+    <div class="geo-bg">
+      <div class="geo-blob geo-blob-1"></div>
+      <div class="geo-blob geo-blob-2"></div>
+      <div class="geo-blob geo-blob-3"></div>
+    </div>
+
+  
 
   <!-- Header -->
   <header class="header">
     <div class="container nav-container">
-      <a href="#" class="logo">Vertex</a>
+      <a href="index.html" class="logo"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20225%20225'%20width='100%25'%20height='100%25'%3e%3c!--%20Background%20rounded%20rectangle%20--%3e%3crect%20x='5'%20y='5'%20width='215'%20height='215'%20rx='45'%20fill='white'%20stroke='%23e6e6e6'%20stroke-width='1'%20/%3e%3c!--%20Outer%20Triangle%20--%3e%3cpolygon%20points='112.5,38%20200.5,189%2024.5,189'%20fill='none'%20stroke='black'%20stroke-width='15'%20stroke-linejoin='round'%20/%3e%3c!--%20Top%20Dash%20--%3e%3cline%20x1='112.5'%20y1='82'%20x2='112.5'%20y2='109'%20stroke='black'%20stroke-width='10'%20stroke-linecap='round'%20/%3e%3c!--%20Center%20Y-shape%20--%3e%3cpath%20d='M%20112.5,125%20L%20112.5,137%20L%20102,143%20M%20112.5,137%20L%20123,143'%20fill='none'%20stroke='black'%20stroke-width='10'%20stroke-linecap='round'%20stroke-linejoin='round'%20/%3e%3c!--%20Bottom-Left%20Dash%20--%3e%3cline%20x1='84.5'%20y1='153.5'%20x2='64.5'%20y2='165.5'%20stroke='black'%20stroke-width='10'%20stroke-linecap='round'%20/%3e%3c!--%20Bottom-Right%20Dash%20--%3e%3cline%20x1='140.5'%20y1='153.5'%20x2='160.5'%20y2='165.5'%20stroke='black'%20stroke-width='10'%20stroke-linecap='round'%20/%3e%3c/svg%3e" alt="Vertex Logo" class="nav-logo-icon" fetchpriority="high" decoding="async">Vertex</a>
 
       <nav class="nav-links">
         <a href="#home" class="nav-link">Inicio</a>
@@ -90,7 +112,7 @@
       <div class="header-actions">
         <div class="language-dropdown">
           <button class="lang-btn-trigger">
-            <span class="lang-text">Español</span> ▼
+            <span class="lang-text">Español</span> <svg class="dropdown-arrow" viewBox="0 0 24 24" style="width: 10px; height: 10px; fill: currentColor; stroke: currentColor; stroke-width: 4px; stroke-linejoin: round;"><path d="M5 7h14l-7 10z"></path></svg>
           </button>
           <div class="lang-menu">
             <a href="../en/" class="lang-item">English</a>
@@ -153,9 +175,8 @@
       <div class="hero-bg-glow"></div>
       <div class="container fade-up">
         <div class="badge">La Empresa Tech Más Joven de Turquía</div>
-        <h1><span class="gradient-text">La Cima de la Tecnología</span><br>Dando Forma al Futuro</h1>
-        <p>Fundada por los talentos jóvenes más brillantes de Turquía, Vertex está revolucionando el mundo de la IA y el
-          software.</p>
+        <h1><span class="gradient-text">La Cima de la Tecnología</span></h1>
+        <p>Vertex, donde se reúnen las mentes jóvenes más brillantes del mundo, ¡está revolucionando el sector tecnológico!</p>
         <div class="hero-buttons">
           <a href="#projects" class="btn btn-primary">Empieza a Explorar</a>
           <a href="#vision" class="btn btn-outline">Nuestra Visión</a>
@@ -168,7 +189,7 @@
             <div class="stat-label">Descargas Objetivo</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number gradient-text">10k+</div>
+            <div class="stat-number gradient-text">50K+</div>
             <div class="stat-label">Usuarios Activos</div>
           </div>
           <div class="stat-item">
@@ -176,9 +197,49 @@
             <div class="stat-label">Edad Media</div>
           </div>
           <div class="stat-item">
-            <div class="stat-number gradient-text">169</div>
+            <div class="stat-number gradient-text">190+</div>
             <div class="stat-label">Países</div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    
+    <!-- Partners / Collaborators Section -->
+    <section class="collaborators-section">
+      <div class="collaborators-title fade-up">Powered by our technologies & infrastructure</div>
+      <div class="marquee-container fade-up">
+        <div class="marquee-content">
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eFal%3c/title%3e%3cpath%20clip-rule='evenodd'%20d='M15.477%200c.415%200%20.749.338.788.752a7.775%207.775%200%20006.985%206.984c.413.04.752.373.752.788v6.952c0%20.415-.338.748-.752.788a7.775%207.775%200%2000-6.985%206.984c-.04.414-.373.752-.788.752H8.525c-.416%200-.749-.338-.789-.752a7.775%207.775%200%2000-6.984-6.984c-.414-.04-.752-.373-.752-.788V8.524c0-.415.338-.748.752-.788A7.775%207.775%200%20007.736.752C7.776.338%208.11%200%208.526%200h6.95zM4.819%2011.98a7.226%207.226%200%20007.223%207.23%207.226%207.226%200%20007.223-7.23c0-3.994-3.234-7.23-7.223-7.23a7.227%207.227%200%2000-7.223%207.23z'%20fill='%23EC0648'%20fill-rule='evenodd'%3e%3c/path%3e%3c/svg%3e" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20fill='currentColor'%20fill-rule='evenodd'%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eOpenRouter%3c/title%3e%3cpath%20d='M16.804%201.957l7.22%204.105v.087L16.73%2010.21l.017-2.117-.821-.03c-1.059-.028-1.611.002-2.268.11-1.064.175-2.038.577-3.147%201.352L8.345%2011.03c-.284.195-.495.336-.68.455l-.515.322-.397.234.385.23.53.338c.476.314%201.17.796%202.701%201.866%201.11.775%202.083%201.177%203.147%201.352l.3.045c.694.091%201.375.094%202.825.033l.022-2.159%207.22%204.105v.087L16.589%2022l.014-1.862-.635.022c-1.386.042-2.137.002-3.138-.162-1.694-.28-3.26-.926-4.881-2.059l-2.158-1.5a21.997%2021.997%200%2000-.755-.498l-.467-.28a55.927%2055.927%200%2000-.76-.43C2.908%2014.73.563%2014.116%200%2014.116V9.888l.14.004c.564-.007%202.91-.622%203.809-1.124l1.016-.58.438-.274c.428-.28%201.072-.726%202.686-1.853%201.621-1.133%203.186-1.78%204.881-2.059%201.152-.19%201.974-.213%203.814-.138l.02-1.907z'%3e%3c/path%3e%3c/svg%3e" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eGoogleCloud%3c/title%3e%3cpath%20d='M15.961%207.327l2.086-2.086.14-.879C14.384.905%208.34%201.297%204.913%205.18A9.643%209.643%200%20002.88%208.991l.747-.105%204.172-.688.322-.33c1.856-2.038%204.994-2.312%207.137-.578l.703.037z'%20fill='%23EA4335'%3e%3c/path%3e%3cpath%20d='M21.02%208.93a9.399%209.399%200%2000-2.834-4.568L15.258%207.29a5.204%205.204%200%20011.91%204.129v.52a2.606%202.606%200%20012.607%202.605c0%201.44-1.167%202.577-2.606%202.577h-5.22l-.512.556v3.126l.513.49h5.219c3.743.03%206.802-2.952%206.83-6.695a6.778%206.778%200%2000-2.98-5.668z'%20fill='%234285F4'%3e%3c/path%3e%3cpath%20d='M6.738%2021.293h5.212v-4.172H6.738c-.371%200-.731-.08-1.069-.234l-.74.227-2.1%202.086-.183.71a6.763%206.763%200%20004.092%201.383z'%20fill='%2334A853'%3e%3c/path%3e%3cpath%20d='M6.738%207.759A6.778%206.778%200%20002.646%2019.91l3.023-3.023a2.606%202.606%200%20113.448-3.448l3.023-3.023a6.771%206.771%200%2000-5.402-2.657z'%20fill='%23FBBC05'%3e%3c/path%3e%3c/svg%3e" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eCloudflare%3c/title%3e%3cpath%20d='M16.493%2017.4c.135-.52.08-.983-.161-1.338-.215-.328-.592-.519-1.05-.519l-8.663-.109a.148.148%200%2001-.135-.082c-.027-.054-.027-.109-.027-.163.027-.082.108-.164.189-.164l8.744-.11c1.05-.054%202.153-.9%202.556-1.937l.511-1.31c.027-.055.027-.11.027-.164C17.92%208.91%2015.66%207%2012.942%207c-2.503%200-4.628%201.638-5.381%203.903a2.432%202.432%200%2000-1.803-.491c-1.21.109-2.153%201.092-2.287%202.32-.027.328%200%20.628.054.9C1.56%2013.688%200%2015.326%200%2017.319c0%20.19.027.355.027.545%200%20.082.08.137.161.137h15.983c.08%200%20.188-.055.215-.164l.107-.437'%20fill='%23F38020'%3e%3c/path%3e%3cpath%20d='M19.238%2011.75h-.242c-.054%200-.108.054-.135.109l-.35%201.2c-.134.52-.08.983.162%201.338.215.328.592.518%201.05.518l1.855.11c.054%200%20.108.027.135.082.027.054.027.109.027.163-.027.082-.108.164-.188.164l-1.91.11c-1.05.054-2.153.9-2.557%201.937l-.134.355c-.027.055.026.137.107.137h6.592c.081%200%20.162-.055.162-.137.107-.41.188-.846.188-1.31-.027-2.62-2.153-4.777-4.762-4.777'%20fill='%23FCAD32'%3e%3c/path%3e%3c/svg%3e" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eFal%3c/title%3e%3cpath%20clip-rule='evenodd'%20d='M15.477%200c.415%200%20.749.338.788.752a7.775%207.775%200%20006.985%206.984c.413.04.752.373.752.788v6.952c0%20.415-.338.748-.752.788a7.775%207.775%200%2000-6.985%206.984c-.04.414-.373.752-.788.752H8.525c-.416%200-.749-.338-.789-.752a7.775%207.775%200%2000-6.984-6.984c-.414-.04-.752-.373-.752-.788V8.524c0-.415.338-.748.752-.788A7.775%207.775%200%20007.736.752C7.776.338%208.11%200%208.526%200h6.95zM4.819%2011.98a7.226%207.226%200%20007.223%207.23%207.226%207.226%200%20007.223-7.23c0-3.994-3.234-7.23-7.223-7.23a7.227%207.227%200%2000-7.223%207.23z'%20fill='%23EC0648'%20fill-rule='evenodd'%3e%3c/path%3e%3c/svg%3e" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20fill='currentColor'%20fill-rule='evenodd'%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eOpenRouter%3c/title%3e%3cpath%20d='M16.804%201.957l7.22%204.105v.087L16.73%2010.21l.017-2.117-.821-.03c-1.059-.028-1.611.002-2.268.11-1.064.175-2.038.577-3.147%201.352L8.345%2011.03c-.284.195-.495.336-.68.455l-.515.322-.397.234.385.23.53.338c.476.314%201.17.796%202.701%201.866%201.11.775%202.083%201.177%203.147%201.352l.3.045c.694.091%201.375.094%202.825.033l.022-2.159%207.22%204.105v.087L16.589%2022l.014-1.862-.635.022c-1.386.042-2.137.002-3.138-.162-1.694-.28-3.26-.926-4.881-2.059l-2.158-1.5a21.997%2021.997%200%2000-.755-.498l-.467-.28a55.927%2055.927%200%2000-.76-.43C2.908%2014.73.563%2014.116%200%2014.116V9.888l.14.004c.564-.007%202.91-.622%203.809-1.124l1.016-.58.438-.274c.428-.28%201.072-.726%202.686-1.853%201.621-1.133%203.186-1.78%204.881-2.059%201.152-.19%201.974-.213%203.814-.138l.02-1.907z'%3e%3c/path%3e%3c/svg%3e" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eGoogleCloud%3c/title%3e%3cpath%20d='M15.961%207.327l2.086-2.086.14-.879C14.384.905%208.34%201.297%204.913%205.18A9.643%209.643%200%20002.88%208.991l.747-.105%204.172-.688.322-.33c1.856-2.038%204.994-2.312%207.137-.578l.703.037z'%20fill='%23EA4335'%3e%3c/path%3e%3cpath%20d='M21.02%208.93a9.399%209.399%200%2000-2.834-4.568L15.258%207.29a5.204%205.204%200%20011.91%204.129v.52a2.606%202.606%200%20012.607%202.605c0%201.44-1.167%202.577-2.606%202.577h-5.22l-.512.556v3.126l.513.49h5.219c3.743.03%206.802-2.952%206.83-6.695a6.778%206.778%200%2000-2.98-5.668z'%20fill='%234285F4'%3e%3c/path%3e%3cpath%20d='M6.738%2021.293h5.212v-4.172H6.738c-.371%200-.731-.08-1.069-.234l-.74.227-2.1%202.086-.183.71a6.763%206.763%200%20004.092%201.383z'%20fill='%2334A853'%3e%3c/path%3e%3cpath%20d='M6.738%207.759A6.778%206.778%200%20002.646%2019.91l3.023-3.023a2.606%202.606%200%20113.448-3.448l3.023-3.023a6.771%206.771%200%2000-5.402-2.657z'%20fill='%23FBBC05'%3e%3c/path%3e%3c/svg%3e" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eCloudflare%3c/title%3e%3cpath%20d='M16.493%2017.4c.135-.52.08-.983-.161-1.338-.215-.328-.592-.519-1.05-.519l-8.663-.109a.148.148%200%2001-.135-.082c-.027-.054-.027-.109-.027-.163.027-.082.108-.164.189-.164l8.744-.11c1.05-.054%202.153-.9%202.556-1.937l.511-1.31c.027-.055.027-.11.027-.164C17.92%208.91%2015.66%207%2012.942%207c-2.503%200-4.628%201.638-5.381%203.903a2.432%202.432%200%2000-1.803-.491c-1.21.109-2.153%201.092-2.287%202.32-.027.328%200%20.628.054.9C1.56%2013.688%200%2015.326%200%2017.319c0%20.19.027.355.027.545%200%20.082.08.137.161.137h15.983c.08%200%20.188-.055.215-.164l.107-.437'%20fill='%23F38020'%3e%3c/path%3e%3cpath%20d='M19.238%2011.75h-.242c-.054%200-.108.054-.135.109l-.35%201.2c-.134.52-.08.983.162%201.338.215.328.592.518%201.05.518l1.855.11c.054%200%20.108.027.135.082.027.054.027.109.027.163-.027.082-.108.164-.188.164l-1.91.11c-1.05.054-2.153.9-2.557%201.937l-.134.355c-.027.055.026.137.107.137h6.592c.081%200%20.162-.055.162-.137.107-.41.188-.846.188-1.31-.027-2.62-2.153-4.777-4.762-4.777'%20fill='%23FCAD32'%3e%3c/path%3e%3c/svg%3e" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eFal%3c/title%3e%3cpath%20clip-rule='evenodd'%20d='M15.477%200c.415%200%20.749.338.788.752a7.775%207.775%200%20006.985%206.984c.413.04.752.373.752.788v6.952c0%20.415-.338.748-.752.788a7.775%207.775%200%2000-6.985%206.984c-.04.414-.373.752-.788.752H8.525c-.416%200-.749-.338-.789-.752a7.775%207.775%200%2000-6.984-6.984c-.414-.04-.752-.373-.752-.788V8.524c0-.415.338-.748.752-.788A7.775%207.775%200%20007.736.752C7.776.338%208.11%200%208.526%200h6.95zM4.819%2011.98a7.226%207.226%200%20007.223%207.23%207.226%207.226%200%20007.223-7.23c0-3.994-3.234-7.23-7.223-7.23a7.227%207.227%200%2000-7.223%207.23z'%20fill='%23EC0648'%20fill-rule='evenodd'%3e%3c/path%3e%3c/svg%3e" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20fill='currentColor'%20fill-rule='evenodd'%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eOpenRouter%3c/title%3e%3cpath%20d='M16.804%201.957l7.22%204.105v.087L16.73%2010.21l.017-2.117-.821-.03c-1.059-.028-1.611.002-2.268.11-1.064.175-2.038.577-3.147%201.352L8.345%2011.03c-.284.195-.495.336-.68.455l-.515.322-.397.234.385.23.53.338c.476.314%201.17.796%202.701%201.866%201.11.775%202.083%201.177%203.147%201.352l.3.045c.694.091%201.375.094%202.825.033l.022-2.159%207.22%204.105v.087L16.589%2022l.014-1.862-.635.022c-1.386.042-2.137.002-3.138-.162-1.694-.28-3.26-.926-4.881-2.059l-2.158-1.5a21.997%2021.997%200%2000-.755-.498l-.467-.28a55.927%2055.927%200%2000-.76-.43C2.908%2014.73.563%2014.116%200%2014.116V9.888l.14.004c.564-.007%202.91-.622%203.809-1.124l1.016-.58.438-.274c.428-.28%201.072-.726%202.686-1.853%201.621-1.133%203.186-1.78%204.881-2.059%201.152-.19%201.974-.213%203.814-.138l.02-1.907z'%3e%3c/path%3e%3c/svg%3e" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eGoogleCloud%3c/title%3e%3cpath%20d='M15.961%207.327l2.086-2.086.14-.879C14.384.905%208.34%201.297%204.913%205.18A9.643%209.643%200%20002.88%208.991l.747-.105%204.172-.688.322-.33c1.856-2.038%204.994-2.312%207.137-.578l.703.037z'%20fill='%23EA4335'%3e%3c/path%3e%3cpath%20d='M21.02%208.93a9.399%209.399%200%2000-2.834-4.568L15.258%207.29a5.204%205.204%200%20011.91%204.129v.52a2.606%202.606%200%20012.607%202.605c0%201.44-1.167%202.577-2.606%202.577h-5.22l-.512.556v3.126l.513.49h5.219c3.743.03%206.802-2.952%206.83-6.695a6.778%206.778%200%2000-2.98-5.668z'%20fill='%234285F4'%3e%3c/path%3e%3cpath%20d='M6.738%2021.293h5.212v-4.172H6.738c-.371%200-.731-.08-1.069-.234l-.74.227-2.1%202.086-.183.71a6.763%206.763%200%20004.092%201.383z'%20fill='%2334A853'%3e%3c/path%3e%3cpath%20d='M6.738%207.759A6.778%206.778%200%20002.646%2019.91l3.023-3.023a2.606%202.606%200%20113.448-3.448l3.023-3.023a6.771%206.771%200%2000-5.402-2.657z'%20fill='%23FBBC05'%3e%3c/path%3e%3c/svg%3e" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eCloudflare%3c/title%3e%3cpath%20d='M16.493%2017.4c.135-.52.08-.983-.161-1.338-.215-.328-.592-.519-1.05-.519l-8.663-.109a.148.148%200%2001-.135-.082c-.027-.054-.027-.109-.027-.163.027-.082.108-.164.189-.164l8.744-.11c1.05-.054%202.153-.9%202.556-1.937l.511-1.31c.027-.055.027-.11.027-.164C17.92%208.91%2015.66%207%2012.942%207c-2.503%200-4.628%201.638-5.381%203.903a2.432%202.432%200%2000-1.803-.491c-1.21.109-2.153%201.092-2.287%202.32-.027.328%200%20.628.054.9C1.56%2013.688%200%2015.326%200%2017.319c0%20.19.027.355.027.545%200%20.082.08.137.161.137h15.983c.08%200%20.188-.055.215-.164l.107-.437'%20fill='%23F38020'%3e%3c/path%3e%3cpath%20d='M19.238%2011.75h-.242c-.054%200-.108.054-.135.109l-.35%201.2c-.134.52-.08.983.162%201.338.215.328.592.518%201.05.518l1.855.11c.054%200%20.108.027.135.082.027.054.027.109.027.163-.027.082-.108.164-.188.164l-1.91.11c-1.05.054-2.153.9-2.557%201.937l-.134.355c-.027.055.026.137.107.137h6.592c.081%200%20.162-.055.162-.137.107-.41.188-.846.188-1.31-.027-2.62-2.153-4.777-4.762-4.777'%20fill='%23FCAD32'%3e%3c/path%3e%3c/svg%3e" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eFal%3c/title%3e%3cpath%20clip-rule='evenodd'%20d='M15.477%200c.415%200%20.749.338.788.752a7.775%207.775%200%20006.985%206.984c.413.04.752.373.752.788v6.952c0%20.415-.338.748-.752.788a7.775%207.775%200%2000-6.985%206.984c-.04.414-.373.752-.788.752H8.525c-.416%200-.749-.338-.789-.752a7.775%207.775%200%2000-6.984-6.984c-.414-.04-.752-.373-.752-.788V8.524c0-.415.338-.748.752-.788A7.775%207.775%200%20007.736.752C7.776.338%208.11%200%208.526%200h6.95zM4.819%2011.98a7.226%207.226%200%20007.223%207.23%207.226%207.226%200%20007.223-7.23c0-3.994-3.234-7.23-7.223-7.23a7.227%207.227%200%2000-7.223%207.23z'%20fill='%23EC0648'%20fill-rule='evenodd'%3e%3c/path%3e%3c/svg%3e" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20fill='currentColor'%20fill-rule='evenodd'%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eOpenRouter%3c/title%3e%3cpath%20d='M16.804%201.957l7.22%204.105v.087L16.73%2010.21l.017-2.117-.821-.03c-1.059-.028-1.611.002-2.268.11-1.064.175-2.038.577-3.147%201.352L8.345%2011.03c-.284.195-.495.336-.68.455l-.515.322-.397.234.385.23.53.338c.476.314%201.17.796%202.701%201.866%201.11.775%202.083%201.177%203.147%201.352l.3.045c.694.091%201.375.094%202.825.033l.022-2.159%207.22%204.105v.087L16.589%2022l.014-1.862-.635.022c-1.386.042-2.137.002-3.138-.162-1.694-.28-3.26-.926-4.881-2.059l-2.158-1.5a21.997%2021.997%200%2000-.755-.498l-.467-.28a55.927%2055.927%200%2000-.76-.43C2.908%2014.73.563%2014.116%200%2014.116V9.888l.14.004c.564-.007%202.91-.622%203.809-1.124l1.016-.58.438-.274c.428-.28%201.072-.726%202.686-1.853%201.621-1.133%203.186-1.78%204.881-2.059%201.152-.19%201.974-.213%203.814-.138l.02-1.907z'%3e%3c/path%3e%3c/svg%3e" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eGoogleCloud%3c/title%3e%3cpath%20d='M15.961%207.327l2.086-2.086.14-.879C14.384.905%208.34%201.297%204.913%205.18A9.643%209.643%200%20002.88%208.991l.747-.105%204.172-.688.322-.33c1.856-2.038%204.994-2.312%207.137-.578l.703.037z'%20fill='%23EA4335'%3e%3c/path%3e%3cpath%20d='M21.02%208.93a9.399%209.399%200%2000-2.834-4.568L15.258%207.29a5.204%205.204%200%20011.91%204.129v.52a2.606%202.606%200%20012.607%202.605c0%201.44-1.167%202.577-2.606%202.577h-5.22l-.512.556v3.126l.513.49h5.219c3.743.03%206.802-2.952%206.83-6.695a6.778%206.778%200%2000-2.98-5.668z'%20fill='%234285F4'%3e%3c/path%3e%3cpath%20d='M6.738%2021.293h5.212v-4.172H6.738c-.371%200-.731-.08-1.069-.234l-.74.227-2.1%202.086-.183.71a6.763%206.763%200%20004.092%201.383z'%20fill='%2334A853'%3e%3c/path%3e%3cpath%20d='M6.738%207.759A6.778%206.778%200%20002.646%2019.91l3.023-3.023a2.606%202.606%200%20113.448-3.448l3.023-3.023a6.771%206.771%200%2000-5.402-2.657z'%20fill='%23FBBC05'%3e%3c/path%3e%3c/svg%3e" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eCloudflare%3c/title%3e%3cpath%20d='M16.493%2017.4c.135-.52.08-.983-.161-1.338-.215-.328-.592-.519-1.05-.519l-8.663-.109a.148.148%200%2001-.135-.082c-.027-.054-.027-.109-.027-.163.027-.082.108-.164.189-.164l8.744-.11c1.05-.054%202.153-.9%202.556-1.937l.511-1.31c.027-.055.027-.11.027-.164C17.92%208.91%2015.66%207%2012.942%207c-2.503%200-4.628%201.638-5.381%203.903a2.432%202.432%200%2000-1.803-.491c-1.21.109-2.153%201.092-2.287%202.32-.027.328%200%20.628.054.9C1.56%2013.688%200%2015.326%200%2017.319c0%20.19.027.355.027.545%200%20.082.08.137.161.137h15.983c.08%200%20.188-.055.215-.164l.107-.437'%20fill='%23F38020'%3e%3c/path%3e%3cpath%20d='M19.238%2011.75h-.242c-.054%200-.108.054-.135.109l-.35%201.2c-.134.52-.08.983.162%201.338.215.328.592.518%201.05.518l1.855.11c.054%200%20.108.027.135.082.027.054.027.109.027.163-.027.082-.108.164-.188.164l-1.91.11c-1.05.054-2.153.9-2.557%201.937l-.134.355c-.027.055.026.137.107.137h6.592c.081%200%20.162-.055.162-.137.107-.41.188-.846.188-1.31-.027-2.62-2.153-4.777-4.762-4.777'%20fill='%23FCAD32'%3e%3c/path%3e%3c/svg%3e" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eFal%3c/title%3e%3cpath%20clip-rule='evenodd'%20d='M15.477%200c.415%200%20.749.338.788.752a7.775%207.775%200%20006.985%206.984c.413.04.752.373.752.788v6.952c0%20.415-.338.748-.752.788a7.775%207.775%200%2000-6.985%206.984c-.04.414-.373.752-.788.752H8.525c-.416%200-.749-.338-.789-.752a7.775%207.775%200%2000-6.984-6.984c-.414-.04-.752-.373-.752-.788V8.524c0-.415.338-.748.752-.788A7.775%207.775%200%20007.736.752C7.776.338%208.11%200%208.526%200h6.95zM4.819%2011.98a7.226%207.226%200%20007.223%207.23%207.226%207.226%200%20007.223-7.23c0-3.994-3.234-7.23-7.223-7.23a7.227%207.227%200%2000-7.223%207.23z'%20fill='%23EC0648'%20fill-rule='evenodd'%3e%3c/path%3e%3c/svg%3e" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20fill='currentColor'%20fill-rule='evenodd'%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eOpenRouter%3c/title%3e%3cpath%20d='M16.804%201.957l7.22%204.105v.087L16.73%2010.21l.017-2.117-.821-.03c-1.059-.028-1.611.002-2.268.11-1.064.175-2.038.577-3.147%201.352L8.345%2011.03c-.284.195-.495.336-.68.455l-.515.322-.397.234.385.23.53.338c.476.314%201.17.796%202.701%201.866%201.11.775%202.083%201.177%203.147%201.352l.3.045c.694.091%201.375.094%202.825.033l.022-2.159%207.22%204.105v.087L16.589%2022l.014-1.862-.635.022c-1.386.042-2.137.002-3.138-.162-1.694-.28-3.26-.926-4.881-2.059l-2.158-1.5a21.997%2021.997%200%2000-.755-.498l-.467-.28a55.927%2055.927%200%2000-.76-.43C2.908%2014.73.563%2014.116%200%2014.116V9.888l.14.004c.564-.007%202.91-.622%203.809-1.124l1.016-.58.438-.274c.428-.28%201.072-.726%202.686-1.853%201.621-1.133%203.186-1.78%204.881-2.059%201.152-.19%201.974-.213%203.814-.138l.02-1.907z'%3e%3c/path%3e%3c/svg%3e" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eGoogleCloud%3c/title%3e%3cpath%20d='M15.961%207.327l2.086-2.086.14-.879C14.384.905%208.34%201.297%204.913%205.18A9.643%209.643%200%20002.88%208.991l.747-.105%204.172-.688.322-.33c1.856-2.038%204.994-2.312%207.137-.578l.703.037z'%20fill='%23EA4335'%3e%3c/path%3e%3cpath%20d='M21.02%208.93a9.399%209.399%200%2000-2.834-4.568L15.258%207.29a5.204%205.204%200%20011.91%204.129v.52a2.606%202.606%200%20012.607%202.605c0%201.44-1.167%202.577-2.606%202.577h-5.22l-.512.556v3.126l.513.49h5.219c3.743.03%206.802-2.952%206.83-6.695a6.778%206.778%200%2000-2.98-5.668z'%20fill='%234285F4'%3e%3c/path%3e%3cpath%20d='M6.738%2021.293h5.212v-4.172H6.738c-.371%200-.731-.08-1.069-.234l-.74.227-2.1%202.086-.183.71a6.763%206.763%200%20004.092%201.383z'%20fill='%2334A853'%3e%3c/path%3e%3cpath%20d='M6.738%207.759A6.778%206.778%200%20002.646%2019.91l3.023-3.023a2.606%202.606%200%20113.448-3.448l3.023-3.023a6.771%206.771%200%2000-5.402-2.657z'%20fill='%23FBBC05'%3e%3c/path%3e%3c/svg%3e" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eCloudflare%3c/title%3e%3cpath%20d='M16.493%2017.4c.135-.52.08-.983-.161-1.338-.215-.328-.592-.519-1.05-.519l-8.663-.109a.148.148%200%2001-.135-.082c-.027-.054-.027-.109-.027-.163.027-.082.108-.164.189-.164l8.744-.11c1.05-.054%202.153-.9%202.556-1.937l.511-1.31c.027-.055.027-.11.027-.164C17.92%208.91%2015.66%207%2012.942%207c-2.503%200-4.628%201.638-5.381%203.903a2.432%202.432%200%2000-1.803-.491c-1.21.109-2.153%201.092-2.287%202.32-.027.328%200%20.628.054.9C1.56%2013.688%200%2015.326%200%2017.319c0%20.19.027.355.027.545%200%20.082.08.137.161.137h15.983c.08%200%20.188-.055.215-.164l.107-.437'%20fill='%23F38020'%3e%3c/path%3e%3cpath%20d='M19.238%2011.75h-.242c-.054%200-.108.054-.135.109l-.35%201.2c-.134.52-.08.983.162%201.338.215.328.592.518%201.05.518l1.855.11c.054%200%20.108.027.135.082.027.054.027.109.027.163-.027.082-.108.164-.188.164l-1.91.11c-1.05.054-2.153.9-2.557%201.937l-.134.355c-.027.055.026.137.107.137h6.592c.081%200%20.162-.055.162-.137.107-.41.188-.846.188-1.31-.027-2.62-2.153-4.777-4.762-4.777'%20fill='%23FCAD32'%3e%3c/path%3e%3c/svg%3e" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+
+          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eFal%3c/title%3e%3cpath%20clip-rule='evenodd'%20d='M15.477%200c.415%200%20.749.338.788.752a7.775%207.775%200%20006.985%206.984c.413.04.752.373.752.788v6.952c0%20.415-.338.748-.752.788a7.775%207.775%200%2000-6.985%206.984c-.04.414-.373.752-.788.752H8.525c-.416%200-.749-.338-.789-.752a7.775%207.775%200%2000-6.984-6.984c-.414-.04-.752-.373-.752-.788V8.524c0-.415.338-.748.752-.788A7.775%207.775%200%20007.736.752C7.776.338%208.11%200%208.526%200h6.95zM4.819%2011.98a7.226%207.226%200%20007.223%207.23%207.226%207.226%200%20007.223-7.23c0-3.994-3.234-7.23-7.223-7.23a7.227%207.227%200%2000-7.223%207.23z'%20fill='%23EC0648'%20fill-rule='evenodd'%3e%3c/path%3e%3c/svg%3e" alt="Fal.ai" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20fill='currentColor'%20fill-rule='evenodd'%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eOpenRouter%3c/title%3e%3cpath%20d='M16.804%201.957l7.22%204.105v.087L16.73%2010.21l.017-2.117-.821-.03c-1.059-.028-1.611.002-2.268.11-1.064.175-2.038.577-3.147%201.352L8.345%2011.03c-.284.195-.495.336-.68.455l-.515.322-.397.234.385.23.53.338c.476.314%201.17.796%202.701%201.866%201.11.775%202.083%201.177%203.147%201.352l.3.045c.694.091%201.375.094%202.825.033l.022-2.159%207.22%204.105v.087L16.589%2022l.014-1.862-.635.022c-1.386.042-2.137.002-3.138-.162-1.694-.28-3.26-.926-4.881-2.059l-2.158-1.5a21.997%2021.997%200%2000-.755-.498l-.467-.28a55.927%2055.927%200%2000-.76-.43C2.908%2014.73.563%2014.116%200%2014.116V9.888l.14.004c.564-.007%202.91-.622%203.809-1.124l1.016-.58.438-.274c.428-.28%201.072-.726%202.686-1.853%201.621-1.133%203.186-1.78%204.881-2.059%201.152-.19%201.974-.213%203.814-.138l.02-1.907z'%3e%3c/path%3e%3c/svg%3e" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eGoogleCloud%3c/title%3e%3cpath%20d='M15.961%207.327l2.086-2.086.14-.879C14.384.905%208.34%201.297%204.913%205.18A9.643%209.643%200%20002.88%208.991l.747-.105%204.172-.688.322-.33c1.856-2.038%204.994-2.312%207.137-.578l.703.037z'%20fill='%23EA4335'%3e%3c/path%3e%3cpath%20d='M21.02%208.93a9.399%209.399%200%2000-2.834-4.568L15.258%207.29a5.204%205.204%200%20011.91%204.129v.52a2.606%202.606%200%20012.607%202.605c0%201.44-1.167%202.577-2.606%202.577h-5.22l-.512.556v3.126l.513.49h5.219c3.743.03%206.802-2.952%206.83-6.695a6.778%206.778%200%2000-2.98-5.668z'%20fill='%234285F4'%3e%3c/path%3e%3cpath%20d='M6.738%2021.293h5.212v-4.172H6.738c-.371%200-.731-.08-1.069-.234l-.74.227-2.1%202.086-.183.71a6.763%206.763%200%20004.092%201.383z'%20fill='%2334A853'%3e%3c/path%3e%3cpath%20d='M6.738%207.759A6.778%206.778%200%20002.646%2019.91l3.023-3.023a2.606%202.606%200%20113.448-3.448l3.023-3.023a6.771%206.771%200%2000-5.402-2.657z'%20fill='%23FBBC05'%3e%3c/path%3e%3c/svg%3e" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
+          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="data:image/svg+xml,%3csvg%20height='1em'%20style='flex:none;line-height:1'%20viewBox='0%200%2024%2024'%20width='1em'%20xmlns='http://www.w3.org/2000/svg'%3e%3ctitle%3eCloudflare%3c/title%3e%3cpath%20d='M16.493%2017.4c.135-.52.08-.983-.161-1.338-.215-.328-.592-.519-1.05-.519l-8.663-.109a.148.148%200%2001-.135-.082c-.027-.054-.027-.109-.027-.163.027-.082.108-.164.189-.164l8.744-.11c1.05-.054%202.153-.9%202.556-1.937l.511-1.31c.027-.055.027-.11.027-.164C17.92%208.91%2015.66%207%2012.942%207c-2.503%200-4.628%201.638-5.381%203.903a2.432%202.432%200%2000-1.803-.491c-1.21.109-2.153%201.092-2.287%202.32-.027.328%200%20.628.054.9C1.56%2013.688%200%2015.326%200%2017.319c0%20.19.027.355.027.545%200%20.082.08.137.161.137h15.983c.08%200%20.188-.055.215-.164l.107-.437'%20fill='%23F38020'%3e%3c/path%3e%3cpath%20d='M19.238%2011.75h-.242c-.054%200-.108.054-.135.109l-.35%201.2c-.134.52-.08.983.162%201.338.215.328.592.518%201.05.518l1.855.11c.054%200%20.108.027.135.082.027.054.027.109.027.163-.027.082-.108.164-.188.164l-1.91.11c-1.05.054-2.153.9-2.557%201.937l-.134.355c-.027.055.026.137.107.137h6.592c.081%200%20.162-.055.162-.137.107-.41.188-.846.188-1.31-.027-2.62-2.153-4.777-4.762-4.777'%20fill='%23FCAD32'%3e%3c/path%3e%3c/svg%3e" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
+
         </div>
       </div>
     </section>
@@ -196,7 +257,7 @@
                   <div class="youth-core"></div>
                 </div>
               </div>
-              <h3>Jóvenes Innovadores</h3>
+              <h2>Jóvenes Innovadores</h2>
               <p>Nuestro equipo, con una edad media de 16 años, representa la próxima generación de visionarios
                 tecnológicos.</p>
             </div>
@@ -210,7 +271,7 @@
                   <div class="multi-layer"></div>
                 </div>
               </div>
-              <h3>Experiencia Multidisciplinaria</h3>
+              <h2>Experiencia Multidisciplinaria</h2>
               <p>Innovamos en una amplia gama de habilidades, desde desarrollo de software hasta IA.</p>
             </div>
           </div>
@@ -223,7 +284,7 @@
                   <div class="global-dot"></div>
                 </div>
               </div>
-              <h3>Visión Global</h3>
+              <h2>Visión Global</h2>
               <p>Estamos dedicados a posicionar a Turquía como un líder tecnológico global.</p>
             </div>
           </div>
@@ -238,10 +299,10 @@
         <div class="grid-3">
 
           <!-- Cortex -->
-          <a href="https://github.com/VertexCorporation/Cortex" target="_blank"
+          <a href="download.html"
             class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="/assets/cortex-CCFjNAAW.webp" alt="Cortex AI" loading="lazy">
+              <img src="/assets/cortex-BBIccxBz.webp" alt="Cortex AI" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <h3>Cortex</h3>
@@ -262,22 +323,22 @@
             </div>
           </a>
 
-          <!-- Drome -->
-          <a href="https://github.com/VertexCorporation/Drome" target="_blank"
+          <!-- Drome (disabled)
+          <!--          <a href="https://github.com/VertexCorporation/Drome" target="_blank"
             class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="data:image/webp;base64,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" alt="Drome" loading="lazy">
+              <img src="../assets/drome.webp" alt="Drome" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <h3>Drome</h3>
               <p>Un lenguaje de programación innovador que ofrece herramientas versátiles y eficientes.</p>
             </div>
-          </a>
+          </a>-->
 
           <!-- Solar -->
           <a href="https://browser.solar" target="_blank" class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="/assets/solar-BoWBZ5VH.webp" alt="Solar Browser" loading="lazy">
+              <img src="/assets/solar-Cvc2lvwd.webp" alt="Solar Browser" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <h3>Solar Browser</h3>
@@ -289,7 +350,7 @@
           <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank"
             class="card fade-up project-card animated-border">
             <div class="project-img-container">
-              <img src="/assets/allstar-Pz6DTLfe.webp" alt="All Star" loading="lazy">
+              <img src="/assets/allstar-BEoSfwVf.webp" alt="All Star" loading="lazy" decoding="async">
             </div>
             <div class="card-content">
               <h3>All Star</h3>
@@ -300,8 +361,7 @@
           <!-- Ally -->
           <div class="card fade-up project-card animated-border" style="cursor: default;">
             <div class="project-img-container">
-              <img src="../assets/ally.webp" alt="Ally Health" loading="lazy"
-                onerror="this.src='../assets/comingsoon.webp'">
+              <img src="data:image/webp;base64,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" alt="Ally Health" loading="lazy">
             </div>
             <div class="card-content">
               <h3>Ally</h3>
@@ -333,7 +393,7 @@
                 <div class="ai-line"></div>
               </div>
             </div>
-            <h4>Inteligencia Artificial</h4>
+            <h3>Inteligencia Artificial</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Python, TensorFlow, PyTorch</p>
           </div>
           <div class="feature-card" style="padding: 24px;">
@@ -349,7 +409,7 @@
                 </div>
               </div>
             </div>
-            <h4>Tecnologías Web</h4>
+            <h3>Tecnologías Web</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">React, Node.js, WebAssembly</p>
           </div>
           <div class="feature-card" style="padding: 24px;">
@@ -362,7 +422,7 @@
                 </div>
               </div>
             </div>
-            <h4>Aplicación Móvil</h4>
+            <h3>Aplicación Móvil</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Flutter, React Native, Swift</p>
           </div>
           <div class="feature-card" style="padding: 24px;">
@@ -375,7 +435,7 @@
                 </div>
               </div>
             </div>
-            <h4>Desarrollo de Juegos</h4>
+            <h3>Desarrollo de Juegos</h3>
             <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Unity, C#, Unreal Engine</p>
           </div>
         </div>
@@ -442,10 +502,21 @@
             <img src="/assets/rubbletalk-Ci6yusi4.png" alt="RubbleTalk" class="team-img" loading="lazy"
               style="border-radius: 12px; object-fit: contain; background: rgba(255,255,255,0.05);">
             <h3>RubbleTalk</h3>
-            <p class="team-role">Partner</p>
+            <p class="team-role">Socio</p>
             <div class="social-links">
               <a href="https://www.linkedin.com/company/rubbletalk/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e"
                   alt="LinkedIn"></a>
+            </div>
+          </div>
+
+          <!-- Barış Yücel -->
+          <div class="card fade-up team-card">
+            <img src="/assets/baris_yucel-DKurVkVy.jpg" alt="Barış Yücel" class="team-img" loading="lazy">
+            <h3>Barış Yücel</h3>
+            <p class="team-role">Creador de Contenido</p>
+            <div class="social-links">
+              <a href="https://www.instagram.com/yucelbrs" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg"
+                  alt="Instagram"></a>
             </div>
           </div>
         </div>
@@ -468,7 +539,7 @@
             <div class="social-links">
               <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e"
                   alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/mustawtfa/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg"
+              <a href="https://www.instagram.com/mustawtfa/" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg"
                   alt="Instagram"></a>
               <a href="mailto:mustafa@vertexishere.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
             </div>
@@ -482,7 +553,7 @@
             <div class="social-links">
               <a href="https://www.linkedin.com/in/ataturkcu/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e"
                   alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/re4lata/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg"
+              <a href="https://www.instagram.com/re4lata/" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg"
                   alt="Instagram"></a>
               <a href="mailto:ata@vertexishere.com" target="_blank"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
             </div>
@@ -490,17 +561,31 @@
 
           <!-- Murat Coşkun -->
           <div class="card fade-up team-card">
-            <img src="/assets/MURATCOSKUN-DmLgWc-e.webp" alt="Murat Coşkun" class="team-img" loading="lazy">
+            <img src="/assets/MURATCOSKUN-DMSIYrOW.webp" alt="Murat Coşkun" class="team-img" loading="lazy">
             <h3>Murat Coşkun</h3>
             <p class="team-role">Arquitecto Jefe</p>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/muratck/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e"
                   alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg"
+              <a href="https://www.instagram.com/bsdmog07/" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg"
                   alt="Instagram"></a>
               <a href="mailto:murat@vertexishere.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
             </div>
           </div>
+
+          <!-- Fazlı Özlemiş -->
+          <div class="card fade-up team-card">
+            <img src="/assets/FAZLIOZLEMIS-CvMiVKzb.jpg" alt="Fazlı Özlemiş" class="team-img" loading="lazy">
+            <h3>Fazlı Özlemiş</h3>
+            <p class="team-role">Desarrollador de Software</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/fazl%C4%B1-%C3%B6zlemi%C5%9F-3929673b0/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/_._.fz_._/" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg" alt="Instagram"></a>
+              <a href="mailto:fazli@vertexishere.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
+            </div>
+          </div>
+
+          
 
 
           <!-- Mir Emir Kaya -->
@@ -509,7 +594,7 @@
             <h3>Mir Emir Kaya</h3>
             <p class="team-role">Miembro del Consejo</p>
             <div class="social-links">
-              <a href="https://www.instagram.com/miremirkaya0/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg"
+              <a href="https://www.instagram.com/miremirkaya0/" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg"
                   alt="Instagram"></a>
             </div>
           </div>
@@ -517,26 +602,85 @@
           
           <!-- Mehmet Uras -->
           <div class="card fade-up team-card">
-            <img src="data:image/webp;base64,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" alt="Mehmet Uras" class="team-img" loading="lazy" style="object-fit: cover; opacity: 0.5;">
+            <img src="/assets/mehmet_uras-DQVacIMl.jpg" alt="Mehmet Uras" class="team-img" loading="lazy">
             <h3>Mehmet Uras</h3>
-            <p class="team-role">CMO</p>
+            <p class="team-role">Director de Marketing</p>
             <div class="social-links">
+              <a href="https://www.linkedin.com/in/mehmet-uras-baz-bab2593b1" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
             </div>
           </div>
 
 
-          <!-- Selim Doğan -->
+          <!-- Selim Doğan (removed) -->
+
+          <!-- Elif İrem Şahin -->
           <div class="card fade-up team-card">
-            <img src="/assets/selim-CX09JSGR.webp" alt="Selim Doğan" class="team-img" loading="lazy">
-            <h3>Selim Doğan</h3>
-            <p class="team-role">Desarrollador Web Senior</p>
+            <img src="/assets/elif_irem_sahin-_BOaXZF-.jpg" alt="Elif İrem Şahin" class="team-img" loading="lazy">
+            <h3>Elif İrem Şahin</h3>
+            <p class="team-role">Marketing</p>
             <div class="social-links">
-              <a href="https://www.linkedin.com/in/selim-doğan-865380320/" target="_blank"><img
-                  src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/selim.rar/" target="_blank"><img src="/assets/instagram-BIqBgWyY.svg"
-                  alt="Instagram"></a>
+              <a href="https://www.linkedin.com/in/elif-irem-%C5%9Fahin-31b304382?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/elifirem_sahin?igsh=NW8yYjBkbGxoNTl6" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg" alt="Instagram"></a>
+              <a href="mailto:elifiremsahin2@gmail.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
             </div>
           </div>
+
+          <!-- Ekin Burçak Korkmaz -->
+          <div class="card fade-up team-card">
+            <img src="/assets/ekin_burcak-Dk4lWT3S.jpeg" alt="Ekin Burçak Korkmaz" class="team-img" loading="lazy">
+            <h3>Ekin Burçak Korkmaz</h3>
+            <p class="team-role">Marketing</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/ekin-bur%C3%A7ak-korkmaz-1aa9ba3a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
+                target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/ekinburcakorkmaz?igsh=MTJodWlkYnBtdHFpMQ==" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg" alt="Instagram"></a>
+              <a href="mailto:ekinburcakorkmaz@gmail.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
+            </div>
+          </div>
+
+          <!-- Ekin Önal -->
+          <div class="card fade-up team-card">
+            <img src="/assets/EKINONAL-DKTx0bhw.jpg" alt="Ekin Önal" class="team-img" loading="lazy">
+            <h3>Ekin Önal</h3>
+            <p class="team-role">Marketing</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/ekin-önal-48b1493b1?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/ekin_nlll/" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg" alt="Instagram"></a>
+            </div>
+          </div>
+
+          <!-- Bahadır Gürbüz -->
+          <div class="card fade-up team-card">
+            <img src="/assets/BAHADIRGURBUZ-DKVe8er-.jpg" alt="Bahadır Gürbüz" class="team-img" loading="lazy">
+            <h3>Bahadır Gürbüz</h3>
+            <p class="team-role">Desarrollador de Software</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/bahadir-gurbuz/" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/bahadirrgurbuz/" target="_blank"><img src="/assets/instagram-Ca9Olt4b.svg" alt="Instagram"></a>
+            </div>
+          </div>
+
+          <!-- Emre Baldemir -->
+          <div class="card fade-up team-card">
+            <img src="/assets/emre_baldemir-klSpM6sx.jpg" alt="Emre Baldemir" class="team-img" loading="lazy">
+            <h3>Emre Baldemir</h3>
+            <p class="team-role">Marketing</p>
+            <div class="social-links">
+              <a href="https://www.linkedin.com/in/emre-b-475784391?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20width='24'%20height='24'%20viewBox='0%200%2024%2024'%3e%3cpath%20d='M19%200h-14c-2.761%200-5%202.239-5%205v14c0%202.761%202.239%205%205%205h14c2.762%200%205-2.239%205-5v-14c0-2.761-2.238-5-5-5zm-11%2019h-3v-11h3v11zm-1.5-12.268c-.966%200-1.75-.79-1.75-1.764s.784-1.764%201.75-1.764%201.75.79%201.75%201.764-.783%201.764-1.75%201.764zm13.5%2012.268h-3v-5.604c0-3.368-4-3.113-4%200v5.604h-3v-11h3v1.765c1.396-2.586%207-2.777%207%202.476v6.759z'/%3e%3c/svg%3e" alt="LinkedIn"></a>
+              <a href="mailto:emrebaldemir16@gmail.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
+            </div>
+          </div>
+
+          <!-- Ecrin Hacıömeroğlu -->
+          <div class="card fade-up team-card">
+            <img src="/assets/ecrin_haciomeroglu-Dw03hsZZ.jpg" alt="Ecrin Hacıömeroğlu" class="team-img" loading="lazy">
+            <h3>Ecrin Hacıömeroğlu</h3>
+            <p class="team-role">Marketing</p>
+            <div class="social-links">
+              <a href="mailto:ecrinhaciomeroglu6@gmail.com"><img src="data:image/svg+xml,%3csvg%20class='svg-icon'%20style='width:%201em;height:%201em;vertical-align:%20middle;fill:%20currentColor;overflow:%20hidden;'%20viewBox='0%200%201024%201024'%20version='1.1'%20xmlns='http://www.w3.org/2000/svg'%3e%3cpath%20d='M874.666667%20375.189333V746.666667a64%2064%200%200%201-64%2064H213.333333a64%2064%200%200%201-64-64V375.189333l266.090667%20225.6a149.333333%20149.333333%200%200%200%20193.152%200L874.666667%20375.189333zM810.666667%20213.333333a64.789333%2064.789333%200%200%201%2022.826666%204.181334%2063.616%2063.616%200%200%201%2026.794667%2019.413333%2064.32%2064.32%200%200%201%209.344%2015.466667c2.773333%206.570667%204.48%2013.696%204.906667%2021.184L874.666667%20277.333333v21.333334L553.536%20572.586667a64%2064%200%200%201-79.893333%202.538666l-3.178667-2.56L149.333333%20298.666667v-21.333334a63.786667%2063.786667%200%200%201%2035.136-57.130666A63.872%2063.872%200%200%201%20213.333333%20213.333333h597.333334z'%20/%3e%3c/svg%3e" alt="Email"></a>
+            </div>
+          </div>
+
 
         </div>
       </div>
@@ -544,6 +688,104 @@
   </main>
 
   <!-- Final CTA -->
+    <!-- Honor Roll (names-only honor roll) -->
+    <section id="hr" class="section">
+      <div class="container">
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">Lista de Honor</h2>
+
+        <!-- Styles specific to Onur Tablosu -->
+        <style>
+          .hr-row { overflow: hidden; margin: 12px 0; }
+          .hr-marquee { display: flex; align-items: center; }
+          .hr-marquee .hr-inner { display: inline-flex; white-space: nowrap; }
+          .hr-marquee span, .hr-marquee a { display: inline-block; padding: 0 28px; font-size: 18px; color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+          .hr-marquee a:hover { color: var(--text-main); text-decoration: underline; }
+          .hr-marquee.scroll .hr-inner { will-change: transform; animation: hr-scroll linear infinite; }
+          .hr-marquee.scroll.reverse .hr-inner { animation-direction: reverse; }
+          @keyframes hr-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+          /* when there are few names, center them */
+          .hr-marquee.center { justify-content: center; }
+        </style>
+
+        <div id="hr-container">
+          <div class="hr-row">
+            <div class="hr-marquee" data-names="Selim Doğan|Burak İsa Şimşek">
+              <div class="hr-inner">
+                <span>Selim Doğan</span>
+                <span>Burak İsa Şimşek</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function(){
+            var lastWidth = window.innerWidth;
+            
+            function setupHonorRoll() {
+              var isMobile = window.innerWidth <= 768;
+              var scrollThreshold = isMobile ? 3 : 5;
+              
+              document.querySelectorAll('.hr-marquee').forEach(function(m, idx){
+                // Store original HTML if not already done
+                if (!m.dataset.originalHtml) {
+                  m.dataset.originalHtml = m.querySelector('.hr-inner').innerHTML;
+                }
+                
+                var inner = m.querySelector('.hr-inner');
+                inner.innerHTML = m.dataset.originalHtml;
+                
+                // Remove previous classes
+                m.classList.remove('scroll', 'center', 'reverse');
+                inner.style.animationDirection = '';
+                inner.style.animationDuration = '';
+                m.style.setProperty('--ot-duration', '');
+                
+                var names = inner.querySelectorAll('span');
+                var count = names.length;
+                if (count === 0) return;
+                
+                if (count < scrollThreshold) {
+                  m.classList.add('center');
+                  return;
+                }
+                
+                // Duplicate content for seamless scrolling
+                inner.innerHTML = inner.innerHTML + inner.innerHTML;
+                var charCount = inner.textContent.length;
+                var duration = Math.max(8, Math.min(60, Math.floor(charCount/2)));
+                m.classList.add('scroll');
+                
+                if (idx % 2 === 1) {
+                  m.classList.add('reverse');
+                  inner.style.animationDirection = 'reverse';
+                } else {
+                  inner.style.animationDirection = 'normal';
+                }
+                m.style.setProperty('--ot-duration', duration + 's');
+                inner.style.animationDuration = duration + 's';
+              });
+            }
+            
+            setupHonorRoll();
+            
+            // Re-run on window resize
+            window.addEventListener('resize', function() {
+              if (Math.abs(window.innerWidth - lastWidth) > 100) {
+                lastWidth = window.innerWidth;
+                setupHonorRoll();
+              }
+            });
+          })();
+        </script>
+
+        <!-- Disable site-wide mouse spotlight/ glow around cursor for this page -->
+        <style>
+          body::before { display: none !important; background: none !important; }
+        </style>
+
+      </div>
+    </section>
   <section class="container">
     <div class="cta-section fade-up">
       <div class="cta-bg-animation">
@@ -575,16 +817,16 @@
     <div class="container">
       <div class="footer-main-grid">
         <div class="footer-brand">
-          <a href="#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;">Vertex</a>
+          <a href="#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20225%20225'%20width='100%25'%20height='100%25'%3e%3c!--%20Background%20rounded%20rectangle%20--%3e%3crect%20x='5'%20y='5'%20width='215'%20height='215'%20rx='45'%20fill='white'%20stroke='%23e6e6e6'%20stroke-width='1'%20/%3e%3c!--%20Outer%20Triangle%20--%3e%3cpolygon%20points='112.5,38%20200.5,189%2024.5,189'%20fill='none'%20stroke='black'%20stroke-width='15'%20stroke-linejoin='round'%20/%3e%3c!--%20Top%20Dash%20--%3e%3cline%20x1='112.5'%20y1='82'%20x2='112.5'%20y2='109'%20stroke='black'%20stroke-width='10'%20stroke-linecap='round'%20/%3e%3c!--%20Center%20Y-shape%20--%3e%3cpath%20d='M%20112.5,125%20L%20112.5,137%20L%20102,143%20M%20112.5,137%20L%20123,143'%20fill='none'%20stroke='black'%20stroke-width='10'%20stroke-linecap='round'%20stroke-linejoin='round'%20/%3e%3c!--%20Bottom-Left%20Dash%20--%3e%3cline%20x1='84.5'%20y1='153.5'%20x2='64.5'%20y2='165.5'%20stroke='black'%20stroke-width='10'%20stroke-linecap='round'%20/%3e%3c!--%20Bottom-Right%20Dash%20--%3e%3cline%20x1='140.5'%20y1='153.5'%20x2='160.5'%20y2='165.5'%20stroke='black'%20stroke-width='10'%20stroke-linecap='round'%20/%3e%3c/svg%3e" alt="Vertex Logo" class="nav-logo-icon">Vertex</a>
           <p style="color: var(--text-muted); line-height: 1.6;">
             La empresa tecnológica más joven de Turquía. Revolucionando IA, software y juegos.
           </p>
         </div>
 
         <div class="footer-col">
-          <h4 style="margin-bottom: 24px;">Proyectos</h4>
+          <h3 style="margin-bottom: 24px;">Proyectos</h3>
           <ul class="footer-links">
-            <li><a href="https://github.com/VertexCorporation/Cortex">Cortex</a></li>
+            <li><a href="download.html">Cortex</a></li>
             <li><a href="https://github.com/SolarBrowser/">Solar Browser</a></li>
             <li><a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar">All Star</a></li>
             <li><a href="https://github.com/VertexCorporation/Mergen">Mergen</a></li>
@@ -592,7 +834,7 @@
         </div>
 
         <div class="footer-col">
-          <h4 style="margin-bottom: 24px;">Empresa</h4>
+          <h3 style="margin-bottom: 24px;">Empresa</h3>
           <ul class="footer-links">
             <li><a href="#about">Sobre Nosotros</a></li>
             <li><a href="#team">Equipo</a></li>
@@ -601,7 +843,7 @@
         </div>
 
         <div class="footer-col">
-          <h4 style="margin-bottom: 24px;">Contactoo</h4>
+          <h3 style="margin-bottom: 24px;">Contacto</h3>
           <ul class="footer-links">
             <li><a href="mailto:contact@vertexishere.com">Enviar Email</a></li>
             <li><a href="https://www.linkedin.com/company/106897671/">LinkedIn</a></li>
@@ -613,7 +855,8 @@
 
       <div class="footer-bottom-row">
         <div class="copyright">
-          &copy; 2025 Vertex Corporation. All rights reserved.
+          &copy; 2026 Vertex Corporation Ltd. All rights reserved.<br>
+          <span style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 8px;">20 Wenlock Road, London, N1 7GU, United Kingdom | +44 7400 412824</span>
         </div>
         <div class="footer-legal-links">
           <a href="#">Política de Privacidad</a>
@@ -623,7 +866,19 @@
       </div>
     </div>
   </footer>
-
+
+  
+  <!-- Service Worker Registration for Caching -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('../sw.js').then(
+          (registration) => console.log('[SW] Registered:', registration),
+          (error) => console.log('[SW] Registration failed:', error)
+        );
+      });
+    }
+  </script>
 </body>
 
 </html>
