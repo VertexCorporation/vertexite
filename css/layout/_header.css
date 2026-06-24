@@ -62,6 +62,10 @@
     /* Optional: If it needs color inversion in light mode, you can add filters. Let's keep it default. */
 }
 
+[data-theme="light"] .nav-logo-icon {
+    filter: invert(1);
+}
+
 .logo:hover .nav-logo-icon {
     transform: scale(1.05) rotate(-5deg);
 }
