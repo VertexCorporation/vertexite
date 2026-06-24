@@ -25,7 +25,7 @@ async function fetchRepos() {
     const response = await fetch(`https://api.github.com/users/${ORG}/repos?per_page=100`);
     const repos = await response.json();
     
-    const IGNORED_REPOS = ['vertexite', 'cozmosite', 'cortexite', 'allyishere'];
+    const IGNORED_REPOS = ['vertexite', 'cozmosite', 'cortexite', 'allyishere', 'eventsite'];
 
     const processed = repos
       .filter(repo => !IGNORED_REPOS.includes(repo.name.toLowerCase()))
