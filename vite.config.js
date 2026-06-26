@@ -21,7 +21,8 @@ export default defineConfig({
                 pt: resolve(__dirname, 'pt/index.html'),
                 ru: resolve(__dirname, 'ru/index.html'),
                 it: resolve(__dirname, 'it/index.html'),
-                ja: resolve(__dirname, 'ja/index.html')
+                ja: resolve(__dirname, 'ja/index.html'),
+   muze: resolve(__dirname, 'muze.html')
             }
         }
     }
