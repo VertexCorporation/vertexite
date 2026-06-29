@@ -184,74 +184,315 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     */
 
-    // Particle System
-    const canvas = document.getElementById('particle-canvas');
-    if (canvas) {
-        const ctx = canvas.getContext('2d');
-        let particles = [];
+    // Retro Low Poly 3D Background System
+ const canvas = document.getElementById('particle-canvas');
+ if (canvas) {
+ const ctx = canvas.getContext('2d');
 
-        const resizeCanvas = throttle(() => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }, 100);
+ const resizeCanvas = throttle(() => {
+ canvas.width = window.innerWidth;
+ canvas.height = window.innerHeight;
+ }, 100);
 
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
+ window.addEventListener('resize', resizeCanvas);
+ resizeCanvas();
 
-        const getThemeColor = () => {
-            return document.documentElement.getAttribute('data-theme') === 'light' ? '0, 0, 0' : '255, 255, 255';
-        };
+ const isDark = () => document.documentElement.getAttribute('data-theme') !== 'light';
 
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2 + 1;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.opacity = Math.random() * 0.3 + 0.1;
-            }
+ let time = 0;
+ const mouse = { x: 0, y: 0, active: false };
 
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
+ window.addEventListener('mousemove', (e) => {
+ mouse.x = e.clientX;
+ mouse.y = e.clientY;
+ mouse.active = true;
+ });
 
-                if (this.x > canvas.width) this.x = 0;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.y > canvas.height) this.y = 0;
-                if (this.y < 0) this.y = canvas.height;
-            }
+ window.addEventListener('mouseleave', () => {
+ mouse.active = false;
+ });
 
-            draw() {
-                ctx.fillStyle = `rgba(${getThemeColor()}, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
+ // 3D Camera & Projection settings
+ const project = (x, y, z, width, height) => {
+ const camX = 0;
+ const camY = 140; // Camera height above the ground plane
+ const camZ = -50; // Camera position on Z
+ const focalLength = 360; // Distance to projection plane
 
+ const rx = x - camX;
+ const ry = y - camY;
+ const rz = z - camZ;
 
-        const initParticles = () => {
-            particles = [];
-            const particleCount = Math.min(window.innerWidth / 10, 100); // Responsive count
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        };
+ if (rz <= 0.1) return null;
 
-        const animateParticles = () => {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(particle => {
-                particle.update();
-                particle.draw();
-            });
-            requestAnimationFrame(animateParticles);
-        };
+ const scale = focalLength / rz;
+ const px = width / 2 + rx * scale;
+ // Position horizon around 45% of the screen height
+ const py = height * 0.45 - ry * scale;
 
-        initParticles();
-        animateParticles();
-    }
+ return { x: px, y: py, scale };
+ };
+
+ // Terrain Settings
+ const cols = 22;
+ const rows = 18;
+ const spacingZ = 60;
+ let gridOffsetZ = 0;
+ const speed = 0.8;
+
+ const getProjectedVertex = (col, row) => {
+ const actualSpacingX = canvas.width / (cols - 3);
+ const x = (col - cols / 2) * actualSpacingX;
+ const z = row * spacingZ + (gridOffsetZ % spacingZ);
+
+ const xPercent = (col - cols / 2) / (cols / 2);
+ const sideFactor = Math.pow(Math.abs(xPercent), 2.2);
+
+ // Base terrain height + ripples
+ let y = sideFactor * 130;
+ if (sideFactor > 0.05) {
+ y += Math.sin(col * 0.5 - time * 1.5) * Math.cos(row * 0.4 + time) * 16;
+ } else {
+ // small ripples in valley
+ y += Math.sin(col * 0.8 + time * 2.0) * 3.5;
+ }
+
+ const proj = project(x, y, z, canvas.width, canvas.height);
+ if (proj && mouse.active) {
+ const dx = proj.x - mouse.x;
+ const dy = proj.y - mouse.y;
+ const dist = Math.sqrt(dx * dx + dy * dy);
+ if (dist < 140) {
+ const force = (1 - dist / 140) * 35;
+ y -= force;
+ return project(x, y, z, canvas.width, canvas.height);
+ }
+ }
+ return proj;
+ };
+
+ // Floating 3D Polyhedra Class
+ class Polyhedron {
+ constructor(x, y, z, type, scale) {
+ this.x = x;
+ this.y = y;
+ this.z = z;
+ this.type = type; // 'octahedron' or 'pyramid'
+ this.scale = scale;
+ this.ax = Math.random() * Math.PI * 2;
+ this.ay = Math.random() * Math.PI * 2;
+ this.az = Math.random() * Math.PI * 2;
+ this.rotX = Math.random() * 0.015 - 0.0075;
+ this.rotY = Math.random() * 0.015 - 0.0075;
+ this.rotZ = Math.random() * 0.015 - 0.0075;
+
+ // Define local vertices & faces
+ if (type === 'octahedron') {
+ this.vertices = [
+ { x: 0, y: 1.2, z: 0 },
+ { x: 1, y: 0, z: 0 },
+ { x: 0, y: 0, z: 1 },
+ { x: -1, y: 0, z: 0 },
+ { x: 0, y: 0, z: -1 },
+ { x: 0, y: -1.2, z: 0 }
+ ];
+ this.faces = [
+ [0, 1, 2], [0, 2, 3], [0, 3, 4], [0, 4, 1],
+ [5, 2, 1], [5, 3, 2], [5, 4, 3], [5, 1, 4]
+ ];
+ } else {
+ // Pyramid/Crystal
+ this.vertices = [
+ { x: 0, y: 1.3, z: 0 },
+ { x: 0.8, y: -0.6, z: 0.8 },
+ { x: -0.8, y: -0.6, z: 0.8 },
+ { x: -0.8, y: -0.6, z: -0.8 },
+ { x: 0.8, y: -0.6, z: -0.8 }
+ ];
+ this.faces = [
+ [0, 1, 2], [0, 2, 3], [0, 3, 4], [0, 4, 1],
+ [1, 4, 3], [1, 3, 2]
+ ];
+ }
+ }
+
+ update() {
+ this.ax += this.rotX;
+ this.ay += this.rotY;
+ this.az += this.rotZ;
+
+ // Float gently up & down
+ this.y += Math.sin(time + this.x) * 0.15;
+ }
+
+ draw() {
+ // Rotate and project vertices
+ const rotatedVertices = this.vertices.map(v => {
+ // X-axis
+ let y1 = v.y * Math.cos(this.ax) - v.z * Math.sin(this.ax);
+ let z1 = v.y * Math.sin(this.ax) + v.z * Math.cos(this.ax);
+ // Y-axis
+ let x2 = v.x * Math.cos(this.ay) + z1 * Math.sin(this.ay);
+ let z2 = -v.x * Math.sin(this.ay) + z1 * Math.cos(this.ay);
+ // Z-axis
+ let x3 = x2 * Math.cos(this.az) - y1 * Math.sin(this.az);
+ let y3 = x2 * Math.sin(this.az) + y1 * Math.cos(this.az);
+
+ const wx = this.x + x3 * this.scale;
+ const wy = this.y + y3 * this.scale;
+ const wz = this.z + z2 * this.scale;
+
+ const proj = project(wx, wy, wz, canvas.width, canvas.height);
+ return { wx, wy, wz, proj };
+ });
+
+ // Filter out if any vertex couldn't project
+ if (rotatedVertices.some(v => !v.proj)) return;
+
+ // Sort faces by depth
+ const facesWithDepth = this.faces.map((face, idx) => {
+ const zAvg = (rotatedVertices[face[0]].wz + rotatedVertices[face[1]].wz + rotatedVertices[face[2]].wz) / 3;
+ return { face, idx, zAvg };
+ });
+ facesWithDepth.sort((a, b) => b.zAvg - a.zAvg);
+
+ const dark = isDark();
+
+ facesWithDepth.forEach(({ face }) => {
+ // Compute normal for simple flat shading
+ const v0 = rotatedVertices[face[0]];
+ const v1 = rotatedVertices[face[1]];
+ const v2 = rotatedVertices[face[2]];
+
+ const ux = v1.wx - v0.wx, uy = v1.wy - v0.wy, uz = v1.wz - v0.wz;
+ const vx = v2.wx - v0.wx, vy = v2.wy - v0.wy, vz = v2.wz - v0.wz;
+ let nx = uy * vz - uz * vy;
+ let ny = uz * vx - ux * vz;
+ let nz = ux * vy - uy * vx;
+ const len = Math.sqrt(nx * nx + ny * ny + nz * nz);
+ if (len > 0) {
+ nx /= len; ny /= len; nz /= len;
+ }
+
+ // Light vector (from top-left-front)
+ const dot = nx * 0.5 + ny * 0.8 + nz * -0.3;
+ const dotVal = Math.max(0.1, Math.min(1.0, (dot + 1) / 2));
+
+ // Depth fade
+ const maxDepth = rows * spacingZ;
+ const alpha = Math.max(0.1, Math.min(0.85, 1 - this.z / maxDepth));
+
+ ctx.beginPath();
+ ctx.moveTo(v0.proj.x, v0.proj.y);
+ ctx.lineTo(v1.proj.x, v1.proj.y);
+ ctx.lineTo(v2.proj.x, v2.proj.y);
+ ctx.closePath();
+
+ // Shade fill
+ if (dark) {
+ // Glowing purple base shaded by diffuse light
+ const r = Math.floor(138 * dotVal);
+ const g = Math.floor(43 * dotVal);
+ const b = Math.floor(226 * dotVal);
+ ctx.fillStyle = `rgba(${r}, ${g}, ` + b + `, ${alpha * 0.7})`;
+ ctx.strokeStyle = `rgba(6, 182, 212, ${alpha * 0.8})`; // Neon cyan wireframe
+ } else {
+ // Muted blue shaded base
+ const r = Math.floor(191 + 40 * dotVal);
+ const g = Math.floor(219 + 30 * dotVal);
+ const b = Math.floor(254 + 1 * dotVal);
+ ctx.fillStyle = `rgba(${r}, ${g}, ` + b + `, ${alpha * 0.65})`;
+ ctx.strokeStyle = `rgba(37, 99, 235, ${alpha * 0.7})`; // Blue wireframe
+ }
+ ctx.fill();
+ ctx.stroke();
+ });
+ }
+ }
+
+ // Initialize floating shapes on the sides
+ const shapes = [
+ new Polyhedron(-280, 180, 240, 'octahedron', 35),
+ new Polyhedron(280, 200, 200, 'pyramid', 32),
+ new Polyhedron(-340, 220, 320, 'pyramid', 40),
+ new Polyhedron(340, 170, 280, 'octahedron', 38)
+ ];
+
+ const animate = () => {
+ time += 0.007;
+ gridOffsetZ -= speed;
+
+ ctx.clearRect(0, 0, canvas.width, canvas.height);
+ const dark = isDark();
+
+ // Draw grid from back to front (Painter's Algorithm)
+ for (let r = rows - 2; r >= 0; r--) {
+ for (let c = 0; c < cols - 1; c++) {
+ const p00 = getProjectedVertex(c, r);
+ const p10 = getProjectedVertex(c + 1, r);
+ const p11 = getProjectedVertex(c + 1, r + 1);
+ const p01 = getProjectedVertex(c, r + 1);
+
+ if (!p00 || !p10 || !p11 || !p01) continue;
+
+ // Calculate depth alpha fade
+ const avgZ = (r + 0.5) * spacingZ + (gridOffsetZ % spacingZ);
+ const maxDepth = rows * spacingZ;
+ const alpha = Math.max(0, Math.min(1, 1 - avgZ / maxDepth));
+
+ // Fill path first to hide hidden lines (solid 3D effect)
+ ctx.beginPath();
+ ctx.moveTo(p00.x, p00.y);
+ ctx.lineTo(p10.x, p10.y);
+ ctx.lineTo(p11.x, p11.y);
+ ctx.lineTo(p01.x, p01.y);
+ ctx.closePath();
+
+ if (dark) {
+ ctx.fillStyle = `rgba(5, 5, 5, ${0.8 + alpha * 0.15})`;
+ } else {
+ ctx.fillStyle = `rgba(255, 255, 255, ${0.8 + alpha * 0.15})`;
+ }
+ ctx.fill();
+
+ // Draw lines
+ ctx.beginPath();
+ ctx.moveTo(p00.x, p00.y);
+ ctx.lineTo(p10.x, p10.y);
+ ctx.lineTo(p11.x, p11.y);
+ ctx.lineTo(p00.x, p00.y); // triangle diagonal line
+ ctx.closePath();
+
+ if (dark) {
+ if (c % 4 === 0 || r % 4 === 0) {
+ ctx.strokeStyle = `rgba(6, 182, 212, ${alpha * 0.4})`; // Cyan accent
+ } else {
+ ctx.strokeStyle = `rgba(147, 51, 234, ${alpha * 0.25})`; // Purple
+ }
+ } else {
+ if (c % 4 === 0 || r % 4 === 0) {
+ ctx.strokeStyle = `rgba(37, 99, 235, ${alpha * 0.3})`; // Blue accent
+ } else {
+ ctx.strokeStyle = `rgba(71, 85, 105, ${alpha * 0.15})`; // Slate
+ }
+ }
+ ctx.stroke();
+ }
+ }
+
+ // Draw floating polyhedra
+ shapes.forEach(shape => {
+ shape.update();
+ shape.draw();
+ });
+
+ requestAnimationFrame(animate);
+ };
+
+ animate();
+ }
 });
+
 /* =========================================
    🐰 EASTER EGG: Selim Doğan
    ========================================= */
