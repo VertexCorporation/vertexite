@@ -926,16 +926,28 @@
         phone: document.getElementById('joinPhone').value
       };
       
-      // ZAPIER WEBHOOK ENTEGRASYONU BURAYA GELECEK
-      // fetch('ZAPIER_WEBHOOK_URL', { method: 'POST', body: JSON.stringify(data) })
-      
-      setTimeout(() => {
+      fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', { 
+        method: 'POST', 
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data) 
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+      })
+      .then(result => {
         alert('Başvurunuz başarıyla alındı! İnceleme sonrası sizinle iletişime geçeceğiz.');
         closeJoinModal();
         e.target.reset();
+      })
+      .catch(error => {
+        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
+        console.error('Submission error:', error);
+      })
+      .finally(() => {
         btn.textContent = 'Başvuruyu Gönder';
         btn.disabled = false;
-      }, 1000);
+      });
     }
   </script>
 
