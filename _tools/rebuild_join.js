@@ -290,7 +290,8 @@ const getFormHtml = (info) => `
             age: document.getElementById('joinAge').value,
             linkedin: document.getElementById('joinLinkedin').value,
             github: document.getElementById('joinGithub').value,
-            about: document.getElementById('joinAbout').value
+            about: document.getElementById('joinAbout').value,
+            language: '${info.folder}'
         };
 
         fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {
