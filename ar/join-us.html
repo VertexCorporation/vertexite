@@ -1,292 +1,618 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>انضم إلينا | Vertex</title>
-    <style>
-        :root {
-            --primary: #8a2be2;
-            --secondary: #4b0082;
-            --bg-color: #0d0d12;
-            --text-color: #ffffff;
-            --input-bg: rgba(255, 255, 255, 0.05);
-            --border-color: rgba(255, 255, 255, 0.1);
-        }
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            overflow-x: hidden;
-            min-height: 100vh;
-        }
+  <!-- 🎯 SEO & Meta Tags -->
+  <title>انضم إلينا | Vertex</title>
+  <meta name="description"
+    content="⭐ Vertex: Turkiye's youngest tech company. Pioneering in AI with Cortex & Mergen, mobile gaming, and next-gen software solutions.">
+  <meta name="keywords"
+    content="vertex, vertex corporation, cortex, mergen ai, drome lang, solar browser, ally health, young tech entrepreneurs, software company Turkiye">
+  <meta name="author" content="Vertex Corporation">
+  <meta name="theme-color" content="#0a0a0a">
+  <meta name="robots" content="index, follow, noimageindex">
 
-        /* Animated Triangles Background */
-        .background-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            z-index: -1;
-            overflow: hidden;
-            background: radial-gradient(circle at center, #1a0b2e 0%, var(--bg-color) 100%);
-        }
+  <!-- 🌍 Hreflang Tags -->
+  <link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
+  <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
+  <link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
+  <link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
+  <link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
+  <link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
+  <link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
+  <link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
+  <link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
+  <link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
+  <link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
+  <link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
+  <link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
+  <link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
+  <link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
+  <link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
+  <link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
 
-        .triangle {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-left: 20px solid transparent;
-            border-right: 20px solid transparent;
-            border-bottom: 35px solid rgba(138, 43, 226, 0.15);
-            animation: floatup 15s linear infinite;
-        }
+  <!-- 🖼️ Open Graph (Social Media) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://vertexishere.com/ar/join-us.html">
+  <meta property="og:title" content="انضم إلينا | Vertex">
+  <meta property="og:description" content="Turkiye's youngest tech giants. Building the future with AI and Software.">
+  <meta property="og:site_name" content="Vertex Corporation">
 
-        @keyframes floatup {
-            0% { transform: translateY(110vh) rotate(0deg) scale(1); opacity: 0; }
-            10% { opacity: 1; }
-            90% { opacity: 1; }
-            100% { transform: translateY(-10vh) rotate(360deg) scale(1.5); opacity: 0; }
-        }
+  <!-- 
+    ✅ WHATSAPP & SOCIAL FIX:
+    Link paylaşıldığında 'og-image.webp' yerine LOGO (favicon) çıkması için güncellendi.
+    Absolute URL (https://...) kullanılması WhatsApp için zorunludur.
+  -->
+  <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp">
 
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 40px;
-            background: rgba(20, 20, 30, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 24px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.4);
-        }
+  <!-- Twitter Card -->
+  <!-- Logo kare olduğu için 'summary' kart tipi daha uygundur -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="انضم إلينا | Vertex">
+  <meta name="twitter:description" content="كن جزءًا من فريق Vertex.">
+  <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp">
 
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+  <!-- Fonts & Styles -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="../css/main.css">
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
+  <link rel="preload" href="../assets/favicon.webp" as="image" type="image/webp">
+  
+  <!-- DNS Prefetch for Essential Domains -->
+  <link rel="dns-prefetch" href="https://www.youtube.com">
+  <link rel="dns-prefetch" href="https://github.com">
+  <link rel="dns-prefetch" href="https://www.linkedin.com">
 
-        .header h1 {
-            font-size: 3rem;
-            margin: 0 0 10px 0;
-            background: linear-gradient(135deg, #b87aff, #6a11cb);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="../assets/favicon.webp">
 
-        .header p {
-            color: #a0a0b0;
-            font-size: 1.1rem;
-        }
 
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
 
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 8px;
-        }
+  <style>
+    /* RTL Patch */
+    html[dir="rtl"] {
+      direction: rtl;
+      text-align: right;
+    }
 
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
+    html[dir="rtl"] .nav-links {
+      margin-right: auto;
+      margin-left: 0;
+    }
 
-        label {
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #d0d0e0;
-            margin-left: 5px;
-        }
+    html[dir="rtl"] .header-actions {
+      margin-left: 0;
+      margin-right: 0;
+    }
+  </style>
 
-        input, textarea {
-            width: 100%;
-            padding: 15px 20px;
-            background: var(--input-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            color: white;
-            font-size: 1rem;
-            outline: none;
-            transition: all 0.3s ease;
-            box-sizing: border-box;
-        }
+<style>
+/* CSS Variables are inherited from index.html data-theme */
+.join-page-wrapper {
+    position: relative;
+    padding: 60px 20px;
+    min-height: calc(100vh - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        input:focus, textarea:focus {
-            border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 15px rgba(138, 43, 226, 0.2);
-        }
+.triangle-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
 
-        textarea {
-            resize: vertical;
-            min-height: 120px;
-        }
+.triangle {
+    position: absolute;
+    width: 0; height: 0;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom: 35px solid rgba(138, 43, 226, 0.2);
+    animation: floatup 15s linear infinite;
+}
 
-        .submit-btn {
-            grid-column: 1 / -1;
-            padding: 18px;
-            background: linear-gradient(135deg, #8a2be2, #4b0082);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-            box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
-        }
+@keyframes floatup {
+    0% { transform: translateY(110vh) rotate(0deg) scale(1); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-10vh) rotate(360deg) scale(1.5); opacity: 0; }
+}
 
-        .submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 25px rgba(138, 43, 226, 0.4);
-        }
+.join-form-container {
+    max-width: 800px;
+    width: 100%;
+    background: var(--bg-card); /* Integrates with light/dark theme! */
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    padding: 40px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    z-index: 1;
+}
 
-        .submit-btn:active {
-            transform: translateY(0);
-        }
+.join-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
 
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 30px;
-            color: #a0a0b0;
-            text-decoration: none;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
+.join-header h1 {
+    font-size: 2.5rem;
+    margin: 0 0 10px;
+    background: linear-gradient(135deg, #8a2be2, #4b0082);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-        .back-link:hover {
-            color: white;
-        }
+.join-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+}
 
-        @media (max-width: 768px) {
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-            .container {
-                margin: 20px;
-                padding: 30px 20px;
-            }
-        }
-    </style>
-</head>
-<body dir="rtl">
-    <div class="background-container" id="bg-container"></div>
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
 
-    <div class="container">
-        <div class="header">
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.form-group.full-width { grid-column: 1 / -1; }
+
+.join-form-container label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-color);
+    margin-left: 5px;
+}
+
+.join-form-container input, .join-form-container textarea {
+    width: 100%;
+    padding: 14px 18px;
+    background: var(--bg-elevated, rgba(128,128,128,0.05));
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-color);
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+.join-form-container input:focus, .join-form-container textarea:focus {
+    border-color: #8a2be2;
+    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+}
+
+.join-form-container textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.join-submit-btn {
+    grid-column: 1 / -1;
+    padding: 16px;
+    background: linear-gradient(135deg, #8a2be2, #4b0082);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+}
+.join-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+}
+
+@media (max-width: 768px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .join-form-container { padding: 25px 20px; }
+}
+</style>
+\n</head>
+
+<body>
+  
+    <!-- Geometric Background Objects -->
+    <div class="geo-bg">
+      <div class="geo-blob geo-blob-1"></div>
+      <div class="geo-blob geo-blob-2"></div>
+      <div class="geo-blob geo-blob-3"></div>
+    </div>
+
+  
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container nav-container">
+      <a href="index.html" class="logo"><img src="../assets/logo.svg" alt="Vertex Logo" class="nav-logo-icon" fetchpriority="high" decoding="async">Vertex</a>
+
+      <nav class="nav-links">
+        <a href="#home" class="nav-link">الرئيسية</a>
+        <a href="#projects" class="nav-link">المشاريع</a>
+                <a href="#news-section" class="nav-link">الأخبار</a>
+
+        <a href="partners.html" class="nav-link">الشركاء</a>
+        <a href="#team" class="nav-link">الفريق</a>
+      <a href="documentation.html" class="nav-link">توثيق</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="language-dropdown">
+          <button class="lang-btn-trigger">
+            <span class="lang-text">العربية</span> <svg class="dropdown-arrow" viewBox="0 0 24 24" style="width: 10px; height: 10px; fill: currentColor; stroke: currentColor; stroke-width: 4px; stroke-linejoin: round;"><path d="M5 7h14l-7 10z"></path></svg>
+          </button>
+          <div class="lang-menu">
+            <a href="../en/" class="lang-item">English</a>
+            <a href="../tr/" class="lang-item">Türkçe</a>
+            <a href="../hi/" class="lang-item">Hindi</a>
+            <a href="../ar/" class="lang-item active">العربية</a>
+            <a href="../az/" class="lang-item">Azərbaycan</a>
+            <a href="../pt/" class="lang-item">Português</a>
+            <a href="../nl/" class="lang-item">Nederlands</a>
+            <a href="../id/" class="lang-item">Indonesia</a>
+            <a href="../it/" class="lang-item">Italiano</a>
+            <a href="../es/" class="lang-item">Español</a>
+            <a href="../ru/" class="lang-item">Русский</a>
+            <a href="../fr/" class="lang-item">Français</a>
+            <a href="../ja/" class="lang-item">日本語</a>
+            <a href="../ko/" class="lang-item">한국어</a>
+            <a href="../zh/" class="lang-item">简体中文</a>
+            <a href="../de/" class="lang-item">Deutsch</a>
+          </div>
+        </div>
+        <button class="theme-toggle-btn btn-outline" aria-label="Toggle Theme"
+          style="padding: 8px; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+          <div class="theme-icon"></div>
+        </button>
+        <a href="join-us.html" class="btn btn-outline btn-sm">انضم إلينا</a>
+        <a href="#projects" class="btn btn-primary btn-sm">عرض المشاريع</a>
+        <button class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu">
+    <nav class="mobile-nav-links">
+      <a href="#home">الرئيسية</a>
+      <a href="#about">About</a>
+      <a href="#projects">المشاريع</a>
+      <a href="#vision">Vision</a>
+
+      <a href="partners.html">الشركاء</a>
+      <a href="#team">الفريق</a>
+      <a href="documentation.html">توثيق</a>
+      <div class="mobile-lang-selector">
+        <a href="../tr/">Türkçe</a>
+        <a href="../en/" class="active">English</a>
+        <a href="../hi/">Hindi</a>
+      </div>
+
+      <div class="mobile-menu-actions">
+        <a href="join-us.html" class="btn btn-outline mobile-btn">انضم إلينا</a>
+        <a href="#projects" class="btn btn-primary mobile-btn">عرض المشاريع</a>
+      </div>
+    </nav>
+  </div>
+
+  <main>\n
+<div class="join-page-wrapper">
+    <div class="triangle-bg" id="join-triangles"></div>
+    <div class="join-form-container">
+        <div class="join-header">
             <h1>انضم إلينا</h1>
             <p>كن جزءًا من فريق Vertex.</p>
         </div>
-
         <form id="joinForm" class="form-grid">
             <div class="form-group">
                 <label>الاسم الكامل</label>
                 <input type="text" id="joinName" required>
             </div>
-            
             <div class="form-group">
                 <label>البريد الإلكتروني</label>
                 <input type="email" id="joinEmail" required>
             </div>
-
             <div class="form-group">
-                <label>رقم الهاتف (اختياري)</label>
-                <input type="tel" id="joinPhone">
+                <label>رقم الهاتف</label>
+                <input type="tel" id="joinPhone" required> <!-- NOW REQUIRED -->
             </div>
-
             <div class="form-group">
                 <label>العمر</label>
                 <input type="number" id="joinAge" required min="13" max="100">
             </div>
-
             <div class="form-group">
                 <label>رابط LinkedIn (اختياري)</label>
                 <input type="url" id="joinLinkedin">
             </div>
-
             <div class="form-group">
                 <label>رابط GitHub (اختياري)</label>
                 <input type="url" id="joinGithub">
             </div>
-
             <div class="form-group full-width">
                 <label>تحدث عن نفسك</label>
                 <textarea id="joinAbout" required></textarea>
             </div>
-
-            <button type="submit" class="submit-btn" id="submitBtn">إرسال الطلب</button>
+            <button type="submit" class="join-submit-btn" id="submitBtn">إرسال الطلب</button>
         </form>
-
-        <a href="index.html" class="back-link">← العودة للصفحة الرئيسية</a>
     </div>
+</div>
+<script>
+    const bgContainer = document.getElementById('join-triangles');
+    for (let i = 0; i < 20; i++) {
+        const t = document.createElement('div');
+        t.className = 'triangle';
+        t.style.left = Math.random() * 100 + '%';
+        t.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        t.style.animationDelay = (Math.random() * 10) + 's';
+        t.style.opacity = Math.random() * 0.5 + 0.1;
+        const size = Math.random() * 15 + 10;
+        t.style.borderLeftWidth = size + 'px';
+        t.style.borderRightWidth = size + 'px';
+        t.style.borderBottomWidth = (size * 1.7) + 'px';
+        bgContainer.appendChild(t);
+    }
 
-    <script>
-        // Generate floating triangles
-        const bgContainer = document.getElementById('bg-container');
-        for (let i = 0; i < 30; i++) {
-            const triangle = document.createElement('div');
-            triangle.className = 'triangle';
-            triangle.style.left = Math.random() * 100 + 'vw';
-            triangle.style.animationDuration = (Math.random() * 10 + 10) + 's';
-            triangle.style.animationDelay = (Math.random() * 10) + 's';
-            triangle.style.opacity = Math.random() * 0.5 + 0.1;
-            const size = Math.random() * 20 + 10;
-            triangle.style.borderLeftWidth = size + 'px';
-            triangle.style.borderRightWidth = size + 'px';
-            triangle.style.borderBottomWidth = (size * 1.7) + 'px';
-            bgContainer.appendChild(triangle);
-        }
+    document.getElementById('joinForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const btn = document.getElementById('submitBtn');
+        const originalText = btn.textContent;
+        btn.textContent = '...';
+        btn.disabled = true;
 
-        // Form Submission
-        document.getElementById('joinForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const btn = document.getElementById('submitBtn');
-            const originalText = btn.textContent;
-            btn.textContent = '...';
-            btn.disabled = true;
+        const data = {
+            name: document.getElementById('joinName').value,
+            email: document.getElementById('joinEmail').value,
+            phone: document.getElementById('joinPhone').value,
+            age: document.getElementById('joinAge').value,
+            linkedin: document.getElementById('joinLinkedin').value,
+            github: document.getElementById('joinGithub').value,
+            about: document.getElementById('joinAbout').value
+        };
 
-            const data = {
-                name: document.getElementById('joinName').value,
-                email: document.getElementById('joinEmail').value,
-                phone: document.getElementById('joinPhone').value,
-                age: document.getElementById('joinAge').value,
-                linkedin: document.getElementById('joinLinkedin').value,
-                github: document.getElementById('joinGithub').value,
-                about: document.getElementById('joinAbout').value
-            };
-
-            fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Network error');
-                return response.json();
-            })
-            .then(result => {
-                alert('تم استلام الطلب!');
-                document.getElementById('joinForm').reset();
-            })
-            .catch(error => {
-                alert('حدث خطأ.');
-                console.error(error);
-            })
-            .finally(() => {
-                btn.textContent = originalText;
-                btn.disabled = false;
-            });
+        fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) throw new Error('Network error');
+            return response.json();
+        })
+        .then(result => {
+            alert('تم استلام الطلب!');
+            document.getElementById('joinForm').reset();
+        })
+        .catch(error => {
+            alert('حدث خطأ.');
+            console.error(error);
+        })
+        .finally(() => {
+            btn.textContent = originalText;
+            btn.disabled = false;
         });
-    </script>
+    });
+</script>
+\n</main>
+
+  <!-- Final CTA -->
+    <!-- Honor Roll (names-only honor roll) -->
+    <section id="hr" class="section">
+      <div class="container">
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">لوحة الشرف</h2>
+
+        <!-- Styles specific to Onur Tablosu -->
+        <style>
+          .hr-row { overflow: hidden; margin: 12px 0; }
+          .hr-marquee { display: flex; align-items: center; }
+          .hr-marquee .hr-inner { display: inline-flex; white-space: nowrap; }
+          .hr-marquee span, .hr-marquee a { display: inline-block; padding: 0 28px; font-size: 18px; color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
+          .hr-marquee a:hover { color: var(--text-main); text-decoration: underline; }
+          .hr-marquee.scroll .hr-inner { will-change: transform; animation: hr-scroll linear infinite; }
+          .hr-marquee.scroll.reverse .hr-inner { animation-direction: reverse; }
+          @keyframes hr-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+          /* when there are few names, center them */
+          .hr-marquee.center { justify-content: center; }
+        </style>
+
+        <div id="hr-container">
+          <div class="hr-row">
+            <div class="hr-marquee" data-names="Selim Doğan|Burak İsa Şimşek|Ensar Demirtaş|Barış Yücel|Mehmet Talha Yalçın|Mert Çelik|Yüsra Arbana|Ekin Önal|Emre Baldemir">
+              <div class="hr-inner">
+                <span>Selim Doğan</span>
+                <span>Burak İsa Şimşek</span>
+                <span>Ensar Demirtaş</span>
+                <span>Barış Yücel</span>
+                <span>Mehmet Talha Yalçın</span>
+                <span>Mert Çelik</span>
+                <span>Yüsra Arbana</span>
+                <span>Ekin Önal</span>
+                <span>Emre Baldemir</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          (function(){
+            var lastWidth = window.innerWidth;
+            
+            function setupHonorRoll() {
+              var isMobile = window.innerWidth <= 768;
+              var scrollThreshold = isMobile ? 3 : 5;
+              
+              document.querySelectorAll('.hr-marquee').forEach(function(m, idx){
+                // Store original HTML if not already done
+                if (!m.dataset.originalHtml) {
+                  m.dataset.originalHtml = m.querySelector('.hr-inner').innerHTML;
+                }
+                
+                var inner = m.querySelector('.hr-inner');
+                inner.innerHTML = m.dataset.originalHtml;
+                
+                // Remove previous classes
+                m.classList.remove('scroll', 'center', 'reverse');
+                inner.style.animationDirection = '';
+                inner.style.animationDuration = '';
+                m.style.setProperty('--ot-duration', '');
+                
+                var names = inner.querySelectorAll('span');
+                var count = names.length;
+                if (count === 0) return;
+                
+                if (count < scrollThreshold) {
+                  m.classList.add('center');
+                  return;
+                }
+                
+                // Duplicate content for seamless scrolling
+                inner.innerHTML = inner.innerHTML + inner.innerHTML;
+                var charCount = inner.textContent.length;
+                var duration = Math.max(8, Math.min(60, Math.floor(charCount/2)));
+                m.classList.add('scroll');
+                
+                if (idx % 2 === 1) {
+                  m.classList.add('reverse');
+                  inner.style.animationDirection = 'reverse';
+                } else {
+                  inner.style.animationDirection = 'normal';
+                }
+                m.style.setProperty('--ot-duration', duration + 's');
+                inner.style.animationDuration = duration + 's';
+              });
+            }
+            
+            setupHonorRoll();
+            
+            // Re-run on window resize
+            window.addEventListener('resize', function() {
+              if (Math.abs(window.innerWidth - lastWidth) > 100) {
+                lastWidth = window.innerWidth;
+                setupHonorRoll();
+              }
+            });
+          })();
+        </script>
+
+        <!-- Disable site-wide mouse spotlight/ glow around cursor for this page -->
+        <style>
+          body::before { display: none !important; background: none !important; }
+        </style>
+
+      </div>
+    </section>
+  <section class="container">
+    <div class="cta-section fade-up">
+      <div class="cta-bg-animation">
+        <div class="cta-grid"></div>
+        <div class="cta-orb"></div>
+        <div class="cta-orb"></div>
+        <div class="cta-orb"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-shooting-line"></div>
+        <div class="cta-overlay"></div>
+      </div>
+      <div class="cta-content">
+        <h2 style="font-size: 42px; margin-bottom: 24px;">كن جزءًا من المستقبل</h2>
+        <p style="font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px;">
+          ادفع حدود التكنولوجيا مع Vertex. استكشف مشاريعنا أو انضم إلى فريقنا.
+        </p>
+        <div style="display: flex; gap: 16px; justify-content: center;">
+          <a href="#projects" class="btn btn-primary">استكشف المشاريع</a>
+          <a href="join-us.html" class="btn btn-outline">انضم إلينا</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-expanded">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="footer-brand">
+          <a href="#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;"><img src="../assets/logo.svg" alt="Vertex Logo" class="nav-logo-icon">Vertex</a>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            أصغر شركة تكنولوجية في تركيا. نحدث ثورة في الذكاء الاصطناعي والبرمجيات والألعاب بمتوسط عمر 15 عامًا.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h3 style="margin-bottom: 24px;">المشاريع</h3>
+          <ul class="footer-links">
+            <li><a href="download.html">Cortex</a></li>
+            <li><a href="https://github.com/SolarBrowser/">Solar Browser</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar">All Star</a></li>
+            <li><a href="https://github.com/VertexCorporation/Mergen">Mergen</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 style="margin-bottom: 24px;">الشركة</h3>
+          <ul class="footer-links">
+            <li><a href="#about">معلومات عنا</a></li>
+            <li><a href="#team">الفريق</a></li>
+            <li><a href="#vision">Vision</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 style="margin-bottom: 24px;">اتصل</h3>
+          <ul class="footer-links">
+            <li><a href="mailto:contact@vertexishere.com">إرسال بريد إلكتروني</a></li>
+            <li><a href="https://www.linkedin.com/company/106897671/">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/vertex.23/">Instagram</a></li>
+            <li><a href="#">Discord</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div class="copyright">
+          &copy; 2026 Vertex Corporation Ltd. All rights reserved.<br>
+          <span style="font-size: 0.85rem; color: var(--text-muted); display: block; margin-top: 8px;">20 Wenlock Road, London, N1 7GU, United Kingdom | +44 7400 412824</span>
+        </div>
+        <div class="footer-legal-links">
+          <a href="../privacy-policy.html">سياسة الخصوصية</a>
+          <a href="../terms-of-service.html">شروط الاستخدام</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/main.js" defer></script>
+  
+  <!-- Service Worker Registration for Caching -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('../sw.js').then(
+          (registration) => console.log('[SW] Registered:', registration),
+          (error) => console.log('[SW] Registration failed:', error)
+        );
+      });
+    }
+  </script>
 </body>
+
 </html>
