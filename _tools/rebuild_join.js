@@ -111,7 +111,7 @@ const formCss = `
     width: 0; height: 0;
     border-left: 20px solid transparent;
     border-right: 20px solid transparent;
-    border-bottom: 35px solid rgba(138, 43, 226, 0.2);
+    border-bottom: 35px solid rgba(var(--primary-rgb), 0.1);
     animation: floatup 15s linear infinite;
 }
 
@@ -141,7 +141,7 @@ const formCss = `
 .join-header h1 {
     font-size: 2.5rem;
     margin: 0 0 10px;
-    background: linear-gradient(135deg, #8a2be2, #4b0082);
+    background: var(--gradient-main);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -185,8 +185,8 @@ const formCss = `
 }
 
 .join-form-container input:focus, .join-form-container textarea:focus {
-    border-color: #8a2be2;
-    box-shadow: 0 0 0 3px rgba(138, 43, 226, 0.1);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.1);
 }
 
 .join-form-container textarea {
@@ -197,8 +197,8 @@ const formCss = `
 .join-submit-btn {
     grid-column: 1 / -1;
     padding: 16px;
-    background: linear-gradient(135deg, #8a2be2, #4b0082);
-    color: white;
+    background: var(--primary);
+    color: var(--btn-text-color);
     border: none;
     border-radius: 12px;
     font-size: 1.1rem;
@@ -209,7 +209,7 @@ const formCss = `
 }
 .join-submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 20px rgba(138, 43, 226, 0.3);
+    box-shadow: 0 10px 20px rgba(var(--primary-rgb), 0.2);
 }
 
 @media (max-width: 768px) {
@@ -339,10 +339,8 @@ Object.keys(langs).forEach(lang => {
             let headerHtml = content.substring(0, mainStart.index + mainStart[0].length);
             let footerHtml = content.substring(mainEnd.index);
             
-            // Insert form CSS before </head>
-            headerHtml = headerHtml.replace('</head>', formCss + '\\n</head>');
+            headerHtml = headerHtml.replace('</head>', formCss + '\n</head>');
             
-            // Change title and OpenGraph for SEO on join page
             headerHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${info.title} | Vertex</title>`);
             headerHtml = headerHtml.replace(/<meta property="og:title" content=".*?">/, `<meta property="og:title" content="${info.title} | Vertex">`);
             headerHtml = headerHtml.replace(/<meta property="og:description"\\s*content=".*?">/, `<meta property="og:description" content="${info.desc}">`);
@@ -350,8 +348,8 @@ Object.keys(langs).forEach(lang => {
             
             headerHtml = headerHtml.replace(/<meta name="twitter:title" content=".*?">/, `<meta name="twitter:title" content="${info.title} | Vertex">`);
             headerHtml = headerHtml.replace(/<meta name="twitter:description" content=".*?">/, `<meta name="twitter:description" content="${info.desc}">`);
-            
-            const joinPageContent = headerHtml + '\\n' + getFormHtml(info) + '\\n' + footerHtml;
+
+            const joinPageContent = headerHtml + '\n' + getFormHtml(info) + '\n' + footerHtml;
             const targetFilePath = path.join(baseDir, lang, info.file);
             
             fs.writeFileSync(targetFilePath, joinPageContent);
