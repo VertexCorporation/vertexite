@@ -325,11 +325,22 @@ Object.keys(langs).forEach(lang => {
         let content = fs.readFileSync(indexPath, 'utf-8');
         const info = langs[lang];
         
-        // 1. Update index.html mailto links to "Join Us"
+        // 1. Update mailto links to "Join Us" in all html files of the language directory
         const mailtoRegex = /<a href="mailto:contact@vertexishere\.com" class="([^"]*)".*?>.*?<\/a>/g;
-        content = content.replace(mailtoRegex, `<a href="${info.file}" class="$1">${info.joinNav}</a>`);
-        fs.writeFileSync(indexPath, content);
-        console.log('Updated buttons in:', indexPath);
+        fs.readdirSync(path.join(baseDir, lang)).forEach(file => {
+            if (file.endsWith('.html') && file !== info.file) {
+                const filePath = path.join(baseDir, lang, file);
+                let htmlContent = fs.readFileSync(filePath, 'utf-8');
+                const newHtmlContent = htmlContent.replace(mailtoRegex, `<a href="${info.file}" class="$1">${info.joinNav}</a>`);
+                if (htmlContent !== newHtmlContent) {
+                    fs.writeFileSync(filePath, newHtmlContent);
+                    console.log('Updated buttons in:', filePath);
+                }
+            }
+        });
+        
+        // Refresh index content after potential update for layout wrapper
+        content = fs.readFileSync(indexPath, 'utf-8');
 
         // 2. Generate join page using index.html as layout wrapper
         const mainStart = content.match(/<main[^>]*>/);
