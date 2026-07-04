@@ -272,17 +272,26 @@
 
 
 .checkbox-label input[type="checkbox"] {
+    width: 24px !important;
+    height: 24px !important;
+    min-width: 24px !important;
+    min-height: 24px !important;
+    max-width: 24px !important;
+    max-height: 24px !important;
+    flex-shrink: 0;
+    display: block;
+
     appearance: none;
     -webkit-appearance: none;
-    width: 22px;
-    height: 22px;
+    
+    
     border: 2px solid var(--border-color);
     border-radius: 6px;
     background-color: transparent;
     cursor: pointer;
     position: relative;
     transition: all 0.3s ease;
-    flex-shrink: 0;
+    
 }
 .checkbox-label input[type="checkbox"]:checked {
     background-color: var(--primary);
@@ -352,6 +361,7 @@
     border-bottom: 1px solid var(--border-color);
     color: var(--text-color);
  text-align: center;}
+
 .doctrine-text-container {
     padding: 25px;
     overflow-y: auto;
@@ -360,6 +370,12 @@
     color: var(--text-muted);
     flex: 1;
     white-space: pre-line;
+    text-align: center;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.doctrine-text-container::-webkit-scrollbar {
+    display: none;
 }
 .doctrine-read-btn {
     margin: 20px;
@@ -655,6 +671,16 @@ That might we need is present in the noble blood in our veins; the absolute peak
             }
         }, 100);
     });
+
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    });
+
 
     scrollBox.addEventListener('scroll', () => {
         if (!timerStarted) {

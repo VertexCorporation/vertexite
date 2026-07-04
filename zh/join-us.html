@@ -343,6 +343,16 @@ That might we need is present in the noble blood in our veins; the absolute peak
         }, 100);
     });
 
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal) {
+            modal.classList.remove('show');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
+        }
+    });
+
+
     scrollBox.addEventListener('scroll', () => {
         if (!timerStarted) {
             if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {

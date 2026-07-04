@@ -1,6 +1,6 @@
-- [ ] Add custom CSS for animated checkboxes.
-- [ ] Update modal title to "Vertex" and center it (`text-align: center`).
-- [ ] Modify the Doctrine checkbox so clicking it triggers the modal.
-- [ ] Rebuild HTML files.
-- [ ] Commit and push.
-- [ ] Update `walkthrough.md` with Firebase Admin Panel solution.
+- [x] Add custom CSS for animated checkboxes.
+- [x] Update modal title to "Vertex" and center it (`text-align: center`).
+- [x] Modify the Doctrine checkbox so clicking it triggers the modal.
+- [x] Rebuild HTML files.
+- [x] Commit and push.
+- [x] Update `walkthrough.md` with Firebase Admin Panel solution.
