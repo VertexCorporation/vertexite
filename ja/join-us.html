@@ -145,7 +145,7 @@
 
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
 }
 
@@ -262,6 +262,9 @@
     max-height: 24px !important;
     flex-shrink: 0;
     display: block;
+    box-sizing: border-box;
+    aspect-ratio: 1 / 1;
+    margin: 0;
 
     appearance: none;
     -webkit-appearance: none;
@@ -733,18 +736,49 @@ That might we need is present in the noble blood in our veins; the absolute peak
             language: 'ja'
         };
 
-        fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {
+        const checkUrl = 'https://firestore.googleapis.com/v1/projects/vertex-ai-1618/databases/(default)/documents:runQuery';
+        const checkQuery = {
+            structuredQuery: {
+                from: [{ collectionId: 'contributors' }],
+                where: {
+                    compositeFilter: {
+                        op: 'OR',
+                        filters: [
+                            { fieldFilter: { field: { fieldPath: 'email' }, op: 'EQUAL', value: { stringValue: data.email } } },
+                            { fieldFilter: { field: { fieldPath: 'phone' }, op: 'EQUAL', value: { stringValue: data.phone } } }
+                        ]
+                    }
+                }
+            }
+        };
+
+        fetch(checkUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(checkQuery)
         })
-        .then(response => {
-            if (!response.ok) throw new Error('Network error');
-            return response.json();
-        })
-        .then(result => {
-            alert('応募を受け付けました！');
-            document.getElementById('joinForm').reset();
+        .then(res => res.json())
+        .then(queryRes => {
+            if (queryRes.length > 0 && queryRes[0].document) {
+                alert('This email or phone number is already registered.');
+                btn.textContent = originalText;
+                btn.disabled = false;
+                return;
+            }
+            // Proceed to create
+            return fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network error');
+                return response.json();
+            })
+            .then(result => {
+                alert('応募を受け付けました！');
+                document.getElementById('joinForm').reset();
+            });
         })
         .catch(error => {
             alert('エラーが発生しました。');
@@ -763,7 +797,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
     <!-- Honor Roll (names-only honor roll) -->
     <section id="hr" class="section">
       <div class="container">
-        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px;">名誉の殿堂</h2>
+        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px; margin-top: 120px;">名誉の殿堂</h2>
 
         <!-- Styles specific to Onur Tablosu -->
         <style>

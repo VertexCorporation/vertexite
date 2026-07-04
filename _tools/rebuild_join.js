@@ -141,6 +141,7 @@ Object.keys(langs).forEach(key => {
         langs[key].ageErr = 'Lütfen 0 ile 123 arasında geçerli bir yaş giriniz.';
         langs[key].reqErr = 'Lütfen bu alanı doldurun.';
         langs[key].emailErr = 'Lütfen geçerli bir e-posta adresi girin.';
+        langs[key].dupErr = 'Bu e-posta veya telefon numarası zaten kayıtlı.';
     } else {
         langs[key].agreeTerms = 'I accept the <a href="https://vertexishere.com/terms-of-service" target="_blank"><b>General Terms of Service</b></a> and <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Privacy Policy</b></a>.';
         langs[key].doctrineBtn = 'Read Vertex Doctrine';
@@ -151,6 +152,7 @@ Object.keys(langs).forEach(key => {
         langs[key].ageErr = 'Please enter a valid age between 0 and 123.';
         langs[key].reqErr = 'Please fill out this field.';
         langs[key].emailErr = 'Please enter a valid email address.';
+        langs[key].dupErr = 'This email or phone number is already registered.';
     }
 });
 
@@ -222,7 +224,7 @@ const formCss = `
 
 .form-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 20px;
 }
 
@@ -339,6 +341,9 @@ const formCss = `
     max-height: 24px !important;
     flex-shrink: 0;
     display: block;
+    box-sizing: border-box;
+    aspect-ratio: 1 / 1;
+    margin: 0;
 
     appearance: none;
     -webkit-appearance: none;
@@ -703,18 +708,49 @@ const getFormHtml = (info) => `
             language: '${info.folder}'
         };
 
-        fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {
+        const checkUrl = 'https://firestore.googleapis.com/v1/projects/vertex-ai-1618/databases/(default)/documents:runQuery';
+        const checkQuery = {
+            structuredQuery: {
+                from: [{ collectionId: 'contributors' }],
+                where: {
+                    compositeFilter: {
+                        op: 'OR',
+                        filters: [
+                            { fieldFilter: { field: { fieldPath: 'email' }, op: 'EQUAL', value: { stringValue: data.email } } },
+                            { fieldFilter: { field: { fieldPath: 'phone' }, op: 'EQUAL', value: { stringValue: data.phone } } }
+                        ]
+                    }
+                }
+            }
+        };
+
+        fetch(checkUrl, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
+            body: JSON.stringify(checkQuery)
         })
-        .then(response => {
-            if (!response.ok) throw new Error('Network error');
-            return response.json();
-        })
-        .then(result => {
-            alert('${info.success}');
-            document.getElementById('joinForm').reset();
+        .then(res => res.json())
+        .then(queryRes => {
+            if (queryRes.length > 0 && queryRes[0].document) {
+                alert('${info.dupErr}');
+                btn.textContent = originalText;
+                btn.disabled = false;
+                return;
+            }
+            // Proceed to create
+            return fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                if (!response.ok) throw new Error('Network error');
+                return response.json();
+            })
+            .then(result => {
+                alert('${info.success}');
+                document.getElementById('joinForm').reset();
+            });
         })
         .catch(error => {
             alert('${info.error}');
