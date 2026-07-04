@@ -246,6 +246,7 @@
     margin-top: 10px;
     padding: 10px;
 }
+
 .checkbox-label {
     display: flex;
     align-items: center;
@@ -253,7 +254,22 @@
     font-size: 0.95rem;
     color: var(--text-color);
     cursor: pointer;
+    white-space: nowrap;
 }
+.checkbox-label a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 768px) {
+    .checkbox-label {
+        white-space: normal;
+    }
+}
+
 .checkbox-label input[type="checkbox"] {
     width: 20px;
     height: 20px;
@@ -478,7 +494,7 @@
             <div class="checkbox-group full-width">
                 <label class="checkbox-label">
                     <input type="checkbox" id="termsCheck" required>
-                    <span>I accept the General Terms of Service and Privacy Policy.</span>
+                    <span>I accept the <a href="https://vertexishere.com/terms-of-service" target="_blank"><b>General Terms of Service</b></a> and <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Privacy Policy</b></a>.</span>
                 </label>
                 <label class="checkbox-label">
                     <input type="checkbox" id="doctrineCheck" required disabled style="opacity: 0.7;">

@@ -1,4 +1,4 @@
-- [ ] Add `reqErr` and `emailErr` localized strings to `langs` in `rebuild_join.js`.
-- [ ] Add JavaScript to intercept `invalid` events on form inputs and apply `setCustomValidity()`.
-- [ ] Run `node _tools/rebuild_join.js` to regenerate HTML files.
-- [ ] Commit and push changes.
+- [x] Add `reqErr` and `emailErr` localized strings to `langs` in `rebuild_join.js`.
+- [x] Add JavaScript to intercept `invalid` events on form inputs and apply `setCustomValidity()`.
+- [x] Run `node _tools/rebuild_join.js` to regenerate HTML files.
+- [x] Commit and push changes.

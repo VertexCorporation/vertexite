@@ -131,7 +131,7 @@ const langs = {
 
 Object.keys(langs).forEach(key => {
     if (key === 'tr' || key === 'az') {
-        langs[key].agreeTerms = 'Genel Kullanım Koşulları ve Gizlilik Politikası\'nı kabul ediyorum.';
+        langs[key].agreeTerms = '<a href="https://vertexishere.com/terms-of-service" target="_blank"><b>Genel Kullanım Koşulları</b></a> ve <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Gizlilik Politikası</b></a>\'nı kabul ediyorum.';
         langs[key].doctrineBtn = 'Vertex Doktrini\'ni Oku';
         langs[key].doctrineTitle = 'Vertex Doktrini';
         langs[key].doctrineText = doctrineTr;
@@ -142,7 +142,7 @@ Object.keys(langs).forEach(key => {
         langs[key].reqErr = 'Lütfen bu alanı doldurun.';
         langs[key].emailErr = 'Lütfen geçerli bir e-posta adresi girin.';
     } else {
-        langs[key].agreeTerms = 'I accept the General Terms of Service and Privacy Policy.';
+        langs[key].agreeTerms = 'I accept the <a href="https://vertexishere.com/terms-of-service" target="_blank"><b>General Terms of Service</b></a> and <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Privacy Policy</b></a>.';
         langs[key].doctrineBtn = 'Read Vertex Doctrine';
         langs[key].doctrineTitle = 'Vertex Doctrine';
         langs[key].doctrineText = doctrineEn;
@@ -305,6 +305,7 @@ const formCss = `
     margin-top: 10px;
     padding: 10px;
 }
+
 .checkbox-label {
     display: flex;
     align-items: center;
@@ -312,7 +313,22 @@ const formCss = `
     font-size: 0.95rem;
     color: var(--text-color);
     cursor: pointer;
+    white-space: nowrap;
 }
+.checkbox-label a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color 0.3s;
+}
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+@media (max-width: 768px) {
+    .checkbox-label {
+        white-space: normal;
+    }
+}
+
 .checkbox-label input[type="checkbox"] {
     width: 20px;
     height: 20px;
