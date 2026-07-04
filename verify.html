@@ -321,6 +321,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             const name = fields.name ? fields.name.stringValue : 'Unknown';
             const lang = fields.language ? fields.language.stringValue : 'en';
             
+            const hasVerified = fields.hasVerified ? fields.hasVerified.booleanValue : false;
+            
+            if (!hasVerified) {
+                throw new Error('Certificate pending or rejected');
+            }
+            
             const certType = lang === 'tr' ? 'Liyakat Sertifikası' : 'Merit Certificate';
             
             // Format date from document createTime
