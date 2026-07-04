@@ -1,9 +1,4 @@
-- [ ] Update `rebuild_join.js` with localized Doctrine strings (Turkish + English).
-- [ ] Add modal HTML structure and CSS to `rebuild_join.js`.
-- [ ] Implement JS for 10-second modal countdown, scroll requirement, and fade effect.
-- [ ] Add checkboxes (Terms/Privacy and Doctrine) and submit button toggle logic.
-- [ ] Implement age validation (0-123).
-- [ ] Adjust CSS for `join-page-wrapper` padding (Appbar overlap).
-- [ ] Adjust CSS for `honor-roll` section margin (reduce gap).
+- [ ] Add `reqErr` and `emailErr` localized strings to `langs` in `rebuild_join.js`.
+- [ ] Add JavaScript to intercept `invalid` events on form inputs and apply `setCustomValidity()`.
 - [ ] Run `node _tools/rebuild_join.js` to regenerate HTML files.
-- [ ] Create a JS snippet for the user to fix the Zapier QR code long ID issue.
+- [ ] Commit and push changes.

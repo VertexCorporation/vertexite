@@ -599,7 +599,30 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         checkFormValidity();
     });
 
+    
+    // Validation Localization
+    const reqErr = 'Lütfen bu alanı doldurun.';
+    const emailErr = 'Lütfen geçerli bir e-posta adresi girin.';
+    const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required]');
+    
+    formInputs.forEach(input => {
+        input.addEventListener('invalid', function(e) {
+            if (this.validity.valueMissing) {
+                this.setCustomValidity(reqErr);
+            } else if (this.type === 'email' && this.validity.typeMismatch) {
+                this.setCustomValidity(emailErr);
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+        
+        input.addEventListener('input', function(e) {
+            this.setCustomValidity(''); 
+        });
+    });
+
     document.getElementById('joinForm').addEventListener('submit', function(e) {
+
         e.preventDefault();
         
         const ageVal = parseInt(ageInput.value, 10);

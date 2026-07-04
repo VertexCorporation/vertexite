@@ -136,8 +136,11 @@ Object.keys(langs).forEach(key => {
         langs[key].doctrineTitle = 'Vertex Doktrini';
         langs[key].doctrineText = doctrineTr;
         langs[key].readBtn = 'Okudum';
+        
         langs[key].waitSec = 'saniye daha';
         langs[key].ageErr = 'Lütfen 0 ile 123 arasında geçerli bir yaş giriniz.';
+        langs[key].reqErr = 'Lütfen bu alanı doldurun.';
+        langs[key].emailErr = 'Lütfen geçerli bir e-posta adresi girin.';
     } else {
         langs[key].agreeTerms = 'I accept the General Terms of Service and Privacy Policy.';
         langs[key].doctrineBtn = 'Read Vertex Doctrine';
@@ -146,6 +149,8 @@ Object.keys(langs).forEach(key => {
         langs[key].readBtn = 'I have read';
         langs[key].waitSec = 'seconds left';
         langs[key].ageErr = 'Please enter a valid age between 0 and 123.';
+        langs[key].reqErr = 'Please fill out this field.';
+        langs[key].emailErr = 'Please enter a valid email address.';
     }
 });
 
@@ -563,7 +568,30 @@ const getFormHtml = (info) => `
         checkFormValidity();
     });
 
+    
+    // Validation Localization
+    const reqErr = '${info.reqErr}';
+    const emailErr = '${info.emailErr}';
+    const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required]');
+    
+    formInputs.forEach(input => {
+        input.addEventListener('invalid', function(e) {
+            if (this.validity.valueMissing) {
+                this.setCustomValidity(reqErr);
+            } else if (this.type === 'email' && this.validity.typeMismatch) {
+                this.setCustomValidity(emailErr);
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+        
+        input.addEventListener('input', function(e) {
+            this.setCustomValidity(''); 
+        });
+    });
+
     document.getElementById('joinForm').addEventListener('submit', function(e) {
+
         e.preventDefault();
         
         const ageVal = parseInt(ageInput.value, 10);

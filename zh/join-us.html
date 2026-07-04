@@ -346,7 +346,30 @@ That might we need is present in the noble blood in our veins; the absolute peak
         checkFormValidity();
     });
 
+    
+    // Validation Localization
+    const reqErr = 'Please fill out this field.';
+    const emailErr = 'Please enter a valid email address.';
+    const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required]');
+    
+    formInputs.forEach(input => {
+        input.addEventListener('invalid', function(e) {
+            if (this.validity.valueMissing) {
+                this.setCustomValidity(reqErr);
+            } else if (this.type === 'email' && this.validity.typeMismatch) {
+                this.setCustomValidity(emailErr);
+            } else {
+                this.setCustomValidity('');
+            }
+        });
+        
+        input.addEventListener('input', function(e) {
+            this.setCustomValidity(''); 
+        });
+    });
+
     document.getElementById('joinForm').addEventListener('submit', function(e) {
+
         e.preventDefault();
         
         const ageVal = parseInt(ageInput.value, 10);
