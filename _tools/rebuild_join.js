@@ -267,7 +267,7 @@ const getFormHtml = (info) => `
         t.className = 'triangle';
         t.style.left = Math.random() * 100 + '%';
         t.style.animationDuration = (Math.random() * 10 + 10) + 's';
-        t.style.animationDelay = (Math.random() * 10) + 's';
+        t.style.animationDelay = '-' + (Math.random() * 20) + 's';
         t.style.opacity = Math.random() * 0.5 + 0.1;
         const size = Math.random() * 15 + 10;
         t.style.borderLeftWidth = size + 'px';
@@ -338,6 +338,10 @@ Object.keys(langs).forEach(lang => {
         if (mainStart && mainEnd) {
             let headerHtml = content.substring(0, mainStart.index + mainStart[0].length);
             let footerHtml = content.substring(mainEnd.index);
+            
+            // Fix navigation links to point to index.html instead of the current page
+            headerHtml = headerHtml.replace(/href="#([a-zA-Z0-9_-]+)"/g, 'href="index.html#$1"');
+            footerHtml = footerHtml.replace(/href="#([a-zA-Z0-9_-]+)"/g, 'href="index.html#$1"');
             
             headerHtml = headerHtml.replace('</head>', formCss + '\n</head>');
             
