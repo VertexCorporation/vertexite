@@ -1,4 +1,6 @@
-- [x] Add `reqErr` and `emailErr` localized strings to `langs` in `rebuild_join.js`.
-- [x] Add JavaScript to intercept `invalid` events on form inputs and apply `setCustomValidity()`.
-- [x] Run `node _tools/rebuild_join.js` to regenerate HTML files.
-- [x] Commit and push changes.
+- [ ] Add custom CSS for animated checkboxes.
+- [ ] Update modal title to "Vertex" and center it (`text-align: center`).
+- [ ] Modify the Doctrine checkbox so clicking it triggers the modal.
+- [ ] Rebuild HTML files.
+- [ ] Commit and push.
+- [ ] Update `walkthrough.md` with Firebase Admin Panel solution.

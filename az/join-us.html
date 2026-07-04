@@ -252,12 +252,39 @@
     }
 }
 
+
 .checkbox-label input[type="checkbox"] {
-    width: 20px;
-    height: 20px;
-    accent-color: var(--primary);
+    appearance: none;
+    -webkit-appearance: none;
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--border-color);
+    border-radius: 6px;
+    background-color: transparent;
     cursor: pointer;
+    position: relative;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
 }
+.checkbox-label input[type="checkbox"]:checked {
+    background-color: var(--primary);
+    border-color: var(--primary);
+}
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: '';
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    border: solid var(--btn-text-color);
+    border-width: 0 2px 2px 0;
+    animation: checkAnim 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+@keyframes checkAnim {
+    0% { height: 0; width: 0; opacity: 0; }
+    100% { height: 11px; width: 5px; opacity: 1; }
+}
+
 .doctrine-open-btn {
     background: none;
     border: none;
@@ -306,7 +333,7 @@
     margin: 0;
     border-bottom: 1px solid var(--border-color);
     color: var(--text-color);
-}
+ text-align: center;}
 .doctrine-text-container {
     padding: 25px;
     overflow-y: auto;
@@ -478,9 +505,9 @@
                     <input type="checkbox" id="termsCheck" required>
                     <span><a href="https://vertexishere.com/terms-of-service" target="_blank"><b>Genel Kullanım Koşulları</b></a> ve <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Gizlilik Politikası</b></a>'nı kabul ediyorum.</span>
                 </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" id="doctrineCheck" required disabled style="opacity: 0.7;">
-                    <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn">Vertex Doktrini'ni Oku</button></span>
+                <label class="checkbox-label" id="doctrineLabelWrapper">
+                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
+                    <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn" style="pointer-events: none;">Vertex Doktrini'ni Oku</button></span>
                 </label>
             </div>
 
@@ -492,7 +519,7 @@
 <!-- Doctrine Modal -->
 <div class="doctrine-modal-overlay" id="doctrineModal">
     <div class="doctrine-modal-content">
-        <h2>Vertex Doktrini</h2>
+        <h2>Vertex</h2>
         <div class="doctrine-text-container" id="doctrineScroll">
             Vertex, iki doğrunun kesiştiği en uç noktadır.
 
@@ -585,7 +612,24 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         }, 1000);
     }
 
-    openBtn.addEventListener('click', () => {
+    const doctrineLabelWrapper = document.getElementById('doctrineLabelWrapper');
+    doctrineLabelWrapper.addEventListener('click', (e) => {
+        if (!doctrineCheck.checked) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
+            setTimeout(() => {
+                if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
+                    startTimer();
+                }
+            }, 100);
+        } else {
+            e.preventDefault(); // Zaten tikliyse tıklamayı engelle
+        }
+    });
+    
+    // Fallback for direct btn calls if any
+    openBtn.addEventListener('click', (e) => {
         modal.style.display = 'flex';
         setTimeout(() => modal.classList.add('show'), 10);
         setTimeout(() => {

@@ -210,9 +210,9 @@
                     <input type="checkbox" id="termsCheck" required>
                     <span>I accept the <a href="https://vertexishere.com/terms-of-service" target="_blank"><b>General Terms of Service</b></a> and <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Privacy Policy</b></a>.</span>
                 </label>
-                <label class="checkbox-label">
-                    <input type="checkbox" id="doctrineCheck" required disabled style="opacity: 0.7;">
-                    <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn">Read Vertex Doctrine</button></span>
+                <label class="checkbox-label" id="doctrineLabelWrapper">
+                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
+                    <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn" style="pointer-events: none;">Read Vertex Doctrine</button></span>
                 </label>
             </div>
 
@@ -224,7 +224,7 @@
 <!-- Doctrine Modal -->
 <div class="doctrine-modal-overlay" id="doctrineModal">
     <div class="doctrine-modal-content">
-        <h2>Vertex Doctrine</h2>
+        <h2>Vertex</h2>
         <div class="doctrine-text-container" id="doctrineScroll">
             Vertex is the absolute intersection of two intersecting lines.
 
@@ -316,7 +316,24 @@ That might we need is present in the noble blood in our veins; the absolute peak
         }, 1000);
     }
 
-    openBtn.addEventListener('click', () => {
+    const doctrineLabelWrapper = document.getElementById('doctrineLabelWrapper');
+    doctrineLabelWrapper.addEventListener('click', (e) => {
+        if (!doctrineCheck.checked) {
+            e.preventDefault();
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'), 10);
+            setTimeout(() => {
+                if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
+                    startTimer();
+                }
+            }, 100);
+        } else {
+            e.preventDefault(); // Zaten tikliyse tıklamayı engelle
+        }
+    });
+    
+    // Fallback for direct btn calls if any
+    openBtn.addEventListener('click', (e) => {
         modal.style.display = 'flex';
         setTimeout(() => modal.classList.add('show'), 10);
         setTimeout(() => {
