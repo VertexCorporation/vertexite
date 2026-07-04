@@ -84,7 +84,7 @@
 /* CSS Variables are inherited from index.html data-theme */
 .join-page-wrapper {
     position: relative;
-    padding: 60px 20px 20px 20px;
+    padding: 120px 20px 20px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -220,7 +220,115 @@
     .form-grid { grid-template-columns: 1fr; }
     .join-form-container { padding: 25px 20px; }
 }
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+    padding: 10px;
+}
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+.doctrine-open-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0;
+}
+.join-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Modal CSS */
+.doctrine-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.doctrine-modal-overlay.show {
+    opacity: 1;
+}
+.doctrine-modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+.doctrine-modal-content h2 {
+    padding: 25px;
+    margin: 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+.doctrine-text-container {
+    padding: 25px;
+    overflow-y: auto;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    flex: 1;
+    white-space: pre-line;
+}
+.doctrine-read-btn {
+    margin: 20px;
+    padding: 16px;
+    background: var(--primary);
+    color: var(--btn-text-color);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+.doctrine-read-btn.disabled {
+    background: var(--border-color);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.doctrine-read-btn.active {
+    opacity: 1;
+    background: var(--primary);
+    color: var(--btn-text-color);
+}
+#hr {
+    padding-top: 10px !important;
+    margin-top: 0 !important;
+}
 </style>
+
 
 </head>
 
@@ -333,7 +441,7 @@
             </div>
             <div class="form-group">
                 <label>Yaş</label>
-                <input type="number" id="joinAge" required min="13" max="100">
+                <input type="number" id="joinAge" required min="0" max="123">
             </div>
             <div class="form-group">
                 <label>LinkedIn Linki (İstəyə görə)</label>
@@ -343,12 +451,60 @@
                 <label>GitHub Linki (İstəyə görə)</label>
                 <input type="url" id="joinGithub">
             </div>
+            
             <div class="form-group full-width">
                 <label>Özünüz haqqında danışın</label>
                 <textarea id="joinAbout" required></textarea>
             </div>
-            <button type="submit" class="join-submit-btn" id="submitBtn">Müraciəti Göndər</button>
-        </form>
+            
+            <div class="checkbox-group full-width">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="termsCheck" required>
+                    <span>Genel Kullanım Koşulları ve Gizlilik Politikası'nı kabul ediyorum.</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="doctrineCheck" required disabled style="opacity: 0.7;">
+                    <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn">Vertex Doktrini'ni Oku</button></span>
+                </label>
+            </div>
+
+            <button type="submit" class="join-submit-btn" id="submitBtn" disabled>Müraciəti Göndər</button>
+            </form>
+    </div>
+</div>
+
+<!-- Doctrine Modal -->
+<div class="doctrine-modal-overlay" id="doctrineModal">
+    <div class="doctrine-modal-content">
+        <h2>Vertex Doktrini</h2>
+        <div class="doctrine-text-container" id="doctrineScroll">
+            Vertex, iki doğrunun kesiştiği en uç noktadır.
+
+Bu Vertex’in sadece matematikteki anlamıdır; anatomide bedenin ve zihnin en üst bölgesi, gök biliminde evrenin başucu noktası, uzay geometrisinde en temel yapı taşı, ağ teorisinde tüm kilit bağlantıların birleştiği merkez düğüm, optikte ışığın merceği kestiği mutlak odaktır.
+
+İşte biz de ismimizi tüm bu anlamların ve fazlasının oluşturduğu kolektif mânâdan aldık; insanlar olarak potansiyelimizin ve sınırlarımızın en üst seviyesini gösterip hep birlikte zirveye ulaşacağız, teknolojinin temel yapı taşı olacak, dünyanın bağlantılarını merkezimizde toplayacak ve mutlak hâkimiyet kuracağız!
+
+Bu yolculuk hiç kolay olmadı, asla da olmayacak. Ancak üstte gök çökmedikçe, altta yer delinmedikçe; bizi kim durdurabilir, ne durdurabilir? Hiçbir şey! Yolculuk ne kadar zor olursa olsun, yolu tamamlayacağız.
+
+Bugüne gelene kadar, yaptıklarımız toplamda yüzlerce kez reddedildi; görüşmelerde binlerce kez kapılar yüzümüze kapandı, davalarla yüzleştik, Vertex’i tehlikelerle baş başa bırakmış olan binlerce unsuru atlattık ve hatta bize destek olmuş olan insanlar tarafından çok kez yarı yolda bırakıldık.
+
+Ancak pes etmedik! Çünkü biz bu yolculuğa çıkmazsak, vaziyet odur ki kimse çıkmayacak. Konfor alanlarımızdan sıyrılıp, dünyanın bu köhneleşmiş düzenini değiştirecek cesareti biz göstermezsek, kimse göstermeyecek. Biz başaramazsak, görünen o ki kimse başaramayacak; o yüzden başarmak zorundayız! Vertex’in pes etme lüksü yok; durmaya zerre kadar niyetimiz yok, olmayacak.
+
+Bu satırları okuyan sen; sıradan olmak istemiyorsan, vaktiyle seni küçümseyenlerin en büyük pişmanlığı olmak istiyorsan, bu ülkenin ve seni binbir emekle büyüten ebeveynlerinin gururu olmak istiyorsan, ileride bir gün hayatını birleştireceğin eşin, gözünün içine bakan çocukların veya canından çok sevdiğin bir yakının senden bir imkân beklediğinde başını öne eğip mahcup olmak istemiyorsan, durman gereken yegâne yer burasıdır. Ait olduğun yer Vertex’tir! 
+
+Geçmişte bu idealler, bu insanlık ve bu topraklar uğruna; canını hiçe saymış, bedeller ödemiş ve göçüp gitmiş büyüklerimiz var. Bizim için gece uyumamış, gündüz oturmamış atalarımızın yanında bizim hâlen refah içinde olmamamıza rağmen geceleri huzur içinde uyuyup gündüzleri rahatlık içinde eğlenmememiz gerek. Onların bize bıraktığı mirasa ihanet etmemek, aziz hatıraları önünde başımızı daima dik tutmak zorundayız. Çaresizlik içinde solup giden o narin çiçeklerin, sessizce yitip giden ömürlerin ve yarım kalan hikâyelerin telafisi, unutmamak gerekir ki, bizim ellerimizdedir. Kimsenin yüzünü kara çıkarmamak ve geçmişte yaşanan acıların, sırf imkânsızlıklar yüzünden yitip giden genç hayatların, o yıkıcı trajedilerin bir daha asla yaşanmamasını sağlamak bizim görevimizdir.
+
+Vertex’in vizyonu: Öncelikle Türkiye’yi, sonrasında ise dünyayı; öncelikle teknoloji alanında, sonrasında ise diğer alanlarda yükseltmektir. Bu ülkenin teknolojide bir adım bile ileri gitmesi demek, Türkiye’nin ilerlemesi demektir. Türkiye’nin ilerlemesi demek ise ülkenin refah seviyesinin yükselmesi demektir. Refahı yüksek bir sistemde yaşayan halk, diğer halkların refahını da elbet yükseltecektir. 
+Yazdıklarımızın hepsini yapacağız ve buna hiç şüphemiz yok.
+
+Bu uğurda aslında hiçbir şeye ihtiyacımız yoktur, ihtiyacımız olan tek şey; çalışkan olmaktır. Azmimizin yenemeyeceği hiçbir şey yoktur, sadece kendimize güvenmemiz ve kudretli durmamız yeterli olacaktır.
+
+Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zirve, hepimizin olacak.
+        </div>
+        <button type="button" class="doctrine-read-btn disabled" id="doctrineReadBtn" disabled>Okudum (10 saniye daha)</button>
+    </div>
+</div>
+
     </div>
 </div>
 <script>
@@ -367,9 +523,93 @@
         bgContainer.appendChild(t);
     }
 
+    
+    // Form Logic
+    const termsCheck = document.getElementById('termsCheck');
+    const doctrineCheck = document.getElementById('doctrineCheck');
+    const submitBtn = document.getElementById('submitBtn');
+    const ageInput = document.getElementById('joinAge');
+    
+    function checkFormValidity() {
+        if (termsCheck.checked && doctrineCheck.checked) {
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.disabled = true;
+        }
+    }
+    
+    termsCheck.addEventListener('change', checkFormValidity);
+
+    // Modal Logic
+    const modal = document.getElementById('doctrineModal');
+    const openBtn = document.getElementById('openDoctrineBtn');
+    const readBtn = document.getElementById('doctrineReadBtn');
+    const scrollBox = document.getElementById('doctrineScroll');
+    
+    let timerInterval = null;
+    let secondsLeft = 10;
+    let timerStarted = false;
+
+    function startTimer() {
+        if(timerStarted) return;
+        timerStarted = true;
+        
+        readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
+        timerInterval = setInterval(() => {
+            secondsLeft--;
+            if (secondsLeft > 0) {
+                readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
+            } else {
+                clearInterval(timerInterval);
+                readBtn.innerText = 'Okudum';
+                readBtn.disabled = false;
+                readBtn.classList.remove('disabled');
+                readBtn.classList.add('active');
+            }
+        }, 1000);
+    }
+
+    openBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        setTimeout(() => modal.classList.add('show'), 10);
+        setTimeout(() => {
+            if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
+                startTimer();
+            }
+        }, 100);
+    });
+
+    scrollBox.addEventListener('scroll', () => {
+        if (!timerStarted) {
+            if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
+                startTimer();
+            }
+        }
+    });
+
+    readBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+        
+        doctrineCheck.checked = true;
+        doctrineCheck.disabled = false;
+        doctrineCheck.addEventListener('click', (e) => e.preventDefault());
+        checkFormValidity();
+    });
+
     document.getElementById('joinForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        const ageVal = parseInt(ageInput.value, 10);
+        if (isNaN(ageVal) || ageVal < 0 || ageVal > 123) {
+            alert('Lütfen 0 ile 123 arasında geçerli bir yaş giriniz.');
+            return;
+        }
+
         const btn = document.getElementById('submitBtn');
+
         const originalText = btn.textContent;
         btn.textContent = '...';
         btn.disabled = true;

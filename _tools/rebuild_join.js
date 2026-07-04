@@ -1,6 +1,51 @@
 const fs = require('fs');
 const path = require('path');
 
+
+const doctrineTr = `Vertex, iki doğrunun kesiştiği en uç noktadır.
+
+Bu Vertex’in sadece matematikteki anlamıdır; anatomide bedenin ve zihnin en üst bölgesi, gök biliminde evrenin başucu noktası, uzay geometrisinde en temel yapı taşı, ağ teorisinde tüm kilit bağlantıların birleştiği merkez düğüm, optikte ışığın merceği kestiği mutlak odaktır.
+
+İşte biz de ismimizi tüm bu anlamların ve fazlasının oluşturduğu kolektif mânâdan aldık; insanlar olarak potansiyelimizin ve sınırlarımızın en üst seviyesini gösterip hep birlikte zirveye ulaşacağız, teknolojinin temel yapı taşı olacak, dünyanın bağlantılarını merkezimizde toplayacak ve mutlak hâkimiyet kuracağız!
+
+Bu yolculuk hiç kolay olmadı, asla da olmayacak. Ancak üstte gök çökmedikçe, altta yer delinmedikçe; bizi kim durdurabilir, ne durdurabilir? Hiçbir şey! Yolculuk ne kadar zor olursa olsun, yolu tamamlayacağız.
+
+Bugüne gelene kadar, yaptıklarımız toplamda yüzlerce kez reddedildi; görüşmelerde binlerce kez kapılar yüzümüze kapandı, davalarla yüzleştik, Vertex’i tehlikelerle baş başa bırakmış olan binlerce unsuru atlattık ve hatta bize destek olmuş olan insanlar tarafından çok kez yarı yolda bırakıldık.
+
+Ancak pes etmedik! Çünkü biz bu yolculuğa çıkmazsak, vaziyet odur ki kimse çıkmayacak. Konfor alanlarımızdan sıyrılıp, dünyanın bu köhneleşmiş düzenini değiştirecek cesareti biz göstermezsek, kimse göstermeyecek. Biz başaramazsak, görünen o ki kimse başaramayacak; o yüzden başarmak zorundayız! Vertex’in pes etme lüksü yok; durmaya zerre kadar niyetimiz yok, olmayacak.
+
+Bu satırları okuyan sen; sıradan olmak istemiyorsan, vaktiyle seni küçümseyenlerin en büyük pişmanlığı olmak istiyorsan, bu ülkenin ve seni binbir emekle büyüten ebeveynlerinin gururu olmak istiyorsan, ileride bir gün hayatını birleştireceğin eşin, gözünün içine bakan çocukların veya canından çok sevdiğin bir yakının senden bir imkân beklediğinde başını öne eğip mahcup olmak istemiyorsan, durman gereken yegâne yer burasıdır. Ait olduğun yer Vertex’tir! 
+
+Geçmişte bu idealler, bu insanlık ve bu topraklar uğruna; canını hiçe saymış, bedeller ödemiş ve göçüp gitmiş büyüklerimiz var. Bizim için gece uyumamış, gündüz oturmamış atalarımızın yanında bizim hâlen refah içinde olmamamıza rağmen geceleri huzur içinde uyuyup gündüzleri rahatlık içinde eğlenmememiz gerek. Onların bize bıraktığı mirasa ihanet etmemek, aziz hatıraları önünde başımızı daima dik tutmak zorundayız. Çaresizlik içinde solup giden o narin çiçeklerin, sessizce yitip giden ömürlerin ve yarım kalan hikâyelerin telafisi, unutmamak gerekir ki, bizim ellerimizdedir. Kimsenin yüzünü kara çıkarmamak ve geçmişte yaşanan acıların, sırf imkânsızlıklar yüzünden yitip giden genç hayatların, o yıkıcı trajedilerin bir daha asla yaşanmamasını sağlamak bizim görevimizdir.
+
+Vertex’in vizyonu: Öncelikle Türkiye’yi, sonrasında ise dünyayı; öncelikle teknoloji alanında, sonrasında ise diğer alanlarda yükseltmektir. Bu ülkenin teknolojide bir adım bile ileri gitmesi demek, Türkiye’nin ilerlemesi demektir. Türkiye’nin ilerlemesi demek ise ülkenin refah seviyesinin yükselmesi demektir. Refahı yüksek bir sistemde yaşayan halk, diğer halkların refahını da elbet yükseltecektir. 
+Yazdıklarımızın hepsini yapacağız ve buna hiç şüphemiz yok.
+
+Bu uğurda aslında hiçbir şeye ihtiyacımız yoktur, ihtiyacımız olan tek şey; çalışkan olmaktır. Azmimizin yenemeyeceği hiçbir şey yoktur, sadece kendimize güvenmemiz ve kudretli durmamız yeterli olacaktır.
+
+Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zirve, hepimizin olacak.`;
+const doctrineEn = `Vertex is the absolute intersection of two intersecting lines.
+
+This is merely the mathematical definition of Vertex; in anatomy, it is the highest point of the body and mind; in astronomy, the zenith of the universe; in space geometry, the most fundamental building block; in network theory, the central node where all key connections converge; in optics, the absolute focus where light intersects the lens.
+
+This is precisely where we draw our name, from the collective meaning of all these definitions and more. As humans, we will demonstrate the highest level of our potential and limits, and together we will reach the peak. We will become the fundamental building block of technology, gather the connections of the world at our center, and establish absolute dominance!
+
+This journey has never been easy, and it never will be. But unless the sky above collapses or the earth below tears apart, who can stop us? What can stop us? Nothing! No matter how arduous the journey, we will complete the path.
+
+Up to this day, everything we have built was rejected hundreds of times; thousands of doors were shut in our faces during negotiations, we faced lawsuits, survived thousands of threats that left Vertex in peril, and were even abandoned midway many times by the very people who once supported us.
+
+But we never gave up! Because if we do not embark on this journey, the reality is that no one else will. If we do not step out of our comfort zones and show the courage to change this archaic order of the world, no one else will. If we fail, it seems no one else will succeed; therefore, we must succeed! Vertex does not have the luxury of giving up; we have not the slightest intention of stopping, and we never will.
+
+You, who are reading these lines; if you do not want to be ordinary, if you want to become the greatest regret of those who once belittled you, if you want to be the pride of this country and the parents who raised you with immense effort, if you do not want to bow your head in shame when your future spouse, the children looking up to you, or a loved one expects an opportunity from you—then this is the only place you must stand. The place you belong is Vertex!
+
+In the past, for the sake of these ideals, humanity, and these lands, there are our elders who sacrificed their lives, paid heavy prices, and passed away. Alongside our ancestors who neither slept at night nor rested by day, it is unacceptable for us to sleep peacefully at night and enjoy comfort by day while we are still not in prosperity. We must not betray the legacy they left us, and we must always hold our heads high before their sacred memories. The compensation for those delicate flowers that faded in despair, the lives that silently slipped away, and the unfinished stories lies, without a doubt, in our hands. It is our duty to ensure that no one's trust is betrayed, and that the pain of the past, the young lives lost merely due to impossibilities, and those devastating tragedies are never experienced again.
+
+The vision of Vertex is: First to elevate Turkey, and then the world; first in the field of technology, and then in other fields. Even a single step forward for this country in technology means the advancement of Turkey. The advancement of Turkey means raising the prosperity level of the country. A public living in a highly prosperous system will undoubtedly elevate the prosperity of other nations as well. We will achieve everything we have written, and we have no doubt about it.
+
+In this endeavor, we actually need nothing; the only thing we need is to be hardworking. There is nothing our determination cannot overcome, simply trusting ourselves and standing mighty will suffice.
+
+That might we need is present in the noble blood in our veins; the absolute peak will belong to us all.`;
+
 const langs = {
     'tr': { folder: 'tr', file: 'aramiza-katil.html', title: 'Aramıza Katıl', desc: 'Vertex ekibinin bir parçası ol.',
         labels: ['Ad Soyad', 'E-posta', 'Telefon Numarası', 'Yaş', 'LinkedIn Bağlantısı (Opsiyonel)', 'GitHub Bağlantısı (Opsiyonel)', 'Kendinden bahset'],
@@ -84,6 +129,26 @@ const langs = {
     }
 };
 
+Object.keys(langs).forEach(key => {
+    if (key === 'tr' || key === 'az') {
+        langs[key].agreeTerms = 'Genel Kullanım Koşulları ve Gizlilik Politikası\'nı kabul ediyorum.';
+        langs[key].doctrineBtn = 'Vertex Doktrini\'ni Oku';
+        langs[key].doctrineTitle = 'Vertex Doktrini';
+        langs[key].doctrineText = doctrineTr;
+        langs[key].readBtn = 'Okudum';
+        langs[key].waitSec = 'saniye daha';
+        langs[key].ageErr = 'Lütfen 0 ile 123 arasında geçerli bir yaş giriniz.';
+    } else {
+        langs[key].agreeTerms = 'I accept the General Terms of Service and Privacy Policy.';
+        langs[key].doctrineBtn = 'Read Vertex Doctrine';
+        langs[key].doctrineTitle = 'Vertex Doctrine';
+        langs[key].doctrineText = doctrineEn;
+        langs[key].readBtn = 'I have read';
+        langs[key].waitSec = 'seconds left';
+        langs[key].ageErr = 'Please enter a valid age between 0 and 123.';
+    }
+});
+
 const baseDir = path.join(__dirname, '..');
 
 const formCss = `
@@ -91,7 +156,7 @@ const formCss = `
 /* CSS Variables are inherited from index.html data-theme */
 .join-page-wrapper {
     position: relative;
-    padding: 60px 20px 20px 20px;
+    padding: 120px 20px 20px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -227,7 +292,115 @@ const formCss = `
     .form-grid { grid-template-columns: 1fr; }
     .join-form-container { padding: 25px 20px; }
 }
+
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 10px;
+    padding: 10px;
+}
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+.checkbox-label input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    accent-color: var(--primary);
+    cursor: pointer;
+}
+.doctrine-open-btn {
+    background: none;
+    border: none;
+    color: var(--primary);
+    text-decoration: underline;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0;
+}
+.join-submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* Modal CSS */
+.doctrine-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.doctrine-modal-overlay.show {
+    opacity: 1;
+}
+.doctrine-modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+}
+.doctrine-modal-content h2 {
+    padding: 25px;
+    margin: 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-color);
+}
+.doctrine-text-container {
+    padding: 25px;
+    overflow-y: auto;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--text-muted);
+    flex: 1;
+    white-space: pre-line;
+}
+.doctrine-read-btn {
+    margin: 20px;
+    padding: 16px;
+    background: var(--primary);
+    color: var(--btn-text-color);
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s ease;
+}
+.doctrine-read-btn.disabled {
+    background: var(--border-color);
+    color: var(--text-muted);
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+.doctrine-read-btn.active {
+    opacity: 1;
+    background: var(--primary);
+    color: var(--btn-text-color);
+}
+#hr {
+    padding-top: 10px !important;
+    margin-top: 0 !important;
+}
 </style>
+
 `;
 
 const getFormHtml = (info) => `
@@ -253,7 +426,7 @@ const getFormHtml = (info) => `
             </div>
             <div class="form-group">
                 <label>${info.labels[3]}</label>
-                <input type="number" id="joinAge" required min="13" max="100">
+                <input type="number" id="joinAge" required min="0" max="123">
             </div>
             <div class="form-group">
                 <label>${info.labels[4]}</label>
@@ -263,12 +436,39 @@ const getFormHtml = (info) => `
                 <label>${info.labels[5]}</label>
                 <input type="url" id="joinGithub">
             </div>
+            
             <div class="form-group full-width">
                 <label>${info.labels[6]}</label>
                 <textarea id="joinAbout" required></textarea>
             </div>
-            <button type="submit" class="join-submit-btn" id="submitBtn">${info.submitBtn}</button>
-        </form>
+            
+            <div class="checkbox-group full-width">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="termsCheck" required>
+                    <span>${info.agreeTerms}</span>
+                </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="doctrineCheck" required disabled style="opacity: 0.7;">
+                    <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn">${info.doctrineBtn}</button></span>
+                </label>
+            </div>
+
+            <button type="submit" class="join-submit-btn" id="submitBtn" disabled>${info.submitBtn}</button>
+            </form>
+    </div>
+</div>
+
+<!-- Doctrine Modal -->
+<div class="doctrine-modal-overlay" id="doctrineModal">
+    <div class="doctrine-modal-content">
+        <h2>${info.doctrineTitle}</h2>
+        <div class="doctrine-text-container" id="doctrineScroll">
+            ${info.doctrineText}
+        </div>
+        <button type="button" class="doctrine-read-btn disabled" id="doctrineReadBtn" disabled>${info.readBtn} (10 ${info.waitSec})</button>
+    </div>
+</div>
+
     </div>
 </div>
 <script>
@@ -287,9 +487,93 @@ const getFormHtml = (info) => `
         bgContainer.appendChild(t);
     }
 
+    
+    // Form Logic
+    const termsCheck = document.getElementById('termsCheck');
+    const doctrineCheck = document.getElementById('doctrineCheck');
+    const submitBtn = document.getElementById('submitBtn');
+    const ageInput = document.getElementById('joinAge');
+    
+    function checkFormValidity() {
+        if (termsCheck.checked && doctrineCheck.checked) {
+            submitBtn.disabled = false;
+        } else {
+            submitBtn.disabled = true;
+        }
+    }
+    
+    termsCheck.addEventListener('change', checkFormValidity);
+
+    // Modal Logic
+    const modal = document.getElementById('doctrineModal');
+    const openBtn = document.getElementById('openDoctrineBtn');
+    const readBtn = document.getElementById('doctrineReadBtn');
+    const scrollBox = document.getElementById('doctrineScroll');
+    
+    let timerInterval = null;
+    let secondsLeft = 10;
+    let timerStarted = false;
+
+    function startTimer() {
+        if(timerStarted) return;
+        timerStarted = true;
+        
+        readBtn.innerText = '${info.readBtn} (' + secondsLeft + ' ${info.waitSec})';
+        timerInterval = setInterval(() => {
+            secondsLeft--;
+            if (secondsLeft > 0) {
+                readBtn.innerText = '${info.readBtn} (' + secondsLeft + ' ${info.waitSec})';
+            } else {
+                clearInterval(timerInterval);
+                readBtn.innerText = '${info.readBtn}';
+                readBtn.disabled = false;
+                readBtn.classList.remove('disabled');
+                readBtn.classList.add('active');
+            }
+        }, 1000);
+    }
+
+    openBtn.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        setTimeout(() => modal.classList.add('show'), 10);
+        setTimeout(() => {
+            if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
+                startTimer();
+            }
+        }, 100);
+    });
+
+    scrollBox.addEventListener('scroll', () => {
+        if (!timerStarted) {
+            if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
+                startTimer();
+            }
+        }
+    });
+
+    readBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+        setTimeout(() => {
+            modal.style.display = 'none';
+        }, 300);
+        
+        doctrineCheck.checked = true;
+        doctrineCheck.disabled = false;
+        doctrineCheck.addEventListener('click', (e) => e.preventDefault());
+        checkFormValidity();
+    });
+
     document.getElementById('joinForm').addEventListener('submit', function(e) {
         e.preventDefault();
+        
+        const ageVal = parseInt(ageInput.value, 10);
+        if (isNaN(ageVal) || ageVal < 0 || ageVal > 123) {
+            alert('${info.ageErr}');
+            return;
+        }
+
         const btn = document.getElementById('submitBtn');
+
         const originalText = btn.textContent;
         btn.textContent = '...';
         btn.disabled = true;
