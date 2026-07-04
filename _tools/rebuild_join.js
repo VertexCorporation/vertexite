@@ -354,6 +354,9 @@ Object.keys(langs).forEach(lang => {
             headerHtml = headerHtml.replace(/href="#([a-zA-Z0-9_-]+)"/g, 'href="index.html#$1"');
             footerHtml = footerHtml.replace(/href="#([a-zA-Z0-9_-]+)"/g, 'href="index.html#$1"');
             
+            // Remove the CTA section from the Join Us page
+            footerHtml = footerHtml.replace(/<section class="container">\s*<div class="cta-section fade-up">[\s\S]*?<\/section>/i, '');
+            
             headerHtml = headerHtml.replace('</head>', formCss + '\n</head>');
             
             headerHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${info.title} | Vertex</title>`);
