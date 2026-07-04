@@ -82,8 +82,7 @@
 /* CSS Variables are inherited from index.html data-theme */
 .join-page-wrapper {
     position: relative;
-    padding: 60px 20px;
-    min-height: calc(100vh - 100px);
+    padding: 60px 20px 20px 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -183,6 +182,18 @@
 .join-form-container textarea {
     resize: vertical;
     min-height: 120px;
+}
+
+/* Hide up/down arrows for number inputs (Chrome, Safari, Edge, Opera) */
+.join-form-container input[type="number"]::-webkit-outer-spin-button,
+.join-form-container input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Hide up/down arrows for number inputs (Firefox) */
+.join-form-container input[type="number"] {
+    -moz-appearance: textfield;
 }
 
 .join-submit-btn {
