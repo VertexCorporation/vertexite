@@ -393,7 +393,7 @@ const formCss = `
 }
 @keyframes checkAnim {
     0% { height: 0; width: 0; opacity: 0; }
-    100% { height: 11px; width: 5px; opacity: 1; }
+    100% { height: 11px; width: 4px; opacity: 1; }
 }
 
 
@@ -438,7 +438,7 @@ const formCss = `
  text-align: center;}
 
 .doctrine-text-container {
-    padding: 25px;
+    padding: 5px 25px 15px 25px;
     overflow-y: auto;
     font-size: 1.05rem;
     line-height: 1.6;
@@ -608,6 +608,7 @@ const getFormHtml = (info) => `
 
     </div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/intlTelInput.min.js"></script>
 <script>
     const bgContainer = document.getElementById('join-triangles');
     for (let i = 0; i < 20; i++) {
@@ -623,6 +624,19 @@ const getFormHtml = (info) => `
         t.style.borderBottomWidth = (size * 1.7) + 'px';
         bgContainer.appendChild(t);
     }
+
+    const langToCountry = {
+        'tr': 'tr', 'en': 'us', 'ar': 'ae', 'az': 'az', 'de': 'de', 'es': 'es', 'fr': 'fr', 'hi': 'in',
+        'id': 'id', 'it': 'it', 'ja': 'jp', 'ko': 'kr', 'nl': 'nl', 'pt': 'pt', 'ru': 'ru', 'zh': 'cn'
+    };
+    const defaultCountry = langToCountry['${info.folder}'] || 'us';
+    
+    const phoneInput = document.querySelector("#joinPhone");
+    const iti = window.intlTelInput(phoneInput, {
+      initialCountry: defaultCountry,
+      utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/utils.js",
+      separateDialCode: true
+    });
 
     
     // Form Logic
@@ -797,7 +811,7 @@ const getFormHtml = (info) => `
         const data = {
             name: document.getElementById('joinName').value,
             email: document.getElementById('joinEmail').value,
-            phone: document.getElementById('joinPhone').value,
+            phone: iti.getNumber(),
             age: document.getElementById('joinAge').value,
             linkedin: document.getElementById('joinLinkedin').value,
             github: document.getElementById('joinGithub').value,
@@ -901,7 +915,14 @@ Object.keys(langs).forEach(lang => {
             // Remove the CTA section from the Join Us page
             footerHtml = footerHtml.replace(/<section class="container">\s*<div class="cta-section fade-up">[\s\S]*?<\/section>/i, '');
             
-            headerHtml = headerHtml.replace('</head>', formCss + '\n</head>');
+            const itiCss = `\n<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/css/intlTelInput.css" />
+<style>
+.iti { width: 100%; }
+.iti__flag { background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/img/flags.png"); }
+@media (min-resolution: 2x) { .iti__flag { background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/img/flags@2x.png"); } }
+</style>\n`;
+            
+            headerHtml = headerHtml.replace('</head>', itiCss + formCss + '\n</head>');
             
             headerHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${info.title} | Vertex</title>`);
             headerHtml = headerHtml.replace(/<meta property="og:title" content=".*?">/, `<meta property="og:title" content="${info.title} | Vertex">`);
