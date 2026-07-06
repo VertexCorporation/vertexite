@@ -635,7 +635,8 @@ const getFormHtml = (info) => `
     const iti = window.intlTelInput(phoneInput, {
       initialCountry: defaultCountry,
       utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/utils.js",
-      separateDialCode: true
+      separateDialCode: true,
+      preferredCountries: ['tr', 'gb']
     });
 
     
