@@ -907,7 +907,16 @@ Object.keys(langs).forEach(lang => {
             const tosHeader = tosHtml.substring(0, containerStart + '<div class="container">'.length);
             const tosFooter = '\n  </div>\n</body>\n</html>';
             
-            let contractHeaderHtml = tosHeader.replace(/<title>.*?<\/title>/, `<title>${info.contractTitle} | Vertex</title>`);
+            let contractHeaderHtml = tosHeader.replace(/<title>.*?<\/title>/, `<title>${info.contractTitle} | Vertex</title>
+  <meta property="og:title" content="${info.contractTitle} | Vertex" />
+  <meta property="og:description" content="Vertex ${info.contractTitle}" />
+  <meta property="og:url" content="https://vertexishere.com/${lang}/${info.contractFile}" />
+  <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp" />
+  <meta name="twitter:title" content="${info.contractTitle} | Vertex" />
+  <meta name="twitter:description" content="Vertex ${info.contractTitle}" />
+  <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp" />`);
+            contractHeaderHtml = contractHeaderHtml.replace('href="assets/favicon.webp"', 'href="../assets/favicon.webp"');
+
             
             // Format the contract content for HTML
             let formattedContent = info.contractContent.trim();
