@@ -549,11 +549,11 @@
             </div>
             <div class="form-group">
                 <label>LinkedIn Bağlantısı (Opsiyonel)</label>
-                <input type="url" id="joinLinkedin">
+                <input type="url" id="joinLinkedin" pattern="https?://.*" title="Must start with http:// or https://">
             </div>
             <div class="form-group">
                 <label>GitHub Bağlantısı (Opsiyonel)</label>
-                <input type="url" id="joinGithub">
+                <input type="url" id="joinGithub" pattern="https?://.*" title="Must start with http:// or https://">
             </div>
             
             <div class="form-group full-width">
@@ -571,7 +571,7 @@
                     <span><a href="vertex-kadro-sozlesmesi.html" target="_blank"><b>Vertex Kadro Sözleşmesi</b></a>'ni okuduğumu ve onayladığımı beyan ederim.</span>
                 </label>
                 <label class="checkbox-label" id="doctrineLabelWrapper">
-                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
+                    <input type="checkbox" id="doctrineCheck" required disabled>
                     <span><a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrini</b></a>'ni okudum.</span>
                 </label>
             </div>
@@ -677,6 +677,11 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
     
     termsCheck.addEventListener('change', checkFormValidity);
     contractCheck.addEventListener('change', checkFormValidity);
+    doctrineCheck.addEventListener('change', checkFormValidity);
+
+    phoneInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9+]/g, '');
+    });
 
     // Modal Logic
     const modal = document.getElementById('doctrineModal');
@@ -733,20 +738,6 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
     });
 
     const doctrineLabelWrapper = document.getElementById('doctrineLabelWrapper');
-    doctrineLabelWrapper.addEventListener('click', (e) => {
-        if (!doctrineCheck.checked) {
-            e.preventDefault();
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('show'), 10);
-            setTimeout(() => {
-                if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
-                    startTimer();
-                }
-            }, 100);
-        } else {
-            e.preventDefault(); // Zaten tikliyse tıklamayı engelle
-        }
-    });
     
     // Fallback for direct btn calls if any
     openBtn.addEventListener('click', (e) => {
@@ -785,9 +776,8 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
             modal.style.display = 'none';
         }, 300);
         
-        doctrineCheck.checked = true;
         doctrineCheck.disabled = false;
-        doctrineCheck.addEventListener('click', (e) => e.preventDefault());
+        doctrineCheck.checked = true;
         checkFormValidity();
     });
 

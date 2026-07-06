@@ -550,11 +550,11 @@ const getFormHtml = (info) => `
             </div>
             <div class="form-group">
                 <label>${info.labels[4]}</label>
-                <input type="url" id="joinLinkedin">
+                <input type="url" id="joinLinkedin" pattern="https?://.*" title="Must start with http:// or https://">
             </div>
             <div class="form-group">
                 <label>${info.labels[5]}</label>
-                <input type="url" id="joinGithub">
+                <input type="url" id="joinGithub" pattern="https?://.*" title="Must start with http:// or https://">
             </div>
             
             <div class="form-group full-width">
@@ -572,7 +572,7 @@ const getFormHtml = (info) => `
                     <span>${info.contractLabel}</span>
                 </label>
                 <label class="checkbox-label" id="doctrineLabelWrapper">
-                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
+                    <input type="checkbox" id="doctrineCheck" required disabled>
                     <span>${info.doctrineLabel}</span>
                 </label>
             </div>
@@ -657,6 +657,11 @@ const getFormHtml = (info) => `
     
     termsCheck.addEventListener('change', checkFormValidity);
     contractCheck.addEventListener('change', checkFormValidity);
+    doctrineCheck.addEventListener('change', checkFormValidity);
+
+    phoneInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9+]/g, '');
+    });
 
     // Modal Logic
     const modal = document.getElementById('doctrineModal');
@@ -713,20 +718,6 @@ const getFormHtml = (info) => `
     });
 
     const doctrineLabelWrapper = document.getElementById('doctrineLabelWrapper');
-    doctrineLabelWrapper.addEventListener('click', (e) => {
-        if (!doctrineCheck.checked) {
-            e.preventDefault();
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('show'), 10);
-            setTimeout(() => {
-                if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
-                    startTimer();
-                }
-            }, 100);
-        } else {
-            e.preventDefault(); // Zaten tikliyse tıklamayı engelle
-        }
-    });
     
     // Fallback for direct btn calls if any
     openBtn.addEventListener('click', (e) => {
@@ -765,9 +756,8 @@ const getFormHtml = (info) => `
             modal.style.display = 'none';
         }, 300);
         
-        doctrineCheck.checked = true;
         doctrineCheck.disabled = false;
-        doctrineCheck.addEventListener('click', (e) => e.preventDefault());
+        doctrineCheck.checked = true;
         checkFormValidity();
     });
 

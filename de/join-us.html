@@ -193,11 +193,11 @@
             </div>
             <div class="form-group">
                 <label>LinkedIn URL (Optional)</label>
-                <input type="url" id="joinLinkedin">
+                <input type="url" id="joinLinkedin" pattern="https?://.*" title="Must start with http:// or https://">
             </div>
             <div class="form-group">
                 <label>GitHub URL (Optional)</label>
-                <input type="url" id="joinGithub">
+                <input type="url" id="joinGithub" pattern="https?://.*" title="Must start with http:// or https://">
             </div>
             
             <div class="form-group full-width">
@@ -215,7 +215,7 @@
                     <span>I declare that I have read and approve the <a href="vertex-team-contract.html" target="_blank"><b>Vertex Team Contract</b></a>.</span>
                 </label>
                 <label class="checkbox-label" id="doctrineLabelWrapper">
-                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
+                    <input type="checkbox" id="doctrineCheck" required disabled>
                     <span>I have read the <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doctrine</b></a>.</span>
                 </label>
             </div>
@@ -320,6 +320,11 @@ That might we need is present in the noble blood in our veins; the absolute peak
     
     termsCheck.addEventListener('change', checkFormValidity);
     contractCheck.addEventListener('change', checkFormValidity);
+    doctrineCheck.addEventListener('change', checkFormValidity);
+
+    phoneInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9+]/g, '');
+    });
 
     // Modal Logic
     const modal = document.getElementById('doctrineModal');
@@ -376,20 +381,6 @@ That might we need is present in the noble blood in our veins; the absolute peak
     });
 
     const doctrineLabelWrapper = document.getElementById('doctrineLabelWrapper');
-    doctrineLabelWrapper.addEventListener('click', (e) => {
-        if (!doctrineCheck.checked) {
-            e.preventDefault();
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('show'), 10);
-            setTimeout(() => {
-                if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
-                    startTimer();
-                }
-            }, 100);
-        } else {
-            e.preventDefault(); // Zaten tikliyse tıklamayı engelle
-        }
-    });
     
     // Fallback for direct btn calls if any
     openBtn.addEventListener('click', (e) => {
@@ -428,9 +419,8 @@ That might we need is present in the noble blood in our veins; the absolute peak
             modal.style.display = 'none';
         }, 300);
         
-        doctrineCheck.checked = true;
         doctrineCheck.disabled = false;
-        doctrineCheck.addEventListener('click', (e) => e.preventDefault());
+        doctrineCheck.checked = true;
         checkFormValidity();
     });
 
