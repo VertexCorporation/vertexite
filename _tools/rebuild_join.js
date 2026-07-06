@@ -909,14 +909,31 @@ Object.keys(langs).forEach(lang => {
             
             let contractHeaderHtml = tosHeader.replace(/<title>.*?<\/title>/, `<title>${info.contractTitle} | Vertex</title>`);
             
+            // Format the contract content for HTML
+            let formattedContent = info.contractContent.trim();
+            // Remove the first line (title) because we already use <h1>
+            let firstNewline = formattedContent.indexOf('\n');
+            if (firstNewline !== -1) {
+                formattedContent = formattedContent.substring(firstNewline).trim();
+            }
+            
+            // Format headings
+            formattedContent = formattedContent.split('\n').map(line => {
+                let trimmed = line.trim();
+                if (trimmed.match(/^(?:\d+\.\s+.*|Onay Beyanı|Consent Statement|Giriş ve Kapsam|Introduction and Scope)$/)) {
+                    return `\n<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">${trimmed}</h2>`;
+                }
+                return line;
+            }).join('\n');
+            
             const contractHtml = `
-            <h1 style="margin-bottom: 50px;">${info.contractTitle}</h1>
-            <div style="white-space: pre-line; line-height: 1.7; color: var(--text-secondary-color); font-size: 1.05rem; padding-bottom: 50px;">
-${info.contractContent}
+            <h1 style="margin-bottom: 30px;">${info.contractTitle}</h1>
+            <div style="white-space: pre-line; line-height: 1.7; color: var(--text-secondary-color); font-size: 1.05rem; padding-bottom: 50px;" class="contract-text-body">
+${formattedContent}
             </div>
             `;
             
-            const contractPageContent = contractHeaderHtml + '\\n' + contractHtml + '\\n' + tosFooter;
+            const contractPageContent = contractHeaderHtml + '\n' + contractHtml + '\n  </div>\n</body>\n</html>';
             const contractFilePath = path.join(baseDir, lang, info.contractFile);
             fs.writeFileSync(contractFilePath, contractPageContent);
             console.log('Generated contract page for:', contractFilePath);
