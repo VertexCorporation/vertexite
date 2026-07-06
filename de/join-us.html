@@ -214,6 +214,10 @@
                     <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
                     <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn" style="pointer-events: none;">Read Vertex Doctrine</button></span>
                 </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="contractCheck" required>
+                    <span>I declare that I have read and approve the <a href="vertex-team-contract.html" target="_blank"><b>Vertex Team Contract</b></a>.</span>
+                </label>
             </div>
 
             <button type="submit" class="join-submit-btn" id="submitBtn" disabled>Bewerbung einreichen</button>
@@ -252,6 +256,19 @@ That might we need is present in the noble blood in our veins; the absolute peak
     </div>
 </div>
 
+<!-- Success Modal -->
+<div class="success-modal-overlay" id="successModal">
+    <div class="success-modal-content">
+        <svg class="success-svg" viewBox="0 0 52 52">
+            <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+        <h3>APPLICATION RECEIVED!</h3>
+        <p>Vertex will review your application and, if deemed necessary, will contact you using the provided contact information.<br><br>Thank you for your interest.</p>
+        <button type="button" class="join-submit-btn" onclick="window.location.href='index.html'">← Zurück zur Startseite</button>
+    </div>
+</div>
+
     </div>
 </div>
 <script>
@@ -274,11 +291,12 @@ That might we need is present in the noble blood in our veins; the absolute peak
     // Form Logic
     const termsCheck = document.getElementById('termsCheck');
     const doctrineCheck = document.getElementById('doctrineCheck');
+    const contractCheck = document.getElementById('contractCheck');
     const submitBtn = document.getElementById('submitBtn');
     const ageInput = document.getElementById('joinAge');
     
     function checkFormValidity() {
-        if (termsCheck.checked && doctrineCheck.checked) {
+        if (termsCheck.checked && doctrineCheck.checked && contractCheck.checked) {
             submitBtn.disabled = false;
         } else {
             submitBtn.disabled = true;
@@ -286,6 +304,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
     }
     
     termsCheck.addEventListener('change', checkFormValidity);
+    contractCheck.addEventListener('change', checkFormValidity);
 
     // Modal Logic
     const modal = document.getElementById('doctrineModal');
@@ -462,7 +481,9 @@ That might we need is present in the noble blood in our veins; the absolute peak
                 return response.json();
             })
             .then(result => {
-                alert('Bewerbung erhalten!');
+                const successModal = document.getElementById('successModal');
+                successModal.style.display = 'flex';
+                setTimeout(() => successModal.classList.add('show'), 10);
                 document.getElementById('joinForm').reset();
             });
         })

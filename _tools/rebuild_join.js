@@ -45,6 +45,7 @@ The vision of Vertex is: First to elevate Turkey, and then the world; first in t
 In this endeavor, we actually need nothing; the only thing we need is to be hardworking. There is nothing our determination cannot overcome, simply trusting ourselves and standing mighty will suffice.
 
 That might we need is present in the noble blood in our veins; the absolute peak will belong to us all.`;
+const { contractTr, contractEn } = require('./contracts.js');
 
 const langs = {
     'tr': { folder: 'tr', file: 'aramiza-katil.html', title: 'Aramıza Katıl', desc: 'Vertex ekibinin bir parçası ol.',
@@ -142,6 +143,12 @@ Object.keys(langs).forEach(key => {
         langs[key].reqErr = 'Lütfen bu alanı doldurun.';
         langs[key].emailErr = 'Lütfen geçerli bir e-posta adresi girin.';
         langs[key].dupErr = 'Bu e-posta veya telefon numarası zaten kayıtlı.';
+        langs[key].contractFile = 'vertex-kadro-sozlesmesi.html';
+        langs[key].contractLabel = '<a href="' + langs[key].contractFile + '" target="_blank"><b>Vertex Kadro Sözleşmesi</b></a>\'ni okuduğumu ve onayladığımı beyan ederim.';
+        langs[key].successTitle = 'BAŞVURUNUZ ALINMIŞTIR!';
+        langs[key].successDesc = 'Vertex, başvurunuzu inceleyecek ve gerekli görmesi halinde sizlere sağlamış olduğunuz iletişim bilgileri üzerinden dönüş yapacaktır.<br><br>İlginiz için teşekkür ederiz.';
+        langs[key].contractContent = contractTr;
+        langs[key].contractTitle = 'Vertex Kadro Sözleşmesi';
     } else {
         langs[key].agreeTerms = 'I accept the <a href="https://vertexishere.com/terms-of-service" target="_blank"><b>General Terms of Service</b></a> and <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Privacy Policy</b></a>.';
         langs[key].doctrineBtn = 'Read Vertex Doctrine';
@@ -153,6 +160,12 @@ Object.keys(langs).forEach(key => {
         langs[key].reqErr = 'Please fill out this field.';
         langs[key].emailErr = 'Please enter a valid email address.';
         langs[key].dupErr = 'This email or phone number is already registered.';
+        langs[key].contractFile = 'vertex-team-contract.html';
+        langs[key].contractLabel = 'I declare that I have read and approve the <a href="' + langs[key].contractFile + '" target="_blank"><b>Vertex Team Contract</b></a>.';
+        langs[key].successTitle = 'APPLICATION RECEIVED!';
+        langs[key].successDesc = 'Vertex will review your application and, if deemed necessary, will contact you using the provided contact information.<br><br>Thank you for your interest.';
+        langs[key].contractContent = contractEn;
+        langs[key].contractTitle = 'Vertex Team Contract';
     }
 });
 
@@ -193,6 +206,11 @@ const formCss = `
     100% { transform: translateY(-10vh) rotate(360deg) scale(1.5); opacity: 0; }
 }
 
+@keyframes joinFadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 .join-form-container {
     max-width: 800px;
     width: 100%;
@@ -202,6 +220,8 @@ const formCss = `
     padding: 40px;
     box-shadow: 0 20px 40px rgba(0,0,0,0.1);
     z-index: 1;
+    opacity: 0;
+    animation: joinFadeInUp 1s ease-out forwards;
 }
 
 .join-header {
@@ -468,6 +488,46 @@ const formCss = `
     padding-top: 10px !important;
     margin-top: 0 !important;
 }
+
+/* Success Modal CSS */
+.success-modal-overlay {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.8); backdrop-filter: blur(5px);
+    z-index: 9999; display: none; align-items: center; justify-content: center;
+    padding: 20px; opacity: 0; transition: opacity 0.3s ease;
+}
+.success-modal-overlay.show { opacity: 1; }
+.success-modal-content {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+    max-width: 500px; width: 100%;
+    padding: 40px; text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    outline: 2px solid var(--primary);
+    outline-offset: -10px;
+}
+.success-svg { 
+    width: 80px; height: 80px; border-radius: 50%; display: block; 
+    stroke-width: 4; stroke: var(--primary); stroke-miterlimit: 10; 
+    margin: 0 auto 20px auto; box-shadow: inset 0px 0px 0px var(--primary); 
+    animation: successFill .4s ease-in-out .4s forwards, successScale .3s ease-in-out .9s both; 
+}
+.success-circle { 
+    stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 4; stroke-miterlimit: 10; 
+    stroke: var(--primary); fill: none; 
+    animation: successStroke .6s cubic-bezier(0.65, 0, 0.45, 1) forwards; 
+}
+.success-check { 
+    transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; 
+    animation: successStroke .3s cubic-bezier(0.65, 0, 0.45, 1) .8s forwards; 
+}
+@keyframes successStroke { 100% { stroke-dashoffset: 0; } }
+@keyframes successScale { 0%, 100% { transform: none; } 50% { transform: scale3d(1.1, 1.1, 1); } }
+@keyframes successFill { 100% { box-shadow: inset 0px 0px 0px 30px transparent; } }
+
+.success-modal-content h3 { font-size: 1.8rem; margin-bottom: 15px; color: var(--text-color); }
+.success-modal-content p { font-size: 1.1rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 30px; }
 </style>
 
 `;
@@ -520,6 +580,10 @@ const getFormHtml = (info) => `
                     <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
                     <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn" style="pointer-events: none;">${info.doctrineBtn}</button></span>
                 </label>
+                <label class="checkbox-label">
+                    <input type="checkbox" id="contractCheck" required>
+                    <span>${info.contractLabel}</span>
+                </label>
             </div>
 
             <button type="submit" class="join-submit-btn" id="submitBtn" disabled>${info.submitBtn}</button>
@@ -535,6 +599,19 @@ const getFormHtml = (info) => `
             ${info.doctrineText}
         </div>
         <button type="button" class="doctrine-read-btn disabled" id="doctrineReadBtn" disabled>${info.readBtn} (10 ${info.waitSec})</button>
+    </div>
+</div>
+
+<!-- Success Modal -->
+<div class="success-modal-overlay" id="successModal">
+    <div class="success-modal-content">
+        <svg class="success-svg" viewBox="0 0 52 52">
+            <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+        </svg>
+        <h3>${info.successTitle}</h3>
+        <p>${info.successDesc}</p>
+        <button type="button" class="join-submit-btn" onclick="window.location.href='index.html'">${info.backBtn}</button>
     </div>
 </div>
 
@@ -560,11 +637,12 @@ const getFormHtml = (info) => `
     // Form Logic
     const termsCheck = document.getElementById('termsCheck');
     const doctrineCheck = document.getElementById('doctrineCheck');
+    const contractCheck = document.getElementById('contractCheck');
     const submitBtn = document.getElementById('submitBtn');
     const ageInput = document.getElementById('joinAge');
     
     function checkFormValidity() {
-        if (termsCheck.checked && doctrineCheck.checked) {
+        if (termsCheck.checked && doctrineCheck.checked && contractCheck.checked) {
             submitBtn.disabled = false;
         } else {
             submitBtn.disabled = true;
@@ -572,6 +650,7 @@ const getFormHtml = (info) => `
     }
     
     termsCheck.addEventListener('change', checkFormValidity);
+    contractCheck.addEventListener('change', checkFormValidity);
 
     // Modal Logic
     const modal = document.getElementById('doctrineModal');
@@ -748,7 +827,9 @@ const getFormHtml = (info) => `
                 return response.json();
             })
             .then(result => {
-                alert('${info.success}');
+                const successModal = document.getElementById('successModal');
+                successModal.style.display = 'flex';
+                setTimeout(() => successModal.classList.add('show'), 10);
                 document.getElementById('joinForm').reset();
             });
         })
@@ -817,6 +898,27 @@ Object.keys(langs).forEach(lang => {
             
             fs.writeFileSync(targetFilePath, joinPageContent);
             console.log('Generated integrated layout for:', targetFilePath);
+
+            // 3. Generate Contract Page
+            const contractHeaderHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${info.contractTitle} | Vertex</title>`)
+                                             .replace(/<meta property="og:title" content=".*?">/, `<meta property="og:title" content="${info.contractTitle} | Vertex">`);
+            const contractHtml = `
+            <div class="join-page-wrapper">
+                <div class="triangle-bg" id="contract-triangles"></div>
+                <div class="join-form-container" style="max-width: 900px; padding: 50px;">
+                    <div class="join-header">
+                        <h1>${info.contractTitle}</h1>
+                    </div>
+                    <div style="white-space: pre-line; line-height: 1.6; color: var(--text-muted); font-size: 1.05rem;">
+${info.contractContent}
+                    </div>
+                </div>
+            </div>
+            `;
+            const contractPageContent = contractHeaderHtml + '\n' + contractHtml + '\n' + footerHtml;
+            const contractFilePath = path.join(baseDir, lang, info.contractFile);
+            fs.writeFileSync(contractFilePath, contractPageContent);
+            console.log('Generated contract page for:', contractFilePath);
         }
     }
 });
