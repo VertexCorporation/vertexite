@@ -48,7 +48,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
 const { contractTr, contractEn } = require('./contracts.js');
 
 const langs = {
-    'tr': { folder: 'tr', file: 'aramiza-katil.html', title: 'Aramıza Katıl', desc: 'Vertex ekibinin bir parçası ol.',
+    'tr': { folder: 'tr', file: 'aramiza-katil.html', title: 'Aramıza Katıl', desc: "Vertex'in bir parçası ol.",
         labels: ['Ad Soyad', 'E-posta', 'Telefon Numarası', 'Yaş', 'LinkedIn Bağlantısı (Opsiyonel)', 'GitHub Bağlantısı (Opsiyonel)', 'Kendinden bahset'],
         submitBtn: 'Başvuruyu Gönder', backBtn: '← Ana Sayfaya Dön', success: 'Başvurunuz alındı!', error: 'Bir hata oluştu.',
         joinNav: 'Aramıza Katıl'
@@ -899,23 +899,24 @@ Object.keys(langs).forEach(lang => {
             fs.writeFileSync(targetFilePath, joinPageContent);
             console.log('Generated integrated layout for:', targetFilePath);
 
-            // 3. Generate Contract Page
-            const contractHeaderHtml = headerHtml.replace(/<title>.*?<\/title>/, `<title>${info.contractTitle} | Vertex</title>`)
-                                             .replace(/<meta property="og:title" content=".*?">/, `<meta property="og:title" content="${info.contractTitle} | Vertex">`);
+            // 3. Generate Contract Page using terms-of-service.html template
+            const tosPath = path.join(baseDir, 'terms-of-service.html');
+            const tosHtml = fs.readFileSync(tosPath, 'utf-8');
+            
+            const containerStart = tosHtml.indexOf('<div class="container">');
+            const tosHeader = tosHtml.substring(0, containerStart + '<div class="container">'.length);
+            const tosFooter = '\n  </div>\n</body>\n</html>';
+            
+            let contractHeaderHtml = tosHeader.replace(/<title>.*?<\/title>/, `<title>${info.contractTitle} | Vertex</title>`);
+            
             const contractHtml = `
-            <div class="join-page-wrapper">
-                <div class="triangle-bg" id="contract-triangles"></div>
-                <div class="join-form-container" style="max-width: 900px; padding: 50px;">
-                    <div class="join-header">
-                        <h1>${info.contractTitle}</h1>
-                    </div>
-                    <div style="white-space: pre-line; line-height: 1.6; color: var(--text-muted); font-size: 1.05rem;">
+            <h1 style="margin-bottom: 50px;">${info.contractTitle}</h1>
+            <div style="white-space: pre-line; line-height: 1.7; color: var(--text-secondary-color); font-size: 1.05rem; padding-bottom: 50px;">
 ${info.contractContent}
-                    </div>
-                </div>
             </div>
             `;
-            const contractPageContent = contractHeaderHtml + '\n' + contractHtml + '\n' + footerHtml;
+            
+            const contractPageContent = contractHeaderHtml + '\\n' + contractHtml + '\\n' + tosFooter;
             const contractFilePath = path.join(baseDir, lang, info.contractFile);
             fs.writeFileSync(contractFilePath, contractPageContent);
             console.log('Generated contract page for:', contractFilePath);
