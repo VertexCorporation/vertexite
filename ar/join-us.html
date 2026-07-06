@@ -779,9 +779,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
         modal.style.display = 'flex';
         setTimeout(() => modal.classList.add('show'), 10);
         setTimeout(() => {
-            if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
-                startTimer();
-            }
+            startTimer();
         }, 100);
     });
 
@@ -796,13 +794,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
     });
 
 
-    scrollBox.addEventListener('scroll', () => {
-        if (!timerStarted) {
-            if (scrollBox.scrollTop + scrollBox.clientHeight >= scrollBox.scrollHeight - 50) {
-                startTimer();
-            }
-        }
-    });
+
 
     readBtn.addEventListener('click', () => {
         modal.classList.remove('show');
