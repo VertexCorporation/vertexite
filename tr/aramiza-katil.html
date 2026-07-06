@@ -302,16 +302,7 @@
     100% { height: 11px; width: 5px; opacity: 1; }
 }
 
-.doctrine-open-btn {
-    background: none;
-    border: none;
-    color: var(--primary);
-    text-decoration: underline;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 0;
-}
+
 .join-submit-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -568,13 +559,13 @@
                     <input type="checkbox" id="termsCheck" required>
                     <span><a href="https://vertexishere.com/terms-of-service" target="_blank"><b>Genel Kullanım Koşulları</b></a> ve <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Gizlilik Politikası</b></a>'nı kabul ediyorum.</span>
                 </label>
-                <label class="checkbox-label" id="doctrineLabelWrapper">
-                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
-                    <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn" style="pointer-events: none;">Vertex Doktrini'ni Oku</button></span>
-                </label>
                 <label class="checkbox-label">
                     <input type="checkbox" id="contractCheck" required>
                     <span><a href="vertex-kadro-sozlesmesi.html" target="_blank"><b>Vertex Kadro Sözleşmesi</b></a>'ni okuduğumu ve onayladığımı beyan ederim.</span>
+                </label>
+                <label class="checkbox-label" id="doctrineLabelWrapper">
+                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
+                    <span><a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrini</b></a>'ni okudum.</span>
                 </label>
             </div>
 
@@ -712,6 +703,7 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
     
     // Fallback for direct btn calls if any
     openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         modal.style.display = 'flex';
         setTimeout(() => modal.classList.add('show'), 10);
         setTimeout(() => {

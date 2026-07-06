@@ -322,16 +322,7 @@
     100% { height: 11px; width: 5px; opacity: 1; }
 }
 
-.doctrine-open-btn {
-    background: none;
-    border: none;
-    color: var(--primary);
-    text-decoration: underline;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 0;
-}
+
 .join-submit-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -589,13 +580,13 @@
                     <input type="checkbox" id="termsCheck" required>
                     <span>I accept the <a href="https://vertexishere.com/terms-of-service" target="_blank"><b>General Terms of Service</b></a> and <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Privacy Policy</b></a>.</span>
                 </label>
-                <label class="checkbox-label" id="doctrineLabelWrapper">
-                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
-                    <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn" style="pointer-events: none;">Read Vertex Doctrine</button></span>
-                </label>
                 <label class="checkbox-label">
                     <input type="checkbox" id="contractCheck" required>
                     <span>I declare that I have read and approve the <a href="vertex-team-contract.html" target="_blank"><b>Vertex Team Contract</b></a>.</span>
+                </label>
+                <label class="checkbox-label" id="doctrineLabelWrapper">
+                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
+                    <span>I have read the <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doctrine</b></a>.</span>
                 </label>
             </div>
 
@@ -732,6 +723,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
     
     // Fallback for direct btn calls if any
     openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         modal.style.display = 'flex';
         setTimeout(() => modal.classList.add('show'), 10);
         setTimeout(() => {

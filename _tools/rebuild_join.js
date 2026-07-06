@@ -133,7 +133,7 @@ const langs = {
 Object.keys(langs).forEach(key => {
     if (key === 'tr' || key === 'az') {
         langs[key].agreeTerms = '<a href="https://vertexishere.com/terms-of-service" target="_blank"><b>Genel Kullanım Koşulları</b></a> ve <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Gizlilik Politikası</b></a>\'nı kabul ediyorum.';
-        langs[key].doctrineBtn = 'Vertex Doktrini\'ni Oku';
+        langs[key].doctrineLabel = '<a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrini</b></a>\'ni okudum.';
         langs[key].doctrineTitle = 'Vertex Doktrini';
         langs[key].doctrineText = doctrineTr;
         langs[key].readBtn = 'Okudum';
@@ -151,7 +151,7 @@ Object.keys(langs).forEach(key => {
         langs[key].contractTitle = 'Vertex Kadro Sözleşmesi';
     } else {
         langs[key].agreeTerms = 'I accept the <a href="https://vertexishere.com/terms-of-service" target="_blank"><b>General Terms of Service</b></a> and <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Privacy Policy</b></a>.';
-        langs[key].doctrineBtn = 'Read Vertex Doctrine';
+        langs[key].doctrineLabel = 'I have read the <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doctrine</b></a>.';
         langs[key].doctrineTitle = 'Vertex Doctrine';
         langs[key].doctrineText = doctrineEn;
         langs[key].readBtn = 'I have read';
@@ -396,16 +396,7 @@ const formCss = `
     100% { height: 11px; width: 5px; opacity: 1; }
 }
 
-.doctrine-open-btn {
-    background: none;
-    border: none;
-    color: var(--primary);
-    text-decoration: underline;
-    cursor: pointer;
-    font-size: 0.95rem;
-    font-weight: 600;
-    padding: 0;
-}
+
 .join-submit-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
@@ -576,13 +567,13 @@ const getFormHtml = (info) => `
                     <input type="checkbox" id="termsCheck" required>
                     <span>${info.agreeTerms}</span>
                 </label>
-                <label class="checkbox-label" id="doctrineLabelWrapper">
-                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
-                    <span><button type="button" class="doctrine-open-btn" id="openDoctrineBtn" style="pointer-events: none;">${info.doctrineBtn}</button></span>
-                </label>
                 <label class="checkbox-label">
                     <input type="checkbox" id="contractCheck" required>
                     <span>${info.contractLabel}</span>
+                </label>
+                <label class="checkbox-label" id="doctrineLabelWrapper">
+                    <input type="checkbox" id="doctrineCheck" required style="pointer-events: none;">
+                    <span>${info.doctrineLabel}</span>
                 </label>
             </div>
 
@@ -699,6 +690,7 @@ const getFormHtml = (info) => `
     
     // Fallback for direct btn calls if any
     openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
         modal.style.display = 'flex';
         setTimeout(() => modal.classList.add('show'), 10);
         setTimeout(() => {
