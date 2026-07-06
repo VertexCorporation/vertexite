@@ -599,15 +599,15 @@
             <div class="checkbox-group full-width">
                 <label class="checkbox-label">
                     <input type="checkbox" id="termsCheck" required>
-                    <span>I accept the <a href="shurut-al-khidma.html" target="_blank"><b>Terms of Service</b></a> and <a href="siyasat-al-khususiyya.html" target="_blank"><b>Privacy Policy</b></a>.</span>
+                    <span>أوافق على <a href="shurut-al-khidma.html" target="_blank"><b>شروط الخدمة</b></a> و <a href="siyasat-al-khususiyya.html" target="_blank"><b>سياسة الخصوصية</b></a>.</span>
                 </label>
                 <label class="checkbox-label">
                     <input type="checkbox" id="contractCheck" required>
-                    <span>I declare that I have read and approve the <a href="vertex-team-contract.html" target="_blank"><b>Vertex Team Contract</b></a>.</span>
+                    <span>أقر بأنني قرأت وأوافق على <a href="vertex-team-contract.html" target="_blank"><b>عقد فريق Vertex</b></a>.</span>
                 </label>
                 <label class="checkbox-label" id="doctrineLabelWrapper">
                     <input type="checkbox" id="doctrineCheck" required>
-                    <span>I have read the <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doctrine</b></a>.</span>
+                    <span>لقد قرأت <a href="javascript:void(0)" id="openDoctrineBtn"><b>عقيدة Vertex</b></a>.</span>
                 </label>
             </div>
 
@@ -643,7 +643,7 @@ In this endeavor, we actually need nothing; the only thing we need is to be hard
 
 That might we need is present in the noble blood in our veins; the absolute peak will belong to us all.
         </div>
-        <button type="button" class="doctrine-read-btn disabled" id="doctrineReadBtn" disabled>I have read (10 seconds left)</button>
+        <button type="button" class="doctrine-read-btn disabled" id="doctrineReadBtn" disabled>قرأت (10 ثواني متبقية)</button>
     </div>
 </div>
 
@@ -654,8 +654,8 @@ That might we need is present in the noble blood in our veins; the absolute peak
             <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
             <path class="success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
         </svg>
-        <h3>APPLICATION RECEIVED!</h3>
-        <p>Vertex will review your application and, if deemed necessary, will contact you using the provided contact information.<br><br>Thank you for your interest.</p>
+        <h3>تم استلام الطلب!</h3>
+        <p>ستقوم Vertex بمراجعة طلبك والتواصل معك عند الضرورة.<br><br>شكراً لاهتمامك.</p>
         <button type="button" class="join-submit-btn" onclick="window.location.href='index.html'">← العودة للصفحة الرئيسية</button>
     </div>
 </div>
@@ -730,11 +730,11 @@ That might we need is present in the noble blood in our veins; the absolute peak
     function tickTimer() {
         secondsLeft--;
         if (secondsLeft > 0) {
-            readBtn.innerText = 'I have read (' + secondsLeft + ' seconds left)';
+            readBtn.innerText = 'قرأت (' + secondsLeft + ' ثواني متبقية)';
         } else {
             clearInterval(timerInterval);
             timerInterval = null;
-            readBtn.innerText = 'I have read';
+            readBtn.innerText = 'قرأت';
             readBtn.disabled = false;
             readBtn.classList.remove('disabled');
             readBtn.classList.add('active');
@@ -745,7 +745,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
         if(timerStarted) return;
         timerStarted = true;
         
-        readBtn.innerText = 'I have read (' + secondsLeft + ' seconds left)';
+        readBtn.innerText = 'قرأت (' + secondsLeft + ' ثواني متبقية)';
         timerInterval = setInterval(tickTimer, 1000);
     }
 
@@ -755,7 +755,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
         timerInterval = null;
         timerStarted = false;
         secondsLeft = 10;
-        readBtn.innerText = 'I have read';
+        readBtn.innerText = 'قرأت';
     }
 
     document.addEventListener('visibilitychange', () => {
@@ -823,8 +823,8 @@ That might we need is present in the noble blood in our veins; the absolute peak
 
     
     // Validation Localization
-    const reqErr = 'Please fill out this field.';
-    const emailErr = 'Please enter a valid email address.';
+    const reqErr = 'يرجى ملء هذا الحقل.';
+    const emailErr = 'يرجى إدخال بريد إلكتروني صحيح.';
     const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required]');
     
     formInputs.forEach(input => {
@@ -849,7 +849,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
         
         const ageVal = parseInt(ageInput.value, 10);
         if (isNaN(ageVal) || ageVal < 0 || ageVal > 123) {
-            alert('Please enter a valid age between 0 and 123.');
+            alert('يرجى إدخال عمر صحيح.');
             return;
         }
 
@@ -894,7 +894,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
         .then(res => res.json())
         .then(queryRes => {
             if (queryRes.length > 0 && queryRes[0].document) {
-                alert('This email or phone number is already registered.');
+                alert('البريد أو الهاتف مسجل مسبقاً.');
                 btn.textContent = originalText;
                 btn.disabled = false;
                 return;

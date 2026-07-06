@@ -581,15 +581,15 @@
             <div class="checkbox-group full-width">
                 <label class="checkbox-label">
                     <input type="checkbox" id="termsCheck" required>
-                    <span>I accept the <a href="iyong-yakgwan.html" target="_blank"><b>Terms of Service</b></a> and <a href="gaein-jeongbo-cheori-bangchim.html" target="_blank"><b>Privacy Policy</b></a>.</span>
+                    <span><a href="iyong-yakgwan.html" target="_blank"><b>이용약관</b></a> 및 <a href="gaein-jeongbo-cheori-bangchim.html" target="_blank"><b>개인정보처리방침</b></a>에 동의합니다.</span>
                 </label>
                 <label class="checkbox-label">
                     <input type="checkbox" id="contractCheck" required>
-                    <span>I declare that I have read and approve the <a href="vertex-team-contract.html" target="_blank"><b>Vertex Team Contract</b></a>.</span>
+                    <span>본인은 <a href="vertex-team-contract.html" target="_blank"><b>Vertex 팀 계약</b></a>을(를) 읽고 승인함을 선언합니다.</span>
                 </label>
                 <label class="checkbox-label" id="doctrineLabelWrapper">
                     <input type="checkbox" id="doctrineCheck" required>
-                    <span>I have read the <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doctrine</b></a>.</span>
+                    <span>본인은 <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex 독트린</b></a>을(를) 읽었습니다.</span>
                 </label>
             </div>
 
@@ -625,7 +625,7 @@ In this endeavor, we actually need nothing; the only thing we need is to be hard
 
 That might we need is present in the noble blood in our veins; the absolute peak will belong to us all.
         </div>
-        <button type="button" class="doctrine-read-btn disabled" id="doctrineReadBtn" disabled>I have read (10 seconds left)</button>
+        <button type="button" class="doctrine-read-btn disabled" id="doctrineReadBtn" disabled>읽었음 (10 초 남음)</button>
     </div>
 </div>
 
@@ -636,8 +636,8 @@ That might we need is present in the noble blood in our veins; the absolute peak
             <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
             <path class="success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
         </svg>
-        <h3>APPLICATION RECEIVED!</h3>
-        <p>Vertex will review your application and, if deemed necessary, will contact you using the provided contact information.<br><br>Thank you for your interest.</p>
+        <h3>지원서 접수 완료!</h3>
+        <p>Vertex에서 지원서를 검토한 후 필요시 연락드리겠습니다.<br><br>관심을 가져주셔서 감사합니다.</p>
         <button type="button" class="join-submit-btn" onclick="window.location.href='index.html'">← 홈으로 돌아가기</button>
     </div>
 </div>
@@ -712,11 +712,11 @@ That might we need is present in the noble blood in our veins; the absolute peak
     function tickTimer() {
         secondsLeft--;
         if (secondsLeft > 0) {
-            readBtn.innerText = 'I have read (' + secondsLeft + ' seconds left)';
+            readBtn.innerText = '읽었음 (' + secondsLeft + ' 초 남음)';
         } else {
             clearInterval(timerInterval);
             timerInterval = null;
-            readBtn.innerText = 'I have read';
+            readBtn.innerText = '읽었음';
             readBtn.disabled = false;
             readBtn.classList.remove('disabled');
             readBtn.classList.add('active');
@@ -727,7 +727,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
         if(timerStarted) return;
         timerStarted = true;
         
-        readBtn.innerText = 'I have read (' + secondsLeft + ' seconds left)';
+        readBtn.innerText = '읽었음 (' + secondsLeft + ' 초 남음)';
         timerInterval = setInterval(tickTimer, 1000);
     }
 
@@ -737,7 +737,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
         timerInterval = null;
         timerStarted = false;
         secondsLeft = 10;
-        readBtn.innerText = 'I have read';
+        readBtn.innerText = '읽었음';
     }
 
     document.addEventListener('visibilitychange', () => {
@@ -805,8 +805,8 @@ That might we need is present in the noble blood in our veins; the absolute peak
 
     
     // Validation Localization
-    const reqErr = 'Please fill out this field.';
-    const emailErr = 'Please enter a valid email address.';
+    const reqErr = '이 필드를 작성하세요.';
+    const emailErr = '유효한 이메일을 입력하세요.';
     const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required]');
     
     formInputs.forEach(input => {
@@ -831,7 +831,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
         
         const ageVal = parseInt(ageInput.value, 10);
         if (isNaN(ageVal) || ageVal < 0 || ageVal > 123) {
-            alert('Please enter a valid age between 0 and 123.');
+            alert('유효한 나이를 입력하세요.');
             return;
         }
 
@@ -876,7 +876,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
         .then(res => res.json())
         .then(queryRes => {
             if (queryRes.length > 0 && queryRes[0].document) {
-                alert('This email or phone number is already registered.');
+                alert('이 이메일 또는 전화번호는 이미 등록되었습니다.');
                 btn.textContent = originalText;
                 btn.disabled = false;
                 return;

@@ -581,15 +581,15 @@
             <div class="checkbox-group full-width">
                 <label class="checkbox-label">
                     <input type="checkbox" id="termsCheck" required>
-                    <span><a href="xidmet-sertleri.html" target="_blank"><b>Hizmet Şartları</b></a> ve <a href="mexfilik-siyaseti.html" target="_blank"><b>Gizlilik Politikası</b></a>'nı kabul ediyorum.</span>
+                    <span><a href="xidmet-sertleri.html" target="_blank"><b>Xidmət Şərtləri</b></a> və <a href="mexfilik-siyaseti.html" target="_blank"><b>Məxfilik Siyasəti</b></a> ilə razılaşıram.</span>
                 </label>
                 <label class="checkbox-label">
                     <input type="checkbox" id="contractCheck" required>
-                    <span><a href="vertex-kadro-sozlesmesi.html" target="_blank"><b>Vertex Kadro Sözleşmesi</b></a>'ni okuduğumu ve onayladığımı beyan ederim.</span>
+                    <span><a href="vertex-kadro-sozlesmesi.html" target="_blank"><b>Vertex Komanda Müqaviləsi</b></a>ni oxuduğumu və təsdiqlədiyimi bəyan edirəm.</span>
                 </label>
                 <label class="checkbox-label" id="doctrineLabelWrapper">
                     <input type="checkbox" id="doctrineCheck" required>
-                    <span><a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrini</b></a>'ni okudum.</span>
+                    <span><a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrinası</b></a>ni oxudum.</span>
                 </label>
             </div>
 
@@ -626,7 +626,7 @@ Bu uğurda aslında hiçbir şeye ihtiyacımız yoktur, ihtiyacımız olan tek �
 
 Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zirve, hepimizin olacak.
         </div>
-        <button type="button" class="doctrine-read-btn disabled" id="doctrineReadBtn" disabled>Okudum (10 saniye daha)</button>
+        <button type="button" class="doctrine-read-btn disabled" id="doctrineReadBtn" disabled>Oxudum (10 saniyə qaldı)</button>
     </div>
 </div>
 
@@ -637,8 +637,8 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
             <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
             <path class="success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
         </svg>
-        <h3>BAŞVURUNUZ ALINMIŞTIR!</h3>
-        <p>Vertex, başvurunuzu inceleyecek ve gerekli görmesi halinde sizlere sağlamış olduğunuz iletişim bilgileri üzerinden dönüş yapacaktır.<br><br>İlginiz için teşekkür ederiz.</p>
+        <h3>MÜRACİƏT QƏBUL EDİLDİ!</h3>
+        <p>Vertex müraciətinizi nəzərdən keçirəcək və lazım gələrsə sizinlə əlaqə saxlayacaq.<br><br>Marağınıza görə təşəkkür edirik.</p>
         <button type="button" class="join-submit-btn" onclick="window.location.href='index.html'">← Ana Səhifəyə Qayıt</button>
     </div>
 </div>
@@ -713,11 +713,11 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
     function tickTimer() {
         secondsLeft--;
         if (secondsLeft > 0) {
-            readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
+            readBtn.innerText = 'Oxudum (' + secondsLeft + ' saniyə qaldı)';
         } else {
             clearInterval(timerInterval);
             timerInterval = null;
-            readBtn.innerText = 'Okudum';
+            readBtn.innerText = 'Oxudum';
             readBtn.disabled = false;
             readBtn.classList.remove('disabled');
             readBtn.classList.add('active');
@@ -728,7 +728,7 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         if(timerStarted) return;
         timerStarted = true;
         
-        readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
+        readBtn.innerText = 'Oxudum (' + secondsLeft + ' saniyə qaldı)';
         timerInterval = setInterval(tickTimer, 1000);
     }
 
@@ -738,7 +738,7 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         timerInterval = null;
         timerStarted = false;
         secondsLeft = 10;
-        readBtn.innerText = 'Okudum';
+        readBtn.innerText = 'Oxudum';
     }
 
     document.addEventListener('visibilitychange', () => {
@@ -806,8 +806,8 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
 
     
     // Validation Localization
-    const reqErr = 'Lütfen bu alanı doldurun.';
-    const emailErr = 'Lütfen geçerli bir e-posta adresi girin.';
+    const reqErr = 'Bu sahəni doldurun.';
+    const emailErr = 'Düzgün e-poçt daxil edin.';
     const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required]');
     
     formInputs.forEach(input => {
@@ -832,7 +832,7 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         
         const ageVal = parseInt(ageInput.value, 10);
         if (isNaN(ageVal) || ageVal < 0 || ageVal > 123) {
-            alert('Lütfen 0 ile 123 arasında geçerli bir yaş giriniz.');
+            alert('Zəhmət olmasa düzgün yaş daxil edin.');
             return;
         }
 
@@ -877,7 +877,7 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         .then(res => res.json())
         .then(queryRes => {
             if (queryRes.length > 0 && queryRes[0].document) {
-                alert('Bu e-posta veya telefon numarası zaten kayıtlı.');
+                alert('Bu e-poçt və ya telefon artıq qeydiyyatdan keçib.');
                 btn.textContent = originalText;
                 btn.disabled = false;
                 return;
