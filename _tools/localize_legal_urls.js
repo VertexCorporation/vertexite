@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const localizationMap = {
-    'tr': { terms: 'hizmet-kosullari.html', privacy: 'gizlilik-politikasi.html' },
+    'tr': { terms: 'hizmet-sartlari.html', privacy: 'gizlilik-politikasi.html' },
     'ar': { terms: 'shurut-al-khidma.html', privacy: 'siyasat-al-khususiyya.html' },
     'az': { terms: 'xidmet-sertleri.html', privacy: 'mexfilik-siyaseti.html' },
     'de': { terms: 'nutzungsbedingungen.html', privacy: 'datenschutzrichtlinie.html' },
@@ -23,10 +23,10 @@ const localizationMap = {
 const baseDir = path.join(__dirname, '..');
 
 const metaTags = (title) => `
-    <link rel="icon" type="image/png" href="/assets/img/favicon.png">
+    <link rel="icon" type="image/webp" href="/assets/favicon.webp">
     <meta property="og:title" content="${title}">
     <meta property="og:description" content="Vertex ${title} details and information.">
-    <meta property="og:image" content="/assets/img/vertex-social-card.png">
+    <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp">
     <meta property="og:url" content="https://vertexishere.com">
     <meta property="og:type" content="website">
     <meta name="twitter:card" content="summary_large_image">
@@ -37,10 +37,13 @@ Object.keys(localizationMap).forEach(lang => {
     if (!fs.existsSync(langDir)) return;
 
     // Handle Terms
-    const oldTerms = path.join(langDir, 'terms-of-service.html');
+    const oldTerms1 = path.join(langDir, 'terms-of-service.html');
+    const oldTerms2 = path.join(langDir, 'hizmet-kosullari.html');
     const newTerms = path.join(langDir, localizationMap[lang].terms);
     
-    let targetTerms = oldTerms;
+    let targetTerms = newTerms;
+    if (fs.existsSync(oldTerms1)) targetTerms = oldTerms1;
+    if (fs.existsSync(oldTerms2)) targetTerms = oldTerms2;
     if (fs.existsSync(newTerms)) targetTerms = newTerms;
     
     if (fs.existsSync(targetTerms)) {
@@ -48,13 +51,16 @@ Object.keys(localizationMap).forEach(lang => {
         let titleMatch = content.match(/<title>(.*?)<\/title>/i);
         let title = titleMatch ? titleMatch[1] : 'Vertex Terms of Service';
         
-        if (!content.includes('og:title')) {
-            content = content.replace('</head>', metaTags(title) + '</head>');
-        }
+        // Clear all previous injected tags
+        content = content.replace(/<link rel="icon".*?>/g, '');
+        content = content.replace(/<meta property="og:.*?>/g, '');
+        content = content.replace(/<meta name="twitter:.*?>/g, '');
+        
+        content = content.replace('</head>', metaTags(title) + '</head>');
         
         fs.writeFileSync(newTerms, content, 'utf8');
-        if (oldTerms !== newTerms && fs.existsSync(oldTerms)) {
-            fs.unlinkSync(oldTerms);
+        if (targetTerms !== newTerms && fs.existsSync(targetTerms)) {
+            fs.unlinkSync(targetTerms);
         }
         console.log(`Updated ${lang}/${localizationMap[lang].terms}`);
     }
@@ -71,13 +77,15 @@ Object.keys(localizationMap).forEach(lang => {
         let titleMatch = content.match(/<title>(.*?)<\/title>/i);
         let title = titleMatch ? titleMatch[1] : 'Vertex Privacy Policy';
         
-        if (!content.includes('og:title')) {
-            content = content.replace('</head>', metaTags(title) + '</head>');
-        }
+        content = content.replace(/<link rel="icon".*?>/g, '');
+        content = content.replace(/<meta property="og:.*?>/g, '');
+        content = content.replace(/<meta name="twitter:.*?>/g, '');
+        
+        content = content.replace('</head>', metaTags(title) + '</head>');
         
         fs.writeFileSync(newPrivacy, content, 'utf8');
-        if (oldPrivacy !== newPrivacy && fs.existsSync(oldPrivacy)) {
-            fs.unlinkSync(oldPrivacy);
+        if (targetPrivacy !== newPrivacy && fs.existsSync(targetPrivacy)) {
+            fs.unlinkSync(targetPrivacy);
         }
         console.log(`Updated ${lang}/${localizationMap[lang].privacy}`);
     }

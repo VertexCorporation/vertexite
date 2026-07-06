@@ -131,7 +131,7 @@ const langs = {
 };
 
 const localizationMap = {
-    'tr': { terms: 'hizmet-kosullari.html', privacy: 'gizlilik-politikasi.html' },
+    'tr': { terms: 'hizmet-sartlari.html', privacy: 'gizlilik-politikasi.html' },
     'ar': { terms: 'shurut-al-khidma.html', privacy: 'siyasat-al-khususiyya.html' },
     'az': { terms: 'xidmet-sertleri.html', privacy: 'mexfilik-siyaseti.html' },
     'de': { terms: 'nutzungsbedingungen.html', privacy: 'datenschutzrichtlinie.html' },
@@ -154,7 +154,7 @@ Object.keys(langs).forEach(key => {
     let pf = localizationMap[key] ? localizationMap[key].privacy : 'privacy-policy.html';
 
     if (key === 'tr' || key === 'az') {
-        langs[key].agreeTerms = `<a href="${tf}" target="_blank"><b>Kullanım Koşulları</b></a> ve <a href="${pf}" target="_blank"><b>Gizlilik Politikası</b></a>'nı kabul ediyorum.`;
+        langs[key].agreeTerms = `<a href="${tf}" target="_blank"><b>Hizmet Şartları</b></a> ve <a href="${pf}" target="_blank"><b>Gizlilik Politikası</b></a>'nı kabul ediyorum.`;
         langs[key].doctrineLabel = '<a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrini</b></a>\'ni okudum.';
         langs[key].doctrineTitle = 'Vertex Doktrini';
         langs[key].doctrineText = doctrineTr;
