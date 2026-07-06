@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="hi">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Vertex सेवा की शर्तें</title>
+  <link rel="icon" type="image/png" href="assets/favicon.webp" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" /></noscript>
+  <style>
+    :root {
+      --background-color: #f4f7f9;
+      --content-bg-color: #ffffff;
+      --text-primary-color: #1a202c;
+      --text-secondary-color: #4a5568;
+      --link-color: #3182ce;
+      --link-hover-color: #2b6cb0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --triangle-color: #e2e8f0;
+      --critical-bg-color: #fff5f5;
+      --critical-border-color: #e53e3e;
+      --critical-text-color: #9b2c2c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 20px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+
+    body::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    .triangles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .triangles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: var(--triangle-color);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: triangleAnimate 25s linear infinite;
+      bottom: -180px;
+    }
+
+    .triangles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .triangles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .triangles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .triangles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .triangles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .triangles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .triangles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .triangles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes triangleAnimate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: var(--content-bg-color);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1,
+    h2 {
+      color: var(--text-primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    p,
+    ul,
+    li {
+      color: var(--text-secondary-color);
+      font-size: 1.05em;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+      padding-left: 10px;
+      list-style-position: outside;
+    }
+
+    li {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+
+    .critical-disclaimer {
+      background-color: var(--critical-bg-color);
+      border-left: 4px solid var(--critical-border-color);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .critical-disclaimer p,
+    .critical-disclaimer li {
+      color: var(--critical-text-color);
+    }
+
+    .critical-disclaimer strong {
+      color: var(--critical-border-color);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+        margin: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+    <!-- Geometric Background Objects -->
+    <div class="geo-bg">
+      <div class="geo-blob geo-blob-1"></div>
+      <div class="geo-blob geo-blob-2"></div>
+      <div class="geo-blob geo-blob-3"></div>
+    </div>
+
+  <ul class="triangles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <div class="container">
+    <h1>Vertex सेवा की शर्तें</h1>
+    <p style="text-align:center; font-style: italic;">अंतिम अद्यतन: 22 जुलाई, 2025</p>
+
+    <p>
+      Vertex में आपका स्वागत है। हमारे एप्लिकेशन, गेम और संबंधित सेवाएं (सामूहिक रूप से, "सेवाएं")
+      <strong>Vertex</strong> ("हम," "हमें," या "हमारा") के रूप में जाने जाने वाले व्यक्तिगत डेवलपर्स द्वारा प्रदान की जाती हैं। ये सामान्य सेवा की शर्तें
+      ("शर्तें") हमारी सभी सेवाओं तक आपकी पहुंच और उपयोग को नियंत्रित करती हैं। Vertex खाता बनाकर या हमारी किसी भी
+      सेवा का उपयोग करके, आप इन शर्तों और हमारी सामान्य <strong>
+        <a href="https://vertexishere.com/privacy-policy" target="_blank" rel="noopener noreferrer">गोपनीयता नीति</a>
+      </strong> से बाध्य होने के लिए सहमत होते हैं।
+    </p>
+    <p>
+      कृपया ध्यान दें कि व्यक्तिगत सेवाओं (जैसे Cortex) में अतिरिक्त, विशिष्ट शर्तें हो सकती हैं जो उन पर लागू होती हैं।
+      किसी भी विवाद की स्थिति में, उस सेवा की विशिष्ट शर्तें इन सामान्य शर्तों पर पूर्वता लेंगी।
+    </p>
+
+    <h2>1. हमारी सेवाएं</h2>
+    <p>
+      Vertex विभिन्न प्रकार के डिजिटल उत्पाद और सेवाएं प्रदान करता है, जो मुफ्त में या सशुल्क सदस्यता के माध्यम से पेश की जा सकती हैं।
+      हम डेवलपर्स की एक स्वतंत्र टीम हैं, कोई पंजीकृत कंपनी नहीं। हम उच्च-गुणवत्ता वाली सेवाएं प्रदान करने का प्रयास करते हैं
+      लेकिन उन्हें "जैसी हैं" के आधार पर पेश करते हैं।
+    </p>
+
+    <h2>2. आपका एकीकृत Vertex खाता</h2>
+    <p>
+      हमारी सेवाओं की अधिकांश सुविधाओं का उपयोग करने के लिए आपको एक एकीकृत Vertex खाता बनाना होगा। आप
+      अपने खाते के तहत होने वाली सभी गतिविधियों और अपने लॉगिन क्रेडेंशियल को गोपनीय रखने के लिए ज़िम्मेदार हैं।
+    </p>
+
+    <h2>3. वित्तीय शर्तें</h2>
+    <p>हमारी कुछ सेवाएं सशुल्क सदस्यता या डिजिटल सामान (जैसे "क्रेडिट") प्रदान कर सकती हैं।</p>
+    <ul>
+      <li><strong>सदस्यता:</strong> सदस्यता का बिल आवर्ती आधार पर अग्रिम में लिया जाता है और
+        रद्द होने तक स्वचालित रूप से नवीनीकृत हो जाएगा।</li>
+      <li><strong>डिजिटल सामान:</strong> खरीदा गया कोई भी डिजिटल आइटम केवल विशिष्ट सेवा के भीतर उपयोग के लिए है। उनका
+        कोई वास्तविक दुनिया का मौद्रिक मूल्य नहीं है और वे अहस्तांतरणीय हैं।</li>
+      <li><strong>कोई धनवापसी नहीं:</strong> कानून द्वारा अनुमत अधिकतम सीमा तक, सभी भुगतान अंतिम हैं और
+        अप्रतिदेय (नॉन-रिफंडेबल) हैं।</li>
+    </ul>
+
+    <h2>4. उपयोगकर्ता आचरण</h2>
+    <p>आप हमारी सेवाओं का उपयोग किसी भी ऐसे उद्देश्य के लिए नहीं करने के लिए सहमत हैं जो अवैध है या इन शर्तों द्वारा निषिद्ध है। इसमें
+      हानिकारक सामग्री उत्पन्न करना, हमारे सिस्टम को नुकसान पहुंचाने का प्रयास करना, या दूसरों के अधिकारों का उल्लंघन करना शामिल है।</p>
+
+    <h2>5. वारंटी का अस्वीकरण और देयता की सीमा</h2>
+    <p>सेवाएं "जैसी हैं" और "जैसी उपलब्ध हैं" के आधार पर प्रदान की जाती हैं। सेवाओं का आपका उपयोग आपके अपने जोखिम पर है।
+      कानून द्वारा अनुमत अधिकतम सीमा तक, हम किसी भी प्रकार की सभी वारंटियों को स्पष्ट रूप से अस्वीकार करते हैं, चाहे व्यक्त हों
+      या निहित, जिसमें व्यापारिकता, किसी विशेष उद्देश्य के लिए उपयुक्तता और गैर-उल्लंघन की निहित वारंटियां शामिल हैं,
+      लेकिन इन्हीं तक सीमित नहीं हैं।</p>
+
+    <div class="critical-disclaimer">
+      <p><strong>जोखिम की स्वीकृति और देयता की सीमा:</strong> आप स्वीकार करते हैं कि हमारी सेवाएं
+        जटिल सॉफ़्टवेयर और तृतीय-पक्ष बुनियादी ढांचे पर निर्भर करती हैं। हालांकि हम उत्कृष्टता के लिए प्रयास करते हैं, आप समझते हैं और सहमत हैं कि
+        त्रुटियां, बग, सुरक्षा कमजोरियां, या अन्य तकनीकी विफलताएं ("तकनीकी विफलताएं") हो सकती हैं।</p>
+      <p>कानून द्वारा अनुमत अधिकतम सीमा तक, किसी भी स्थिति में <strong>VERTEX के डेवलपर्स</strong> किसी भी अप्रत्यक्ष,
+        आकस्मिक, विशेष, परिणामी या दंडात्मक नुकसान, या लाभ, डेटा, या सद्भावना के किसी भी नुकसान के लिए उत्तरदायी नहीं होंगे,
+        जो निम्न के परिणामस्वरूप हों:
+        <br>(A) सेवाओं का आपका उपयोग, या उपयोग करने में असमर्थता;
+        <br>(B) किसी भी तृतीय पक्ष का कोई भी आचरण या सामग्री, जिसमें उनके प्लेटफ़ॉर्म से उत्पन्न होने वाले डेटा उल्लंघन शामिल हैं;
+        <br>(C) आपके डेटा तक अनधिकृत पहुंच या परिवर्तन, <strong>जिसमें स्वयं सेवाओं के भीतर
+          किसी तकनीकी विफलता से उत्पन्न होने वाली ऐसी घटनाएं शामिल हैं।</strong>
+      </p>
+      <p>क्या फिर भी हम पर कोई देयता थोपी जानी चाहिए, इस समझौते के तहत हमारी कुल संचयी देयता
+        (1) दावे को जन्म देने वाली घटना से पहले के 12 महीनों में किसी भी VERTEX सेवाओं के लिए आपके द्वारा हमें भुगतान की गई
+        कुल राशि, या (2) सौ अमेरिकी डॉलर ($100) में से जो भी अधिक हो, उससे अधिक नहीं होगी। यह सीमा
+        आपके और हमारे बीच सौदे के लिए मौलिक है और इस बात की परवाह किए बिना लागू होती है कि कोई भी दावा
+        किस कानूनी सिद्धांत पर आधारित है।</p>
+    </div>
+
+    <h2>6. समाप्ति</h2>
+    <p>यदि आप इन शर्तों का उल्लंघन करते हैं तो हम तत्काल, बिना पूर्व सूचना के, आपके खाते और सेवाओं तक पहुंच को समाप्त या
+      निलंबित कर सकते हैं। हम किसी भी समय किसी भी सेवा को संशोधित या बंद करने का अधिकार भी सुरक्षित रखते हैं।</p>
+
+    <h2>7. शासी कानून</h2>
+    <p>ये शर्तें <strong>तुर्किये गणराज्य</strong> के कानूनों द्वारा शासित होंगी। आप किसी भी विवाद के लिए
+      <strong>इस्तांबुल सेंट्रल (चागलायन) न्यायालयों</strong> के विशेष क्षेत्राधिकार के अधीन होने के लिए सहमत हैं।</p>
+
+    <h2>8. इन शर्तों में बदलाव</h2>
+    <p>हम अपने पूर्ण विवेक पर, किसी भी समय इन शर्तों को संशोधित या प्रतिस्थापित करने का अधिकार सुरक्षित रखते हैं। हम
+      इन शर्तों के शीर्ष पर "अंतिम अद्यतन" तिथि को अपडेट करके किसी भी बदलाव को इंगित करेंगे। किसी भी महत्वपूर्ण बदलाव के लिए, हम
+      अधिक प्रमुख नोटिस प्रदान करेंगे। इन शर्तों में किसी भी बदलाव के पोस्ट होने के बाद हमारी किसी भी सेवा का आपका निरंतर उपयोग
+      उन बदलावों की स्वीकृति माना जाएगा।</p>
+
+    <h2>9. हमसे संपर्क करें</h2>
+    <p>यदि इन शर्तों के बारे में आपके कोई प्रश्न हैं, तो कृपया हमसे संपर्क करें:</p>
+    <ul>
+      <li><b>ईमेल:</b> <a href="mailto:contact@vertexishere.com">contact@vertexishere.com</a></li>
+      <li><b>वेबसाइट:</b> <a href="https://vertexishere.com" target="_blank"
+          rel="noopener noreferrer">vertexishere.com</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>

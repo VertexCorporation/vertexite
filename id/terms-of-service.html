@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Ketentuan Layanan Vertex</title>
+  <link rel="icon" type="image/png" href="assets/favicon.webp" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" /></noscript>
+  <style>
+    :root {
+      --background-color: #f4f7f9;
+      --content-bg-color: #ffffff;
+      --text-primary-color: #1a202c;
+      --text-secondary-color: #4a5568;
+      --link-color: #3182ce;
+      --link-hover-color: #2b6cb0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --triangle-color: #e2e8f0;
+      --critical-bg-color: #fff5f5;
+      --critical-border-color: #e53e3e;
+      --critical-text-color: #9b2c2c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 20px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+
+    body::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    .triangles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .triangles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: var(--triangle-color);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: triangleAnimate 25s linear infinite;
+      bottom: -180px;
+    }
+
+    .triangles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .triangles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .triangles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .triangles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .triangles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .triangles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .triangles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .triangles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes triangleAnimate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: var(--content-bg-color);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1,
+    h2 {
+      color: var(--text-primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    p,
+    ul,
+    li {
+      color: var(--text-secondary-color);
+      font-size: 1.05em;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+      padding-left: 10px;
+      list-style-position: outside;
+    }
+
+    li {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+
+    .critical-disclaimer {
+      background-color: var(--critical-bg-color);
+      border-left: 4px solid var(--critical-border-color);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .critical-disclaimer p,
+    .critical-disclaimer li {
+      color: var(--critical-text-color);
+    }
+
+    .critical-disclaimer strong {
+      color: var(--critical-border-color);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+        margin: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+    <!-- Geometric Background Objects -->
+    <div class="geo-bg">
+      <div class="geo-blob geo-blob-1"></div>
+      <div class="geo-blob geo-blob-2"></div>
+      <div class="geo-blob geo-blob-3"></div>
+    </div>
+
+  <ul class="triangles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <div class="container">
+    <h1>Ketentuan Layanan Vertex</h1>
+    <p style="text-align:center; font-style: italic;">Terakhir Diperbarui: 22 Juli 2025</p>
+
+    <p>
+      Selamat datang di Vertex. Aplikasi, game, dan layanan terkait kami (secara kolektif disebut "Layanan") disediakan oleh
+      masing-masing developer yang dikenal sebagai <strong>Vertex</strong> ("kami", atau "milik kami"). Ketentuan Layanan umum ini
+      ("Ketentuan") mengatur akses Anda ke dan penggunaan atas semua Layanan kami. Dengan membuat Akun Vertex atau menggunakan salah satu
+      Layanan kami, Anda setuju untuk terikat dengan Ketentuan ini dan <strong>
+        <a href="https://vertexishere.com/privacy-policy" target="_blank" rel="noopener noreferrer">Kebijakan Privasi</a>
+      </strong> umum kami.
+    </p>
+    <p>
+      Harap diperhatikan bahwa Layanan individual (seperti Cortex) mungkin memiliki ketentuan tambahan dan spesifik yang berlaku untuknya. Jika terjadi
+      pertentangan, ketentuan spesifik dari Layanan tersebut akan lebih diutamakan daripada Ketentuan umum ini.
+    </p>
+
+    <h2>1. Layanan Kami</h2>
+    <p>
+      Vertex menyediakan berbagai produk dan layanan digital, yang mungkin ditawarkan secara gratis atau melalui
+      langganan berbayar. Kami adalah tim developer independen, bukan perusahaan terdaftar. Kami berusaha keras untuk menyediakan
+      layanan berkualitas tinggi tetapi menawarkannya "sebagaimana adanya".
+    </p>
+
+    <h2>2. Akun Vertex Terpadu Anda</h2>
+    <p>
+      Anda harus membuat Akun Vertex terpadu untuk menggunakan sebagian besar fitur Layanan kami. Anda bertanggung jawab atas semua
+      aktivitas yang terjadi di bawah akun Anda dan menjaga kerahasiaan kredensial login Anda.
+    </p>
+
+    <h2>3. Ketentuan Finansial</h2>
+    <p>Beberapa Layanan kami mungkin menawarkan langganan berbayar atau barang digital (seperti "Kredit").</p>
+    <ul>
+      <li><strong>Langganan:</strong> Langganan ditagihkan di muka secara berulang dan akan
+        diperpanjang secara otomatis kecuali dibatalkan.</li>
+      <li><strong>Barang Digital:</strong> Setiap item digital yang dibeli hanya untuk digunakan dalam Layanan tertentu. Item tersebut
+        tidak memiliki nilai uang di dunia nyata dan tidak dapat dialihkan.</li>
+      <li><strong>Tidak Ada Pengembalian Dana:</strong> Sejauh diizinkan oleh hukum, semua pembayaran bersifat final dan
+        tidak dapat dikembalikan.</li>
+    </ul>
+
+    <h2>4. Perilaku Pengguna</h2>
+    <p>Anda setuju untuk tidak menggunakan Layanan kami untuk tujuan apa pun yang ilegal atau dilarang oleh Ketentuan ini. Hal ini termasuk
+      menghasilkan konten berbahaya, mencoba merusak sistem kami, atau melanggar hak orang lain.</p>
+
+    <h2>5. Penafian Jaminan dan Batasan Tanggung Jawab</h2>
+    <p>LAYANAN DISEDIAKAN "SEBAGAIMANA ADANYA" DAN BERDASARKAN "SEBAGAIMANA TERSEDIA". PENGGUNAAN ANDA ATAS LAYANAN ADALAH RISIKO ANDA SENDIRI.
+      SEJAUH DIIZINKAN OLEH HUKUM, KAMI SECARA TEGAS MENAFIKAN SEMUA JAMINAN DALAM BENTUK APA PUN, BAIK TERSURAT MAUPUN
+      TERSIRAT, TERMASUK, NAMUN TIDAK TERBATAS PADA, JAMINAN TERSIRAT ATAS KELAYAKAN UNTUK DIPERDAGANGKAN, KESESUAIAN UNTUK TUJUAN TERTENTU,
+      DAN PELANGGARAN.</p>
+
+    <div class="critical-disclaimer">
+      <p><strong>Pengakuan Risiko dan Batasan Tanggung Jawab:</strong> Anda mengakui bahwa Layanan kami bergantung pada
+        perangkat lunak kompleks dan infrastruktur pihak ketiga. Meskipun kami berusaha keras untuk mencapai keunggulan, Anda memahami dan menyetujui bahwa
+        kesalahan, bug, kerentanan keamanan, atau kegagalan teknis lainnya ("Kegagalan Teknis") dapat terjadi.</p>
+      <p>SEJAUH DIIZINKAN OLEH HUKUM, DALAM KEADAAN APA PUN <strong>DEVELOPER VERTEX</strong> TIDAK BERTANGGUNG JAWAB
+        ATAS KERUSAKAN TIDAK LANGSUNG, INSIDENTAL, KHUSUS, KONSEKUENSIAL, ATAU PENGHUKUMAN, ATAU HILANGNYA KEUNTUNGAN, DATA, ATAU
+        NIAT BAIK, YANG DIHASILKAN DARI:
+        <br>(A) PENGGUNAAN ANDA, ATAU KETIDAKMAMPUAN MENGGUNAKAN, LAYANAN;
+        <br>(B) PERILAKU ATAU KONTEN DARI PIHAK KETIGA MANA PUN, TERMASUK PELANGGARAN DATA YANG BERASAL DARI PLATFORM MEREKA;
+        <br>(C) AKSES TIDAK SAH ATAU PERUBAHAN DATA ANDA, <strong>TERMASUK PERISTIWA YANG TIMBUL DARI
+          KEGAGALAN TEKNIS DI DALAM LAYANAN ITU SENDIRI.</strong>
+      </p>
+      <p>JIKA NAMUN DEMIKIAN ADA TANGGUNG JAWAB YANG DIBEBANKAN KEPADA KAMI, TOTAL TANGGUNG JAWAB KUMULATIF KAMI KEPADA ANDA BERDASARKAN PERJANJIAN INI
+        TIDAK AKAN MELEBIHI JUMLAH YANG LEBIH BESAR ANTARA (1) TOTAL JUMLAH YANG TELAH ANDA BAYARKAN KEPADA KAMI UNTUK LAYANAN VERTEX APA PUN DALAM 12
+        BULAN SEBELUM PERISTIWA YANG MENIMBULKAN KLAIM, ATAU (2) SERATUS DOLAR AS ($100). BATASAN INI ADALAH
+        HAL YANG MENDASAR DALAM KESEPAKATAN ANTARA ANDA DAN KAMI DAN BERLAKU TERLEPAS DARI TEORI HUKUM APA PUN YANG MENJADI DASAR KLAIM.</p>
+    </div>
+
+    <h2>6. Penghentian</h2>
+    <p>Kami dapat menghentikan atau menangguhkan akun Anda dan akses ke Layanan dengan segera, tanpa pemberitahuan sebelumnya, jika Anda
+      melanggar Ketentuan ini. Kami juga berhak mengubah atau menghentikan Layanan apa pun kapan saja.</p>
+
+    <h2>7. Hukum yang Berlaku</h2>
+    <p>Ketentuan ini akan diatur oleh hukum <strong>Republik Turki</strong>. Anda setuju untuk tunduk pada
+      yurisdiksi eksklusif <strong>Pengadilan Pusat Istanbul (Çağlayan)</strong> untuk setiap perselisihan.</p>
+
+    <h2>8. Perubahan pada Ketentuan Ini</h2>
+    <p>Kami berhak, atas kebijakan kami sendiri, untuk mengubah atau mengganti Ketentuan ini kapan saja. Kami akan menunjukkan
+      setiap perubahan dengan memperbarui tanggal "Terakhir Diperbarui" di bagian atas Ketentuan ini. Untuk perubahan signifikan apa pun, kami akan
+      memberikan pemberitahuan yang lebih menonjol. Penggunaan Layanan kami yang berkelanjutan oleh Anda setelah dipostingnya perubahan apa pun pada
+      Ketentuan ini merupakan persetujuan Anda atas perubahan tersebut.</p>
+
+    <h2>9. Hubungi Kami</h2>
+    <p>Jika Anda memiliki pertanyaan tentang Ketentuan ini, silakan hubungi kami:</p>
+    <ul>
+      <li><b>Email:</b> <a href="mailto:contact@vertexishere.com">contact@vertexishere.com</a></li>
+      <li><b>Situs Web:</b> <a href="https://vertexishere.com" target="_blank"
+          rel="noopener noreferrer">vertexishere.com</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>

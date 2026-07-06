@@ -132,7 +132,7 @@ const langs = {
 
 Object.keys(langs).forEach(key => {
     if (key === 'tr' || key === 'az') {
-        langs[key].agreeTerms = '<a href="https://vertexishere.com/terms-of-service" target="_blank"><b>Genel Kullanım Koşulları</b></a> ve <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Gizlilik Politikası</b></a>\'nı kabul ediyorum.';
+        langs[key].agreeTerms = '<a href="terms-of-service.html" target="_blank"><b>Kullanım Koşulları</b></a> ve <a href="privacy-policy.html" target="_blank"><b>Gizlilik Politikası</b></a>\'nı kabul ediyorum.';
         langs[key].doctrineLabel = '<a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrini</b></a>\'ni okudum.';
         langs[key].doctrineTitle = 'Vertex Doktrini';
         langs[key].doctrineText = doctrineTr;
@@ -150,7 +150,7 @@ Object.keys(langs).forEach(key => {
         langs[key].contractContent = contractTr;
         langs[key].contractTitle = 'Vertex Kadro Sözleşmesi';
     } else {
-        langs[key].agreeTerms = 'I accept the <a href="https://vertexishere.com/terms-of-service" target="_blank"><b>General Terms of Service</b></a> and <a href="https://vertexishere.com/privacy-policy" target="_blank"><b>Privacy Policy</b></a>.';
+        langs[key].agreeTerms = 'I accept the <a href="terms-of-service.html" target="_blank"><b>Terms of Service</b></a> and <a href="privacy-policy.html" target="_blank"><b>Privacy Policy</b></a>.';
         langs[key].doctrineLabel = 'I have read the <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doctrine</b></a>.';
         langs[key].doctrineTitle = 'Vertex Doctrine';
         langs[key].doctrineText = doctrineEn;
@@ -909,6 +909,7 @@ Object.keys(langs).forEach(lang => {
             const itiCss = `\n<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/css/intlTelInput.css" />
 <style>
 .iti { width: 100%; }
+.iti__flag-container, .iti__selected-flag { background: transparent !important; }
 .iti__flag { background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/img/flags.png"); }
 @media (min-resolution: 2x) { .iti__flag { background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/img/flags@2x.png"); } }
 </style>\n`;

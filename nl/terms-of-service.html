@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Vertex Servicevoorwaarden</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.webp" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" /></noscript>
+  <style>
+    :root {
+      --background-color: #f4f7f9;
+      --content-bg-color: #ffffff;
+      --text-primary-color: #1a202c;
+      --text-secondary-color: #4a5568;
+      --link-color: #3182ce;
+      --link-hover-color: #2b6cb0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --triangle-color: #e2e8f0;
+      --critical-bg-color: #fff5f5;
+      --critical-border-color: #e53e3e;
+      --critical-text-color: #9b2c2c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 20px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+
+    body::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    .triangles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .triangles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: var(--triangle-color);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: triangleAnimate 25s linear infinite;
+      bottom: -180px;
+    }
+
+    .triangles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .triangles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .triangles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .triangles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .triangles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .triangles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .triangles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .triangles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes triangleAnimate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: var(--content-bg-color);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1,
+    h2 {
+      color: var(--text-primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    p,
+    ul,
+    li {
+      color: var(--text-secondary-color);
+      font-size: 1.05em;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+      padding-left: 10px;
+      list-style-position: outside;
+    }
+
+    li {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+
+    .critical-disclaimer {
+      background-color: var(--critical-bg-color);
+      border-left: 4px solid var(--critical-border-color);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .critical-disclaimer p,
+    .critical-disclaimer li {
+      color: var(--critical-text-color);
+    }
+
+    .critical-disclaimer strong {
+      color: var(--critical-border-color);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+        margin: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+    <!-- Geometric Background Objects -->
+    <div class="geo-bg">
+      <div class="geo-blob geo-blob-1"></div>
+      <div class="geo-blob geo-blob-2"></div>
+      <div class="geo-blob geo-blob-3"></div>
+    </div>
+
+  <ul class="triangles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <div class="container">
+    <h1>Vertex Servicevoorwaarden</h1>
+    <p style="text-align:center; font-style: italic;">Laatst bijgewerkt: 22 juli 2025</p>
+
+    <p>
+      Welkom bij Vertex. Onze applicaties, games en gerelateerde diensten (gezamenlijk de "Diensten") worden geleverd door
+      de individuele ontwikkelaars bekend als <strong>Vertex</strong> ("wij", "ons" of "onze"). Deze algemene Servicevoorwaarden
+      ("Voorwaarden") regelen uw toegang tot en gebruik van al onze Diensten. Door een Vertex Account aan te maken of een van onze
+      Diensten te gebruiken, gaat u ermee akkoord gebonden te zijn aan deze Voorwaarden en ons algemene <strong>
+        <a href="https://vertexishere.com/privacy-policy" target="_blank" rel="noopener noreferrer">Privacybeleid</a>.
+      </strong>
+    </p>
+    <p>
+      Houd er rekening mee dat individuele Diensten (zoals Cortex) aanvullende, specifieke voorwaarden kunnen hebben die daarop van toepassing zijn. In geval van een conflict, hebben de specifieke voorwaarden van die Dienst voorrang op deze algemene Voorwaarden.
+    </p>
+
+    <h2>1. Onze Diensten</h2>
+    <p>
+      Vertex biedt een verscheidenheid aan digitale producten en diensten, die gratis of via betaalde abonnementen kunnen worden aangeboden. Wij zijn een onafhankelijk team van ontwikkelaars, geen geregistreerd bedrijf. We streven ernaar om diensten van hoge kwaliteit te leveren, maar bieden ze "as is" (in de huidige staat) aan.
+    </p>
+
+    <h2>2. Uw Geünificeerde Vertex Account</h2>
+    <p>
+      U moet een geünificeerd Vertex Account aanmaken om de meeste functies van onze Diensten te gebruiken. U bent verantwoordelijk voor alle activiteiten die plaatsvinden onder uw account en voor het vertrouwelijk houden van uw inloggegevens.
+    </p>
+
+    <h2>3. Financiële Voorwaarden</h2>
+    <p>Sommige van onze Diensten kunnen betaalde abonnementen of digitale goederen (zoals "Credits") aanbieden.</p>
+    <ul>
+      <li><strong>Abonnementen:</strong> Abonnementen worden vooraf op terugkerende basis in rekening gebracht en worden automatisch verlengd tenzij ze worden geannuleerd.</li>
+      <li><strong>Digitale Goederen:</strong> Alle gekochte digitale items zijn alleen voor gebruik binnen de specifieke Dienst. Ze hebben geen echte geldwaarde en zijn niet overdraagbaar.</li>
+      <li><strong>Geen Restituties:</strong> Voor zover wettelijk toegestaan, zijn alle betalingen definitief en niet-restitueerbaar.</li>
+    </ul>
+
+    <h2>4. Gedrag van Gebruikers</h2>
+    <p>U stemt ermee in onze Diensten niet te gebruiken voor enig doel dat illegaal is of verboden door deze Voorwaarden. Dit omvat het genereren van schadelijke inhoud, het proberen onze systemen aan te tasten, of het inbreuk maken op de rechten van anderen.</p>
+
+    <h2>5. Afwijzing van Garanties en Beperking van Aansprakelijkheid</h2>
+    <p>DE DIENSTEN WORDEN AANGEBODEN OP EEN "AS IS" (IN DE HUIDIGE STAAT) EN "AS AVAILABLE" (ZOALS BESCHIKBAAR) BASIS. UW GEBRUIK VAN DE DIENSTEN IS OP EIGEN RISICO. VOOR ZOVER WETTELIJK TOEGESTAAN, WIJZEN WIJ UITDRUKKELIJK ALLE GARANTIES VAN WELKE AARD DAN OOK AF, HETZIJ UITDRUKKELIJK OF IMPLICIET, MET INBEGRIP VAN, MAAR NIET BEPERKT TOT, DE IMPLICIETE GARANTIES VAN VERKOOPBAARHEID, GESCHIKTHEID VOOR EEN BEPAALD DOEL, EN NIET-INBREUKMAKENDHEID.</p>
+
+    <div class="critical-disclaimer">
+      <p><strong>Erkenning van Risico en Beperking van Aansprakelijkheid:</strong> U erkent dat onze Diensten afhankelijk zijn van complexe software en infrastructuur van derden. Hoewel we streven naar uitmuntendheid, begrijpt u en gaat u ermee akkoord dat er fouten, bugs, beveiligingskwetsbaarheden, of andere technische storingen ("Technische Storingen") kunnen optreden.</p>
+      <p>VOOR ZOVER WETTELIJK TOEGESTAAN, ZULLEN <strong>DE ONTWIKKELAARS VAN VERTEX</strong> IN GEEN GEVAL AANSPRAKELIJK ZIJN VOOR ENIGE INDIRECTE, INCIDENTELE, SPECIALE, GEVOLG- OF STRAFSCHADE, OF ENIG VERLIES VAN WINST, GEGEVENS OF GOODWILL, VOORTVLOEIEND UIT:
+        <br>(A) UW GEBRUIK VAN, OF ONVERMOGEN TOT GEBRUIK VAN, DE DIENSTEN;
+        <br>(B) ENIG GEDRAG OF INHOUD VAN EEN DERDE PARTIJ, INCLUSIEF DATALEKKEN AFKOMSTIG VAN HUN PLATFORMS;
+        <br>(C) ONGEAUTORISEERDE TOEGANG TOT OF WIJZIGING VAN UW GEGEVENS, <strong>INCLUSIEF DERGELIJKE GEBEURTENISSEN DIE VOORTVLOEIEN UIT EEN TECHNISCHE STORING BINNEN DE DIENSTEN ZELF.</strong>
+      </p>
+      <p>MOCHT ER DESONDANKS ENIGE AANSPRAKELIJKHEID AAN ONS WORDEN OPGELEGD, DAN ZAL ONZE TOTALE CUMULATIEVE AANSPRAKELIJKHEID JEGENS U ONDER DEZE OVEREENKOMST NIET MEER BEDRAGEN DAN HET GROOTSTE VAN (1) HET TOTALE BEDRAG DAT U AAN ONS HEEFT BETAALD VOOR ENIGE VERTEX DIENSTEN IN DE 12 MAANDEN VOORAFGAAND AAN DE GEBEURTENIS DIE AANLEIDING GEEFT TOT DE CLAIM, OF (2) HONDERD AMERIKAANSE DOLLAR ($100). DEZE BEPERKING IS FUNDAMENTEEL VOOR DE OVEREENKOMST TUSSEN U EN ONS EN IS VAN TOEPASSING ONGEACHT DE JURIDISCHE THEORIE WAAROP EEN CLAIM IS GEBASEERD.</p>
+    </div>
+
+    <h2>6. Beëindiging</h2>
+    <p>We kunnen uw account en toegang tot de Diensten onmiddellijk beëindigen of opschorten, zonder voorafgaande kennisgeving, als u deze Voorwaarden schendt. We behouden ons ook het recht voor om een Dienst op elk moment te wijzigen of stop te zetten.</p>
+
+    <h2>7. Toepasselijk Recht</h2>
+    <p>Deze Voorwaarden worden beheerst door de wetten van de <strong>Republiek Turkije</strong>. U stemt ermee in zich te onderwerpen aan de exclusieve jurisdictie van de <strong>Centrale Rechtbanken van Istanbul (Çağlayan)</strong> voor eventuele geschillen.</p>
+
+    <h2>8. Wijzigingen in deze Voorwaarden</h2>
+    <p>We behouden ons het recht voor, naar eigen goeddunken, om deze Voorwaarden op elk moment te wijzigen of te vervangen. We zullen eventuele wijzigingen aangeven door de "Laatst bijgewerkt" datum bovenaan deze Voorwaarden bij te werken. Voor eventuele belangrijke wijzigingen zullen we een meer prominente kennisgeving doen. Uw voortgezet gebruik van een van onze Diensten na het plaatsen van eventuele wijzigingen in deze Voorwaarden vormt acceptatie van die wijzigingen.</p>
+
+    <h2>9. Neem Contact Op</h2>
+    <p>Als u vragen heeft over deze Voorwaarden, neem dan contact met ons op:</p>
+    <ul>
+      <li><b>E-mail:</b> <a href="mailto:contact@vertexishere.com">contact@vertexishere.com</a></li>
+      <li><b>Website:</b> <a href="https://vertexishere.com" target="_blank"
+          rel="noopener noreferrer">vertexishere.com</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>

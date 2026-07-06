@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Vertex 利用規約</title>
+  <link rel="icon" type="image/png" href="assets/favicon.webp" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" /></noscript>
+  <style>
+    :root {
+      --background-color: #f4f7f9;
+      --content-bg-color: #ffffff;
+      --text-primary-color: #1a202c;
+      --text-secondary-color: #4a5568;
+      --link-color: #3182ce;
+      --link-hover-color: #2b6cb0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --triangle-color: #e2e8f0;
+      --critical-bg-color: #fff5f5;
+      --critical-border-color: #e53e3e;
+      --critical-text-color: #9b2c2c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 20px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+
+    body::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    .triangles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .triangles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: var(--triangle-color);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: triangleAnimate 25s linear infinite;
+      bottom: -180px;
+    }
+
+    .triangles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .triangles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .triangles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .triangles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .triangles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .triangles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .triangles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .triangles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes triangleAnimate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: var(--content-bg-color);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1,
+    h2 {
+      color: var(--text-primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    p,
+    ul,
+    li {
+      color: var(--text-secondary-color);
+      font-size: 1.05em;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+      padding-left: 10px;
+      list-style-position: outside;
+    }
+
+    li {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+
+    .critical-disclaimer {
+      background-color: var(--critical-bg-color);
+      border-left: 4px solid var(--critical-border-color);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .critical-disclaimer p,
+    .critical-disclaimer li {
+      color: var(--critical-text-color);
+    }
+
+    .critical-disclaimer strong {
+      color: var(--critical-border-color);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+        margin: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+    <!-- Geometric Background Objects -->
+    <div class="geo-bg">
+      <div class="geo-blob geo-blob-1"></div>
+      <div class="geo-blob geo-blob-2"></div>
+      <div class="geo-blob geo-blob-3"></div>
+    </div>
+
+  <ul class="triangles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <div class="container">
+    <h1>Vertex 利用規約</h1>
+    <p style="text-align:center; font-style: italic;">最終更新日: 2025年7月22日</p>
+
+    <p>
+      Vertexへようこそ。当社のアプリケーション、ゲーム、および関連サービス（以下、総称して「本サービス」といいます）は、<strong>Vertex</strong>（以下「当社」といいます）として知られる個人開発者によって提供されます。この一般的な利用規約（以下「本規約」といいます）は、当社のすべての本サービスへのアクセスおよび使用を規定するものです。Vertexアカウントを作成するか、当社の本サービスを使用することにより、お客様は本規約および当社の一般的な<strong>
+        <a href="https://vertexishere.com/privacy-policy" target="_blank" rel="noopener noreferrer">プライバシーポリシー</a>。
+      </strong>
+    </p>
+    <p>
+      個々のサービス（Cortexなど）には、適用される追加の固有の条件がある場合がありますのでご注意ください。矛盾がある場合は、そのサービスの特定の条件がこの一般的な本規約に優先します。
+    </p>
+
+    <h2>1. 当社のサービス</h2>
+    <p>
+      Vertexは、さまざまなデジタル製品およびサービスを提供しており、無料で提供される場合と有料のサブスクリプションを通じて提供される場合があります。私たちは独立した開発者チームであり、登録企業ではありません。高品質のサービスを提供するよう努めておりますが、「現状有姿」で提供されます。
+    </p>
+
+    <h2>2. 統合Vertexアカウント</h2>
+    <p>
+      当社のサービスのほとんどの機能を使用するには、統合Vertexアカウントを作成する必要があります。お客様は、ご自身のアカウントで発生するすべての活動、およびログイン認証情報の機密性を保持する責任を負います。
+    </p>
+
+    <h2>3. 財務条件</h2>
+    <p>当社のサービスの一部では、有料サブスクリプションまたはデジタルグッズ（「クレジット」など）を提供する場合があります。</p>
+    <ul>
+      <li><strong>サブスクリプション:</strong> サブスクリプションは定期的かつ前払いで請求され、キャンセルされない限り自動的に更新されます。</li>
+      <li><strong>デジタルグッズ:</strong> 購入したデジタルアイテムは、特定のサービス内でのみ使用できます。これらは現実世界の金銭的価値を持たず、譲渡することはできません。</li>
+      <li><strong>返金不可:</strong> 法律で認められる最大限の範囲で、すべての支払いは最終的なものであり、返金することはできません。</li>
+    </ul>
+
+    <h2>4. ユーザーの行動</h2>
+    <p>お客様は、違法または本規約で禁止されている目的で当社の本サービスを使用しないことに同意するものとします。これには、有害なコンテンツの生成、当社のシステムの機能低下の試み、または他者の権利の侵害が含まれます。</p>
+
+    <h2>5. 保証の否認および責任の制限</h2>
+    <p>本サービスは、「現状有姿」および「提供可能な範囲」で提供されます。本サービスの使用は、お客様ご自身の責任において行われます。法律で認められる最大限の範囲で、当社は、商品性、特定の目的への適合性、および非侵害の黙示の保証を含む（ただしこれらに限定されない）、明示または黙示を問わず、いかなる種類の保証も明示的に否認します。</p>
+
+    <div class="critical-disclaimer">
+      <p><strong>リスクの認識および責任の制限:</strong> お客様は、当社のサービスが複雑なソフトウェアおよびサードパーティのインフラストラクチャに依存していることを認識するものとします。当社は卓越性を追求していますが、エラー、バグ、セキュリティの脆弱性、またはその他の技術的障害（「技術的障害」）が発生する可能性があることを理解し、同意するものとします。</p>
+      <p>法律で認められる最大限の範囲で、いかなる場合も<strong>VERTEXの開発者</strong>は、以下のいずれかに起因する、間接的、偶発的、特別、派生的、または懲罰的損害賠償、あるいは利益、データ、または信用の損失について責任を負わないものとします。
+        <br>(A) お客様による本サービスの使用または使用不能。
+        <br>(B) サードパーティのプラットフォームに起因するデータ侵害を含む、サードパーティの行動またはコンテンツ。
+        <br>(C) お客様のデータへの不正アクセスまたは改ざん（<strong>本サービス自体の技術的障害から生じるそのような事象を含みます</strong>）。
+      </p>
+      <p>それにもかかわらず当社に責任が課せられた場合、本契約に基づくお客様に対する当社の累積的責任総額は、（1）請求の原因となった事象の前の12か月間にVertexのサービスについてお客様が当社に支払った総額、または（2）100米ドル（$100）のいずれか大きい方を超えないものとします。この制限は、お客様と当社の間の契約の基本であり、請求の根拠となる法理論に関係なく適用されます。</p>
+    </div>
+
+    <h2>6. 契約の解除</h2>
+    <p>お客様が本規約に違反した場合、当社は事前の通知なしに直ちにお客様のアカウントおよび本サービスへのアクセスを終了または一時停止する場合があります。当社はまた、いつでも任意のサービスを変更または中止する権利を留保します。</p>
+
+    <h2>7. 準拠法</h2>
+    <p>本規約は<strong>トルコ共和国</strong>の法律に準拠するものとします。お客様は、あらゆる紛争について<strong>イスタンブール中央（チャールヤン）裁判所</strong>の専属管轄権に服することに同意するものとします。</p>
+
+    <h2>8. 本規約の変更</h2>
+    <p>当社は、独自の裁量により、いつでも本規約を変更または置き換える権利を留保します。当社は、本規約の上部にある「最終更新日」の日付を更新することにより、変更を示します。重要な変更については、より目立つ形でお知らせします。本規約の変更が掲載された後も、当社のいずれかのサービスを継続して使用することは、それらの変更を受け入れたことを構成します。</p>
+
+    <h2>9. お問い合わせ</h2>
+    <p>本規約に関してご質問がある場合は、以下までお問い合わせください。</p>
+    <ul>
+      <li><b>メール:</b> <a href="mailto:contact@vertexishere.com">contact@vertexishere.com</a></li>
+      <li><b>ウェブサイト:</b> <a href="https://vertexishere.com" target="_blank"
+          rel="noopener noreferrer">vertexishere.com</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>

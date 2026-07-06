@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Vertex 服务条款</title>
+  <link rel="icon" type="image/png" href="../assets/favicon.webp" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" /></noscript>
+  <style>
+    :root {
+      --background-color: #f4f7f9;
+      --content-bg-color: #ffffff;
+      --text-primary-color: #1a202c;
+      --text-secondary-color: #4a5568;
+      --link-color: #3182ce;
+      --link-hover-color: #2b6cb0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --triangle-color: #e2e8f0;
+      --critical-bg-color: #fff5f5;
+      --critical-border-color: #e53e3e;
+      --critical-text-color: #9b2c2c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 20px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+
+    body::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    .triangles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .triangles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: var(--triangle-color);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: triangleAnimate 25s linear infinite;
+      bottom: -180px;
+    }
+
+    .triangles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .triangles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .triangles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .triangles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .triangles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .triangles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .triangles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .triangles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes triangleAnimate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: var(--content-bg-color);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1,
+    h2 {
+      color: var(--text-primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    p,
+    ul,
+    li {
+      color: var(--text-secondary-color);
+      font-size: 1.05em;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+      padding-left: 10px;
+      list-style-position: outside;
+    }
+
+    li {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+
+    .critical-disclaimer {
+      background-color: var(--critical-bg-color);
+      border-left: 4px solid var(--critical-border-color);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .critical-disclaimer p,
+    .critical-disclaimer li {
+      color: var(--critical-text-color);
+    }
+
+    .critical-disclaimer strong {
+      color: var(--critical-border-color);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+        margin: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+    <!-- Geometric Background Objects -->
+    <div class="geo-bg">
+      <div class="geo-blob geo-blob-1"></div>
+      <div class="geo-blob geo-blob-2"></div>
+      <div class="geo-blob geo-blob-3"></div>
+    </div>
+
+  <ul class="triangles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <div class="container">
+    <h1>Vertex 服务条款</h1>
+    <p style="text-align:center; font-style: italic;">最后更新：2025年7月22日</p>
+
+    <p>
+      欢迎来到 Vertex。我们的应用程序、游戏及相关服务（统称为“服务”）由名为 <strong>Vertex</strong> 的独立开发者（“我们”或“我们的”）提供。这些一般服务条款（“条款”）约束您对我们所有服务的访问和使用。通过创建 Vertex 帐户或使用我们的任何服务，即表示您同意受这些条款和我们的一般 <strong>
+        <a href="https://vertexishere.com/privacy-policy" target="_blank" rel="noopener noreferrer">隐私政策</a>。
+      </strong>
+    </p>
+    <p>
+      请注意，个别服务（如 Cortex）可能有适用于它们的附加特定条款。如有冲突，将以该服务的特定条款为准，优先于这些一般条款。
+    </p>
+
+    <h2>1. 我们的服务</h2>
+    <p>
+      Vertex 提供各种数字产品和服务，可能免费提供或通过付费订阅提供。我们是一个独立的开发者团队，而不是注册公司。我们努力提供高质量的服务，但按“原样”提供。
+    </p>
+
+    <h2>2. 您的统一 Vertex 帐户</h2>
+    <p>
+      您必须创建一个统一的 Vertex 帐户才能使用我们服务的大部分功能。您对您帐户下发生的所有活动负责，并有责任对您的登录凭据保密。
+    </p>
+
+    <h2>3. 财务条款</h2>
+    <p>我们的一些服务可能提供付费订阅或数字商品（如“积分”）。</p>
+    <ul>
+      <li><strong>订阅：</strong> 订阅按周期提前计费，除非取消，否则将自动续订。</li>
+      <li><strong>数字商品：</strong> 购买的任何数字物品仅供在特定服务内使用。它们没有现实世界的货币价值，且不可转让。</li>
+      <li><strong>不退款：</strong> 在法律允许的最大范围内，所有付款都是最终的，不可退款。</li>
+    </ul>
+
+    <h2>4. 用户行为</h2>
+    <p>您同意不将我们的服务用于任何非法或本条款禁止的目的。这包括生成有害内容、试图损害我们的系统或侵犯他人的权利。</p>
+
+    <h2>5. 免责声明和责任限制</h2>
+    <p>服务按“原样”和“可用”基础提供。您使用服务的风险由您自行承担。在法律允许的最大范围内，我们明确否认任何形式的明示或暗示保证，包括但不限于适销性、特定用途的适用性和不侵权的暗示保证。</p>
+
+    <div class="critical-disclaimer">
+      <p><strong>风险确认和责任限制：</strong> 您承认我们的服务依赖于复杂的软件和第三方基础设施。虽然我们追求卓越，但您理解并同意可能会发生错误、漏洞、安全漏洞或其他技术故障（“技术故障”）。</p>
+      <p>在法律允许的最大范围内，在任何情况下，<strong>VERTEX 的开发者</strong>均不对任何间接的、偶然的、特殊的、后果性的或惩罚性的损害，或任何利润、数据或商誉的损失负责，这些损害或损失源于：
+        <br>(A) 您使用或无法使用服务；
+        <br>(B) 任何第三方的任何行为或内容，包括源自其平台的数据泄露；
+        <br>(C) 未经授权访问或更改您的数据，<strong>包括因服务本身的技术故障而引起的此类事件。</strong>
+      </p>
+      <p>如果尽管如此仍对我们施加任何责任，我们在本协议下对您的总累计责任不应超过以下两者中的较大者：(1) 在引起索赔的事件发生前 12 个月内，您为任何 Vertex 服务向我们支付的总金额，或 (2) 一百美元 ($100)。该限制是您和我们之间交易的根本，无论任何索赔基于何种法律理论均适用。</p>
+    </div>
+
+    <h2>6. 终止</h2>
+    <p>如果您违反这些条款，我们可能会立即终止或暂停您的帐户及对服务的访问，恕不另行通知。我们还保留随时修改或停止任何服务的权利。</p>
+
+    <h2>7. 适用法律</h2>
+    <p>这些条款应受<strong>土耳其共和国</strong>法律管辖。您同意就任何争议接受<strong>伊斯坦布尔中央（Çağlayan）法院</strong>的专属管辖权。</p>
+
+    <h2>8. 本条款的变更</h2>
+    <p>我们保留随时自行决定修改或替换这些条款的权利。我们将通过更新这些条款顶部的“最后更新”日期来表明任何变更。对于任何重大变更，我们将提供更醒目的通知。在这些条款的任何变更发布后，您继续使用我们的任何服务即构成对这些变更的接受。</p>
+
+    <h2>9. 联系我们</h2>
+    <p>如果您对这些条款有任何疑问，请联系我们：</p>
+    <ul>
+      <li><b>电子邮件：</b> <a href="mailto:contact@vertexishere.com">contact@vertexishere.com</a></li>
+      <li><b>网站：</b> <a href="https://vertexishere.com" target="_blank"
+          rel="noopener noreferrer">vertexishere.com</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>

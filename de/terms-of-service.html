@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Vertex Nutzungsbedingungen</title>
+  <link rel="icon" type="image/png" href="assets/favicon.webp" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" /></noscript>
+  <style>
+    :root {
+      --background-color: #f4f7f9;
+      --content-bg-color: #ffffff;
+      --text-primary-color: #1a202c;
+      --text-secondary-color: #4a5568;
+      --link-color: #3182ce;
+      --link-hover-color: #2b6cb0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --triangle-color: #e2e8f0;
+      --critical-bg-color: #fff5f5;
+      --critical-border-color: #e53e3e;
+      --critical-text-color: #9b2c2c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 20px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+
+    body::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    .triangles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .triangles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: var(--triangle-color);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: triangleAnimate 25s linear infinite;
+      bottom: -180px;
+    }
+
+    .triangles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .triangles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .triangles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .triangles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .triangles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .triangles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .triangles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .triangles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes triangleAnimate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: var(--content-bg-color);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1,
+    h2 {
+      color: var(--text-primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    p,
+    ul,
+    li {
+      color: var(--text-secondary-color);
+      font-size: 1.05em;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+      padding-left: 10px;
+      list-style-position: outside;
+    }
+
+    li {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+
+    .critical-disclaimer {
+      background-color: var(--critical-bg-color);
+      border-left: 4px solid var(--critical-border-color);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .critical-disclaimer p,
+    .critical-disclaimer li {
+      color: var(--critical-text-color);
+    }
+
+    .critical-disclaimer strong {
+      color: var(--critical-border-color);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+        margin: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+    <!-- Geometric Background Objects -->
+    <div class="geo-bg">
+      <div class="geo-blob geo-blob-1"></div>
+      <div class="geo-blob geo-blob-2"></div>
+      <div class="geo-blob geo-blob-3"></div>
+    </div>
+
+  <ul class="triangles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <div class="container">
+    <h1>Vertex Nutzungsbedingungen</h1>
+    <p style="text-align:center; font-style: italic;">Zuletzt aktualisiert: 22. Juli 2025</p>
+
+    <p>
+      Willkommen bei Vertex. Unsere Anwendungen, Spiele und damit verbundenen Dienste (zusammenfassend die "Dienste") werden von den unabhängigen Entwicklern, bekannt als <strong>Vertex</strong> ("wir", "uns" oder "unser"), bereitgestellt. Diese allgemeinen Nutzungsbedingungen ("Bedingungen") regeln Ihren Zugang zu und Ihre Nutzung all unserer Dienste. Durch die Erstellung eines Vertex-Kontos oder die Nutzung unserer Dienste erklären Sie sich mit diesen Bedingungen und unserer allgemeinen <strong>
+        <a href="https://vertexishere.com/privacy-policy" target="_blank" rel="noopener noreferrer">Datenschutzerklärung</a>.
+      </strong>
+    </p>
+    <p>
+      Bitte beachten Sie, dass für einzelne Dienste (wie Cortex) möglicherweise zusätzliche, spezifische Bedingungen gelten. Im Falle eines Konflikts haben die spezifischen Bedingungen dieses Dienstes Vorrang vor diesen allgemeinen Bedingungen.
+    </p>
+
+    <h2>1. Unsere Dienste</h2>
+    <p>
+      Vertex bietet eine Vielzahl digitaler Produkte und Dienste an, die kostenlos oder über kostenpflichtige Abonnements angeboten werden können. Wir sind ein unabhängiges Entwicklerteam, kein eingetragenes Unternehmen. Wir bemühen uns, hochwertige Dienste bereitzustellen, bieten diese jedoch "ohne Mängelgewähr" an.
+    </p>
+
+    <h2>2. Ihr einheitliches Vertex-Konto</h2>
+    <p>
+      Sie müssen ein einheitliches Vertex-Konto erstellen, um die meisten Funktionen unserer Dienste nutzen zu können. Sie sind für alle Aktivitäten verantwortlich, die unter Ihrem Konto stattfinden, sowie für die Geheimhaltung Ihrer Anmeldedaten.
+    </p>
+
+    <h2>3. Finanzielle Bedingungen</h2>
+    <p>Einige unserer Dienste bieten möglicherweise kostenpflichtige Abonnements oder digitale Güter (wie "Credits") an.</p>
+    <ul>
+      <li><strong>Abonnements:</strong> Abonnements werden im Voraus wiederkehrend abgerechnet und verlängern sich automatisch, sofern sie nicht gekündigt werden.</li>
+      <li><strong>Digitale Güter:</strong> Alle gekauften digitalen Artikel sind nur zur Nutzung innerhalb des jeweiligen Dienstes bestimmt. Sie haben keinen realen Geldwert und sind nicht übertragbar.</li>
+      <li><strong>Keine Rückerstattungen:</strong> Soweit gesetzlich zulässig, sind alle Zahlungen endgültig und nicht erstattungsfähig.</li>
+    </ul>
+
+    <h2>4. Benutzerverhalten</h2>
+    <p>Sie stimmen zu, unsere Dienste nicht für Zwecke zu nutzen, die illegal oder durch diese Bedingungen verboten sind. Dies schließt die Erstellung schädlicher Inhalte, den Versuch, unsere Systeme zu beeinträchtigen, oder die Verletzung der Rechte anderer ein.</p>
+
+    <h2>5. Haftungsausschluss und Haftungsbeschränkung</h2>
+    <p>DIE DIENSTE WERDEN "OHNE MÄNGELGEWÄHR" UND "WIE VERFÜGBAR" BEREITGESTELLT. DIE NUTZUNG DER DIENSTE ERFOLGT AUF IHR EIGENES RISIKO. SOWEIT GESETZLICH ZULÄSSIG, SCHLIESSEN WIR AUSDRÜCKLICH ALLE GARANTIEN JEDER ART AUS, OB AUSDRÜCKLICH ODER STILLSCHWEIGEND, EINSCHLIESSLICH, ABER NICHT BESCHRÄNKT AUF DIE STILLSCHWEIGENDEN GARANTIEN DER MARKTGÄNGIGKEIT, DER EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND DER NICHTVERLETZUNG VON RECHTEN DRITTER.</p>
+
+    <div class="critical-disclaimer">
+      <p><strong>Anerkennung von Risiken und Haftungsbeschränkung:</strong> Sie erkennen an, dass unsere Dienste auf komplexer Software und Drittanbieter-Infrastruktur basieren. Obwohl wir nach Exzellenz streben, verstehen Sie und stimmen zu, dass Fehler, Bugs, Sicherheitslücken oder andere technische Ausfälle ("Technische Ausfälle") auftreten können.</p>
+      <p>SOWEIT GESETZLICH ZULÄSSIG, SIND <strong>DIE ENTWICKLER VON VERTEX</strong> IN KEINEM FALL HAFTBAR FÜR INDIREKTE, ZUFÄLLIGE, BESONDERE, FOLGE- ODER STRAFSCHÄDEN ODER FÜR DEN VERLUST VON GEWINNEN, DATEN ODER FIRMENWERT, DIE RESULTIEREN AUS:
+        <br>(A) IHRER NUTZUNG ODER DER UNFÄHIGKEIT ZUR NUTZUNG DER DIENSTE;
+        <br>(B) DEM VERHALTEN ODER DEN INHALTEN DRITTER, EINSCHLIESSLICH DATENVERLETZUNGEN, DIE VON DEREN PLATTFORMEN AUSGEHEN;
+        <br>(C) UNBEFUGTEM ZUGANG ZU ODER ÄNDERUNG IHRER DATEN, <strong>EINSCHLIESSLICH SOLCHER EREIGNISSE, DIE AUS EINEM TECHNISCHEN AUSFALL INNERHALB DER DIENSTE SELBST ENTSTEHEN.</strong>
+      </p>
+      <p>SOLLTE UNS DENNOCH EINE HAFTUNG AUFERLEGT WERDEN, ÜBERSTEIGT UNSERE GESAMTE KUMULATIVE HAFTUNG IHNEN GEGENÜBER UNTER DIESER VEREINBARUNG NICHT DEN HÖHEREN BETRAG VON ENTWEDER (1) DEM GESAMTBETRAG, DEN SIE IN DEN 12 MONATEN VOR DEM EREIGNIS, DAS ZU DEM ANSPRUCH GEFÜHRT HAT, FÜR VERTEX-DIENSTE AN UNS GEZAHLT HABEN, ODER (2) EINHUNDERT US-DOLLAR ($100). DIESE BESCHRÄNKUNG IST GRUNDLEGEND FÜR DIE VEREINBARUNG ZWISCHEN IHNEN UND UNS UND GILT UNABHÄNGIG VON DER RECHTSTHEORIE, AUF DER EIN ANSPRUCH BASIERT.</p>
+    </div>
+
+    <h2>6. Kündigung</h2>
+    <p>Wir können Ihr Konto und Ihren Zugang zu den Diensten sofort und ohne vorherige Ankündigung kündigen oder sperren, wenn Sie gegen diese Bedingungen verstoßen. Wir behalten uns außerdem das Recht vor, jeden Dienst jederzeit zu ändern oder einzustellen.</p>
+
+    <h2>7. Geltendes Recht</h2>
+    <p>Diese Bedingungen unterliegen den Gesetzen der <strong>Republik Türkei</strong>. Sie stimmen zu, sich für alle Streitigkeiten der ausschließlichen Gerichtsbarkeit der <strong>Zentralen Gerichte von Istanbul (Çağlayan)</strong> zu unterwerfen.</p>
+
+    <h2>8. Änderungen dieser Bedingungen</h2>
+    <p>Wir behalten uns das Recht vor, diese Bedingungen nach unserem alleinigen Ermessen jederzeit zu ändern oder zu ersetzen. Wir werden auf Änderungen hinweisen, indem wir das Datum "Zuletzt aktualisiert" oben in diesen Bedingungen aktualisieren. Bei wesentlichen Änderungen werden wir eine deutlichere Benachrichtigung bereitstellen. Ihre fortgesetzte Nutzung unserer Dienste nach der Veröffentlichung von Änderungen dieser Bedingungen stellt die Annahme dieser Änderungen dar.</p>
+
+    <h2>9. Kontakt</h2>
+    <p>Wenn Sie Fragen zu diesen Bedingungen haben, kontaktieren Sie uns bitte:</p>
+    <ul>
+      <li><b>E-Mail:</b> <a href="mailto:contact@vertexishere.com">contact@vertexishere.com</a></li>
+      <li><b>Website:</b> <a href="https://vertexishere.com" target="_blank"
+          rel="noopener noreferrer">vertexishere.com</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>

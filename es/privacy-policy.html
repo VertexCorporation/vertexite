@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <!-- Meta Tags: Essential for character encoding, responsiveness, and compatibility -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Política de Privacidad de Vertex</title>
+
+  <!-- Assets: Favicon and Google Fonts for consistent branding and typography -->
+  <link rel="icon" type="image/png" href="../assets/favicon.webp" />
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" /></noscript>
+
+  <!-- Internal CSS: Styles for the entire page (Consistent with other legal pages) -->
+  <style>
+    :root {
+      --background-color: #f4f7f9;
+      --content-bg-color: #ffffff;
+      --text-primary-color: #1a202c;
+      --text-secondary-color: #4a5568;
+      --link-color: #3182ce;
+      --link-hover-color: #2b6cb0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --triangle-color: #e2e8f0;
+      --warning-bg-color: #fffaf0;
+      --warning-border-color: #f6e05e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 20px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+
+    body::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    .triangles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .triangles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: var(--triangle-color);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: triangleAnimate 25s linear infinite;
+      bottom: -180px;
+    }
+
+    .triangles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .triangles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .triangles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .triangles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .triangles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .triangles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .triangles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .triangles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes triangleAnimate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: var(--content-bg-color);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1,
+    h2 {
+      color: var(--text-primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    p,
+    ul,
+    li {
+      color: var(--text-secondary-color);
+      font-size: 1.05em;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+      padding-left: 10px;
+    }
+
+    li {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+
+    .disclaimer {
+      background-color: var(--warning-bg-color);
+      border-left: 4px solid var(--warning-border-color);
+      padding: 15px 20px;
+      margin-top: 20px;
+      border-radius: 4px;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+        margin: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  
+    <!-- Geometric Background Objects -->
+    <div class="geo-bg">
+      <div class="geo-blob geo-blob-1"></div>
+      <div class="geo-blob geo-blob-2"></div>
+      <div class="geo-blob geo-blob-3"></div>
+    </div>
+
+  <ul class="triangles">
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+    <li></li>
+  </ul>
+  <div class="container">
+    <h1>Política de Privacidad de Vertex</h1>
+    <p style="text-align:center; font-style: italic;">Última actualización: 27 de julio de 2025</p>
+
+    <p>
+      Bienvenido a Vertex. Somos un equipo apasionado e independiente de desarrolladores que crean varias aplicaciones y juegos.
+      Es importante que sepa que <strong>no somos una empresa formal y registrada.</strong> Operamos con un
+      compromiso con la transparencia y la privacidad del usuario. Esta Política de Privacidad general explica cómo manejamos la información
+      en todo el ecosistema de Vertex.
+    </p>
+    <p>
+      Esta política cubre el sistema de la <strong>Cuenta Unificada de Vertex</strong>. Tenga en cuenta que cada uno de nuestros productos
+      (como
+      Cortex) tiene su propia Política de Privacidad específica que detalla el manejo de datos exclusivo de ese servicio. Este documento
+      proporciona el marco general.
+    </p>
+
+    <h2>A) La Cuenta Unificada de Vertex</h2>
+    <p>
+      Para usar nuestros servicios, usted crea una única "Cuenta de Vertex". Esta cuenta le permite acceder a todos nuestros proyectos actuales y
+      futuros con un conjunto de credenciales. Para este propósito, recopilamos la siguiente información:
+    </p>
+    <ul>
+      <li>
+        <b>Información Que Proporciona Directamente:</b> Cuando se registra, recopilamos su <strong>nombre de usuario</strong>,
+        <strong>dirección de correo electrónico</strong> y una <strong>contraseña</strong> encriptada de forma segura.
+      </li>
+      <li>
+        <b>Información de Inicios de Sesión de Terceros (ej. Google):</b> Si inicia sesión usando un servicio como Google,
+        recibimos información de ellos para crear su cuenta. Esto generalmente incluye su <strong>nombre</strong>,
+        <strong>dirección de correo electrónico</strong> y <strong>foto de perfil</strong>.
+      </li>
+    </ul>
+
+    <h2>B) Información Específica del Servicio y Separación de Datos</h2>
+    <p>
+      Más allá de los datos básicos de la cuenta, cada producto de Vertex recopila información necesaria para su función. Por ejemplo, nuestra
+      aplicación Cortex procesa datos de conversación.
+    </p>
+    <p>
+      <strong>Este tipo de datos específicos del producto se rige por la política de privacidad de ese producto.</strong> Mantenemos
+      una estricta separación de datos. La información recopilada en un producto (por ejemplo, sus chats en Cortex) nunca se utiliza para
+      personalizar su experiencia o mostrar anuncios en otro producto de Vertex.
+    </p>
+
+    <h2>C) Cómo Usamos Su Información</h2>
+    <p>Usamos la información que recopilamos para los siguientes propósitos generales:</p>
+    <ul>
+      <li>Para proporcionar, mantener y asegurar nuestros servicios y el sistema unificado de cuentas.</li>
+      <li>Para comunicarnos con usted sobre su cuenta o actualizaciones críticas del servicio.</li>
+      <li>Para analizar las tendencias de uso y mejorar nuestros productos, generalmente utilizando datos anonimizados o agregados.</li>
+      <li>
+        Para procesar pagos de suscripciones o bienes digitales. Estas transacciones son manejadas directamente por las plataformas
+        de las tiendas de aplicaciones correspondientes (por ejemplo, Google Play Store), no por nosotros.
+      </li>
+    </ul>
+    <p><strong>No vendemos ni alquilamos su información personal a terceros. Nunca.</strong></p>
+
+
+    <h2>D) Sus Derechos y Control de Datos</h2>
+    <p>Usted tiene el control total de sus datos.</p>
+    <ul>
+      <li>
+        <strong>Derecho de Acceso:</strong> Puede solicitar una copia de los datos personales que tenemos sobre su Cuenta de Vertex.
+      </li>
+      <li>
+        <strong>Derecho de Supresión:</strong> Tiene derecho a eliminar permanentemente toda su Cuenta de Vertex y todos
+        los datos asociados con ella en todos nuestros servicios. Puede iniciar este proceso usando nuestro formulario central de eliminación
+        de datos: <a href="https://vertexishere.com/delete-data" target="_blank"
+          rel="noopener noreferrer">vertexishere.com/delete-data</a>.
+      </li>
+    </ul>
+
+    <h2>E) Seguridad de Datos y Dependencia de Terceros</h2>
+    <div class="disclaimer">
+      <p>
+        El ecosistema de Vertex se basa en plataformas de terceros sólidas y seguras como <strong>Google Firebase</strong>
+        para el alojamiento y la autenticación, y <strong>Cloudflare</strong> para la seguridad de la red. Confiamos en sus
+        medidas de seguridad estándar de la industria para proteger sus datos.
+      </p>
+      <p>
+        Sin embargo, ningún sistema es 100% inmune a las infracciones. Al utilizar nuestros servicios, reconoce que somos un equipo pequeño e
+        independiente y dependemos de estos socios. En caso de una violación de datos en estas plataformas de terceros,
+        <strong>los desarrolladores de Vertex no pueden asumir la responsabilidad.</strong>
+      </p>
+    </div>
+
+    <h2>F) Privacidad de los Niños</h2>
+    <p>
+      Si bien el contenido de algunos de nuestros juegos y aplicaciones (por ejemplo, los clasificados PEGI 3) puede ser adecuado para todas las edades,
+      nuestros servicios en línea, incluida la creación de una <strong>Cuenta de Vertex</strong> unificada, están estrictamente destinados
+      a personas que tengan <strong>13 años de edad o más</strong>.
+    </p>
+    <p>
+      El motivo de esta distinción es que la creación de una cuenta requiere la recopilación de datos personales (como una
+      dirección de correo electrónico), y no estamos equipados para manejar los complejos requisitos legales (como el consentimiento parental
+      verificable)
+      para recopilar datos de niños más pequeños. Por lo tanto, no recopilamos a sabiendas información personal de nadie
+      menor de 13 años. Si usted es un padre o tutor y cree que su hijo nos ha proporcionado información
+      personal, comuníquese con nosotros de inmediato.
+    </p>
+
+    <h2>G) Cambios en Esta Política de Privacidad</h2>
+    <p>Nos reservamos el derecho, a nuestra entera discreción, de modificar o reemplazar esta Política de Privacidad en cualquier momento.
+      Indicaremos cualquier cambio actualizando la fecha de "Última actualización" en la parte superior de esta Política. Para cualquier cambio
+      significativo, proporcionaremos un aviso más destacado. Su uso continuado de nuestro Servicio después de la publicación de cualquier
+      cambio constituye la aceptación de dichos cambios.</p>
+
+    <h2>H) Contáctenos</h2>
+    <p>Si tiene alguna pregunta sobre esta Política de Privacidad general, contáctenos:</p>
+    <ul>
+      <li><b>Correo electrónico:</b> <a href="mailto:contact@vertexishere.com">contact@vertexishere.com</a></li>
+      <li><b>Sitio web:</b> <a href="https://vertexishere.com" target="_blank"
+          rel="noopener noreferrer">vertexishere.com</a></li>
+    </ul>
+  </div>
+</body>
+
+</html>
