@@ -130,9 +130,31 @@ const langs = {
     }
 };
 
+const localizationMap = {
+    'tr': { terms: 'hizmet-kosullari.html', privacy: 'gizlilik-politikasi.html' },
+    'ar': { terms: 'shurut-al-khidma.html', privacy: 'siyasat-al-khususiyya.html' },
+    'az': { terms: 'xidmet-sertleri.html', privacy: 'mexfilik-siyaseti.html' },
+    'de': { terms: 'nutzungsbedingungen.html', privacy: 'datenschutzrichtlinie.html' },
+    'es': { terms: 'terminos-de-servicio.html', privacy: 'politica-de-privacidad.html' },
+    'fr': { terms: 'conditions-d-utilisation.html', privacy: 'politique-de-confidentialite.html' },
+    'hi': { terms: 'seva-ki-shartein.html', privacy: 'gopaniyata-niti.html' },
+    'id': { terms: 'syarat-layanan.html', privacy: 'kebijakan-privasi.html' },
+    'it': { terms: 'termini-di-servizio.html', privacy: 'informativa-sulla-privacy.html' },
+    'ja': { terms: 'riyou-kiyaku.html', privacy: 'puraibashi-porishi.html' },
+    'ko': { terms: 'iyong-yakgwan.html', privacy: 'gaein-jeongbo-cheori-bangchim.html' },
+    'nl': { terms: 'servicevoorwaarden.html', privacy: 'privacybeleid.html' },
+    'pt': { terms: 'termos-de-servico.html', privacy: 'politica-de-privacidade.html' },
+    'ru': { terms: 'usloviya-obsluzhivaniya.html', privacy: 'politika-konfidencialnosti.html' },
+    'zh': { terms: 'fuwu-tiaokuan.html', privacy: 'yinsi-zhengce.html' },
+    'en': { terms: 'terms-of-service.html', privacy: 'privacy-policy.html' }
+};
+
 Object.keys(langs).forEach(key => {
+    let tf = localizationMap[key] ? localizationMap[key].terms : 'terms-of-service.html';
+    let pf = localizationMap[key] ? localizationMap[key].privacy : 'privacy-policy.html';
+
     if (key === 'tr' || key === 'az') {
-        langs[key].agreeTerms = '<a href="terms-of-service.html" target="_blank"><b>Kullanım Koşulları</b></a> ve <a href="privacy-policy.html" target="_blank"><b>Gizlilik Politikası</b></a>\'nı kabul ediyorum.';
+        langs[key].agreeTerms = `<a href="${tf}" target="_blank"><b>Kullanım Koşulları</b></a> ve <a href="${pf}" target="_blank"><b>Gizlilik Politikası</b></a>'nı kabul ediyorum.`;
         langs[key].doctrineLabel = '<a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrini</b></a>\'ni okudum.';
         langs[key].doctrineTitle = 'Vertex Doktrini';
         langs[key].doctrineText = doctrineTr;
@@ -150,7 +172,7 @@ Object.keys(langs).forEach(key => {
         langs[key].contractContent = contractTr;
         langs[key].contractTitle = 'Vertex Kadro Sözleşmesi';
     } else {
-        langs[key].agreeTerms = 'I accept the <a href="terms-of-service.html" target="_blank"><b>Terms of Service</b></a> and <a href="privacy-policy.html" target="_blank"><b>Privacy Policy</b></a>.';
+        langs[key].agreeTerms = `I accept the <a href="${tf}" target="_blank"><b>Terms of Service</b></a> and <a href="${pf}" target="_blank"><b>Privacy Policy</b></a>.`;
         langs[key].doctrineLabel = 'I have read the <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doctrine</b></a>.';
         langs[key].doctrineTitle = 'Vertex Doctrine';
         langs[key].doctrineText = doctrineEn;
@@ -402,6 +424,19 @@ const formCss = `
     cursor: not-allowed;
 }
 
+/* intl-tel-input theme overrides */
+.iti__country-list {
+    background-color: var(--bg-card) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+.iti__country-name {
+    color: var(--text-color) !important;
+}
+.iti__country:hover, .iti__country.iti__highlight {
+    background-color: var(--bg-elevated) !important;
+}
+
 /* Modal CSS */
 .doctrine-modal-overlay {
     position: fixed;
@@ -572,7 +607,7 @@ const getFormHtml = (info) => `
                     <span>${info.contractLabel}</span>
                 </label>
                 <label class="checkbox-label" id="doctrineLabelWrapper">
-                    <input type="checkbox" id="doctrineCheck" required disabled>
+                    <input type="checkbox" id="doctrineCheck" required>
                     <span>${info.doctrineLabel}</span>
                 </label>
             </div>
@@ -756,9 +791,15 @@ const getFormHtml = (info) => `
             modal.style.display = 'none';
         }, 300);
         
-        doctrineCheck.disabled = false;
         doctrineCheck.checked = true;
         checkFormValidity();
+    });
+
+    doctrineCheck.addEventListener('click', (e) => {
+        if (!readBtn.classList.contains('active')) {
+            e.preventDefault();
+            openBtn.click();
+        }
     });
 
     

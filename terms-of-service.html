@@ -5,15 +5,25 @@
   <title>Vertex Terms of Service</title>
   <script>
     (function() {
-      const supportedLangs = ['tr', 'ar', 'az', 'de', 'es', 'fr', 'hi', 'id', 'it', 'ja', 'ko', 'nl', 'pt', 'ru', 'zh', 'en'];
+      const map = {
+        'tr': 'hizmet-kosullari.html', 'ar': 'shurut-al-khidma.html',
+        'az': 'xidmet-sertleri.html', 'de': 'nutzungsbedingungen.html',
+        'es': 'terminos-de-servicio.html', 'fr': 'conditions-d-utilisation.html',
+        'hi': 'seva-ki-shartein.html', 'id': 'syarat-layanan.html',
+        'it': 'termini-di-servizio.html', 'ja': 'riyou-kiyaku.html',
+        'ko': 'iyong-yakgwan.html', 'nl': 'servicevoorwaarden.html',
+        'pt': 'termos-de-servico.html', 'ru': 'usloviya-obsluzhivaniya.html',
+        'zh': 'fuwu-tiaokuan.html', 'en': 'terms-of-service.html'
+      };
+      
       let userLang = navigator.language || navigator.userLanguage || 'en';
       userLang = userLang.split('-')[0];
       
-      if (!supportedLangs.includes(userLang)) {
+      if (!map[userLang]) {
         userLang = 'en';
       }
       
-      window.location.replace('/' + userLang + '/terms-of-service.html');
+      window.location.replace('/' + userLang + '/' + map[userLang]);
     })();
   </script>
 </head>

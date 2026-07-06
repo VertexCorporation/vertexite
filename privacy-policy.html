@@ -5,15 +5,25 @@
   <title>Vertex Privacy Policy</title>
   <script>
     (function() {
-      const supportedLangs = ['tr', 'ar', 'az', 'de', 'es', 'fr', 'hi', 'id', 'it', 'ja', 'ko', 'nl', 'pt', 'ru', 'zh', 'en'];
+      const map = {
+        'tr': 'gizlilik-politikasi.html', 'ar': 'siyasat-al-khususiyya.html',
+        'az': 'mexfilik-siyaseti.html', 'de': 'datenschutzrichtlinie.html',
+        'es': 'politica-de-privacidad.html', 'fr': 'politique-de-confidentialite.html',
+        'hi': 'gopaniyata-niti.html', 'id': 'kebijakan-privasi.html',
+        'it': 'informativa-sulla-privacy.html', 'ja': 'puraibashi-porishi.html',
+        'ko': 'gaein-jeongbo-cheori-bangchim.html', 'nl': 'privacybeleid.html',
+        'pt': 'politica-de-privacidade.html', 'ru': 'politika-konfidencialnosti.html',
+        'zh': 'yinsi-zhengce.html', 'en': 'privacy-policy.html'
+      };
+      
       let userLang = navigator.language || navigator.userLanguage || 'en';
       userLang = userLang.split('-')[0];
       
-      if (!supportedLangs.includes(userLang)) {
+      if (!map[userLang]) {
         userLang = 'en';
       }
       
-      window.location.replace('/' + userLang + '/privacy-policy.html');
+      window.location.replace('/' + userLang + '/' + map[userLang]);
     })();
   </script>
 </head>

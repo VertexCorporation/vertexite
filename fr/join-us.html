@@ -318,6 +318,19 @@
     cursor: not-allowed;
 }
 
+/* intl-tel-input theme overrides */
+.iti__country-list {
+    background-color: var(--bg-card) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+}
+.iti__country-name {
+    color: var(--text-color) !important;
+}
+.iti__country:hover, .iti__country.iti__highlight {
+    background-color: var(--bg-elevated) !important;
+}
+
 /* Modal CSS */
 .doctrine-modal-overlay {
     position: fixed;
@@ -568,14 +581,14 @@
             <div class="checkbox-group full-width">
                 <label class="checkbox-label">
                     <input type="checkbox" id="termsCheck" required>
-                    <span>I accept the <a href="terms-of-service.html" target="_blank"><b>Terms of Service</b></a> and <a href="privacy-policy.html" target="_blank"><b>Privacy Policy</b></a>.</span>
+                    <span>I accept the <a href="conditions-d-utilisation.html" target="_blank"><b>Terms of Service</b></a> and <a href="politique-de-confidentialite.html" target="_blank"><b>Privacy Policy</b></a>.</span>
                 </label>
                 <label class="checkbox-label">
                     <input type="checkbox" id="contractCheck" required>
                     <span>I declare that I have read and approve the <a href="vertex-team-contract.html" target="_blank"><b>Vertex Team Contract</b></a>.</span>
                 </label>
                 <label class="checkbox-label" id="doctrineLabelWrapper">
-                    <input type="checkbox" id="doctrineCheck" required disabled>
+                    <input type="checkbox" id="doctrineCheck" required>
                     <span>I have read the <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doctrine</b></a>.</span>
                 </label>
             </div>
@@ -779,9 +792,15 @@ That might we need is present in the noble blood in our veins; the absolute peak
             modal.style.display = 'none';
         }, 300);
         
-        doctrineCheck.disabled = false;
         doctrineCheck.checked = true;
         checkFormValidity();
+    });
+
+    doctrineCheck.addEventListener('click', (e) => {
+        if (!readBtn.classList.contains('active')) {
+            e.preventDefault();
+            openBtn.click();
+        }
     });
 
     
