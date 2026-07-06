@@ -971,23 +971,27 @@ Object.keys(langs).forEach(lang => {
             fs.writeFileSync(targetFilePath, joinPageContent);
             console.log('Generated integrated layout for:', targetFilePath);
 
-            // 3. Generate Contract Page using terms-of-service.html template
-            const tosPath = path.join(baseDir, 'terms-of-service.html');
+            // 3. Generate Contract Page using en/terms-of-service.html template
+            const tosPath = path.join(baseDir, 'en', 'terms-of-service.html');
             const tosHtml = fs.readFileSync(tosPath, 'utf-8');
             
             const containerStart = tosHtml.indexOf('<div class="container">');
             const tosHeader = tosHtml.substring(0, containerStart + '<div class="container">'.length);
             const tosFooter = '\n  </div>\n</body>\n</html>';
             
-            let contractHeaderHtml = tosHeader.replace(/<title>.*?<\/title>/, `<title>${info.contractTitle} | Vertex</title>
-  <meta property="og:title" content="${info.contractTitle} | Vertex" />
+            let contractHeaderHtml = tosHeader.replace(/<title>.*?<\/title>/, `<title>${info.contractTitle} | Vertex</title>`);
+            contractHeaderHtml = contractHeaderHtml.replace(/<meta property="og:.*?>/g, '');
+            contractHeaderHtml = contractHeaderHtml.replace(/<meta name="twitter:.*?>/g, '');
+            contractHeaderHtml = contractHeaderHtml.replace('</head>', `  <meta property="og:title" content="${info.contractTitle} | Vertex" />
   <meta property="og:description" content="Vertex ${info.contractTitle}" />
   <meta property="og:url" content="https://vertexishere.com/${lang}/${info.contractFile}" />
   <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp" />
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="${info.contractTitle} | Vertex" />
   <meta name="twitter:description" content="Vertex ${info.contractTitle}" />
-  <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp" />`);
-            contractHeaderHtml = contractHeaderHtml.replace('href="assets/favicon.webp"', 'href="../assets/favicon.webp"');
+  <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp" />
+</head>`);
 
             
             // Format the contract content for HTML
