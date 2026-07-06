@@ -666,24 +666,49 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
     let secondsLeft = 10;
     let timerStarted = false;
 
+    function tickTimer() {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+            readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
+        } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            readBtn.innerText = 'Okudum';
+            readBtn.disabled = false;
+            readBtn.classList.remove('disabled');
+            readBtn.classList.add('active');
+        }
+    }
+
     function startTimer() {
         if(timerStarted) return;
         timerStarted = true;
         
         readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
-        timerInterval = setInterval(() => {
-            secondsLeft--;
-            if (secondsLeft > 0) {
-                readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
-            } else {
-                clearInterval(timerInterval);
-                readBtn.innerText = 'Okudum';
-                readBtn.disabled = false;
-                readBtn.classList.remove('disabled');
-                readBtn.classList.add('active');
-            }
-        }, 1000);
+        timerInterval = setInterval(tickTimer, 1000);
     }
+
+    function resetTimer() {
+        if (secondsLeft <= 0) return; // Already finished
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerStarted = false;
+        secondsLeft = 10;
+        readBtn.innerText = 'Okudum';
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            if (timerStarted && secondsLeft > 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        } else {
+            if (timerStarted && secondsLeft > 0 && !timerInterval) {
+                timerInterval = setInterval(tickTimer, 1000);
+            }
+        }
+    });
 
     const doctrineLabelWrapper = document.getElementById('doctrineLabelWrapper');
     doctrineLabelWrapper.addEventListener('click', (e) => {
@@ -719,6 +744,7 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
             setTimeout(() => {
                 modal.style.display = 'none';
             }, 300);
+            resetTimer();
         }
     });
 

@@ -653,24 +653,49 @@ const getFormHtml = (info) => `
     let secondsLeft = 10;
     let timerStarted = false;
 
+    function tickTimer() {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+            readBtn.innerText = '${info.readBtn} (' + secondsLeft + ' ${info.waitSec})';
+        } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            readBtn.innerText = '${info.readBtn}';
+            readBtn.disabled = false;
+            readBtn.classList.remove('disabled');
+            readBtn.classList.add('active');
+        }
+    }
+
     function startTimer() {
         if(timerStarted) return;
         timerStarted = true;
         
         readBtn.innerText = '${info.readBtn} (' + secondsLeft + ' ${info.waitSec})';
-        timerInterval = setInterval(() => {
-            secondsLeft--;
-            if (secondsLeft > 0) {
-                readBtn.innerText = '${info.readBtn} (' + secondsLeft + ' ${info.waitSec})';
-            } else {
-                clearInterval(timerInterval);
-                readBtn.innerText = '${info.readBtn}';
-                readBtn.disabled = false;
-                readBtn.classList.remove('disabled');
-                readBtn.classList.add('active');
-            }
-        }, 1000);
+        timerInterval = setInterval(tickTimer, 1000);
     }
+
+    function resetTimer() {
+        if (secondsLeft <= 0) return; // Already finished
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerStarted = false;
+        secondsLeft = 10;
+        readBtn.innerText = '${info.readBtn}';
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            if (timerStarted && secondsLeft > 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        } else {
+            if (timerStarted && secondsLeft > 0 && !timerInterval) {
+                timerInterval = setInterval(tickTimer, 1000);
+            }
+        }
+    });
 
     const doctrineLabelWrapper = document.getElementById('doctrineLabelWrapper');
     doctrineLabelWrapper.addEventListener('click', (e) => {
@@ -706,6 +731,7 @@ const getFormHtml = (info) => `
             setTimeout(() => {
                 modal.style.display = 'none';
             }, 300);
+            resetTimer();
         }
     });
 

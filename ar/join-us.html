@@ -686,24 +686,49 @@ That might we need is present in the noble blood in our veins; the absolute peak
     let secondsLeft = 10;
     let timerStarted = false;
 
+    function tickTimer() {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+            readBtn.innerText = 'I have read (' + secondsLeft + ' seconds left)';
+        } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            readBtn.innerText = 'I have read';
+            readBtn.disabled = false;
+            readBtn.classList.remove('disabled');
+            readBtn.classList.add('active');
+        }
+    }
+
     function startTimer() {
         if(timerStarted) return;
         timerStarted = true;
         
         readBtn.innerText = 'I have read (' + secondsLeft + ' seconds left)';
-        timerInterval = setInterval(() => {
-            secondsLeft--;
-            if (secondsLeft > 0) {
-                readBtn.innerText = 'I have read (' + secondsLeft + ' seconds left)';
-            } else {
-                clearInterval(timerInterval);
-                readBtn.innerText = 'I have read';
-                readBtn.disabled = false;
-                readBtn.classList.remove('disabled');
-                readBtn.classList.add('active');
-            }
-        }, 1000);
+        timerInterval = setInterval(tickTimer, 1000);
     }
+
+    function resetTimer() {
+        if (secondsLeft <= 0) return; // Already finished
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerStarted = false;
+        secondsLeft = 10;
+        readBtn.innerText = 'I have read';
+    }
+
+    document.addEventListener('visibilitychange', () => {
+        if (document.hidden) {
+            if (timerStarted && secondsLeft > 0) {
+                clearInterval(timerInterval);
+                timerInterval = null;
+            }
+        } else {
+            if (timerStarted && secondsLeft > 0 && !timerInterval) {
+                timerInterval = setInterval(tickTimer, 1000);
+            }
+        }
+    });
 
     const doctrineLabelWrapper = document.getElementById('doctrineLabelWrapper');
     doctrineLabelWrapper.addEventListener('click', (e) => {
@@ -739,6 +764,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
             setTimeout(() => {
                 modal.style.display = 'none';
             }, 300);
+            resetTimer();
         }
     });
 
