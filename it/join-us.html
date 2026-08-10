@@ -578,6 +578,31 @@
                 <textarea id="joinAbout" required></textarea>
             </div>
             
+            
+            <div class="form-group full-width">
+                <label>In quale dipartimento vorresti principalmente entrare?</label>
+                <select id="joinTeam" name="joinTeam" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; margin-bottom: 20px; outline: none; font-family: inherit; font-size: 1rem; appearance: none; -webkit-appearance: none; -moz-appearance: none;">
+                    <option value="" disabled selected>Seleziona un dipartimento</option>
+                    <optgroup label="Dipartimenti Superiori" style="color: #fff; font-style: normal; font-weight: bold;">
+                        <option value="essence" disabled>Essence | Consiglio di Amministrazione</option>
+                        <option value="core" disabled>Core | Dipartimento Principale</option>
+                        <option value="senatus" disabled>Senatus | Dipartimento di Gestione</option>
+                    </optgroup>
+                    <optgroup label="Dipartimenti Intermedi" style="color: #fff; font-style: normal; font-weight: bold;">
+                        <option value="pulse">Pulse | Dipartimento dei Social Media</option>
+                        <option value="chroma">Chroma | Dipartimento di Design Digitale</option>
+                        <option value="catalyst">Catalyst | Dipartimento delle Finanze</option>
+                        <option value="envoy">Envoy | Dipartimento Operativo</option>
+                        <option value="aero">Aero | Dipartimento delle Risorse Umane</option>
+                        <option value="graphogos">Graphogos | Dipartimento di Sviluppo Software</option>
+                    </optgroup>
+                    <optgroup label="Dipartimenti Inferiori" style="color: #fff; font-style: normal; font-weight: bold;">
+                        <option value="scout" style="color: #fff;">Scout | Dipartimento Operativo</option>
+                        <option value="vertest" style="color: #fff;">Vertest | Dipartimento di Test</option>
+                    </optgroup>
+                </select>
+            </div>
+            
             <div class="checkbox-group full-width">
                 <label class="checkbox-label">
                     <input type="checkbox" id="termsCheck" required>
@@ -799,7 +824,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
     // Validation Localization
     const reqErr = 'Compila questo campo.';
     const emailErr = 'Inserisci un'email valida.';
-    const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required]');
+    const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required], #joinForm select[required]');
     
     formInputs.forEach(input => {
         input.addEventListener('invalid', function(e) {
@@ -841,7 +866,8 @@ That might we need is present in the noble blood in our veins; the absolute peak
             linkedin: document.getElementById('joinLinkedin').value,
             github: document.getElementById('joinGithub').value,
             about: document.getElementById('joinAbout').value,
-            language: 'it'
+            language: 'it',
+            department: document.getElementById('joinTeam').value
         };
 
         const checkUrl = 'https://firestore.googleapis.com/v1/projects/vertex-ai-1618/databases/(default)/documents:runQuery';

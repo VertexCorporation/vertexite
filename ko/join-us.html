@@ -578,6 +578,31 @@
                 <textarea id="joinAbout" required></textarea>
             </div>
             
+            
+            <div class="form-group full-width">
+                <label>주로 어느 부서에 참여하고 싶으신가요?</label>
+                <select id="joinTeam" name="joinTeam" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; margin-bottom: 20px; outline: none; font-family: inherit; font-size: 1rem; appearance: none; -webkit-appearance: none; -moz-appearance: none;">
+                    <option value="" disabled selected>부서를 선택하세요</option>
+                    <optgroup label="상위 부서" style="color: #fff; font-style: normal; font-weight: bold;">
+                        <option value="essence" disabled>Essence | 이사회</option>
+                        <option value="core" disabled>Core | 핵심 부서</option>
+                        <option value="senatus" disabled>Senatus | 관리 부서</option>
+                    </optgroup>
+                    <optgroup label="중위 부서" style="color: #fff; font-style: normal; font-weight: bold;">
+                        <option value="pulse">Pulse | 소셜 미디어 부서</option>
+                        <option value="chroma">Chroma | 디지털 디자인 부서</option>
+                        <option value="catalyst">Catalyst | 재무 부서</option>
+                        <option value="envoy">Envoy | 운영 부서</option>
+                        <option value="aero">Aero | 인사 부서</option>
+                        <option value="graphogos">Graphogos | 소프트웨어 개발 부서</option>
+                    </optgroup>
+                    <optgroup label="하위 부서" style="color: #fff; font-style: normal; font-weight: bold;">
+                        <option value="scout" style="color: #fff;">Scout | 운영 부서</option>
+                        <option value="vertest" style="color: #fff;">Vertest | 테스트 부서</option>
+                    </optgroup>
+                </select>
+            </div>
+            
             <div class="checkbox-group full-width">
                 <label class="checkbox-label">
                     <input type="checkbox" id="termsCheck" required>
@@ -799,7 +824,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
     // Validation Localization
     const reqErr = '이 필드를 작성하세요.';
     const emailErr = '유효한 이메일을 입력하세요.';
-    const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required]');
+    const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required], #joinForm select[required]');
     
     formInputs.forEach(input => {
         input.addEventListener('invalid', function(e) {
@@ -841,7 +866,8 @@ That might we need is present in the noble blood in our veins; the absolute peak
             linkedin: document.getElementById('joinLinkedin').value,
             github: document.getElementById('joinGithub').value,
             about: document.getElementById('joinAbout').value,
-            language: 'ko'
+            language: 'ko',
+            department: document.getElementById('joinTeam').value
         };
 
         const checkUrl = 'https://firestore.googleapis.com/v1/projects/vertex-ai-1618/databases/(default)/documents:runQuery';
