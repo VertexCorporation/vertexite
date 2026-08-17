@@ -238,6 +238,41 @@
   filter: brightness(1.1);
 }
 
+.moderators-section {
+  padding: 60px 0 40px 0;
+  width: 100%;
+}
+
+.moderators-inline-grid {
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center; 
+  gap: 15px; 
+  margin-top: 20px;
+}
+
+.mod-pill {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: #cccccc;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 40px; 
+  transition: all 0.3s ease;
+  cursor: default;
+  white-space: nowrap; 
+}
+
+/
+.mod-pill:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.05);
+}
+
 /* Dust Effect for Role Change */
 @keyframes dustPuff {
   0% {
