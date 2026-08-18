@@ -881,6 +881,11 @@
     function submitJoinForm(e) {
       e.preventDefault();
       const btn = e.target.querySelector('button[type="submit"]');
+      const vName = document.getElementById('joinName').value.trim();
+      const vEmail = document.getElementById('joinEmail').value.trim();
+      if (vName.length < 3) { alert('Lütfen geçerli bir ad giriniz (en az 3 karakter).'); return; }
+      const emailRegex = /^[^s@]+@[^s@]+\.[^s@]+$/;
+      if (!emailRegex.test(vEmail)) { alert('Lütfen geçerli bir e-posta adresi giriniz.'); return; }
       btn.textContent = 'Gönderiliyor...';
       btn.disabled = true;
       
