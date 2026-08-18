@@ -811,7 +811,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
             return;
         }
         
-        const emailRegex = /^[^s@]+@[^s@]+\.[^s@]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(vEmail)) {
             alert('Please enter a valid email address.');
             return;

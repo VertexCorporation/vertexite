@@ -791,7 +791,7 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
             return;
         }
         
-        const emailRegex = /^[^s@]+@[^s@]+\.[^s@]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!emailRegex.test(vEmail)) {
             alert('Lütfen geçerli bir e-posta adresi giriniz.');
             return;
