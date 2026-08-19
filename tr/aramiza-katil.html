@@ -781,6 +781,33 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
     // Fallback for direct btn calls if any
     openBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        // --- Added Frontend Validations ---
+        const vName = document.getElementById('joinName').value.trim();
+        const vEmail = document.getElementById('joinEmail').value.trim();
+        const vAbout = document.getElementById('joinAbout').value.trim();
+        
+        if (vName.length < 3) {
+            alert('Lütfen geçerli bir ad giriniz (en az 3 karakter).');
+            return;
+        }
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(vEmail)) {
+            alert('Lütfen geçerli bir e-posta adresi giriniz.');
+            return;
+        }
+        
+        if (typeof iti !== 'undefined' && typeof iti.isValidNumber === 'function' && !iti.isValidNumber()) {
+            alert('Lütfen geçerli bir telefon numarası giriniz.');
+            return;
+        }
+        
+        if (vAbout.length < 20) {
+            alert('Lütfen kendinizden daha detaylı bahsedin (en az 20 karakter).');
+            return;
+        }
+        // --- End of Validations ---
+
         modal.style.display = 'flex';
         setTimeout(() => modal.classList.add('show'), 10);
         setTimeout(() => {

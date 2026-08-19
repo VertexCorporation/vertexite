@@ -410,6 +410,33 @@ That might we need is present in the noble blood in our veins; the absolute peak
     // Fallback for direct btn calls if any
     openBtn.addEventListener('click', (e) => {
         e.preventDefault();
+        // --- Added Frontend Validations ---
+        const vName = document.getElementById('joinName').value.trim();
+        const vEmail = document.getElementById('joinEmail').value.trim();
+        const vAbout = document.getElementById('joinAbout').value.trim();
+        
+        if (vName.length < 3) {
+            alert('Please enter a valid name (at least 3 characters).');
+            return;
+        }
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(vEmail)) {
+            alert('Please enter a valid email address.');
+            return;
+        }
+        
+        if (typeof iti !== 'undefined' && typeof iti.isValidNumber === 'function' && !iti.isValidNumber()) {
+            alert('Please enter a valid phone number.');
+            return;
+        }
+        
+        if (vAbout.length < 20) {
+            alert('Please tell us more about yourself (at least 20 characters).');
+            return;
+        }
+        // --- End of Validations ---
+
         modal.style.display = 'flex';
         setTimeout(() => modal.classList.add('show'), 10);
         setTimeout(() => {
