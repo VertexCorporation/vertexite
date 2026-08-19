@@ -240,10 +240,10 @@
 
 .moderators-inline-grid {
   display: flex;
-  flex-wrap: nowrap; /* Asla alt satıra geçmez, tek satırda yan yana kalır */
+  flex-wrap: nowrap; 
   justify-content: center;
   align-items: center;
-  gap: 10px; /* Kutular arası boşluğu hafif daraltarak ekrana rahat sığdırır */
+  gap: 10px; 
   margin: 24px auto 0 auto;
   width: 100%;
   max-width: 1200px;
@@ -253,12 +253,12 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 18px; /* Yatay ve dikey iç boşlukları kompakt hale getirir */
-  font-size: 14px; /* Tüm isimlerin tek satıra sığması için ideal boyut */
+  padding: 10px 18px; 
+  font-size: 14px; 
   font-weight: 500;
   border-radius: 40px;
-  white-space: nowrap; /* İsimlerin bölünmesini engeller */
-  flex-shrink: 0; /* Ekran daralsa bile butonların ezilmesini önler */
+  white-space: nowrap; 
+  flex-shrink: 0; 
   transition: all 0.3s ease;
   cursor: default;
 }
@@ -272,7 +272,7 @@ body.light .mod-pill,
 [data-theme="light"] .mod-pill {
   background: rgba(0, 0, 0, 0.04);
   border: 1px solid rgba(0, 0, 0, 0.18);
-  color: #1a1a1a; /* Oldukça net ve koyu */
+  color: #1a1a1a; 
 }
 
 body.light .mod-pill:hover,
@@ -283,7 +283,6 @@ body.light .mod-pill:hover,
   box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
 }
 
-/* Dark temadayken açık renk kalmasını istiyorsan: */
 body.dark .mod-pill,
 [data-theme="dark"] .mod-pill {
   background: rgba(255, 255, 255, 0.04);
