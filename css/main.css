@@ -238,61 +238,60 @@
   filter: brightness(1.1);
 }
 
-/* =========================================
-   MODERATÖRLER BÖLÜMÜ (NET GÖRÜNÜM)
-========================================= */
-
 .moderators-inline-grid {
-  display: flex;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  gap: 12px;
-  margin: 24px auto 0 auto;
-  width: 100%;
-  max-width: 1200px;
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 24px auto 0 auto !important;
+  width: 100% !important;
+  max-width: 1200px !important;
 }
 
 .mod-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  font-size: 15px;
-  font-weight: 600;
-  border-radius: 40px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  cursor: default;
-  transition: all 0.25s ease;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 18px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border-radius: 40px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  cursor: default !important;
+  transition: all 0.25s ease !important;
 
-  /* Açık Tema Varsayılanı (Görünür Koyu Gri) */
-  background: #e8e8e8;
-  color: #111111;
-  border: 1px solid #d0d0d0;
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
 }
 
 .mod-pill:hover {
-  background: #dcdcdc;
-  border-color: #999999;
-  transform: translateY(-2px);
+  background: #cbd5e1 !important;
+  border-color: #94a3b8 !important;
+  transform: translateY(-2px) scale(1.03) !important;
 }
 
-/* Koyu Temadayken Otomatik Açık Renk Olması İçin */
 body.dark .mod-pill,
 [data-theme="dark"] .mod-pill,
-html:not(.light) .mod-pill {
-  background: rgba(255, 255, 255, 0.08);
-  color: #f0f0f0;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+.dark .mod-pill {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
 }
 
 body.dark .mod-pill:hover,
 [data-theme="dark"] .mod-pill:hover,
-html:not(.light) .mod-pill:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  color: #ffffff;
+.dark .mod-pill:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.news-card:has(img[src*="solar"]),
+.news-card:has(img[alt*="SOLAR"]),
+.news-card:has(img[alt*="solar"]) {
+  display: none !important;
 }
 
 /* Dust Effect for Role Change */
