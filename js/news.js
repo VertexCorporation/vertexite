@@ -84,6 +84,7 @@ async function fetchNews() {
 
         // 3. Render
         await renderNews(articles, container, lang, strings);
+        
     } catch (error) {
         console.warn("News fetch failed, using fallback data:", error);
         await renderNews(FALLBACK_NEWS, container, lang, strings);

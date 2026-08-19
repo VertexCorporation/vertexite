@@ -238,12 +238,16 @@
   filter: brightness(1.1);
 }
 
+/* =========================================
+   MODERATÖRLER BÖLÜMÜ (NET GÖRÜNÜM)
+========================================= */
+
 .moderators-inline-grid {
   display: flex;
-  flex-wrap: nowrap; 
+  flex-wrap: nowrap;
   justify-content: center;
   align-items: center;
-  gap: 10px; 
+  gap: 12px;
   margin: 24px auto 0 auto;
   width: 100%;
   max-width: 1200px;
@@ -253,49 +257,42 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 10px 18px; 
-  font-size: 14px; 
-  font-weight: 500;
+  padding: 10px 20px;
+  font-size: 15px;
+  font-weight: 600;
   border-radius: 40px;
-  white-space: nowrap; 
-  flex-shrink: 0; 
-  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
   cursor: default;
+  transition: all 0.25s ease;
+
+  /* Açık Tema Varsayılanı (Görünür Koyu Gri) */
+  background: #e8e8e8;
+  color: #111111;
+  border: 1px solid #d0d0d0;
 }
 
 .mod-pill:hover {
-  transform: translateY(-2px) scale(1.04);
+  background: #dcdcdc;
+  border-color: #999999;
+  transform: translateY(-2px);
 }
 
-
-body.light .mod-pill,
-[data-theme="light"] .mod-pill {
-  background: rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.18);
-  color: #1a1a1a; 
-}
-
-body.light .mod-pill:hover,
-[data-theme="light"] .mod-pill:hover {
-  background: rgba(0, 0, 0, 0.08);
-  border-color: rgba(0, 0, 0, 0.35);
-  color: #000000;
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-}
-
+/* Koyu Temadayken Otomatik Açık Renk Olması İçin */
 body.dark .mod-pill,
-[data-theme="dark"] .mod-pill {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #e0e0e0;
+[data-theme="dark"] .mod-pill,
+html:not(.light) .mod-pill {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f0f0f0;
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
 body.dark .mod-pill:hover,
-[data-theme="dark"] .mod-pill:hover {
-  background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(255, 255, 255, 0.25);
+[data-theme="dark"] .mod-pill:hover,
+html:not(.light) .mod-pill:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
   color: #ffffff;
-  box-shadow: 0 6px 15px rgba(255, 255, 255, 0.05);
 }
 
 /* Dust Effect for Role Change */
