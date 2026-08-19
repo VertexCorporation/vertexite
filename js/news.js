@@ -67,11 +67,23 @@ async function fetchNews() {
         const newsDataResponse = await fetch(signedUrl);
         if (!newsDataResponse.ok) throw new Error("Failed to fetch news data");
 
-        const articles = await newsDataResponse.json();
+        let articles = await newsDataResponse.json();
+
+        // Solar projesine ait verileri filtrele
+        articles = articles.filter(article => {
+            const id = (article.id || '').toLowerCase();
+            const slug = (article.slug || '').toLowerCase();
+            const tags = (article.tags || []).map(t => t.toLowerCase());
+            const titles = Object.values(article.translations || {}).map(t => (t.title || '').toLowerCase());
+
+            return !id.includes('solar') &&
+                   !slug.includes('solar') &&
+                   !tags.includes('solar') &&
+                   !titles.some(title => title.includes('solar'));
+        });
 
         // 3. Render
         await renderNews(articles, container, lang, strings);
-
     } catch (error) {
         console.warn("News fetch failed, using fallback data:", error);
         await renderNews(FALLBACK_NEWS, container, lang, strings);
