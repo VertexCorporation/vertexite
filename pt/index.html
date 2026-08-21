@@ -481,6 +481,64 @@
         <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px; margin-top: 120px;">Nossos Parceiros</h2>
 
         <div class="centered-grid">
+
+          <style>
+            /* ElevenLabs Theme */
+            .el-dark-logo { display: block !important; }
+            .el-light-logo { display: none !important; }
+            .el-box-border { border-color: rgba(255, 255, 255, 0.85) !important; background: rgba(255, 255, 255, 0.05) !important; }
+          
+            body.light .el-dark-logo,
+            [data-theme="light"] .el-dark-logo,
+            html.light .el-dark-logo {
+              display: none !important;
+            }
+            body.light .el-light-logo,
+            [data-theme="light"] .el-light-logo,
+            html.light .el-light-logo {
+              display: block !important;
+            }
+            body.light .el-box-border,
+            [data-theme="light"] .el-box-border,
+            html.light .el-box-border {
+              border-color: rgba(0, 0, 0, 0.85) !important;
+              background: rgba(0, 0, 0, 0.03) !important;
+            }
+          </style>
+          
+          <div class="card fade-up team-card">
+            <div class="el-box-border" style="width: 150px; height: 150px; margin: 0 auto 16px auto; border-radius: 20px; border-width: 2px; border-style: solid; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 12px; box-sizing: border-box;">
+              <a href="https://elevenlabs.io/startup-grants" target="_blank" rel="noopener noreferrer" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
+                <!-- Dark theme elevenlabs logo -->
+                <img src="https://eleven-public-cdn.elevenlabs.io/payloadcms/cy7rxce8uki-IIElevenLabsGrants%201.webp" 
+                     alt="ElevenLabs Grants" 
+                     class="el-dark-logo"
+                     style="width: 100%; height: auto; object-fit: contain;" 
+                     loading="lazy">
+          
+                <!-- Light theme elevenlabs logo -->
+                <img src="https://eleven-public-cdn.elevenlabs.io/payloadcms/pwsc4vchsqt-ElevenLabsGrants.webp" 
+                     alt="ElevenLabs Grants" 
+                     class="el-light-logo"
+                     style="width: 100%; height: auto; object-fit: contain;" 
+                     loading="lazy">
+              </a>
+            </div>
+          
+            <h3>ElevenLabs</h3>
+            <p class="team-role">PARCEIRO TECNOLÓGICO</p>
+          
+            <div class="social-links">
+              <a href="https://elevenlabs.io/startup-grants" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s ease;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"></circle>
+                  <line x1="2" y1="12" x2="22" y2="12"></line>
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                </svg>
+              </a>
+            </div>
+          </div>
+
           <!-- Fal.ai -->
           <div class="card fade-up team-card">
             <img src="../assets/partners/fal.svg" alt="fal" class="team-img" loading="lazy" style="border-radius: 12px; object-fit: contain; padding: 20px; background: rgba(255,255,255,0.05);">
@@ -564,7 +622,7 @@
           <div class="card fade-up team-card">
             <img src="../assets/team/ekin_burcak.jpeg" alt="Ekin Burçak Korkmaz" class="team-img" loading="lazy">
             <h3>Ekin Burçak Korkmaz</h3>
-            <p class="team-role">Marketing</p>
+            <p class="team-role">Diretor de Operações</p>
             <div class="social-links">
               <a href="https://www.linkedin.com/in/ekin-bur%C3%A7ak-korkmaz-1aa9ba3a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
                 target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
@@ -577,7 +635,7 @@
           <div class="card fade-up team-card">
             <img src="../assets/team/ecrin_haciomeroglu.jpg" alt="Ecrin Hacıömeroğlu" class="team-img" loading="lazy">
             <h3>Ecrin Hacıömeroğlu</h3>
-            <p class="team-role">Marketing</p>
+            <p class="team-role">Diretor de Comunicação</p>
             <div class="social-links">
               <a href="mailto:ecrin@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
             </div>
@@ -621,21 +679,20 @@
       </div>
     </section>
     <!-- Moderatörler -->
-  <section class="moderators-section">
-    <div class="container">
-        <h2 class="section-title text-center" style="font-size: 32px; margin-bottom: 24px;">Nossos Moderadores</h2>
-      
-        <div class="moderators-inline-grid">
-          <span class="mod-pill">Nice Özcan</span>
-          <span class="mod-pill">Efe Şahin</span>
-          <span class="mod-pill">Egemen Topçu</span>
-          <span class="mod-pill">Mert Çelik</span>
-          <span class="mod-pill">Selen Naz Solmaz</span>
-          <span class="mod-pill">Melike Kaya</span>
-        </div>
-      
-    </div>
-  </section>
+<section class="moderators-section" style="padding: 40px 0 20px 0;">
+  <div class="container">
+      <h2 class="section-title text-center" style="font-size: 32px; margin-bottom: 24px;">Nossos Moderadores</h2>
+
+      <div style="display: flex; flex-wrap: nowrap; justify-content: center; align-items: center; gap: 10px; margin: 20px auto 0 auto; width: 100%; max-width: 1200px;">
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Nice Özcan</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Efe Şahin</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Egemen Topçu</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Mert Çelik</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Selen Naz Solmaz</span>
+          <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Melike Kaya</span>
+      </div>
+  </div>
+</section>
   </main>
 
   <!-- Final CTA -->
