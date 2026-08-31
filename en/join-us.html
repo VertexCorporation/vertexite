@@ -318,6 +318,111 @@
     cursor: not-allowed;
 }
 
+/* Cal.com Interview Embed Section */
+.interview-section {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.interview-header-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.interview-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.interview-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin: 0;
+}
+
+.interview-status-box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    border-radius: 14px;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.interview-status-box.pending {
+    background: rgba(234, 179, 8, 0.08);
+    border: 1px solid rgba(234, 179, 8, 0.35);
+    color: #eab308;
+}
+
+.interview-status-box.confirmed {
+    background: rgba(34, 197, 94, 0.08);
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    color: #22c55e;
+}
+
+.interview-status-box .status-icon {
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.interview-status-box .status-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.interview-status-box .status-content strong {
+    font-weight: 600;
+    font-size: 0.98rem;
+    color: var(--text-color);
+}
+
+.interview-status-box .status-content span {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+}
+
+.cal-embed-container {
+    width: 100%;
+    min-height: 650px;
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    background: var(--bg-elevated, rgba(128, 128, 128, 0.03));
+    position: relative;
+}
+
+#my-cal-inline-interview {
+    width: 100%;
+    height: 100%;
+    min-height: 650px;
+}
+
+.submit-warning-tip {
+    grid-column: 1 / -1;
+    font-size: 0.88rem;
+    color: #ef4444;
+    text-align: center;
+    margin-top: 8px;
+    line-height: 1.4;
+    transition: opacity 0.3s ease;
+}
+
 /* intl-tel-input theme overrides */
 .iti__country-list {
     background-color: var(--bg-card) !important;
@@ -581,7 +686,7 @@
             
             <div class="form-group full-width">
                 <label>Which department would you primarily like to join?</label>
-                <select id="joinTeam" name="joinTeam" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; margin-bottom: 20px; outline: none; font-family: inherit; font-size: 1rem; appearance: none; -webkit-appearance: none; -moz-appearance: none;">
+                <select id="joinTeam" name="joinTeam" required style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.5); color: #fff; margin-bottom: 10px; outline: none; font-family: inherit; font-size: 1rem; appearance: none; -webkit-appearance: none; -moz-appearance: none;">
                     <option value="" disabled selected>Select a department</option>
                     <optgroup label="Upper Departments" style="color: #fff; font-style: normal; font-weight: bold;">
                         <option value="essence" disabled>Essence | Board of Directors</option>
@@ -602,6 +707,44 @@
                     </optgroup>
                 </select>
             </div>
+
+            <!-- Interview Appointment Section -->
+            <div class="interview-section form-group full-width">
+                <div class="interview-header-wrapper">
+                    <label class="interview-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Select Interview Date & Time
+                    </label>
+                    <p class="interview-desc">To process your application, please book an interview slot from the calendar below.</p>
+                </div>
+
+                <!-- Interview Status Badge -->
+                <div id="interviewStatusBox" class="interview-status-box pending">
+                    <div class="status-icon">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="8" x2="12" y2="12"></line>
+                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                        </svg>
+                    </div>
+                    <div class="status-content">
+                        <strong>No Interview Scheduled Yet</strong>
+                        <span>Please select a date and time from the Cal.com calendar below to complete your booking.</span>
+                    </div>
+                </div>
+
+                <!-- Cal.com Inline Embed Container -->
+                <div class="cal-embed-container">
+                    <!-- Cal inline embed code begins -->
+                    <div style="width:100%;height:100%;min-height:650px;overflow:scroll" id="my-cal-inline-interview"></div>
+                    <!-- Cal inline embed code ends -->
+                </div>
+            </div>
             
             <div class="checkbox-group full-width">
                 <label class="checkbox-label">
@@ -619,6 +762,7 @@
             </div>
 
             <button type="submit" class="join-submit-btn" id="submitBtn" disabled>Submit Application</button>
+            <div id="submitWarningTip" class="submit-warning-tip">* You must book an interview date and accept all terms to submit your application.</div>
             </form>
     </div>
 </div>
@@ -701,6 +845,90 @@ That might we need is present in the noble blood in our veins; the absolute peak
     });
 
     
+    // Cal.com Embed & State Logic
+    let isInterviewBooked = false;
+    let interviewBookingData = null;
+
+    function handleInterviewBooking(detail) {
+        console.log('Interview booked:', detail);
+        isInterviewBooked = true;
+        interviewBookingData = detail?.data || detail;
+        
+        let dateStr = '';
+        if (interviewBookingData?.booking?.startTime) {
+            try {
+                const d = new Date(interviewBookingData.booking.startTime);
+                dateStr = d.toLocaleString('en-US', { dateStyle: 'full', timeStyle: 'short' });
+            } catch(e) {
+                dateStr = interviewBookingData.booking.startTime;
+            }
+        } else if (interviewBookingData?.date) {
+            dateStr = interviewBookingData.date;
+        }
+
+        const statusBox = document.getElementById('interviewStatusBox');
+        if (statusBox) {
+            statusBox.className = 'interview-status-box confirmed';
+            statusBox.innerHTML = `
+                <div class="status-icon">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                    </svg>
+                </div>
+                <div class="status-content">
+                    <strong>Interview Successfully Scheduled!</strong>
+                    <span>${dateStr ? 'Interview Time: ' + dateStr : 'Your interview appointment has been recorded.'}</span>
+                </div>
+            `;
+        }
+
+        checkFormValidity();
+    }
+
+    // Cal embed loader
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "interview", {origin:"https://app.cal.com"});
+    Cal.config = Cal.config || {};
+    Cal.config.forwardQueryParams = true;
+
+    Cal.ns.interview("inline", {
+        elementOrSelector:"#my-cal-inline-interview",
+        config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"auto"},
+        calLink: "team/vertex/interview",
+    });
+
+    Cal.ns.interview("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+
+    // Cal.com Event Listeners
+    Cal.ns.interview("on", {
+        action: "*",
+        callback: (e) => {
+            if (e.detail?.type === "bookingSuccessful" || e.detail?.type === "bookingSuccessfulV2" || e.detail?.action === "bookingSuccessful") {
+                handleInterviewBooking(e.detail);
+            }
+        }
+    });
+
+    Cal.ns.interview("on", {
+        action: "bookingSuccessful",
+        callback: (e) => handleInterviewBooking(e.detail)
+    });
+
+    Cal.ns.interview("on", {
+        action: "bookingSuccessfulV2",
+        callback: (e) => handleInterviewBooking(e.detail)
+    });
+
+    // Window message fallback for Cal.com events
+    window.addEventListener("message", (e) => {
+        try {
+            if (e.data && (e.data.type === "CAL:bookingSuccessful" || e.data.type === "CAL:bookingSuccessfulV2" || e.data.action === "bookingSuccessful")) {
+                handleInterviewBooking(e.data);
+            }
+        } catch(err) {}
+    });
+
     // Form Logic
     const termsCheck = document.getElementById('termsCheck');
     const doctrineCheck = document.getElementById('doctrineCheck');
@@ -709,10 +937,25 @@ That might we need is present in the noble blood in our veins; the absolute peak
     const ageInput = document.getElementById('joinAge');
     
     function checkFormValidity() {
-        if (termsCheck.checked && doctrineCheck.checked && contractCheck.checked) {
-            submitBtn.disabled = false;
-        } else {
-            submitBtn.disabled = true;
+        const checkboxesValid = termsCheck.checked && doctrineCheck.checked && contractCheck.checked;
+        const allValid = checkboxesValid && isInterviewBooked;
+        
+        submitBtn.disabled = !allValid;
+
+        const tip = document.getElementById('submitWarningTip');
+        if (tip) {
+            if (!isInterviewBooked && !checkboxesValid) {
+                tip.textContent = '* You must book an interview appointment and accept all terms to submit your application.';
+                tip.style.display = 'block';
+            } else if (!isInterviewBooked) {
+                tip.textContent = '* Please select an interview time from the calendar above before submitting.';
+                tip.style.display = 'block';
+            } else if (!checkboxesValid) {
+                tip.textContent = '* Please review and accept all required terms and agreements.';
+                tip.style.display = 'block';
+            } else {
+                tip.style.display = 'none';
+            }
         }
     }
     
@@ -879,6 +1122,12 @@ That might we need is present in the noble blood in our veins; the absolute peak
             return;
         }
 
+        if (!isInterviewBooked) {
+            alert('Please book an interview appointment from the calendar before submitting your application.');
+            checkFormValidity();
+            return;
+        }
+
         const btn = document.getElementById('submitBtn');
 
         const originalText = btn.textContent;
@@ -894,7 +1143,10 @@ That might we need is present in the noble blood in our veins; the absolute peak
             github: document.getElementById('joinGithub').value,
             about: document.getElementById('joinAbout').value,
             language: 'en',
-            department: document.getElementById('joinTeam').value
+            department: document.getElementById('joinTeam').value,
+            interviewDate: interviewBookingData?.booking?.startTime || interviewBookingData?.date || null,
+            interviewBookingUid: interviewBookingData?.booking?.uid || interviewBookingData?.uid || null,
+            interviewDetails: interviewBookingData ? JSON.stringify(interviewBookingData) : null
         };
 
         const checkUrl = 'https://firestore.googleapis.com/v1/projects/vertex-ai-1618/databases/(default)/documents:runQuery';
