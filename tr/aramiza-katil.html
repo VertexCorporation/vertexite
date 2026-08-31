@@ -832,21 +832,29 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
     let isInterviewBooked = false;
     let interviewBookingData = null;
 
+    function extractCalBookingInfo(raw) {
+        if (!raw) return { startTime: null, uid: null };
+        const obj = raw.data || raw.detail?.data || raw.detail || raw;
+        const booking = obj.booking || obj;
+        const startTime = booking.startTime || booking.start || booking.date || obj.startTime || obj.start || obj.date || raw.startTime || raw.date || null;
+        const uid = booking.uid || booking.id || obj.uid || obj.id || raw.uid || raw.id || null;
+        return { startTime, uid };
+    }
+
     function handleInterviewBooking(detail) {
-        console.log('Mülakat randevusu oluşturuldu:', detail);
+        console.log('Mülakat randevusu alındı:', detail);
         isInterviewBooked = true;
-        interviewBookingData = detail?.data || detail;
+        interviewBookingData = detail;
         
+        const info = extractCalBookingInfo(detail);
         let dateStr = '';
-        if (interviewBookingData?.booking?.startTime) {
+        if (info.startTime) {
             try {
-                const d = new Date(interviewBookingData.booking.startTime);
-                dateStr = d.toLocaleString('tr-TR', { dateStyle: 'full', timeStyle: 'short' });
+                const d = new Date(info.startTime);
+                dateStr = isNaN(d.getTime()) ? info.startTime : d.toLocaleString('tr-TR', { dateStyle: 'full', timeStyle: 'short' });
             } catch(e) {
-                dateStr = interviewBookingData.booking.startTime;
+                dateStr = info.startTime;
             }
-        } else if (interviewBookingData?.date) {
-            dateStr = interviewBookingData.date;
         }
 
         const statusBox = document.getElementById('interviewStatusBox');
@@ -1102,6 +1110,8 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         btn.textContent = '...';
         btn.disabled = true;
 
+        const calInfo = extractCalBookingInfo(interviewBookingData);
+
         const data = {
             name: document.getElementById('joinName').value,
             email: document.getElementById('joinEmail').value,
@@ -1112,8 +1122,8 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
             about: document.getElementById('joinAbout').value,
             language: 'tr',
             department: document.getElementById('joinTeam').value,
-            interviewDate: interviewBookingData?.booking?.startTime || interviewBookingData?.date || null,
-            interviewBookingUid: interviewBookingData?.booking?.uid || interviewBookingData?.uid || null,
+            interviewDate: calInfo.startTime || null,
+            interviewBookingUid: calInfo.uid || null,
             interviewDetails: interviewBookingData ? JSON.stringify(interviewBookingData) : null
         };
 
