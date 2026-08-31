@@ -319,6 +319,28 @@
 }
 
 
+.interview-header-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.interview-title {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.interview-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin: 0;
+}
+
 .interview-status-box {
     display: flex;
     align-items: center;
@@ -660,9 +682,19 @@
             </div>
             
             
-            <div class="form-group full-width">
-                <label>Gesprek Inplannen</label>
-                <p class="interview-desc" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 15px;">Om uw sollicitatie te verwerken, dient u een moment voor het gesprek te reserveren via de onderstaande kalender.</p>
+            <div class="interview-section form-group full-width">
+                <div class="interview-header-wrapper">
+                    <label class="interview-title">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                        Selecteer Datum en Tijd voor Gesprek
+                    </label>
+                    <p class="interview-desc">Om uw sollicitatie te verwerken, dient u een moment voor het gesprek te reserveren via de onderstaande kalender.</p>
+                </div>
                 
                 <!-- Interview Status Badge (Shown when booked) -->
                 <div id="interviewStatusBox" class="interview-status-box confirmed" style="display: none;"></div>
