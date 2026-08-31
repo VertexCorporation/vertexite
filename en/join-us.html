@@ -528,23 +528,21 @@
     border-radius: 24px;
     max-width: 500px; width: 100%;
     padding: 40px; text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    outline: 2px solid var(--primary);
-    outline-offset: -10px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.4);
 }
 .success-svg { 
     width: 80px; height: 80px; border-radius: 50%; display: block; 
-    stroke-width: 4; stroke: var(--primary); stroke-miterlimit: 10; 
+    stroke-width: 3.5; stroke: var(--primary); stroke-linecap: round; stroke-linejoin: round; stroke-miterlimit: 10; 
     margin: 0 auto 20px auto; box-shadow: inset 0px 0px 0px var(--primary); 
     animation: successFill .4s ease-in-out .4s forwards, successScale .3s ease-in-out .9s both; 
 }
 .success-circle { 
-    stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 4; stroke-miterlimit: 10; 
+    stroke-dasharray: 166; stroke-dashoffset: 166; stroke-width: 3.5; stroke-miterlimit: 10; 
     stroke: var(--primary); fill: none; 
     animation: successStroke .6s cubic-bezier(0.65, 0, 0.45, 1) forwards; 
 }
 .success-check { 
-    transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; 
+    transform-origin: 50% 50%; stroke-dasharray: 48; stroke-dashoffset: 48; stroke-linecap: round; stroke-linejoin: round;
     animation: successStroke .3s cubic-bezier(0.65, 0, 0.45, 1) .8s forwards; 
 }
 @keyframes successStroke { 100% { stroke-dashoffset: 0; } }
@@ -790,7 +788,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
     <div class="success-modal-content">
         <svg class="success-svg" viewBox="0 0 52 52">
             <circle class="success-circle" cx="26" cy="26" r="25" fill="none"/>
-            <path class="success-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            <path class="success-check" fill="none" stroke-linecap="round" stroke-linejoin="round" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
         </svg>
         <h3>APPLICATION RECEIVED!</h3>
         <p>Vertex will review your application and, if deemed necessary, will contact you using the provided contact information.<br><br>Thank you for your interest.</p>
