@@ -720,20 +720,8 @@
                     <p class="interview-desc">Başvurunuzun işleme alınabilmesi için lütfen aşağıdaki takvim üzerinden mülakat gün ve saatinizi belirleyiniz.</p>
                 </div>
 
-                <!-- Mülakat Durum Rozeti -->
-                <div id="interviewStatusBox" class="interview-status-box pending">
-                    <div class="status-icon">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                        </svg>
-                    </div>
-                    <div class="status-content">
-                        <strong>Mülakat Randevusu Henüz Seçilmedi</strong>
-                        <span>Lütfen aşağıdaki Cal.com takviminden uygun saat seçerek randevunuzu oluşturun.</span>
-                    </div>
-                </div>
+                <!-- Mülakat Durum Rozeti (Randevu alındığında gösterilir) -->
+                <div id="interviewStatusBox" class="interview-status-box confirmed" style="display: none;"></div>
 
                 <!-- Cal.com Inline Embed Container -->
                 <div class="cal-embed-container">
@@ -759,7 +747,6 @@
             </div>
 
             <button type="submit" class="join-submit-btn" id="submitBtn" disabled>Başvuruyu Gönder</button>
-            <div id="submitWarningTip" class="submit-warning-tip">* Başvurunuzu gönderebilmek için yukarıdaki takvimden mülakat randevunuzu almalı ve tüm şartları onaylamalısınız.</div>
             </form>
     </div>
 </div>
@@ -867,6 +854,7 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         const statusBox = document.getElementById('interviewStatusBox');
         if (statusBox) {
             statusBox.className = 'interview-status-box confirmed';
+            statusBox.style.display = 'flex';
             statusBox.innerHTML = `
                 <div class="status-icon">
                     <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -939,22 +927,6 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         const allValid = checkboxesValid && isInterviewBooked;
         
         submitBtn.disabled = !allValid;
-
-        const tip = document.getElementById('submitWarningTip');
-        if (tip) {
-            if (!isInterviewBooked && !checkboxesValid) {
-                tip.textContent = '* Başvurunuzu gönderebilmek için yukarıdaki takvimden mülakat randevunuzu almalı ve tüm şartları onaylamalısınız.';
-                tip.style.display = 'block';
-            } else if (!isInterviewBooked) {
-                tip.textContent = '* Başvurunuzu gönderebilmek için lütfen yukarıdaki takvimden mülakat randevusu seçin.';
-                tip.style.display = 'block';
-            } else if (!checkboxesValid) {
-                tip.textContent = '* Lütfen tüm sözleşme ve şartları onaylayınız.';
-                tip.style.display = 'block';
-            } else {
-                tip.style.display = 'none';
-            }
-        }
     }
     
     termsCheck.addEventListener('change', checkFormValidity);
