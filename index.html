@@ -1,215 +1,731 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="tr" data-theme="light">
 <head>
-  <script>
-    (function() {
-      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertex | Teknolojinin Zirvesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF9; --surface:#F1F1EE; --surface-2:#EAEAE6;
+    --text:#1A1B1E; --text-muted:#6B6E76; --border:#E3E3DF;
+    --accent:#3B4FD9; --accent-ink:#FFFFFF; --accent-soft:rgba(59,79,217,.08);
+    --radius-s:6px; --radius-m:10px;
+    --maxw:1120px;
+    --dur:200ms;
+    --logo-filter:brightness(0);
+  }
+  html[data-theme="dark"]{
+    --bg:#0E1013; --surface:#15171B; --surface-2:#1B1E23;
+    --text:#EDEEEF; --text-muted:#8A8D96; --border:#262932;
+    --accent:#6C7CF0; --accent-ink:#0E1013; --accent-soft:rgba(108,124,240,.12);
+    --logo-filter:brightness(0) invert(1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Manrope',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition:background var(--dur) ease, color var(--dur) ease;
+  }
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
 
-    <!-- 
-      SEO & CRAWLER SETTINGS:
-      We allow bots to index this entry point so they can discover the language sub-folders.
-    -->
-    <meta name="robots" content="index, follow">
+  /* Header */
+  header{position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--border); transition:background var(--dur) ease, border-color var(--dur) ease;}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:68px; gap:20px;}
+  .brand{display:flex; align-items:center; gap:9px; text-decoration:none;}
+  .logo-chip{display:flex; align-items:center; gap:7px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:6px 10px;}
+  .logo-chip img{height:16px; width:auto; filter:var(--logo-filter); transition:filter var(--dur) ease;}
+  .logo-chip span{font-weight:800; font-size:14.5px; color:var(--text); letter-spacing:-.01em;}
+  .nav-links{display:flex; align-items:center; gap:26px; list-style:none; margin:0; padding:0;}
+  .nav-links a{font-size:14px; font-weight:500; text-decoration:none; color:var(--text-muted); position:relative; padding:4px 0; white-space:nowrap;}
+  .nav-links a::after{content:''; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--text); transform:scaleX(0); transform-origin:left; transition:transform var(--dur) ease;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-right{display:flex; align-items:center; gap:10px;}
+  .icon-btn{display:flex; align-items:center; justify-content:center; gap:6px; width:36px; height:36px; border-radius:var(--radius-s); border:1px solid var(--border); background:var(--surface); color:var(--text); cursor:pointer; transition:border-color var(--dur) ease;}
+  .icon-btn:hover{border-color:var(--text-muted);}
+  #langBtn{width:auto; padding:0 11px; font-size:12.5px; font-weight:700; letter-spacing:.02em;}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 18px; border-radius:var(--radius-s); font-size:14px; font-weight:600; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform var(--dur) ease;}
+  .btn-primary{background:var(--text); color:var(--bg);}
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--border); background:transparent; color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-muted);}
 
-    <!-- PAGE TITLE & DESCRIPTION -->
-    <title>Vertex | The Peak of Technology</title>
-    <meta name="description"
-        content="Vertex - Turkiye's youngest tech company. Shaping the future with AI, Software, and Gaming. Redirecting to your local version...">
-    <meta name="author" content="Vertex Corporation">
-    <meta name="theme-color" content="#050505">
+  /* Hero */
+  .hero{padding:88px 0 64px;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center;}
+  h1{font-size:clamp(32px,4.4vw,50px); line-height:1.14; letter-spacing:-.02em; font-weight:800; margin:0 0 20px;}
+  .hero p.lede{font-size:17.5px; line-height:1.6; color:var(--text-muted); max-width:480px; margin:0 0 30px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  .hero-anim{opacity:0; transform:translateY(14px); animation:riseIn .6s cubic-bezier(.16,1,.3,1) forwards;}
+  .hero-anim:nth-child(1){animation-delay:.02s;} .hero-anim:nth-child(2){animation-delay:.1s;} .hero-anim:nth-child(3){animation-delay:.18s;}
+  @keyframes riseIn{to{opacity:1; transform:translateY(0);}}
+  .hero-visual{position:relative;}
+  .net-path{fill:none; stroke:var(--accent); stroke-width:1.4; stroke-linecap:round; stroke-dasharray:280; stroke-dashoffset:280; animation:draw 1.4s cubic-bezier(.16,1,.3,1) forwards; animation-delay:.3s;}
+  .net-path.p2{stroke-dasharray:220; stroke-dashoffset:220; animation-delay:.45s; opacity:.55;}
+  .net-path.p3{stroke-dasharray:190; stroke-dashoffset:190; animation-delay:.55s; opacity:.35;}
+  @keyframes draw{to{stroke-dashoffset:0;}}
+  .net-node{fill:var(--accent); opacity:0; animation:nodeIn .4s ease forwards;}
+  .net-node.n1{animation-delay:1.1s;} .net-node.n2{animation-delay:1.2s;} .net-node.n3{animation-delay:1.3s;} .net-node.n4{animation-delay:1.4s;}
+  @keyframes nodeIn{to{opacity:1;}}
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/webp" href="assets/favicon.webp">
+  /* Stats */
+  .stats{border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); padding:34px 0;}
+  .stat{text-align:left; padding:0 20px; border-left:1px solid var(--border);}
+  .stat:first-child{border-left:none; padding-left:0;}
+  .stat .num{font-size:30px; font-weight:800; letter-spacing:-.02em;}
+  .stat .lab{font-size:13px; color:var(--text-muted); margin-top:2px;}
 
-    <!-- 
-      ========================================
-      SOCIAL MEDIA PREVIEW (OPEN GRAPH)
-      Critical for WhatsApp, LinkedIn, Discord
-      ========================================
-    -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://vertexishere.com/">
-    <meta property="og:site_name" content="Vertex Corporation">
-    <meta property="og:title" content="Vertex | The Peak of Technology">
-    <meta property="og:description"
-        content="Discover the future of AI and Software with Vertex. Turkiye's youngest tech giants.">
+  /* Marquee */
+  .marquee-outer{border-bottom:1px solid var(--border); padding:26px 0; overflow:hidden;}
+  .marquee-label{text-align:center; font-size:13px; color:var(--text-muted); margin-bottom:18px;}
+  .marquee-track{display:flex; gap:14px; width:max-content; align-items:center; animation:scrollX 28s linear infinite;}
+  .tech-badge{display:flex; align-items:center; gap:9px; height:38px; padding:0 18px; border:1px solid var(--border); border-radius:20px; background:var(--surface); white-space:nowrap; flex-shrink:0;}
+  .tech-badge .dot{width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:.75; flex-shrink:0;}
+  .tech-badge span.name{font-size:13px; font-weight:700; color:var(--text-muted); letter-spacing:.01em;}
+  @keyframes scrollX{from{transform:translateX(0);} to{transform:translateX(-50%);}}
 
-    <!-- 
-      ✅ WHATSAPP:
-      Using absolute path (https://...) for the favicon to ensure it appears on shares.
-    -->
-    <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp">
+  section{padding:72px 0;}
+  .section-head{max-width:560px; margin-bottom:40px;}
+  h2{font-size:clamp(23px,2.4vw,30px); letter-spacing:-.015em; margin:0 0 10px; font-weight:800;}
+  .section-head p{color:var(--text-muted); font-size:15px; line-height:1.6; margin:0;}
 
-    <!-- TWITTER CARD -->
-    <!-- 'summary' is better for square logos -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Vertex | The Peak of Technology">
-    <meta name="twitter:description" content="Discover the future of AI and Software with Vertex.">
-    <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp">
+  /* Feature trio */
+  .feature-trio{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden;}
+  .feature-item{background:var(--bg); padding:28px 24px;}
+  .feature-item h3{font-size:16.5px; margin:0 0 10px; font-weight:700;}
+  .feature-item p{font-size:13.5px; color:var(--text-muted); line-height:1.6; margin:0;}
 
-    <!-- 
-      STYLES: 
-      Dark background to prevent "White Flash" during redirect.
-    -->
-    <style>
-        html,
-        body {
-            background-color: #050505;
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            color: #333;
-        }
+  /* Products */
+  .products{border-top:1px solid var(--border);}
+  .product-layout{display:grid; grid-template-columns:1.3fr 1fr; gap:20px;}
+  .product-feature{border:1px solid var(--border); border-radius:var(--radius-m); padding:32px; background:var(--surface); display:flex; flex-direction:column; justify-content:space-between; min-height:260px; text-decoration:none; transition:border-color var(--dur) ease;}
+  .product-feature:hover{border-color:var(--text-muted);}
+  .product-feature .tag{font-size:12.5px; font-weight:700; color:var(--accent); margin-bottom:14px;}
+  .product-feature h3{font-size:21px; margin:0 0 10px; letter-spacing:-.01em; color:var(--text);}
+  .product-feature p{color:var(--text-muted); font-size:14.5px; line-height:1.6; margin:0; max-width:380px;}
+  .product-list{display:flex; flex-direction:column; gap:1px; border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden;}
+  .product-row{padding:19px 22px; background:var(--bg); border-bottom:1px solid var(--border); transition:background var(--dur) ease; text-decoration:none; display:block;}
+  .product-row:last-child{border-bottom:none;}
+  .product-row:hover{background:var(--surface);}
+  .product-row .tag-row{display:flex; align-items:center; gap:8px; margin-bottom:6px;}
+  .product-row .tag{font-size:11px; font-weight:700; color:var(--text-muted);}
+  .badge-soon{display:inline-block; font-size:10.5px; font-weight:700; padding:2.5px 8px; border-radius:20px; background:var(--accent-soft); color:var(--accent);}
+  .product-row h4{font-size:16px; margin:0 0 5px; font-weight:700; color:var(--text);}
+  .product-row p{font-size:13.5px; color:var(--text-muted); line-height:1.55; margin:0;}
+  .product-row.disabled{cursor:default;}
+  .product-row.disabled:hover{background:var(--bg);}
 
-        /* Fallback text style for noscript users/bots */
-        .noscript-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            color: #fff;
-            text-align: center;
-            padding: 20px;
-        }
+  /* Tech ecosystem */
+  .tech{border-top:1px solid var(--border);}
+  .tech-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px;}
+  .tech-card{border:1px solid var(--border); border-radius:var(--radius-m); padding:22px; background:var(--surface);}
+  .tech-card h4{font-size:14.5px; margin:0 0 10px; font-weight:700;}
+  .tech-card .stack{font-size:13px; color:var(--text-muted); line-height:1.7;}
 
-        .noscript-container h1 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
+  /* Vision */
+  .vision{border-top:1px solid var(--border);}
+  .vision-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  .vision-text p{font-size:16px; line-height:1.75; color:var(--text-muted); margin:0 0 16px;}
+  .vision-text p:first-child{color:var(--text); font-size:19px; line-height:1.6;}
+  .vision-ticker{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+  .vision-chip{border:1px solid var(--border); border-radius:20px; padding:7px 15px; font-size:13px; font-weight:700; background:var(--surface);}
 
-        .noscript-container p {
-            margin-bottom: 2rem;
-            color: #888;
-        }
+  /* Team */
+  .team{border-top:1px solid var(--border);}
+  .team-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:32px;}
+  .team-nav{display:flex; gap:8px;}
+  .team-nav-btn{width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:var(--surface); color:var(--text); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:border-color var(--dur) ease, opacity .2s ease;}
+  .team-nav-btn:hover{border-color:var(--text-muted);}
+  .team-nav-btn:disabled{opacity:.32; cursor:default;}
+  .team-scroll-wrap{position:relative;}
+  .team-scroll-wrap::after{content:''; position:absolute; top:0; right:0; bottom:0; width:56px; background:linear-gradient(to left, var(--bg), transparent); pointer-events:none; transition:background var(--dur) ease;}
+  .team-track{display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity; scroll-behavior:smooth; padding:2px 2px 10px; scrollbar-width:none;}
+  .team-track::-webkit-scrollbar{display:none;}
+  .team-card{scroll-snap-align:start; flex:0 0 152px; width:152px; border:1px solid var(--border); border-radius:13px; background:var(--surface); padding:9px; transition:transform var(--dur) ease, border-color var(--dur) ease;}
+  .team-card:hover{transform:translateY(-3px); border-color:var(--text-muted);}
+  .team-photo-wrap{aspect-ratio:4/5; overflow:hidden; background:var(--bg); border-radius:9px;}
+  .team-photo{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s cubic-bezier(.16,1,.3,1);}
+  .team-card:hover .team-photo{transform:scale(1.05);}
+  .team-info{padding:11px 3px 1px;}
+  .team-info h4{font-size:13.5px; margin:0 0 2px; font-weight:700; line-height:1.25;}
+  .team-info .role{font-size:11px; color:var(--text-muted); margin-bottom:9px; line-height:1.3;}
+  .team-social{display:flex; gap:6px;}
+  .team-social a{width:22px; height:22px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; transition:border-color var(--dur) ease;}
+  .team-social a:hover{border-color:var(--text-muted);}
+  .team-social img{width:10.5px; height:10.5px; opacity:.7;}
 
-        .noscript-links {
-            display: flex;
-            gap: 20px;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+  /* Partners */
+  .partners{border-top:1px solid var(--border);}
+  .partner-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  .partner-card{border:1px solid var(--border); border-radius:var(--radius-m); padding:22px 14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:var(--surface); transition:border-color var(--dur) ease; min-height:96px; text-decoration:none;}
+  .partner-card:hover{border-color:var(--text-muted);}
+  .partner-card img{max-height:24px; max-width:100%; opacity:.85;}
+  .partner-name{font-size:12.5px; font-weight:600; color:var(--text-muted);}
 
-        .noscript-links a {
-            color: #fff;
-            text-decoration: none;
-            padding: 10px 20px;
-            border: 1px solid #333;
-            border-radius: 8px;
-            transition: background 0.3s;
-        }
+  /* Name lists */
+  .names{border-top:1px solid var(--border);}
+  .name-block + .name-block{margin-top:36px;}
+  .name-block h3{font-size:16px; font-weight:700; margin:0 0 16px;}
+  .namelist{display:flex; flex-wrap:wrap; gap:9px;}
+  .name-chip{
+    border:1px solid var(--border); border-radius:20px; padding:7px 14px; font-size:13px; background:var(--surface);
+    opacity:0;
+    transition:opacity .55s cubic-bezier(.16,1,.3,1), transform .55s cubic-bezier(.16,1,.3,1), background .5s ease, border-color .3s ease;
+  }
+  .name-chip:hover{border-color:var(--accent); background:var(--accent-soft);}
+  /* Moderators: slide in from the left */
+  .mod-block .name-chip{transform:translateX(-18px);}
+  .mod-block.in-view .name-chip{opacity:1; transform:translateX(0);}
+  /* Honor roll: rise up while a soft highlight settles, like a spotlight passing over each name */
+  .honor-block .name-chip{transform:translateY(12px) scale(.94); background:var(--accent-soft); border-color:var(--accent);}
+  .honor-block.in-view .name-chip{opacity:1; transform:translateY(0) scale(1); background:var(--surface); border-color:var(--border);}
 
-        .noscript-links a:hover {
-            background: #1a1a1a;
-        }
-    </style>
+  .cta-band{border-top:1px solid var(--border); text-align:left;}
+  .cta-band .wrap{display:flex; align-items:center; justify-content:space-between; padding:50px 28px; flex-wrap:wrap; gap:20px;}
+  .cta-band h2{margin:0; font-size:24px;}
+  .cta-actions{display:flex; gap:12px;}
 
-    <!-- 
-      REDIRECT LOGIC:
-      Executes immediately to route the user to the correct language.
-    -->
-    <script>
-        (function () {
-            // --- Configuration ---
-            const SUPPORTED_LANGS = ['tr', 'hi', 'ar', 'az', 'pt', 'nl', 'id', 'it', 'es', 'ru', 'fr', 'ja', 'ko', 'zh', 'de'];
-            const DEFAULT_LANG = 'en'; // Fallback language
-            const STORAGE_KEY = 'vertex_lang';
+  footer{border-top:1px solid var(--border); padding:40px 0;}
+  .foot-grid{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;}
+  .foot-brand p{color:var(--text-muted); font-size:13.5px; max-width:260px; line-height:1.6; margin:10px 0 0;}
+  .foot-links{display:flex; gap:48px; flex-wrap:wrap;}
+  .foot-col h5{font-size:12.5px; color:var(--text-muted); margin:0 0 12px; font-weight:600;}
+  .foot-col a{display:block; font-size:13.5px; text-decoration:none; color:var(--text); margin-bottom:9px;}
+  .foot-col a:hover{color:var(--accent);}
+  .foot-bottom{margin-top:32px; padding-top:20px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-muted); line-height:1.7;}
+  .foot-legal{display:flex; gap:16px; margin-top:6px;}
+  .foot-legal a{text-decoration:none; color:var(--text-muted);}
+  .foot-legal a:hover{color:var(--text);}
 
-            // --- Path Resolver ---
-            // Handles Localhost, Subfolders, and Root Domains safely.
-            function getBasePath() {
-                const path = window.location.pathname;
-
-                // If hosted in a subfolder
-                if (path.includes('/vertexite/')) return '/vertexite';
-
-                // If running locally (file://)
-                if (window.location.protocol === 'file:') {
-                    return path.substring(0, path.lastIndexOf('/')).replace(/\/index\.html$/, '');
-                }
-
-                // Standard Root Domain
-                return '';
-            }
-
-            try {
-                // 1. Check saved preference
-                const savedLang = localStorage.getItem(STORAGE_KEY);
-
-                // 2. Detect Browser Language
-                const userLang = navigator.language || navigator.userLanguage;
-                const shortLang = userLang ? userLang.substring(0, 2) : 'en';
-
-                // 3. Determine Target
-                let targetLang = DEFAULT_LANG;
-
-                if (savedLang) {
-                    targetLang = savedLang;
-                } else if (SUPPORTED_LANGS.includes(shortLang)) {
-                    targetLang = shortLang;
-                }
-
-                // 4. Save to Cache
-                localStorage.setItem(STORAGE_KEY, targetLang);
-
-                // 5. Construct URL & Redirect
-                const basePath = getBasePath();
-                const targetUrl = `${window.location.origin}${basePath}/${targetLang}/`;
-
-                // .replace() keeps the history clean (prevents back button loops)
-                window.location.replace(targetUrl);
-
-            } catch (e) {
-                // Fail-safe: If anything breaks, force English
-                console.error("Redirect logic failed", e);
-                window.location.replace('./en/');
-            }
-        })();
-    </script>
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1; max-width:280px;}
+    .product-layout{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr; row-gap:20px;}
+    .stat:nth-child(3){border-left:none;}
+    .feature-trio{grid-template-columns:1fr;}
+    .tech-grid{grid-template-columns:1fr 1fr;}
+    .vision-grid{grid-template-columns:1fr; gap:30px;}
+    .partner-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .hero-anim, .net-path, .net-node{animation:none !important; opacity:1 !important; transform:none !important; stroke-dashoffset:0 !important;}
+    .marquee-track{animation:none !important;}
+    .name-chip{transition:none !important; opacity:1 !important; transform:none !important;}
+  }
+</style>
 </head>
-
 <body>
-  
 
-    <!-- 
-      FALLBACK:
-      Crucial for SEO Bots (Googlebot) and users with No-JS.
-      This allows crawlers to find your sub-pages.
-    -->
-    <noscript>
-        <div class="noscript-container">
-            <h1>Vertex Corporation</h1>
-            <p>Please select your region / Lütfen bölgenizi seçin:</p>
-            <div class="noscript-links">
-                <a href="./tr/">Türkçe</a>
-                <a href="./en/">English</a>
-                <a href="./hi/">Hindi</a>
-                <a href="./ar/">العربية</a>
-                <a href="./az/">Azərbaycan</a>
-                <a href="./pt/">Português</a>
-                <a href="./nl/">Nederlands</a>
-                <a href="./id/">Indonesia</a>
-                <a href="./it/">Italiano</a>
-                <a href="./es/">Español</a>
-                <a href="./ru/">Русский</a>
-                <a href="./fr/">Français</a>
-                <a href="./ja/">日本語</a>
-                <a href="./ko/">한국어</a>
-                <a href="./zh/">简体中文</a>
-                <a href="./de/">Deutsch</a>
-            </div>
+<header>
+  <div class="wrap nav">
+    <a href="#home" class="brand">
+      <span class="logo-chip"><img src="https://vertexishere.com/assets/logo.svg" alt="Vertex logo"><span>Vertex</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#projects" data-i18n="nav.projects">Projeler</a></li>
+      <li><a href="#vision" data-i18n="nav.vision">Vizyon</a></li>
+      <li><a href="#partners" data-i18n="nav.partners">Sponsorlar</a></li>
+      <li><a href="#team" data-i18n="nav.team">Ekip</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="icon-btn" id="langBtn" aria-label="Dili değiştir">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"/></svg>
+        <span id="langLabel">EN</span>
+      </button>
+      <button class="icon-btn" id="themeBtn" aria-label="Temayı değiştir">
+        <svg id="themeIconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+        <svg id="themeIconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="display:none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="https://vertexishere.com/tr/aramiza-katil.html" id="joinBtn" class="btn btn-primary" data-i18n="nav.cta">Aramıza Katıl</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="hero" id="home">
+    <div class="wrap hero-grid">
+      <div>
+        <h1 class="hero-anim" data-i18n="hero.h1">Teknolojinin Zirvesi</h1>
+        <p class="lede hero-anim" data-i18n="hero.sub">Dünyanın en parlak genç zihinlerinin buluştuğu Vertex, teknoloji sektöründe devrim yaratıyor!</p>
+        <div class="hero-actions hero-anim">
+          <a href="#projects" class="btn btn-primary" data-i18n="hero.cta1">Keşfetmeye Başla</a>
+          <a href="#vision" class="btn btn-ghost" data-i18n="hero.cta2">Vizyonumuz</a>
         </div>
-    </noscript>
-</body>
+      </div>
+      <div class="hero-visual">
+        <svg viewBox="0 0 360 300" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path class="net-path" d="M40 240 L160 120 L260 170 L320 60"/>
+          <path class="net-path p2" d="M160 120 L120 40"/>
+          <path class="net-path p3" d="M260 170 L300 250"/>
+          <circle class="net-node n1" cx="40" cy="240" r="4"/>
+          <circle class="net-node n2" cx="160" cy="120" r="4"/>
+          <circle class="net-node n3" cx="260" cy="170" r="4"/>
+          <circle class="net-node n4" cx="320" cy="60" r="4"/>
+        </svg>
+      </div>
+    </div>
+  </section>
 
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat"><div class="num">10M+</div><div class="lab" data-i18n="stat.downloads">Hedef İndirme</div></div>
+      <div class="stat"><div class="num" id="statUsers">70B+</div><div class="lab" data-i18n="stat.users">Aktif Kullanıcı</div></div>
+      <div class="stat"><div class="num">16</div><div class="lab" data-i18n="stat.age">Yaş Ortalaması</div></div>
+      <div class="stat"><div class="num">190+</div><div class="lab" data-i18n="stat.countries">Ülke</div></div>
+    </div>
+  </section>
+
+  <div class="marquee-outer">
+    <div class="marquee-label" data-i18n="marquee.label">Altyapımız ve teknolojilerimiz en iyiler tarafından desteklenmektedir</div>
+    <div class="marquee-track">
+      <div class="tech-badge"><span class="dot"></span><span class="name">fal</span></div>
+      <div class="tech-badge"><span class="dot"></span><span class="name">OpenRouter</span></div>
+      <div class="tech-badge"><span class="dot"></span><span class="name">Google Cloud</span></div>
+      <div class="tech-badge"><span class="dot"></span><span class="name">Cloudflare</span></div>
+      <div class="tech-badge"><span class="dot"></span><span class="name">fal</span></div>
+      <div class="tech-badge"><span class="dot"></span><span class="name">OpenRouter</span></div>
+      <div class="tech-badge"><span class="dot"></span><span class="name">Google Cloud</span></div>
+      <div class="tech-badge"><span class="dot"></span><span class="name">Cloudflare</span></div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="feature-trio">
+        <div class="feature-item">
+          <h3 data-i18n="f1.title">Genç Yenilikçiler</h3>
+          <p data-i18n="f1.desc">Ortalama 16 yaşındaki ekibimiz, sınırları zorlamaya ve devrim niteliğinde çözümler yaratmaya kendini adamış yeni nesil teknoloji vizyonerlerini temsil ediyor.</p>
+        </div>
+        <div class="feature-item">
+          <h3 data-i18n="f2.title">Çok Alanlı Uzmanlık</h3>
+          <p data-i18n="f2.desc">Yazılım geliştirmeden yapay zekaya, oyun, müzik prodüksiyonu ve tarayıcı teknolojilerine kadar geniş beceri setimizle yenilik yapıyoruz.</p>
+        </div>
+        <div class="feature-item">
+          <h3 data-i18n="f3.title">Global Vizyon</h3>
+          <p data-i18n="f3.desc">Dünya standartlarında ürünler geliştirerek Türkiye'yi küresel teknoloji lideri konumuna getirmeye kendimizi adadık.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="products" id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n="products.h2">Projelerimiz</h2>
+        <p data-i18n="products.sub">Yapay zekadan mobil oyuna, sağlık teknolojisine uzanan ürün ailemiz.</p>
+      </div>
+      <div class="product-layout">
+        <a href="https://vertexishere.com/tr/indir.html" target="_blank" rel="noopener" class="product-feature">
+          <div>
+            <div class="tag" data-i18n="cortex.tag">YAPAY ZEKA</div>
+            <h3 data-i18n="cortex.title">Cortex</h3>
+            <p data-i18n="cortex.desc">Gelişmiş yeteneklere sahip devrim niteliğinde çevrimiçi ve çevrimdışı yapay zeka platformu.</p>
+          </div>
+        </a>
+        <div class="product-list">
+          <a href="https://github.com/VertexCorporation/Mergen" target="_blank" rel="noopener" class="product-row">
+            <div class="tag-row"><span class="tag" data-i18n="mergen.tag">AI MİMARİSİ</span></div>
+            <h4 data-i18n="mergen.title">Mergen</h4>
+            <p data-i18n="mergen.desc">Yüksek performanslı veri işleme ve makine öğrenimi modelleri için ölçeklenebilir yapay zeka mimarisi.</p>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank" rel="noopener" class="product-row">
+            <div class="tag-row"><span class="tag" data-i18n="allstar.tag">MOBİL OYUN</span></div>
+            <h4>All Star</h4>
+            <p data-i18n="allstar.desc">48 saatte 5 milyon+ kişiye ulaşan ve 20.000+ indirme alan mobil oyunumuz.</p>
+          </a>
+          <div class="product-row disabled">
+            <div class="tag-row"><span class="tag" data-i18n="ally.tag">SAĞLIK ASİSTANI</span><span class="badge-soon" data-i18n="ally.badge">Yakında</span></div>
+            <h4>Ally</h4>
+            <p data-i18n="ally.desc">Akıllı sağlık asistanınız. Gerçek zamanlı izleme ve kişiselleştirilmiş sağlık tavsiyeleri sunar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tech">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n="tech.h2">Teknoloji Ekosistemimiz</h2>
+        <p data-i18n="tech.sub">En güçlü araçları ve modern dilleri kullanarak geleceği inşa ediyoruz.</p>
+      </div>
+      <div class="tech-grid">
+        <div class="tech-card"><h4 data-i18n="tech1.title">Yapay Zeka</h4><div class="stack">Python, TensorFlow, PyTorch</div></div>
+        <div class="tech-card"><h4 data-i18n="tech2.title">Web Teknolojileri</h4><div class="stack">React, Node.js, WebAssembly</div></div>
+        <div class="tech-card"><h4 data-i18n="tech3.title">Mobil Uygulama</h4><div class="stack">Flutter, React Native, Swift</div></div>
+        <div class="tech-card"><h4 data-i18n="tech4.title">Oyun Geliştirme</h4><div class="stack">Unity, C#, Unreal Engine</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="vision" id="vision">
+    <div class="wrap vision-grid">
+      <div class="section-head" style="margin-bottom:0;">
+        <h2 data-i18n="vision.h2">2030 Vizyonu</h2>
+      </div>
+      <div class="vision-text">
+        <p data-i18n="vision.p1">2030 yılına kadar Vertex, dünya çapındaki tüm pazarlarda küresel bir varlık kurmayı, platformlarımızda milyonlarca aktif kullanıcıya ulaşmayı ve küresel teknoloji sektöründe öncü bir güç olarak tanınmayı hedefliyor.</p>
+        <p data-i18n="vision.p2">Sürekli yeniliğe, kendi işletim sistemimizi geliştirmeye ve yapay zeka yeteneklerimizi daha da genişleterek dijital geleceği şekillendirmeye kararlıyız.</p>
+        <div class="vision-ticker">
+          <span class="vision-chip">Cortex</span>
+          <span class="vision-chip">Mergen</span>
+          <span class="vision-chip">All Star</span>
+          <span class="vision-chip">Ally</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team" id="team">
+    <div class="wrap">
+      <div class="team-head">
+        <div class="section-head" style="margin-bottom:0;">
+          <h2 data-i18n="team.h2">Ekibimiz</h2>
+          <p data-i18n="team.sub">Vertex'i her gün büyüten kişiler.</p>
+        </div>
+        <div class="team-nav">
+          <button class="team-nav-btn" id="teamPrev" aria-label="Önceki">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="team-nav-btn" id="teamNext" aria-label="Sonraki">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="team-scroll-wrap">
+        <div class="team-track" id="teamTrack">
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/MUSTAFACAKI.webp" alt="Mustafa Çakı"></div>
+          <div class="team-info">
+            <h4>Mustafa Çakı</h4>
+            <div class="role" data-i18n="role.mustafa">Kurucu Ortak &amp; CEO</div>
+            <div class="team-social">
+              <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/mustawtfa/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/mehmet_uras.jpg" alt="Uras Baz"></div>
+          <div class="team-info">
+            <h4>Uras Baz</h4>
+            <div class="role">CTO</div>
+            <div class="team-social"></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/ekin_burcak.jpeg" alt="Ekin Burçak Korkmaz"></div>
+          <div class="team-info">
+            <h4>Ekin Burçak Korkmaz</h4>
+            <div class="role" data-i18n="role.ekin">İşletme Direktörü (COO)</div>
+            <div class="team-social">
+              <a href="https://www.linkedin.com/in/ekin-bur%C3%A7ak-korkmaz-1aa9ba3a7" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/ekinburcakorkmaz" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/ecrin_haciomeroglu.jpg" alt="Ecrin Hacıömeroğlu"></div>
+          <div class="team-info">
+            <h4>Ecrin Hacıömeroğlu</h4>
+            <div class="role" data-i18n="role.ecrin">İletişim Direktörü (CCO)</div>
+            <div class="team-social"></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/azra_koncaoglu.jpeg" alt="Azra Koncaoğlu"></div>
+          <div class="team-info">
+            <h4>Azra Koncaoğlu</h4>
+            <div class="role" data-i18n="role.azra">İnsan Kaynakları Direktörü (CHRO)</div>
+            <div class="team-social">
+              <a href="https://www.linkedin.com/in/azra-koncao%C4%9Flu-aaaba741b" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/nyzszm" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/idil_baspinar.jpeg" alt="İdil Başpınar"></div>
+          <div class="team-info">
+            <h4>İdil Başpınar</h4>
+            <div class="role" data-i18n="role.idil">Pazarlama Direktörü (CMO)</div>
+            <div class="team-social">
+              <a href="https://www.instagram.com/idilbspnrr" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/suzan_almira_akgul.jpeg" alt="Suzan Almira Akgül"></div>
+          <div class="team-info">
+            <h4>Suzan Almira Akgül</h4>
+            <div class="role" data-i18n="role.suzan">İletişim Direktörü</div>
+            <div class="team-social"></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/efe_sahin.jpeg" alt="Efe Şahin"></div>
+          <div class="team-info">
+            <h4>Efe Şahin</h4>
+            <div class="role" data-i18n="role.efe">Dijital Direktör (CDO)</div>
+            <div class="team-social">
+              <a href="https://www.instagram.com/16efesahin" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/elif_dilber.jpeg" alt="Elif Dilber"></div>
+          <div class="team-info">
+            <h4>Elif Dilber</h4>
+            <div class="role" data-i18n="role.elif">Finans Direktörü (CFO)</div>
+            <div class="team-social">
+              <a href="https://www.linkedin.com/in/elif-dilber-755a39382" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/ellvfs" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partners" id="partners">
+    <div class="wrap">
+      <div class="section-head">
+        <h2 data-i18n="partners.h2">Sponsorlarımız</h2>
+        <p data-i18n="partners.sub">Vertex'i destekleyen sponsorlarımız.</p>
+      </div>
+      <div class="partner-grid">
+        <a class="partner-card" href="https://elevenlabs.io/startup-grants" target="_blank" rel="noopener"><img src="https://eleven-public-cdn.elevenlabs.io/payloadcms/pwsc4vchsqt-ElevenLabsGrants.webp" alt="ElevenLabs"><span class="partner-name">ElevenLabs</span></a>
+        <a class="partner-card" href="https://fal.ai/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/fal.svg" alt="fal"><span class="partner-name">fal</span></a>
+        <a class="partner-card" href="https://deepgram.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/deepgram.jpeg" alt="Deepgram"><span class="partner-name">Deepgram</span></a>
+        <a class="partner-card" href="https://www.cloudflare.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/cloudflare.svg" alt="Cloudflare"><span class="partner-name">Cloudflare</span></a>
+        <a class="partner-card" href="https://www.assemblyai.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/assemblyai.svg" alt="AssemblyAI"><span class="partner-name">AssemblyAI</span></a>
+        <a class="partner-card" href="https://miro.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/miro.svg" alt="Miro"><span class="partner-name">Miro</span></a>
+        <a class="partner-card" href="https://about.gitlab.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/gitlab.svg" alt="GitLab"><span class="partner-name">GitLab</span></a>
+        <a class="partner-card" href="https://www.daytona.io/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/daytona.svg" alt="Daytona"><span class="partner-name">Daytona</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="names">
+    <div class="wrap">
+      <div class="name-block mod-block">
+        <h3 data-i18n="mods.h2">Moderatörler</h3>
+        <div class="namelist">
+          <span class="name-chip">Nice Özcan</span>
+          <span class="name-chip">Beyza Köseoğlu</span>
+          <span class="name-chip">Eymen Can Orman</span>
+          <span class="name-chip">Mert Çelik</span>
+          <span class="name-chip">Selen Naz Solmaz</span>
+          <span class="name-chip">Melike Kaya</span>
+        </div>
+      </div>
+      <div class="name-block honor-block">
+        <h3 data-i18n="honor.h2">Onur Tablosu</h3>
+        <div class="namelist">
+          <span class="name-chip">Selim Doğan</span>
+          <span class="name-chip">Burak İsa Şimşek</span>
+          <span class="name-chip">Ensar Demirtaş</span>
+          <span class="name-chip">Barış Yücel</span>
+          <span class="name-chip">Mehmet Talha Yalçın</span>
+          <span class="name-chip">Mert Çelik</span>
+          <span class="name-chip">Yüsra Arbana</span>
+          <span class="name-chip">Ekin Önal</span>
+          <span class="name-chip">Emre Baldemir</span>
+          <span class="name-chip">İbrahim Baygün</span>
+          <span class="name-chip">Mehmet Ali Durusoy</span>
+          <span class="name-chip">Akın Taha Ateş</span>
+          <span class="name-chip">Kaan Erbaş</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2 data-i18n="cta.h2">Geleceğin Parçası Olun</h2>
+      <div class="cta-actions">
+        <a href="#projects" class="btn btn-ghost" data-i18n="cta.btn1">Projeleri Keşfet</a>
+        <a href="https://vertexishere.com/tr/aramiza-katil.html" id="joinBtn2" class="btn btn-primary" data-i18n="cta.btn2">Aramıza Katıl</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <span class="logo-chip"><img src="https://vertexishere.com/assets/logo.svg" alt="Vertex logo"><span>Vertex</span></span>
+      <p data-i18n="footer.blurb">Türkiye'nin en genç teknoloji şirketi. Ortalama 16 yaşındaki ekibiyle yapay zeka, yazılım ve oyun alanlarında devrim yaratıyor.</p>
+    </div>
+    <div class="foot-links">
+      <div class="foot-col">
+        <h5 data-i18n="footer.col1">Projeler</h5>
+        <a href="https://vertexishere.com/tr/indir.html" target="_blank" rel="noopener">Cortex</a>
+        <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank" rel="noopener">All Star</a>
+        <a href="https://github.com/VertexCorporation/Mergen" target="_blank" rel="noopener">Mergen</a>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="footer.col2">Şirket</h5>
+        <a href="#home" data-i18n="footer.l5">Hakkımızda</a>
+        <a href="#team" data-i18n="nav.team">Ekip</a>
+        <a href="#vision" data-i18n="nav.vision">Vizyon</a>
+      </div>
+      <div class="foot-col">
+        <h5 data-i18n="footer.col3">İletişim</h5>
+        <a href="https://www.linkedin.com/company/106897671/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/vertex.23/" target="_blank" rel="noopener">Instagram</a>
+        <a href="#">Discord</a>
+      </div>
+    </div>
+  </div>
+  <div class="wrap foot-bottom">
+    <div data-i18n="footer.copyright">© 2026 Vertex Corporation Ltd. Tüm hakları saklıdır.</div>
+    <div>20 Wenlock Road, London, N1 7GU, United Kingdom · +44 7400 412824</div>
+    <div class="foot-legal">
+      <a href="https://vertexishere.com/privacy-policy.html" target="_blank" rel="noopener" data-i18n="footer.privacy">Gizlilik Politikası</a>
+      <a href="https://vertexishere.com/terms-of-service.html" target="_blank" rel="noopener" data-i18n="footer.terms">Kullanım Şartları</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const themeBtn = document.getElementById('themeBtn');
+  const sunIcon = document.getElementById('themeIconSun');
+  const moonIcon = document.getElementById('themeIconMoon');
+  themeBtn.addEventListener('click', () => {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    sunIcon.style.display = isDark ? 'block' : 'none';
+    moonIcon.style.display = isDark ? 'none' : 'block';
+  });
+
+  const i18n = {
+    tr: {
+      'nav.projects':'Projeler','nav.vision':'Vizyon','nav.partners':'Sponsorlar','nav.team':'Ekip','nav.docs':'Dokümantasyon','nav.cta':'Aramıza Katıl',
+      'hero.h1':'Teknolojinin Zirvesi',
+      'hero.sub':'Dünyanın en parlak genç zihinlerinin buluştuğu Vertex, teknoloji sektöründe devrim yaratıyor!',
+      'hero.cta1':'Keşfetmeye Başla','hero.cta2':'Vizyonumuz',
+      'stat.downloads':'Hedef İndirme','stat.users':'Aktif Kullanıcı','stat.age':'Yaş Ortalaması','stat.countries':'Ülke',
+      'marquee.label':'Altyapımız ve teknolojilerimiz en iyiler tarafından desteklenmektedir',
+      'f1.title':'Genç Yenilikçiler','f1.desc':'Ortalama 16 yaşındaki ekibimiz, sınırları zorlamaya ve devrim niteliğinde çözümler yaratmaya kendini adamış yeni nesil teknoloji vizyonerlerini temsil ediyor.',
+      'f2.title':'Çok Alanlı Uzmanlık','f2.desc':'Yazılım geliştirmeden yapay zekaya, oyun, müzik prodüksiyonu ve tarayıcı teknolojilerine kadar geniş beceri setimizle yenilik yapıyoruz.',
+      'f3.title':'Global Vizyon','f3.desc':'Dünya standartlarında ürünler geliştirerek Türkiye\u2019yi küresel teknoloji lideri konumuna getirmeye kendimizi adadık.',
+      'products.h2':'Projelerimiz','products.sub':'Yapay zekadan mobil oyuna, sağlık teknolojisine uzanan ürün ailemiz.',
+      'cortex.tag':'YAPAY ZEKA','cortex.title':'Cortex','cortex.desc':'Gelişmiş yeteneklere sahip devrim niteliğinde çevrimiçi ve çevrimdışı yapay zeka platformu.',
+      'mergen.tag':'AI MİMARİSİ','mergen.title':'Mergen','mergen.desc':'Yüksek performanslı veri işleme ve makine öğrenimi modelleri için ölçeklenebilir yapay zeka mimarisi.',
+      'allstar.tag':'MOBİL OYUN','allstar.desc':'48 saatte 5 milyon+ kişiye ulaşan ve 20.000+ indirme alan mobil oyunumuz.',
+      'ally.tag':'SAĞLIK ASİSTANI','ally.badge':'Yakında','ally.desc':'Akıllı sağlık asistanınız. Gerçek zamanlı izleme ve kişiselleştirilmiş sağlık tavsiyeleri sunar.',
+      'tech.h2':'Teknoloji Ekosistemimiz','tech.sub':'En güçlü araçları ve modern dilleri kullanarak geleceği inşa ediyoruz.',
+      'tech1.title':'Yapay Zeka','tech2.title':'Web Teknolojileri','tech3.title':'Mobil Uygulama','tech4.title':'Oyun Geliştirme',
+      'vision.h2':'2030 Vizyonu',
+      'vision.p1':'2030 yılına kadar Vertex, dünya çapındaki tüm pazarlarda küresel bir varlık kurmayı, platformlarımızda milyonlarca aktif kullanıcıya ulaşmayı ve küresel teknoloji sektöründe öncü bir güç olarak tanınmayı hedefliyor.',
+      'vision.p2':'Sürekli yeniliğe, kendi işletim sistemimizi geliştirmeye ve yapay zeka yeteneklerimizi daha da genişleterek dijital geleceği şekillendirmeye kararlıyız.',
+      'team.h2':'Ekibimiz','team.sub':'Vertex\u2019i her gün büyüten kişiler.',
+      'role.mustafa':'Kurucu Ortak & CEO','role.ekin':'İşletme Direktörü (COO)','role.ecrin':'İletişim Direktörü (CCO)',
+      'role.azra':'İnsan Kaynakları Direktörü (CHRO)','role.idil':'Pazarlama Direktörü (CMO)','role.suzan':'İletişim Direktörü',
+      'role.efe':'Dijital Direktör (CDO)','role.elif':'Finans Direktörü (CFO)',
+      'partners.h2':'Sponsorlarımız','partners.sub':'Vertex\u2019i destekleyen sponsorlarımız.',
+      'mods.h2':'Moderatörler','honor.h2':'Onur Tablosu',
+      'cta.h2':'Geleceğin Parçası Olun','cta.btn1':'Projeleri Keşfet','cta.btn2':'Aramıza Katıl',
+      'footer.blurb':'Türkiye\u2019nin en genç teknoloji şirketi. Ortalama 16 yaşındaki ekibiyle yapay zeka, yazılım ve oyun alanlarında devrim yaratıyor.',
+      'footer.col1':'Projeler','footer.col2':'Şirket','footer.col3':'İletişim','footer.l5':'Hakkımızda',
+      'footer.copyright':'© 2026 Vertex Corporation Ltd. Tüm hakları saklıdır.',
+      'footer.privacy':'Gizlilik Politikası','footer.terms':'Kullanım Şartları'
+    },
+    en: {
+      'nav.projects':'Projects','nav.vision':'Vision','nav.partners':'Sponsors','nav.team':'Team','nav.docs':'Documentation','nav.cta':'Join Us',
+      'hero.h1':'The Peak of Technology',
+      'hero.sub':'Founded by the brightest young minds in the world, Vertex is revolutionizing the technology industry!',
+      'hero.cta1':'Start Exploring','hero.cta2':'Our Vision',
+      'stat.downloads':'Target Downloads','stat.users':'Active Users','stat.age':'Average Age','stat.countries':'Countries',
+      'marquee.label':'Powered by our technologies & infrastructure',
+      'f1.title':'Young Innovators','f1.desc':'Our team, averaging 16 years old, represents the next generation of tech visionaries dedicated to pushing boundaries and creating revolutionary solutions.',
+      'f2.title':'Multidisciplinary Expertise','f2.desc':'We innovate across a wide range of skills, from software development to AI, gaming, music production, and browser technologies.',
+      'f3.title':'Global Vision','f3.desc':'We are dedicated to positioning Turkiye as a global technology leader by developing world-class products.',
+      'products.h2':'Our Projects','products.sub':'From artificial intelligence to mobile gaming and health technology.',
+      'cortex.tag':'ARTIFICIAL INTELLIGENCE','cortex.title':'Cortex','cortex.desc':'A revolutionary online and offline AI platform with advanced capabilities.',
+      'mergen.tag':'AI ARCHITECTURE','mergen.title':'Mergen','mergen.desc':'Scalable AI architecture designed for high-performance data processing and machine learning models.',
+      'allstar.tag':'MOBILE GAME','allstar.desc':'Our mobile game that reached 5 million+ people in 48 hours with 20,000+ downloads.',
+      'ally.tag':'HEALTH ASSISTANT','ally.badge':'Coming soon','ally.desc':'Your intelligent health assistant. Providing real-time monitoring and personalized wellness advice.',
+      'tech.h2':'Our Technology Ecosystem','tech.sub':'We use the most powerful tools and modern languages to build the future.',
+      'tech1.title':'Artificial Intelligence','tech2.title':'Web Technologies','tech3.title':'Mobile App','tech4.title':'Game Development',
+      'vision.h2':'2030 Vision',
+      'vision.p1':'By 2030, Vertex aims to establish a global presence in all markets worldwide, reaching millions of active users on our platforms and becoming a recognized leading force in the global technology industry.',
+      'vision.p2':'We are committed to continuous innovation, developing our own operating system, and further expanding our AI capabilities to shape the digital future.',
+      'team.h2':'Our Team','team.sub':'The people growing Vertex every day.',
+      'role.mustafa':'Co-Founder & CEO','role.ekin':'Chief Operating Officer','role.ecrin':'Chief Communications Officer',
+      'role.azra':'CHRO','role.idil':'CMO','role.suzan':'Communication Director',
+      'role.efe':'Chief Digital Officer','role.elif':'Chief Financial Officer - CFO',
+      'partners.h2':'Our Sponsors','partners.sub':'The sponsors supporting Vertex.',
+      'mods.h2':'Our Moderators','honor.h2':'Honor Roll',
+      'cta.h2':'Be Part of the Future','cta.btn1':'Explore Projects','cta.btn2':'Join Us',
+      'footer.blurb':'Turkiye\u2019s youngest tech company. Revolutionizing AI, software, and gaming with an average age of 16.',
+      'footer.col1':'Projects','footer.col2':'Company','footer.col3':'Contact','footer.l5':'About Us',
+      'footer.copyright':'© 2026 Vertex Corporation Ltd. All rights reserved.',
+      'footer.privacy':'Privacy Policy','footer.terms':'Terms of Use'
+    }
+  };
+  let currentLang = 'tr';
+  const langBtn = document.getElementById('langBtn');
+  const langLabel = document.getElementById('langLabel');
+  const joinBtn = document.getElementById('joinBtn');
+  const joinBtn2 = document.getElementById('joinBtn2');
+  function applyLang(lang){
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if(i18n[lang][key]) el.textContent = i18n[lang][key];
+    });
+    document.documentElement.lang = lang;
+    langLabel.textContent = lang === 'tr' ? 'EN' : 'TR';
+    joinBtn.href = lang === 'tr' ? 'https://vertexishere.com/tr/aramiza-katil.html' : 'https://vertexishere.com/en/join-us.html';
+    joinBtn2.href = joinBtn.href;
+  }
+  langBtn.addEventListener('click', () => {
+    currentLang = currentLang === 'tr' ? 'en' : 'tr';
+    applyLang(currentLang);
+  });
+
+  const nameBlocks = document.querySelectorAll('.name-block');
+  if('IntersectionObserver' in window){
+    const nameObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const chips = entry.target.querySelectorAll('.name-chip');
+          chips.forEach((chip, i) => { chip.style.transitionDelay = (i * 30) + 'ms'; });
+          entry.target.classList.add('in-view');
+          nameObserver.unobserve(entry.target);
+        }
+      });
+    }, {threshold:0.15});
+    nameBlocks.forEach(block => nameObserver.observe(block));
+  } else {
+    nameBlocks.forEach(block => block.classList.add('in-view'));
+  }
+
+  const teamTrack = document.getElementById('teamTrack');
+  const teamPrev = document.getElementById('teamPrev');
+  const teamNext = document.getElementById('teamNext');
+  function updateTeamNav(){
+    teamPrev.disabled = teamTrack.scrollLeft <= 4;
+    teamNext.disabled = teamTrack.scrollLeft >= teamTrack.scrollWidth - teamTrack.clientWidth - 4;
+  }
+  teamPrev.addEventListener('click', () => teamTrack.scrollBy({left:-336, behavior:'smooth'}));
+  teamNext.addEventListener('click', () => teamTrack.scrollBy({left:336, behavior:'smooth'}));
+  teamTrack.addEventListener('scroll', updateTeamNav);
+  window.addEventListener('resize', updateTeamNav);
+  updateTeamNav();
+</script>
+</body>
 </html>
