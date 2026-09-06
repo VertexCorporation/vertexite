@@ -6,7 +6,7 @@
 </script>
 <meta charset="utf-8"/><meta content="⭐ Vertex: Turkiye's youngest tech company. Pioneering in AI with Cortex &amp; Mergen, mobile gaming, and next-gen software solutions." name="description"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/><link as="image" href="../assets/logo.svg" rel="preload"/>
-<title>Vertex | Le Sommet de la Technologie</title>
+<title>Vertex | Le Sommet de la Technologie</title><link href="../assets/favicon.webp" rel="icon" type="image/webp"/><link href="../assets/favicon.webp" rel="apple-touch-icon"/><meta content="#0E1013" name="theme-color"/><meta content="⭐ Vertex: Turkiye's youngest tech company. Pioneering in AI with Cortex &amp; Mergen, mobile gaming, and next-gen software solutions." name="description"/><link href="https://vertexishere.com/fr/" rel="canonical"/><link href="https://vertexishere.com/tr/" hreflang="tr" rel="alternate"/><link href="https://vertexishere.com/en/" hreflang="en" rel="alternate"/><link href="https://vertexishere.com/de/" hreflang="de" rel="alternate"/><link href="https://vertexishere.com/fr/" hreflang="fr" rel="alternate"/><link href="https://vertexishere.com/es/" hreflang="es" rel="alternate"/><link href="https://vertexishere.com/it/" hreflang="it" rel="alternate"/><link href="https://vertexishere.com/pt/" hreflang="pt" rel="alternate"/><link href="https://vertexishere.com/nl/" hreflang="nl" rel="alternate"/><link href="https://vertexishere.com/ru/" hreflang="ru" rel="alternate"/><link href="https://vertexishere.com/ar/" hreflang="ar" rel="alternate"/><link href="https://vertexishere.com/hi/" hreflang="hi" rel="alternate"/><link href="https://vertexishere.com/id/" hreflang="id" rel="alternate"/><link href="https://vertexishere.com/ja/" hreflang="ja" rel="alternate"/><link href="https://vertexishere.com/ko/" hreflang="ko" rel="alternate"/><link href="https://vertexishere.com/zh/" hreflang="zh" rel="alternate"/><link href="https://vertexishere.com/az/" hreflang="az" rel="alternate"/><link href="https://vertexishere.com/en/" hreflang="x-default" rel="alternate"/><meta content="website" property="og:type"/><meta content="https://vertexishere.com/fr/" property="og:url"/><meta content="Vertex | Le Sommet de la Technologie" property="og:title"/><meta content="⭐ Vertex: Turkiye's youngest tech company. Pioneering in AI with Cortex &amp; Mergen, mobile gaming, and next-gen software solutions." property="og:description"/><meta content="https://vertexishere.com/assets/favicon.webp" property="og:image"/><meta content="Vertex Corporation" property="og:site_name"/><meta content="summary" name="twitter:card"/><meta content="Vertex | Le Sommet de la Technologie" name="twitter:title"/><meta content="⭐ Vertex: Turkiye's youngest tech company. Pioneering in AI with Cortex &amp; Mergen, mobile gaming, and next-gen software solutions." name="twitter:description"/><meta content="https://vertexishere.com/assets/favicon.webp" name="twitter:image"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://lottie.host" rel="preconnect"/><link href="https://unpkg.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
@@ -72,7 +72,7 @@
   .mobile-menu{max-height:0; overflow:hidden; visibility:hidden; transition:max-height 280ms ease, visibility 0s linear 280ms;}
   header.menu-open .mobile-menu{max-height:480px; visibility:visible; transition:max-height 280ms ease;}
   .mobile-menu nav{display:flex; flex-direction:column; padding-top:6px; padding-bottom:18px;}
-  .mobile-menu a.mlink{display:block; padding:12px 2px; font-size:15px; font-weight:600; color:var(--text-muted); text-decoration:none; border-bottom:1px solid var(--border);}
+  .mobile-menu a.mlink{transition:color var(--dur) ease, border-color var(--dur) ease; display:block; padding:12px 2px; font-size:15px; font-weight:600; color:var(--text-muted); text-decoration:none; border-bottom:1px solid var(--border);}
   .mobile-menu a.mlink:hover{color:var(--text);}
   .mobile-menu .m-cta{margin-top:14px; width:100%;}
   .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
@@ -83,54 +83,31 @@
   header .logo-chip img{height:28px;}
   header .logo-chip span{font-size:20px; letter-spacing:-.02em;}
   .nav-links{display:flex; align-items:center; gap:26px; list-style:none; margin:0; padding:0;}
-  .nav-links a{font-size:14px; font-weight:500; text-decoration:none; color:var(--text-muted); position:relative; padding:4px 0; white-space:nowrap;}
+  .nav-links a{font-size:14px; font-weight:500; text-decoration:none; color:var(--text-muted); position:relative; padding:4px 0; white-space:nowrap; transition:color var(--dur) ease;}
   .nav-links a::after{content:''; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--text); transform:scaleX(0); transform-origin:left; transition:transform var(--dur) ease;}
   .nav-links a:hover{color:var(--text);}
   .nav-links a:hover::after{transform:scaleX(1);}
   .nav-right{display:flex; align-items:center; gap:10px;}
-  .icon-btn{display:flex; align-items:center; justify-content:center; gap:6px; width:36px; height:36px; border-radius:var(--radius-s); border:1px solid var(--border); background:var(--surface); color:var(--text); cursor:pointer; transition:border-color var(--dur) ease; text-decoration:none; font-size:13px; font-weight:700;}
+  .icon-btn{display:flex; align-items:center; justify-content:center; gap:6px; width:36px; height:36px; border-radius:var(--radius-s); border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer; transition:border-color var(--dur) ease; text-decoration:none; font-size:13px; font-weight:700;}
   .icon-btn:hover{border-color:var(--text-muted);}
+  header .menu-btn{display:none;}
+  @media (max-width:860px){header .menu-btn{display:flex;}}
   .lang-btn{width:auto; padding:0 12px;}
-  .lang-btn .chev{opacity:.55;}
-/* Dil Modalı (premium, haritalı, kutusuz) */
-  body.lang-open{overflow:hidden;}
-  .lang-overlay{position:fixed; inset:0; z-index:100; display:flex; align-items:center; justify-content:center; padding:20px; background:rgba(8,10,13,.5); opacity:0; visibility:hidden; transition:opacity 250ms ease, visibility 0s linear 250ms;}
-  body.lang-open .lang-overlay{opacity:1; visibility:visible; transition:opacity 250ms ease;}
-  .lang-modal{position:relative; width:min(720px,100%); max-height:min(82vh,680px); overflow:auto; overscroll-behavior:contain; scrollbar-width:none; -ms-overflow-style:none; background:var(--header-bg); border:1px solid var(--border); border-radius:22px; box-shadow:0 24px 70px rgba(0,0,0,.4); transform:translateY(20px) scale(.96); transition:transform 320ms cubic-bezier(.2,.9,.25,1.08);}
-  body.lang-open .lang-modal{transform:none;}
-  .lang-modal::-webkit-scrollbar{display:none;}
-
-  .lang-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:16px; overflow:hidden; margin:18px 20px 24px;}
-  .lang-grid > .lang-card:last-child{grid-column:1 / -1;}
-  .lang-card{content-visibility:auto; contain-intrinsic-size:auto 190px; display:flex; flex-direction:column; align-items:center; gap:14px; padding:30px 10px 26px; background:var(--header-bg); text-decoration:none; color:var(--text); position:relative; transition:background var(--dur) ease;}
-  body.lang-open .lang-card{opacity:0; animation:cardIn 420ms cubic-bezier(.2,.9,.3,1.1) forwards; animation-delay:var(--d,0s);}
-  @keyframes cardIn{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
-  .lang-card:hover{background:var(--accent-soft);}
-  .lang-card.hide{display:none;}
-  .lang-card.active{background:var(--accent-soft);}
-  .lang-card .check{position:absolute; top:12px; right:12px; width:22px; height:22px; border-radius:50%; background:var(--accent); color:var(--accent-ink); font-size:12px; font-weight:800; display:none; align-items:center; justify-content:center;}
-  .lang-card.active .check{display:flex;}
-  .map-badge{display:flex; align-items:center; justify-content:center;}
-  .map-badge svg{width:104px; height:104px; fill:var(--text-muted); transition:fill var(--dur) ease, transform 300ms cubic-bezier(.2,.9,.3,1.2);}
-  .lang-card:hover .map-badge svg{fill:var(--text); transform:scale(1.07);}
-  .lang-card.active .map-badge svg{fill:var(--accent);}
-  .lang-card .lname{font-size:20px; font-weight:800; letter-spacing:-.01em;}
-  .lang-card.active .lname{color:var(--accent);}
-  .lang-card .lname-en{font-size:12.5px; font-weight:500; color:var(--text-muted); margin-top:-8px;}
-  .lang-empty{padding:36px 20px 44px; text-align:center; color:var(--text-muted); font-size:14px; font-weight:600;}
+  .lang-btn .chev{opacity:.55; transition:transform var(--dur) ease;}
+  .language-dropdown.open .lang-btn .chev{transform:rotate(180deg);}
+.language-dropdown{position:relative;}
+  .lang-panel{position:absolute; top:calc(100% + 10px); right:0; min-width:215px; max-height:330px; overflow:auto; background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:6px; box-shadow:0 16px 40px rgba(0,0,0,.16); z-index:60; opacity:0; visibility:hidden; transform:translateY(6px); transition:opacity var(--dur) ease, transform var(--dur) ease, visibility 0s linear var(--dur);}
+  .language-dropdown.open .lang-panel{opacity:1; visibility:visible; transform:none; transition:opacity var(--dur) ease, transform var(--dur) ease;}
+  .lang-row{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; font-size:13.5px; font-weight:500; color:var(--text-muted); border-radius:8px; text-decoration:none; white-space:nowrap; transition:background-color var(--dur) ease, color var(--dur) ease;}
+  .lang-row:hover{background:var(--surface); color:var(--text);}
+  .lang-row.active{color:var(--text); font-weight:700;}
+  .lang-row .tick{font-size:12px; opacity:0; color:var(--accent);}
+  .lang-row.active .tick{opacity:1;}
   .mobile-menu button.mlink{width:100%; text-align:left; background:none; border:none; border-bottom:1px solid var(--border); cursor:pointer; font:inherit; display:flex; align-items:center; gap:10px; padding:12px 2px; font-size:15px; font-weight:600; color:var(--text-muted);}
   .mobile-menu button.mlink:hover{color:var(--text);}
   .mobile-menu button.mlink .chev-r{margin-left:auto;}
-  @media (max-width:560px){
-    .lang-grid{grid-template-columns:repeat(2,1fr); margin:14px 12px 20px;}
-    .lang-overlay{padding:14px; align-items:flex-end;}
-    .lang-modal{border-radius:18px;}
-    .lang-grid > .lang-card:last-child{grid-column:auto;}
-    .map-badge svg{width:88px; height:88px;}
-    .lang-card .lname{font-size:18px;}
-  }
-  .btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 18px; border-radius:var(--radius-s); font-size:14px; font-weight:600; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform var(--dur) ease;}
-  .btn-primary{background:var(--text); color:var(--bg);}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 18px; border-radius:var(--radius-s); font-size:14px; font-weight:600; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform var(--dur) ease, background-color var(--dur) ease, border-color var(--dur) ease, color var(--dur) ease, box-shadow var(--dur) ease;}
+  .btn-primary{background:transparent; color:var(--text); border-color:var(--border);}
   .btn-primary:hover{transform:translateY(-1px);}
   .btn-ghost{border-color:var(--border); background:transparent; color:var(--text);}
   .btn-ghost:hover{border-color:var(--text-muted);}
@@ -177,7 +154,7 @@
   /* Products */
   .products{border-top:1px solid var(--border);}
   .product-layout{display:grid; grid-template-columns:1.3fr 1fr; gap:20px;}
-  .product-feature{border:1px solid var(--border); border-radius:var(--radius-m); padding:32px; background:var(--surface); display:flex; flex-direction:column; justify-content:space-between; min-height:260px; text-decoration:none; transition:border-color var(--dur) ease;}
+  .product-feature{border:1px solid var(--border); border-radius:var(--radius-m); padding:32px; background:transparent; display:flex; flex-direction:column; justify-content:space-between; min-height:260px; text-decoration:none; transition:border-color var(--dur) ease;}
   .product-feature:hover{border-color:var(--text-muted);}
   .product-feature .tag{font-size:12.5px; font-weight:700; color:var(--accent); margin-bottom:14px;}
   .product-feature h3{font-size:21px; margin:0 0 10px; letter-spacing:-.01em; color:var(--text);}
@@ -194,7 +171,7 @@
   .product-list{display:flex; flex-direction:column; gap:1px; border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden;}
   .product-row{padding:19px 22px; background:var(--bg); border-bottom:1px solid var(--border); transition:background var(--dur) ease; text-decoration:none; display:block;}
   .product-row:last-child{border-bottom:none;}
-  .product-row:hover{background:var(--surface);}
+  .product-row:hover h4{color:var(--accent);}
   .product-row .tag-row{display:flex; align-items:center; gap:8px; margin-bottom:6px;}
   .product-row .tag{font-size:11px; font-weight:700; color:var(--text-muted);}
   .badge-soon{display:inline-block; font-size:10.5px; font-weight:700; padding:2.5px 8px; border-radius:20px; background:var(--accent-soft); color:var(--accent);}
@@ -209,7 +186,7 @@
   .tech-card{
     border:1px solid var(--border); 
     border-radius:var(--radius-m); 
-    background:var(--surface); 
+    background:transparent; 
     display:flex; 
     flex-direction:column; 
     overflow:hidden;
@@ -218,7 +195,7 @@
   .tech-card:hover { border-color: var(--text-muted); }
   .tech-visual-wrapper {
     height: 180px;
-    background: var(--surface-2);
+    background: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -237,7 +214,7 @@
   .vision-text p{font-size:16px; line-height:1.75; color:var(--text-muted); margin:0 0 16px;}
   .vision-text p:first-child{color:var(--text); font-size:19px; line-height:1.6;}
   .vision-ticker{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
-  .vision-chip{border:1px solid var(--border); border-radius:20px; padding:7px 15px; font-size:13px; font-weight:700; background:var(--surface);}
+  .vision-chip{border:1px solid var(--border); border-radius:20px; padding:7px 15px; font-size:13px; font-weight:700; background:transparent;}
 
   /* Team */
   .team{border-top:1px solid var(--border);}
@@ -250,7 +227,7 @@
   .team-scroll-wrap::after{content:''; position:absolute; top:0; right:0; bottom:0; width:56px; background:linear-gradient(to left, var(--bg), transparent); pointer-events:none; transition:background var(--dur) ease;}
   .team-track{display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity; scroll-behavior:smooth; padding:2px 2px 10px; scrollbar-width:none;}
   .team-track::-webkit-scrollbar{display:none;}
-  .team-card{scroll-snap-align:start; flex:0 0 152px; width:152px; border:1px solid var(--border); border-radius:13px; background:var(--surface); padding:9px; transition:transform var(--dur) ease, border-color var(--dur) ease;}
+  .team-card{scroll-snap-align:start; flex:0 0 152px; width:152px; border:1px solid var(--border); border-radius:13px; background:transparent; padding:9px; transition:transform var(--dur) ease, border-color var(--dur) ease;}
   .team-card:hover{transform:translateY(-3px); border-color:var(--text-muted);}
   .team-photo-wrap{aspect-ratio:4/5; overflow:hidden; background:var(--bg); border-radius:9px;}
   .team-photo{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s cubic-bezier(.16,1,.3,1);}
@@ -266,7 +243,7 @@
   /* Partners (Alt Kısım) */
   .partners{border-top:1px solid var(--border);}
   .partner-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
-  .partner-card{border:1px solid var(--border); border-radius:var(--radius-m); padding:22px 14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:var(--surface); transition:border-color var(--dur) ease; min-height:96px; text-decoration:none;}
+  .partner-card{border:1px solid var(--border); border-radius:var(--radius-m); padding:22px 14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:transparent; transition:border-color var(--dur) ease; min-height:96px; text-decoration:none;}
   .partner-card:hover{border-color:var(--text-muted);}
   .partner-card img{max-height:24px; max-width:100%; opacity:.85;}
   .partner-name{font-size:12.5px; font-weight:600; color:var(--text-muted);}
@@ -331,20 +308,20 @@
   .cta-band h2{margin:0; font-size:24px;}
   .cta-actions{display:flex; gap:12px;}
 
-  footer{border-top:1px solid var(--border); padding:48px 0 40px; text-align:center;}
+  footer{border-top:1px solid var(--border); padding:72px 0 36px;}
   footer .logo-chip{background:transparent; border:none; padding:0; gap:10px; border-radius:0;}
   footer .logo-chip img{height:28px;}
   footer .logo-chip span{font-size:20px; letter-spacing:-.02em;}
-  .foot-grid{display:flex; flex-direction:column; align-items:center; gap:32px;}
-  .foot-brand{display:flex; flex-direction:column; align-items:center;}
-  .foot-brand p{color:var(--text-muted); font-size:13.5px; max-width:440px; line-height:1.6; margin:12px 0 0;}
-  .foot-links{display:flex; gap:48px; flex-wrap:wrap; justify-content:center;}
+  .foot-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:48px; text-align:left; align-items:start; margin-bottom:56px;}
+  .foot-brand{display:flex; flex-direction:column; align-items:flex-start;}
+  .foot-brand p{color:var(--text-muted); font-size:13.5px; max-width:300px; line-height:1.6; margin:12px 0 0;}
+  .foot-links{display:contents;}
   .foot-col h5{font-size:12.5px; color:var(--text-muted); margin:0 0 12px; font-weight:600;}
-  .foot-col a{display:block; font-size:13.5px; text-decoration:none; color:var(--text); margin-bottom:9px;}
+  .foot-col a{display:block; font-size:13.5px; text-decoration:none; color:var(--text); margin-bottom:9px; transition:color var(--dur) ease, padding-left var(--dur) ease;}
   .foot-col a:hover{color:var(--accent);}
-  .foot-bottom{margin-top:36px; padding-top:20px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-muted); line-height:1.7; display:flex; flex-direction:column; align-items:center; gap:4px;}
-  .foot-legal{display:flex; gap:16px; margin-top:6px; justify-content:center;}
-  .foot-legal a{text-decoration:none; color:var(--text-muted);}
+  .foot-bottom{padding-top:24px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-muted); line-height:1.7; display:flex; flex-direction:row; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
+  .foot-legal{display:flex; gap:20px;}
+  .foot-legal a{text-decoration:none; color:var(--text-muted); transition:color var(--dur) ease;}
   .foot-legal a:hover{color:var(--text);}
 
   @media (max-width:1024px){
@@ -369,8 +346,12 @@
     .cta-band .wrap{padding-top:40px; padding-bottom:40px; flex-direction:column; align-items:stretch;}
     .cta-actions{flex-direction:column;}
     .cta-actions .btn{width:100%;}
-    .foot-grid{flex-direction:column;}
-    .foot-links{gap:24px;}
+    .foot-grid{grid-template-columns:1fr; gap:36px; text-align:center; margin-bottom:40px;}
+    .foot-links{display:flex; flex-direction:column; gap:28px;}
+    .foot-brand{align-items:center;}
+    .foot-brand p{margin-left:auto; margin-right:auto;}
+    .foot-bottom{flex-direction:column; text-align:center;}
+    .foot-legal{justify-content:center;}
   }
   @media (min-width:861px){
     .mobile-menu{display:none;}
@@ -408,9 +389,9 @@
 </ul>
 <div class="nav-right">
 <div class="language-dropdown" id="langWrap">
-<button aria-expanded="false" aria-haspopup="dialog" aria-label="Dil seç" class="icon-btn lang-btn" id="langBtn">
+<button aria-expanded="false" aria-haspopup="menu" aria-label="Dil seç" class="icon-btn lang-btn" id="langBtn">
 <svg fill="none" height="15" stroke="currentColor" stroke-width="1.6" viewbox="0 0 24 24" width="15"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg>
-<span>FR</span><svg class="chev" fill="none" height="10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="10"><path d="M6 9l6 6 6-6"></path></svg></button>
+<span>FR</span><svg class="chev" fill="none" height="10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewbox="0 0 24 24" width="10"><path d="M6 9l6 6 6-6"></path></svg></button><div class="lang-panel" role="menu"><a class="lang-row" href="../tr/" role="menuitem"><span>Türkçe</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../en/" role="menuitem"><span>English</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../de/" role="menuitem"><span>Deutsch</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row active" href="../fr/" role="menuitem"><span>Français</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../es/" role="menuitem"><span>Español</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../it/" role="menuitem"><span>Italiano</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../pt/" role="menuitem"><span>Português</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../nl/" role="menuitem"><span>Nederlands</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../ru/" role="menuitem"><span>Русский</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../ar/" role="menuitem"><span>العربية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../hi/" role="menuitem"><span>हिन्दी</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../id/" role="menuitem"><span>Indonesia</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../ja/" role="menuitem"><span>日本語</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../ko/" role="menuitem"><span>한국어</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../zh/" role="menuitem"><span>简体中文</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../az/" role="menuitem"><span>Azərbaycanca</span><span aria-hidden="true" class="tick">✓</span></a></div>
 </div>
 <button aria-label="Temayı değiştir" class="icon-btn" id="themeBtn">
 <svg fill="none" height="17" id="themeIconSun" stroke="currentColor" stroke-width="1.7" style="display:none" viewbox="0 0 24 24" width="17"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"></path></svg>
@@ -418,7 +399,7 @@
 </button><button aria-controls="mobileMenu" aria-expanded="false" aria-label="Menu" class="icon-btn menu-btn" id="menuBtn"><span></span><span></span></button>
 <a class="btn btn-primary" href="join-us.html">Rejoignez-nous</a>
 </div>
-</div><div class="mobile-menu" id="mobileMenu"><nav aria-label="Mobile" class="wrap"><a class="mlink" href="#home">Accueil</a><a class="mlink" href="#projects">Projets</a><a class="mlink" href="#vision">Vision</a><a class="mlink" href="#partners">Partenaires</a><a class="mlink" href="#team">Équipe</a><button aria-haspopup="dialog" class="mlink m-lang" id="mLangBtn" type="button"><svg fill="none" height="18" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg><span>Français</span><svg class="chev-r" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="14"><path d="M9 6l6 6-6 6"></path></svg></button><a class="btn btn-primary m-cta" href="join-us.html">Rejoignez-nous</a></nav></div>
+</div><div class="mobile-menu" id="mobileMenu"><nav aria-label="Mobile" class="wrap"><a class="mlink" href="#home">Accueil</a><a class="mlink" href="#projects">Projets</a><a class="mlink" href="#vision">Vision</a><a class="mlink" href="#partners">Partenaires</a><a class="mlink" href="#team">Équipe</a><button aria-haspopup="menu" class="mlink m-lang" id="mLangBtn" type="button"><svg fill="none" height="18" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg><span>Français</span><svg class="chev-r" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="14"><path d="M9 6l6 6-6 6"></path></svg></button><a class="btn btn-primary m-cta" href="join-us.html">Rejoignez-nous</a></nav></div>
 </header>
 <main>
 <section class="hero" id="home">
@@ -783,7 +764,7 @@
 </div>
 <div class="foot-col">
 <h5>Contact</h5>
-<a href="https://www.linkedin.com/company/vertexcorporation" rel="noopener" target="_blank">Envoyer un E-mail</a>
+<a href="mailto:contact@vertexishere.com">Envoyer un E-mail</a><a href="https://www.linkedin.com/company/vertexcorporation" rel="noopener" target="_blank">LinkedIn</a>
 <a href="https://www.instagram.com/vertexcorpltd" rel="noopener" target="_blank">Instagram</a><a href="https://x.com/VertexCorpLTD" rel="noopener" target="_blank">X</a>
 </div>
 </div>
@@ -798,7 +779,7 @@
 </div>
 </footer>
 <!-- Lottie Player Script -->
-<!-- Lottie Player Script --><div aria-label="Choisir la langue" aria-modal="true" class="lang-overlay" id="langOverlay" role="dialog"><div class="lang-modal"><div class="lang-grid"><a class="lang-card" data-search="Türkçe Turkish tr" href="../tr/" style="--d:0.030s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M50.1,24.4L53.0,24.6L53.9,24.2L55.9,25.6L56.7,26.7L56.3,27.4L56.9,28.7L58.4,28.8L60.0,29.9L57.6,30.7L58.8,33.8L58.2,35.1L59.2,35.6L59.8,37.4L58.4,37.9L58.0,37.0L56.1,37.1L53.9,36.7L52.7,37.5L52.4,37.0L50.2,37.6L47.7,37.5L43.7,38.8L42.0,38.7L40.2,38.1L38.0,38.9L35.7,38.4L34.1,41.3L33.4,41.1L33.1,39.9L34.3,38.8L33.9,38.1L32.3,39.0L29.5,38.5L26.8,40.3L24.1,40.7L22.9,40.3L21.8,39.2L19.8,38.4L17.7,38.2L17.3,39.9L14.9,40.3L13.3,39.6L12.9,38.7L11.3,38.4L10.2,37.7L7.9,37.8L7.1,35.8L7.6,34.9L5.9,34.3L6.2,32.7L6.9,32.2L5.9,31.0L4.2,30.5L4.4,28.9L6.1,27.7L8.3,27.9L10.7,27.7L13.9,26.5L13.8,25.2L19.6,25.6L20.2,24.9L22.7,23.7L25.9,22.9L30.0,23.0L31.6,23.7L33.9,23.9L35.2,25.1L40.8,26.1L43.9,25.6L46.4,26.0L50.1,24.4Z"></path><path d="M9.9,23.0L10.9,24.5L13.0,25.2L12.2,26.0L10.4,25.7L8.4,26.0L7.6,26.8L4.2,27.1L4.0,26.7L5.7,24.7L4.8,23.8L5.7,23.0L7.7,22.7L9.9,23.0Z"></path></svg></span><span class="lname">Türkçe</span><span class="lname-en">Turkish</span></a><a class="lang-card" data-search="English English en" href="../en/" style="--d:0.065s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M14.9,33.6L8.4,33.4L4.0,31.8L9.2,27.9L15.4,27.2L19.2,31.3L18.4,32.6L14.9,33.6Z"></path><path d="M32.7,8.3L27.7,11.5L31.0,12.9L38.6,12.9L40.3,14.1L35.3,20.9L32.3,22.2L38.2,23.2L41.0,25.1L43.1,29.7L46.7,31.2L49.3,34.0L53.7,40.1L60.0,41.3L59.4,45.1L56.0,46.7L54.4,49.1L58.6,49.2L56.0,51.7L51.7,52.7L41.8,52.8L35.9,53.5L31.0,53.4L28.8,55.7L26.6,54.8L19.9,55.6L24.3,52.6L26.5,50.2L32.5,50.1L25.4,47.1L22.4,47.7L21.4,45.6L25.4,44.5L27.7,42.5L27.0,38.6L33.0,37.4L33.8,35.7L27.8,29.7L21.1,29.2L23.5,26.0L20.5,23.1L18.4,22.4L19.6,19.7L16.5,19.2L18.6,15.6L17.2,14.4L19.9,9.9L23.5,8.3L32.7,8.3Z"></path></svg></span><span class="lname">English</span><span class="lname-en">English</span></a><a class="lang-card" data-search="Deutsch German de" href="../de/" style="--d:0.100s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M27.6,9.2L31.4,11.6L37.8,14.6L42.2,13.2L45.0,11.4L47.8,11.7L52.9,15.1L55.3,15.9L56.3,18.6L54.5,21.1L57.6,23.3L58.4,26.0L57.5,27.6L60.0,31.1L58.7,33.5L56.0,33.3L44.3,36.7L43.2,38.5L45.4,42.1L52.6,46.4L50.1,48.7L46.5,50.1L45.7,53.1L39.7,53.6L37.2,54.6L31.8,53.9L31.1,55.3L20.7,52.5L14.6,53.6L14.4,50.7L17.8,45.1L13.6,44.0L9.2,44.0L6.8,42.2L7.6,40.0L5.4,38.1L6.9,36.9L4.6,34.2L4.0,32.8L5.8,29.7L4.3,28.0L9.2,27.1L11.0,24.2L12.5,16.2L17.0,16.1L20.2,17.0L22.4,15.3L22.8,10.9L21.0,8.7L27.6,9.2Z"></path></svg></span><span class="lname">Deutsch</span><span class="lname-en">German</span></a><a class="lang-card active" data-search="Français French fr" href="../fr/" style="--d:0.135s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M45.2,19.1L47.4,19.4L49.0,20.5L51.8,20.6L54.4,21.3L52.3,24.8L52.4,26.7L50.0,27.8L46.3,31.3L49.0,31.3L50.1,33.2L50.6,35.3L48.5,36.4L50.1,38.0L49.9,39.7L52.6,40.5L51.9,41.7L48.0,44.1L46.5,44.4L43.7,43.8L42.4,43.0L41.0,43.3L38.4,42.4L35.3,44.0L34.5,45.0L35.1,46.9L30.5,47.3L28.1,46.3L22.4,45.9L17.5,44.5L15.5,43.1L16.7,42.5L17.6,38.6L18.3,33.7L18.0,31.7L15.5,30.9L14.6,28.9L10.1,26.3L5.6,25.8L4.4,24.8L5.3,23.7L4.0,23.0L9.8,21.8L12.0,23.0L12.9,22.6L16.9,22.6L15.2,18.5L17.6,18.5L18.1,19.7L21.9,20.0L23.3,18.4L27.4,17.3L28.6,16.1L28.7,14.3L30.0,13.4L32.4,12.9L33.7,14.5L38.9,16.3L41.6,18.1L45.2,19.1Z"></path><path d="M59.7,45.5L60.0,48.1L58.6,51.1L57.1,50.3L56.7,46.5L59.7,45.5Z"></path></svg></span><span class="lname">Français</span><span class="lname-en">French</span><span aria-hidden="true" class="check">✓</span></a><a class="lang-card" data-search="Español Spanish es" href="../es/" style="--d:0.170s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M36.8,16.5L39.1,18.0L44.6,19.7L51.0,20.1L51.3,20.8L52.3,20.5L53.7,21.2L58.9,20.8L59.1,23.0L53.9,25.9L49.3,26.9L43.3,33.7L43.8,35.7L45.6,37.0L43.0,38.4L41.9,39.7L41.1,42.2L38.9,42.3L36.8,43.7L35.4,45.8L25.5,46.0L24.1,46.9L21.9,47.3L19.9,49.1L18.1,48.3L16.1,45.0L14.4,43.9L12.1,44.0L11.6,42.2L13.0,40.3L12.3,38.3L13.7,36.4L11.9,33.6L13.7,32.8L13.8,30.6L14.7,30.0L14.2,27.1L17.3,24.8L15.5,23.0L12.1,23.5L9.8,23.2L8.5,22.1L6.0,23.0L6.4,21.5L4.0,18.4L5.6,16.8L10.8,14.9L12.7,15.7L19.7,15.7L24.8,16.5L28.8,16.0L31.3,16.7L34.4,16.9L36.8,16.5Z"></path><path d="M58.6,32.5L60.0,32.9L58.3,34.6L55.2,33.2L57.0,32.2L58.6,32.5Z"></path></svg></span><span class="lname">Español</span><span class="lname-en">Spanish</span></a><a class="lang-card" data-search="Italiano Italian it" href="../it/" style="--d:0.205s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M18.2,36.5L19.0,38.3L17.9,44.6L15.5,44.2L14.6,45.8L12.5,44.4L12.7,39.3L11.4,37.6L16.5,35.0L18.2,36.5Z"></path><path d="M46.3,49.1L44.0,52.7L44.9,54.8L44.1,56.3L41.2,55.8L31.4,50.9L35.8,49.2L37.3,50.1L41.2,49.9L42.8,49.3L46.3,49.1Z"></path><path d="M37.4,9.9L36.0,10.8L37.5,14.3L35.1,13.4L30.7,14.9L31.8,17.2L30.5,18.3L31.2,20.7L36.8,23.8L38.9,27.9L42.9,31.0L44.3,31.5L48.1,31.5L48.3,33.9L53.5,35.6L57.5,37.6L60.0,40.2L58.1,40.9L57.1,39.3L52.6,38.5L50.8,41.3L51.1,42.4L53.5,43.6L53.8,45.4L50.9,46.7L50.8,48.2L48.5,50.4L47.0,50.4L48.1,46.7L49.2,46.5L48.4,43.7L46.8,40.7L43.3,39.5L42.4,37.5L39.3,36.7L37.6,34.8L34.5,34.8L32.3,33.7L27.7,29.8L23.3,26.8L20.1,21.7L14.1,19.8L10.9,22.1L8.1,22.9L9.0,21.4L5.6,20.4L5.9,18.4L4.0,16.5L6.5,15.1L5.9,12.7L10.4,12.2L12.6,11.2L15.0,13.1L16.4,11.0L19.6,10.6L22.1,8.2L24.8,8.6L25.8,7.7L30.1,7.9L31.2,9.0L37.4,9.9Z"></path><path d="M31.7,22.2L31.8,22.0L31.5,21.8L31.2,22.1L31.7,22.2Z"></path></svg></span><span class="lname">Italiano</span><span class="lname-en">Italian</span></a><a class="lang-card" data-search="Português Portuguese pt" href="../pt/" style="--d:0.240s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M36.8,58.1L32.1,60.0L23.8,58.7L21.4,55.4L20.3,43.5L14.2,41.2L15.3,34.5L17.8,32.3L20.6,25.3L23.1,16.1L21.8,6.1L28.0,4.0L31.2,6.7L36.8,7.3L45.4,6.1L49.8,10.6L42.0,16.3L43.3,23.6L41.1,25.0L40.8,30.4L36.3,32.4L40.7,39.2L37.5,44.1L39.2,49.1L35.7,53.7L36.8,58.1Z"></path></svg></span><span class="lname">Português</span><span class="lname-en">Portuguese</span></a><a class="lang-card" data-search="Nederlands Dutch nl" href="../nl/" style="--d:0.275s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M16.8,42.3L12.0,44.9L4.0,42.5L16.8,42.3Z"></path><path d="M16.8,42.3L7.5,41.3L20.5,28.9L24.7,19.7L29.8,27.7L36.2,24.7L33.5,17.4L43.5,12.9L54.5,12.4L60.0,14.7L57.6,27.9L53.4,34.7L41.8,36.9L45.4,40.8L41.0,48.2L42.5,51.6L38.1,51.2L40.1,46.1L20.8,41.0L16.8,42.3Z"></path></svg></span><span class="lname">Nederlands</span><span class="lname-en">Dutch</span></a><a class="lang-card" data-search="Русский Russian ru" href="../ru/" style="--d:0.310s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M43.8,33.8L44.3,35.5L43.9,35.5L43.7,36.0L44.0,36.5L43.6,36.6L43.5,34.1L43.8,33.8Z"></path><path d="M39.6,37.9L39.8,37.0L40.4,37.0L41.0,35.8L39.7,36.1L38.5,35.3L37.9,34.2L37.2,34.0L36.0,34.3L36.2,34.5L35.2,35.4L34.0,35.2L32.0,35.5L28.6,34.6L28.1,35.4L26.2,35.0L24.7,35.6L23.3,34.9L22.1,35.0L20.9,33.8L19.8,34.0L18.3,33.4L15.7,33.9L15.9,34.2L15.3,34.6L15.8,34.8L15.5,35.0L12.1,34.7L11.3,35.3L10.9,35.2L10.7,35.8L11.5,36.5L10.7,37.2L11.3,38.1L10.9,38.3L7.5,37.1L7.7,36.4L8.1,36.3L7.8,36.1L8.3,35.9L8.3,35.4L6.8,35.1L6.2,34.5L5.5,34.5L5.4,34.2L5.8,34.1L5.2,33.3L4.3,33.1L4.0,32.3L4.6,31.8L4.2,31.6L5.4,30.8L4.9,30.5L4.6,29.4L4.9,29.2L4.4,28.9L5.6,28.4L8.7,29.2L8.8,29.5L8.1,29.7L5.8,29.4L6.6,29.8L6.6,30.2L7.5,30.5L7.7,30.3L7.3,30.0L8.3,30.2L8.3,29.9L9.1,29.6L9.8,29.7L9.8,28.9L10.4,28.9L10.7,29.1L10.1,29.2L10.7,29.5L13.1,28.7L13.2,29.0L15.2,28.9L15.6,28.4L18.2,28.9L18.4,28.7L17.7,28.5L17.6,28.1L18.4,27.5L19.2,27.4L19.7,27.4L19.4,27.8L19.6,28.7L19.9,28.9L19.2,29.5L18.4,29.6L19.4,29.7L20.3,29.1L20.3,28.8L21.3,28.7L20.0,28.6L20.0,27.7L23.2,27.8L22.4,27.5L22.3,27.1L24.4,27.0L24.8,26.6L29.2,26.1L30.4,25.7L33.8,26.4L31.3,27.3L32.6,27.0L35.9,27.3L38.6,27.2L39.2,27.6L38.8,27.7L39.8,28.1L40.3,27.7L41.9,27.9L43.5,27.4L45.7,27.6L47.1,28.1L49.5,28.1L50.3,28.6L52.4,28.5L53.0,28.8L53.5,28.7L53.3,28.3L55.3,28.4L60.0,29.7L59.0,30.3L56.7,29.8L55.7,30.2L56.4,30.7L56.3,31.0L54.4,31.2L53.2,31.8L51.0,31.8L50.4,32.5L50.8,32.6L50.9,33.1L50.4,33.2L50.5,33.6L49.8,33.8L48.6,34.9L48.3,33.0L51.0,31.5L51.2,30.9L50.0,31.6L49.8,31.2L48.9,31.2L47.7,32.1L46.2,31.9L43.5,32.2L41.2,33.6L41.9,34.0L42.7,33.8L43.3,34.2L42.9,35.8L41.2,37.5L39.6,37.9Z"></path><path d="M17.9,26.2L15.7,26.5L14.2,27.2L13.1,27.1L14.9,26.4L18.3,26.1L17.9,26.2Z"></path></svg></span><span class="lname">Русский</span><span class="lname-en">Russian</span></a><a class="lang-card" data-search="العربية Arabic ar" href="../ar/" style="--d:0.345s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M35.7,19.1L38.1,19.4L38.8,20.6L40.8,20.6L42.1,23.0L44.9,25.1L45.5,26.5L45.1,27.0L46.5,29.8L49.2,31.9L49.2,32.5L51.8,35.5L58.6,36.3L58.8,36.1L60.0,38.0L58.2,43.3L50.2,46.0L42.4,47.1L40.1,48.2L38.2,51.0L36.9,51.4L36.1,50.6L32.1,50.2L28.8,50.4L27.4,49.9L26.8,50.3L26.8,52.1L25.8,53.0L24.5,50.1L23.0,48.9L21.6,46.8L20.4,44.0L17.3,41.9L15.9,39.8L15.6,38.3L15.9,36.9L14.2,33.4L12.8,32.2L11.8,31.9L10.8,30.5L10.7,29.2L5.5,21.9L4.0,21.6L4.9,18.4L7.7,18.8L9.0,18.0L9.7,17.0L11.6,16.7L12.0,15.8L13.0,15.3L10.2,12.7L16.1,11.0L19.3,11.5L23.9,13.8L30.9,18.8L35.7,19.1Z"></path></svg></span><span class="lname">العربية</span><span class="lname-en">Arabic</span></a><a class="lang-card" data-search="हिन्दी Hindi hi" href="../hi/" style="--d:0.380s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M24.3,12.6L24.5,13.7L25.0,13.5L25.5,14.2L28.7,15.9L27.5,16.8L26.9,18.5L32.0,21.0L33.0,21.3L34.6,21.0L36.9,22.5L39.6,23.1L40.2,22.8L40.7,23.2L42.2,23.1L42.3,20.3L43.3,19.9L43.7,20.3L43.7,22.1L45.5,22.6L46.6,22.2L49.8,22.3L49.9,21.4L49.0,20.9L49.1,20.5L51.0,20.2L52.1,18.9L53.4,18.5L54.8,17.6L56.3,18.0L57.5,17.3L58.9,19.4L60.0,19.7L60.0,20.2L58.7,21.3L57.6,21.6L55.8,22.8L55.8,23.8L54.8,25.0L55.0,25.7L53.8,28.0L52.3,27.7L52.4,29.4L51.8,30.2L52.0,30.9L51.6,31.6L50.9,31.6L50.2,28.4L49.0,29.7L48.4,29.5L48.1,28.4L48.5,27.6L49.5,27.4L50.2,26.0L49.9,25.5L45.6,25.2L45.6,24.0L42.9,23.2L42.2,24.1L42.9,24.7L42.4,26.8L43.5,27.3L43.2,28.4L44.1,32.3L42.6,32.3L42.0,31.9L40.4,32.6L39.9,33.1L40.1,34.1L39.7,34.8L35.9,37.1L34.6,38.7L31.3,41.0L31.1,42.0L29.1,42.6L28.6,43.6L28.0,43.3L27.3,43.7L26.8,44.9L27.4,48.2L26.2,51.6L26.4,54.0L25.6,54.0L24.8,55.2L24.8,56.0L23.7,56.3L23.0,57.7L22.0,58.3L20.1,56.7L19.7,55.7L19.7,54.8L18.5,52.0L17.5,50.7L15.9,46.0L14.2,43.0L12.6,35.8L13.1,34.3L12.4,32.2L12.5,31.1L12.0,31.1L11.4,31.9L11.9,32.5L11.4,33.2L8.9,34.0L5.6,31.2L7.9,30.5L8.0,29.7L6.9,30.1L6.1,30.0L4.9,29.3L4.0,28.0L5.1,27.8L5.1,27.2L7.0,27.4L9.5,27.0L8.8,25.0L7.7,23.8L7.8,23.0L6.5,22.4L6.7,21.7L8.3,20.0L8.9,20.6L11.1,20.1L12.0,18.6L13.1,18.1L14.0,16.4L14.8,16.1L15.0,15.4L16.4,14.2L16.2,12.9L17.8,11.9L16.5,11.4L15.2,10.0L15.5,9.5L15.1,7.3L15.8,7.1L18.5,7.6L20.2,7.1L22.5,5.7L23.4,7.3L24.7,7.9L24.3,8.4L24.4,9.5L25.0,10.0L25.2,11.4L23.6,11.4L24.3,12.6Z"></path></svg></span><span class="lname">हिन्दी</span><span class="lname-en">Hindi</span></a><a class="lang-card" data-search="Indonesia Indonesian id" href="../id/" style="--d:0.415s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M5.6,22.7L6.7,22.7L7.8,24.1L9.5,25.2L10.4,26.3L11.1,26.3L12.9,28.2L14.1,28.5L14.5,29.0L14.1,29.3L14.1,29.8L15.2,30.4L15.5,31.5L15.8,31.7L15.6,32.0L16.5,32.0L17.3,32.9L17.0,36.0L15.5,35.9L15.5,36.3L11.8,33.0L10.2,30.1L8.8,28.7L8.1,26.8L7.1,26.2L6.2,24.7L4.4,23.3L4.0,22.3L5.6,22.7Z"></path><path d="M34.4,40.6L35.4,41.4L34.9,41.7L33.2,41.0L33.3,40.6L34.4,40.6Z"></path><path d="M40.5,40.7L39.1,41.8L38.7,41.3L39.3,40.5L40.4,40.0L40.5,40.7Z"></path><path d="M30.2,39.6L29.9,40.0L29.5,39.4L29.9,39.1L30.3,39.4L30.2,39.6Z"></path><path d="M37.7,39.6L35.6,40.0L34.1,39.7L35.1,39.2L36.1,39.6L37.5,39.4L37.7,39.6Z"></path><path d="M32.2,39.3L33.1,39.3L33.1,39.8L30.4,40.1L30.5,39.5L30.9,39.3L32.0,39.0L32.2,39.3Z"></path><path d="M28.8,39.1L29.1,39.4L28.5,39.9L27.6,39.0L28.8,39.1Z"></path><path d="M42.7,38.5L42.3,38.8L41.5,38.7L42.7,38.5Z"></path><path d="M57.0,39.2L56.0,39.2L56.4,38.5L57.3,38.1L57.6,38.5L57.0,39.2Z"></path><path d="M48.2,38.9L47.9,38.7L48.1,38.2L48.6,38.2L48.2,38.9Z"></path><path d="M26.8,37.8L25.5,37.8L25.6,37.5L27.0,37.5L26.8,37.8Z"></path><path d="M52.1,37.0L51.9,37.4L51.5,37.4L51.7,36.7L52.1,37.0Z"></path><path d="M18.9,36.5L20.0,36.8L20.5,37.4L22.6,37.6L23.0,37.0L25.2,37.6L25.5,38.3L27.1,38.4L27.5,38.8L27.7,39.8L26.1,39.2L23.9,39.3L21.2,38.5L19.6,38.6L16.6,37.4L17.3,36.3L18.9,36.5Z"></path><path d="M52.4,36.1L52.4,36.7L52.0,36.9L51.9,36.1L52.4,36.1Z"></path><path d="M37.6,35.6L37.2,34.9L37.6,34.8L37.6,35.6Z"></path><path d="M42.7,32.9L43.2,33.5L42.5,33.8L41.7,33.0L42.7,32.9Z"></path><path d="M46.3,32.6L47.0,32.8L47.6,33.8L46.4,33.2L44.6,33.3L44.2,33.0L44.4,32.6L46.3,32.6Z"></path><path d="M19.9,32.8L19.2,33.0L19.2,32.2L19.7,32.3L19.9,32.8Z"></path><path d="M17.3,31.1L18.0,32.4L17.9,32.8L17.2,32.6L16.9,31.8L16.1,31.6L16.7,31.0L17.3,31.1Z"></path><path d="M8.8,31.3L8.2,30.6L8.5,30.2L8.8,31.3Z"></path><path d="M60.0,32.3L60.0,40.3L58.7,39.0L57.4,39.1L57.7,38.4L56.4,35.8L53.9,34.6L52.9,34.5L51.4,33.8L51.0,33.2L50.5,34.1L50.2,34.1L49.9,33.1L49.4,32.7L50.5,32.1L51.3,32.0L51.4,31.7L49.4,31.8L48.9,31.0L48.2,30.8L48.1,30.2L49.8,29.5L51.4,30.0L51.8,30.8L51.7,31.8L52.7,33.2L53.3,33.2L54.4,31.9L56.1,30.9L60.0,32.3Z"></path><path d="M6.8,27.3L7.3,27.9L7.3,28.3L6.7,27.9L6.5,27.4L6.8,27.3Z"></path><path d="M40.3,27.9L39.8,28.5L38.9,28.7L34.8,28.6L34.3,29.5L35.2,30.8L35.6,30.8L36.2,30.2L37.9,30.0L37.4,30.8L36.0,31.5L36.6,32.0L37.3,33.0L37.1,33.5L37.9,34.4L37.0,34.6L36.7,35.0L36.2,34.7L36.3,34.1L35.5,33.5L35.6,32.5L35.1,32.4L34.6,32.8L34.7,35.9L34.0,36.1L33.6,35.7L33.9,34.0L33.6,33.4L33.1,33.4L32.8,32.5L33.5,31.5L34.1,28.8L34.7,27.9L35.0,28.1L35.5,27.5L39.0,28.1L40.4,27.0L40.7,27.3L40.3,27.9Z"></path><path d="M43.8,28.1L45.0,27.2L45.0,27.7L44.5,28.0L45.0,28.7L44.0,28.7L44.2,30.0L43.7,29.4L43.4,27.6L43.7,26.8L44.1,27.0L43.8,28.1Z"></path><path d="M31.4,24.0L31.4,24.7L30.9,24.7L32.0,26.3L31.7,26.7L33.1,27.9L31.6,28.2L31.4,30.0L30.1,30.9L30.1,31.9L29.4,33.5L27.8,34.2L27.6,33.4L27.1,33.1L26.7,33.3L25.7,33.0L24.3,33.4L24.3,32.8L22.4,32.7L22.1,30.8L21.1,29.7L21.2,29.1L20.8,28.7L21.3,26.8L21.6,26.6L21.7,27.1L22.7,28.0L24.3,27.9L25.1,27.2L26.5,27.6L27.7,27.3L29.3,23.8L31.4,24.0Z"></path></svg></span><span class="lname">Indonesia</span><span class="lname-en">Indonesian</span></a><a class="lang-card" data-search="日本語 Japanese ja" href="../ja/" style="--d:0.450s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M45.4,21.2L46.2,23.9L47.4,25.1L48.0,26.7L47.8,29.3L46.9,29.8L46.2,31.8L44.9,32.0L44.3,33.4L44.7,35.1L44.4,36.8L43.2,38.5L43.2,40.1L44.1,41.3L42.6,42.1L42.5,42.9L40.3,44.0L39.8,42.4L38.3,42.9L37.4,44.9L36.0,43.6L34.6,45.3L29.9,44.6L28.7,45.0L29.8,46.3L28.0,46.8L26.5,49.0L24.9,49.0L23.9,47.8L23.6,46.4L24.6,45.7L22.3,44.7L20.4,45.0L19.6,45.6L16.7,46.4L13.4,46.6L12.9,47.9L11.7,47.2L8.8,47.5L9.1,46.0L10.3,46.0L15.9,42.1L17.5,42.2L20.5,42.0L23.9,41.2L25.7,42.1L27.1,41.1L26.8,40.4L29.3,37.7L31.6,37.6L32.2,36.9L35.0,36.0L37.0,33.8L38.9,32.7L41.2,28.0L40.7,24.0L42.0,23.1L45.0,23.0L45.4,21.2Z"></path><path d="M54.6,11.5L58.0,12.1L59.1,12.7L60.0,14.8L57.5,15.7L55.1,15.9L53.2,17.5L52.5,19.0L47.6,17.0L44.5,17.8L42.7,17.0L42.2,18.0L43.6,18.6L42.4,20.7L41.0,20.5L41.4,19.3L40.4,17.6L40.6,16.7L43.8,14.7L45.6,14.8L46.8,11.8L47.3,9.4L46.6,7.8L47.9,6.6L50.6,9.0L54.6,11.5Z"></path><path d="M9.7,48.8L11.1,48.7L12.2,50.1L12.5,51.5L11.6,52.4L10.2,56.6L7.6,57.4L6.2,57.0L6.6,55.9L6.2,54.2L7.8,52.3L4.0,50.1L6.8,48.7L7.2,48.0L8.9,47.9L9.7,48.8Z"></path><path d="M21.0,46.5L22.0,46.6L22.3,48.1L21.0,48.8L20.3,50.1L18.4,49.2L17.2,49.7L16.1,51.5L14.4,51.3L13.9,49.2L15.4,47.5L18.2,47.4L20.0,46.2L21.0,46.5Z"></path></svg></span><span class="lname">日本語</span><span class="lname-en">Japanese</span></a><a class="lang-card" data-search="한국어 Korean ko" href="../ko/" style="--d:0.485s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M38.6,4.0L41.9,10.1L51.6,22.3L53.5,29.5L52.5,38.9L54.7,40.3L50.0,50.7L40.4,51.8L39.5,54.9L29.6,53.8L20.4,58.5L12.9,60.0L10.3,51.0L16.1,42.7L13.8,33.1L9.3,27.8L16.5,23.4L15.0,15.4L22.2,8.3L34.0,8.3L38.6,4.0Z"></path></svg></span><span class="lname">한국어</span><span class="lname-en">Korean</span></a><a class="lang-card" data-search="简体中文 Chinese (Simplified) zh" href="../zh/" style="--d:0.520s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M56.1,26.8L55.6,26.4L55.4,26.9L54.7,27.3L53.9,27.3L53.9,27.9L52.8,27.5L50.2,29.3L48.0,30.2L47.9,29.5L48.6,28.7L47.6,28.3L45.5,29.9L44.5,30.0L44.2,30.4L45.5,31.0L45.5,31.6L46.0,31.8L47.2,31.1L48.9,31.5L48.8,32.0L47.4,32.3L45.8,33.7L46.7,34.4L47.3,35.9L47.8,36.2L47.5,36.8L48.2,37.5L47.4,37.8L48.3,38.4L48.0,39.8L47.5,39.9L46.1,42.4L43.2,44.8L41.0,45.2L40.6,44.9L40.6,45.5L37.5,46.5L37.8,47.0L37.4,47.2L37.0,46.6L37.3,46.1L34.9,46.0L34.1,45.3L34.4,44.9L33.0,44.4L32.2,45.0L29.7,45.2L29.7,46.4L29.2,46.1L28.4,46.1L28.1,45.6L27.4,45.5L27.6,44.7L27.1,44.6L27.0,43.7L26.0,43.9L25.9,43.4L26.2,42.7L26.9,42.1L26.9,40.6L26.6,40.6L25.9,39.7L25.7,40.0L25.2,39.8L24.5,38.8L24.0,39.2L23.2,39.0L20.8,40.4L19.0,39.9L18.0,40.8L17.7,40.1L15.7,40.2L14.5,39.9L14.6,39.6L13.1,39.1L11.7,38.0L10.8,38.2L10.0,37.8L8.8,37.1L8.4,36.0L9.1,36.0L8.7,35.1L8.9,34.3L8.3,34.1L7.8,33.3L6.4,33.0L6.0,32.2L4.8,31.9L5.2,31.7L5.0,30.5L4.2,30.4L4.0,29.7L4.3,29.1L5.3,28.8L6.6,28.8L6.9,28.3L8.1,28.2L10.0,27.3L10.0,26.7L10.6,26.3L10.3,24.8L9.9,24.6L12.1,24.5L12.0,24.1L12.8,22.6L14.2,22.9L15.0,22.5L15.1,21.5L17.0,20.8L17.1,21.3L19.3,22.1L19.9,23.2L19.6,24.1L19.8,24.4L22.3,24.7L23.9,25.2L24.8,26.7L29.7,26.9L32.3,27.6L34.4,27.1L36.8,26.9L39.1,25.8L38.6,25.2L39.1,24.5L40.6,24.8L41.5,24.2L42.5,24.2L43.3,23.4L44.9,23.0L46.2,23.1L46.2,22.6L45.1,21.8L44.1,22.2L42.4,21.9L43.4,20.2L44.5,20.4L45.8,19.9L46.5,18.5L47.2,18.1L47.1,17.7L46.6,17.4L48.6,16.8L51.7,17.2L52.3,17.8L53.4,20.1L55.2,20.6L56.4,21.5L56.6,22.1L59.8,21.5L60.0,22.1L59.5,22.5L58.3,24.6L57.5,24.4L56.6,24.7L56.8,26.0L56.1,26.8Z"></path></svg></span><span class="lname">简体中文</span><span class="lname-en">Chinese (Simplified)</span></a><a class="lang-card" data-search="Azərbaycanca Azerbaijani az" href="../az/" style="--d:0.555s"><span aria-hidden="true" class="map-badge"><svg aria-hidden="true" viewbox="0 0 64 64"><path d="M46.5,13.1L52.5,19.1L53.9,22.2L60.0,27.2L55.0,38.1L55.4,41.0L51.5,43.4L49.9,51.2L46.8,51.5L40.4,46.9L42.8,45.1L40.1,37.2L37.6,37.6L23.3,45.9L23.9,42.6L15.4,35.0L17.4,31.1L10.8,26.6L13.2,24.2L6.6,19.3L9.7,17.5L22.9,21.7L24.7,18.7L19.8,15.2L22.6,12.5L26.2,13.4L31.9,19.0L38.6,20.1L46.5,13.1Z"></path><path d="M19.1,46.2L12.0,44.8L4.0,37.0L6.9,36.3L15.2,40.6L19.1,46.2Z"></path></svg></span><span class="lname">Azərbaycanca</span><span class="lname-en">Azerbaijani</span></a></div></div></div><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><script>
+<!-- Lottie Player Script --><script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script><script>
   /* Tema: kalıcı + sistem tercihi + doğru ikon (light'ta ay, dark'ta güneş göster) */
   const themeBtn = document.getElementById('themeBtn');
   const sunIcon = document.getElementById('themeIconSun');
@@ -825,39 +806,33 @@
     applyTheme(isDark ? 'light' : 'dark');
   });
 
-/* Dil modalı: ortada, haritalı, animasyonlu */
+/* Dil paneli (butona bağlı) */
+  const langWrap = document.getElementById('langWrap');
   const langBtn = document.getElementById('langBtn');
-  const langOverlay = document.getElementById('langOverlay');
   const mLangBtn = document.getElementById('mLangBtn');
-  function lang_setPaused(on){
-    try{
-      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      document.querySelectorAll('lottie-player').forEach(function(p){
-        try{
-          if(on){ if(p.pause) p.pause(); }
-          else if(!reduce){
-            var r = p.getBoundingClientRect();
-            if(r.bottom > 0 && r.top < window.innerHeight && p.play) p.play();
-          }
-        }catch(_){}
-      });
-    }catch(_){}
-    var ht = document.querySelector('.honor-track');
-    if(ht) ht.style.animationPlayState = on ? 'paused' : '';
+  function closeLang(){
+    if(langWrap) langWrap.classList.remove('open');
+    if(langBtn) langBtn.setAttribute('aria-expanded', 'false');
   }
-  function openLang(){
-    const h = document.getElementById('siteHeader');
-    if(h) h.classList.remove('menu-open');
-    const mb = document.getElementById('menuBtn');
-    if(mb) mb.setAttribute('aria-expanded', 'false');
-    document.body.classList.add('lang-open');
-    lang_setPaused(true);
+  if(langBtn && langWrap){
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = langWrap.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', (e) => { if(!langWrap.contains(e.target)) closeLang(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLang(); });
   }
-  function closeLang(){ document.body.classList.remove('lang-open'); lang_setPaused(false); }
-  if(langBtn) langBtn.addEventListener('click', (e) => { e.stopPropagation(); openLang(); });
-  if(mLangBtn) mLangBtn.addEventListener('click', () => openLang());
-  if(langOverlay) langOverlay.addEventListener('click', (e) => { if(!e.target.closest('.lang-modal')) closeLang(); });
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLang(); });
+  if(mLangBtn && langWrap){
+    mLangBtn.addEventListener('click', () => {
+      const h = document.getElementById('siteHeader');
+      if(h) h.classList.remove('menu-open');
+      const mb = document.getElementById('menuBtn');
+      if(mb) mb.setAttribute('aria-expanded', 'false');
+      const open = langWrap.classList.toggle('open');
+      if(langBtn) langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
 
   /* Ekip Slider */
   const teamTrack = document.getElementById('teamTrack');
