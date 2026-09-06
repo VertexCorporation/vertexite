@@ -1,1036 +1,783 @@
 <!DOCTYPE html>
-<html lang="tr">
-
+<html lang="tr" data-theme="light">
 <head>
-  <script>
-    (function() {
-      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vertex | Teknolojinin Zirvesi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#FAFAF9; --surface:#F1F1EE; --surface-2:#EAEAE6;
+    --text:#1A1B1E; --text-muted:#6B6E76; --border:#E3E3DF;
+    --accent:#3B4FD9; --accent-ink:#FFFFFF; --accent-soft:rgba(59,79,217,.08);
+    --radius-s:6px; --radius-m:10px;
+    --maxw:1120px;
+    --dur:200ms;
+    --logo-filter:brightness(0);
+  }
+  html[data-theme="dark"]{
+    --bg:#0E1013; --surface:#15171B; --surface-2:#1B1E23;
+    --text:#EDEEEF; --text-muted:#8A8D96; --border:#262932;
+    --accent:#6C7CF0; --accent-ink:#0E1013; --accent-soft:rgba(108,124,240,.12);
+    --logo-filter:brightness(0) invert(1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Manrope',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition:background var(--dur) ease, color var(--dur) ease;
+  }
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
 
-  <!-- 🎯 SEO & Meta Tags -->
-  <title>Vertex | Teknolojinin Zirvesi</title>
-  <meta name="description"
-    content="⭐ Vertex: Türkiye'nin en genç teknoloji şirketi. Cortex, Mergen AI, mobil oyun ve yeni nesil yazılım çözümleriyle geleceği şekillendiriyoruz.">
-  <meta name="keywords"
-    content="vertex, vertex corporation, cortex, mergen ai, drome lang, ally health, genç girişimciler, yazılım şirketi, yapay zeka türkiye">
-  <meta name="author" content="Vertex Corporation">
-  <meta name="theme-color" content="#0a0a0a">
-  <meta name="robots" content="index, follow, noimageindex">
+  /* Linear.app Tarzı Smooth Reveal Animasyonu (Header haricinde kullanılır) */
+  .linear-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: linearFadeUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+  @keyframes linearFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
 
-  <!-- 🌍 Hreflang Tags -->
-  <link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-  <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-  <link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-  <link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-  <link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-  <link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-  <link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-  <link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-  <link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-  <link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-  <link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-  <link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-  <link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-  <link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-  <link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-  <link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-  <link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
+  /* Header (Sabit - Efektsiz) */
+  header{position:sticky; top:0; z-index:50; background:var(--bg); border-bottom:1px solid var(--border); transition:background var(--dur) ease, border-color var(--dur) ease;}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:68px; gap:20px;}
+  .brand{display:flex; align-items:center; gap:9px; text-decoration:none;}
+  .logo-chip{display:flex; align-items:center; gap:7px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:6px 10px;}
+  .logo-chip img{height:16px; width:auto; filter:var(--logo-filter); transition:filter var(--dur) ease;}
+  .logo-chip span{font-weight:800; font-size:14.5px; color:var(--text); letter-spacing:-.01em;}
+  .nav-links{display:flex; align-items:center; gap:26px; list-style:none; margin:0; padding:0;}
+  .nav-links a{font-size:14px; font-weight:500; text-decoration:none; color:var(--text-muted); position:relative; padding:4px 0; white-space:nowrap;}
+  .nav-links a::after{content:''; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--text); transform:scaleX(0); transform-origin:left; transition:transform var(--dur) ease;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-right{display:flex; align-items:center; gap:10px;}
+  .icon-btn{display:flex; align-items:center; justify-content:center; gap:6px; width:36px; height:36px; border-radius:var(--radius-s); border:1px solid var(--border); background:var(--surface); color:var(--text); cursor:pointer; transition:border-color var(--dur) ease; text-decoration:none;}
+  .icon-btn:hover{border-color:var(--text-muted);}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 18px; border-radius:var(--radius-s); font-size:14px; font-weight:600; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform var(--dur) ease;}
+  .btn-primary{background:var(--text); color:var(--bg);}
+  .btn-primary:hover{transform:translateY(-1px);}
+  .btn-ghost{border-color:var(--border); background:transparent; color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-muted);}
 
-  <!-- 🖼️ Open Graph (Social Media) -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://vertexishere.com/tr/">
-  <meta property="og:title" content="Vertex | Teknolojinin Zirvesi">
-  <meta property="og:description"
-    content="Türkiye'nin en genç teknoloji devi. Yapay zeka ve yazılım ile geleceği inşa ediyoruz.">
-  <meta property="og:site_name" content="Vertex Corporation">
-
-  <!-- 
-    ✅ WHATSAPP & SOCIAL FIX:
-    Using absolute path for the favicon to ensure it appears on WhatsApp/LinkedIn shares.
-  -->
-  <meta property="og:image" content="https://vertexishere.com/assets/favicon.webp">
-
-  <!-- Twitter Card -->
-  <!-- Set to 'summary' for better display of square logos -->
-  <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Vertex | Teknolojinin Zirvesi">
-  <meta name="twitter:description" content="Cortex, Mergen ve teknolojinin geleceğini keşfedin.">
-  <meta name="twitter:image" content="https://vertexishere.com/assets/favicon.webp">
-
-  <!-- Fonts & Styles -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="../css/main.css">
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-  <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
-  <link rel="preload" href="../assets/favicon.webp" as="image" type="image/webp">
+  /* Hero */
+  .hero{padding:88px 0 64px;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center;}
+  h1{font-size:clamp(32px,4.4vw,50px); line-height:1.14; letter-spacing:-.02em; font-weight:800; margin:0 0 20px;}
+  .hero p.lede{font-size:17.5px; line-height:1.6; color:var(--text-muted); max-width:480px; margin:0 0 30px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
   
-  <!-- DNS Prefetch for Essential Domains -->
-  <link rel="dns-prefetch" href="https://www.youtube.com">
-  <link rel="dns-prefetch" href="https://github.com">
-  <link rel="dns-prefetch" href="https://www.linkedin.com">
+  .hero-visual{position:relative;}
+  .hero-visual lottie-player{width:100%; height:auto; max-width:480px; margin:0 auto;}
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/webp" href="../assets/favicon.webp">
+  /* Stats */
+  .stats{border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); padding:34px 0;}
+  .stat{text-align:left; padding:0 20px; border-left:1px solid var(--border);}
+  .stat:first-child{border-left:none; padding-left:0;}
+  .stat .num{font-size:30px; font-weight:800; letter-spacing:-.02em;}
+  .stat .lab{font-size:13px; color:var(--text-muted); margin-top:2px;}
+
+  /* Statik ve Simetrik Gri Logolar */
+  .partners-static { border-bottom:1px solid var(--border); padding:36px 0; text-align:center; }
+  .partners-label { font-size:13px; color:var(--text-muted); margin-bottom:24px; }
+  .partners-logos { display:flex; gap:48px; justify-content:center; align-items:center; flex-wrap:wrap; max-width:900px; margin:0 auto; padding: 0 20px; }
+  .partner-logo-img { height:26px; width:auto; filter:grayscale(100%) opacity(40%); transition:filter 0.3s ease; }
+  html[data-theme="dark"] .partner-logo-img { filter: grayscale(100%) opacity(40%) invert(1); }
+  .partner-logo-img:hover{filter:grayscale(0) opacity(100%);}
+  html[data-theme="dark"] .partner-logo-img:hover { filter: grayscale(0) opacity(100%) invert(0); }
+
+  section{padding:72px 0;}
+  .section-head{max-width:560px; margin-bottom:40px;}
+  h2{font-size:clamp(23px,2.4vw,30px); letter-spacing:-.015em; margin:0 0 10px; font-weight:800;}
+  .section-head p{color:var(--text-muted); font-size:15px; line-height:1.6; margin:0;}
+
+  /* Feature trio */
+  .feature-trio{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden;}
+  .feature-item{background:var(--bg); padding:28px 24px;}
+  .feature-item h3{font-size:16.5px; margin:0 0 10px; font-weight:700;}
+  .feature-item p{font-size:13.5px; color:var(--text-muted); line-height:1.6; margin:0;}
+
+  /* Products */
+  .products{border-top:1px solid var(--border);}
+  .product-layout{display:grid; grid-template-columns:1.3fr 1fr; gap:20px;}
+  .product-feature{border:1px solid var(--border); border-radius:var(--radius-m); padding:32px; background:var(--surface); display:flex; flex-direction:column; justify-content:space-between; min-height:260px; text-decoration:none; transition:border-color var(--dur) ease;}
+  .product-feature:hover{border-color:var(--text-muted);}
+  .product-feature .tag{font-size:12.5px; font-weight:700; color:var(--accent); margin-bottom:14px;}
+  .product-feature h3{font-size:21px; margin:0 0 10px; letter-spacing:-.01em; color:var(--text);}
+  .product-feature p{color:var(--text-muted); font-size:14.5px; line-height:1.6; margin:0; max-width:380px;}
+  .product-list{display:flex; flex-direction:column; gap:1px; border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden;}
+  .product-row{padding:19px 22px; background:var(--bg); border-bottom:1px solid var(--border); transition:background var(--dur) ease; text-decoration:none; display:block;}
+  .product-row:last-child{border-bottom:none;}
+  .product-row:hover{background:var(--surface);}
+  .product-row .tag-row{display:flex; align-items:center; gap:8px; margin-bottom:6px;}
+  .product-row .tag{font-size:11px; font-weight:700; color:var(--text-muted);}
+  .badge-soon{display:inline-block; font-size:10.5px; font-weight:700; padding:2.5px 8px; border-radius:20px; background:var(--accent-soft); color:var(--accent);}
+  .product-row h4{font-size:16px; margin:0 0 5px; font-weight:700; color:var(--text);}
+  .product-row p{font-size:13.5px; color:var(--text-muted); line-height:1.55; margin:0;}
+  .product-row.disabled{cursor:default;}
+  .product-row.disabled:hover{background:var(--bg);}
+
+  /* Tech ecosystem (Linear Style) */
+  .tech{border-top:1px solid var(--border);}
+  .tech-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .tech-card{
+    border:1px solid var(--border); 
+    border-radius:var(--radius-m); 
+    background:var(--surface); 
+    display:flex; 
+    flex-direction:column; 
+    overflow:hidden;
+    transition: border-color 0.3s ease;
+  }
+  .tech-card:hover { border-color: var(--text-muted); }
+  .tech-visual-wrapper {
+    height: 180px;
+    background: var(--surface-2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    padding: 20px;
+  }
+  .tech-card-content {
+    padding: 20px;
+  }
+  .tech-card h4{font-size:15px; margin:0 0 8px; font-weight:700; color:var(--text);}
+  .tech-card .stack{font-size:13px; color:var(--text-muted); line-height:1.6;}
+
+  /* Vision */
+  .vision{border-top:1px solid var(--border);}
+  .vision-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  .vision-text p{font-size:16px; line-height:1.75; color:var(--text-muted); margin:0 0 16px;}
+  .vision-text p:first-child{color:var(--text); font-size:19px; line-height:1.6;}
+  .vision-ticker{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+  .vision-chip{border:1px solid var(--border); border-radius:20px; padding:7px 15px; font-size:13px; font-weight:700; background:var(--surface);}
+
+  /* Team */
+  .team{border-top:1px solid var(--border);}
+  .team-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:32px;}
+  .team-nav{display:flex; gap:8px;}
+  .team-nav-btn{width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:var(--surface); color:var(--text); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:border-color var(--dur) ease, opacity .2s ease;}
+  .team-nav-btn:hover{border-color:var(--text-muted);}
+  .team-nav-btn:disabled{opacity:.32; cursor:default;}
+  .team-scroll-wrap{position:relative;}
+  .team-scroll-wrap::after{content:''; position:absolute; top:0; right:0; bottom:0; width:56px; background:linear-gradient(to left, var(--bg), transparent); pointer-events:none; transition:background var(--dur) ease;}
+  .team-track{display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity; scroll-behavior:smooth; padding:2px 2px 10px; scrollbar-width:none;}
+  .team-track::-webkit-scrollbar{display:none;}
+  .team-card{scroll-snap-align:start; flex:0 0 152px; width:152px; border:1px solid var(--border); border-radius:13px; background:var(--surface); padding:9px; transition:transform var(--dur) ease, border-color var(--dur) ease;}
+  .team-card:hover{transform:translateY(-3px); border-color:var(--text-muted);}
+  .team-photo-wrap{aspect-ratio:4/5; overflow:hidden; background:var(--bg); border-radius:9px;}
+  .team-photo{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s cubic-bezier(.16,1,.3,1);}
+  .team-card:hover .team-photo{transform:scale(1.05);}
+  .team-info{padding:11px 3px 1px;}
+  .team-info h4{font-size:13.5px; margin:0 0 2px; font-weight:700; line-height:1.25;}
+  .team-info .role{font-size:11px; color:var(--text-muted); margin-bottom:9px; line-height:1.3;}
+  .team-social{display:flex; gap:6px;}
+  .team-social a{width:22px; height:22px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; transition:border-color var(--dur) ease;}
+  .team-social a:hover{border-color:var(--text-muted);}
+  .team-social img{width:10.5px; height:10.5px; opacity:.7;}
+
+  /* Partners (Alt Kısım) */
+  .partners{border-top:1px solid var(--border);}
+  .partner-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  .partner-card{border:1px solid var(--border); border-radius:var(--radius-m); padding:22px 14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:var(--surface); transition:border-color var(--dur) ease; min-height:96px; text-decoration:none;}
+  .partner-card:hover{border-color:var(--text-muted);}
+  .partner-card img{max-height:24px; max-width:100%; opacity:.85;}
+  .partner-name{font-size:12.5px; font-weight:600; color:var(--text-muted);}
+
+  /* Name lists (Moderatörler & Onur Tablosu) */
+  .names{border-top:1px solid var(--border); overflow:hidden; padding-bottom: 72px;}
+  .name-block + .name-block{margin-top:56px;}
+  .name-block h3{font-size:18px; font-weight:700; margin:0 0 24px; color:var(--text);}
+  
+  /* Minimalist Moderatörler */
+  .mod-list{display:flex; flex-wrap:wrap; gap:20px 40px;}
+  .mod-item{
+    font-size:15.5px; font-weight:600; color:var(--text-muted);
+    display:flex; align-items:center; gap:10px; cursor:default;
+    opacity:0; transform:translateY(10px);
+    transition:opacity .5s ease, transform .5s ease, color .2s ease;
+  }
+  .mod-item:hover{color:var(--text);}
+  .mod-item::before{
+    content:''; display:block; width:6px; height:6px; border-radius:50%; background:var(--accent); opacity:0.5; transition:opacity .2s ease;
+  }
+  .mod-item:hover::before{opacity:1;}
+  .mod-block.in-view .mod-item{opacity:1; transform:translateY(0);}
+
+  /* Onur Tablosu Kayan Yazı (Marquee) - İçeriğe göre hizalanmış ve maskelenmiş hali */
+  .honor-marquee-container {
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  .honor-track { 
+    display: flex; 
+    width: max-content; 
+    align-items: center; 
+    animation: scrollHonor 40s linear infinite; 
+  }
+  .honor-track:hover { animation-play-state: paused; } /* Üzerine gelince durması için */
+  .honor-item { 
+    font-size: 24px; 
+    font-weight: 800; 
+    color: var(--text); 
+    letter-spacing: -0.02em; 
+    white-space: nowrap; 
+    display: flex; 
+    align-items: center; 
+    padding-right: 40px;
+  }
+  .honor-item::after { 
+    content: '✦'; 
+    color: var(--border); 
+    font-size: 18px; 
+    font-weight: 400; 
+    margin-left: 40px; 
+  }
+  @keyframes scrollHonor { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .cta-band{border-top:1px solid var(--border); text-align:left;}
+  .cta-band .wrap{display:flex; align-items:center; justify-content:space-between; padding:50px 28px; flex-wrap:wrap; gap:20px;}
+  .cta-band h2{margin:0; font-size:24px;}
+  .cta-actions{display:flex; gap:12px;}
+
+  footer{border-top:1px solid var(--border); padding:40px 0;}
+  .foot-grid{display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:24px;}
+  .foot-brand p{color:var(--text-muted); font-size:13.5px; max-width:260px; line-height:1.6; margin:10px 0 0;}
+  .foot-links{display:flex; gap:48px; flex-wrap:wrap;}
+  .foot-col h5{font-size:12.5px; color:var(--text-muted); margin:0 0 12px; font-weight:600;}
+  .foot-col a{display:block; font-size:13.5px; text-decoration:none; color:var(--text); margin-bottom:9px;}
+  .foot-col a:hover{color:var(--accent);}
+  .foot-bottom{margin-top:32px; padding-top:20px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-muted); line-height:1.7;}
+  .foot-legal{display:flex; gap:16px; margin-top:6px;}
+  .foot-legal a{text-decoration:none; color:var(--text-muted);}
+  .foot-legal a:hover{color:var(--text);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1; max-width:280px;}
+    .product-layout{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr; row-gap:20px;}
+    .stat:nth-child(3){border-left:none;}
+    .feature-trio{grid-template-columns:1fr;}
+    .tech-grid{grid-template-columns:1fr;} /* Mobilde alt alta gelsin */
+    .vision-grid{grid-template-columns:1fr; gap:30px;}
+    .partner-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .linear-reveal{animation:none !important; opacity:1 !important; transform:none !important;}
+    .mod-item{transition:none !important; opacity:1 !important; transform:none !important;}
+  }
+</style>
 </head>
+<body>
 
-<body>  
-
-  <!-- Header -->
-  <header class="header">
-    <div class="container nav-container">
-      <a href="index.html" class="logo"><img src="../assets/logo.svg" alt="Vertex Logo" class="nav-logo-icon" fetchpriority="high" decoding="async">Vertex</a>
-
-      <nav class="nav-links">
-        <a href="#home" class="nav-link">Ana Sayfa</a>
-        <a href="#projects" class="nav-link">Projeler</a>
-        <a href="#news-section" class="nav-link">Haberler</a>
-
-        <a href="sponsorlar.html" class="nav-link">Sponsorlar</a>
-        <a href="#team" class="nav-link">Ekip</a>
-        <a href="dokumantasyon.html" class="nav-link">Dokümantasyon</a>
-      </nav>
-
-      <div class="header-actions">
-        <div class="language-dropdown">
-          <button class="lang-btn-trigger">
-            <span class="lang-text">Türkçe</span> <svg class="dropdown-arrow" viewBox="0 0 24 24" style="width: 10px; height: 10px; fill: currentColor; stroke: currentColor; stroke-width: 4px; stroke-linejoin: round;"><path d="M5 7h14l-7 10z"></path></svg>
-          </button>
-          <div class="lang-menu">
-            <a href="../en/" class="lang-item">English</a>
-            <a href="../tr/" class="lang-item active">Türkçe</a>
-            <a href="../hi/" class="lang-item">Hindi</a>
-            <a href="../ar/" class="lang-item">العربية</a>
-            <a href="../az/" class="lang-item">Azərbaycan</a>
-            <a href="../pt/" class="lang-item">Português</a>
-            <a href="../nl/" class="lang-item">Nederlands</a>
-            <a href="../id/" class="lang-item">Indonesia</a>
-            <a href="../it/" class="lang-item">Italiano</a>
-            <a href="../es/" class="lang-item">Español</a>
-            <a href="../ru/" class="lang-item">Русский</a>
-            <a href="../fr/" class="lang-item">Français</a>
-            <a href="../ja/" class="lang-item">日本語</a>
-            <a href="../ko/" class="lang-item">한국어</a>
-            <a href="../zh/" class="lang-item">简体中文</a>
-            <a href="../de/" class="lang-item">Deutsch</a>
-          </div>
-        </div>
-        <button class="theme-toggle-btn btn-outline" aria-label="Temayı Değiştir"
-          style="padding: 8px; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
-          <div class="theme-icon"></div>
-        </button>
-        <a href="aramiza-katil.html" class="btn btn-outline btn-sm">Aramıza Katıl</a>
-        <a href="#projects" class="btn btn-primary btn-sm">Projeleri Gör</a>
-        <button class="mobile-menu-btn" aria-label="Menüyü Aç">☰</button>
-      </div>
+<!-- Header (Sabit kalıyor, Linear efekti sildik) -->
+<header>
+  <div class="wrap nav">
+    <a href="#home" class="brand">
+      <span class="logo-chip"><img src="https://vertexishere.com/assets/logo.svg" alt="Vertex logo"><span>Vertex</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#home">Ana Sayfa</a></li>
+      <li><a href="#projects">Projeler</a></li>
+      <li><a href="#vision">Vizyon</a></li>
+      <li><a href="#partners">Sponsorlar</a></li>
+      <li><a href="#team">Ekip</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="../en/index.html" class="icon-btn" aria-label="Dili değiştir">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"/></svg>
+        <span>EN</span>
+      </a>
+      <button class="icon-btn" id="themeBtn" aria-label="Temayı değiştir">
+        <svg id="themeIconSun" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"/></svg>
+        <svg id="themeIconMoon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" style="display:none"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>
+      </button>
+      <a href="https://vertexishere.com/tr/aramiza-katil.html" class="btn btn-primary">Aramıza Katıl</a>
     </div>
-  </header>
-
-  <!-- Mobile Menu -->
-  <div class="mobile-menu">
-    <nav class="mobile-nav-links">
-      <a href="#home">Ana Sayfa</a>
-      <a href="#about">Hakkımızda</a>
-      <a href="#projects">Projeler</a>
-      <a href="#vision">Vizyon</a>
-      <a href="sponsorlar.html">Sponsorlar</a>
-      <a href="#team">Ekip</a>
-      <a href="dokumantasyon.html">Dokümantasyon</a>
-      <div class="mobile-lang-selector">
-        <a href="../tr/" class="active">Türkçe</a>
-        <a href="../en/">English</a>
-        <a href="../hi/">Hindi</a>
-      </div>
-
-      <div class="mobile-menu-actions">
-        <a href="aramiza-katil.html" class="btn btn-outline mobile-btn">Aramıza Katıl</a>
-        <a href="#projects" class="btn btn-primary mobile-btn">Projeleri Gör</a>
-      </div>
-    </nav>
   </div>
+</header>
 
-  <main>
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-      <div class="hero-bg-glow"></div>
-      <div class="container fade-up">
-        <h1><span class="gradient-text">Teknolojinin Zirvesi</span></h1>
-        <p>Dünyanın en parlak genç zihinlerinin buluştuğu Vertex, teknoloji sektöründe devrim yaratıyor!</p>
-        <div class="hero-buttons">
+<main>
+  <section class="hero" id="home">
+    <div class="wrap hero-grid">
+      <!-- Metinler Linear efektiyle kayarak geliyor -->
+      <div>
+        <h1 class="linear-reveal delay-1">Teknolojinin Zirvesi</h1>
+        <p class="lede linear-reveal delay-2">Dünyanın en parlak genç zihinlerinin buluştuğu Vertex, teknoloji sektöründe devrim yaratıyor!</p>
+        <div class="hero-actions linear-reveal delay-3">
           <a href="#projects" class="btn btn-primary">Keşfetmeye Başla</a>
-          <a href="#vision" class="btn btn-outline">Vizyonumuz</a>
-        </div>
-
-        <!-- Stats -->
-        <div class="stats-container fade-up">
-          <div class="stat-item">
-            <div class="stat-number gradient-text">10M+</div>
-            <div class="stat-label">Hedef İndirme</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number gradient-text">70B+</div>
-            <div class="stat-label">Aktif Kullanıcı</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number gradient-text">16</div>
-            <div class="stat-label">Yaş Ortalaması</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-number gradient-text">190+</div>
-            <div class="stat-label">Ülke</div>
-          </div>
+          <a href="#vision" class="btn btn-ghost">Vizyonumuz</a>
         </div>
       </div>
-    </section>
-
-    
-    <!-- Partners / Collaborators Section -->
-    <section class="collaborators-section">
-      <div class="collaborators-title fade-up">Altyapımız ve teknolojilerimiz en iyiler tarafından desteklenmektedir</div>
-      <div class="marquee-container fade-up">
-        <div class="marquee-content">
-          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="fal" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
-
-          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="fal" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
-
-          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="fal" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
-
-          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="fal" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
-
-          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="fal" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
-
-          <a href="https://fal.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/fal.svg" alt="fal" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://openrouter.ai/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/openrouter.svg" alt="OpenRouter" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://cloud.google.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/googlecloud.svg" alt="Google Cloud" onerror="this.src='../assets/favicon.webp'"></a>
-          <a href="https://www.cloudflare.com/" target="_blank" rel="noopener noreferrer" class="marquee-item"><img src="../assets/partners/cloudflare.svg" alt="Cloudflare" onerror="this.src='../assets/favicon.webp'"></a>
-
-        </div>
+      
+      <div class="hero-visual linear-reveal delay-4">
+        <lottie-player 
+          src="https://lottie.host/d8573061-1faf-406b-b143-da7ca317e9dc/RYVDvwxMiD.json" 
+          background="transparent" 
+          speed="1" 
+          loop 
+          autoplay>
+        </lottie-player>
       </div>
-    </section>
 
-    <!-- About Section -->
-    <section id="about" class="section">
-      <div class="container">
-        <div class="grid-3">
-          <div class="card fade-up animated-border">
-            <div class="card-content">
-              <div class="card-icon">
-                <div class="visual-youth">
-                  <div class="youth-orbit"></div>
-                  <div class="youth-orbit"></div>
-                  <div class="youth-core"></div>
-                </div>
-              </div>
-              <h2>Genç Yenilikçiler</h2>
-              <p class="desktop-text">Ortalama 16 yaşındaki ekibimiz, sınırları zorlamaya ve devrim niteliğinde çözümler
-                yaratmaya kendini
-                adamış yeni nesil teknoloji vizyonerlerini temsil ediyor.</p>
-              <p class="mobile-text">Ortalama 16 yaşındaki ekibimizle, sınırları zorlayan yeni nesil teknoloji
-                vizyonerleriyiz.</p>
-            </div>
-          </div>
-          <div class="card fade-up animated-border">
-            <div class="card-content">
-              <div class="card-icon">
-                <div class="visual-multi">
-                  <div class="multi-layer"></div>
-                  <div class="multi-layer"></div>
-                  <div class="multi-layer"></div>
-                </div>
-              </div>
-              <h2>Çok Alanlı Uzmanlık</h2>
-              <p class="desktop-text">Yazılım geliştirmeden yapay zeka, oyun, müzik prodüksiyonu ve tarayıcı
-                teknolojilerine kadar geniş
-                beceri setimizle yenilik yapıyoruz.</p>
-              <p class="mobile-text">Yazılım, yapay zeka, oyun ve daha fazlasını kapsayan geniş becerilerimizle yenilik
-                yapıyoruz.</p>
-            </div>
-          </div>
-          <div class="card fade-up animated-border">
-            <div class="card-content">
-              <div class="card-icon">
-                <div class="visual-global">
-                  <div class="global-grid"></div>
-                  <div class="global-scan"></div>
-                  <div class="global-dot"></div>
-                </div>
-              </div>
-              <h2>Global Vizyon</h2>
-              <p class="desktop-text">Dünya standartlarında ürünler geliştirerek Türkiye'yi küresel teknoloji lideri
-                konumuna getirmeye
-                kendimizi adadık.</p>
-              <p class="mobile-text">Türkiye'yi küresel teknoloji lideri yapmaya kararlıyız.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="section">
-      <div class="container">
-        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px; margin-top: 120px;">Projelerimiz</h2>
-        <div class="grid-3">
+  <section class="stats">
+    <div class="wrap stats-grid">
+      <div class="stat"><div class="num">10M+</div><div class="lab">Hedef İndirme</div></div>
+      <div class="stat"><div class="num">70B+</div><div class="lab">Aktif Kullanıcı</div></div>
+      <div class="stat"><div class="num">16</div><div class="lab">Yaş Ortalaması</div></div>
+      <div class="stat"><div class="num">190+</div><div class="lab">Ülke</div></div>
+    </div>
+  </section>
 
-          <!-- Cortex -->
-          <a href="indir.html"
-            class="card fade-up project-card animated-border">
-            <div class="project-img-container">
-              <img src="../assets/cortex.webp" alt="Cortex AI" loading="lazy" decoding="async">
-            </div>
-            <div class="card-content">
-              <h3>Cortex</h3>
-              <p>Gelişmiş yeteneklere sahip devrim niteliğinde çevrimiçi ve çevrimdışı yapay zeka platformu.</p>
-            </div>
-          </a>
-
-          <!-- Mergen -->
-          <a href="https://github.com/VertexCorporation/Mergen" target="_blank"
-            class="card fade-up project-card animated-border">
-            <div class="project-img-container">
-              <img src="../assets/mergen.webp" alt="Mergen AI" loading="lazy"
-                onerror="this.src='../assets/comingsoon.webp'">
-            </div>
-            <div class="card-content">
-              <h3>Mergen</h3>
-              <p>Yüksek performanslı veri işleme ve makine öğrenimi modelleri için ölçeklenebilir yapay zeka mimarisi.
-              </p>
-            </div>
-          </a>
-
-          <!-- Drome (disabled)
-                        <a href="https://github.com/VertexCorporation/Drome" target="_blank"
-            class="card fade-up project-card animated-border">
-            <div class="project-img-container">
-              <img src="../assets/drome.webp" alt="Drome" loading="lazy" decoding="async">
-            </div>
-            <div class="card-content">
-              <h3>Drome</h3>
-              <p>Geliştiriciler için çok yönlü ve verimli araçlar sunan yenilikçi programlama dili.</p>
-            </div>
-          </a>-->
-
-          <!-- Solar (disabled)
-          <a href="https://browser.solar/" target="_blank" class="card fade-up project-card animated-border">
-            <div class="project-img-container">
-              <img src="../assets/solar.webp" alt="Solar Browser" loading="lazy" decoding="async">
-            </div>
-            <div class="card-content">
-              <h3>Solar Browser</h3>
-              <p>Performans ve gizlilik için sıfırdan geliştirilen yeni nesil web tarayıcısı.</p>
-            </div>
-          </a>-->
-
-          <!-- All Star -->
-          <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank"
-            class="card fade-up project-card animated-border">
-            <div class="project-img-container">
-              <img src="../assets/allstar.webp" alt="All Star" loading="lazy" decoding="async">
-            </div>
-            <div class="card-content">
-              <h3>All Star</h3>
-              <p>48 saatte 5 milyon+ kişiye ulaşan ve 20.000+ indirme alan mobil oyunumuz.</p>
-            </div>
-          </a>
-
-          <!-- Ally -->
-          <div class="card fade-up project-card animated-border" style="cursor: default;">
-            <div class="project-img-container">
-              <img src="../assets/ally.webp" alt="Ally Health" loading="lazy">
-            </div>
-            <div class="card-content">
-              <h3>Ally</h3>
-              <p>Akıllı sağlık asistanınız. Gerçek zamanlı izleme ve kişiselleştirilmiş sağlık tavsiyeleri sunar.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Technologies Section -->
-    <section id="tech" class="section section-dark">
-      <div class="container">
-        <div class="section-header text-center">
-          <h2 class="fade-up">Teknoloji Ekosistemimiz</h2>
-          <p class="fade-up" style="color: var(--text-muted); margin-top: 16px;">
-            En güçlü araçları ve modern dilleri kullanarak geleceği inşa ediyoruz.
-          </p>
-        </div>
-
-        <div class="tech-grid fade-up">
-          <div class="feature-card" style="padding: 24px;">
-            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
-              <div class="visual-ai">
-                <div class="ai-node"></div>
-                <div class="ai-node"></div>
-                <div class="ai-node"></div>
-                <div class="ai-node"></div>
-                <div class="ai-line"></div>
-              </div>
-            </div>
-            <h3>Yapay Zeka</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Python, TensorFlow, PyTorch</p>
-          </div>
-          <div class="feature-card" style="padding: 24px;">
-            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
-              <div class="visual-web">
-                <div class="web-header">
-                  <div class="web-dot"></div>
-                  <div class="web-dot"></div>
-                </div>
-                <div class="web-content">
-                  <div class="web-block"></div>
-                  <div class="web-block"></div>
-                </div>
-              </div>
-            </div>
-            <h3>Web Teknolojileri</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">React, Node.js, WebAssembly</p>
-          </div>
-          <div class="feature-card" style="padding: 24px;">
-            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
-              <div class="visual-mobile">
-                <div class="mobile-screen">
-                  <div class="mobile-item"></div>
-                  <div class="mobile-item"></div>
-                  <div class="mobile-item"></div>
-                </div>
-              </div>
-            </div>
-            <h3>Mobil Uygulama</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Flutter, React Native, Swift</p>
-          </div>
-          <div class="feature-card" style="padding: 24px;">
-            <div class="visual-container" style="height: 80px; margin-bottom: 16px;">
-              <div class="visual-game">
-                <div class="game-stick"></div>
-                <div class="game-btns">
-                  <div class="game-btn"></div>
-                  <div class="game-btn"></div>
-                </div>
-              </div>
-            </div>
-            <h3>Oyun Geliştirme</h3>
-            <p style="font-size: 13px; color: var(--text-muted); margin-top: 8px;">Unity, C#, Unreal Engine</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Vision Section -->
-    <section id="vision" class="section">
-      <div class="container">
-        <div class="card fade-up"
-          style="flex-direction: row; align-items: center; gap: 40px; padding: 60px; flex-wrap: wrap;">
-          <div style="flex: 1; min-width: 300px;">
-            <h2 style="font-size: 32px; margin-bottom: 24px;">2030 Vizyonu</h2>
-            <p style="font-size: 18px; margin-bottom: 24px;">2030 yılına kadar Vertex, dünyadaki tüm pazarlarda küresel
-              varlık kurarak platformlarımızda milyonlarca aktif kullanıcıya ulaşmayı hedefliyor.</p>
-            <p style="color: var(--text-muted);">Sürekli inovasyona, kendi işletim sistemimizi geliştirmeye ve yapay
-              zeka yeteneklerimizi daha da genişleterek dijital geleceğe yön vermeye kararlıyız.</p>
-          </div>
-          <div style="flex: 1; display: flex; justify-content: center; align-items: center; min-width: 300px;">
-            <div class="visual-vision">
-              <div class="vision-ring-1"></div>
-              <div class="vision-ring-2"></div>
-              <div class="vision-ring-3"></div>
-              <div class="vision-core"></div>
-              <div class="vision-floating-text" style="--x: -80px; --y: -60px; --delay: 0s;">Cortex</div>
-              <div class="vision-floating-text" style="--x: 80px; --y: -70px; --delay: 1s;">Mergen</div>
-              <div class="vision-floating-text" style="--x: -50px; --y: 90px; --delay: 4s;">All Star</div>
-              <div class="vision-floating-text" style="--x: 50px; --y: -90px; --delay: 5s;">Ally</div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- News Section -->
-    <section id="news-section" class="section">
-      <div id="news-container">
-        <!-- Content rendered by js/news.js -->
-      </div>
-    </section>
-
-    <!-- Sponsors Section -->
-    <section id="sponsors" class="section">
-      <div class="container">
-        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px; margin-top: 120px;">Sponsorlarımız</h2>
-
-        <div class="centered-grid">
-
-          <style>
-            /* ElevenLabs Theme */
-            .el-dark-logo { display: block !important; }
-            .el-light-logo { display: none !important; }
-            .el-box-border { border-color: rgba(255, 255, 255, 0.85) !important; background: rgba(255, 255, 255, 0.05) !important; }
-          
-            body.light .el-dark-logo,
-            [data-theme="light"] .el-dark-logo,
-            html.light .el-dark-logo {
-              display: none !important;
-            }
-            body.light .el-light-logo,
-            [data-theme="light"] .el-light-logo,
-            html.light .el-light-logo {
-              display: block !important;
-            }
-            body.light .el-box-border,
-            [data-theme="light"] .el-box-border,
-            html.light .el-box-border {
-              border-color: rgba(0, 0, 0, 0.85) !important;
-              background: rgba(0, 0, 0, 0.03) !important;
-            }
-          </style>
-          
-          <div class="card fade-up team-card">
-            <div class="el-box-border" style="width: 150px; height: 150px; margin: 0 auto 16px auto; border-radius: 20px; border-width: 2px; border-style: solid; display: flex; align-items: center; justify-content: center; overflow: hidden; padding: 12px; box-sizing: border-box;">
-              <a href="https://elevenlabs.io/startup-grants" target="_blank" rel="noopener noreferrer" style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center;">
-                <!-- Dark theme elevenlabs logo -->
-                <img src="https://eleven-public-cdn.elevenlabs.io/payloadcms/cy7rxce8uki-IIElevenLabsGrants%201.webp" 
-                     alt="ElevenLabs Grants" 
-                     class="el-dark-logo"
-                     style="width: 100%; height: auto; object-fit: contain;" 
-                     loading="lazy">
-          
-                <!-- Light theme elevenlabs logo -->
-                <img src="https://eleven-public-cdn.elevenlabs.io/payloadcms/pwsc4vchsqt-ElevenLabsGrants.webp" 
-                     alt="ElevenLabs Grants" 
-                     class="el-light-logo"
-                     style="width: 100%; height: auto; object-fit: contain;" 
-                     loading="lazy">
-              </a>
-            </div>
-          
-            <h3>ElevenLabs</h3>
-          
-            <div class="social-links">
-              <a href="https://elevenlabs.io/startup-grants" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; justify-content: center; opacity: 0.7; transition: opacity 0.2s ease;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="2" y1="12" x2="22" y2="12"></line>
-                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-                </svg>
-              </a>
-            </div>
-          </div>
-
-          <!-- Fal.ai -->
-          <div class="card fade-up team-card">
-            <img src="../assets/partners/fal.svg" alt="fal" class="team-img" loading="lazy" style="border-radius: 12px; object-fit: contain; padding: 20px; background: rgba(255,255,255,0.05);">
-            <h3>fal</h3>
-            <div class="social-links">
-              <a href="https://fal.ai/" target="_blank"><img src="../assets/website.svg" alt="Website"></a>
-            </div>
-          </div>
-
-          <!-- Deepgram -->          
-          <div class="card fade-up team-card">
-            <img src="../assets/partners/deepgram.jpeg" alt="Deepgram" class="team-img" loading="lazy" style="border-radius: 12px; object-fit: contain; padding: 20px; background: rgba(255,255,255,0.05);">
-            <h3>Deepgram</h3>
-            <div class="social-links">
-              <a href="https://deepgram.com/" target="_blank"><img src="../assets/website.svg" alt="Website"></a>
-            </div>
-          </div>
-
-          <!-- Cloudflare -->
-          <div class="card fade-up team-card">
-            <img src="../assets/partners/cloudflare.svg" alt="Cloudflare" class="team-img" loading="lazy" style="border-radius: 12px; object-fit: contain; padding: 20px; background: rgba(255,255,255,0.05);">
-            <h3>Cloudflare</h3>
-            <div class="social-links">
-              <a href="https://www.cloudflare.com/" target="_blank"><img src="../assets/website.svg" alt="Website"></a>
-            </div>
-          </div>
-
-          <!-- AssemblyAI -->
-          <div class="card fade-up team-card">
-            <img src="../assets/partners/assemblyai.svg" alt="AssemblyAI" class="team-img" loading="lazy" style="border-radius: 12px; object-fit: contain; padding: 20px; background: rgba(255,255,255,0.05);">
-            <h3>AssemblyAI</h3>
-            <div class="social-links">
-              <a href="https://www.assemblyai.com/" target="_blank"><img src="../assets/website.svg" alt="Website"></a>
-            </div>
-          </div>
-
-          <!-- Miro -->
-          <div class="card fade-up team-card">
-            <img src="../assets/partners/miro.svg" alt="Miro" class="team-img" loading="lazy" style="border-radius: 12px; object-fit: contain; padding: 20px; background: rgba(255,255,255,0.05);">
-            <h3>Miro</h3>
-            <div class="social-links">
-              <a href="https://miro.com/" target="_blank"><img src="../assets/website.svg" alt="Website"></a>
-            </div>
-          </div>
-
-          <!-- GitLab -->
-          <div class="card fade-up team-card">
-            <img src="../assets/partners/gitlab.svg" alt="GitLab" class="team-img" loading="lazy" style="border-radius: 12px; object-fit: contain; padding: 20px; background: rgba(255,255,255,0.05);">
-            <h3>GitLab</h3>
-            <div class="social-links">
-              <a href="https://about.gitlab.com/" target="_blank"><img src="../assets/website.svg" alt="Website"></a>
-            </div>
-          </div>
-
-          <!-- Daytona -->
-          <div class="card fade-up team-card">
-            <img src="../assets/partners/daytona.svg" alt="Daytona" class="team-img" loading="lazy" style="border-radius: 12px; object-fit: contain; padding: 20px; background: rgba(255,255,255,0.05);">
-            <h3>Daytona</h3>
-            <div class="social-links">
-              <a href="https://www.daytona.io/" target="_blank"><img src="../assets/website.svg" alt="Website"></a>
-            </div>
-          </div>
-
-
-        </div>
-      </div>
-    </section>
-
-    
-
-    <!-- Team Section -->
-    <section id="team" class="section">
-      <div class="container">
-        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px; margin-top: 120px;">Ekibimiz</h2>
-
-        
-
-        <div class="centered-grid">
-
-          <!-- Mustafa Çakı -->
-          <div class="card fade-up team-card">
-            <img src="../assets/team/MUSTAFACAKI.webp" alt="Mustafa Çakı" class="team-img" loading="lazy">
-            <h3>Mustafa Çakı</h3>
-            <p class="team-role">Kurucu & CEO</p>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank"><img src="../assets/linkedin.svg"
-                  alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/mustawtfa/" target="_blank"><img src="../assets/instagram.svg"
-                  alt="Instagram"></a>
-              <a href="mailto:mustafa@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
-            </div>
-          </div>
-
-          <!-- Uras Baz -->
-          <div class="card fade-up team-card">
-            <img src="../assets/team/mehmet_uras.jpg" alt="Uras Baz" class="team-img" loading="lazy">
-            <h3>Uras Baz</h3>
-            <p class="team-role">Baş Teknoloji Sorumlusu - CTO</p>
-            <div class="social-links">
-              <a href="mailto:uras@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
-            </div>
-          </div>
-
-          <!-- Ekin Burçak Korkmaz -->
-          <div class="card fade-up team-card">
-            <img src="../assets/team/ekin_burcak.jpeg" alt="Ekin Burçak Korkmaz" class="team-img" loading="lazy">
-            <h3>Ekin Burçak Korkmaz</h3>
-            <p class="team-role">Operasyon Grup Başkanı - COO </p>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/ekin-bur%C3%A7ak-korkmaz-1aa9ba3a7?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app"
-                target="_blank"><img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/ekinburcakorkmaz?igsh=MTJodWlkYnBtdHFpMQ==" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
-              <a href="mailto:ekin@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
-            </div>
-          </div>
-
-          <!-- Ecrin Hacıömeroğlu -->
-          <div class="card fade-up team-card">
-            <img src="../assets/team/ecrin_haciomeroglu.jpg" alt="Ecrin Hacıömeroğlu" class="team-img" loading="lazy">
-            <h3>Ecrin Hacıömeroğlu</h3>
-            <p class="team-role">Kurumsal İlişkiler ve İletişim Başkanı - CCO</p>
-            <div class="social-links">
-              <a href="mailto:ecrin@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
-            </div>
-          </div>
-
-          
-          <!-- Azra Koncaoğlu -->
-          <div class="card fade-up team-card">
-            <img src="../assets/team/azra_koncaoglu.jpeg" alt="Azra Koncaoğlu" class="team-img" loading="lazy">
-            <h3>Azra Koncaoğlu</h3>
-            <p class="team-role">İnsan Kaynakları Direktörü - CHRO</p>
-            <div class="social-links">
-              <a href="https://www.linkedin.com/in/azra-koncao%C4%9Flu-aaaba741b?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"> <img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-              <a href="https://www.instagram.com/nyzszm?igsh=MWFkczNoOG15dHdlNg==" target="_blank"> <img src="../assets/instagram.svg" alt="Instagram"></a>
-              <a href="mailto:azra@vertexishere.com"> <img src="../assets/email.svg" alt="Email"></a>
-            </div>
-          </div>
-
-          <!-- İdil Başpınar -->
-          <div class="card fade-up team-card">
-            <img src="../assets/team/idil_baspinar.jpeg" alt="İdil Başpınar" class="team-img" loading="lazy">
-            <h3>İdil Başpınar</h3>
-            <p class="team-role">Pazarlama Başkanı - CMO</p>
-            <div class="social-links">
-              <a href="https://www.instagram.com/idilbspnrr?igsh=MTZ6b29ud2JpZjVsNw==" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
-              <a href="mailto:idil@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
-            </div>
-          </div>
-
-          <!--  Suzan Almira Akgül -->
-          <div class="card fade-up team-card">
-            <img src="../assets/team/suzan_almira_akgul.jpeg" alt="Suzan Almira Akgül" class="team-img" loading="lazy">
-            <h3>Suzan Almira Akgül</h3>
-            <p class="team-role">İletişim Direktörü</p>
-            <div class="social-links">
-              <a href="mailto:almira@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
-            </div>
-          </div>
-
-          <!-- Efe Şahin -->
-          <div class="card fade-up team-card">
-            <img src="../assets/team/efe_sahin.jpeg" alt="Efe Şahin" class="team-img" loading="lazy">
-            <h3>Efe Şahin</h3>
-            <p class="team-role">Baş Tasarım Yöneticisi - CDO</p>
-            <div class="social-links">
-              <a href="mailto:efe@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
-              <a href="https://www.instagram.com/16efesahin?igsi=bDE1Y2Z2cHQ5bGN1" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
-            </div>
-          </div>
-
-          <!-- Elif Dilber -->
-          <div class="card fade-up team-card">
-            <img src="../assets/team/elif_dilber.jpeg" alt="Elif Dilber" class="team-img" loading="lazy">
-            <h3>Elif Dilber</h3>
-            <p class="team-role">Baş Finans Görevlisi - CFO</p>
-            <div class="social-links">
-              <a href="mailto:elif@vertexishere.com"><img src="../assets/email.svg" alt="Email"></a>
-              <a href="https://www.instagram.com/ellvfs?igsi=YmNldzcxZGk5Y21q" target="_blank"><img src="../assets/instagram.svg" alt="Instagram"></a>
-              <a href="https://www.linkedin.com/in/elif-dilber-755a39382?utm_source=share_via&utm_content=profile&utm_medium=member_android" target="_blank"> <img src="../assets/linkedin.svg" alt="LinkedIn"></a>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Moderatörler -->
-<section class="moderators-section" style="padding: 40px 0 20px 0;">
-  <div class="container">
-      <h2 class="section-title text-center" style="font-size: 32px; margin-bottom: 24px;">Moderatörlerimiz</h2>
-
-      <div class="hr-row" style="max-width: 1200px; margin: 20px auto 0 auto; padding: 10px 0;">
-        <div class="hr-marquee">
-          <div class="hr-inner" style="align-items: center;">
-              <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; margin: 0 10px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Nice Özcan</span>
-              <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; margin: 0 10px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Beyza Köseoğlu</span>
-              <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; margin: 0 10px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Eymen Can Orman</span>
-              <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; margin: 0 10px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Mert Çelik</span>
-              <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; margin: 0 10px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Selen Naz Solmaz</span>
-              <span style="display: inline-flex; align-items: center; justify-content: center; padding: 10px 20px; margin: 0 10px; font-size: 15px; font-weight: 600; border-radius: 40px; white-space: nowrap; flex-shrink: 0; background: rgba(120, 120, 120, 0.08); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(120, 120, 120, 0.2); color: inherit;">Melike Kaya</span>
-
-              <span style="display: inline-block; width: 80px; padding: 0; border: none; background: transparent;"></span>
-          </div>
-        </div>
-      </div>
+  <!-- SABİT VE SİMETRİK LOGO DİZİLİMİ -->
+  <div class="partners-static">
+    <div class="partners-label">Altyapımız ve teknolojilerimiz en iyiler tarafından desteklenmektedir</div>
+    <div class="partners-logos">
+      <img src="https://vertexishere.com/assets/partners/fal.svg" class="partner-logo-img" alt="fal">
+      <img src="https://vertexishere.com/assets/partners/cloudflare.svg" class="partner-logo-img" alt="Cloudflare">
+      <img src="https://vertexishere.com/assets/partners/deepgram.jpeg" class="partner-logo-img" style="border-radius: 4px;" alt="Deepgram">
+      <img src="https://vertexishere.com/assets/partners/assemblyai.svg" class="partner-logo-img" alt="AssemblyAI">
+      <img src="https://vertexishere.com/assets/partners/miro.svg" class="partner-logo-img" alt="Miro">
+      <img src="https://vertexishere.com/assets/partners/gitlab.svg" class="partner-logo-img" alt="GitLab">
+    </div>
   </div>
-</section>
 
-  </main>
-
-  <!-- Final CTA -->
-    <!-- Honor Roll (names-only honor roll) -->
-    <section id="hr" class="section">
-      <div class="container">
-        <h2 class="section-title fade-up text-center mb-6" style="font-size: 36px; margin-top: 120px;">Onur Tablosu</h2>
-
-        <!-- Styles specific to Onur Tablosu -->
-        <style>
-          .hr-row { overflow: hidden; margin: 12px 0; }
-          .hr-marquee { display: flex; align-items: center; }
-          .hr-marquee .hr-inner { display: inline-flex; white-space: nowrap; }
-          .hr-marquee span, .hr-marquee a { display: inline-block; padding: 0 28px; font-size: 18px; color: var(--text-muted); text-decoration: none; transition: color 0.3s ease; }
-          .hr-marquee a:hover { color: var(--text-main); text-decoration: underline; }
-          .hr-marquee.scroll .hr-inner { will-change: transform; animation: hr-scroll linear infinite; }
-          .hr-marquee.scroll.reverse .hr-inner { animation-direction: reverse; }
-          @keyframes hr-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-          /* when there are few names, center them */
-          .hr-marquee.center { justify-content: center; }
-        </style>
-
-        <div id="hr-container">
-          <div class="hr-row">
-            <div class="hr-marquee" data-names="Selim Doğan|Burak İsa Şimşek|Ensar Demirtaş|Barış Yücel|Mehmet Talha Yalçın|Mert Çelik|Yüsra Arbana|Ekin Önal|Emre Baldemir|İbrahim Baygün|Mehmet Ali Durusoy|Akın Taha Ateş|Kaan Erbaş">
-              <div class="hr-inner">
-                <span>Selim Doğan</span>
-                <span>Burak İsa Şimşek</span>
-                <span>Ensar Demirtaş</span>
-                <span>Barış Yücel</span>
-                <span>Mehmet Talha Yalçın</span>
-                <span>Mert Çelik</span>
-                <span>Yüsra Arbana</span>
-                <span>Ekin Önal</span>
-                <span>Emre Baldemir</span>
-                <span>İbrahim Baygün</span>
-                <span>Mehmet Ali Durusoy</span>
-                <span>Akın Taha Ateş</span>
-                <span>Kaan Erbaş</span>
-            </div>
-            </div>
-          </div>
+  <section>
+    <div class="wrap">
+      <div class="feature-trio">
+        <div class="feature-item">
+          <h3>Genç Yenilikçiler</h3>
+          <p>Ortalama 16 yaşındaki ekibimiz, sınırları zorlamaya ve devrim niteliğinde çözümler yaratmaya kendini adamış yeni nesil teknoloji vizyonerlerini temsil ediyor.</p>
         </div>
-
-        <script>
-          (function(){
-            var lastWidth = window.innerWidth;
-            
-            function setupHonorRoll() {
-              var isMobile = window.innerWidth <= 768;
-              var scrollThreshold = isMobile ? 3 : 5;
-              
-              document.querySelectorAll('.hr-marquee').forEach(function(m, idx){
-                // Store original HTML if not already done
-                if (!m.dataset.originalHtml) {
-                  m.dataset.originalHtml = m.querySelector('.hr-inner').innerHTML;
-                }
-                
-                var inner = m.querySelector('.hr-inner');
-                inner.innerHTML = m.dataset.originalHtml;
-                
-                // Remove previous classes
-                m.classList.remove('scroll', 'center', 'reverse');
-                inner.style.animationDirection = '';
-                inner.style.animationDuration = '';
-                m.style.setProperty('--ot-duration', '');
-                
-                var names = inner.querySelectorAll('span');
-                var count = names.length;
-                if (count === 0) return;
-                
-                if (count < scrollThreshold) {
-                  m.classList.add('center');
-                  return;
-                }
-                
-                // Duplicate content for seamless scrolling
-                inner.innerHTML = inner.innerHTML + inner.innerHTML;
-                var charCount = inner.textContent.length;
-                var duration = Math.max(8, Math.min(60, Math.floor(charCount/2)));
-                m.classList.add('scroll');
-                
-                if (idx % 2 === 1) {
-                  m.classList.add('reverse');
-                  inner.style.animationDirection = 'reverse';
-                } else {
-                  inner.style.animationDirection = 'normal';
-                }
-                m.style.setProperty('--ot-duration', duration + 's');
-                inner.style.animationDuration = duration + 's';
-              });
-            }
-            
-            setupHonorRoll();
-            
-            // Re-run on window resize
-            window.addEventListener('resize', function() {
-              if (Math.abs(window.innerWidth - lastWidth) > 100) {
-                lastWidth = window.innerWidth;
-                setupHonorRoll();
-              }
-            });
-          })();
-        </script>
-
-        <!-- Disable site-wide mouse spotlight/ glow around cursor for this page -->
-        <style>
-          body::before { display: none !important; background: none !important; }
-        </style>
-
-      </div>
-    </section>
-  <section class="container">
-    <div class="cta-section fade-up">
-      <div class="cta-bg-animation">
-        <div class="cta-grid"></div>
-        <div class="cta-orb"></div>
-        <div class="cta-orb"></div>
-        <div class="cta-orb"></div>
-        <div class="cta-shooting-line"></div>
-        <div class="cta-shooting-line"></div>
-        <div class="cta-shooting-line"></div>
-        <div class="cta-shooting-line"></div>
-        <div class="cta-overlay"></div>
-      </div>
-      <div class="cta-content">
-        <h2 style="font-size: 42px; margin-bottom: 24px;">Geleceğin Parçası Olun</h2>
-        <p style="font-size: 18px; color: var(--text-muted); max-width: 600px; margin: 0 auto 40px;">
-          Vertex ile teknolojinin sınırlarını zorlayın. Projelerimizi inceleyin veya ekibimize katılın.
-        </p>
-        <div style="display: flex; gap: 16px; justify-content: center;">
-          <a href="#projects" class="btn btn-primary">Projeleri Keşfet</a>
-          <button onclick="window.location.href='aramiza-katil.html'" class="btn btn-outline" style="cursor: pointer;">Aramıza Katıl</button>
+        <div class="feature-item">
+          <h3>Çok Alanlı Uzmanlık</h3>
+          <p>Yazılım geliştirmeden yapay zekaya, oyun, müzik prodüksiyonu ve tarayıcı teknolojilerine kadar geniş beceri setimizle yenilik yapıyoruz.</p>
+        </div>
+        <div class="feature-item">
+          <h3>Global Vizyon</h3>
+          <p>Dünya standartlarında ürünler geliştirerek Türkiye'yi küresel teknoloji lideri konumuna getirmeye kendimizi adadık.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Footer -->
-  <footer class="footer-expanded">
-    <div class="container">
-      <div class="footer-main-grid">
-        <div class="footer-brand">
-          <a href="#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;"><img src="../assets/logo.svg" alt="Vertex Logo" class="nav-logo-icon">Vertex</a>
-          <p style="color: var(--text-muted); line-height: 1.6;">
-            Dünyanın en parlak genç zihinlerinin buluştuğu Vertex, teknoloji sektöründe devrim yaratıyor!
-          </p>
-        </div>
-
-        <div class="footer-col">
-          <h3 style="margin-bottom: 24px;">Projeler</h3>
-          <ul class="footer-links">
-            <li><a href="indir.html">Cortex</a></li>
-            <li><a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar">All Star</a></li>
-            <li><a href="https://github.com/VertexCorporation/Mergen">Mergen</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h3 style="margin-bottom: 24px;">Şirket</h3>
-          <ul class="footer-links">
-            <li><a href="#about">Hakkımızda</a></li>
-            <li><a href="#team">Ekip</a></li>
-            <li><a href="#vision">Vizyon</a></li>
-          </ul>
-        </div>
-
-        <div class="footer-col">
-          <h3 style="margin-bottom: 24px;">İletişim</h3>
-          <ul class="footer-links">
-            <li><a href="mailto:contact@vertexishere.com">E-posta Gönder</a></li>
-            <li><a href="https://www.linkedin.com/company/106897671/">LinkedIn</a></li>
-            <li><a href="https://www.instagram.com/vertex.23/">Instagram</a></li>
-            <li><a href="#">Discord</a></li>
-          </ul>
-        </div>
+  <section class="products" id="projects">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Projelerimiz</h2>
+        <p>Yapay zekadan mobil oyuna, sağlık teknolojisine uzanan ürün ailemiz.</p>
       </div>
-
-      <div class="footer-bottom-row">
-        <div class="copyright">
-          &copy; 2026 Vertex Corporation. Tüm hakları saklıdır.
-        </div>
-        <div class="footer-legal-links">
-          <a href="../privacy-policy.html">Gizlilik Politikası</a>
-          <a href="../terms-of-service.html">Kullanım Şartları</a>
+      <div class="product-layout">
+        <a href="https://vertexishere.com/tr/indir.html" target="_blank" rel="noopener" class="product-feature">
+          <div>
+            <div class="tag">YAPAY ZEKA</div>
+            <h3>Cortex</h3>
+            <p>Gelişmiş yeteneklere sahip devrim niteliğinde çevrimiçi ve çevrimdışı yapay zeka platformu.</p>
+          </div>
+        </a>
+        <div class="product-list">
+          <a href="https://github.com/VertexCorporation/Mergen" target="_blank" rel="noopener" class="product-row">
+            <div class="tag-row"><span class="tag">AI MİMARİSİ</span></div>
+            <h4>Mergen</h4>
+            <p>Yüksek performanslı veri işleme ve makine öğrenimi modelleri için ölçeklenebilir yapay zeka mimarisi.</p>
+          </a>
+          <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank" rel="noopener" class="product-row">
+            <div class="tag-row"><span class="tag">MOBİL OYUN</span></div>
+            <h4>All Star</h4>
+            <p>48 saatte 5 milyon+ kişiye ulaşan ve 20.000+ indirme alan mobil oyunumuz.</p>
+          </a>
+          <div class="product-row disabled">
+            <div class="tag-row"><span class="tag">SAĞLIK ASİSTANI</span><span class="badge-soon">Yakında</span></div>
+            <h4>Ally</h4>
+            <p>Akıllı sağlık asistanınız. Gerçek zamanlı izleme ve kişiselleştirilmiş sağlık tavsiyeleri sunar.</p>
+          </div>
         </div>
       </div>
     </div>
-  </footer>
+  </section>
 
-  <!-- Application Modal -->
-  <div id="joinModal" class="modal-overlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-    <div class="modal-content" style="background: #111; padding: 40px; border-radius: 16px; border: 1px solid #333; max-width: 500px; width: 90%; color: #fff;">
-      <h3 style="margin-top: 0; font-size: 24px; margin-bottom: 20px;">Vertex'e Katıl</h3>
-      <form id="joinForm" onsubmit="submitJoinForm(event)">
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; color: #888;">Ad Soyad</label>
-          <input type="text" id="joinName" required style="width: 100%; padding: 12px; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; box-sizing: border-box;">
+  <section class="tech">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Teknoloji Ekosistemimiz</h2>
+        <p>En güçlü araçları ve modern dilleri kullanarak geleceği inşa ediyoruz.</p>
+      </div>
+      <div class="tech-grid">
+        
+        <div class="tech-card">
+          <div class="tech-visual-wrapper">
+             <lottie-player src="https://lottie.host/304d6695-c858-4021-b5f2-88caeddb20c4/IrnXNBNbnB.json" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
+          </div>
+          <div class="tech-card-content">
+            <h4>Yapay Zeka</h4>
+            <div class="stack">Python, TensorFlow, PyTorch</div>
+          </div>
         </div>
-        <div style="margin-bottom: 15px;">
-          <label style="display: block; margin-bottom: 5px; color: #888;">E-posta Adresi</label>
-          <input type="email" id="joinEmail" required style="width: 100%; padding: 12px; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; box-sizing: border-box;">
+
+        <div class="tech-card">
+          <div class="tech-visual-wrapper">
+             <lottie-player src="https://assets2.lottiefiles.com/packages/lf20_vnikrcia.json" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
+          </div>
+          <div class="tech-card-content">
+            <h4>Web Teknolojileri</h4>
+            <div class="stack">React, Node.js, WebAssembly</div>
+          </div>
         </div>
-        <div style="margin-bottom: 20px;">
-          <label style="display: block; margin-bottom: 5px; color: #888;">WhatsApp Numarası</label>
-          <input type="tel" id="joinPhone" required placeholder="+90 555 555 5555" style="width: 100%; padding: 12px; background: #222; border: 1px solid #444; border-radius: 8px; color: #fff; box-sizing: border-box;">
+
+        <div class="tech-card">
+          <div class="tech-visual-wrapper">
+             <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_qmfs6c3i.json" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
+          </div>
+          <div class="tech-card-content">
+            <h4>Mobil Uygulama</h4>
+            <div class="stack">Flutter, React Native, Swift</div>
+          </div>
         </div>
-        <div style="margin-bottom: 25px; display: flex; align-items: flex-start; gap: 10px;">
-          <input type="checkbox" id="joinPolicy" required style="margin-top: 4px;">
-          <label for="joinPolicy" style="font-size: 14px; color: #aaa; line-height: 1.5;">Gizlilik Politikası ve Kullanım Şartları'nı okudum, onaylıyorum.</label>
+
+        <div class="tech-card">
+          <div class="tech-visual-wrapper">
+             <lottie-player src="https://assets9.lottiefiles.com/packages/lf20_x17ybolp.json" background="transparent" speed="1" style="width: 120px; height: 120px;" loop autoplay></lottie-player>
+          </div>
+          <div class="tech-card-content">
+            <h4>Oyun Geliştirme</h4>
+            <div class="stack">Unity, C#, Unreal Engine</div>
+          </div>
         </div>
-        <div style="display: flex; gap: 15px; justify-content: flex-end;">
-          <button type="button" onclick="closeJoinModal()" class="btn btn-outline" style="background: transparent; border: 1px solid #444; padding: 12px 24px; border-radius: 8px; color: #fff; cursor: pointer;">İptal</button>
-          <button type="submit" class="btn btn-primary" style="background: #fff; color: #000; border: none; padding: 12px 24px; border-radius: 8px; font-weight: 600; cursor: pointer;">Başvuruyu Gönder</button>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="vision" id="vision">
+    <div class="wrap vision-grid">
+      <div class="section-head" style="margin-bottom:0;">
+        <h2>2030 Vizyonu</h2>
+        <div style="margin-top: 32px;">
+          <lottie-player 
+            src="https://lottie.host/819b0a17-1273-4eaf-8b43-a316eee54497/aFM5syQdJd.json" 
+            background="transparent" 
+            speed="1" 
+            style="width: 100%; max-width: 350px; height: auto;" 
+            loop 
+            autoplay>
+          </lottie-player>
         </div>
-      </form>
+      </div>
+      <div class="vision-text">
+        <p>2030 yılına kadar Vertex, dünya çapındaki tüm pazarlarda küresel bir varlık kurmayı, platformlarımızda milyonlarca aktif kullanıcıya ulaşmayı ve küresel teknoloji sektöründe öncü bir güç olarak tanınmayı hedefliyor.</p>
+        <p>Sürekli yeniliğe, kendi işletim sistemimizi geliştirmeye ve yapay zeka yeteneklerimizi daha da genişleterek dijital geleceği şekillendirmeye kararlıyız.</p>
+        <div class="vision-ticker">
+          <span class="vision-chip">Cortex</span>
+          <span class="vision-chip">Mergen</span>
+          <span class="vision-chip">All Star</span>
+          <span class="vision-chip">Ally</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="team" id="team">
+    <div class="wrap">
+      <div class="team-head">
+        <div class="section-head" style="margin-bottom:0;">
+          <h2>Ekibimiz</h2>
+          <p>Vertex'i her gün büyüten kişiler.</p>
+        </div>
+        <div class="team-nav">
+          <button class="team-nav-btn" id="teamPrev" aria-label="Önceki">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="team-nav-btn" id="teamNext" aria-label="Sonraki">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="team-scroll-wrap">
+        <div class="team-track" id="teamTrack">
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/MUSTAFACAKI.webp" alt="Mustafa Çakı"></div>
+          <div class="team-info">
+            <h4>Mustafa Çakı</h4>
+            <div class="role">Kurucu Ortak &amp; CEO</div>
+            <div class="team-social">
+              <a href="https://www.linkedin.com/in/mustafacaki/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/mustawtfa/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/mehmet_uras.jpg" alt="Uras Baz"></div>
+          <div class="team-info">
+            <h4>Uras Baz</h4>
+            <div class="role">CTO</div>
+            <div class="team-social"></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/ekin_burcak.jpeg" alt="Ekin Burçak Korkmaz"></div>
+          <div class="team-info">
+            <h4>Ekin Burçak Korkmaz</h4>
+            <div class="role">İşletme Direktörü (COO)</div>
+            <div class="team-social">
+              <a href="https://www.linkedin.com/in/ekin-bur%C3%A7ak-korkmaz-1aa9ba3a7" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/ekinburcakorkmaz" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/ecrin_haciomeroglu.jpg" alt="Ecrin Hacıömeroğlu"></div>
+          <div class="team-info">
+            <h4>Ecrin Hacıömeroğlu</h4>
+            <div class="role">İletişim Direktörü (CCO)</div>
+            <div class="team-social"></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/azra_koncaoglu.jpeg" alt="Azra Koncaoğlu"></div>
+          <div class="team-info">
+            <h4>Azra Koncaoğlu</h4>
+            <div class="role">İnsan Kaynakları Direktörü (CHRO)</div>
+            <div class="team-social">
+              <a href="https://www.linkedin.com/in/azra-koncao%C4%9Flu-aaaba741b" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/nyzszm" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/idil_baspinar.jpeg" alt="İdil Başpınar"></div>
+          <div class="team-info">
+            <h4>İdil Başpınar</h4>
+            <div class="role">Pazarlama Direktörü (CMO)</div>
+            <div class="team-social">
+              <a href="https://www.instagram.com/idilbspnrr" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/suzan_almira_akgul.jpeg" alt="Suzan Almira Akgül"></div>
+          <div class="team-info">
+            <h4>Suzan Almira Akgül</h4>
+            <div class="role">İletişim Direktörü</div>
+            <div class="team-social"></div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/efe_sahin.jpeg" alt="Efe Şahin"></div>
+          <div class="team-info">
+            <h4>Efe Şahin</h4>
+            <div class="role">Dijital Direktör (CDO)</div>
+            <div class="team-social">
+              <a href="https://www.instagram.com/16efesahin" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+        <div class="team-card">
+          <div class="team-photo-wrap"><img class="team-photo" loading="lazy" src="https://vertexishere.com/assets/team/elif_dilber.jpeg" alt="Elif Dilber"></div>
+          <div class="team-info">
+            <h4>Elif Dilber</h4>
+            <div class="role">Finans Direktörü (CFO)</div>
+            <div class="team-social">
+              <a href="https://www.linkedin.com/in/elif-dilber-755a39382" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/linkedin.svg" alt="LinkedIn"></a>
+              <a href="https://www.instagram.com/ellvfs" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/instagram.svg" alt="Instagram"></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="partners" id="partners">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Sponsorlarımız</h2>
+        <p>Vertex'i destekleyen sponsorlarımız.</p>
+      </div>
+      <div class="partner-grid">
+        <a class="partner-card" href="https://elevenlabs.io/startup-grants" target="_blank" rel="noopener"><img src="https://eleven-public-cdn.elevenlabs.io/payloadcms/pwsc4vchsqt-ElevenLabsGrants.webp" alt="ElevenLabs"><span class="partner-name">ElevenLabs</span></a>
+        <a class="partner-card" href="https://fal.ai/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/fal.svg" alt="fal"><span class="partner-name">fal</span></a>
+        <a class="partner-card" href="https://deepgram.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/deepgram.jpeg" alt="Deepgram"><span class="partner-name">Deepgram</span></a>
+        <a class="partner-card" href="https://www.cloudflare.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/cloudflare.svg" alt="Cloudflare"><span class="partner-name">Cloudflare</span></a>
+        <a class="partner-card" href="https://www.assemblyai.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/assemblyai.svg" alt="AssemblyAI"><span class="partner-name">AssemblyAI</span></a>
+        <a class="partner-card" href="https://miro.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/miro.svg" alt="Miro"><span class="partner-name">Miro</span></a>
+        <a class="partner-card" href="https://about.gitlab.com/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/gitlab.svg" alt="GitLab"><span class="partner-name">GitLab</span></a>
+        <a class="partner-card" href="https://www.daytona.io/" target="_blank" rel="noopener"><img src="https://vertexishere.com/assets/partners/daytona.svg" alt="Daytona"><span class="partner-name">Daytona</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TASARIMI YENİLENMİŞ MODERATÖRLER VE ONUR TABLOSU -->
+  <section class="names">
+    <div class="wrap">
+      
+      <!-- Minimalist Moderatörler -->
+      <div class="name-block mod-block">
+        <h3>Moderatörler</h3>
+        <div class="mod-list">
+          <span class="mod-item">Nice Özcan</span>
+          <span class="mod-item">Beyza Köseoğlu</span>
+          <span class="mod-item">Eymen Can Orman</span>
+          <span class="mod-item">Mert Çelik</span>
+          <span class="mod-item">Selen Naz Solmaz</span>
+          <span class="mod-item">Melike Kaya</span>
+        </div>
+      </div>
+      
+      <div class="name-block" style="margin-bottom: 32px;">
+        <h3>Onur Tablosu</h3>
+      </div>
+      
+      <!-- KAYAN KUTU BURAYA (WRAP İÇİNE) TAŞINDI, HİZALAMASI DÜZELTİLDİ -->
+      <div class="honor-marquee-container">
+        <div class="honor-track">
+          <span class="honor-item">Selim Doğan</span>
+          <span class="honor-item">Burak İsa Şimşek</span>
+          <span class="honor-item">Ensar Demirtaş</span>
+          <span class="honor-item">Barış Yücel</span>
+          <span class="honor-item">Mehmet Talha Yalçın</span>
+          <span class="honor-item">Mert Çelik</span>
+          <span class="honor-item">Yüsra Arbana</span>
+          <span class="honor-item">Ekin Önal</span>
+          <span class="honor-item">Emre Baldemir</span>
+          <span class="honor-item">İbrahim Baygün</span>
+          <span class="honor-item">Mehmet Ali Durusoy</span>
+          <span class="honor-item">Akın Taha Ateş</span>
+          <span class="honor-item">Kaan Erbaş</span>
+          
+          <span class="honor-item">Selim Doğan</span>
+          <span class="honor-item">Burak İsa Şimşek</span>
+          <span class="honor-item">Ensar Demirtaş</span>
+          <span class="honor-item">Barış Yücel</span>
+          <span class="honor-item">Mehmet Talha Yalçın</span>
+          <span class="honor-item">Mert Çelik</span>
+          <span class="honor-item">Yüsra Arbana</span>
+          <span class="honor-item">Ekin Önal</span>
+          <span class="honor-item">Emre Baldemir</span>
+          <span class="honor-item">İbrahim Baygün</span>
+          <span class="honor-item">Mehmet Ali Durusoy</span>
+          <span class="honor-item">Akın Taha Ateş</span>
+          <span class="honor-item">Kaan Erbaş</span>
+        </div>
+      </div>
+      
+    </div>
+  </section>
+
+  <section class="cta-band">
+    <div class="wrap">
+      <h2>Geleceğin Parçası Olun</h2>
+      <div class="cta-actions">
+        <a href="#projects" class="btn btn-ghost">Projeleri Keşfet</a>
+        <a href="https://vertexishere.com/tr/aramiza-katil.html" class="btn btn-primary">Aramıza Katıl</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <span class="logo-chip"><img src="https://vertexishere.com/assets/logo.svg" alt="Vertex logo"><span>Vertex</span></span>
+      <p>Türkiye'nin en genç teknoloji şirketi. Ortalama 16 yaşındaki ekibiyle yapay zeka, yazılım ve oyun alanlarında devrim yaratıyor.</p>
+    </div>
+    <div class="foot-links">
+      <div class="foot-col">
+        <h5>Projeler</h5>
+        <a href="https://vertexishere.com/tr/indir.html" target="_blank" rel="noopener">Cortex</a>
+        <a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" target="_blank" rel="noopener">All Star</a>
+        <a href="https://github.com/VertexCorporation/Mergen" target="_blank" rel="noopener">Mergen</a>
+      </div>
+      <div class="foot-col">
+        <h5>Şirket</h5>
+        <a href="#home">Hakkımızda</a>
+        <a href="#team">Ekip</a>
+        <a href="#vision">Vizyon</a>
+      </div>
+      <div class="foot-col">
+        <h5>İletişim</h5>
+        <a href="https://www.linkedin.com/company/106897671/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://www.instagram.com/vertex.23/" target="_blank" rel="noopener">Instagram</a>
+        <a href="#">Discord</a>
+      </div>
     </div>
   </div>
+  <div class="wrap foot-bottom">
+    <div>© 2026 Vertex Corporation Ltd. Tüm hakları saklıdır.</div>
+    <div>20 Wenlock Road, London, N1 7GU, United Kingdom · +44 7400 412824</div>
+    <div class="foot-legal">
+      <a href="https://vertexishere.com/privacy-policy.html" target="_blank" rel="noopener">Gizlilik Politikası</a>
+      <a href="https://vertexishere.com/terms-of-service.html" target="_blank" rel="noopener">Kullanım Şartları</a>
+    </div>
+  </div>
+</footer>
 
-  <script>
-    function openJoinModal() {
-      const modal = document.getElementById('joinModal');
-      modal.style.display = 'flex';
-      modal.style.opacity = '0';
-      setTimeout(() => { modal.style.transition = 'opacity 0.3s'; modal.style.opacity = '1'; }, 10);
-    }
-    function closeJoinModal() {
-      const modal = document.getElementById('joinModal');
-      modal.style.opacity = '0';
-      setTimeout(() => { modal.style.display = 'none'; }, 300);
-    }
-    function submitJoinForm(e) {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      const vName = document.getElementById('joinName').value.trim();
-      const vEmail = document.getElementById('joinEmail').value.trim();
-      if (vName.length < 3) { alert('Lütfen geçerli bir ad giriniz (en az 3 karakter).'); return; }
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(vEmail)) { alert('Lütfen geçerli bir e-posta adresi giriniz.'); return; }
-      btn.textContent = 'Gönderiliyor...';
-      btn.disabled = true;
-      
-      const data = {
-        name: document.getElementById('joinName').value,
-        email: document.getElementById('joinEmail').value,
-        phone: document.getElementById('joinPhone').value
-      };
-      
-      fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', { 
-        method: 'POST', 
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data) 
-      })
-      .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.json();
-      })
-      .then(result => {
-        alert('Başvurunuz başarıyla alındı! İnceleme sonrası sizinle iletişime geçeceğiz.');
-        closeJoinModal();
-        e.target.reset();
-      })
-      .catch(error => {
-        alert('Bir hata oluştu. Lütfen tekrar deneyin.');
-        console.error('Submission error:', error);
-      })
-      .finally(() => {
-        btn.textContent = 'Başvuruyu Gönder';
-        btn.disabled = false;
-      });
-    }
-  </script>
+<!-- Lottie Player Script -->
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-  <script type="module" src="../js/main.js" defer></script>
-  
-  <!-- Service Worker Registration for Caching -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('../sw.js').then(
-          (registration) => console.log('[SW] Registered:', registration),
-          (error) => console.log('[SW] Registration failed:', error)
-        );
+<script>
+  /* Tema Değiştirici */
+  const themeBtn = document.getElementById('themeBtn');
+  const sunIcon = document.getElementById('themeIconSun');
+  const moonIcon = document.getElementById('themeIconMoon');
+  themeBtn.addEventListener('click', () => {
+    const root = document.documentElement;
+    const isDark = root.getAttribute('data-theme') === 'dark';
+    root.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    sunIcon.style.display = isDark ? 'block' : 'none';
+    moonIcon.style.display = isDark ? 'none' : 'block';
+  });
+
+  /* Moderatörler Yavaşlatılmış Scroll Animasyonu */
+  const nameBlocks = document.querySelectorAll('.mod-block');
+  if('IntersectionObserver' in window){
+    const nameObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if(entry.isIntersecting){
+          const chips = entry.target.querySelectorAll('.mod-item');
+          chips.forEach((chip, i) => { chip.style.transitionDelay = (i * 40) + 'ms'; });
+          entry.target.classList.add('in-view');
+          nameObserver.unobserve(entry.target);
+        }
       });
-    }
-  </script>
+    }, {threshold:0.15});
+    nameBlocks.forEach(block => nameObserver.observe(block));
+  } else {
+    nameBlocks.forEach(block => block.classList.add('in-view'));
+  }
+
+  /* Ekip Slider */
+  const teamTrack = document.getElementById('teamTrack');
+  const teamPrev = document.getElementById('teamPrev');
+  const teamNext = document.getElementById('teamNext');
+  function updateTeamNav(){
+    teamPrev.disabled = teamTrack.scrollLeft <= 4;
+    teamNext.disabled = teamTrack.scrollLeft >= teamTrack.scrollWidth - teamTrack.clientWidth - 4;
+  }
+  teamPrev.addEventListener('click', () => teamTrack.scrollBy({left:-336, behavior:'smooth'}));
+  teamNext.addEventListener('click', () => teamTrack.scrollBy({left:336, behavior:'smooth'}));
+  teamTrack.addEventListener('scroll', updateTeamNav);
+  window.addEventListener('resize', updateTeamNav);
+  updateTeamNav();
+</script>
 </body>
-
 </html>
