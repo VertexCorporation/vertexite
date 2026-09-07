@@ -33,8 +33,10 @@
     --radius-lg: 24px;
     --container-width: 1200px;
     
-    /* --- Typography --- */
-    --font-main: 'Inter', sans-serif;
+    /* --- Typography (Vertex Brand Guidelines) --- */
+    --font-main: 'Ubuntu', system-ui, -apple-system, 'Segoe UI', sans-serif;
+    --font-heading: 'Anton', 'Arial Narrow', sans-serif;
+    --font-sub: 'Poppins', system-ui, -apple-system, sans-serif;
     
     /* --- Header States --- */
     --header-bg-scrolled: rgba(10, 10, 10, 0.6);

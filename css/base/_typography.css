@@ -1,17 +1,32 @@
 /* =========================================
-   BASE - TYPOGRAPHY
+   BASE - TYPOGRAPHY (Vertex Brand Guidelines)
+   Anton = ana başlıklar, Poppins = alt başlıklar, Ubuntu = gövde
    ========================================= */
 
-/* Headings (H1 - H6) */
-h1,
+/* Ana Başlık (H1) - sarsılmaz duruş için Anton + tamamen büyük harf */
+h1 {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    line-height: 1.1;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+}
+
+/* Alt Başlıklar (H2-H6) - dengeli akıcılık için Poppins */
 h2,
 h3,
 h4,
 h5,
 h6 {
+    font-family: var(--font-sub);
     font-weight: 700;
     line-height: 1.2;
     letter-spacing: -0.02em;
+}
+
+/* Gövde metni - yalınlık için Ubuntu */
+body {
+    font-family: var(--font-main);
 }
 
 /* Text Utilities */

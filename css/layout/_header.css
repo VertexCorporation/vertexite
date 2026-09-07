@@ -44,13 +44,14 @@
 /* --- Logo --- */
 .logo {
     font-size: 32px !important;
-    font-weight: 700;
+    font-weight: 400;
     color: var(--text-main);
     display: flex;
     align-items: center;
     gap: 12px;
-    letter-spacing: -0.03em;
-    font-family: var(--font-main);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
 }
 
 .nav-logo-icon {
