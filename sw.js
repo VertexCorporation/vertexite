@@ -1,5 +1,5 @@
 // Service Worker for caching third-party resources and improving performance
-const CACHE_VERSION = 'vertex-v1';
+const CACHE_VERSION = 'vertex-v2';
 const CACHE_URLS = [
   // Google Fonts - cache indefinitely
   /^https:\/\/fonts\.googleapis\.com\//,
@@ -8,6 +8,8 @@ const CACHE_URLS = [
   /\.webp$/,
   /\.css$/,
   /\.js$/,
+  // Self-hosted Lottie animations
+  '/assets/lottie/',
 ];
 
 // Install event - setup caching strategy
