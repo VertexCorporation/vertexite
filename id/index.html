@@ -62,9 +62,8 @@
   header.scrolled{background:var(--header-bg-scrolled); box-shadow:var(--header-shadow);}
   .nav{display:flex; align-items:center; justify-content:space-between; height:68px; gap:20px; transition:height 250ms ease;}
   header.scrolled .nav{height:56px;}
-  header .logo-chip img{transition:height 250ms ease;}
-  header.scrolled .logo-chip img{height:24px;}
-  header.scrolled .logo-chip span{font-size:18px;}
+  header .logo-chip{transition:transform 250ms ease; transform-origin:left center; will-change:transform;}
+  header.scrolled .logo-chip{transform:scale(.9);}
   section[id]{scroll-margin-top:84px;}
   .menu-btn{display:none; flex-direction:column; align-items:center; justify-content:center; gap:5px;}
   .menu-btn span{display:block; width:16px; height:1.8px; background:currentColor; border-radius:2px; transition:transform 220ms ease;}
