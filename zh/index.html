@@ -121,7 +121,8 @@
   
   .hero-visual{position:relative;}
   .globe-wrap{position:relative; width:100%; max-width:480px; margin:0 auto;}
-  .hero-visual lottie-player{width:100%; height:auto; display:block;}
+  .hero-visual lottie-player{width:100%; height:auto; display:block; transition:filter var(--dur) ease;}
+  html[data-theme="dark"] .hero-visual lottie-player{filter:invert(1);}
   .globe-ring{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); box-sizing:content-box; width:87.67%; height:88.55%; border:2px solid var(--border); border-radius:50%; pointer-events:none; transition:border-color var(--dur) ease;}
 
   /* Stats */
