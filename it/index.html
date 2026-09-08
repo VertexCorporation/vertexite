@@ -380,9 +380,29 @@
     .linear-reveal{animation:none !important; opacity:1 !important; transform:none !important;}
     .mod-item{transition:none !important; opacity:1 !important; transform:none !important;}
   }
+
+  /* Intro sahnesi - js/intro.js suruyor */
+  #vx-intro{display:none; position:fixed; inset:0; z-index:9999; background:var(--bg); overflow:hidden; cursor:pointer;}
+  html.vx-lock #vx-intro{display:block;}
+  html.vx-lock, html.vx-lock body{overflow:hidden;}
+  #vx-intro.vx-done{display:none !important;}
+  #vx-canvas{position:absolute; inset:0; width:100%; height:100%; display:block;}
+  #vx-intro .vx-title{position:absolute; left:0; right:0; top:39%; margin:0; padding:0 20px; transform:translateY(-50%); text-align:center;
+    font-family:'Anton','Arial Narrow',sans-serif; font-weight:400; text-transform:uppercase; letter-spacing:.07em;
+    font-size:clamp(28px,5.6vw,68px); line-height:1.05; color:var(--text); pointer-events:none; will-change:top,opacity;}
+  #vx-intro .vx-hint{position:absolute; left:0; right:0; bottom:44px; margin:0; padding:0 20px; text-align:center; font-size:11.5px;
+    letter-spacing:.18em; text-transform:uppercase; color:var(--text-muted); pointer-events:none; animation:vx-pulse 2.2s ease-in-out infinite;}
+  @keyframes vx-pulse{0%,100%{opacity:.45} 50%{opacity:1}}
+  @media (prefers-reduced-motion: reduce){ html.vx-lock #vx-intro{display:none;} html.vx-lock, html.vx-lock body{overflow:visible;} }
 </style>
 <link href="https://eleven-public-cdn.elevenlabs.io" rel="preconnect"/></head>
 <body>
+<div id="vx-intro" aria-hidden="true">
+<canvas id="vx-canvas"></canvas>
+<div class="vx-title">Il Picco della Tecnologia</div>
+<p class="vx-hint">Clicca, tocca o premi un tasto per iniziare</p>
+</div>
+<script>document.documentElement.classList.add("vx-lock");window.__vxFailsafe=setTimeout(function(){var e=document.getElementById("vx-intro");if(e&&!e.classList.contains("vx-done")){e.classList.add("vx-done");document.documentElement.classList.remove("vx-lock");}},8000);</script>
 <!-- Header (Sabit kalıyor, Linear efekti sildik) -->
 <header id="siteHeader">
 <div class="wrap nav">
@@ -925,5 +945,10 @@
       });
     }
   })();</script>
+<!-- Intro scene -->
+<script src="../js/vendor/d3-array.min.js"></script>
+<script src="../js/vendor/d3-geo.min.js"></script>
+<script src="../js/vendor/topojson-client.min.js"></script>
+<script src="../js/intro.js" data-geo="../assets/geo/countries-110m.json"></script>
 </body>
 </html>
