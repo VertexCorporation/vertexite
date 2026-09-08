@@ -224,7 +224,8 @@
   .team-nav-btn:hover{border-color:var(--text-muted);}
   .team-nav-btn:disabled{opacity:.32; cursor:default;}
   .team-scroll-wrap{position:relative;}
-  .team-scroll-wrap::after{content:''; position:absolute; top:0; right:0; bottom:0; width:56px; background:linear-gradient(to left, var(--bg), transparent); pointer-events:none; transition:background var(--dur) ease;}
+  .team-scroll-wrap::after{content:''; position:absolute; top:0; right:0; bottom:0; width:56px; background:linear-gradient(to left, var(--bg), transparent); pointer-events:none; transition:opacity var(--dur) ease;}
+  .team-scroll-wrap.at-end::after{opacity:0;}
   .team-track{display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity; scroll-behavior:smooth; padding:2px 2px 10px; scrollbar-width:none;}
   .team-track::-webkit-scrollbar{display:none;}
   .team-card{scroll-snap-align:start; flex:0 0 152px; width:152px; border:1px solid var(--border); border-radius:13px; background:transparent; padding:9px; transition:transform var(--dur) ease, border-color var(--dur) ease;}
@@ -844,7 +845,10 @@
   const teamNext = document.getElementById('teamNext');
   function updateTeamNav(){
     teamPrev.disabled = teamTrack.scrollLeft <= 4;
-    teamNext.disabled = teamTrack.scrollLeft >= teamTrack.scrollWidth - teamTrack.clientWidth - 4;
+    var atEnd = teamTrack.scrollLeft >= teamTrack.scrollWidth - teamTrack.clientWidth - 4;
+    teamNext.disabled = atEnd;
+    var wrap = teamTrack.closest('.team-scroll-wrap');
+    if(wrap) wrap.classList.toggle('at-end', atEnd);
   }
   teamPrev.addEventListener('click', () => teamTrack.scrollBy({left:-336, behavior:'smooth'}));
   teamNext.addEventListener('click', () => teamTrack.scrollBy({left:336, behavior:'smooth'}));
