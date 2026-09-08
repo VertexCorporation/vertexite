@@ -121,7 +121,8 @@
   .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
   
   .hero-visual{position:relative;}
-  .hero-visual lottie-player{width:100%; height:auto; max-width:480px; margin:0 auto;}
+  .hero-visual lottie-player{width:100%; height:auto; max-width:480px; margin:0 auto; filter:invert(1); transition:filter var(--dur) ease;}
+  html[data-theme="dark"] .hero-visual lottie-player{filter:none;}
 
   /* Stats */
   .stats{border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
