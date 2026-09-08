@@ -239,7 +239,8 @@
   .team-social{display:flex; gap:6px;}
   .team-social a{width:22px; height:22px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; transition:border-color var(--dur) ease;}
   .team-social a:hover{border-color:var(--text-muted);}
-  .team-social img{width:10.5px; height:10.5px; opacity:.7;}
+  .team-social img{width:10.5px; height:10.5px; opacity:.7; transition:filter var(--dur) ease;}
+  html[data-theme="dark"] .team-social img{filter:brightness(0) invert(1);}
 
   /* Partners (Alt Kısım) */
   .partners{border-top:1px solid var(--border);}
@@ -247,6 +248,8 @@
   .partner-card{border:1px solid var(--border); border-radius:var(--radius-m); padding:22px 14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:transparent; transition:border-color var(--dur) ease; min-height:96px; text-decoration:none;}
   .partner-card:hover{border-color:var(--text-muted);}
   .partner-card img{max-height:24px; max-width:100%; opacity:.85;}
+  .partner-card img[alt="ElevenLabs"]{color:#000;}
+  html[data-theme="dark"] .partner-card img[alt="ElevenLabs"]{color:#fff;}
   .partner-name{font-size:12.5px; font-weight:600; color:var(--text-muted);}
 
   /* Name lists (Moderatörler & Onur Tablosu) */
@@ -600,7 +603,7 @@
 <div class="team-photo-wrap"><img alt="Ekin Burçak Korkmaz" class="team-photo" decoding="async" loading="lazy" src="../assets/team/ekin_burcak.jpeg"/></div>
 <div class="team-info">
 <h4>Ekin Burçak Korkmaz</h4>
-<div class="role">İşletme Direktörü (COO)</div>
+<div class="role">İşletme Müdürü (COO)</div>
 <div class="team-social">
 <a href="https://www.linkedin.com/in/ekin-bur%C3%A7ak-korkmaz-1aa9ba3a7" rel="noopener" target="_blank"><img alt="LinkedIn" decoding="async" loading="lazy" src="../assets/linkedin.svg"/></a>
 <a href="https://www.instagram.com/ekinburcakorkmaz" rel="noopener" target="_blank"><img alt="Instagram" decoding="async" loading="lazy" src="../assets/instagram.svg"/></a>
@@ -611,7 +614,7 @@
 <div class="team-photo-wrap"><img alt="Ecrin Hacıömeroğlu" class="team-photo" decoding="async" loading="lazy" src="../assets/team/ecrinamajpegolan.jpeg"/></div>
 <div class="team-info">
 <h4>Ecrin Hacıömeroğlu</h4>
-<div class="role">İletişim Direktörü (CCO)</div>
+<div class="role">İletişim Müdürü (CCO)</div>
 <div class="team-social"></div>
 </div>
 </div>
@@ -619,7 +622,7 @@
 <div class="team-photo-wrap"><img alt="Azra Koncaoğlu" class="team-photo" decoding="async" loading="lazy" src="../assets/team/azra_koncaoglu.jpeg"/></div>
 <div class="team-info">
 <h4>Azra Koncaoğlu</h4>
-<div class="role">İnsan Kaynakları Direktörü (CHRO)</div>
+<div class="role">İnsan Kaynakları Müdürü (CHRO)</div>
 <div class="team-social">
 <a href="https://www.linkedin.com/in/azra-koncao%C4%9Flu-aaaba741b" rel="noopener" target="_blank"><img alt="LinkedIn" decoding="async" loading="lazy" src="../assets/linkedin.svg"/></a>
 <a href="https://www.instagram.com/nyzszm" rel="noopener" target="_blank"><img alt="Instagram" decoding="async" loading="lazy" src="../assets/instagram.svg"/></a>
@@ -630,7 +633,7 @@
 <div class="team-photo-wrap"><img alt="İdil Başpınar" class="team-photo" decoding="async" loading="lazy" src="../assets/team/idil_baspinar.jpeg"/></div>
 <div class="team-info">
 <h4>İdil Başpınar</h4>
-<div class="role">Chief Marketing Officer (CMO)</div>
+<div class="role">Pazarlama Müdürü (CMO)</div>
 <div class="team-social">
 </div>
 </div>
@@ -639,7 +642,7 @@
 <div class="team-photo-wrap"><img alt="Suzan Almira Akgül" class="team-photo" decoding="async" loading="lazy" src="../assets/team/suzan_almira_akgul.jpeg"/></div>
 <div class="team-info">
 <h4>Suzan Almira Akgül</h4>
-<div class="role">İletişim Direktörü</div>
+<div class="role">İletişim Müdürü</div>
 <div class="team-social">
 <a href="https://www.instagram.com/akgul_almira" rel="noopener" target="_blank"><img alt="Instagram" decoding="async" loading="lazy" src="../assets/instagram.svg"/></a>
 </div>
@@ -649,7 +652,7 @@
 <div class="team-photo-wrap"><img alt="Efe Şahin" class="team-photo" decoding="async" loading="lazy" src="../assets/team/efe_sahin.jpeg"/></div>
 <div class="team-info">
 <h4>Efe Şahin</h4>
-<div class="role">Dijital Direktör (CDO)</div>
+<div class="role">Dijital Müdür (CDO)</div>
 <div class="team-social">
 <a href="https://www.instagram.com/16efesahin" rel="noopener" target="_blank"><img alt="Instagram" decoding="async" loading="lazy" src="../assets/instagram.svg"/></a>
 </div>
@@ -659,7 +662,7 @@
 <div class="team-photo-wrap"><img alt="Elif Dilber" class="team-photo" decoding="async" loading="lazy" src="../assets/team/elif_dilber.jpeg"/></div>
 <div class="team-info">
 <h4>Elif Dilber</h4>
-<div class="role">Finans Direktörü (CFO)</div>
+<div class="role">Finans Müdürü (CFO)</div>
 <div class="team-social">
 <a href="https://www.linkedin.com/in/elif-dilber-755a39382" rel="noopener" target="_blank"><img alt="LinkedIn" decoding="async" loading="lazy" src="../assets/linkedin.svg"/></a>
 <a href="https://www.instagram.com/ellvfs" rel="noopener" target="_blank"><img alt="Instagram" decoding="async" loading="lazy" src="../assets/instagram.svg"/></a>
@@ -677,7 +680,7 @@
 <p>Vertex'i destekleyen sponsorlarımız.</p>
 </div>
 <div class="partner-grid">
-<a class="partner-card" href="https://elevenlabs.io/startup-grants" rel="noopener" target="_blank"><img alt="ElevenLabs" decoding="async" loading="lazy" src="https://eleven-public-cdn.elevenlabs.io/payloadcms/pwsc4vchsqt-ElevenLabsGrants.webp"/><span class="partner-name">ElevenLabs</span></a>
+<a class="partner-card" href="https://elevenlabs.io/startup-grants" rel="noopener" target="_blank"><img alt="ElevenLabs" decoding="async" loading="lazy" src="../assets/partners/elevenlabs.svg"/><span class="partner-name">ElevenLabs</span></a>
 <a class="partner-card" href="https://fal.ai/" rel="noopener" target="_blank"><img alt="fal" decoding="async" loading="lazy" src="../assets/partners/fal.svg"/><span class="partner-name">fal</span></a>
 <a class="partner-card" href="https://deepgram.com/" rel="noopener" target="_blank"><img alt="Deepgram" decoding="async" loading="lazy" src="../assets/partners/deepgram.jpeg"/><span class="partner-name">Deepgram</span></a>
 <a class="partner-card" href="https://www.cloudflare.com/" rel="noopener" target="_blank"><img alt="Cloudflare" decoding="async" loading="lazy" src="../assets/partners/cloudflare.svg"/><span class="partner-name">Cloudflare</span></a>
