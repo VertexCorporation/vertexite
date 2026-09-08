@@ -121,8 +121,9 @@
   .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
   
   .hero-visual{position:relative;}
-  .hero-visual lottie-player{width:100%; height:auto; max-width:480px; margin:0 auto; filter:invert(1); transition:filter var(--dur) ease;}
-  html[data-theme="dark"] .hero-visual lottie-player{filter:none;}
+  .globe-wrap{position:relative; width:100%; max-width:480px; margin:0 auto;}
+  .hero-visual lottie-player{width:100%; height:auto; display:block;}
+  .globe-ring{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); width:87.7%; aspect-ratio:1/1; border:1px solid var(--border); border-radius:50%; pointer-events:none; transition:border-color var(--dur) ease;}
 
   /* Stats */
   .stats{border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
@@ -416,8 +417,11 @@
 </div>
 </div>
 <div class="hero-visual linear-reveal delay-4">
+<div class="globe-wrap">
 <lottie-player autoplay="" background="transparent" loop="" speed="1" src="../assets/lottie/hero.json">
 </lottie-player>
+<span class="globe-ring"></span>
+</div>
 </div>
 </div>
 </section>
