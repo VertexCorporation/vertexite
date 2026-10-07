@@ -1,0 +1,406 @@
+/* =========================================
+   LAYOUT - HEADER & NAVIGATION
+   ========================================= */
+
+/* --- Base Header --- */
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    padding: 20px 0;
+    transition: all 0.3s ease;
+    background: transparent;
+}
+
+/* Scrolled State (Glassmorphism) */
+.header.scrolled {
+    background: rgba(10, 10, 10, 0.4);
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 16px 0;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* Light Theme Specific Scrolled State */
+[data-theme="light"] .header.scrolled {
+    background: rgba(250, 250, 250, 0.5);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1350px;
+    /* Wider than 1200px but not full width */
+    padding: 0 40px;
+    /* Wider padding for logo position */
+}
+
+/* --- Logo --- */
+.logo {
+    font-size: 32px !important;
+    font-weight: 400;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
+}
+
+.nav-logo-icon {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+    /* Optional: If it needs color inversion in light mode, you can add filters. Let's keep it default. */
+}
+
+[data-theme="light"] .nav-logo-icon {
+    filter: invert(1);
+}
+
+.logo:hover .nav-logo-icon {
+    transform: scale(1.05) rotate(-5deg);
+}
+
+/* --- Desktop Navigation --- */
+.nav-links {
+    display: flex;
+    gap: 20px;
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: rgba(25, 25, 25, 0.4);
+    padding: 10px 24px;
+    backdrop-filter: blur(24px) saturate(180%);
+    -webkit-backdrop-filter: blur(24px) saturate(180%);
+    white-space: nowrap;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.02), 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="light"] .nav-links {
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.5), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.nav-link {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 15px;
+    position: relative;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: var(--text-main);
+}
+
+/* Underline Animation */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-main);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* --- Header Actions (Theme & Lang) --- */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.theme-toggle-btn {
+    transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+
+    border: 1px solid transparent !important;
+
+    background: transparent;
+}
+
+.theme-toggle-btn:hover {
+    border-color: var(--text-main) !important;
+
+    background: rgba(128, 128, 128, 0.1);
+}
+
+/* Theme Icon Animation (Sun/Moon) */
+.theme-icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: relative;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+}
+
+/* 
+   ☀️ SUN STATE (Light Mode) - YENİLENMİŞ BASİT TASARIM
+   Merkezde siyah top, etrafında dönen net ışınlar.
+*/
+[data-theme="light"] .theme-icon {
+    background: black;
+    /* Güneşin gövdesi */
+    box-shadow: none;
+    transform: scale(0.55);
+    /* Boyutu biraz küçültüyoruz ki ışınlara yer kalsın */
+}
+
+[data-theme="light"] .theme-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    /* Işınların yayılma alanı */
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    border: none;
+
+    box-shadow:
+        0 -11px 0 -3.5px black,
+        0 11px 0 -3.5px black,
+        11px 0 0 -3.5px black,
+        -11px 0 0 -3.5px black,
+        7.5px 7.5px 0 -3.5px black,
+        -7.5px -7.5px 0 -3.5px black,
+        7.5px -7.5px 0 -3.5px black,
+        -7.5px 7.5px 0 -3.5px black;
+
+    animation: rotate-sun 12s linear infinite;
+}
+
+/* 🌙 MOON STATE (Dark Mode) */
+[data-theme="dark"] .theme-icon {
+    background: transparent;
+    box-shadow: inset 8px -4px 0px 0px white;
+    transform: rotate(-30deg) scale(0.9);
+}
+
+/* Dönme Animasyonu */
+@keyframes rotate-sun {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* --- Mobile Menu Trigger --- */
+.mobile-menu-btn {
+    display: none;
+    background: rgba(var(--primary-rgb), 0.1);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 20px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+    z-index: 1001;
+    -webkit-tap-highlight-color: transparent;
+    /* Remove blue highlight on tap */
+}
+
+.mobile-menu-btn:hover {
+    background: rgba(var(--primary-rgb), 0.2);
+    transform: scale(1.05);
+}
+
+/* --- Mobile Menu Overlay --- */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: var(--bg-color);
+    backdrop-filter: blur(20px) saturate(180%);
+    z-index: 999;
+    /* Lower than header (1000) to keep button visible */
+    padding: 100px 24px 40px;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.mobile-menu.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    font-size: 24px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.mobile-nav-links a {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+    color: var(--text-muted);
+}
+
+.mobile-nav-links a.active,
+.mobile-nav-links a:hover {
+    color: var(--text-main);
+    background: var(--gradient-text);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Staggered Animations for Mobile Links */
+.mobile-menu.active .mobile-nav-links a {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(1) {
+    transition-delay: 0.1s;
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(2) {
+    transition-delay: 0.15s;
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(3) {
+    transition-delay: 0.2s;
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(4) {
+    transition-delay: 0.25s;
+}
+
+.mobile-menu.active .mobile-nav-links a:nth-child(5) {
+    transition-delay: 0.3s;
+}
+
+/* Mobile Language Selector */
+.mobile-lang-selector {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    transition-delay: 0.35s;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.mobile-menu.active .mobile-lang-selector {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.mobile-lang-selector a {
+    padding: 8px 16px;
+    border-radius: var(--radius-sm);
+    background: rgba(var(--primary-rgb), 0.05);
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+.mobile-lang-selector a.active {
+    background: var(--primary);
+    color: var(--btn-text-color);
+}
+
+/* Mobile Menu Action Buttons */
+.mobile-menu-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 32px;
+    width: 100%;
+}
+
+.mobile-btn {
+    width: 100%;
+    padding: 16px;
+    font-size: 16px;
+    justify-content: center;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.4s ease;
+}
+
+.mobile-menu.active .mobile-btn {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Stagger button animation after links */
+.mobile-menu.active .mobile-btn:nth-child(1) {
+    transition-delay: 0.4s;
+}
+
+.mobile-menu.active .mobile-btn:nth-child(2) {
+    transition-delay: 0.45s;
+}
+
+/* --- Responsive Header --- */
+@media (max-width: 768px) {
+
+    .nav-container {
+        padding: 0 20px; /* Reduce side padding to make room */
+    }
+
+    .logo {
+        font-size: 24px !important; /* Scale down logo text */
+        gap: 8px;
+    }
+
+    .nav-logo-icon {
+        height: 28px; /* Scale down logo icon */
+    }
+
+    .nav-links,
+    .header-actions .btn {
+        display: none;
+    }
+
+    .mobile-lang-selector {
+        display: none !important;
+    }
+
+    .mobile-menu-btn {
+        display: flex;
+    }
+
+    .header-actions {
+        gap: 12px;
+    }
+}

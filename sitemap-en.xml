@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 🇺🇸 VERTEX CORPORATION - ENGLISH SITEMAP -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" 
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+  <url>
+    <loc>https://vertexishere.com/en/</loc>
+    <lastmod>2025-02-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+    
+    <!-- Language Alternatives (SEO Hreflangs) -->
+    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
+    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
+    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/" />
+    
+    <!-- Optimized Images -->
+    <image:image>
+      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
+      <image:title>Vertex - The Peak of Technology</image:title>
+      <image:caption>Turkey's youngest tech company pioneering in AI and Software.</image:caption>
+    </image:image>
+    
+    <image:image>
+      <image:loc>https://vertexishere.com/assets/logo.png</image:loc>
+      <image:title>Vertex Corporation Logo</image:title>
+    </image:image>
+  </url>
+
+</urlset>

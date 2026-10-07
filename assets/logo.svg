@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 225 225" width="100%" height="100%">
+  <!-- Outer Triangle -->
+  <polygon points="112.5,38 200.5,189 24.5,189" fill="none" stroke="white" stroke-width="15" stroke-linejoin="round" />
+  
+  <!-- Top Dash -->
+  <line x1="112.5" y1="82" x2="112.5" y2="109" stroke="white" stroke-width="10" stroke-linecap="round" />
+  
+  <!-- Center Y-shape -->
+  <path d="M 112.5,125 L 112.5,137 L 102,143 M 112.5,137 L 123,143" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  
+  <!-- Bottom-Left Dash -->
+  <line x1="84.5" y1="153.5" x2="64.5" y2="165.5" stroke="white" stroke-width="10" stroke-linecap="round" />
+  
+  <!-- Bottom-Right Dash -->
+  <line x1="140.5" y1="153.5" x2="160.5" y2="165.5" stroke="white" stroke-width="10" stroke-linecap="round" />
+</svg>

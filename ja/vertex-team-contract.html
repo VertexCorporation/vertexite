@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Vertexチーム契約 | Vertex</title>
+  
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" media="print" onload="this.media='all'" />
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" /></noscript>
+  <style>
+    :root {
+      --background-color: #f4f7f9;
+      --content-bg-color: #ffffff;
+      --text-primary-color: #1a202c;
+      --text-secondary-color: #4a5568;
+      --link-color: #3182ce;
+      --link-hover-color: #2b6cb0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --triangle-color: #e2e8f0;
+      --critical-bg-color: #fff5f5;
+      --critical-border-color: #e53e3e;
+      --critical-text-color: #9b2c2c;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
+    }
+
+    body {
+      font-family: 'Ubuntu',system-ui,-apple-system,sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 20px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+
+    body::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    .triangles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .triangles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: var(--triangle-color);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: triangleAnimate 25s linear infinite;
+      bottom: -180px;
+    }
+
+    .triangles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .triangles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .triangles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .triangles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .triangles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .triangles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .triangles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .triangles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes triangleAnimate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: var(--content-bg-color);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1,
+    h2 {
+      color: var(--text-primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    p,
+    ul,
+    li {
+      color: var(--text-secondary-color);
+      font-size: 1.05em;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+      padding-left: 10px;
+      list-style-position: outside;
+    }
+
+    li {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+
+    .critical-disclaimer {
+      background-color: var(--critical-bg-color);
+      border-left: 4px solid var(--critical-border-color);
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 8px;
+    }
+
+    .critical-disclaimer p,
+    .critical-disclaimer li {
+      color: var(--critical-text-color);
+    }
+
+    .critical-disclaimer strong {
+      color: var(--critical-border-color);
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+        margin: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+
+    
+    
+    
+    
+    
+    
+    
+
+    <link rel="icon" type="image/webp" href="/assets/favicon.webp">
+    
+    
+    
+    
+    
+    
+  <meta property="og:title" content="Vertexチーム契約 | Vertex" />
+  <meta property="og:description" content="Vertex Vertexチーム契約" />
+  <meta property="og:url" content="https://vertexishere.com/ja/vertex-team-contract.html" />
+  <meta property="og:image" content="https://vertexishere.com/assets/og-image.png" /><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Vertex | The Peak of Technology">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Vertexチーム契約 | Vertex" />
+  <meta name="twitter:description" content="Vertex Vertexチーム契約" />
+  <meta name="twitter:image" content="https://vertexishere.com/assets/og-image.png" />
+<style>h1{font-family:'Anton','Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.07em}h2,h3,h4,h5,h6{font-family:'Poppins',system-ui,-apple-system,sans-serif}</style></head>
+
+<body>
+  
+
+  <div class="container">
+
+            <h1 style="margin-bottom: 30px;">Vertexチーム契約</h1>
+            <div style="white-space: pre-line; line-height: 1.7; color: var(--text-secondary-color); font-size: 1.05rem; padding-bottom: 50px;" class="contract-text-body">
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">Introduction and Scope</h2>
+This document sets forth the fundamental principles to be followed by persons supporting works performed by Vertex Corporation LTD, registered in the Companies Register of England and Wales under registration number 17133522 and hereinafter referred to as Vertex, hereinafter referred to as Contributors. In the event of any conflict of provisions between this agreement and specific agreements relating to specialized teams to which a Contributor may be involved, the provisions of the relevant specific agreement shall prevail.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">1. Status</h2>
+The contributor acknowledges that during their time within the Vertex ecosystem, they are not an official employee, worker, or agent of Vertex. There is no employer-employee relationship between the parties. This participation aims to gain experience in line with a shared vision, support the ecosystem, and add value to technological projects. The contributor is not guaranteed a fixed salary, wage, or insurance for these activities. However, the contributor may mention and reference this experience and role in their professional resume only for the duration of this agreement and their continued active participation in the Vertex ecosystem. Furthermore, based on their outstanding performance and commitment, the contributor has the opportunity to advance to higher levels within the ecosystem, assume strategic positions, and become a partner of Vertex, among other opportunities.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">2. Representative Permission</h2>
+The Contributor's legal responsibilities are governed by the laws of the country in which they reside. If the Contributor is under 18 years of age, by digitally approving this text and becoming part of the Vertex ecosystem, the Contributor declares and undertakes that they have received full authorization and permission from their parent or legal guardian to participate in Vertex-related activities, create content, represent Vertex, and transfer the intellectual property rights arising from the work they perform on behalf of Vertex as described in this document.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">3. Intellectual Property</h2>
+The Contributor's effort and contributions to projects within the Vertex ecosystem are undeniably acknowledged and honored. Unless the Contributor terminates their relationship with Vertex under the Bad Leaver Status described in this document, they always retain the right to freely express their contributions to these projects by referencing their names and to showcase them in their portfolio. However, in order to protect the global vision, sustainability, and integrity of the projects, all rights to the name, execution, operation, development, and commercial rights of any software, code, design, algorithm, strategy, and idea produced within or incorporated into the ecosystem belong exclusively to Vertex. The Contributor acknowledges and declares that the commercial and operational rights to their contributions are entirely vested in Vertex.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">4. Confidentiality</h2>
+Contributors may not share any strategic plans, unannounced projects, technical data such as code, design and architecture, or important and critical internal communications accessed while within the Vertex community with third parties, on social media, or on public platforms without Vertex's written consent. Contributors absolutely commit not to leak any confidential and critical information learned within Vertex. Furthermore, they may not intentionally engage in any action that harms or sabotages the Vertex ecosystem or community.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">5. Ethics</h2>
+Vertex supports dynamic, friendly, and flexible communication within the ecosystem, in line with the nature of an entrepreneurial culture. Casual banter and everyday language within the team are welcome. However, this freedom of communication is considered an ethical violation when it reaches a level of deliberate, persistent, and serious harassment towards another member (bullying, severe insults, discrimination, etc.). If this boundary is severely crossed, or if actions are taken that damage Vertex's reputation, the situation will be reviewed by Vertex management, and the contributor may be immediately removed from the system; Vertex reserves its right to compensation.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">6. Representation Authority and Limitations</h2>
+The contributor may promote Vertex's vision at various events, in communities, and on social media, and may facilitate the recruitment of new talent to the team to contribute to the growth of the ecosystem. However, this ambassadorial role does not authorize the contributor to sign contracts, enter into any legal or financial commitments, or establish a formal partnership on behalf of Vertex. If the contributor's conduct during their representation activities is deemed to harm Vertex's brand value, corporate reputation, or overall vision, Vertex reserves the right to immediately assess the situation and terminate the contributor's relationship with Vertex and claim compensation.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">7. Applicable Law</h2>
+Any disputes shall be governed by the laws of England and Wales, with London courts having jurisdiction. However, to prevent damage to the ecosystem, Vertex reserves the right to seek immediate injunctive relief or compensation in the courts of the Contributor's country of residence.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">8. Termination</h2>
+The contributor is obligated to comply with ethical guidelines. Engaging in serious acts that constitute a crime under the laws of the country of residence, or violating the rules in this document, will be considered a "Bad Leaver Status". In the event of a Bad Leaver Status, Vertex reserves the right to immediately terminate the contract unilaterally, severing the contributor's connection with the ecosystem. The individual thus severed loses the right to establish a relationship with Vertex. Vertex reserves the right to initiate all necessary legal proceedings if the violation causes harm to Vertex.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">9. Amendments</h2>
+Vertex reserves the right to unilaterally update, modify, or add new clauses to the terms contained in this document at any time, in accordance with legal requirements or the operational needs of the ecosystem. All updates will be announced through the communication channels within the Vertex ecosystem. From the moment of announcement, the Contributor's continued participation in Vertex activities and contributions to its operations constitutes acceptance of the updated terms. Contributors who do not accept the updated terms are obligated to terminate their contract and leave the ecosystem.
+
+
+<h2 style="margin-top: 40px; margin-bottom: 10px; font-size: 1.5em; color: var(--text-primary-color);">Consent Statement</h2>
+I acknowledge and agree that I have fully read the above terms and conditions, understand that my role within the Vertex ecosystem is not an employment relationship, have the necessary parental or guardian consent if I am under 18 years of age, will strictly adhere to privacy rules, will remain committed to ethical guidelines, will not engage in any actions that would damage Vertex's reputation, will represent the brand accurately and responsibly externally, and that the materials I produce for Vertex are original and that I transfer all rights to them to Vertex. I declare that this digital consent is legally binding.
+            </div>
+            
+  </div>
+</body>
+</html>

@@ -1,0 +1,366 @@
+/* =========================================
+   VERTEX DESIGN SYSTEM - MAIN IMPORT FILE
+   ========================================= */
+
+/* 1. Base - The foundation */
+@import 'base/_variables.css';
+@import 'base/_reset.css';
+@import 'base/_typography.css';
+
+/* 2. Utils - Helpers & Animations */
+@import 'utils/_animations.css';
+@import 'utils/_effects.css';
+@import 'utils/_geo.css';
+@import 'utils/_visuals.css';
+/* The CSS Art definitions */
+
+/* 3. Layout - Structural Elements */
+@import 'layout/_grid.css';
+@import 'layout/_header.css';
+@import 'layout/_footer.css';
+
+/* 4. Components - Reusable UI Elements */
+@import 'components/_buttons.css';
+@import 'components/_cards.css';
+@import 'components/_inputs.css';
+@import 'components/_stats.css';
+@import 'components/_marquee.css';
+
+/* 5. Pages - Specific Section Styles */
+@import 'pages/_hero.css';
+@import 'pages/_about.css';
+@import 'pages/_cta.css';
+
+/* --- News Section --- */
+.news-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 32px;
+  margin-top: 32px;
+}
+
+.news-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 100%;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+}
+
+.news-img-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border-radius: 12px 12px 0 0;
+  background: var(--bg-secondary);
+}
+
+.news-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-img-container img {
+  transform: scale(1.05);
+}
+
+.news-date {
+  font-size: 0.85rem;
+  color: var(--primary-color);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.read-more-btn {
+  display: inline-block;
+  margin-top: auto;
+  /* Push to bottom */
+  font-weight: 600;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+  padding-top: 16px;
+  /* Use padding instead of margin if space is needed */
+}
+
+.news-card:hover .read-more-btn {
+  transform: translateX(5px);
+}
+
+/* --- Responsive Text Utilities --- */
+.mobile-text {
+  display: none;
+}
+
+.desktop-text {
+  display: block;
+}
+
+@media (max-width: 768px) {
+  .mobile-text {
+    display: block;
+  }
+
+  .desktop-text {
+    display: none;
+  }
+
+  /* --- News Slider --- */
+  .news-grid {
+    display: flex;
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 16px;
+    padding-bottom: 24px;
+    margin-right: -24px;
+    padding-right: 24px;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    align-items: stretch;
+    /* Keep stretch for rows */
+
+    /* Performance */
+    will-change: scroll-position;
+    transform: translateZ(0);
+    grid-template-columns: none;
+    /* Override grid */
+  }
+
+  .news-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .news-card {
+    flex: 0 0 85%;
+    width: 85%;
+    height: auto !important;
+    /* Allow auto height */
+    min-height: 100%;
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    margin: 0;
+    align-self: stretch;
+    /* Default stretch */
+
+    /* Performance */
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: var(--bg-secondary);
+    box-shadow: none;
+    transform: translateZ(0);
+    border: 1px solid var(--border-color);
+  }
+
+  /* When expanded, allow grow (though flex item interactions can be tricky, height:auto usually works) */
+  .news-card.expanded {
+    height: auto !important;
+    align-self: flex-start;
+    /* Don't stretch others to match this big one */
+  }
+}
+
+/* Easter Egg Tooltip */
+.easter-egg-tooltip {
+  position: absolute;
+  bottom: 100%;
+  /* Align to top of card */
+  margin-bottom: 15px;
+  /* Visual gap */
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--primary);
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  width: 240px;
+  text-align: center;
+  z-index: 1000;
+  font-size: 14px;
+  color: var(--text-main);
+  animation: fadeIn 0.3s ease-out;
+  pointer-events: auto;
+}
+
+/* Invisible bridge to prevent closing when moving mouse from card to tooltip */
+.easter-egg-tooltip::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  height: 20px;
+  /* Covers the margin-bottom gap */
+  background: transparent;
+}
+
+.easter-egg-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -8px;
+  border-width: 8px;
+  border-style: solid;
+  border-color: var(--primary) transparent transparent transparent;
+}
+
+.easter-egg-btn {
+  margin-top: 12px;
+  background: var(--primary);
+  color: var(--btn-text-color) !important;
+  /* Dynamic color for proper contrast */
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 800;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  width: 100%;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(var(--primary-rgb), 0.3);
+}
+
+.easter-egg-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(var(--primary-rgb), 0.4);
+  filter: brightness(1.1);
+}
+
+.moderators-inline-grid {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 10px !important;
+  margin: 24px auto 0 auto !important;
+  width: 100% !important;
+  max-width: 1200px !important;
+}
+
+.mod-pill {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 10px 18px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  border-radius: 40px !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  cursor: default !important;
+  transition: all 0.25s ease !important;
+
+  background: #e2e8f0 !important;
+  color: #0f172a !important;
+  border: 1px solid #cbd5e1 !important;
+}
+
+.mod-pill:hover {
+  background: #cbd5e1 !important;
+  border-color: #94a3b8 !important;
+  transform: translateY(-2px) scale(1.03) !important;
+}
+
+body.dark .mod-pill,
+[data-theme="dark"] .mod-pill,
+.dark .mod-pill {
+  background: rgba(255, 255, 255, 0.08) !important;
+  color: #f8fafc !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+body.dark .mod-pill:hover,
+[data-theme="dark"] .mod-pill:hover,
+.dark .mod-pill:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.news-card:has(img[src*="solar"]),
+.news-card:has(img[alt*="SOLAR"]),
+.news-card:has(img[alt*="solar"]) {
+  display: none !important;
+}
+
+/* Dust Effect for Role Change */
+@keyframes dustPuff {
+  0% {
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+
+  40% {
+    transform: scale(1.2) translateY(-5px);
+    filter: blur(4px);
+    opacity: 0.5;
+    color: var(--text-muted);
+    /* Dusty grey */
+  }
+
+  60% {
+    transform: scale(0.9) translateY(2px);
+    filter: blur(2px);
+    opacity: 0.8;
+  }
+
+  100% {
+    transform: scale(1) translateY(0);
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.role-changing {
+  animation: dustPuff 0.8s ease-in-out forwards;
+
+}
+
+
+/* --- Bento Grid Adjustments --- */
+#projects .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: minmax(300px, auto);
+    gap: 24px;
+}
+
+#projects .grid-3 > a:nth-child(1) {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+
+#projects .grid-3 > a:nth-child(1) .project-img-container {
+    height: 350px; /* Taller image inside large card */
+}
+
+#projects .grid-3 > a:nth-child(2),
+#projects .grid-3 > a:nth-child(3) {
+    grid-column: span 1;
+    grid-row: span 1;
+}
+
+/* Ensure mobile bends properly */
+@media (max-width: 768px) {
+    #projects .grid-3 {
+        display: flex !important;
+        flex-direction: row !important;
+        overflow-x: auto !important;
+        grid-template-columns: none !important;
+    }
+    #projects .grid-3 > a:nth-child(1) .project-img-container {
+        height: 180px; 
+    }
+}

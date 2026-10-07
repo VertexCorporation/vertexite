@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 🎯 SEO & Meta Tags -->
+    <title>Vertex | Documentation & Projects</title>
+    <meta name="description"
+        content="Vertex Corporation open source projects, API documentation, and developer resources. Discover Cortex, Mergen, and our other technologies.">
+    <meta name="keywords" content="vertex, documentation, github, open source, cortex, mergen, developer, code">
+    <meta name="author" content="Vertex Corporation">
+    <meta name="theme-color" content="#0a0a0a">
+    <meta name="robots" content="index, follow">
+
+    <!-- 🌍 Hreflang Tags -->
+    <link rel="alternate" hreflang="ru" href="https://vertexishere.com/en/documentation.html" />
+    <link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/dokumantasyon.html" />
+    <link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/documentation.html" />
+
+    <!-- 🖼️ Open Graph (Social Media) -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://vertexishere.com/en/documentation.html">
+    <meta property="og:title" content="Vertex | Developer Hub">
+    <meta property="og:description" content="Discover Vertex technologies, review source code, and contribute.">
+    <meta property="og:site_name" content="Vertex Corporation">
+    <meta property="og:image" content="https://vertexishere.com/assets/og-image.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Vertex | The Peak of Technology">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Vertex | Developer Hub">
+    <meta name="twitter:description" content="Vertex open source projects and documentation.">
+    <meta name="twitter:image" content="https://vertexishere.com/assets/og-image.png">
+
+    <!-- Fonts & Styles -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700;800&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"></noscript>
+    <link rel="stylesheet" href="../css/main.css">
+
+    <style>
+        .docs-hero {
+            padding-top: 120px;
+            padding-bottom: 30px;
+            text-align: center;
+        }
+
+        .repo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 24px;
+            margin-top: 0px;
+        }
+
+        .repo-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .repo-card:hover {
+            transform: translateY(-5px);
+            background: var(--bg-secondary);
+            border-color: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .repo-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .repo-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .repo-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--text-muted);
+        }
+
+        .repo-status {
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            background: rgba(0, 230, 118, 0.1);
+            color: #00e676;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .repo-desc {
+            color: var(--text-muted);
+            font-size: 14px;
+            line-height: 1.6;
+            flex-grow: 1;
+            margin-bottom: 24px;
+        }
+
+        .repo-meta {
+            display: flex;
+            gap: 16px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            margin-bottom: 24px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 16px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .repo-lang-color {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .btn-repo {
+            width: 100%;
+            justify-content: center;
+            gap: 8px;
+        }
+    </style>
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/webp" href="../assets/favicon.webp">
+</head>
+
+<body>
+    <canvas id="particle-canvas"></canvas>
+
+    <!-- Header -->
+    <header class="header">
+    <div class="container nav-container">
+      <a href="index.html#" class="logo"><img src="../assets/logo.svg" alt="Vertex Logo" class="nav-logo-icon">Vertex</a>
+
+      <nav class="nav-links">
+        <a href="index.html#home" class="nav-link">Главная</a>
+        <a href="index.html#projects" class="nav-link">Проекты</a>
+                <a href="index.html#news-section" class="nav-link">Новости</a>
+
+        <a href="partners.html" class="nav-link">Партнеры</a>
+        <a href="index.html#team" class="nav-link">Команда</a>
+      <a href="documentation.html" class="nav-link active">Документация</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="language-dropdown">
+          <button class="lang-btn-trigger">
+            <span class="lang-text">Русский</span> <svg class="dropdown-arrow" viewBox="0 0 24 24" style="width: 10px; height: 10px; fill: currentColor; stroke: currentColor; stroke-width: 4px; stroke-linejoin: round;"><path d="M5 7h14l-7 10z"></path></svg>
+          </button>
+          <div class="lang-menu">
+            <a href="../en/" class="lang-item">English</a>
+            <a href="../tr/" class="lang-item">Türkçe</a>
+            <a href="../hi/" class="lang-item">Hindi</a>
+            <a href="../ar/" class="lang-item">العربية</a>
+            <a href="../az/" class="lang-item">Azərbaycan</a>
+            <a href="../pt/" class="lang-item">Português</a>
+            <a href="../nl/" class="lang-item">Nederlands</a>
+            <a href="../id/" class="lang-item">Indonesia</a>
+            <a href="../it/" class="lang-item">Italiano</a>
+            <a href="../es/" class="lang-item">Español</a>
+            <a href="../ru/" class="lang-item active">Русский</a>
+            <a href="../fr/" class="lang-item">Français</a>
+            <a href="../ja/" class="lang-item">日本語</a>
+            <a href="../ko/" class="lang-item">한국어</a>
+            <a href="../zh/" class="lang-item">简体中文</a>
+            <a href="../de/" class="lang-item">Deutsch</a>
+          </div>
+        </div>
+        <button class="theme-toggle-btn btn-outline" aria-label="Toggle Theme"
+          style="padding: 8px; border-radius: 50%; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;">
+          <div class="theme-icon"></div>
+        </button>
+        <a href="join-us.html" class="btn btn-outline btn-sm">Присоединяйтесь</a>
+        <a href="index.html#projects" class="btn btn-primary btn-sm">Смотреть Проекты</a>
+        <button class="mobile-menu-btn" aria-label="Open Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+    <nav class="mobile-nav-links">
+      <a href="index.html#home">Главная</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#projects">Проекты</a>
+      <a href="index.html#vision">Vision</a>
+
+      <a href="partners.html">Партнеры</a>
+      <a href="index.html#team">Команда</a>
+      <a href="documentation.html" class="active">Документация</a>
+      <div class="mobile-lang-selector">
+        <a href="../tr/">Türkçe</a>
+        <a href="../en/" class="active">English</a>
+        <a href="../hi/">Hindi</a>
+      </div>
+
+            <div class="mobile-menu-actions">
+                <a href="https://github.com/VertexCorporation" class="btn btn-primary mobile-btn">GitHub</a>
+            </div>
+        </nav>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="docs-hero container fade-up">
+            <div class="badge" style="margin-bottom: 24px;">Хаб разработчиков</div>
+            <h1 style="font-size: 48px; margin-bottom: 24px;"><span class="gradient-text">Открытый Код</span> Экосистема
+            </h1>
+            <p style="font-size: 18px; color: var(--text-muted); max-width: 700px; margin: 0 auto;">
+                Изучите исходный код наших проектов, просмотрите документацию API и узнайте, как работают технологии Vertex. Внесите свой вклад в нашу сообщество.
+            </p>
+        </section>
+
+        <!-- Repositories Grid -->
+        <section class="section">
+            <div class="container">
+                <div id="repo-grid" class="repo-grid fade-up"></div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer-expanded">
+    <div class="container">
+      <div class="footer-main-grid">
+        <div class="footer-brand">
+          <a href="index.html#" class="logo" style="font-size: 24px; margin-bottom: 16px; display: block;"><img src="../assets/logo.svg" alt="Vertex Logo" class="nav-logo-icon">Vertex</a>
+          <p style="color: var(--text-muted); line-height: 1.6;">
+            Самая молодая технологическая компания Турции. Революционизирует ИИ, ПО и игры.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Проекты</h4>
+          <ul class="footer-links">
+            <li><a href="https://github.com/VertexCorporation/Cortex">Cortex</a></li>
+            <li><a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar">All Star</a></li>
+            <li><a href="https://github.com/VertexCorporation/Mergen">Mergen</a></li><li><a href="index.html#projects">Ally</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Компания</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#about">О Нас</a></li>
+            <li><a href="index.html#team">Команда</a></li>
+            <li><a href="index.html#vision">Vision</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 style="margin-bottom: 24px;">Контакты</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:contact@vertexishere.com">Отправить Email</a></li>
+            <li><a href="https://www.linkedin.com/company/vertexcorporation/">LinkedIn</a></li>
+            <li><a href="https://www.instagram.com/vertexcorpltd/">Instagram</a></li>
+            <li><a href="index.html#">Discord</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom-row">
+        <div class="copyright">
+          &copy; 2026 Vertex Corporation. All rights reserved.
+        </div>
+        <div class="footer-legal-links">
+          <a href="../privacy-policy.html">Политика Конфиденциальности</a>
+          <a href="../terms-of-service.html">Условия Использования</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+    <script type="module" src="../js/main.js" defer></script>
+
+    <script src="../fetch_repos.js"></script>
+    <script>
+      (async () => {
+        const repos = await fetchRepos();
+        const grid = document.getElementById('repo-grid');
+        const lang = window.location.pathname.split('/')[1] || 'en';
+        grid.innerHTML = repos.map(r => createRepoCard(r, lang)).join('');
+      })();
+    </script>
+</body>
+
+</html>

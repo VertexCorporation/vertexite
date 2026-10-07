@@ -1,0 +1,116 @@
+/* =========================================
+   COMPONENTS - MARQUEE (PARTNERS/COLLABORATORS)
+   ========================================= */
+
+.collaborators-section {
+    padding: 60px 0;
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+    border-top: none;
+    border-bottom: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.collaborators-title {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text-main);
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* Remove old pseudoelement gradients for cleaner mask approach */
+
+.marquee-container {
+    width: 100%;
+    max-width: 1000px; /* Wider view for Lovable effect */
+    margin: 0 auto;
+    display: flex;
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    align-items: center;
+    /* Adjusted mask to make transition slower and allow larger center */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+}
+
+.marquee-content {
+    display: flex;
+    align-items: center;
+    gap: 180px; /* Aradaki boşluğu arttırdık ki 4 logo tam alana yayılsın, kopyalar aynı kareye girmesin */
+    padding-left: 180px;
+    animation: marquee-scroll 25s linear infinite;
+    will-change: transform;
+}
+
+.marquee-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 45px; /* SLEEK LOVABLE SIZE */
+    flex-shrink: 0; 
+    
+    /* Default (Dark Mode) - Make logos white and slightly transparent */
+    filter: brightness(0) invert(1) opacity(0.7); 
+    transition: filter 0.3s ease, transform 0.3s ease;
+}
+
+[data-theme="light"] .marquee-item {
+    /* Light Mode - Make logos black and slightly transparent */
+    filter: brightness(0) opacity(0.7);
+}
+
+.marquee-item:hover {
+    /* On hover, depending on theme hover logic, keep them white/black but increase opacity */
+    filter: brightness(0) invert(1) opacity(1);
+    transform: scale(1.05);
+}
+
+[data-theme="light"] .marquee-item:hover {
+    filter: brightness(0) opacity(1);
+    transform: scale(1.05);
+}
+
+.marquee-item img {
+    height: 100%; /* Changed from max-height to let them scale up */
+    width: auto;
+    object-fit: contain;
+    display: block; /* Ensure it behaves as block to remove baseline gap */
+}
+
+.marquee-item svg {
+    height: 100%;
+    width: auto;
+    fill: currentColor;
+}
+
+@keyframes marquee-scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+    .collaborators-section {
+        padding: 40px 0;
+    }
+    .collaborators-title {
+        font-size: 0.95rem;
+        margin-bottom: 30px;
+    }
+    .marquee-content {
+        gap: 100px; /* Mobilde de kopyalar görünmesin diye genişlettik */
+        padding-left: 100px;
+        animation-duration: 20s;
+    }
+    .marquee-item {
+        height: 32px; /* Smooth small touch for mobile */
+    }
+    .marquee-container {
+        -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+        mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+    }
+}

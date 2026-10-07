@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vertex Terms of Service</title>
+  <meta name="description" content="Vertex: Peak Of Technology">
+  <script>
+    (function() {
+      const map = {
+        'tr': 'hizmet-sartlari.html', 'ar': 'shurut-al-khidma.html',
+        'az': 'xidmet-sertleri.html', 'de': 'nutzungsbedingungen.html',
+        'es': 'terminos-de-servicio.html', 'fr': 'conditions-d-utilisation.html',
+        'hi': 'seva-ki-shartein.html', 'id': 'syarat-layanan.html',
+        'it': 'termini-di-servizio.html', 'ja': 'riyou-kiyaku.html',
+        'ko': 'iyong-yakgwan.html', 'nl': 'servicevoorwaarden.html',
+        'pt': 'termos-de-servico.html', 'ru': 'usloviya-obsluzhivaniya.html',
+        'zh': 'fuwu-tiaokuan.html', 'en': 'terms-of-service.html'
+      };
+      
+      let userLang = navigator.language || navigator.userLanguage || 'en';
+      userLang = userLang.split('-')[0];
+      
+      if (!map[userLang]) {
+        userLang = 'en';
+      }
+      
+      window.location.replace('/' + userLang + '/' + map[userLang]);
+    })();
+  </script>
+</head>
+<body>
+  Redirecting to your language...
+</body>
+</html>
