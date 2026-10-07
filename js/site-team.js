@@ -18,6 +18,10 @@
                 track.appendChild(span);
             }
         }
+        // Hiz icerige gore: ~75px/s okunur sabit hiz (uzun listeler firlamaz).
+        // Animasyon dongusu genisligin yarisini kateder, bu yuzden /150.
+        var duration = Math.max(40, Math.round(track.scrollWidth / 150));
+        track.style.animationDuration = duration + 's';
     }
 
     function apply(result) {
