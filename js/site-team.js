@@ -18,9 +18,9 @@
                 track.appendChild(span);
             }
         }
-        // Hiz icerige gore: ~75px/s okunur sabit hiz (uzun listeler firlamaz).
-        // Animasyon dongusu genisligin yarisini kateder, bu yuzden /150.
-        var duration = Math.max(40, Math.round(track.scrollWidth / 150));
+        // Hiz icerige gore: ~37px/s — Onur Tablosu marquee'siyle ayni his,
+        // uzun listelerde bile yavas ve okunur (dongu yarim genislik kateder, /75).
+        var duration = Math.max(40, Math.round(track.scrollWidth / 75));
         track.style.animationDuration = duration + 's';
     }
 
