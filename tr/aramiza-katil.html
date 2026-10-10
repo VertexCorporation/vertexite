@@ -43,7 +43,6 @@
   .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
   :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
 
-  /* Linear.app Tarzı Smooth Reveal Animasyonu (Header haricinde kullanılır) */
   .linear-reveal {
     opacity: 0;
     transform: translateY(24px);
@@ -57,7 +56,6 @@
   .delay-3 { animation-delay: 0.3s; }
   .delay-4 { animation-delay: 0.4s; }
 
-  /* Header (Sabit - Efektsiz) */
   header{position:sticky; top:0; z-index:50; background:var(--header-bg); -webkit-backdrop-filter:blur(16px) saturate(160%); backdrop-filter:blur(16px) saturate(160%); border-bottom:1px solid var(--border); transition:background var(--dur) ease, border-color var(--dur) ease, box-shadow var(--dur) ease;}
   header.scrolled{background:var(--header-bg-scrolled); box-shadow:var(--header-shadow);}
   .nav{display:flex; align-items:center; justify-content:space-between; height:68px; gap:20px; transition:height 250ms ease;}
@@ -95,7 +93,7 @@
   .lang-btn{width:auto; padding:0 12px;}
   .lang-btn .chev{opacity:.55; transition:transform var(--dur) ease;}
   .language-dropdown.open .lang-btn .chev{transform:rotate(180deg);}
-.language-dropdown{position:relative;}
+  .language-dropdown{position:relative;}
   .lang-panel{position:absolute; top:calc(100% + 10px); right:0; min-width:215px; max-height:330px; overflow:auto; background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:6px; box-shadow:0 16px 40px rgba(0,0,0,.16); z-index:60; opacity:0; visibility:hidden; transform:translateY(6px); transition:opacity var(--dur) ease, transform var(--dur) ease, visibility 0s linear var(--dur);}
   .language-dropdown.open .lang-panel{opacity:1; visibility:visible; transform:none; transition:opacity var(--dur) ease, transform var(--dur) ease;}
   .lang-row{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; font-size:13.5px; font-weight:500; color:var(--text-muted); border-radius:8px; text-decoration:none; white-space:nowrap; transition:background-color var(--dur) ease, color var(--dur) ease;}
@@ -112,7 +110,6 @@
   .btn-ghost{border-color:var(--border); background:transparent; color:var(--text);}
   .btn-ghost:hover{border-color:var(--text-muted);}
 
-  /* Hero */
   .hero{padding:88px 0 64px;}
   .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center;}
   h1{font-size:clamp(32px,4.4vw,50px); line-height:1.14; letter-spacing:.07em; font-weight:400; margin:0 0 20px;}
@@ -122,7 +119,6 @@
   .hero-visual{position:relative;}
   .hero-visual lottie-player{width:100%; height:auto; max-width:480px; margin:0 auto;}
 
-  /* Stats */
   .stats{border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
   .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); padding:34px 0;}
   .stat{text-align:left; padding:0 20px; border-left:1px solid var(--border);}
@@ -130,7 +126,6 @@
   .stat .num{font-size:30px; font-weight:800; letter-spacing:-.02em;}
   .stat .lab{font-size:13px; color:var(--text-muted); margin-top:2px;}
 
-  /* Statik ve Simetrik Gri Logolar */
   .partners-static { border-bottom:1px solid var(--border); padding:36px 0; text-align:center; }
   .partners-label { font-size:13px; color:var(--text-muted); margin-bottom:24px; }
   .partners-logos { display:flex; gap:48px; justify-content:center; align-items:center; flex-wrap:wrap; max-width:900px; margin:0 auto; padding: 0 20px; }
@@ -145,13 +140,11 @@
   h2{font-size:clamp(23px,2.4vw,30px); letter-spacing:-.015em; margin:0 0 10px; font-weight:800;}
   .section-head p{color:var(--text-muted); font-size:15px; line-height:1.6; margin:0;}
 
-  /* Feature trio */
   .feature-trio{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden;}
   .feature-item{background:var(--bg); padding:28px 24px;}
   .feature-item h3{font-size:16.5px; margin:0 0 10px; font-weight:700;}
   .feature-item p{font-size:13.5px; color:var(--text-muted); line-height:1.6; margin:0;}
 
-  /* Products */
   .products{border-top:1px solid var(--border);}
   .product-layout{display:grid; grid-template-columns:1.3fr 1fr; gap:20px;}
   .product-feature{border:1px solid var(--border); border-radius:var(--radius-m); padding:32px; background:transparent; display:flex; flex-direction:column; justify-content:space-between; min-height:260px; text-decoration:none; transition:border-color var(--dur) ease;}
@@ -180,7 +173,6 @@
   .product-row.disabled{cursor:default;}
   .product-row.disabled:hover{background:var(--bg);}
 
-  /* Tech ecosystem (Linear Style) */
   .tech{border-top:1px solid var(--border);}
   .tech-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
   .tech-card{
@@ -208,7 +200,6 @@
   .tech-card h4{font-size:15px; margin:0 0 8px; font-weight:700; color:var(--text);}
   .tech-card .stack{font-size:13px; color:var(--text-muted); line-height:1.6;}
 
-  /* Vision */
   .vision{border-top:1px solid var(--border);}
   .vision-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
   .vision-text p{font-size:16px; line-height:1.75; color:var(--text-muted); margin:0 0 16px;}
@@ -216,7 +207,6 @@
   .vision-ticker{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
   .vision-chip{border:1px solid var(--border); border-radius:20px; padding:7px 15px; font-size:13px; font-weight:700; background:transparent;}
 
-  /* Team */
   .team{border-top:1px solid var(--border);}
   .team-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:32px;}
   .team-nav{display:flex; gap:8px;}
@@ -240,7 +230,6 @@
   .team-social a:hover{border-color:var(--text-muted);}
   .team-social img{width:10.5px; height:10.5px; opacity:.7;}
 
-  /* Partners (Alt Kısım) */
   .partners{border-top:1px solid var(--border);}
   .partner-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
   .partner-card{border:1px solid var(--border); border-radius:var(--radius-m); padding:22px 14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:transparent; transition:border-color var(--dur) ease; min-height:96px; text-decoration:none;}
@@ -248,12 +237,10 @@
   .partner-card img{max-height:24px; max-width:100%; opacity:.85;}
   .partner-name{font-size:12.5px; font-weight:600; color:var(--text-muted);}
 
-  /* Name lists (Moderatörler & Onur Tablosu) */
   .names{border-top:1px solid var(--border); overflow:hidden; padding-bottom: 72px;}
   .name-block + .name-block{margin-top:56px;}
   .name-block h3{font-size:18px; font-weight:700; margin:0 0 24px; color:var(--text); text-align:center;}
   
-  /* Moderatörler Kayan Yazı (Onur Tablosu ile aynı) */
   .mod-marquee-container{
     width:100%; overflow:hidden;
     -webkit-mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent);
@@ -269,7 +256,6 @@
   .mod-item:hover{color:var(--text);}
   .mod-item::after{content:'✦'; color:var(--border); font-size:14px; font-weight:400; margin-left:32px;}
 
-  /* Onur Tablosu Kayan Yazı (Marquee) - İçeriğe göre hizalanmış ve maskelenmiş hali */
   .honor-marquee-container {
     width: 100%;
     overflow: hidden;
@@ -283,7 +269,7 @@
     animation: scrollHonor 40s linear infinite;
     will-change:transform; 
   }
-  .honor-track:hover { animation-play-state: paused; } /* Üzerine gelince durması için */
+  .honor-track:hover { animation-play-state: paused; }
   .honor-item { 
     font-size: 24px; 
     font-weight: 800; 
@@ -372,7 +358,6 @@
     .mod-item{transition:none !important; opacity:1 !important; transform:none !important;}
   }
 
-  /* Başvuru formu (hayalet stil) */
   .join-hero{padding:88px 0 8px; text-align:center;}
   .join-hero h1{font-size:clamp(30px,4vw,44px); line-height:1.15; letter-spacing:.07em; font-weight:400; margin:0 0 16px;}
   .join-hero .join-lede{font-size:16.5px; line-height:1.6; color:var(--text-muted); max-width:520px; margin:0 auto;}
@@ -416,10 +401,15 @@
     .form-grid{grid-template-columns:1fr;}
     .join-card{padding:24px 20px;}
     .join-wrap{padding:28px 20px 56px;}
-  }</style>
+  }
+  
+  /* Eski gönder butonunu tamamen gizleyen kural */
+  #submitBtn {
+    display: none !important;
+  }
+  </style>
 <link href="https://eleven-public-cdn.elevenlabs.io" rel="preconnect"/><link href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/css/intlTelInput.css" rel="stylesheet"/><link href="../css/pages/join-steps.css" rel="stylesheet"/></head>
 <body>
-<!-- Header (Sabit kalıyor, Linear efekti sildik) -->
 <header id="siteHeader">
 <div class="wrap nav">
 <a class="brand" href="index.html">
@@ -446,30 +436,70 @@
 </div>
 </div><div class="mobile-menu" id="mobileMenu"><nav aria-label="Mobile" class="wrap"><a class="mlink" href="index.html#home">Ana Sayfa</a><a class="mlink" href="index.html#projects">Projeler</a><a class="mlink" href="index.html#vision">Vizyon</a><a class="mlink" href="index.html#partners">Sponsorlar</a><a class="mlink" href="index.html#team">Ekip</a><button aria-haspopup="menu" class="mlink m-lang" id="mLangBtn" type="button"><svg fill="none" height="18" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg><span>Türkçe</span><svg class="chev-r" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="14"><path d="M9 6l6 6-6 6"></path></svg></button><a class="btn btn-primary m-cta" href="aramiza-katil.html">Aramıza Katıl</a></nav></div>
 </header>
-<main><section class="join-hero"><div class="wrap"><h1>Aramıza Katıl</h1><p class="join-lede">Vertex'in bir parçası ol.</p></div></section><div class="join-wrap"><div class="join-card"><form class="form-grid" id="joinForm"><div class="form-group"><label for="joinName">Ad Soyad</label><input id="joinName" required="" type="text"/></div><div class="form-group"><label for="joinEmail">E-posta</label><input id="joinEmail" required="" type="email"/></div><div class="form-group"><label for="joinPhone">Telefon Numarası</label><input id="joinPhone" required="" type="tel"/></div><div class="form-group"><label for="joinAge">Yaş</label><input id="joinAge" max="123" min="0" required="" type="number"/></div><div class="form-group"><label for="joinLinkedin">LinkedIn Bağlantısı (Opsiyonel)</label><input id="joinLinkedin" pattern="https?://.*" type="url"/></div><div class="form-group"><label for="joinGithub">GitHub Bağlantısı (Opsiyonel)</label><input id="joinGithub" pattern="https?://.*" type="url"/></div><div class="form-group full-width"><label for="joinAbout">Kendinden bahset</label><textarea id="joinAbout" required=""></textarea></div><div class="form-group full-width"><label for="joinTeam">Birincil olarak hangi departmanımıza girmek istersiniz?</label><select id="joinTeam" name="joinTeam" required=""><option disabled="" selected="" value="">Bir departman seçin</option><optgroup label="Üst Departmanlar"><option disabled="" value="essence">Essence | Yönetim Kurulu</option><option disabled="" value="core">Core | Çekirdek Departmanı</option><option disabled="" value="senatus">Senatus | Yönetim Departmanı</option></optgroup><optgroup label="Orta Departmanlar"><option value="pulse">Pulse | Sosyal Medya Departmanı</option><option value="chroma">Chroma | Dijital Tasarım Departmanı</option><option value="catalyst">Catalyst | Finans Departmanı</option><option value="envoy">Envoy | Operasyon Departmanı</option><option value="aero">Aero | İnsan Kaynakları Departmanı</option><option value="array">Array | Yazılım Geliştirme Departmanı</option></optgroup><optgroup label="Alt Departmanlar"><option value="scout">Scout | Operasyon Departmanı</option><option value="vertest">Vertest | Test Departmanı</option></optgroup></select></div><div class="interview-section form-group full-width"><div class="interview-title"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg><span>Mülakat Tarihi ve Saati Seçin</span></div><p class="interview-desc">Başvurunuzun işleme alınabilmesi için lütfen aşağıdaki takvim üzerinden mülakat gün ve saatinizi belirleyiniz.</p><div class="interview-status-box confirmed" id="interviewStatusBox" style="display: none;"></div><div class="cal-embed-container"><div id="my-cal-inline-interview" style="width:100%;height:100%;min-height:650px;overflow:scroll"></div></div></div><div class="checkbox-group full-width"><label class="checkbox-label"><input id="termsCheck" required="" type="checkbox"/><span><a href="hizmet-sartlari.html" target="_blank"><b>Hizmet Şartları</b></a> ve <a href="gizlilik-politikasi.html" target="_blank"><b>Gizlilik Politikası</b></a>'nı kabul ediyorum.</span></label><label class="checkbox-label"><input id="contractCheck" required="" type="checkbox"/><span><a href="vertex-kadro-sozlesmesi.html" target="_blank"><b>Vertex Kadro Sözleşmesi</b></a>'ni okuduğumu ve onayladığımı beyan ederim.</span></label><label class="checkbox-label" id="doctrineLabelWrapper"><input id="doctrineCheck" required="" type="checkbox"/><span><a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrini</b></a>'ni okudum.</span></label></div><button class="btn btn-primary join-submit-btn" disabled="" id="submitBtn" type="submit">Başvuruyu Gönder</button></form></div></div><div class="doctrine-modal-overlay" id="doctrineModal"><div class="doctrine-modal-content"><h2>Vertex</h2><div class="doctrine-text-container" id="doctrineScroll">
-            Vertex, iki doğrunun kesiştiği en uç noktadır.
 
-Bu Vertex’in sadece matematikteki anlamıdır; anatomide bedenin ve zihnin en üst bölgesi, gök biliminde evrenin başucu noktası, uzay geometrisinde en temel yapı taşı, ağ teorisinde tüm kilit bağlantıların birleştiği merkez düğüm, optikte ışığın merceği kestiği mutlak odaktır.
+<main>
+  <section class="join-hero"><div class="wrap"><h1>Aramıza Katıl</h1><p class="join-lede">Vertex'in bir parçası ol.</p></div></section>
+  <div class="join-wrap">
+    <div class="join-card">
+      <form class="form-grid" id="joinForm">
+        <div class="form-group"><label for="joinName">Ad Soyad</label><input id="joinName" required="" type="text"/></div>
+        <div class="form-group"><label for="joinEmail">E-posta</label><input id="joinEmail" required="" type="email"/></div>
+        <div class="form-group"><label for="joinPhone">Telefon Numarası</label><input id="joinPhone" required="" type="tel"/></div>
+        <div class="form-group"><label for="joinAge">Yaş</label><input id="joinAge" max="123" min="0" required="" type="number"/></div>
+        <div class="form-group"><label for="joinLinkedin">LinkedIn Bağlantısı (Opsiyonel)</label><input id="joinLinkedin" pattern="https?://.*" type="url"/></div>
+        <div class="form-group"><label for="joinGithub">GitHub Bağlantısı (Opsiyonel)</label><input id="joinGithub" pattern="https?://.*" type="url"/></div>
+        <div class="form-group full-width"><label for="joinAbout">Kendinden bahset</label><textarea id="joinAbout" required=""></textarea></div>
+        <div class="form-group full-width">
+          <label for="joinTeam">Birincil olarak hangi departmanımıza girmek istersiniz?</label>
+          <select id="joinTeam" name="joinTeam" required="">
+            <option disabled="" selected="" value="">Bir departman seçin</option>
+            <optgroup label="Üst Departmanlar"><option disabled="" value="essence">Essence | Yönetim Kurulu</option><option disabled="" value="core">Core | Çekirdek Departmanı</option><option disabled="" value="senatus">Senatus | Yönetim Departmanı</option></optgroup>
+            <optgroup label="Orta Departmanlar"><option value="pulse">Pulse | Sosyal Medya Departmanı</option><option value="chroma">Chroma | Dijital Tasarım Departmanı</option><option value="catalyst">Catalyst | Finans Departmanı</option><option value="envoy">Envoy | Operasyon Departmanı</option><option value="aero">Aero | İnsan Kaynakları Departmanı</option><option value="array">Array | Yazılım Geliştirme Departmanı</option></optgroup>
+            <optgroup label="Alt Departmanlar"><option value="scout">Scout | Operasyon Departmanı</option><option value="vertest">Vertest | Test Departmanı</option></optgroup>
+          </select>
+        </div>
+        <div class="interview-section form-group full-width">
+          <div class="interview-title">
+            <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg>
+            <span>Mülakat Tarihi ve Saati Seçin</span>
+          </div>
+          <p class="interview-desc">Başvurunuzun işleme alınabilmesi için lütfen aşağıdaki takvim üzerinden mülakat gün ve saatinizi belirleyiniz.</p>
+          <div class="interview-status-box confirmed" id="interviewStatusBox" style="display: none;"></div>
+          <div class="cal-embed-container"><div id="my-cal-inline-interview" style="width:100%;height:100%;min-height:650px;overflow:scroll"></div></div>
+        </div>
+        <div class="checkbox-group full-width">
+          <label class="checkbox-label"><input id="termsCheck" required="" type="checkbox"/><span><a href="hizmet-sartlari.html" target="_blank"><b>Hizmet Şartları</b></a> ve <a href="gizlilik-politikasi.html" target="_blank"><b>Gizlilik Politikası</b></a>'nı kabul ediyorum.</span></label>
+          <label class="checkbox-label"><input id="contractCheck" required="" type="checkbox"/><span><a href="vertex-kadro-sozlesmesi.html" target="_blank"><b>Vertex Kadro Sözleşmesi</b></a>'ni okuduğumu ve onayladığımı beyan ederim.</span></label>
+          <label class="checkbox-label" id="doctrineLabelWrapper"><input id="doctrineCheck" required="" type="checkbox"/><span><a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex Doktrini</b></a>'ni okudum.</span></label>
+        </div>
+        <button class="btn btn-primary join-submit-btn" disabled="" id="submitBtn" type="submit">Başvuruyu Gönder</button>
+      </form>
+    </div>
+  </div>
 
-İşte biz de ismimizi tüm bu anlamların ve fazlasının oluşturduğu kolektif mânâdan aldık; insanlar olarak potansiyelimizin ve sınırlarımızın en üst seviyesini gösterip hep birlikte zirveye ulaşacağız, teknolojinin temel yapı taşı olacak, dünyanın bağlantılarını merkezimizde toplayacak ve mutlak hâkimiyet kuracağız!
+  <div class="doctrine-modal-overlay" id="doctrineModal">
+    <div class="doctrine-modal-content">
+      <h2>Vertex</h2>
+      <div class="doctrine-text-container" id="doctrineScroll">
+        Vertex, iki doğrunun kesiştiği en uç noktadır.
+        Bu Vertex’in sadece matematikteki anlamıdır; anatomide bedenin ve zihnin en üst bölgesi, gök biliminde evrenin başucu noktası, uzay geometrisinde en temel yapı taşı, ağ teorisinde tüm kilit bağlantıların birleştiği merkez düğüm, optikte ışığın merceği kestiği mutlak odaktır.
+        İşte biz de ismimizi tüm bu anlamların ve fazlasının oluşturduğu kolektif mânâdan aldık; insanlar olarak potansiyelimizin ve sınırlarımızın en üst seviyesini gösterip hep birlikte zirveye ulaşacağız, teknolojinin temel yapı taşı olacak, dünyanın bağlantılarını merkezimizde toplayacak ve mutlak hâkimiyet kuracağız!
+        Bu yolculuk hiç kolay olmadı, asla da olmayacak. Ancak üstte gök çökmedikçe, altta yer delinmedikçe; bizi kim durdurabilir, ne durdurabilir? Hiçbir şey! Yolculuk ne kadar zor olursa olsun, yolu tamamlayacağız.
+      </div>
+      <button class="btn btn-primary join-submit-btn doctrine-read-btn disabled" disabled="" id="doctrineReadBtn" type="button">Okudum (10 saniye daha)</button>
+    </div>
+  </div>
 
-Bu yolculuk hiç kolay olmadı, asla da olmayacak. Ancak üstte gök çökmedikçe, altta yer delinmedikçe; bizi kim durdurabilir, ne durdurabilir? Hiçbir şey! Yolculuk ne kadar zor olursa olsun, yolu tamamlayacağız.
+  <div class="success-modal-overlay" id="successModal">
+    <div class="success-modal-content">
+      <svg class="success-svg" fill="none" height="72" stroke="#22c55e" stroke-width="2.5" viewbox="0 0 52 52" width="72"><circle cx="26" cy="26" r="24"></circle><path d="M14.1 27.2l7.1 7.2 16.7-16.8" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+      <h3>BAŞVURUNUZ ALINMIŞTIR!</h3>
+      <p>Vertex, başvurunuzu inceleyecek ve gerekli görmesi halinde sizlere sağlamış olduğunuz iletişim bilgileri üzerinden dönüş yapacaktır.<br/><br/>İlginiz için teşekkür ederiz.</p>
+      <button class="btn btn-primary join-submit-btn" type="button">← Ana Sayfaya Dön</button>
+    </div>
+  </div>
+</main>
 
-Bugüne gelene kadar, yaptıklarımız toplamda yüzlerce kez reddedildi; görüşmelerde binlerce kez kapılar yüzümüze kapandı, davalarla yüzleştik, Vertex’i tehlikelerle baş başa bırakmış olan binlerce unsuru atlattık ve hatta bize destek olmuş olan insanlar tarafından çok kez yarı yolda bırakıldık.
-
-Ancak pes etmedik! Çünkü biz bu yolculuğa çıkmazsak, vaziyet odur ki kimse çıkmayacak. Konfor alanlarımızdan sıyrılıp, dünyanın bu köhneleşmiş düzenini değiştirecek cesareti biz göstermezsek, kimse göstermeyecek. Biz başaramazsak, görünen o ki kimse başaramayacak; o yüzden başarmak zorundayız! Vertex’in pes etme lüksü yok; durmaya zerre kadar niyetimiz yok, olmayacak.
-
-Bu satırları okuyan sen; sıradan olmak istemiyorsan, vaktiyle seni küçümseyenlerin en büyük pişmanlığı olmak istiyorsan, bu ülkenin ve seni binbir emekle büyüten ebeveynlerinin gururu olmak istiyorsan, ileride bir gün hayatını birleştireceğin eşin, gözünün içine bakan çocukların veya canından çok sevdiğin bir yakının senden bir imkân beklediğinde başını öne eğip mahcup olmak istemiyorsan, durman gereken yegâne yer burasıdır. Ait olduğun yer Vertex’tir! 
-
-Geçmişte bu idealler, bu insanlık ve bu topraklar uğruna; canını hiçe saymış, bedeller ödemiş ve göçüp gitmiş büyüklerimiz var. Bizim için gece uyumamış, gündüz oturmamış atalarımızın yanında bizim hâlen refah içinde olmamamıza rağmen geceleri huzur içinde uyuyup gündüzleri rahatlık içinde eğlenmememiz gerek. Onların bize bıraktığı mirasa ihanet etmemek, aziz hatıraları önünde başımızı daima dik tutmak zorundayız. Çaresizlik içinde solup giden o narin çiçeklerin, sessizce yitip giden ömürlerin ve yarım kalan hikâyelerin telafisi, unutmamak gerekir ki, bizim ellerimizdedir. Kimsenin yüzünü kara çıkarmamak ve geçmişte yaşanan acıların, sırf imkânsızlıklar yüzünden yitip giden genç hayatların, o yıkıcı trajedilerin bir daha asla yaşanmamasını sağlamak bizim görevimizdir.
-
-Vertex’in vizyonu: Öncelikle Türkiye’yi, sonrasında ise dünyayı; öncelikle teknoloji alanında, sonrasında ise diğer alanlarda yükseltmektir. Bu ülkenin teknolojide bir adım bile ileri gitmesi demek, Türkiye’nin ilerlemesi demektir. Türkiye’nin ilerlemesi demek ise ülkenin refah seviyesinin yükselmesi demektir. Refahı yüksek bir sistemde yaşayan halk, diğer halkların refahını da elbet yükseltecektir. 
-Yazdıklarımızın hepsini yapacağız ve buna hiç şüphemiz yok.
-
-Bu uğurda aslında hiçbir şeye ihtiyacımız yoktur, ihtiyacımız olan tek şey; çalışkan olmaktır. Azmimizin yenemeyeceği hiçbir şey yoktur, sadece kendimize güvenmemiz ve kudretli durmamız yeterli olacaktır.
-
-Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zirve, hepimizin olacak.
-        </div><button class="btn btn-primary join-submit-btn doctrine-read-btn disabled" disabled="" id="doctrineReadBtn" type="button">Okudum (10 saniye daha)</button></div></div><div class="success-modal-overlay" id="successModal"><div class="success-modal-content"><svg class="success-svg" fill="none" height="72" stroke="#22c55e" stroke-width="2.5" viewbox="0 0 52 52" width="72"><circle cx="26" cy="26" r="24"></circle><path d="M14.1 27.2l7.1 7.2 16.7-16.8" stroke-linecap="round" stroke-linejoin="round"></path></svg><h3>BAŞVURUNUZ ALINMIŞTIR!</h3><p>Vertex, başvurunuzu inceleyecek ve gerekli görmesi halinde sizlere sağlamış olduğunuz iletişim bilgileri üzerinden dönüş yapacaktır.<br/><br/>İlginiz için teşekkür ederiz.</p><button class="btn btn-primary join-submit-btn" type="button">← Ana Sayfaya Dön</button></div></div></main>
 <footer>
 <div class="wrap foot-grid">
 <div class="foot-brand">
@@ -505,11 +535,13 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
 </div>
 </div>
 </footer>
-<!-- Lottie Player Script -->
-<!-- Lottie Player Script --><script src="../js/join-steps.js"></script><script src="../js/vendor/lottie-player.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/intlTelInput.min.js"></script><script>
+
+<!-- Scripts -->
+<script src="../js/join-steps.js"></script>
+<script src="../js/vendor/lottie-player.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/18.2.1/js/intlTelInput.min.js"></script>
+<script>
 (function(){
-
-
     const langToCountry = {
         'tr': 'tr', 'en': 'us', 'ar': 'ae', 'az': 'az', 'de': 'de', 'es': 'es', 'fr': 'fr', 'hi': 'in',
         'id': 'id', 'it': 'it', 'ja': 'jp', 'ko': 'kr', 'nl': 'nl', 'pt': 'pt', 'ru': 'ru', 'zh': 'cn'
@@ -524,8 +556,6 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
       preferredCountries: ['tr', 'gb']
     });
 
-    
-    // Cal.com Embed & State Logic
     let isInterviewBooked = false;
     let interviewBookingData = null;
 
@@ -538,295 +568,42 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         return { startTime, uid };
     }
 
+    // Mülakat randevusu başarıyla alındığında otomatik tetiklenen fonksiyon
     function handleInterviewBooking(detail) {
-        console.log('Mülakat randevusu alındı:', detail);
+        console.log('Mülakat randevusu alındı, başvuru otomatik gönderiliyor:', detail);
         isInterviewBooked = true;
         interviewBookingData = detail;
         
-        const info = extractCalBookingInfo(detail);
-        let dateStr = '';
-        if (info.startTime) {
-            try {
-                const d = new Date(info.startTime);
-                dateStr = isNaN(d.getTime()) ? info.startTime : d.toLocaleString('tr-TR', { dateStyle: 'full', timeStyle: 'short' });
-            } catch(e) {
-                dateStr = info.startTime;
-            }
-        }
-
-        const statusBox = document.getElementById('interviewStatusBox');
-        if (statusBox) {
-            statusBox.className = 'interview-status-box confirmed';
-            statusBox.style.display = 'flex';
-            statusBox.innerHTML = `
-                <div class="status-icon">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                        <polyline points="22 4 12 14.01 9 11.01"></polyline>
-                    </svg>
-                </div>
-                <div class="status-content">
-                    <strong>Mülakat Randevunuz Başarıyla Alındı!</strong>
-                    <span>${dateStr ? 'Mülakat Zamanı: ' + dateStr : 'Mülakat saatiniz başarıyla kaydedildi.'}</span>
-                </div>
-            `;
-        }
-
-        checkFormValidity();
-    }
-
-    // Cal embed loader
-    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-    Cal("init", "interview", {origin:"https://app.cal.com"});
-    Cal.config = Cal.config || {};
-    Cal.config.forwardQueryParams = true;
-
-    const showInterviewCalendar = () => Cal.ns.interview("inline", {
-        elementOrSelector:"#my-cal-inline-interview",
-        config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"auto"},
-        calLink: "team/vertex/interview",
-    });
-    if (window.applicationStepsEnabled) {
-        document.addEventListener('application:show-date', showInterviewCalendar, { once: true });
-    } else {
-        showInterviewCalendar();
-    }
-
-    Cal.ns.interview("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-
-    // Cal.com Event Listeners
-    Cal.ns.interview("on", {
-        action: "*",
-        callback: (e) => {
-            if (e.detail?.type === "bookingSuccessful" || e.detail?.type === "bookingSuccessfulV2" || e.detail?.action === "bookingSuccessful") {
-                handleInterviewBooking(e.detail);
-            }
-        }
-    });
-
-    Cal.ns.interview("on", {
-        action: "bookingSuccessful",
-        callback: (e) => handleInterviewBooking(e.detail)
-    });
-
-    Cal.ns.interview("on", {
-        action: "bookingSuccessfulV2",
-        callback: (e) => handleInterviewBooking(e.detail)
-    });
-
-    // Window message fallback for Cal.com events
-    window.addEventListener("message", (e) => {
-        try {
-            if (e.data && (e.data.type === "CAL:bookingSuccessful" || e.data.type === "CAL:bookingSuccessfulV2" || e.data.action === "bookingSuccessful")) {
-                handleInterviewBooking(e.data);
-            }
-        } catch(err) {}
-    });
-
-    // Form Logic
-    const termsCheck = document.getElementById('termsCheck');
-    const doctrineCheck = document.getElementById('doctrineCheck');
-    const contractCheck = document.getElementById('contractCheck');
-    const submitBtn = document.getElementById('submitBtn');
-    const ageInput = document.getElementById('joinAge');
-    
-    function checkFormValidity() {
-        const checkboxesValid = termsCheck.checked && doctrineCheck.checked && contractCheck.checked;
-        const allValid = checkboxesValid && isInterviewBooked;
+        const name = document.getElementById('joinName').value.trim();
+        const email = document.getElementById('joinEmail').value.trim();
+        const about = document.getElementById('joinAbout').value.trim();
         
-        submitBtn.disabled = !allValid;
-    }
-    
-    termsCheck.addEventListener('change', checkFormValidity);
-    contractCheck.addEventListener('change', checkFormValidity);
-    doctrineCheck.addEventListener('change', checkFormValidity);
-
-    phoneInput.addEventListener('input', function() {
-        this.value = this.value.replace(/[^0-9+]/g, '');
-    });
-
-    // Modal Logic
-    const modal = document.getElementById('doctrineModal');
-    const openBtn = document.getElementById('openDoctrineBtn');
-    const readBtn = document.getElementById('doctrineReadBtn');
-    const scrollBox = document.getElementById('doctrineScroll');
-    
-    let timerInterval = null;
-    let secondsLeft = 10;
-    let timerStarted = false;
-
-    function tickTimer() {
-        secondsLeft--;
-        if (secondsLeft > 0) {
-            readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
-        } else {
-            clearInterval(timerInterval);
-            timerInterval = null;
-            readBtn.innerText = 'Okudum';
-            readBtn.disabled = false;
-            readBtn.classList.remove('disabled');
-            readBtn.classList.add('active');
-        }
-    }
-
-    function startTimer() {
-        if(timerStarted) return;
-        timerStarted = true;
-        
-        readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
-        timerInterval = setInterval(tickTimer, 1000);
-    }
-
-    function resetTimer() {
-        if (secondsLeft <= 0) return; // Already finished
-        clearInterval(timerInterval);
-        timerInterval = null;
-        timerStarted = false;
-        secondsLeft = 10;
-        readBtn.innerText = 'Okudum';
-    }
-
-    document.addEventListener('visibilitychange', () => {
-        if (document.hidden) {
-            if (timerStarted && secondsLeft > 0) {
-                clearInterval(timerInterval);
-                timerInterval = null;
-            }
-        } else {
-            if (timerStarted && secondsLeft > 0 && !timerInterval) {
-                timerInterval = setInterval(tickTimer, 1000);
-            }
-        }
-    });
-
-    const doctrineLabelWrapper = document.getElementById('doctrineLabelWrapper');
-    
-    // Fallback for direct btn calls if any
-    openBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        // --- Added Frontend Validations ---
-        const vName = document.getElementById('joinName').value.trim();
-        const vEmail = document.getElementById('joinEmail').value.trim();
-        const vAbout = document.getElementById('joinAbout').value.trim();
-        
-        if (vName.length < 3) {
-            alert('Lütfen geçerli bir ad giriniz (en az 3 karakter).');
+        if (!name || !email || !about) {
+            alert('Lütfen takvimden mülakat seçmeden önce yukarıdaki form alanlarını eksiksiz doldurunuz.');
             return;
         }
-        
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(vEmail)) {
-            alert('Lütfen geçerli bir e-posta adresi giriniz.');
-            return;
-        }
-        
-        if (typeof iti !== 'undefined' && typeof iti.isValidNumber === 'function' && !iti.isValidNumber()) {
-            alert('Lütfen geçerli bir telefon numarası giriniz.');
-            return;
-        }
-        
-        if (vAbout.length < 20) {
-            alert('Lütfen kendinizden daha detaylı bahsedin (en az 20 karakter).');
-            return;
-        }
-        // --- End of Validations ---
 
-        modal.style.display = 'flex';
-        setTimeout(() => modal.classList.add('show'), 10);
-        setTimeout(() => {
-            startTimer();
-        }, 100);
-    });
-
-    modal.addEventListener('click', (e) => {
-        if(e.target === modal) {
-            modal.classList.remove('show');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-            resetTimer();
-        }
-    });
-
-
-
-
-    readBtn.addEventListener('click', () => {
-        modal.classList.remove('show');
-        setTimeout(() => {
-            modal.style.display = 'none';
-        }, 300);
-        
-        doctrineCheck.checked = true;
-        checkFormValidity();
-    });
-
-    doctrineCheck.addEventListener('click', (e) => {
-        if (!readBtn.classList.contains('active')) {
-            e.preventDefault();
-            openBtn.click();
-        }
-    });
-
-    
-    // Validation Localization
-    const reqErr = 'Lütfen bu alanı doldurun.';
-    const emailErr = 'Lütfen geçerli bir e-posta adresi girin.';
-    const formInputs = document.querySelectorAll('#joinForm input[required], #joinForm textarea[required], #joinForm select[required]');
-    
-    formInputs.forEach(input => {
-        input.addEventListener('invalid', function(e) {
-            if (this.validity.valueMissing) {
-                this.setCustomValidity(reqErr);
-            } else if (this.type === 'email' && this.validity.typeMismatch) {
-                this.setCustomValidity(emailErr);
-            } else {
-                this.setCustomValidity('');
-            }
-        });
-        
-        input.addEventListener('input', function(e) {
-            this.setCustomValidity(''); 
-        });
-    });
-
-    document.getElementById('joinForm').addEventListener('submit', function(e) {
-
-        e.preventDefault();
-        
-        const ageVal = parseInt(ageInput.value, 10);
+        const ageVal = parseInt(document.getElementById('joinAge').value, 10);
         if (isNaN(ageVal) || ageVal < 0 || ageVal > 123) {
             alert('Lütfen 0 ile 123 arasında geçerli bir yaş giriniz.');
             return;
         }
 
-        if (!isInterviewBooked) {
-            alert('Lütfen başvurunuzu göndermeden önce takvimden bir mülakat randevusu alınız.');
-            checkFormValidity();
-            return;
-        }
-
-        const btn = document.getElementById('submitBtn');
-
-        const originalText = btn.textContent;
-        btn.textContent = '...';
-        btn.disabled = true;
-
-        const calInfo = extractCalBookingInfo(interviewBookingData);
+        const calInfo = extractCalBookingInfo(detail);
 
         const data = {
-            name: document.getElementById('joinName').value,
-            email: document.getElementById('joinEmail').value,
+            name: name,
+            email: email,
             phone: iti.getNumber(),
             age: document.getElementById('joinAge').value,
             linkedin: document.getElementById('joinLinkedin').value,
             github: document.getElementById('joinGithub').value,
-            about: document.getElementById('joinAbout').value,
+            about: about,
             language: 'tr',
             department: document.getElementById('joinTeam').value,
             interviewDate: calInfo.startTime || null,
             interviewBookingUid: calInfo.uid || null,
-            interviewDetails: interviewBookingData ? JSON.stringify(interviewBookingData) : null
+            interviewDetails: detail ? JSON.stringify(detail) : null
         };
 
         const checkUrl = 'https://firestore.googleapis.com/v1/projects/vertex-ai-1618/databases/(default)/documents:runQuery';
@@ -854,11 +631,9 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
         .then(queryRes => {
             if (queryRes.length > 0 && queryRes[0].document) {
                 alert('Bu e-posta veya telefon numarası zaten kayıtlı.');
-                btn.textContent = originalText;
-                btn.disabled = false;
                 return;
             }
-            // Proceed to create
+            
             return fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -876,145 +651,172 @@ Muhtaç olduğumuz o kudret, damarlarımızdaki asil kanda mevcuttur; mutlak zir
             });
         })
         .catch(error => {
-            alert('Bir hata oluştu.');
+            alert('Başvuru gönderilirken bir hata oluştu.');
             console.error(error);
-        })
-        .finally(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
         });
+    }
+
+    // Cal.com Embed Loader & Init
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "interview", {origin:"https://app.cal.com"});
+    Cal.config = Cal.config || {};
+    Cal.config.forwardQueryParams = true;
+
+    const showInterviewCalendar = () => Cal.ns.interview("inline", {
+        elementOrSelector:"#my-cal-inline-interview",
+        config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"auto"},
+        calLink: "team/vertex/interview",
+    });
+    if (window.applicationStepsEnabled) {
+        document.addEventListener('application:show-date', showInterviewCalendar, { once: true });
+    } else {
+        showInterviewCalendar();
+    }
+
+    Cal.ns.interview("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+
+    // Cal.com Event Listeners
+    Cal.ns.interview("on", {
+        action: "bookingSuccessful",
+        callback: (e) => handleInterviewBooking(e.detail)
     });
 
+    Cal.ns.interview("on", {
+        action: "bookingSuccessfulV2",
+        callback: (e) => handleInterviewBooking(e.detail)
+    });
+
+    window.addEventListener("message", (e) => {
+        try {
+            if (e.data && (e.data.type === "CAL:bookingSuccessful" || e.data.type === "CAL:bookingSuccessfulV2" || e.data.action === "bookingSuccessful")) {
+                handleInterviewBooking(e.data);
+            }
+        } catch(err) {}
+    });
+
+    // Modal & Theme & General Logic
+    const themeBtn = document.getElementById('themeBtn');
+    const sunIcon = document.getElementById('themeIconSun');
+    const moonIcon = document.getElementById('themeIconMoon');
+    function syncThemeIcons(isDark){
+      sunIcon.style.display = isDark ? 'block' : 'none';
+      moonIcon.style.display = isDark ? 'none' : 'block';
+    }
+    function applyTheme(t){
+      document.documentElement.setAttribute('data-theme', t);
+      try{ localStorage.setItem('theme', t); }catch(e){}
+      syncThemeIcons(t === 'dark');
+    }
+    (function initTheme(){
+      let t = null;
+      try{ t = localStorage.getItem('theme'); }catch(e){}
+      if(t !== 'light' && t !== 'dark'){
+        t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+      }
+      applyTheme(t);
+    })();
+    themeBtn.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+      applyTheme(isDark ? 'light' : 'dark');
+    });
+
+    const langWrap = document.getElementById('langWrap');
+    const langBtn = document.getElementById('langBtn');
+    const mLangBtn = document.getElementById('mLangBtn');
+    function closeLang(){
+      if(langWrap) langWrap.classList.remove('open');
+      if(langBtn) langBtn.setAttribute('aria-expanded', 'false');
+    }
+    if(langBtn && langWrap){
+      langBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = langWrap.classList.toggle('open');
+        langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', (e) => { if(!langWrap.contains(e.target)) closeLang(); });
+      document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLang(); });
+    }
+
+    const modal = document.getElementById('doctrineModal');
+    const openBtn = document.getElementById('openDoctrineBtn');
+    const readBtn = document.getElementById('doctrineReadBtn');
+    const doctrineCheck = document.getElementById('doctrineCheck');
+    
+    let timerInterval = null;
+    let secondsLeft = 10;
+    let timerStarted = false;
+
+    function tickTimer() {
+        secondsLeft--;
+        if (secondsLeft > 0) {
+            readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
+        } else {
+            clearInterval(timerInterval);
+            timerInterval = null;
+            readBtn.innerText = 'Okudum';
+            readBtn.disabled = false;
+            readBtn.classList.remove('disabled');
+            readBtn.classList.add('active');
+        }
+    }
+
+    function startTimer() {
+        if(timerStarted) return;
+        timerStarted = true;
+        readBtn.innerText = 'Okudum (' + secondsLeft + ' saniye daha)';
+        timerInterval = setInterval(tickTimer, 1000);
+    }
+
+    function resetTimer() {
+        if (secondsLeft <= 0) return;
+        clearInterval(timerInterval);
+        timerInterval = null;
+        timerStarted = false;
+        secondsLeft = 10;
+        readBtn.innerText = 'Okudum';
+    }
+
+    openBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const vName = document.getElementById('joinName').value.trim();
+        const vEmail = document.getElementById('joinEmail').value.trim();
+        const vAbout = document.getElementById('joinAbout').value.trim();
+        
+        if (vName.length < 3) { alert('Lütfen geçerli bir ad giriniz (en az 3 karakter).'); return; }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(vEmail)) { alert('Lütfen geçerli bir e-posta adresi giriniz.'); return; }
+        if (vAbout.length < 20) { alert('Lütfen kendinizden daha detaylı bahsedin (en az 20 karakter).'); return; }
+
+        modal.style.display = 'flex';
+        setTimeout(() => modal.classList.add('show'), 10);
+        setTimeout(() => { startTimer(); }, 100);
+    });
+
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal) {
+            modal.classList.remove('show');
+            setTimeout(() => { modal.style.display = 'none'; }, 300);
+            resetTimer();
+        }
+    });
+
+    readBtn.addEventListener('click', () => {
+        modal.classList.remove('show');
+        setTimeout(() => { modal.style.display = 'none'; }, 300);
+        doctrineCheck.checked = true;
+    });
+
+    doctrineCheck.addEventListener('click', (e) => {
+        if (!readBtn.classList.contains('active')) {
+            e.preventDefault();
+            openBtn.click();
+        }
+    });
+
+    phoneInput.addEventListener('input', function() {
+        this.value = this.value.replace(/[^0-9+]/g, '');
+    });
 })();
-</script><script>
-  /* Tema: kalıcı + sistem tercihi + doğru ikon (light'ta ay, dark'ta güneş göster) */
-  const themeBtn = document.getElementById('themeBtn');
-  const sunIcon = document.getElementById('themeIconSun');
-  const moonIcon = document.getElementById('themeIconMoon');
-  function syncThemeIcons(isDark){
-    sunIcon.style.display = isDark ? 'block' : 'none';
-    moonIcon.style.display = isDark ? 'none' : 'block';
-  }
-  function applyTheme(t){
-    document.documentElement.setAttribute('data-theme', t);
-    try{ localStorage.setItem('theme', t); }catch(e){}
-    syncThemeIcons(t === 'dark');
-  }
-  (function initTheme(){
-    let t = null;
-    try{ t = localStorage.getItem('theme'); }catch(e){}
-    if(t !== 'light' && t !== 'dark'){
-      t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
-    }
-    applyTheme(t);
-  })();
-  themeBtn.addEventListener('click', () => {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    applyTheme(isDark ? 'light' : 'dark');
-  });
-
-/* Dil paneli (butona bağlı) */
-  const langWrap = document.getElementById('langWrap');
-  const langBtn = document.getElementById('langBtn');
-  const mLangBtn = document.getElementById('mLangBtn');
-  function closeLang(){
-    if(langWrap) langWrap.classList.remove('open');
-    if(langBtn) langBtn.setAttribute('aria-expanded', 'false');
-  }
-  if(langBtn && langWrap){
-    langBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const open = langWrap.classList.toggle('open');
-      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    document.addEventListener('click', (e) => { if(!langWrap.contains(e.target)) closeLang(); });
-    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLang(); });
-  }
-  if(mLangBtn && langWrap){
-    mLangBtn.addEventListener('click', () => {
-      const h = document.getElementById('siteHeader');
-      if(h) h.classList.remove('menu-open');
-      const mb = document.getElementById('menuBtn');
-      if(mb) mb.setAttribute('aria-expanded', 'false');
-      const open = langWrap.classList.toggle('open');
-      if(langBtn) langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-  }
-
-  if(document.getElementById('teamTrack')){
-  /* Ekip Slider */
-  const teamTrack = document.getElementById('teamTrack');
-  const teamPrev = document.getElementById('teamPrev');
-  const teamNext = document.getElementById('teamNext');
-  function updateTeamNav(){
-    teamPrev.disabled = teamTrack.scrollLeft <= 4;
-    teamNext.disabled = teamTrack.scrollLeft >= teamTrack.scrollWidth - teamTrack.clientWidth - 4;
-  }
-  teamPrev.addEventListener('click', () => teamTrack.scrollBy({left:-336, behavior:'smooth'}));
-  teamNext.addEventListener('click', () => teamTrack.scrollBy({left:336, behavior:'smooth'}));
-  teamTrack.addEventListener('scroll', updateTeamNav);
-  window.addEventListener('resize', updateTeamNav);
-  updateTeamNav();
-  }
-
-  /* Header: scroll'da cam + incelme, mobil menü */
-  (function(){
-    var header = document.getElementById('siteHeader') || document.querySelector('header');
-    if(!header) return;
-    var ticking = false;
-    function onScroll(){
-      header.classList.toggle('scrolled', window.scrollY > 8);
-      ticking = false;
-    }
-    window.addEventListener('scroll', function(){
-      if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
-    }, {passive:true});
-    onScroll();
-    var menuBtn = document.getElementById('menuBtn');
-    if(!menuBtn) return;
-    function closeMenu(){
-      header.classList.remove('menu-open');
-      menuBtn.setAttribute('aria-expanded', 'false');
-    }
-    menuBtn.addEventListener('click', function(e){
-      e.stopPropagation();
-      var open = header.classList.toggle('menu-open');
-      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
-    });
-    header.querySelectorAll('.mobile-menu a').forEach(function(a){
-      a.addEventListener('click', closeMenu);
-    });
-    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
-    window.addEventListener('resize', function(){ if(window.innerWidth > 860) closeMenu(); });
-  })();
-/* Performans: görünürlükte oynat/duraklat + SW */
-  (function(){
-    var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var players = Array.prototype.slice.call(document.querySelectorAll('lottie-player'));
-    if(REDUCED){ players.forEach(function(p){ try{ p.autoplay = false; if(p.pause) p.pause(); }catch(_){} p.removeAttribute('autoplay'); }); }
-    if(players.length && 'IntersectionObserver' in window){
-      var watcher = new IntersectionObserver(function(es){
-        es.forEach(function(e){
-          var p = e.target;
-          try{
-            if(e.isIntersecting){ if(!REDUCED && p.play) p.play(); }
-            else if(p.pause){ p.pause(); }
-          }catch(_){}
-        });
-      });
-      players.forEach(function(p){ watcher.observe(p); });
-    }
-    var honor = document.querySelector('.honor-track');
-    if(honor && 'IntersectionObserver' in window){
-      new IntersectionObserver(function(es){
-        honor.style.animationPlayState = es[0].isIntersecting ? '' : 'paused';
-      }).observe(honor);
-    }
-    if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
-      window.addEventListener('load', function(){
-        navigator.serviceWorker.register('/sw.js').catch(function(){});
-      });
-    }
-  })();</script>
+</script>
 </body>
 </html>
