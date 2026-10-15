@@ -1,0 +1,10 @@
+{
+  "name": "vertex-public-site",
+  "private": true,
+  "scripts": {
+    "test:personnel": "node tests/personnel-browser.cjs"
+  },
+  "devDependencies": {
+    "playwright": "1.62.1"
+  }
+}

@@ -266,8 +266,10 @@
             getAuth,
             applyActionCode,
             verifyPasswordResetCode,
-            confirmPasswordReset
+            confirmPasswordReset, signInWithEmailAndPassword, sendEmailVerification, signOut
         } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js";
 
         // --- 2. CONFIGURATION ---
         const firebaseConfig = {
@@ -366,6 +368,14 @@
             updateText(t.verifyingTitle, t.verifyingSubtitle);
             try {
                 await applyActionCode(auth, oobCode);
+                await auth.authStateReady();
+                if (auth.currentUser) {
+                    await auth.currentUser.reload();
+                    if (auth.currentUser.emailVerified) {
+                        try { await httpsCallable(getFunctions(app, 'europe-west1'), 'completePersonnelActivation')({}); }
+                        catch (error) { if (error.code !== 'functions/failed-precondition') console.warn('Personnel access will be checked at next sign-in.'); }
+                    }
+                }
                 updateText(t.verifySuccessTitle, t.verifySuccessSubtitle);
                 showStatusAnimation('success');
             } catch (error) {
@@ -377,7 +387,7 @@
 
         async function handleResetPassword(oobCode, t) {
             try {
-                await verifyPasswordResetCode(auth, oobCode);
+                const resetEmail = await verifyPasswordResetCode(auth, oobCode);
                 updateText(t.resetTitle, t.resetSubtitle);
                 passwordLabel.textContent = t.passwordLabel;
                 passwordInput.placeholder = t.passwordPlaceholder;
@@ -386,6 +396,7 @@
                 
                 passwordResetForm.addEventListener('submit', async (e) => {
                     e.preventDefault();
+                    if (submitBtn.disabled) return;
                     if (passwordInput.value.length < 6) {
                         alert(t.weakPassword);
                         return;
@@ -396,6 +407,25 @@
 
                     try {
                         await confirmPasswordReset(auth, oobCode, passwordInput.value);
+                        try {
+                        if (new URLSearchParams(location.search).get('personnel') === '1') {
+                            const signed = await signInWithEmailAndPassword(auth, resetEmail, passwordInput.value);
+                            passwordInput.value = '';
+                            await signed.user.reload();
+                            if (signed.user.emailVerified) {
+                                await httpsCallable(getFunctions(app, 'europe-west1'), 'completePersonnelActivation')({});
+                            } else {
+                                await sendEmailVerification(signed.user);
+                                updateText(t.resetSuccessTitle, document.documentElement.lang === 'tr' ? 'Şifreniz hazır. Personel erişimi için e-postanıza gönderilen doğrulama bağlantısını açın.' : 'Your password is ready. Open the verification link sent to your email to activate personnel access.');
+                                showStatusAnimation('success'); return;
+                            }
+                            await signOut(auth);
+                        }
+                        } catch (accessError) {
+                            passwordInput.value = '';
+                            updateText(t.resetSuccessTitle, document.documentElement.lang === 'tr' ? 'Şifreniz kaydedildi. Personel erişimi giriş yaptığınızda tekrar kontrol edilecek.' : 'Your password is saved. Personnel access will be checked at sign-in.');
+                            showStatusAnimation('success'); return;
+                        }
                         updateText(t.resetSuccessTitle, t.resetSuccessSubtitle);
                         showStatusAnimation('success');
                     } catch (error) {
@@ -403,7 +433,7 @@
                         updateText(t.invalidLinkTitle, t.invalidLinkSubtitle);
                         showStatusAnimation('error');
                     }
-                }, { once: true });
+                });
 
             } catch (error) {
                 console.error("Invalid password reset code:", error.code, error.message);
