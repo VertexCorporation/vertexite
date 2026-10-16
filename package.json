@@ -9,7 +9,8 @@
     "test:refresh": "node tests/website-refresh.cjs",
     "preview": "node tests/serve.cjs",
     "test:home-layout": "node tests/home-layout-browser.cjs",
-    "test:final-polish": "node tests/final-polish-browser.cjs"
+    "test:final-polish": "node tests/final-polish-browser.cjs",
+    "test:interactions": "node tests/interaction-browser.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

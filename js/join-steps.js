@@ -62,10 +62,21 @@
   form.append(details, date);
   window.applicationStepsEnabled = true;
 
-  function showStep(step) {
+  let stepTransition = 0;
+  async function showStep(step) {
+    const ticket = ++stepTransition;
     const showDate = step === 2;
+    const target = showDate ? date : details;
+    const previous = details.hidden ? date : details;
+    [date, details].forEach(el=>el.getAnimations().forEach(a=>a.cancel()));
+    const reduced = matchMedia('(prefers-reduced-motion:reduce)').matches;
+    if (previous !== target && !reduced && previous.animate) {
+      await previous.animate([{opacity:1,transform:'none'},{opacity:0,transform:'translateY(4px) scale(.99)'}],{duration:130,easing:'ease-out'}).finished.catch(()=>{});
+      if(ticket!==stepTransition)return;
+    }
     details.hidden = showDate;
     date.hidden = !showDate;
+    if(!reduced&&target.animate)target.animate([{opacity:0,transform:'translateY(4px) scale(.99)'},{opacity:1,transform:'none'}],{duration:200,easing:'cubic-bezier(.2,.8,.2,1)'});
     if (showDate) document.dispatchEvent(new Event('application:show-date'));
     form.scrollIntoView({ block: 'start', behavior: 'auto' });
     (showDate ? back : details.querySelector('input, textarea, select')).focus({ preventScroll: true });
