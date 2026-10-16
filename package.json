@@ -2,7 +2,12 @@
   "name": "vertex-public-site",
   "private": true,
   "scripts": {
-    "test:personnel": "node tests/personnel-browser.cjs"
+    "test:personnel": "node tests/personnel-browser.cjs",
+    "test:seo": "node scripts/audit-seo.cjs",
+    "test:experience": "node tests/experience-browser.cjs",
+    "test:weekly-stars": "node tests/weekly-stars-browser.cjs",
+    "test:refresh": "node tests/website-refresh.cjs",
+    "preview": "node tests/serve.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

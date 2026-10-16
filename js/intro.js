@@ -1,4 +1,4 @@
-(function () {
+setTimeout(function () {
   'use strict';
 
   var hero = document.querySelector('.hero#home');
@@ -40,7 +40,7 @@
     return '<div class="story-metric"><strong>' + (number ? number.textContent.trim() : '') + '</strong><span>' + (label ? label.textContent.trim() : '') + '</span></div>';
   }).join('');
 
-  hero.classList.add('story-hero');
+  hero.classList.add('story-hero');hero.classList.remove('story-static');
   hero.innerHTML = '' +
     '<div class="story-stage">' +
 
@@ -261,4 +261,4 @@
   document.addEventListener('visibilitychange', function () { if (!document.hidden) requestRender(); });
   new MutationObserver(requestRender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   render();
-}());
+},200);
