@@ -42,6 +42,7 @@
   hero.innerHTML = '' +
     '<div class="story-stage">' +
       '<div class="story-grid" aria-hidden="true"></div>' +
+      '<div class="story-geometry" aria-hidden="true"><svg viewBox="0 0 800 800" fill="none" stroke="currentColor"><circle cx="400" cy="400" r="300"/><circle cx="400" cy="400" r="210"/><ellipse cx="400" cy="400" rx="110" ry="300"/><ellipse cx="400" cy="400" rx="230" ry="300"/><ellipse cx="400" cy="400" rx="300" ry="105"/><path d="M400 100 660 250 660 550 400 700 140 550 140 250Z M140 250 660 550 M660 250 140 550 M400 100V700 M100 400H700 M140 250H660 M140 550H660 M250 140 550 660 M550 140 250 660"/><circle cx="400" cy="100" r="5"/><circle cx="660" cy="250" r="5"/><circle cx="140" cy="550" r="5"/></svg></div>' +
       '<h1 class="story-title">' + title + '</h1>' +
       '<div class="story-sponsors"><span>' + sponsorLabel + '</span><div class="story-sponsor-logos">' + (originalLogos ? originalLogos.innerHTML : '') + '</div></div>' +
       '<div class="story-globe-wrap"><canvas class="story-globe" aria-label="Graphic globe focused on Türkiye"></canvas></div>' +
@@ -55,6 +56,9 @@
   if (sponsorsSection) sponsorsSection.classList.add('story-relocated');
 
   var stage = hero.querySelector('.story-stage');
+  var header = document.querySelector('header');
+  var geometry = hero.querySelector('.story-geometry');
+  var lastGlobeFrame = '';
   var titleEl = hero.querySelector('.story-title');
   var sponsorsEl = hero.querySelector('.story-sponsors');
   var globeWrap = hero.querySelector('.story-globe-wrap');
@@ -64,6 +68,7 @@
   var actionsEl = hero.querySelector('.story-actions');
   var cueEl = hero.querySelector('.story-scroll-cue');
   var context = canvas.getContext('2d');
+  if(!context)return;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var worldFeatures = null;
   var turkey = null;
@@ -84,9 +89,9 @@
   function drawGlobe(progress, turkeyFill, worldSpread) {
     if (!worldFeatures) return;
     var cssSize = globeWrap.clientWidth;
-    var dpr = Math.min(window.devicePixelRatio || 1, 1.35);
+    var dpr = Math.min(window.devicePixelRatio || 1, 1.25);
     var visualScale = 2.5;
-    var size = Math.max(900, Math.min(2600, Math.round(cssSize * visualScale * dpr)));
+    var size = Math.max(700, Math.min(window.innerWidth < 700 ? 1100 : 1920, Math.round(cssSize * visualScale * dpr)));
     if (canvas.width !== size || canvas.height !== size) {
       canvas.width = size;
       canvas.height = size;
@@ -94,6 +99,9 @@
       context.imageSmoothingQuality = 'high';
     }
 
+    var signature = [progress.toFixed(3), size, document.documentElement.getAttribute('data-theme')].join(':');
+    if(signature === lastGlobeFrame)return;
+    lastGlobeFrame = signature;
     var centre = size / 2;
     var radius = size * .445;
     var turn = smooth(phase(progress, .23, .54));
@@ -104,12 +112,12 @@
       .scale(radius)
       .rotate([-longitude, -latitude])
       .clipAngle(90)
-      .precision(.1);
+      .precision(.3);
     var path = d3.geoPath(projection, context);
     var dark = document.documentElement.getAttribute('data-theme') === 'dark';
     var ocean = dark ? '#0e1013' : '#fafaf9';
     var land = dark ? '#4d5158' : '#c8c9c5';
-    var spreadLand = dark ? '#f5f4f0' : '#17181b';
+    var spreadLand = dark ? '#ffffff' : '#000000';
     var border = dark ? '#0e1013' : '#fafaf9';
 
     context.clearRect(0, 0, size, size);
@@ -157,10 +165,12 @@
   }
 
   function render() {
+    var bounds=hero.getBoundingClientRect();
+    if(bounds.bottom<0||bounds.top>window.innerHeight){if(header){header.style.transform='';header.style.opacity='';header.style.pointerEvents='';header.inert=false;}ticking=false;return;}
     var travel = Math.max(1, hero.offsetHeight - stage.offsetHeight);
     var progress = reduced ? 1 : clamp((window.scrollY - hero.offsetTop) / travel, 0, 1);
     var sponsorIn = phase(progress, .06, .17) * (1 - phase(progress, .25, .34));
-    var globeIn = phase(progress, .18, .30);
+    var globeIn = phase(progress, .10, .30);
     var turkeyFill = phase(progress, .42, .56);
     var worldSpread = phase(progress, .55, .84);
     var statementIn = phase(progress, .57, .66) * (1 - phase(progress, .71, .78));
@@ -168,14 +178,19 @@
     var actionsIn = phase(progress, .84, .94);
     var titleLift = smooth(phase(progress, .03, .18));
 
-    titleEl.style.transform = 'translate3d(-50%,' + mix(0, -Math.min(76, window.innerHeight * .08), titleLift).toFixed(2) + 'px,0)';
+    var headerHide = reduced ? 0 : smooth(phase(progress,.035,.16)) * (1-smooth(phase(progress,.86,.98)));
+    if(header){header.style.transform='translate3d(0,'+(-110*headerHide).toFixed(2)+'%,0)';header.style.opacity=String(1-headerHide);header.inert=headerHide>.95;header.style.pointerEvents=headerHide>.95?'none':'';}
+    stage.style.setProperty('--story-header-space',((1-headerHide)*68).toFixed(1)+'px');
+    geometry.style.opacity=String(reduced?0:1-smooth(phase(progress,.10,.30)));
+    geometry.style.transform='translate3d(-50%,-50%,0) scale('+mix(1,1.4,smooth(phase(progress,.05,.30)))+') rotate('+mix(0,18,phase(progress,0,.30))+'deg)';
+    titleEl.style.transform = 'translate3d(-50%,' + (mix(0, -Math.min(76, window.innerHeight * .08), titleLift)+(1-headerHide)*phase(progress,.80,.98)*40).toFixed(2) + 'px,0)';
     titleEl.style.fontSize = 'clamp(42px,' + mix(8.2, 5.4, titleLift).toFixed(2) + 'vw,112px)';
     reveal(sponsorsEl, sponsorIn, 28);
     reveal(globeWrap, globeIn, 42);
     reveal(statementEl, statementIn, 34);
     reveal(metricsEl, metricsIn, 34);
     reveal(actionsEl, actionsIn, 28);
-    canvas.style.opacity = String(1 - Math.max(statementIn, metricsIn, actionsIn) * .48);
+    canvas.style.opacity = '1';
     cueEl.style.opacity = String(1 - phase(progress, .02, .12));
     drawGlobe(progress, turkeyFill, worldSpread);
     ticking = false;

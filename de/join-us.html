@@ -16,7 +16,7 @@
     --header-bg:rgba(250,250,249,.72); --header-bg-scrolled:rgba(250,250,249,.9); --header-shadow:0 8px 28px rgba(26,27,30,.08);
     --bg:#FAFAF9; --surface:#F1F1EE; --surface-2:#EAEAE6;
     --text:#1A1B1E; --text-muted:#6B6E76; --border:#E3E3DF;
-    --accent:#3B4FD9; --accent-ink:#FFFFFF; --accent-soft:rgba(59,79,217,.08);
+    --accent:#000000; --accent-ink:#FFFFFF; --accent-soft:rgba(0,0,0,.06);
     --radius-s:6px; --radius-m:10px;
     --maxw:1120px;
     --dur:200ms;
@@ -26,7 +26,7 @@
     --header-bg:rgba(14,16,19,.62); --header-bg-scrolled:rgba(14,16,19,.86); --header-shadow:0 8px 28px rgba(0,0,0,.38);
     --bg:#0E1013; --surface:#15171B; --surface-2:#1B1E23;
     --text:#EDEEEF; --text-muted:#8A8D96; --border:#262932;
-    --accent:#6C7CF0; --accent-ink:#0E1013; --accent-soft:rgba(108,124,240,.12);
+    --accent:#FFFFFF; --accent-ink:#000000; --accent-soft:rgba(255,255,255,.08);
     --logo-filter:brightness(0) invert(1);
   }
   *{box-sizing:border-box;}
@@ -446,7 +446,7 @@
 </div>
 </div><div class="mobile-menu" id="mobileMenu"><nav aria-label="Mobile" class="wrap"><a class="mlink" href="index.html#home">Startseite</a><a class="mlink" href="index.html#projects">Projekte</a><a class="mlink" href="index.html#vision">Vision</a><a class="mlink" href="index.html#partners">Partner</a><a class="mlink" href="index.html#team">Team</a><button aria-haspopup="menu" class="mlink m-lang" id="mLangBtn" type="button"><svg fill="none" height="18" stroke="currentColor" stroke-width="1.7" viewbox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg><span>Deutsch</span><svg class="chev-r" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewbox="0 0 24 24" width="14"><path d="M9 6l6 6-6 6"></path></svg></button><a class="btn btn-primary m-cta" href="join-us.html">Begleiten Sie uns</a></nav></div>
 </header>
-<main><section class="join-hero"><div class="wrap"><h1>Begleiten Sie uns</h1><p class="join-lede">Werden Sie Teil des Vertex-Teams.</p></div></section><div class="join-wrap"><div class="join-card"><form class="form-grid" id="joinForm"><div class="form-group"><label for="joinName">Vollständiger Name</label><input id="joinName" required="" type="text"/></div><div class="form-group"><label for="joinEmail">E-Mail</label><input id="joinEmail" required="" type="email"/></div><div class="form-group"><label for="joinPhone">Telefonnummer</label><input id="joinPhone" required="" type="tel"/></div><div class="form-group"><label for="joinAge">Alter</label><input id="joinAge" max="123" min="0" required="" type="number"/></div><div class="form-group"><label for="joinLinkedin">LinkedIn URL (Optional)</label><input id="joinLinkedin" pattern="https?://.*" type="url"/></div><div class="form-group"><label for="joinGithub">GitHub URL (Optional)</label><input id="joinGithub" pattern="https?://.*" type="url"/></div><div class="form-group full-width"><label for="joinAbout">Erzählen Sie uns von sich</label><textarea id="joinAbout" required=""></textarea></div><div class="form-group full-width"><label for="joinTeam">Welcher Abteilung möchten Sie primär beitreten?</label><select id="joinTeam" name="joinTeam" required=""><option disabled="" selected="" value="">Wählen Sie eine Abteilung</option><optgroup label="Obere Abteilungen"><option disabled="" value="essence">Essence | Vorstand</option><option disabled="" value="core">Core | Kernabteilung</option><option disabled="" value="senatus">Senatus | Managementabteilung</option></optgroup><optgroup label="Mittlere Abteilungen"><option value="pulse">Pulse | Social-Media-Abteilung</option><option value="chroma">Chroma | Abteilung für Digitales Design</option><option value="catalyst">Catalyst | Finanzabteilung</option><option value="envoy">Envoy | Operationsabteilung</option><option value="aero">Aero | Personalabteilung</option><option value="array">Array | Abteilung für Softwareentwicklung</option></optgroup><optgroup label="Untere Abteilungen"><option value="scout">Scout | Operationsabteilung</option><option value="vertest">Vertest | Testabteilung</option></optgroup></select></div><div class="interview-section form-group full-width"><div class="interview-title"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg><span>Interviewdatum und -uhrzeit auswählen</span></div><p class="interview-desc">Um Ihre Bewerbung bearbeiten zu können, buchen Sie bitte einen Termin für das Interview im untenstehenden Kalender.</p><div class="interview-status-box confirmed" id="interviewStatusBox" style="display: none;"></div><div class="cal-embed-container"><div id="my-cal-inline-interview" style="width:100%;height:100%;min-height:650px;overflow:scroll"></div></div></div><div class="checkbox-group full-width"><label class="checkbox-label"><input id="termsCheck" required="" type="checkbox"/><span>Ich akzeptiere die <a href="nutzungsbedingungen.html" target="_blank"><b>Nutzungsbedingungen</b></a> und die <a href="datenschutzrichtlinie.html" target="_blank"><b>Datenschutzrichtlinie</b></a>.</span></label><label class="checkbox-label"><input id="contractCheck" required="" type="checkbox"/><span>Ich erkläre, dass ich den <a href="vertex-team-contract.html" target="_blank"><b>Vertex-Teamvertrag</b></a> gelesen habe und genehmige.</span></label><label class="checkbox-label" id="doctrineLabelWrapper"><input id="doctrineCheck" required="" type="checkbox"/><span>Ich habe die <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex-Doktrin</b></a> gelesen.</span></label></div><button class="btn btn-primary join-submit-btn" disabled="" id="submitBtn" type="submit">Bewerbung einreichen</button></form></div></div><div class="doctrine-modal-overlay" id="doctrineModal"><div class="doctrine-modal-content"><h2>Vertex</h2><div class="doctrine-text-container" id="doctrineScroll">
+<main><section class="join-hero"><div class="wrap"><h1>Begleiten Sie uns</h1><p class="join-lede">Werden Sie Teil des Vertex-Teams.</p></div></section><div class="join-wrap"><div class="join-card"><form class="form-grid" id="joinForm"><div class="form-group"><label for="joinName">Vollständiger Name</label><input id="joinName" required="" type="text"/></div><div class="form-group"><label for="joinEmail">E-Mail</label><input id="joinEmail" required="" type="email"/></div><div class="form-group"><label for="joinPhone">Telefonnummer</label><input id="joinPhone" required="" type="tel"/></div><div class="form-group"><label for="joinAge">Alter</label><input id="joinAge" max="123" min="0" required="" type="number"/></div><div class="form-group"><label for="joinLinkedin">LinkedIn URL (Optional)</label><input id="joinLinkedin" pattern="https?://.*" type="url"/></div><div class="form-group"><label for="joinGithub">GitHub URL (Optional)</label><input id="joinGithub" pattern="https?://.*" type="url"/></div><div class="form-group full-width"><label for="joinAbout">Erzählen Sie uns von sich</label><textarea id="joinAbout" required=""></textarea></div><div class="form-group full-width"><label for="joinTeam">Welcher Abteilung möchten Sie primär beitreten?</label><select id="joinTeam" name="joinTeam" required=""><option disabled="" selected="" value="">Wählen Sie eine Abteilung</option><option value="pulse">Pulse | Social-Media-Abteilung</option><option value="curia">Curia | Rechtsabteilung</option><option value="tensor">Tensor | Informationstechnologie</option><option value="aero">Aero | Personalabteilung</option><option value="array">Array | Abteilung für Softwareentwicklung</option><option value="chroma">Chroma | Abteilung für Digitales Design</option><option value="envoy">Envoy | Operationsabteilung</option><option value="catalyst">Catalyst | Finanzabteilung</option></select></div><div class="interview-section form-group full-width"><div class="interview-title"><svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="20"><rect height="18" rx="2" ry="2" width="18" x="3" y="4"></rect><line x1="16" x2="16" y1="2" y2="6"></line><line x1="8" x2="8" y1="2" y2="6"></line><line x1="3" x2="21" y1="10" y2="10"></line></svg><span>Interviewdatum und -uhrzeit auswählen</span></div><p class="interview-desc">Um Ihre Bewerbung bearbeiten zu können, buchen Sie bitte einen Termin für das Interview im untenstehenden Kalender.</p><div class="interview-status-box confirmed" id="interviewStatusBox" style="display: none;"></div><div class="cal-embed-container"><div id="my-cal-inline-interview" style="width:100%;height:100%;min-height:650px;overflow:scroll"></div></div></div><div class="checkbox-group full-width"><label class="checkbox-label"><input id="termsCheck" required="" type="checkbox"/><span>Ich akzeptiere die <a href="nutzungsbedingungen.html" target="_blank"><b>Nutzungsbedingungen</b></a> und die <a href="datenschutzrichtlinie.html" target="_blank"><b>Datenschutzrichtlinie</b></a>.</span></label><label class="checkbox-label"><input id="contractCheck" required="" type="checkbox"/><span>Ich erkläre, dass ich den <a href="vertex-team-contract.html" target="_blank"><b>Vertex-Teamvertrag</b></a> gelesen habe und genehmige.</span></label><label class="checkbox-label" id="doctrineLabelWrapper"><input id="doctrineCheck" required="" type="checkbox"/><span>Ich habe die <a href="javascript:void(0)" id="openDoctrineBtn"><b>Vertex-Doktrin</b></a> gelesen.</span></label></div><button class="btn btn-primary join-submit-btn" disabled="" id="submitBtn" type="submit">Bewerbung einreichen</button></form></div></div><div class="doctrine-modal-overlay" id="doctrineModal"><div class="doctrine-modal-content"><h2>Vertex</h2><div class="doctrine-text-container" id="doctrineScroll">
             Vertex is the absolute intersection of two intersecting lines.
 
 This is merely the mathematical definition of Vertex; in anatomy, it is the highest point of the body and mind; in astronomy, the zenith of the universe; in space geometry, the most fundamental building block; in network theory, the central node where all key connections converge; in optics, the absolute focus where light intersects the lens.
@@ -534,6 +534,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
     // Cal.com Embed & State Logic
     let isInterviewBooked = false;
     let interviewBookingData = null;
+    let applicationInFlight = false, applicationSubmitted = false, autoBookingUid = null;
 
     function extractCalBookingInfo(raw) {
         if (!raw) return { startTime: null, uid: null };
@@ -545,7 +546,8 @@ That might we need is present in the noble blood in our veins; the absolute peak
     }
 
     function handleInterviewBooking(detail) {
-        console.log('Interview booked:', detail);
+        const checkedInfo = extractCalBookingInfo(detail);
+        if (!checkedInfo.uid || !checkedInfo.startTime || !Number.isFinite(Date.parse(checkedInfo.startTime))) return;
         isInterviewBooked = true;
         interviewBookingData = detail;
         
@@ -741,141 +743,26 @@ That might we need is present in the noble blood in our veins; the absolute peak
         });
     });
 
-    document.getElementById('joinForm').addEventListener('submit', function(e) {
-
+    document.getElementById('joinForm').addEventListener('submit', async function(e) {
         e.preventDefault();
-        
-        const ageVal = parseInt(ageInput.value, 10);
-        if (isNaN(ageVal) || ageVal < 0 || ageVal > 123) {
-            alert('Bitte geben Sie ein gültiges Alter ein.');
-            return;
-        }
-
-        const btn = document.getElementById('submitBtn');
-
-        const originalText = btn.textContent;
-        btn.textContent = '...';
-        btn.disabled = true;
-
+        const form = e.currentTarget, btn = document.getElementById('submitBtn');
+        if (applicationInFlight || applicationSubmitted || !isInterviewBooked || !form.checkValidity()) return;
+        applicationInFlight = true; btn.disabled = true; const originalText = btn.textContent; btn.textContent = '…';
         const calInfo = extractCalBookingInfo(interviewBookingData);
-
-        const data = {
-            name: document.getElementById('joinName').value,
-            email: document.getElementById('joinEmail').value,
-            phone: iti.getNumber(),
-            age: document.getElementById('joinAge').value,
-            linkedin: document.getElementById('joinLinkedin').value,
-            github: document.getElementById('joinGithub').value,
-            about: document.getElementById('joinAbout').value,
-            language: 'de',
-            department: document.getElementById('joinTeam').value,
-            interviewDate: calInfo.startTime || null,
-            interviewBookingUid: calInfo.uid || null,
-            interviewDetails: interviewBookingData ? JSON.stringify(interviewBookingData) : null
-        };
-
-        const checkUrl = 'https://firestore.googleapis.com/v1/projects/vertex-ai-1618/databases/(default)/documents:runQuery';
-        const checkQuery = {
-            structuredQuery: {
-                from: [{ collectionId: 'contributors' }],
-                where: {
-                    compositeFilter: {
-                        op: 'OR',
-                        filters: [
-                            { fieldFilter: { field: { fieldPath: 'email' }, op: 'EQUAL', value: { stringValue: data.email } } },
-                            { fieldFilter: { field: { fieldPath: 'phone' }, op: 'EQUAL', value: { stringValue: data.phone } } }
-                        ]
-                    }
-                }
-            }
-        };
-
-        fetch(checkUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(checkQuery)
-        })
-        .then(res => res.json())
-        .then(queryRes => {
-            if (queryRes.length > 0 && queryRes[0].document) {
-                alert('Diese E-Mail oder Telefonnummer ist bereits registriert.');
-                btn.textContent = originalText;
-                btn.disabled = false;
-                return;
-            }
-            // Proceed to create
-            return fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(data)
-            })
-            .then(response => {
-                if (!response.ok) throw new Error('Network error');
-                return response.json();
-            })
-            .then(result => {
-                const successModal = document.getElementById('successModal');
-                successModal.style.display = 'flex';
-                setTimeout(() => successModal.classList.add('show'), 10);
-                document.getElementById('joinForm').reset();
-            });
-        })
-        .catch(error => {
-            alert('Ein Fehler ist aufgetreten.');
-            console.error(error);
-        })
-        .finally(() => {
-            btn.textContent = originalText;
-            btn.disabled = false;
-        });
-    });
-
-    // Cal embed loader
-    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-    Cal("init", "interview", {origin:"https://app.cal.com"});
-    Cal.config = Cal.config || {};
-    Cal.config.forwardQueryParams = true;
-
-    const showInterviewCalendar = () => Cal.ns.interview("inline", {
-        elementOrSelector:"#my-cal-inline-interview",
-        config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"auto"},
-        calLink: "team/vertex/interview",
-    });
-    if (window.applicationStepsEnabled) {
-        document.addEventListener('application:show-date', showInterviewCalendar, { once: true });
-    } else {
-        showInterviewCalendar();
-    }
-
-    Cal.ns.interview("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
-
-    // Cal.com Event Listeners
-    Cal.ns.interview("on", {
-        action: "*",
-        callback: (e) => {
-            if (e.detail?.type === "bookingSuccessful" || e.detail?.type === "bookingSuccessfulV2" || e.detail?.action === "bookingSuccessful") {
-                handleInterviewBooking(e.detail);
-            }
-        }
-    });
-
-    Cal.ns.interview("on", {
-        action: "bookingSuccessful",
-        callback: (e) => handleInterviewBooking(e.detail)
-    });
-
-    Cal.ns.interview("on", {
-        action: "bookingSuccessfulV2",
-        callback: (e) => handleInterviewBooking(e.detail)
-    });
-
-    // Window message fallback for Cal.com events
-    window.addEventListener("message", (e) => {
+        const data = {name: document.getElementById('joinName').value, email: document.getElementById('joinEmail').value,
+            phone: iti.getNumber(), age: document.getElementById('joinAge').value, linkedin: document.getElementById('joinLinkedin').value,
+            github: document.getElementById('joinGithub').value, about: document.getElementById('joinAbout').value, language: 'de',
+            department: document.getElementById('joinTeam').value, interviewDate: calInfo.startTime,
+            interviewBookingUid: String(calInfo.uid), interviewDetails: JSON.stringify(interviewBookingData)};
         try {
-            if (e.data && (e.data.type === "CAL:bookingSuccessful" || e.data.type === "CAL:bookingSuccessfulV2" || e.data.action === "bookingSuccessful")) {
-                handleInterviewBooking(e.data);
-            }
-        } catch(err) {}
+            const response = await fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
+            if (!response.ok) throw Error('Application submission failed');
+            const result = await response.json(); if (!result.success) throw Error('Application submission failed');
+            applicationSubmitted = true;
+            const modal = document.getElementById('successModal'); modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('show'),10); form.reset();
+        } catch(error) { alert('Ein Fehler ist aufgetreten.'); }
+        finally { applicationInFlight = false; btn.textContent = originalText; btn.disabled = applicationSubmitted || !isInterviewBooked; }
     });
 
 })();
