@@ -7,7 +7,8 @@
     "test:experience": "node tests/experience-browser.cjs",
     "test:weekly-stars": "node tests/weekly-stars-browser.cjs",
     "test:refresh": "node tests/website-refresh.cjs",
-    "preview": "node tests/serve.cjs"
+    "preview": "node tests/serve.cjs",
+    "test:home-layout": "node tests/home-layout-browser.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"

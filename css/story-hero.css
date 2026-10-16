@@ -75,3 +75,11 @@ html[data-theme="dark"] .story-sponsor-logos img { filter:grayscale(1) opacity(.
 .partner-card img,.partner-logo-img,.story-sponsor-logos img{filter:brightness(0);opacity:1}html[data-theme="dark"] .partner-card img,html[data-theme="dark"] .partner-logo-img,html[data-theme="dark"] .story-sponsor-logos img{filter:brightness(0) invert(1)}
 /* The first frame is real HTML; hydration begins only after it can paint. */
 .story-static-content{position:absolute;top:clamp(78px,13vh,126px);left:50%;width:min(1120px,calc(100% - 40px));transform:translateX(-50%);z-index:5}.story-static-content .story-title{position:static;width:100%;font-size:clamp(42px,8.2vw,112px);height:auto;transform:none;white-space:normal;text-wrap:balance;color:var(--text);mix-blend-mode:normal;will-change:auto}.story-static-content .story-actions{position:static;width:100%;margin-top:26px;opacity:1;transform:none}.story-static .story-geometry{opacity:1}@media(max-width:700px){.story-static-content{top:10vh}}@media(prefers-reduced-motion:reduce){.story-static-content{position:relative;inset:auto;transform:none;width:100%}}
+/* The HTML and hydrated title use identical line boxes and word spacing. */
+.story-static-content .story-title{display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:.25em;line-height:.96;letter-spacing:.07em;text-wrap:normal}
+.story-static-content .story-title-word{position:static;transform:none}
+.story-stage{contain:layout paint}.story-stage>.story-title{line-height:.96;margin:0}.story-stage>.story-sponsors,.story-stage>.story-statement,.story-stage>.story-metrics{visibility:hidden}.story-stage.story-ready>.story-sponsors,.story-stage.story-ready>.story-statement,.story-stage.story-ready>.story-metrics{visibility:visible}
+@media(prefers-reduced-motion:no-preference){.story-static-content .story-title{animation:heroWelcome 700ms cubic-bezier(.2,.8,.2,1) both}@keyframes heroWelcome{from{opacity:.65;translate:0 12px}to{opacity:1;translate:0 0}}}
+@media(prefers-reduced-motion:reduce){.story-stage{contain:none}}
+/* Japanese headlines have no spaces: retain one readable, bounded word group. */
+html:lang(ja) .story-title{font-size:clamp(30px,7vw,100px)!important;letter-spacing:.03em}

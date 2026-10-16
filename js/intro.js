@@ -1,4 +1,4 @@
-setTimeout(function () {
+setTimeout(async function () {
   'use strict';
 
   var hero = document.querySelector('.hero#home');
@@ -6,6 +6,8 @@ setTimeout(function () {
   var sponsorsSection = document.querySelector('.partners-static');
   if (!hero || !window.d3 || !window.topojson) return;
 
+  // Match the first HTML frame before measuring or replacing its title.
+  if(document.fonts){await document.fonts.load('112px Anton');await document.fonts.ready;}
   var originalTitle = hero.querySelector('h1');
   var originalLede = hero.querySelector('.lede');
   var originalActions = Array.prototype.slice.call(hero.querySelectorAll('.hero-actions a'));
@@ -213,8 +215,11 @@ setTimeout(function () {
     actionsEl.style.top=(titleEl.offsetTop+layout.height+26)+'px';
     actionsEl.style.pointerEvents=actionsIn<.05?'none':'';actionsEl.inert=actionsIn<.05;
     titleEl.style.transform += ' scale('+ (mix(1,fit*grow,morph)).toFixed(4)+')';
-    titleEl.style.willChange='auto';titleEl.style.left=morph===0?'0':'50%';titleEl.style.right=morph===0?'0':'auto';titleEl.style.margin=morph===0?'0 auto':'0';if(morph===0)titleEl.style.transform='none';
+    titleEl.style.willChange='auto';titleEl.style.left=morph===0?'0':'50%';titleEl.style.right=morph===0?'0':'auto';titleEl.style.margin=morph===0?'0 auto':'0';if(morph===0)titleEl.style.transform=titleLift?'translateY('+(-Math.min(76,window.innerHeight*.08)*titleLift).toFixed(2)+'px)':'none';
     titleEl.style.opacity=String(1-.12*Math.sin(Math.PI*phase(progress,.015,.26))*(1-ending));
+    // Keep panels below the actual title, including long translated headings.
+    var titleBottom=Math.max.apply(null,Array.from(titleEl.children).map(function(el){return el.getBoundingClientRect().bottom;}))-stage.getBoundingClientRect().top;
+    if(!reduced)[sponsorsEl,statementEl,metricsEl].forEach(function(panel){panel.style.top=Math.max(titleBottom+24,Math.min(306,window.innerHeight*.34))+'px';});
     reveal(sponsorsEl, sponsorIn, 28);
     reveal(globeWrap, globeIn, 42);
     reveal(statementEl, statementIn, 34);
@@ -261,4 +266,5 @@ setTimeout(function () {
   document.addEventListener('visibilitychange', function () { if (!document.hidden) requestRender(); });
   new MutationObserver(requestRender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   render();
-},200);
+  stage.classList.add('story-ready');
+},750);
