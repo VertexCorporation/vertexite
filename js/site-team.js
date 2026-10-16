@@ -41,6 +41,7 @@
     }
     function apply(data) {
         current = data;
+        document.getElementById("teamTrack")?.removeAttribute("aria-busy");
         fill('modTrack', names(data.staff), 'mod-item');
         fill('staffTrack', names([].concat(data.mods || [], data.chefs || [])).sort(function(a,b){return a.localeCompare(b,document.documentElement.lang || 'en');}), 'mod-item');
         fill('honorTrack', names(data.honors), 'mod-item');
@@ -51,11 +52,12 @@
             .then(function (res) { if (!res.ok) throw Error('unavailable'); return res.json(); })
             .then(function (json) { if (!json.result || !['staff','mods','chefs','honors'].every(function(k){return Array.isArray(json.result[k]);})) throw Error('invalid'); apply(json.result); })
             .then(function(){failures=0;})
-            .catch(function () { if(failures++<3){clearTimeout(retryTimer);retryTimer=setTimeout(load,Math.min(30000,2000*Math.pow(2,failures))+Math.random()*1000);} });
+            .catch(function () { if(failures++<3){clearTimeout(retryTimer);retryTimer=setTimeout(load,Math.min(30000,2000*Math.pow(2,failures))+Math.random()*1000);}else if(!Object.keys(current).length){var track=document.getElementById('teamTrack');if(track){track.removeAttribute('aria-busy');track.replaceChildren();var note=document.createElement('p');note.className='story-quick-status';note.setAttribute('role','status');var messages={tr:'Ekip şu anda yüklenemiyor. Lütfen daha sonra tekrar deneyin.',en:'The team is unavailable right now. Please try again later.',de:'Das Team ist derzeit nicht verfügbar. Bitte später erneut versuchen.',fr:'L’équipe est indisponible. Veuillez réessayer plus tard.',es:'El equipo no está disponible. Inténtalo de nuevo más tarde.',it:'Il team non è disponibile. Riprova più tardi.',pt:'A equipa está indisponível. Tente novamente mais tarde.',nl:'Het team is momenteel niet beschikbaar. Probeer het later opnieuw.',ru:'Список команды временно недоступен. Повторите попытку позже.',ar:'قائمة الفريق غير متاحة الآن. يُرجى المحاولة لاحقًا.',hi:'टीम अभी उपलब्ध नहीं है। कृपया बाद में फिर प्रयास करें।',id:'Tim belum tersedia. Silakan coba lagi nanti.',ja:'現在チームを読み込めません。後ほどお試しください。',ko:'지금은 팀을 불러올 수 없습니다. 나중에 다시 시도해 주세요.',zh:'暂时无法加载团队，请稍后重试。',az:'Komanda hazırda yüklənmir. Daha sonra yenidən cəhd edin.'};note.textContent=messages[document.documentElement.lang]||messages.en;track.appendChild(note);}} });
     }
+    function showLoading(){var track=document.getElementById('teamTrack');if(!track)return;var section=track.closest('section');if(section)section.hidden=false;track.setAttribute('aria-busy','true');for(var i=0;i<3;i++){var card=document.createElement('div');card.className='team-card skeleton';card.setAttribute('aria-hidden','true');track.appendChild(card);}}
     function start() {
         var oldLeads = document.getElementById('chefTrack'); if (oldLeads) oldLeads.closest('.name-block').remove();
-        apply({}); load(); setInterval(function () { if (!document.hidden) load(); }, 300000);
+        showLoading(); load(); setInterval(function () { if (!document.hidden) load(); }, 300000);
         window.addEventListener('resize',function(){clearTimeout(timer);timer=setTimeout(function(){apply(current);},100);});
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
