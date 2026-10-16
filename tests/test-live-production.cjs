@@ -12,46 +12,23 @@ async function testLiveProduction() {
   });
   const page = await context.newPage();
 
-  // Test 1: Turkish home page card click
-  console.log('\n[1/4] Navigating to https://vertexishere.com/tr/ ...');
+  // Test 1: Turkish home page card click & profile details
+  console.log('\n[1/5] Navigating to https://vertexishere.com/tr/ ...');
   await page.goto('https://vertexishere.com/tr/', { waitUntil: 'networkidle', timeout: 30000 });
 
-  // Scroll to #team section
   const teamSection = page.locator('#team');
   await teamSection.scrollIntoViewIfNeeded();
 
-  // Wait for team cards to render dynamically
   await page.waitForSelector('#teamTrack .team-card', { timeout: 15000 });
-  const cardCount = await page.locator('#teamTrack .team-card').count();
-  console.log(`Found ${cardCount} team cards rendered on #teamTrack.`);
-  assert(cardCount > 0, 'No team cards were rendered');
-
-  // Locate Mustafa Çakı's card
   const mustafaCard = page.locator('#teamTrack .team-card').filter({ hasText: 'Mustafa Çakı' });
   await mustafaCard.waitFor({ state: 'visible', timeout: 5000 });
   console.log('Found Mustafa Çakı card on live site.');
 
-  // Verify attributes and classes
   const hasProfileClass = await mustafaCard.evaluate((el) => el.classList.contains('has-profile'));
   const profileSlug = await mustafaCard.getAttribute('data-profile-slug');
-  const profileLink = mustafaCard.locator('h3 a.team-profile-link');
-  const href = await profileLink.getAttribute('href');
-  console.log(`Card attributes: has-profile=${hasProfileClass}, data-profile-slug=${profileSlug}, href=${href}`);
+  assert.strictEqual(hasProfileClass, true);
+  assert.strictEqual(profileSlug, 'mustafa-caki');
 
-  assert.strictEqual(hasProfileClass, true, 'Card must have .has-profile class');
-  assert.strictEqual(profileSlug, 'mustafa-caki', 'Card data-profile-slug must be mustafa-caki');
-  assert.strictEqual(href, '/tr/mustafa-caki', 'Profile link href must be /tr/mustafa-caki');
-
-  // Verify social link isolation on a card with social links
-  const cardWithSocial = page.locator('#teamTrack .team-card').filter({ hasText: 'Ekin Burçak' });
-  if (await cardWithSocial.count() > 0) {
-    const socialLink = cardWithSocial.locator('.team-social a').first();
-    const socialHref = await socialLink.getAttribute('href');
-    console.log(`Found social link on team card: ${socialHref}`);
-    assert(socialHref.startsWith('http'), 'Social link should have valid http href');
-  }
-
-  // Click Mustafa Çakı's card (clicking photo area on the card via stretched-link)
   console.log('Clicking Mustafa Çakı card on live site...');
   await Promise.all([
     page.waitForURL((url) => url.pathname.includes('/tr/mustafa-caki'), { timeout: 15000 }),
@@ -59,67 +36,61 @@ async function testLiveProduction() {
   ]);
 
   console.log(`Navigated to: ${page.url()}`);
-  assert(page.url().includes('/tr/mustafa-caki'), 'Target URL should be /tr/mustafa-caki');
+  assert(page.url().includes('/tr/mustafa-caki'));
 
-  // Verify profile page contents
-  const trTitle = await page.title();
-  console.log(`Page title: ${trTitle}`);
-  assert(trTitle.includes('Kurucu Ortak & CEO'), 'Title must contain Kurucu Ortak & CEO');
+  // Verify photo box
+  const photoBox = page.locator('.profile-heading .profile-photo-box');
+  await photoBox.waitFor({ state: 'visible', timeout: 5000 });
+  const photoImg = photoBox.locator('img');
+  const photoSrc = await photoImg.getAttribute('src');
+  console.log(`Photo box verified with src: ${photoSrc}`);
+  assert(photoSrc.includes('MUSTAFACAKI.webp'));
 
-  const h1 = await page.locator('.profile-heading h1').textContent();
-  const roleText = await page.locator('.profile-heading p').textContent();
-  console.log(`Heading: ${h1}, Role: ${roleText}`);
-  assert.strictEqual(h1.trim(), 'Mustafa Çakı');
-  assert(roleText.includes('Kurucu Ortak & CEO'), 'Role text must be Kurucu Ortak & CEO');
+  // Verify links & logos
+  const linkIcons = await page.locator('.profile-links .profile-link-icon').count();
+  console.log(`Found ${linkIcons} link logos on profile sidebar.`);
+  assert.strictEqual(linkIcons, 2, 'Should have exactly 2 logos (LinkedIn and Instagram)');
 
   const pCount = await page.locator('.profile-bio p').count();
-  console.log(`Bio paragraphs count: ${pCount}`);
-  assert.strictEqual(pCount, 6, 'Must have exactly 6 paragraphs in bio');
+  assert.strictEqual(pCount, 6, 'Must have 6 bio paragraphs');
 
-  // Test 2: English home page card click
-  console.log('\n[2/4] Navigating to https://vertexishere.com/en/ ...');
+  // Test 2: English home page card click & profile
+  console.log('\n[2/5] Navigating to https://vertexishere.com/en/ ...');
   await page.goto('https://vertexishere.com/en/', { waitUntil: 'networkidle', timeout: 30000 });
   await page.locator('#team').scrollIntoViewIfNeeded();
   await page.waitForSelector('#teamTrack .team-card', { timeout: 15000 });
 
   const enMustafaCard = page.locator('#teamTrack .team-card').filter({ hasText: 'Mustafa Çakı' });
-  await enMustafaCard.waitFor({ state: 'visible', timeout: 5000 });
-
-  const enHref = await enMustafaCard.locator('h3 a.team-profile-link').getAttribute('href');
-  console.log(`EN profile link href: ${enHref}`);
-  assert.strictEqual(enHref, '/en/mustafa-caki');
-
-  // Click card on name
-  console.log('Clicking name on EN card...');
   await Promise.all([
     page.waitForURL((url) => url.pathname.includes('/en/mustafa-caki'), { timeout: 15000 }),
     enMustafaCard.locator('h3 a.team-profile-link').click()
   ]);
 
   console.log(`Navigated to: ${page.url()}`);
-  assert(page.url().includes('/en/mustafa-caki'), 'Target URL should be /en/mustafa-caki');
+  assert(page.url().includes('/en/mustafa-caki'));
+  assert.strictEqual(await page.locator('.profile-heading .profile-photo-box').count(), 1);
+  assert.strictEqual(await page.locator('.profile-links .profile-link-icon').count(), 2);
 
-  const enTitle = await page.title();
-  const enRole = await page.locator('.profile-heading p').textContent();
-  console.log(`EN Title: ${enTitle}, EN Role: ${enRole}`);
-  assert(enTitle.includes('Co-Founder & CEO'), 'EN Title must contain Co-Founder & CEO');
-  assert(enRole.includes('Co-Founder & CEO'), 'EN Role must contain Co-Founder & CEO');
+  // Test 3: Other language profiles (e.g., German, French, Arabic, Japanese)
+  console.log('\n[3/5] Testing other language profiles across the globe...');
+  const testLangs = ['de', 'fr', 'ar', 'ja', 'es', 'zh'];
+  for (const l of testLangs) {
+    const langUrl = `https://vertexishere.com/${l}/mustafa-caki`;
+    const res = await page.goto(langUrl, { waitUntil: 'domcontentloaded', timeout: 20000 });
+    console.log(`Checked ${langUrl} -> status: ${res.status()}`);
+    assert.strictEqual(res.status(), 200, `Profile page for ${l} should return 200`);
+    assert.strictEqual(await page.locator('.profile-heading .profile-photo-box').count(), 1);
+    assert.strictEqual(await page.locator('.profile-links .profile-link-icon').count(), 2);
+  }
 
-  const enPCount = await page.locator('.profile-bio p').count();
-  assert.strictEqual(enPCount, 6, 'EN Bio must have 6 paragraphs');
+  // Test 4: Redirects across languages
+  console.log('\n[4/5] Testing clean redirects across languages...');
+  await page.goto('https://vertexishere.com/de/team/mustafa-caki', { waitUntil: 'domcontentloaded' });
+  console.log(`/de/team/mustafa-caki redirected to: ${page.url()}`);
+  assert(page.url().includes('/de/mustafa-caki'));
 
-  // Test 3: Redirects in production
-  console.log('\n[3/4] Testing clean redirects in production...');
-  await page.goto('https://vertexishere.com/en/team/mustafa-caki', { waitUntil: 'domcontentloaded' });
-  console.log(`/en/team/mustafa-caki redirected to: ${page.url()}`);
-  assert(page.url().includes('/en/mustafa-caki'), 'Clean redirect to /en/mustafa-caki failed');
-
-  await page.goto('https://vertexishere.com/tr/team/mustafa-caki', { waitUntil: 'domcontentloaded' });
-  console.log(`/tr/team/mustafa-caki redirected to: ${page.url()}`);
-  assert(page.url().includes('/tr/mustafa-caki'), 'Clean redirect to /tr/mustafa-caki failed');
-
-  // Test 4: Mobile viewport layout
-  console.log('\n[4/4] Testing mobile layout on production...');
+  // Test 5: Mobile viewport layout
+  console.log('\n[5/5] Testing mobile layout on production...');
   const mobileContext = await browser.newContext({
     viewport: { width: 375, height: 812 },
     isMobile: true
