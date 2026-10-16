@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html data-theme="light" dir="rtl" lang="ar">
+<head>
+<link href="../css/story-hero.css?v=0ef81abea879" rel="stylesheet"/>
+<script>
+(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<meta charset="utf-8"/><meta content="Mustafa Çakı, Co-Founder & CEO of Vertex. His story, technology vision and professional links." name="description"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/><link as="image" href="../assets/logo.svg" rel="preload"/>
+<title>Mustafa Çakı | Co-Founder & CEO · Vertex</title><link href="../assets/favicon.webp" rel="apple-touch-icon"/><meta content="#0E1013" name="theme-color"/><meta content="website" property="og:type"/><meta property="og:url" content="https://vertexishere.com/ar/mustafa-caki"><meta content="Mustafa Çakı | Co-Founder & CEO · Vertex" property="og:title"/><meta content="Mustafa Çakı, Co-Founder & CEO of Vertex. His story, technology vision and professional links." property="og:description"/><meta content="https://vertexishere.com/assets/og-image.png?v=cd7b9dbd49d6" property="og:image"/><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Vertex"><meta property="og:locale" content="ar_AR"><meta property="og:site_name" content="Vertex"><meta content="summary_large_image" name="twitter:card"/><meta content="Mustafa Çakı | Co-Founder & CEO · Vertex" name="twitter:title"/><meta content="Mustafa Çakı, Co-Founder & CEO of Vertex. His story, technology vision and professional links." name="twitter:description"/><meta content="https://vertexishere.com/assets/og-image.png?v=cd7b9dbd49d6" name="twitter:image"/>
+
+
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=c12fbbd8b60e">
+<style>h1{font-family:'Anton','Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.07em}h2,h3,h4,h5,h6{font-family:'Poppins',system-ui,-apple-system,sans-serif}</style>
+<style>
+  :root{
+    --header-bg:rgba(250,250,249,.72); --header-bg-scrolled:rgba(250,250,249,.9); --header-shadow:0 8px 28px rgba(26,27,30,.08);
+    --bg:#FAFAF9; --surface:#F1F1EE; --surface-2:#EAEAE6;
+    --text:#1A1B1E; --text-muted:#6B6E76; --border:#E3E3DF;
+    --accent:#000000; --accent-ink:#FFFFFF; --accent-soft:rgba(0,0,0,.06);
+    --radius-s:6px; --radius-m:10px;
+    --maxw:1120px;
+    --dur:200ms;
+    --logo-filter:brightness(0);
+  }
+  html[data-theme="dark"]{
+    --header-bg:rgba(14,16,19,.62); --header-bg-scrolled:rgba(14,16,19,.86); --header-shadow:0 8px 28px rgba(0,0,0,.38);
+    --bg:#0E1013; --surface:#15171B; --surface-2:#1B1E23;
+    --text:#EDEEEF; --text-muted:#8A8D96; --border:#262932;
+    --accent:#FFFFFF; --accent-ink:#000000; --accent-soft:rgba(255,255,255,.08);
+    --logo-filter:brightness(0) invert(1);
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; color-scheme:light;}
+  html[data-theme="dark"]{color-scheme:dark;}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:'Ubuntu',system-ui,-apple-system,sans-serif;
+    -webkit-font-smoothing:antialiased;
+    transition:background var(--dur) ease, color var(--dur) ease;
+  }
+  a{color:inherit;}
+  img,svg{display:block; max-width:100%;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:3px;}
+
+  /* Linear.app Tarzı Smooth Reveal Animasyonu (Header haricinde kullanılır) */
+  .linear-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    animation: linearFadeUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  }
+  @keyframes linearFadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.2s; }
+  .delay-3 { animation-delay: 0.3s; }
+  .delay-4 { animation-delay: 0.4s; }
+
+  /* Header (Sabit - Efektsiz) */
+  header{position:sticky; top:0; z-index:50; background:var(--header-bg); -webkit-backdrop-filter:blur(16px) saturate(160%); backdrop-filter:blur(16px) saturate(160%); border-bottom:1px solid var(--border); transition:background var(--dur) ease, border-color var(--dur) ease, box-shadow var(--dur) ease;}
+  header.scrolled{background:var(--header-bg-scrolled); box-shadow:var(--header-shadow);}
+  .nav{display:flex; align-items:center; justify-content:space-between; height:68px; gap:20px; transition:height 250ms ease;}
+  header.scrolled .nav{height:56px;}
+  header .logo-chip{transition:transform 250ms ease; transform-origin:left center; will-change:transform;}
+  header.scrolled .logo-chip{transform:scale(.9);}
+  section[id]{scroll-margin-top:84px;}
+  .menu-btn{display:none; flex-direction:column; align-items:center; justify-content:center; gap:5px;}
+  .menu-btn span{display:block; width:16px; height:1.8px; background:currentColor; border-radius:2px; transition:transform 220ms ease;}
+  header.menu-open .menu-btn span:first-child{transform:translateY(3.4px) rotate(45deg);}
+  header.menu-open .menu-btn span:last-child{transform:translateY(-3.4px) rotate(-45deg);}
+  .mobile-menu{max-height:0; overflow:hidden; visibility:hidden; transition:max-height 280ms ease, visibility 0s linear 280ms;}
+  header.menu-open .mobile-menu{max-height:480px; visibility:visible; transition:max-height 280ms ease;}
+  .mobile-menu nav{display:flex; flex-direction:column; padding-top:6px; padding-bottom:18px;}
+  .mobile-menu a.mlink{transition:color var(--dur) ease, border-color var(--dur) ease; display:block; padding:12px 2px; font-size:15px; font-weight:600; color:var(--text-muted); text-decoration:none; border-bottom:1px solid var(--border);}
+  .mobile-menu a.mlink:hover{color:var(--text);}
+  .mobile-menu .m-cta{margin-top:14px; width:100%;}
+  .brand{display:flex; align-items:center; gap:10px; text-decoration:none;}
+  .logo-chip{display:flex; align-items:center; gap:7px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:6px 10px;}
+  .logo-chip img{height:16px; width:auto; filter:var(--logo-filter); transition:filter var(--dur) ease;}
+  .logo-chip span{font-weight:800; font-size:14.5px; color:var(--text); letter-spacing:-.01em;}
+  header .logo-chip{background:transparent; border:none; padding:0; gap:10px; border-radius:0;}
+  header .logo-chip img{height:28px;}
+  header .logo-chip span{font-size:20px; letter-spacing:-.02em;}
+  .nav-links{display:flex; align-items:center; gap:26px; list-style:none; margin:0; padding:0;}
+  .nav-links a{font-size:14px; font-weight:500; text-decoration:none; color:var(--text-muted); position:relative; padding:4px 0; white-space:nowrap; transition:color var(--dur) ease;}
+  .nav-links a::after{content:''; position:absolute; left:0; right:0; bottom:0; height:1.5px; background:var(--text); transform:scaleX(0); transform-origin:left; transition:transform var(--dur) ease;}
+  .nav-links a:hover{color:var(--text);}
+  .nav-links a:hover::after{transform:scaleX(1);}
+  .nav-right{display:flex; align-items:center; gap:10px;}
+  .icon-btn{display:flex; align-items:center; justify-content:center; gap:6px; width:36px; height:36px; border-radius:var(--radius-s); border:1px solid var(--border); background:transparent; color:var(--text); cursor:pointer; transition:border-color var(--dur) ease; text-decoration:none; font-size:13px; font-weight:700;}
+  .icon-btn:hover{border-color:var(--text-muted);}
+  header .menu-btn{display:none;}
+  @media (max-width:860px){header .menu-btn{display:flex;}}
+  .lang-btn{width:auto; padding:0 12px;}
+  .lang-btn .chev{opacity:.55; transition:transform var(--dur) ease;}
+  .language-dropdown.open .lang-btn .chev{transform:rotate(180deg);}
+.language-dropdown{position:relative;}
+  .lang-panel{position:absolute; top:calc(100% + 10px); right:0; min-width:215px; max-height:330px; overflow:auto; background:var(--bg); border:1px solid var(--border); border-radius:12px; padding:6px; box-shadow:0 16px 40px rgba(0,0,0,.16); z-index:60; opacity:0; visibility:hidden; transform:translateY(6px); transition:opacity var(--dur) ease, transform var(--dur) ease, visibility 0s linear var(--dur);}
+  .language-dropdown.open .lang-panel{opacity:1; visibility:visible; transform:none; transition:opacity var(--dur) ease, transform var(--dur) ease;}
+  .lang-row{display:flex; align-items:center; justify-content:space-between; gap:12px; padding:10px 12px; font-size:13.5px; font-weight:500; color:var(--text-muted); border-radius:8px; text-decoration:none; white-space:nowrap; transition:background-color var(--dur) ease, color var(--dur) ease;}
+  .lang-row:hover{background:var(--surface); color:var(--text);}
+  .lang-row.active{color:var(--text); font-weight:700;}
+  .lang-row .tick{font-size:12px; opacity:0; color:var(--accent);}
+  .lang-row.active .tick{opacity:1;}
+  .mobile-menu button.mlink{width:100%; text-align:left; background:none; border:none; border-bottom:1px solid var(--border); cursor:pointer; font:inherit; display:flex; align-items:center; gap:10px; padding:12px 2px; font-size:15px; font-weight:600; color:var(--text-muted);}
+  .mobile-menu button.mlink:hover{color:var(--text);}
+  .mobile-menu button.mlink .chev-r{margin-left:auto;}
+  .btn{display:inline-flex; align-items:center; justify-content:center; padding:10px 18px; border-radius:var(--radius-s); font-size:14px; font-weight:600; text-decoration:none; cursor:pointer; border:1px solid transparent; transition:transform var(--dur) ease, background-color var(--dur) ease, border-color var(--dur) ease, color var(--dur) ease, box-shadow var(--dur) ease;}
+  .btn-primary{background:transparent; color:var(--text); border-color:var(--border);}
+  .btn-primary:hover{border-color:var(--text);}
+  .btn-ghost{border-color:var(--border); background:transparent; color:var(--text);}
+  .btn-ghost:hover{border-color:var(--text-muted);}
+
+  /* Hero */
+  .hero{padding:88px 0 64px;}
+  .hero-grid{display:grid; grid-template-columns:1.1fr .9fr; gap:56px; align-items:center;}
+  h1{font-size:clamp(32px,4.4vw,50px); line-height:1.14; letter-spacing:.07em; font-weight:400; margin:0 0 20px;}
+  .hero p.lede{font-size:17.5px; line-height:1.6; color:var(--text-muted); max-width:480px; margin:0 0 30px;}
+  .hero-actions{display:flex; gap:12px; flex-wrap:wrap;}
+  
+  .hero-visual{position:relative;}
+  .globe-wrap{position:relative; width:100%; max-width:480px; margin:0 auto;}
+  .hero-visual lottie-player{width:100%; height:auto; display:block; clip-path:ellipse(43.835% 44.275% at 50% 50%);}
+  .hero-visual .globe-dark{display:none;}
+  html[data-theme="dark"] .hero-visual .globe-light{display:none;}
+  html[data-theme="dark"] .hero-visual .globe-dark{display:block;}
+  .globe-ring{position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); box-sizing:content-box; width:87.67%; height:88.55%; border:2px solid var(--border); border-radius:50%; pointer-events:none; transition:border-color var(--dur) ease;}
+
+  /* Stats */
+  .stats{border-top:1px solid var(--border); border-bottom:1px solid var(--border);}
+  .stats-grid{display:grid; grid-template-columns:repeat(4,1fr); padding:34px 0;}
+  .stat{text-align:left; padding:0 20px; border-left:1px solid var(--border);}
+  .stat:first-child{border-left:none; padding-left:0;}
+  .stat .num{font-size:30px; font-weight:800; letter-spacing:-.02em;}
+  .stat .lab{font-size:13px; color:var(--text-muted); margin-top:2px;}
+
+  /* Statik ve Simetrik Gri Logolar */
+  .partners-static { border-bottom:1px solid var(--border); padding:36px 0; text-align:center; }
+  .partners-label { font-size:13px; color:var(--text-muted); margin-bottom:24px; }
+  .partners-logos { display:flex; gap:48px; justify-content:center; align-items:center; flex-wrap:wrap; max-width:900px; margin:0 auto; padding: 0 20px; }
+  .partner-logo-img { height:26px; width:auto; filter:grayscale(100%) opacity(40%); transition:filter 0.3s ease; }
+  html[data-theme="dark"] .partner-logo-img { filter: grayscale(100%) opacity(40%) invert(1); }
+  .partner-logo-img:hover{filter:grayscale(0) opacity(100%);}
+  html[data-theme="dark"] .partner-logo-img:hover { filter: grayscale(0) opacity(100%) invert(0); }
+
+  section{padding:72px 0;}
+  .products,.tech,.vision,.partners,.names,.cta-band{content-visibility:auto; contain-intrinsic-size:auto 720px;}
+  .section-head{max-width:560px; margin-bottom:40px;}
+  h2{font-size:clamp(23px,2.4vw,30px); letter-spacing:-.015em; margin:0 0 10px; font-weight:800;}
+  .section-head p{color:var(--text-muted); font-size:15px; line-height:1.6; margin:0;}
+
+  /* Feature trio */
+  .feature-trio{display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden;}
+  .feature-item{background:var(--bg); padding:28px 24px;}
+  .feature-item h2{font-size:16.5px; margin:0 0 10px; font-weight:700;}
+  .feature-item p{font-size:13.5px; color:var(--text-muted); line-height:1.6; margin:0;}
+
+  /* Products */
+  .products{border-top:1px solid var(--border);}
+  .product-layout{display:grid; grid-template-columns:1.3fr 1fr; gap:20px;}
+  .product-feature{border:1px solid var(--border); border-radius:var(--radius-m); padding:32px; background:transparent; display:flex; flex-direction:column; justify-content:space-between; min-height:260px; text-decoration:none; transition:border-color var(--dur) ease;}
+  .product-feature:hover{border-color:var(--text-muted);}
+  .product-feature .tag{font-size:12.5px; font-weight:700; color:var(--accent); margin-bottom:14px;}
+  .product-feature h3{font-size:21px; margin:0 0 10px; letter-spacing:-.01em; color:var(--text);}
+  .product-feature p{color:var(--text-muted); font-size:14.5px; line-height:1.6; margin:0; max-width:380px;}
+  .product-link{display:block; text-decoration:none; color:inherit;}
+  .store-badges{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+  .store-badge{display:inline-flex; align-items:center; gap:10px; padding:8px 16px 8px 12px; border:1px solid var(--border); border-radius:10px; background:var(--bg); text-decoration:none; color:var(--text); transition:border-color var(--dur) ease, transform var(--dur) ease;}
+  .store-badge:hover{border-color:var(--text-muted); border-color:var(--text);}
+  .store-badge svg{width:22px; height:22px; flex-shrink:0;}
+  .store-badge span{display:flex; flex-direction:column; line-height:1.25;}
+  .store-badge small{font-size:9.5px; font-weight:500; color:var(--text-muted); letter-spacing:.02em;}
+  .store-badge strong{font-size:15px; font-weight:700;}
+  .store-badges .store-badge{justify-content:center;}
+  .product-list{display:flex; flex-direction:column; gap:1px; border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden;}
+  .product-row{padding:19px 22px; background:var(--bg); border-bottom:1px solid var(--border); transition:background var(--dur) ease; text-decoration:none; display:block;}
+  .product-row:last-child{border-bottom:none;}
+  .product-row:hover h4{color:var(--accent);}
+  .product-row .tag-row{display:flex; align-items:center; gap:8px; margin-bottom:6px;}
+  .product-row .tag{font-size:11px; font-weight:700; color:var(--text-muted);}
+  .badge-soon{display:inline-block; font-size:10.5px; font-weight:700; padding:2.5px 8px; border-radius:20px; background:var(--accent-soft); color:var(--accent);}
+  .product-row h4{font-size:16px; margin:0 0 5px; font-weight:700; color:var(--text);}
+  .product-row p{font-size:13.5px; color:var(--text-muted); line-height:1.55; margin:0;}
+  .product-row.disabled{cursor:default;}
+  .product-row.disabled:hover{background:var(--bg);}
+
+  /* Tech ecosystem (Linear Style) */
+  .tech{border-top:1px solid var(--border);}
+  .tech-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  .tech-card{
+    border:1px solid var(--border); 
+    border-radius:var(--radius-m); 
+    background:transparent; 
+    display:flex; 
+    flex-direction:column; 
+    overflow:hidden;
+    transition: border-color 0.3s ease;
+  }
+  .tech-card:hover { border-color: var(--text-muted); }
+  .tech-visual-wrapper {
+    height: 180px;
+    background: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--border);
+    padding: 20px;
+  }
+  .tech-card-content {
+    padding: 20px;
+  }
+  .tech-card h3{font-size:15px; margin:0 0 8px; font-weight:700; color:var(--text);}
+  .tech-card .stack{font-size:13px; color:var(--text-muted); line-height:1.6;}
+
+  /* Vision */
+  .vision{border-top:1px solid var(--border);}
+  .vision-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:start;}
+  .vision-text p{font-size:16px; line-height:1.75; color:var(--text-muted); margin:0 0 16px;}
+  .vision-text p:first-child{color:var(--text); font-size:19px; line-height:1.6;}
+  .vision-ticker{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;}
+  .vision-chip{border:1px solid var(--border); border-radius:20px; padding:7px 15px; font-size:13px; font-weight:700; background:transparent;}
+
+  /* Team */
+  .team{border-top:1px solid var(--border);}
+  .team-head{display:flex; align-items:flex-end; justify-content:space-between; gap:20px; flex-wrap:wrap; margin-bottom:32px;}
+  .team-nav{display:flex; gap:8px;}
+  .team-nav-btn{width:36px; height:36px; border-radius:50%; border:1px solid var(--border); background:var(--surface); color:var(--text); display:flex; align-items:center; justify-content:center; cursor:pointer; transition:border-color var(--dur) ease, opacity .2s ease;}
+  .team-nav-btn:hover{border-color:var(--text-muted);}
+  .team-nav-btn:disabled{opacity:.32; cursor:default;}
+  .team-scroll-wrap{position:relative;}
+  .team-scroll-wrap::after{content:''; position:absolute; top:0; right:0; bottom:0; width:56px; background:linear-gradient(to left, var(--bg), transparent); pointer-events:none; transition:opacity var(--dur) ease;}
+  .team-scroll-wrap.at-end::after{opacity:0;}
+  .team-track{display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x proximity; scroll-behavior:smooth; padding:2px 2px 10px; scrollbar-width:none;}
+  .team-track::-webkit-scrollbar{display:none;}
+  .team-card{scroll-snap-align:start; flex:0 0 152px; width:152px; border:1px solid var(--border); border-radius:13px; background:transparent; padding:9px; transition:transform var(--dur) ease, border-color var(--dur) ease;}
+  .team-card:hover{transform:translateY(-3px); border-color:var(--text-muted);}
+  .team-photo-wrap{aspect-ratio:4/5; overflow:hidden; background:var(--bg); border-radius:9px;}
+  .team-photo{width:100%; height:100%; object-fit:cover; display:block; transition:transform .5s cubic-bezier(.16,1,.3,1);}
+  .team-card:hover .team-photo{transform:none;}
+  .team-info{padding:11px 3px 1px;}
+  .team-info h4{font-size:13.5px; margin:0 0 2px; font-weight:700; line-height:1.25;}
+  .team-info .role{font-size:11px; color:var(--text-muted); margin-bottom:9px; line-height:1.3;}
+  .team-social{display:flex; gap:6px;}
+  .team-social a{width:22px; height:22px; border-radius:50%; border:1px solid var(--border); display:flex; align-items:center; justify-content:center; transition:border-color var(--dur) ease;}
+  .team-social a:hover{border-color:var(--text-muted);}
+  .team-social img{width:10.5px; height:10.5px; opacity:.7; transition:filter var(--dur) ease;}
+  html[data-theme="dark"] .team-social img{filter:brightness(0) invert(1);}
+
+  /* Partners (Alt Kısım) */
+  .partners{border-top:1px solid var(--border);}
+  .partner-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:12px;}
+  .partner-card{border:1px solid var(--border); border-radius:var(--radius-m); padding:22px 14px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; background:transparent; transition:border-color var(--dur) ease; min-height:96px; text-decoration:none;}
+  .partner-card:hover{border-color:var(--text-muted);}
+  .partner-card img{max-height:24px; max-width:100%; opacity:.85;}
+  .partner-card img[alt="ElevenLabs"]{color:#000;}
+  html[data-theme="dark"] .partner-card img[alt="ElevenLabs"]{color:#fff;}
+  .partner-name{font-size:12.5px; font-weight:600; color:var(--text-muted);}
+
+  /* Name lists (Moderatörler & Onur Tablosu) */
+  .names{border-top:1px solid var(--border); overflow:hidden; padding-bottom: 72px;}
+  .name-block + .name-block{margin-top:56px;}
+  .name-block h3{font-size:18px; font-weight:700; margin:0 0 24px; color:var(--text); text-align:center;}
+  
+  /* Moderatörler Kayan Yazı (Onur Tablosu ile aynı) */
+  .mod-marquee-container{
+    width:100%; overflow:hidden;
+    -webkit-mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  .mod-track{display:flex; width:max-content; align-items:center; animation:scrollHonor 40s linear infinite;}
+  .mod-track:hover{animation-play-state:paused;}
+  .mod-item{
+    font-size:17px; font-weight:700; color:var(--text-muted);
+    white-space:nowrap; display:flex; align-items:center; cursor:default;
+    padding-right:32px; transition:color .2s ease;
+  }
+  .mod-item:hover{color:var(--text);}
+  .mod-item::after{content:'✦'; color:var(--border); font-size:14px; font-weight:400; margin-left:32px;}
+
+  /* Onur Tablosu Kayan Yazı (Marquee) - İçeriğe göre hizalanmış ve maskelenmiş hali */
+  .honor-marquee-container {
+    width: 100%;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  }
+  .honor-track { 
+    display: flex; 
+    width: max-content; 
+    align-items: center; 
+    animation: scrollHonor 40s linear infinite;
+    will-change:transform; 
+  }
+  .honor-track:hover { animation-play-state: paused; } /* Üzerine gelince durması için */
+  .honor-item { 
+    font-size: 24px; 
+    font-weight: 800; 
+    color: var(--text); 
+    letter-spacing: -0.02em; 
+    white-space: nowrap; 
+    display: flex; 
+    align-items: center; 
+    padding-right: 40px;
+  }
+  .honor-item::after { 
+    content: '✦'; 
+    color: var(--border); 
+    font-size: 18px; 
+    font-weight: 400; 
+    margin-left: 40px; 
+  }
+  @keyframes scrollHonor { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  .cta-band{border-top:1px solid var(--border); text-align:left;}
+  .cta-band .wrap{display:flex; align-items:center; justify-content:space-between; padding:50px 28px; flex-wrap:wrap; gap:20px;}
+  .cta-band h2{margin:0; font-size:24px;}
+  .cta-actions{display:flex; gap:12px;}
+
+  footer{border-top:1px solid var(--border); padding:72px 0 36px;}
+  footer .logo-chip{background:transparent; border:none; padding:0; gap:10px; border-radius:0;}
+  footer .logo-chip img{height:28px;}
+  footer .logo-chip span{font-size:20px; letter-spacing:-.02em;}
+  .foot-grid{display:grid; grid-template-columns:1.6fr 1fr 1fr 1fr; gap:48px; text-align:left; align-items:start; margin-bottom:56px;}
+  .foot-brand{display:flex; flex-direction:column; align-items:flex-start;}
+  .foot-brand p{color:var(--text-muted); font-size:13.5px; max-width:300px; line-height:1.6; margin:12px 0 0;}
+  .foot-links{display:contents;}
+  .foot-col h2{font-size:12.5px; color:var(--text-muted); margin:0 0 12px; font-weight:600;}
+  .foot-col a{display:block; font-size:13.5px; text-decoration:none; color:var(--text); margin-bottom:9px; transition:color var(--dur) ease, padding-left var(--dur) ease;}
+  .foot-col a:hover{color:var(--accent);}
+  .foot-bottom{padding-top:24px; border-top:1px solid var(--border); font-size:12.5px; color:var(--text-muted); line-height:1.7; display:flex; flex-direction:row; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;}
+  .foot-legal{display:flex; gap:20px;}
+  .foot-legal a{text-decoration:none; color:var(--text-muted); transition:color var(--dur) ease;}
+  .foot-legal a:hover{color:var(--text);}
+
+  @media (max-width:1024px){
+    .nav-links{gap:18px;}
+    .wrap{padding:0 22px;}
+  }
+  @media (max-width:860px){
+    .wrap{padding:0 20px;}
+    .hero{padding:64px 0 48px;}
+    .hero-grid{grid-template-columns:1fr; gap:36px;}
+    .hero-visual{order:-1; max-width:240px; margin:0 auto;}
+    .product-layout{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr 1fr; gap:24px 16px;}
+    .stat{border-left:none; padding:0; text-align:center;}
+    .feature-trio{grid-template-columns:1fr;}
+    .tech-grid{grid-template-columns:1fr 1fr;}
+    .vision-grid{grid-template-columns:1fr; gap:28px;}
+    .partner-grid{grid-template-columns:1fr 1fr;}
+    .nav-links{display:none;}
+    .nav-right .btn{display:none;}
+    .menu-btn{display:flex;}
+    .cta-band .wrap{padding-top:40px; padding-bottom:40px; flex-direction:column; align-items:stretch;}
+    .cta-actions{flex-direction:column;}
+    .cta-actions .btn{width:100%;}
+    .foot-grid{grid-template-columns:1fr; gap:36px; text-align:center; margin-bottom:40px;}
+    .foot-links{display:flex; flex-direction:column; gap:28px;}
+    .foot-brand{align-items:center;}
+    .foot-brand p{margin-left:auto; margin-right:auto;}
+    .foot-bottom{flex-direction:column; text-align:center;}
+    .foot-legal{justify-content:center;}
+  }
+  @media (min-width:861px){
+    .mobile-menu{display:none;}
+  }
+  @media (max-width:560px){
+    .tech-grid{grid-template-columns:1fr;}
+    .stats-grid{gap:18px 12px;}
+    .stat .num{font-size:24px;}
+    .team-card{flex:0 0 140px; width:140px;}
+    .partners-logos{gap:28px;}
+    .hero-actions .btn{flex:1 1 100%;}
+    .store-badges .store-badge{flex:1 1 140px; justify-content:center;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    header, .nav, header .logo-chip img{transition:none !important;}
+    .honor-track{animation:none !important;}
+    .linear-reveal{animation:none !important; opacity:1 !important; transform:none !important;}
+    .mod-item{transition:none !important; opacity:1 !important; transform:none !important;}
+  }
+</style>
+<link href="https://eleven-public-cdn.elevenlabs.io" rel="preconnect"/><link id="vertex-favicon" rel="icon" href="/assets/favicon-light.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/site-design.css?v=9dba49b5a636">
+<script defer src="/js/site-design.js?v=a424168824fe"></script>
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://vertexishere.com/#organization","name":"Vertex","url":"https://vertexishere.com","logo":"https://vertexishere.com/assets/logo.svg"},{"@type":"WebSite","@id":"https://vertexishere.com/#website","url":"https://vertexishere.com","name":"Vertex","inLanguage":"ar","publisher":{"@id":"https://vertexishere.com/#organization"}}]}</script><link rel="preload" as="font" type="font/woff2" href="/assets/fonts/font-2.woff2" crossorigin><link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/mustafa-caki"><link rel="alternate" hreflang="az" href="https://vertexishere.com/az/mustafa-caki"><link rel="alternate" hreflang="de" href="https://vertexishere.com/de/mustafa-caki"><link rel="alternate" hreflang="en" href="https://vertexishere.com/en/mustafa-caki"><link rel="alternate" hreflang="es" href="https://vertexishere.com/es/mustafa-caki"><link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/mustafa-caki"><link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/mustafa-caki"><link rel="alternate" hreflang="id" href="https://vertexishere.com/id/mustafa-caki"><link rel="alternate" hreflang="it" href="https://vertexishere.com/it/mustafa-caki"><link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/mustafa-caki"><link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/mustafa-caki"><link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/mustafa-caki"><link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/mustafa-caki"><link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/mustafa-caki"><link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/mustafa-caki"><link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/mustafa-caki"><link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/mustafa-caki"><link rel="canonical" href="https://vertexishere.com/ar/mustafa-caki"><script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Mustafa Çakı","jobTitle":"Co-Founder & CEO","url":"https://vertexishere.com/ar/mustafa-caki","image":"https://vertexishere.com/assets/team/MUSTAFACAKI.webp","worksFor":{"@type":"Organization","name":"Vertex","url":"https://vertexishere.com"},"sameAs":["https://www.linkedin.com/in/mustawtfa/","https://www.instagram.com/mustawtfa/"]}</script></head>
+<body>
+<!-- Header (Sabit kalıyor, Linear efekti sildik) -->
+<header id="siteHeader">
+<div class="wrap nav">
+<a class="brand" href="/ar/#home">
+<span class="logo-chip"><img alt="Vertex logo" decoding="async" fetchpriority="high" src="../assets/logo.svg" width="225" height="225"><span>Vertex</span></span>
+</a>
+<ul class="nav-links">
+<li><a href="/ar/#home">الرئيسية</a></li>
+<li><a href="/ar/#projects">المشاريع</a></li>
+<li><a href="/ar/#vision">Vision</a></li>
+<li><a href="/ar/#partners">الشركاء</a></li>
+<li><a href="/ar/#team">الفريق</a></li>
+</ul>
+<div class="nav-right">
+<div class="language-dropdown" id="langWrap">
+<button aria-expanded="false" aria-haspopup="menu" class="icon-btn lang-btn" id="langBtn">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" width="15"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg>
+<span>العربية</span><svg class="chev" fill="none" height="10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewBox="0 0 24 24" width="10"><path d="M6 9l6 6 6-6"></path></svg></button><div class="lang-panel" role="menu"><a class="lang-row" href="/tr/mustafa-caki" role="menuitem"><span>التركية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/en/mustafa-caki" role="menuitem"><span>الإنجليزية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/de/mustafa-caki" role="menuitem"><span>الألمانية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/fr/mustafa-caki" role="menuitem"><span>الفرنسية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/es/mustafa-caki" role="menuitem"><span>الإسبانية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/it/mustafa-caki" role="menuitem"><span>الإيطالية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/pt/mustafa-caki" role="menuitem"><span>البرتغالية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/nl/mustafa-caki" role="menuitem"><span>الهولندية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/ru/mustafa-caki" role="menuitem"><span>الروسية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/ar/mustafa-caki" class="lang-row active" role="menuitem"><span>العربية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/hi/mustafa-caki" role="menuitem"><span>الهندية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/id/mustafa-caki" role="menuitem"><span>الإندونيسية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/ja/mustafa-caki" role="menuitem"><span>اليابانية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/ko/mustafa-caki" role="menuitem"><span>الكورية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/zh/mustafa-caki" role="menuitem"><span>الصينية</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="/az/mustafa-caki" role="menuitem"><span>الأذربيجانية</span><span aria-hidden="true" class="tick">✓</span></a></div>
+</div>
+<button aria-label="Temayı değiştir" class="icon-btn" id="themeBtn">
+<svg fill="none" height="17" id="themeIconSun" stroke="currentColor" stroke-width="1.7" style="display:none" viewBox="0 0 24 24" width="17"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"></path></svg>
+<svg fill="none" height="17" id="themeIconMoon" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" width="17"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"></path></svg>
+</button><button aria-controls="mobileMenu" aria-expanded="false" aria-label="Menu" class="icon-btn menu-btn" id="menuBtn"><span></span><span></span></button>
+<a class="btn btn-primary" href="join-us.html">انضم إلينا</a>
+</div>
+</div><div class="mobile-menu" id="mobileMenu"><nav aria-label="Mobile" class="wrap"><a class="mlink" href="/ar/#home">الرئيسية</a><a class="mlink" href="/ar/#projects">المشاريع</a><a class="mlink" href="/ar/#vision">Vision</a><a class="mlink" href="/ar/#partners">الشركاء</a><a class="mlink" href="/ar/#team">الفريق</a><button aria-haspopup="menu" class="mlink m-lang" id="mLangBtn" type="button"><svg fill="none" height="18" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg><span>العربية</span><svg class="chev-r" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24" width="14"><path d="M9 6l6 6-6 6"></path></svg></button><a class="btn btn-primary m-cta" href="join-us.html">انضم إلينا</a></nav></div>
+</header>
+<main class="profile-page wrap"><article><header class="profile-heading"><div class="profile-photo-box"><img src="/assets/team/MUSTAFACAKI.webp" alt="Mustafa Çakı" fetchpriority="high" width="784" height="1024"></div><div><h1>Mustafa Çakı</h1><p>Co-Founder &amp; CEO · Vertex</p></div></header><div class="profile-layout"><div class="profile-bio"><p>Moving constantly with my teacher father, I witnessed extreme poverty; friends lost to the streets and families denied healthcare. My motivation is eradicating this suffering. A century after Atatürk began uplifting Türkiye, his mission remains unfinished.</p><p>My ultimate goal is global Eudaimonia, true human prosperity. I chose technology because it offers the fastest way to scale meaningful impact.</p><p>Despite dozens of rejections and legal hurdles as high schoolers, we built Cortex and organically reached 100,000+ global users without marketing spend.</p><p>Over three years at Vertex, I've led thousands of people through hundreds of challenges. I believe everyone carries a hidden spark, and my greatest strength is turning those sparks into collective fire.</p><p>I missed Teknopark High School by two points. Unable to enter as a student, I founded a startup and returned as a CEO. Three years later, Vertex entered Teknopark's incubation. One door closed, so I kicked down another.</p><p>In ten years, I intend to lead one of the world's largest companies, using technology to uplift Türkiye and advance prosperity worldwide. To me, this is already written destiny; my only job is to live it out.</p></div><aside class="profile-links"><h2>الروابط</h2><a href="https://www.linkedin.com/in/mustawtfa/" target="_blank" rel="noopener noreferrer"><svg class="profile-link-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg><span>LinkedIn ↗</span></a><a href="https://www.instagram.com/mustawtfa/" target="_blank" rel="noopener noreferrer"><svg class="profile-link-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg><span>Instagram ↗</span></a></aside></div></article></main>
+<footer>
+<div class="wrap foot-grid">
+<div class="foot-brand">
+<span class="logo-chip"><img alt="Vertex logo" decoding="async" loading="lazy" src="../assets/logo.svg" width="225" height="225"><span>Vertex</span></span>
+<p>أصغر شركة تكنولوجية في تركيا. نحدث ثورة في الذكاء الاصطناعي والبرمجيات والألعاب بمتوسط عمر 15 عامًا.</p>
+</div>
+<div class="foot-links">
+<div class="foot-col">
+<h2>المشاريع</h2>
+<a href="download.html" rel="noopener" target="_blank">Cortex</a>
+<a href="https://play.google.com/store/apps/details?id=com.VertexGames.AllStar" rel="noopener" target="_blank">All Star</a>
+<a href="https://github.com/VertexCorporation/Mergen" rel="noopener" target="_blank">Mergen</a><a href="/ar/#projects">Ally</a>
+</div>
+<div class="foot-col">
+<h2>الشركة</h2>
+<a href="/ar/#home">معلومات عنا</a>
+<a href="/ar/#team">الفريق</a>
+<a href="/ar/#vision">Vision</a>
+</div>
+<div class="foot-col">
+<h2>اتصل</h2>
+<a href="mailto:contact@vertexishere.com">إرسال بريد إلكتروني</a><a href="https://www.linkedin.com/company/vertexcorporation" rel="noopener" target="_blank">LinkedIn</a>
+<a href="https://www.instagram.com/vertexcorpltd" rel="noopener" target="_blank">Instagram</a><a href="https://x.com/VertexCorpLTD" rel="noopener" target="_blank">X</a>
+</div>
+</div>
+</div>
+<div class="wrap foot-bottom">
+<div>© 2026 Vertex Corporation Ltd. All rights reserved.</div>
+<div>20 Wenlock Road, London, N1 7GU, United Kingdom · +44 7400 412824</div>
+<div class="foot-legal">
+<a href="/ar/siyasat-al-khususiyya" rel="noopener" target="_blank">سياسة الخصوصية</a>
+<a href="/ar/shurut-al-khidma" rel="noopener" target="_blank">شروط الاستخدام</a>
+</div>
+</div>
+</footer>
+<!-- Lottie Player Script -->
+<!-- Lottie Player Script --><script>
+  /* Tema: kalıcı + sistem tercihi + doğru ikon (light'ta ay, dark'ta güneş göster) */
+  const themeBtn = document.getElementById('themeBtn');
+  const sunIcon = document.getElementById('themeIconSun');
+  const moonIcon = document.getElementById('themeIconMoon');
+  function syncThemeIcons(isDark){
+    sunIcon.style.display = isDark ? 'block' : 'none';
+    moonIcon.style.display = isDark ? 'none' : 'block';
+  }
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    try{ localStorage.setItem('theme', t); }catch(e){}
+    syncThemeIcons(t === 'dark');
+  }
+  (function initTheme(){
+    let t = null;
+    try{ t = localStorage.getItem('theme'); }catch(e){}
+    if(t !== 'light' && t !== 'dark'){
+      t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    }
+    applyTheme(t);
+  })();
+  themeBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    applyTheme(isDark ? 'light' : 'dark');
+  });
+
+/* Dil paneli (butona bağlı) */
+  const langWrap = document.getElementById('langWrap');
+  const langBtn = document.getElementById('langBtn');
+  const mLangBtn = document.getElementById('mLangBtn');
+  function closeLang(){
+    if(langWrap) langWrap.classList.remove('open');
+    if(langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  }
+  if(langBtn && langWrap){
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = langWrap.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', (e) => { if(!langWrap.contains(e.target)) closeLang(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLang(); });
+  }
+  if(mLangBtn && langWrap){
+    mLangBtn.addEventListener('click', () => {
+      const h = document.getElementById('siteHeader');
+      if(h) h.classList.remove('menu-open');
+      const mb = document.getElementById('menuBtn');
+      if(mb) mb.setAttribute('aria-expanded', 'false');
+      const open = langWrap.classList.toggle('open');
+      if(langBtn) langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  /* Header: scroll'da cam + incelme, mobil menü */
+  (function(){
+    var header = document.getElementById('siteHeader') || document.querySelector('header');
+    if(!header) return;
+    var ticking = false;
+    function onScroll(){
+      header.classList.toggle('scrolled', window.scrollY > 8);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+    }, {passive:true});
+    onScroll();
+    var menuBtn = document.getElementById('menuBtn');
+    if(!menuBtn) return;
+    function closeMenu(){
+      header.classList.remove('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+    menuBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = header.classList.toggle('menu-open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    header.querySelectorAll('.mobile-menu a').forEach(function(a){
+      a.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+    window.addEventListener('resize', function(){ if(window.innerWidth > 860) closeMenu(); });
+  })();
+/* Performans: görünürlükte oynat/duraklat + SW */
+  (function(){
+    var REDUCED = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var players = Array.prototype.slice.call(document.querySelectorAll('lottie-player'));
+    if(REDUCED){ players.forEach(function(p){ try{ p.autoplay = false; if(p.pause) p.pause(); }catch(_){} p.removeAttribute('autoplay'); }); }
+    if(players.length && 'IntersectionObserver' in window){
+      var watcher = new IntersectionObserver(function(es){
+        es.forEach(function(e){
+          var p = e.target;
+          try{
+            if(e.isIntersecting){ if(!REDUCED && p.play) p.play(); }
+            else if(p.pause){ p.pause(); }
+          }catch(_){}
+        });
+      });
+      players.forEach(function(p){ watcher.observe(p); });
+    }
+    var honor = document.querySelector('.honor-track');
+    if(honor && 'IntersectionObserver' in window){
+      new IntersectionObserver(function(es){
+        honor.style.animationPlayState = es[0].isIntersecting ? '' : 'paused';
+      }).observe(honor);
+    }
+    if('serviceWorker' in navigator && /^https?:$/.test(location.protocol)){
+      window.addEventListener('load', function(){
+        navigator.serviceWorker.register('/sw.js').catch(function(){});
+      });
+    }
+  })();</script>
+<script defer src="../js/vendor/d3-array.min.js"></script>
+<script defer src="../js/vendor/d3-geo.min.js"></script>
+<script defer src="../js/vendor/topojson-client.min.js"></script>
+<script defer src="../js/intro.js?v=ae264cc09e9d"></script>
+<script src="../js/site-team.js?v=41150fc39dee" defer></script>
+</body>
+</html>

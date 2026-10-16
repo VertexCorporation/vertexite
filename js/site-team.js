@@ -51,7 +51,8 @@
         var track=document.getElementById('teamTrack'); if(!track)return;
         track.replaceChildren(); var container=track.closest('.team-scroll-wrap'); if(container)container.hidden=!rows.length;
         var lang = (document.documentElement.lang || 'en').toLowerCase();
-        var currentLang = lang === 'tr' ? 'tr' : 'en';
+        var supportedLangs = ['ar','az','de','en','es','fr','hi','id','it','ja','ko','nl','pt','ru','tr','zh'];
+        var currentLang = supportedLangs.indexOf(lang) !== -1 ? lang : 'en';
         rows.forEach(function(card){
             var item=document.createElement('div');item.className='team-card';
             var wrap=document.createElement('div');wrap.className='team-photo-wrap';
