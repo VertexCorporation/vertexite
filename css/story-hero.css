@@ -57,6 +57,19 @@ html[data-theme="dark"] .story-sponsor-logos img { filter:grayscale(1) opacity(.
 .team-photo-missing{display:grid;place-items:center;font-size:42px;color:var(--text-muted);}
 @media(prefers-reduced-motion:reduce){.story-geometry{display:none}.story-stage::after,.hero.story-hero::after{display:none}}
 
-.story-title{-webkit-text-stroke:1px var(--bg);paint-order:stroke fill;text-shadow:0 1px 12px var(--bg);}
+ .story-title{text-shadow:none;-webkit-text-stroke:0;}
 
 @media(prefers-reduced-motion:reduce){.story-globe{transform:none;filter:none}}
+
+/* Scroll-only geometry and consistent controls. */
+.story-grid{display:none}.story-geometry{width:max(135vw,140vh);top:62%}.hero.story-hero{height:650vh}.story-title{text-wrap:nowrap;width:max-content;max-width:none}.story-globe{transform:scale(calc(2.5 * var(--ending-scale,1)))}
+.btn,.icon-btn,.store-badge{transition:border-color .2s ease,background-color .2s ease,color .2s ease;box-shadow:none}.btn:hover,.icon-btn:hover,.store-badge:hover{transform:none;border-color:var(--text)}
+.cta-band{position:relative;isolation:isolate;overflow:hidden}.cta-band::before{content:"";position:absolute;inset:-100px 0;z-index:-1;opacity:.12;background:repeating-conic-gradient(from 30deg at 20% 50%,transparent 0deg 59deg,var(--text) 59.2deg 59.6deg,transparent 60deg 120deg);pointer-events:none}.cta-band .wrap{min-height:250px}
+.partner-card img{width:180px;max-width:85%;height:45px;object-fit:contain}
+@media(max-width:700px){.hero.story-hero{height:600vh}.story-title{font-size:clamp(42px,8.2vw,112px)!important}}
+@media(prefers-reduced-motion:reduce){.hero.story-hero{height:auto}.story-title{white-space:normal!important;width:100%;max-width:100%}.story-globe{transform:none}.cta-band::before{opacity:.08}}
+
+.story-title-word{position:absolute;left:0;top:0;display:inline-block;white-space:pre}.story-title-probe .story-title-word{position:static;transform:none!important;margin-right:.25em}.story-title-probe .story-title-word:last-child{margin-right:0}
+@media(prefers-reduced-motion:reduce){.story-title-word{position:static;transform:none!important;margin-right:.25em}}
+
+.partner-card img,.partner-logo-img,.story-sponsor-logos img{filter:brightness(0);opacity:1}html[data-theme="dark"] .partner-card img,html[data-theme="dark"] .partner-logo-img,html[data-theme="dark"] .story-sponsor-logos img{filter:brightness(0) invert(1)}

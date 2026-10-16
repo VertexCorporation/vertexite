@@ -1,7 +1,7 @@
 // Public lists contain names only; empty/error responses never restore old names.
 (function () {
     var ENDPOINT = 'https://listsiteteam-o5h7dmtija-ew.a.run.app/';
-    var current = {}, timer;
+    var current = {}, timer, retryTimer, failures=0;
     function fill(id, values, itemClass) {
         var track = document.getElementById(id);
         if (!track) return;
@@ -50,7 +50,8 @@
         return fetch(ENDPOINT, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:{lang:document.documentElement.lang || 'en'}})})
             .then(function (res) { if (!res.ok) throw Error('unavailable'); return res.json(); })
             .then(function (json) { if (!json.result || !['staff','mods','chefs','honors'].every(function(k){return Array.isArray(json.result[k]);})) throw Error('invalid'); apply(json.result); })
-            .catch(function () { apply({}); });
+            .then(function(){failures=0;})
+            .catch(function () { if(failures++<3){clearTimeout(retryTimer);retryTimer=setTimeout(load,Math.min(30000,2000*Math.pow(2,failures))+Math.random()*1000);} });
     }
     function start() {
         var oldLeads = document.getElementById('chefTrack'); if (oldLeads) oldLeads.closest('.name-block').remove();
