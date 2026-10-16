@@ -28,7 +28,8 @@
 
 .btn-primary:hover {
     background: var(--primary-hover);
-    transform: translateY(-2px);
+    transform: none;
+    border-color: currentColor;
     box-shadow: 0 8px 25px rgba(var(--primary-rgb), 0.3);
 }
 

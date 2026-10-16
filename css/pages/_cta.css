@@ -89,5 +89,5 @@
 
 .cta-content .btn:hover {
     border-color: white;
-    transform: translateY(-2px);
+    transform: none;
 }
