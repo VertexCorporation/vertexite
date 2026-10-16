@@ -67,3 +67,10 @@ footer .foot-col a,footer .foot-legal a{color:var(--text-muted)}footer .foot-col
 @media(prefers-reduced-motion:reduce){.sky-clouds,.section-revealed>.wrap{animation:none!important}.cta-skyline svg{transform:none}}
 
 .cta-skyline{mask-image:none}.city-building{fill:var(--bg)}.city-buildings{mask-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.3) 45%,black 90%)}
+/* Uniform quiet hover; portrait pixels never scale. */
+.team-card,.team-card.has-profile,.team-card.profile-unavailable{transition:border-color 240ms var(--ui-ease) 45ms,box-shadow 240ms var(--ui-ease) 45ms;transform:none}
+.team-card:hover,.team-card.has-profile:hover,.team-card.profile-unavailable:hover,.team-card:focus-within{transform:none;border-color:var(--text-muted);box-shadow:0 2px 10px rgba(0,0,0,.035)}
+.team-card .team-photo,.team-card:hover .team-photo{transform:none;transition:none}
+.cta-skyline svg{display:block}.city-ground{stroke-width:1}
+.tech-diagram{display:block;width:220px;max-width:100%;height:164px;color:var(--text);opacity:.78;overflow:visible}.vision .tech-diagram{width:350px;height:auto;max-width:100%}.diagram-pulse{animation:diagramBreathe 5s ease-in-out infinite;animation-play-state:paused}.diagram-signal{stroke-dasharray:80 120;animation:diagramSignal 8s linear infinite;animation-play-state:paused}.diagram-orbit{transform-origin:110px 80px;animation:diagramOrbit 24s linear infinite;animation-play-state:paused}.diagram-active .diagram-pulse,.diagram-active .diagram-signal,.diagram-active .diagram-orbit{animation-play-state:running}@keyframes diagramBreathe{50%{opacity:.4}}@keyframes diagramSignal{to{stroke-dashoffset:-200}}@keyframes diagramOrbit{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.diagram-pulse,.diagram-signal,.diagram-orbit{animation:none}.team-card{transition:none}}

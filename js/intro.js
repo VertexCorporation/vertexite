@@ -42,6 +42,9 @@ setTimeout(async function () {
     return '<div class="story-metric"><strong>' + (number ? number.textContent.trim() : '') + '</strong><span>' + (label ? label.textContent.trim() : '') + '</span></div>';
   }).join('');
 
+  var outgoingStage=hero.querySelector('.story-stage').cloneNode(true);
+  var outgoingTitle=outgoingStage.querySelector('h1');if(outgoingTitle){var decorativeTitle=document.createElement('div');decorativeTitle.className=outgoingTitle.className;decorativeTitle.innerHTML=outgoingTitle.innerHTML;outgoingTitle.replaceWith(decorativeTitle);}
+  outgoingStage.classList.add('story-outgoing');outgoingStage.setAttribute('aria-hidden','true');outgoingStage.inert=true;
   hero.classList.add('story-hero');hero.classList.remove('story-static');
   hero.innerHTML = '' +
     '<div class="story-stage">' +
@@ -64,8 +67,10 @@ setTimeout(async function () {
   var geometry = hero.querySelector('.story-geometry');
   var lastGlobeFrame = '';
   var titleEl = hero.querySelector('.story-title');
+  var contrastTitle=document.createElement('div');contrastTitle.className='story-title-contrast';contrastTitle.setAttribute('aria-hidden','true');titleEl.before(contrastTitle);
   var titleWords=title.split(/\s+/).filter(Boolean),titleLayout=null;
   titleEl.textContent='';titleEl.setAttribute('aria-label',title);titleWords.forEach(function(word){var span=document.createElement('span');span.textContent=word;span.className='story-title-word';span.setAttribute('aria-hidden','true');titleEl.appendChild(span);});
+  contrastTitle.replaceChildren(...Array.from(titleEl.children).map(function(el){var copy=el.cloneNode(true);copy.className='story-contrast-word';return copy;}));
   function measureTitle(){
     var probe=titleEl.cloneNode(true);probe.className='story-title story-title-probe';probe.style.cssText='position:fixed;visibility:hidden;transform:none;left:0;top:0;width:'+Math.min(1120,window.innerWidth-40)+'px;font-size:'+Math.max(42,Math.min(112,window.innerWidth*.082))+'px;white-space:normal;';
     document.body.appendChild(probe);var base=probe.getBoundingClientRect(),initial=Array.from(probe.children).map(function(el){var r=el.getBoundingClientRect();return {x:r.left-base.left,y:r.top-base.top};});
@@ -200,9 +205,8 @@ setTimeout(async function () {
     var geometryOpacity=reduced?0:Math.max(1-smooth(phase(progress,.10,.30)),ending);
     geometry.style.opacity=String(geometryOpacity);
     // Wireframe lines must remain behind solid lettering; invert only the globe phase.
-    var invertTitle=!reduced&&geometryOpacity===0;
-    titleEl.style.mixBlendMode=invertTitle?'difference':'normal';
-    titleEl.style.color=invertTitle?'#fff':'var(--text)';
+    var contrastBlend=reduced?0:smooth(phase(progress,.30,.36))*(1-smooth(phase(progress,.88,.90)));
+    titleEl.style.mixBlendMode='normal';titleEl.style.color='var(--text)';
     geometry.style.transform='translate3d(-50%,-50%,0) scale('+mix(1,1.4,smooth(phase(progress,.05,.30))*(1-ending))+') rotate('+mix(0,18,phase(progress,0,.30)*(1-ending))+'deg)';
     titleEl.style.transform = 'translate3d(-50%,' + (mix(0, -Math.min(76, window.innerHeight * .08), titleLift)).toFixed(2) + 'px,0)';
     titleEl.style.fontSize = 'clamp(42px,8.2vw,112px)';
@@ -216,7 +220,10 @@ setTimeout(async function () {
     actionsEl.style.pointerEvents=actionsIn<.05?'none':'';actionsEl.inert=actionsIn<.05;
     titleEl.style.transform += ' scale('+ (mix(1,fit*grow,morph)).toFixed(4)+')';
     titleEl.style.willChange='auto';titleEl.style.left=morph===0?'0':'50%';titleEl.style.right=morph===0?'0':'auto';titleEl.style.margin=morph===0?'0 auto':'0';if(morph===0)titleEl.style.transform=titleLift?'translateY('+(-Math.min(76,window.innerHeight*.08)*titleLift).toFixed(2)+'px)':'none';
-    titleEl.style.opacity=String(1-.12*Math.sin(Math.PI*phase(progress,.015,.26))*(1-ending));
+    var titleOpacity=1-.12*Math.sin(Math.PI*phase(progress,.015,.26))*(1-ending);
+    contrastTitle.style.cssText=titleEl.style.cssText;contrastTitle.style.mixBlendMode='difference';contrastTitle.style.color='#fff';contrastTitle.style.opacity=String(titleOpacity*contrastBlend);
+    Array.from(contrastTitle.children).forEach(function(el,i){el.style.cssText=titleEl.children[i].style.cssText;});
+    titleEl.style.opacity=String(titleOpacity*(1-contrastBlend));
     // Keep panels below the actual title, including long translated headings.
     var titleBottom=Math.max.apply(null,Array.from(titleEl.children).map(function(el){return el.getBoundingClientRect().bottom;}))-stage.getBoundingClientRect().top;
     if(!reduced)[sponsorsEl,statementEl,metricsEl].forEach(function(panel){panel.style.top=Math.max(titleBottom+24,Math.min(306,window.innerHeight*.34))+'px';});
@@ -267,4 +274,8 @@ setTimeout(async function () {
   new MutationObserver(requestRender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   render();
   stage.classList.add('story-ready');
+  if(!reduced&&stage.animate){hero.appendChild(outgoingStage);outgoingStage.querySelector('.story-geometry').style.opacity='1';
+    stage.animate([{opacity:0},{opacity:1}],{duration:280,easing:'ease-out'});
+    outgoingStage.animate([{opacity:1},{opacity:0}],{duration:280,easing:'ease-out'}).finished.then(function(){outgoingStage.remove();});
+  }
 },750);
