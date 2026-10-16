@@ -67,6 +67,7 @@
   function measureTitle(){
     var probe=titleEl.cloneNode(true);probe.className='story-title story-title-probe';probe.style.cssText='position:fixed;visibility:hidden;transform:none;left:0;top:0;width:'+Math.min(1120,window.innerWidth-40)+'px;font-size:'+Math.max(42,Math.min(112,window.innerWidth*.082))+'px;white-space:normal;';
     document.body.appendChild(probe);var base=probe.getBoundingClientRect(),initial=Array.from(probe.children).map(function(el){var r=el.getBoundingClientRect();return {x:r.left-base.left,y:r.top-base.top};});
+    var rows=new Map();Array.from(probe.children).forEach(function(el,i){var r=el.getBoundingClientRect(),key=Math.round(initial[i].y);if(!rows.has(key))rows.set(key,[]);rows.get(key).push({i:i,left:initial[i].x,right:initial[i].x+r.width});});rows.forEach(function(row){var left=Math.min.apply(null,row.map(function(r){return r.left;})),right=Math.max.apply(null,row.map(function(r){return r.right;})),offset=(base.width-(right-left))/2-left;row.forEach(function(r){initial[r.i].x+=offset;});});
     probe.style.width='max-content';probe.style.whiteSpace='nowrap';base=probe.getBoundingClientRect();var total=base.width,final=Array.from(probe.children).map(function(el){var r=el.getBoundingClientRect();return {x:r.left-base.left,y:0};});
     titleLayout={height:initial.reduce(function(h,p){return Math.max(h,p.y);},0)+parseFloat(getComputedStyle(probe).lineHeight),initial:initial,final:final,width:Math.min(1120,window.innerWidth-40),total:total};probe.remove();
   }

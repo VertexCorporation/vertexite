@@ -18,8 +18,8 @@
         append(false);
         if (!values.length) return;
         var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!reduced && track.scrollWidth > container.clientWidth) {
-            append(true); track.style.animation = ''; track.style.animationDuration = Math.max(40, Math.round(track.scrollWidth / 75)) + 's';
+        if (!reduced) {
+            append(true); track.style.setProperty('--name-cycle',(track.children[values.length].getBoundingClientRect().left-track.children[0].getBoundingClientRect().left)+'px'); track.style.animation = ''; track.style.animationName='publicNamesLoop'; track.style.animationDuration = '10s';
         } else {
             track.style.width = '100%'; track.style.flexWrap = 'wrap'; track.style.justifyContent = 'center';
             container.style.maskImage = 'none'; container.style.webkitMaskImage = 'none';

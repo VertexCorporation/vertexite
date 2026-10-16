@@ -30,3 +30,19 @@ input,select,textarea{border-color:var(--border-strong);border-radius:8px;backgr
 .story-sponsors,.story-statement,.story-metrics{background:var(--surface);border-color:var(--border);box-shadow:none;backdrop-filter:none;}
 .story-quick-status{color:var(--text-muted);font-size:13px;}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.skeleton::after{animation:none!important}.cta-band::before,.cta-band::after{animation:none!important}.story-actions{position:relative!important;top:auto!important;}}
+/* Stable header geometry prevents threshold/layout feedback while scrolling. */
+header .nav,header.scrolled .nav{height:68px;transition:none}header .logo-chip,header.scrolled .logo-chip{transform:none;transition:none}
+footer a{color:var(--text-muted);transition:color 120ms var(--ui-ease)}footer a:hover,footer a:focus-visible{color:var(--text)}
+/* White difference text inverts the actual pixels underneath, including land. */
+.story-title{color:#fff;mix-blend-mode:difference}
+/* A geometric skyline rises once on entry; no continuously rendered scene. */
+.cta-band::before,.cta-band::after{display:none}.cta-skyline{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;color:var(--text);opacity:.13}.cta-skyline svg{width:100%;height:100%;transform:translateY(100%);transition:transform 1200ms cubic-bezier(.16,1,.3,1)}.geometry-active .cta-skyline svg{transform:translateY(0)}
+@media(prefers-reduced-motion:reduce){.cta-skyline svg{transform:none;transition:none}}
+@property --scrollbar-alpha{syntax:'<number>';inherits:true;initial-value:0}
+html,.lang-panel{--scrollbar-alpha:0;transition:--scrollbar-alpha 170ms ease}html.is-scrolling,.lang-panel.is-scrolling{--scrollbar-alpha:1}
+:root{--scroll-rgb:0 0 0}html[data-theme="dark"]{--scroll-rgb:255 255 255}
+*{scrollbar-width:thin;scrollbar-color:rgb(var(--scroll-rgb)/var(--scrollbar-alpha)) transparent}
+::-webkit-scrollbar{width:7px;height:7px;background:transparent}::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}::-webkit-scrollbar-thumb{background:rgb(var(--scroll-rgb)/var(--scrollbar-alpha));border-radius:999px}
+@keyframes publicNamesLoop{from{transform:translateX(0)}to{transform:translateX(calc(-1 * var(--name-cycle)))}}
+
+footer .foot-col a,footer .foot-legal a{color:var(--text-muted)}footer .foot-col a:hover,footer .foot-col a:focus-visible,footer .foot-legal a:hover,footer .foot-legal a:focus-visible{color:var(--accent)}
