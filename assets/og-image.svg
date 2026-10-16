@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#0f0f10"/><svg x="190" y="190" width="240" height="240" viewBox="0 0 225 225">
+  <!-- Outer Triangle -->
+  <polygon points="112.5,38 200.5,189 24.5,189" fill="none" stroke="white" stroke-width="15" stroke-linejoin="round" />
+
+  <!-- Top Dash -->
+  <line x1="112.5" y1="82" x2="112.5" y2="109" stroke="white" stroke-width="10" stroke-linecap="round" />
+
+  <!-- Center Y-shape -->
+  <path d="M 112.5,125 L 112.5,137 L 102,143 M 112.5,137 L 123,143" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+
+  <!-- Bottom-Left Dash -->
+  <line x1="84.5" y1="153.5" x2="64.5" y2="165.5" stroke="white" stroke-width="10" stroke-linecap="round" />
+
+  <!-- Bottom-Right Dash -->
+  <line x1="140.5" y1="153.5" x2="160.5" y2="165.5" stroke="white" stroke-width="10" stroke-linecap="round" />
+
+</svg><text x="470" y="370" fill="#f5f5f5" font-family="Arial,sans-serif" font-size="135" font-weight="700">Vertex</text></svg>

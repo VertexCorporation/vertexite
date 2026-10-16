@@ -79,7 +79,7 @@
   var metricsEl = hero.querySelector('.story-metrics');
   var actionsEl = hero.querySelector('.story-actions');
   var cueEl = hero.querySelector('.story-scroll-cue');
-  actionsEl.addEventListener('click',function(event){var link=event.target.closest('a');if(!link)return;var href=link.getAttribute('href');if(href&&href.charAt(0)==='#'){var target=document.querySelector(href);if(target){event.preventDefault();event.stopPropagation();window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-(header?header.offsetHeight:0),behavior:'instant'});history.replaceState(null,'',href);}}});
+  actionsEl.addEventListener('click',function(event){var link=event.target.closest('a');if(!link)return;var href=link.getAttribute('href');if(href&&href.charAt(0)==='#'){var target=document.querySelector(href);if(target){event.preventDefault();event.stopPropagation();target.style.animation='none';window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-(header?header.offsetHeight:0),behavior:'instant'});history.replaceState(null,'',href);}}});
   var context = canvas.getContext('2d');
   if(!context)return;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -190,10 +190,10 @@
     var metricsIn = phase(progress, .67, .77) * (1 - phase(progress, .82, .89));
     var ending=smooth(phase(progress,.90,1));
     var actionsIn = Math.max(1-phase(progress,.015,.09),phase(progress,.92,1));
-    var titleLift = smooth(phase(progress, .03, .18))*(1-ending);
+    var titleLift = smooth(phase(progress, .015, .26))*(1-ending);
 
     var headerHide = reduced ? 0 : smooth(phase(progress,.035,.16)) * (1-smooth(phase(progress,.86,.98)));
-    if(header){header.style.transform='translate3d(0,'+(-110*headerHide).toFixed(2)+'%,0)';header.style.opacity=String(1-headerHide);header.inert=headerHide>.95;header.style.pointerEvents=headerHide>.95?'none':'';}
+    if(header){header.style.transform=headerHide===0?'none':'translate3d(0,'+(-110*headerHide).toFixed(2)+'%,0)';header.style.opacity=String(1-headerHide);header.inert=headerHide>.95;header.style.pointerEvents=headerHide>.95?'none':'';}
     stage.style.setProperty('--story-header-space',((1-headerHide)*68).toFixed(1)+'px');
     var geometryOpacity=reduced?0:Math.max(1-smooth(phase(progress,.10,.30)),ending);
     geometry.style.opacity=String(geometryOpacity);
@@ -206,12 +206,15 @@
     titleEl.style.fontSize = 'clamp(42px,8.2vw,112px)';
     var layout=titleLayout,fit=Math.min(1,(window.innerWidth-40)/layout.total),morph=smooth(phase(progress,.03,.22))*(1-ending);
     titleEl.style.width=mix(layout.width,layout.total,morph)+'px';
-    Array.from(titleEl.children).forEach(function(el,i){el.style.transform='translate3d('+mix(layout.initial[i].x,layout.final[i].x,morph).toFixed(2)+'px,'+mix(layout.initial[i].y,0,morph).toFixed(2)+'px,0)';});
+    titleEl.style.height=layout.height+'px';
+    titleEl.style.display='flex';titleEl.style.flexWrap='wrap';titleEl.style.justifyContent='center';titleEl.style.alignContent='flex-start';titleEl.style.columnGap='.25em';
+    Array.from(titleEl.children).forEach(function(el,i){el.style.position=morph===0?'static':'absolute';el.style.transform=morph===0?'none':'translate3d('+mix(layout.initial[i].x,layout.final[i].x,morph).toFixed(2)+'px,'+mix(layout.initial[i].y,0,morph).toFixed(2)+'px,0)';});
     var grow=mix(.86,1,smooth(phase(progress,.30,.56)));
     actionsEl.style.top=(titleEl.offsetTop+layout.height+26)+'px';
     actionsEl.style.pointerEvents=actionsIn<.05?'none':'';actionsEl.inert=actionsIn<.05;
     titleEl.style.transform += ' scale('+ (mix(1,fit*grow,morph)).toFixed(4)+')';
-    titleEl.style.opacity='1';
+    titleEl.style.willChange='auto';titleEl.style.left=morph===0?'0':'50%';titleEl.style.right=morph===0?'0':'auto';titleEl.style.margin=morph===0?'0 auto':'0';if(morph===0)titleEl.style.transform='none';
+    titleEl.style.opacity=String(1-.12*Math.sin(Math.PI*phase(progress,.015,.26))*(1-ending));
     reveal(sponsorsEl, sponsorIn, 28);
     reveal(globeWrap, globeIn, 42);
     reveal(statementEl, statementIn, 34);

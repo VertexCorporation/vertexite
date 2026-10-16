@@ -71,7 +71,8 @@
     (showDate ? back : details.querySelector('input, textarea, select')).focus({ preventScroll: true });
   }
 
-  next.addEventListener('click', () => {
+  next.addEventListener('click', async () => {
+    if(window.validateVertexPhone&&!await window.validateVertexPhone()){document.getElementById('joinPhone').reportValidity();return;}
     const invalid = [...details.querySelectorAll('input, textarea, select')].find(input => !input.checkValidity());
     if (invalid) {
       invalid.reportValidity();

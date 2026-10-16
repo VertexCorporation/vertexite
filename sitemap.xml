@@ -1,508 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml"
-        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
-
-  <!-- EN MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/en/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- TR MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/tr/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- HI MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/hi/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- AR MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/ar/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- AZ MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/az/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- PT MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/pt/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- NL MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/nl/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- ID MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/id/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- IT MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/it/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- ES MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/es/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- RU MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/ru/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- FR MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/fr/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- JA MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/ja/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- KO MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/ko/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- ZH MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/zh/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- DE MAIN PAGE -->
-  <url>
-    <loc>https://vertexishere.com/de/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>1.0</priority>
-
-    <xhtml:link rel="alternate" hreflang="en" href="https://vertexishere.com/en/" />
-    <xhtml:link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/" />
-    <xhtml:link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/" />
-    <xhtml:link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/" />
-    <xhtml:link rel="alternate" hreflang="az" href="https://vertexishere.com/az/" />
-    <xhtml:link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/" />
-    <xhtml:link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/" />
-    <xhtml:link rel="alternate" hreflang="id" href="https://vertexishere.com/id/" />
-    <xhtml:link rel="alternate" hreflang="it" href="https://vertexishere.com/it/" />
-    <xhtml:link rel="alternate" hreflang="es" href="https://vertexishere.com/es/" />
-    <xhtml:link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/" />
-    <xhtml:link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/" />
-    <xhtml:link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/" />
-    <xhtml:link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/" />
-    <xhtml:link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/" />
-    <xhtml:link rel="alternate" hreflang="de" href="https://vertexishere.com/de/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/" />
-
-    <image:image>
-      <image:loc>https://vertexishere.com/assets/og-image.jpg</image:loc>
-      <image:title>Vertex - The Peak of Technology</image:title>
-    </image:image>
-  </url>
-
-  <!-- 🌐 ROOT REDIRECT PAGE -->
-  <url>
-    <loc>https://vertexishere.com/</loc>
-    <lastmod>2025-12-25</lastmod>
-    <priority>0.5</priority>
-  </url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://vertexishere.com/all-star-privacy-policy</loc></url>
+  <url><loc>https://vertexishere.com/all-star-terms-of-service</loc></url>
+  <url><loc>https://vertexishere.com/ar/</loc></url>
+  <url><loc>https://vertexishere.com/ar/documentation</loc></url>
+  <url><loc>https://vertexishere.com/ar/download</loc></url>
+  <url><loc>https://vertexishere.com/ar/join-us</loc></url>
+  <url><loc>https://vertexishere.com/ar/partners</loc></url>
+  <url><loc>https://vertexishere.com/ar/shurut-al-khidma</loc></url>
+  <url><loc>https://vertexishere.com/ar/siyasat-al-khususiyya</loc></url>
+  <url><loc>https://vertexishere.com/ar/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/az/</loc></url>
+  <url><loc>https://vertexishere.com/az/documentation</loc></url>
+  <url><loc>https://vertexishere.com/az/download</loc></url>
+  <url><loc>https://vertexishere.com/az/join-us</loc></url>
+  <url><loc>https://vertexishere.com/az/mexfilik-siyaseti</loc></url>
+  <url><loc>https://vertexishere.com/az/partners</loc></url>
+  <url><loc>https://vertexishere.com/az/vertex-kadro-sozlesmesi</loc></url>
+  <url><loc>https://vertexishere.com/az/xidmet-sertleri</loc></url>
+  <url><loc>https://vertexishere.com/cortex-attributions</loc></url>
+  <url><loc>https://vertexishere.com/cortex-privacy-policy</loc></url>
+  <url><loc>https://vertexishere.com/cortex-terms-of-service</loc></url>
+  <url><loc>https://vertexishere.com/de/</loc></url>
+  <url><loc>https://vertexishere.com/de/datenschutzrichtlinie</loc></url>
+  <url><loc>https://vertexishere.com/de/documentation</loc></url>
+  <url><loc>https://vertexishere.com/de/download</loc></url>
+  <url><loc>https://vertexishere.com/de/join-us</loc></url>
+  <url><loc>https://vertexishere.com/de/nutzungsbedingungen</loc></url>
+  <url><loc>https://vertexishere.com/de/partners</loc></url>
+  <url><loc>https://vertexishere.com/de/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/en/</loc></url>
+  <url><loc>https://vertexishere.com/en/documentation</loc></url>
+  <url><loc>https://vertexishere.com/en/download</loc></url>
+  <url><loc>https://vertexishere.com/en/join-us</loc></url>
+  <url><loc>https://vertexishere.com/en/mustafa-caki</loc></url>
+  <url><loc>https://vertexishere.com/en/partners</loc></url>
+  <url><loc>https://vertexishere.com/en/privacy-policy</loc></url>
+  <url><loc>https://vertexishere.com/en/terms-of-service</loc></url>
+  <url><loc>https://vertexishere.com/en/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/es/</loc></url>
+  <url><loc>https://vertexishere.com/es/documentation</loc></url>
+  <url><loc>https://vertexishere.com/es/download</loc></url>
+  <url><loc>https://vertexishere.com/es/join-us</loc></url>
+  <url><loc>https://vertexishere.com/es/partners</loc></url>
+  <url><loc>https://vertexishere.com/es/politica-de-privacidad</loc></url>
+  <url><loc>https://vertexishere.com/es/terminos-de-servicio</loc></url>
+  <url><loc>https://vertexishere.com/es/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/fr/</loc></url>
+  <url><loc>https://vertexishere.com/fr/conditions-d-utilisation</loc></url>
+  <url><loc>https://vertexishere.com/fr/documentation</loc></url>
+  <url><loc>https://vertexishere.com/fr/download</loc></url>
+  <url><loc>https://vertexishere.com/fr/join-us</loc></url>
+  <url><loc>https://vertexishere.com/fr/partners</loc></url>
+  <url><loc>https://vertexishere.com/fr/politique-de-confidentialite</loc></url>
+  <url><loc>https://vertexishere.com/fr/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/hi/</loc></url>
+  <url><loc>https://vertexishere.com/hi/documentation</loc></url>
+  <url><loc>https://vertexishere.com/hi/download</loc></url>
+  <url><loc>https://vertexishere.com/hi/gopaniyata-niti</loc></url>
+  <url><loc>https://vertexishere.com/hi/join-us</loc></url>
+  <url><loc>https://vertexishere.com/hi/partners</loc></url>
+  <url><loc>https://vertexishere.com/hi/seva-ki-shartein</loc></url>
+  <url><loc>https://vertexishere.com/hi/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/id/</loc></url>
+  <url><loc>https://vertexishere.com/id/documentation</loc></url>
+  <url><loc>https://vertexishere.com/id/download</loc></url>
+  <url><loc>https://vertexishere.com/id/join-us</loc></url>
+  <url><loc>https://vertexishere.com/id/kebijakan-privasi</loc></url>
+  <url><loc>https://vertexishere.com/id/partners</loc></url>
+  <url><loc>https://vertexishere.com/id/syarat-layanan</loc></url>
+  <url><loc>https://vertexishere.com/id/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/it/</loc></url>
+  <url><loc>https://vertexishere.com/it/documentation</loc></url>
+  <url><loc>https://vertexishere.com/it/download</loc></url>
+  <url><loc>https://vertexishere.com/it/informativa-sulla-privacy</loc></url>
+  <url><loc>https://vertexishere.com/it/join-us</loc></url>
+  <url><loc>https://vertexishere.com/it/partners</loc></url>
+  <url><loc>https://vertexishere.com/it/termini-di-servizio</loc></url>
+  <url><loc>https://vertexishere.com/it/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/ja/</loc></url>
+  <url><loc>https://vertexishere.com/ja/documentation</loc></url>
+  <url><loc>https://vertexishere.com/ja/download</loc></url>
+  <url><loc>https://vertexishere.com/ja/join-us</loc></url>
+  <url><loc>https://vertexishere.com/ja/partners</loc></url>
+  <url><loc>https://vertexishere.com/ja/puraibashi-porishi</loc></url>
+  <url><loc>https://vertexishere.com/ja/riyou-kiyaku</loc></url>
+  <url><loc>https://vertexishere.com/ja/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/ko/</loc></url>
+  <url><loc>https://vertexishere.com/ko/documentation</loc></url>
+  <url><loc>https://vertexishere.com/ko/download</loc></url>
+  <url><loc>https://vertexishere.com/ko/gaein-jeongbo-cheori-bangchim</loc></url>
+  <url><loc>https://vertexishere.com/ko/iyong-yakgwan</loc></url>
+  <url><loc>https://vertexishere.com/ko/join-us</loc></url>
+  <url><loc>https://vertexishere.com/ko/partners</loc></url>
+  <url><loc>https://vertexishere.com/ko/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/nl/</loc></url>
+  <url><loc>https://vertexishere.com/nl/documentation</loc></url>
+  <url><loc>https://vertexishere.com/nl/download</loc></url>
+  <url><loc>https://vertexishere.com/nl/join-us</loc></url>
+  <url><loc>https://vertexishere.com/nl/partners</loc></url>
+  <url><loc>https://vertexishere.com/nl/privacybeleid</loc></url>
+  <url><loc>https://vertexishere.com/nl/servicevoorwaarden</loc></url>
+  <url><loc>https://vertexishere.com/nl/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/privacy-policy</loc></url>
+  <url><loc>https://vertexishere.com/pt/</loc></url>
+  <url><loc>https://vertexishere.com/pt/documentation</loc></url>
+  <url><loc>https://vertexishere.com/pt/download</loc></url>
+  <url><loc>https://vertexishere.com/pt/join-us</loc></url>
+  <url><loc>https://vertexishere.com/pt/partners</loc></url>
+  <url><loc>https://vertexishere.com/pt/politica-de-privacidade</loc></url>
+  <url><loc>https://vertexishere.com/pt/termos-de-servico</loc></url>
+  <url><loc>https://vertexishere.com/pt/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/ru/</loc></url>
+  <url><loc>https://vertexishere.com/ru/documentation</loc></url>
+  <url><loc>https://vertexishere.com/ru/download</loc></url>
+  <url><loc>https://vertexishere.com/ru/join-us</loc></url>
+  <url><loc>https://vertexishere.com/ru/partners</loc></url>
+  <url><loc>https://vertexishere.com/ru/politika-konfidencialnosti</loc></url>
+  <url><loc>https://vertexishere.com/ru/usloviya-obsluzhivaniya</loc></url>
+  <url><loc>https://vertexishere.com/ru/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/support</loc></url>
+  <url><loc>https://vertexishere.com/terms-of-service</loc></url>
+  <url><loc>https://vertexishere.com/tr/</loc></url>
+  <url><loc>https://vertexishere.com/tr/aramiza-katil</loc></url>
+  <url><loc>https://vertexishere.com/tr/dokumantasyon</loc></url>
+  <url><loc>https://vertexishere.com/tr/gizlilik-politikasi</loc></url>
+  <url><loc>https://vertexishere.com/tr/hizmet-sartlari</loc></url>
+  <url><loc>https://vertexishere.com/tr/indir</loc></url>
+  <url><loc>https://vertexishere.com/tr/mustafa-caki</loc></url>
+  <url><loc>https://vertexishere.com/tr/sponsorlar</loc></url>
+  <url><loc>https://vertexishere.com/tr/vertex-kadro-sozlesmesi</loc></url>
+  <url><loc>https://vertexishere.com/zh/</loc></url>
+  <url><loc>https://vertexishere.com/zh/documentation</loc></url>
+  <url><loc>https://vertexishere.com/zh/download</loc></url>
+  <url><loc>https://vertexishere.com/zh/fuwu-tiaokuan</loc></url>
+  <url><loc>https://vertexishere.com/zh/join-us</loc></url>
+  <url><loc>https://vertexishere.com/zh/partners</loc></url>
+  <url><loc>https://vertexishere.com/zh/vertex-team-contract</loc></url>
+  <url><loc>https://vertexishere.com/zh/yinsi-zhengce</loc></url>
 </urlset>
