@@ -26,16 +26,53 @@
         }
     }
     function names(rows) { return Array.isArray(rows) ? rows.filter(function (r) { return r && typeof r.name === 'string' && r.name.trim(); }).map(function (r) { return r.name.trim(); }) : []; }
+    function isMustafa(name) {
+        if (!name || typeof name !== 'string') return false;
+        var clean = name.trim().toLowerCase().replace(/ı/g, 'i').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        return clean === 'mustafa caki';
+    }
+    function getProfileSlug(card) {
+        if (!card) return null;
+        if (typeof card.profileSlug === 'string' && card.profileSlug.trim()) {
+            return card.profileSlug.trim().replace(/^\/+|\/+$/g, '');
+        }
+        if (typeof card.profileId === 'string' && card.profileId.trim()) {
+            return card.profileId.trim().replace(/^\/+|\/+$/g, '');
+        }
+        if (typeof card.slug === 'string' && card.slug.trim()) {
+            return card.slug.trim().replace(/^\/+|\/+$/g, '');
+        }
+        if (isMustafa(card.name)) {
+            return 'mustafa-caki';
+        }
+        return null;
+    }
     function renderCards(rows) {
         var track=document.getElementById('teamTrack'); if(!track)return;
         track.replaceChildren(); var container=track.closest('.team-scroll-wrap'); if(container)container.hidden=!rows.length;
+        var lang = (document.documentElement.lang || 'en').toLowerCase();
+        var currentLang = lang === 'tr' ? 'tr' : 'en';
         rows.forEach(function(card){
             var item=document.createElement('div');item.className='team-card';
             var wrap=document.createElement('div');wrap.className='team-photo-wrap';
             var photo=document.createElement('img');photo.className='team-photo';photo.alt=card.name;photo.width=400;photo.height=400;photo.loading='lazy';photo.decoding='async';photo.src=card.imageUrl;
             photo.onerror=function(){photo.remove();wrap.classList.add('team-photo-missing');wrap.textContent=card.name.slice(0,1);};wrap.appendChild(photo);
-            var info=document.createElement('div');info.className='team-info';var name=document.createElement('h3');name.textContent=card.name;var profile=card.name==='Mustafa Çakı'&&new URL(card.imageUrl,location.origin).pathname==='/assets/team/MUSTAFACAKI.webp'?'/'+(document.documentElement.lang==='tr'?'tr':'en')+'/mustafa-caki':null;if(profile){var link=document.createElement('a');link.href=profile;link.textContent=card.name;name.replaceChildren(link);var photoLink=document.createElement('a');photoLink.href=profile;photoLink.setAttribute('aria-label',card.name);photoLink.appendChild(photo);wrap.appendChild(photoLink);}var role=document.createElement('div');role.className='role';role.textContent=card.position;
-            var social=document.createElement('div');social.className='team-social';(card.links||[]).forEach(function(link){var a=document.createElement('a');a.href=link.url;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',link.label);var img=document.createElement('img');img.alt=link.label;img.src='../assets/'+(link.label.toLowerCase()==='linkedin'?'linkedin.svg':link.label.toLowerCase()==='instagram'?'instagram.svg':'website.svg');a.appendChild(img);social.appendChild(a);});
+            var info=document.createElement('div');info.className='team-info';var name=document.createElement('h3');name.textContent=card.name;
+            var slug=getProfileSlug(card);
+            var profile=slug?'/'+currentLang+'/'+slug:null;
+            if(profile){
+                item.classList.add('has-profile');
+                if(slug)item.dataset.profileSlug=slug;
+                var link=document.createElement('a');link.className='team-profile-link';link.href=profile;link.textContent=card.name;name.replaceChildren(link);
+                var photoLink=document.createElement('a');photoLink.href=profile;photoLink.setAttribute('aria-label',card.name);photoLink.setAttribute('tabindex','-1');photoLink.setAttribute('aria-hidden','true');photoLink.appendChild(photo);wrap.appendChild(photoLink);
+                item.addEventListener('click',function(e){if(e.target.closest('.team-social')||e.target.closest('a'))return;window.location.href=profile;});
+                link.addEventListener('keydown',function(e){if(e.key===' '){e.preventDefault();window.location.href=profile;}});
+            }else{
+                item.dataset.profileAvailable='false';
+                item.classList.add('profile-unavailable');
+            }
+            var role=document.createElement('div');role.className='role';role.textContent=card.position;
+            var social=document.createElement('div');social.className='team-social';(card.links||[]).forEach(function(link){var a=document.createElement('a');a.href=link.url;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',link.label);a.addEventListener('click',function(e){e.stopPropagation();});var img=document.createElement('img');img.alt=link.label;img.src='../assets/'+(link.label.toLowerCase()==='linkedin'?'linkedin.svg':link.label.toLowerCase()==='instagram'?'instagram.svg':'website.svg');a.appendChild(img);social.appendChild(a);});
             info.append(name,role,social);item.append(wrap,info);track.appendChild(item);
         });track.dispatchEvent(new Event('scroll'));
     }

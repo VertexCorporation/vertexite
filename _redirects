@@ -1,3 +1,12 @@
 / /en/ 301
 /verify/* /verify 200
 /muze /tr/ 302
+/en/team/mustafa-caki /en/mustafa-caki 301
+/en/team/mustafa-caki/ /en/mustafa-caki 301
+/tr/team/mustafa-caki /tr/mustafa-caki 301
+/tr/team/mustafa-caki/ /tr/mustafa-caki 301
+/en/mustafa-caki/ /en/mustafa-caki 301
+/tr/mustafa-caki/ /tr/mustafa-caki 301
+/team/mustafa-caki /en/mustafa-caki 301
+/team/mustafa-caki/ /en/mustafa-caki 301
+
