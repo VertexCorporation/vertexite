@@ -195,7 +195,12 @@
     var headerHide = reduced ? 0 : smooth(phase(progress,.035,.16)) * (1-smooth(phase(progress,.86,.98)));
     if(header){header.style.transform='translate3d(0,'+(-110*headerHide).toFixed(2)+'%,0)';header.style.opacity=String(1-headerHide);header.inert=headerHide>.95;header.style.pointerEvents=headerHide>.95?'none':'';}
     stage.style.setProperty('--story-header-space',((1-headerHide)*68).toFixed(1)+'px');
-    geometry.style.opacity=String(reduced?0:Math.max(1-smooth(phase(progress,.10,.30)),ending));
+    var geometryOpacity=reduced?0:Math.max(1-smooth(phase(progress,.10,.30)),ending);
+    geometry.style.opacity=String(geometryOpacity);
+    // Wireframe lines must remain behind solid lettering; invert only the globe phase.
+    var invertTitle=!reduced&&geometryOpacity===0;
+    titleEl.style.mixBlendMode=invertTitle?'difference':'normal';
+    titleEl.style.color=invertTitle?'#fff':'var(--text)';
     geometry.style.transform='translate3d(-50%,-50%,0) scale('+mix(1,1.4,smooth(phase(progress,.05,.30))*(1-ending))+') rotate('+mix(0,18,phase(progress,0,.30)*(1-ending))+'deg)';
     titleEl.style.transform = 'translate3d(-50%,' + (mix(0, -Math.min(76, window.innerHeight * .08), titleLift)).toFixed(2) + 'px,0)';
     titleEl.style.fontSize = 'clamp(42px,8.2vw,112px)';
