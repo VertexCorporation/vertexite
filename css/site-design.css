@@ -151,7 +151,7 @@ header .nav-right>.nav-future-cta{font-size:12px;padding:10px 12px;white-space:n
   .btn-primary:hover,.story-actions .btn-primary:hover,header .nav-right .btn-primary:hover{
     border-color:transparent!important;box-shadow:none;opacity:1!important;transform:none;filter:brightness(.9)
   }
-  html[data-theme="light"] .btn-primary:hover{background-color:#292c30}
+  /* The brightness filter darkens both light and dark filled buttons consistently. */
 }
 @media(prefers-reduced-motion:reduce){.btn-primary,.story-actions .btn-primary{transition:none!important}}
 
