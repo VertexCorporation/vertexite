@@ -25,164 +25,190 @@ const I18N = {
 const FALLBACK_NEWS = [{ "id": "the-era-of-boring-health-apps-is-ending", "translations": { "tr": { "summary": "İşte Ally!", "content": "Sadece adım sayan, ruhsuz uygulamalardan sıkıldın mı? Sıkıldın sıkıldın, biz de sıkıldık. Ally ile, sağlığınızı hayatınızın eğlenceli bir parçası yapıyoruz. Entegre donanımlarımızla beraber, amacımız dünya genelinde sağlıklı yaşam oranlarını artırmak ve akut ölümleri minimuma indirmek. Alfa test sürecine katılıp bu devrimin bir parçası olmaya ne dersin? Gel, geleceğin en gelişmiş sağlık ekosisteminin ilk adımlarını hep beraber atalım.", "title": "SIKICI SAĞLIK UYGULAMALARI DEVRİ BİTİYOR" }, "en": { "content": "Are you tired of soulless apps that just count steps? You’ve had enough, and so have we. With Ally, we are making your health a fun part of your life. Together with our integrated hardware, our goal is to increase healthy living rates worldwide and minimize acute deaths. How about joining the Alpha testing process and becoming a part of this revolution? Come, let's take the first steps of the most advanced health ecosystem of the future together.", "summary": "Meet Ally!", "title": "THE ERA OF BORING HEALTH APPS IS ENDING" } }, "cover": { "en": "news/covers/the-era-of-boring-health-apps-is-ending/1766923800106-en-cover.jpg", "tr": "news/covers/the-era-of-boring-health-apps-is-ending/1766923799776-tr-TR BANNER.png" }, "authorUid": "87F41GbxROdIYAweHiSRA5ZFIbS2", "slug": "the-era-of-boring-health-apps-is-ending", "references": ["https://allyishere.com"], "tags": ["ally", "health", "fitness", "gamification", "lifestyle", "habit-tracker", "wellbeing", "future-tech", "smart-health", "early-access", "biohacking", "alpha"], "publishedAt": "2025-12-28T12:10:07.414Z" }, { "id": "we-are-breaking-ground-in-the-ai-industry", "slug": "we-are-breaking-ground-in-the-ai-industry", "tags": ["cortex", "app"], "references": [], "authorUid": "87F41GbxROdIYAweHiSRA5ZFIbS2", "publishedAt": "2025-06-18T20:58:42.808Z", "cover": { "tr": "news/covers/we-are-breaking-ground-in-the-ai-industry/tr-cortex_banner_tr.png", "en": "news/covers/we-are-breaking-ground-in-the-ai-industry/en-cortex_banner_en.png" }, "translations": { "en": { "title": "WE ARE BREAKING GROUND IN THE AI INDUSTRY", "summary": "cortex is set to revolutionize the world by offering users an efficient and offline ai experience on mobile devices, along with many unconventional features.", "content": "cortex is an advanced artificial intelligence application. it offers almost all popular ai models in a single app, minimizing complexity, it also provides an offline experience, so no one is left out in offline mode, it keeps data on the device, ensuring security, it allows users to create their own ais, it allows users to add their own models, it befriends you with characters inside, and can do much more.\n\nmoreover, cortex is completely open source, anyone can contribute to the project or create their own projects through cortex.\n\nas of august 2025, cortex is available on the play store and open to everyone, try it now!\n\ngotthelicensesohandsoff" }, "tr": { "title": "YAPAY ZEKA SEKTÖRÜNDE ÇIĞIR AÇIYORUZ", "content": "cortex, gelişmiş bir yapay zeka uygulamasıdır.\nnerdeyse tüm popüler yapay zeka modellerini tek uygulamadan sunarak karmaşıklığı minimuma indirir, kullanıcılara internetsiz deneyim de sunarak kimseyi yalnız bırakmaz, çevrimdışı modda verileri cihazda tutarak güvenliği sağlar, kullanıcıların kendi yapay zekalarını oluşturmasına izin verir, kullanıcıların kendi modellerini eklemesine izin verir, içindeki karakterlerle size dost olur ve çok daha fazlasını yapabilir.\n\nüstelik cortex tamamen açık kaynaklı, isteyen herkes projeye katkı yapabilir veya kendi projelerini cortex üzerinden oluşturabilir.\n\ncortex, haziran 2025 ağustos itibariyle Play Store üzerinde yayında ve herkesin erişimine açık, hemen deneyin!\n\nlisansıvarbuaradadenemeyinçalmayı", "summary": "cortex, kullanıcılara mobil cihazlarda son derece verimli ve çevrimdışı bir yapay zekâ deneyimi sunan, bunun yanı sıra birçok alışılmışın dışında özellikle donatılmış devrim niteliğinde bir mobil uygulamadır." } } }];
 
 
+
+const NEWS_KEY = 'news:published';
+const COVER_FALLBACK = '/assets/logo.svg';
+const NEWS_LIMIT = 36;
+
+function validArticles(value) {
+    return Array.isArray(value) && value.length > 0 && value.length <= 1000 &&
+        value.every(item => item && typeof item === 'object' && typeof item.id === 'string' &&
+            item.translations && typeof item.translations === 'object');
+}
+function validURL(value) {
+    try {
+        const url = new URL(value, location.href);
+        return (url.protocol === 'https:' || url.protocol === 'http:') ? url.href : '';
+    } catch (_) { return ''; }
+}
+function signedExpiry(url) {
+    try {
+        const query = new URL(url).searchParams;
+        const rawDate = query.get('X-Goog-Date') || query.get('X-Amz-Date');
+        const seconds = Number(query.get('X-Goog-Expires') || query.get('X-Amz-Expires'));
+        if (rawDate && /^[0-9]{8}T[0-9]{6}Z$/.test(rawDate) && Number.isFinite(seconds) && seconds > 0) {
+            const time = Date.UTC(Number(rawDate.slice(0,4)), Number(rawDate.slice(4,6))-1,
+                Number(rawDate.slice(6,8)), Number(rawDate.slice(9,11)),
+                Number(rawDate.slice(11,13)), Number(rawDate.slice(13,15)));
+            return Math.min(time + seconds * 1000 - 60000, Date.now() + 24 * 3600 * 1000);
+        }
+    } catch (_) {}
+    // The provider may omit expiry metadata: re-sign conservatively.
+    return Date.now() + 5 * 60 * 1000;
+}
+
+const coverPromises = new Map();
 async function getSignedImageUrl(filePath) {
-    if (!filePath) return '../assets/logo.webp';
-    try {
-        const response = await fetch(IMAGE_API_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data: { filePath: filePath } })
-        });
-        if (!response.ok) return '../assets/logo.webp';
-        const json = await response.json();
-        return json.result?.signedUrl || '../assets/logo.webp';
-    } catch (e) {
-        console.warn("Image fetch failed", e);
-        return '../assets/logo.webp';
-    }
+    if (!filePath || typeof filePath !== 'string') return COVER_FALLBACK;
+    if (/^https?:\/\//i.test(filePath)) return validURL(filePath) || COVER_FALLBACK;
+    const cache = window.VertexPublicCache;
+    const key = 'news-cover:' + filePath;
+    const saved = cache && cache.read(key);
+    if (saved && saved.value && saved.value.expiresAt > Date.now() + 10000 &&
+        validURL(saved.value.url)) return saved.value.url;
+    if (coverPromises.has(filePath)) return coverPromises.get(filePath);
+    const promise = (async () => {
+        try {
+            const options = {method:'POST',headers:{'Content-Type':'application/json'},
+                body:JSON.stringify({data:{filePath}})};
+            const json = cache ? await cache.fetchJSON(IMAGE_API_ENDPOINT,options,10000)
+                : await fetch(IMAGE_API_ENDPOINT,options).then(r=>{if(!r.ok)throw Error('cover unavailable');return r.json();});
+            const url = validURL(json && json.result && json.result.signedUrl);
+            if (!url) return COVER_FALLBACK;
+            const expiresAt = signedExpiry(url);
+            if (cache && expiresAt > Date.now() + 15000) cache.save(key,{url,expiresAt});
+            return url;
+        } catch (error) {
+            console.warn('[news] cover unavailable',error);
+            return COVER_FALLBACK;
+        }
+    })().finally(()=>coverPromises.delete(filePath));
+    coverPromises.set(filePath,promise);
+    return promise;
 }
-
-async function fetchNews() {
-    const lang = document.documentElement.lang || 'en';
-    const strings = I18N[lang] || I18N['en'];
-    const container = document.getElementById('news-container');
-    if (!container) return;
-
-    try {
-        // 1. Get Signed URL for JSON
-        const response = await fetch(API_ENDPOINT, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ data: null })
-        });
-
-        if (!response.ok) throw new Error(`API Error: ${response.status}`);
-
-        const jsonResponse = await response.json();
-        const signedUrl = jsonResponse.result?.signedUrl;
-
-        if (!signedUrl) throw new Error("No signed URL returned");
-
-        // 2. Fetch News Content
-        const newsDataResponse = await fetch(signedUrl);
-        if (!newsDataResponse.ok) throw new Error("Failed to fetch news data");
-
-        let articles = await newsDataResponse.json();
-
-        // Solar projesine ait verileri filtrele
-        articles = articles.filter(article => {
-            const id = (article.id || '').toLowerCase();
-            const slug = (article.slug || '').toLowerCase();
-            const tags = (article.tags || []).map(t => t.toLowerCase());
-            const titles = Object.values(article.translations || {}).map(t => (t.title || '').toLowerCase());
-
-            return !id.includes('solar') &&
-                   !slug.includes('solar') &&
-                   !tags.includes('solar') &&
-                   !titles.some(title => title.includes('solar'));
-        });
-
-        // 3. Render
-        await renderNews(articles, container, lang, strings);
-        
-    } catch (error) {
-        console.warn("News fetch failed, using fallback data:", error);
-        await renderNews(FALLBACK_NEWS, container, lang, strings);
-
-        const section = document.getElementById('news-section');
-        if (section) section.style.display = 'block';
-    }
+function visibleNews(items) {
+    return items.filter(article => {
+        const id = String(article.id || '').toLowerCase(), slug = String(article.slug || '').toLowerCase();
+        const tags = Array.isArray(article.tags)?article.tags.map(t=>String(t).toLowerCase()):[];
+        const titles = Object.values(article.translations||{}).map(t=>String((t&&t.title)||'').toLowerCase());
+        return !id.includes('solar') && !slug.includes('solar') &&
+            !tags.includes('solar') && !titles.some(title=>title.includes('solar'));
+    }).sort((a,b)=>new Date(b.publishedAt||0)-new Date(a.publishedAt||0));
 }
-
-async function renderNews(articles, container, lang, strings) {
-    if (!articles || articles.length === 0) return;
-
-    // Sort by date desc
-    articles.sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt));
-
-    container.innerHTML = `
-        <div class="container">
-            <h2 class="section-title fade-up visible text-center mb-6" style="font-size: 36px;">${strings.title}</h2>
-            <div class="news-grid" id="news-grid-internal"></div>
-        </div>
-    `;
-
-    const internalGrid = document.getElementById('news-grid-internal');
-
-    // Process all images in parallel
-    const articlesWithImages = await Promise.all(articles.map(async (article) => {
-        const rawPath = article.cover?.[lang] || article.cover?.['en'] || article.cover?.[Object.keys(article.cover)[0]];
-        const imageUrl = await getSignedImageUrl(rawPath);
-        return { ...article, imageUrl };
-    }));
-
-    articlesWithImages.forEach(article => {
-        // Fallback to English if translation missing
-        const content = article.translations[lang] || article.translations['en'];
-        if (!content) return;
-
-        const date = new Date(article.publishedAt).toLocaleDateString(lang, {
-            year: 'numeric', month: 'long', day: 'numeric'
+async function fetchRemoteNews() {
+    const cache = window.VertexPublicCache;
+    const options = {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:null})};
+    const response = cache ? await cache.fetchJSON(API_ENDPOINT,options,12000)
+        : await fetch(API_ENDPOINT,options).then(r=>{if(!r.ok)throw Error('news URL unavailable');return r.json();});
+    const signedUrl = validURL(response && response.result && response.result.signedUrl);
+    if (!signedUrl) throw new Error('invalid news download URL');
+    const data = cache ? await cache.fetchJSON(signedUrl,{method:'GET',credentials:'omit'},12000)
+        : await fetch(signedUrl).then(r=>{if(!r.ok)throw Error('news unavailable');return r.json();});
+    if (!validArticles(data)) throw new Error('invalid news data');
+    return visibleNews(data);
+}
+function makeElement(tag,className,text) {
+    const node=document.createElement(tag);
+    if(className)node.className=className;
+    if(text!=null)node.textContent=text;
+    return node;
+}
+function setCoverImage(img,article,lang) {
+    const covers=article.cover||{};
+    const path=covers[lang]||covers.en||Object.values(covers)[0];
+    if(!path)return;
+    let started=false;
+    const load=async()=>{
+        if(started)return;started=true;
+        img.src=await getSignedImageUrl(path);
+    };
+    if('IntersectionObserver' in window) {
+        const observer=new IntersectionObserver(entries=>{
+            if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();load();}
+        },{rootMargin:'160px'});
+        observer.observe(img);
+    } else load();
+}
+function renderNews(articles,container,lang,strings) {
+    const visible=visibleNews(articles).slice(0,NEWS_LIMIT);
+    const grid=document.createDocumentFragment();
+    visible.forEach(article=>{
+        const content=(article.translations||{})[lang]||(article.translations||{}).en||
+            Object.values(article.translations||{})[0];
+        if(!content||!content.title)return;
+        const card=makeElement('article','vertex-news-card');
+        const cover=makeElement('div','vertex-news-cover');
+        const image=makeElement('img','vertex-news-image');
+        image.src=COVER_FALLBACK;image.alt='';image.loading='lazy';image.decoding='async';
+        image.addEventListener('error',()=>{if(image.src!==new URL(COVER_FALLBACK,location.href).href)image.src=COVER_FALLBACK;});
+        cover.appendChild(image);setCoverImage(image,article,lang);
+        const contentWrap=makeElement('div','vertex-news-content');
+        const dateValue=new Date(article.publishedAt);
+        if(!isNaN(dateValue.valueOf())){
+            const date=makeElement('time','vertex-news-date',dateValue.toLocaleDateString(lang,{day:'numeric',month:'long',year:'numeric'}));
+            date.dateTime=dateValue.toISOString();contentWrap.appendChild(date);
+        }
+        contentWrap.appendChild(makeElement('h3','vertex-news-title',content.title));
+        const summaryText=content.summary || (content.content ? content.content.slice(0,170)+'…' : '');
+        const summary=makeElement('p','vertex-news-summary',summaryText);
+        contentWrap.appendChild(summary);
+        const detail=makeElement('div','vertex-news-detail');
+        detail.hidden=true;
+        detail.appendChild(makeElement('p','vertex-news-body',content.content||summaryText));
+        const source=Array.isArray(article.references)?validURL(article.references[0]):'';
+        if(source){
+            const link=makeElement('a','vertex-news-source',strings.source+' ↗');
+            link.href=source;link.target='_blank';link.rel='noopener noreferrer';detail.appendChild(link);
+        }
+        contentWrap.appendChild(detail);
+        const button=makeElement('button','vertex-news-toggle',strings.readMore+' ↓');
+        button.type='button';button.setAttribute('aria-expanded','false');
+        button.addEventListener('click',()=>{
+            const expanded=button.getAttribute('aria-expanded')==='true';
+            button.setAttribute('aria-expanded',String(!expanded));
+            detail.hidden=expanded;summary.hidden=!expanded;
+            button.textContent=expanded?strings.readMore+' ↓':strings.close+' ↑';
         });
-
-        // Prepare summary and Full Content
-        const summaryText = content.summary || (content.content ? content.content.substring(0, 100) + '...' : '');
-        // Replace newlines with <br> for HTML rendering
-        const fullText = (content.content || summaryText).replace(/\n/g, '<br>');
-
-        const card = document.createElement('div');
-        card.className = "card fade-up visible news-card animated-border";
-
-        card.innerHTML = `
-            <div class="news-img-container">
-                <img src="${article.imageUrl}" alt="${content.title}" loading="lazy" decoding="async" onerror="this.src='../assets/favicon.webp'">
-            </div>
-            <div class="card-content">
-                <div class="news-date">${date}</div>
-                <h3>${content.title}</h3>
-                
-                <div class="news-summary">
-                    <p>${summaryText}</p>
-                </div>
-                
-                <div class="news-full-content" style="display: none;">
-                    <p>${fullText}</p>
-                    ${article.references && article.references.length > 0 ?
-                `<a href="${article.references[0]}" target="_blank" class="btn btn-outline btn-sm mt-4" style="margin-top: 16px;">${strings.source}</a>` : ''}
-                </div>
-                
-                <span class="read-more-btn">${strings.readMore} &darr;</span>
-            </div>
-        `;
-
-        // Add Click Event Listener
-        card.addEventListener('click', (e) => {
-            // If clicking the source link, specific behaviors usually bubble
-            if (e.target.tagName === 'A') return;
-
-            // Toggle Expand
-            const isExpanded = card.classList.contains('expanded');
-            const summary = card.querySelector('.news-summary');
-            const fullContent = card.querySelector('.news-full-content');
-            const readMoreBtn = card.querySelector('.read-more-btn');
-
-            if (isExpanded) {
-                // Collapse
-                card.classList.remove('expanded');
-                summary.style.display = 'block';
-                fullContent.style.display = 'none';
-                readMoreBtn.innerHTML = `${strings.readMore} &darr;`;
-            } else {
-                // Expand
-                card.classList.add('expanded');
-                summary.style.display = 'none';
-                fullContent.style.display = 'block';
-                readMoreBtn.innerHTML = `${strings.close} &uarr;`;
-            }
-        });
-
-        internalGrid.appendChild(card);
+        contentWrap.appendChild(button);
+        card.append(cover,contentWrap);grid.appendChild(card);
     });
+    container.replaceChildren(grid);
+    container.removeAttribute('aria-busy');
 }
-
+let activeLoad = null;
+async function fetchNews() {
+    if(activeLoad)return activeLoad;
+    const container=document.getElementById('news-container');
+    if(!container)return;
+    const lang=(document.documentElement.lang||'en').toLowerCase().split('-')[0];
+    const strings=I18N[lang]||I18N.en;
+    const cache=window.VertexPublicCache;
+    const snapshot=cache&&cache.read(NEWS_KEY);
+    if(snapshot&&validArticles(snapshot.value))renderNews(snapshot.value,container,lang,strings);
+    activeLoad=(async()=>{
+        try {
+            const result=cache?await cache.load(NEWS_KEY,fetchRemoteNews,validArticles,{cooldownMs:180000})
+                : {value:await fetchRemoteNews(),source:'network'};
+            if(result.source==='network'||!snapshot)renderNews(result.value,container,lang,strings);
+        } catch(error) {
+            console.warn('[news] retaining saved or bundled stories',error);
+            if(!snapshot||!validArticles(snapshot.value))renderNews(FALLBACK_NEWS,container,lang,strings);
+        } finally {
+            container.removeAttribute('aria-busy');
+        }
+    })().finally(()=>{activeLoad=null;});
+    return activeLoad;
+}
+function bootPublicNews() {
+    const section=document.getElementById('news-section');
+    if(!section)return;
+    if('IntersectionObserver' in window){
+        const observer=new IntersectionObserver(entries=>{
+            if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();fetchNews();}
+        },{rootMargin:'750px'});
+        observer.observe(section);
+    } else fetchNews();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootPublicNews);
+else bootPublicNews();
 export { fetchNews };
