@@ -72,7 +72,7 @@ setTimeout(async function () {
   titleEl.textContent='';titleEl.setAttribute('aria-label',title);titleWords.forEach(function(word){var span=document.createElement('span');span.textContent=word;span.className='story-title-word';span.setAttribute('aria-hidden','true');titleEl.appendChild(span);});
   contrastTitle.replaceChildren(...Array.from(titleEl.children).map(function(el){var copy=el.cloneNode(true);copy.className='story-contrast-word';return copy;}));
   function measureTitle(){
-    var probe=titleEl.cloneNode(true);probe.className='story-title story-title-probe';probe.style.cssText='position:fixed;visibility:hidden;transform:none;left:0;top:0;width:'+Math.min(1120,window.innerWidth-40)+'px;font-size:'+Math.max(42,Math.min(112,window.innerWidth*.082))+'px;white-space:normal;';
+    var probe=titleEl.cloneNode(true);probe.className='story-title story-title-probe';probe.style.cssText='position:fixed;visibility:hidden;transform:none;left:0;top:0;width:'+Math.min(1120,window.innerWidth-40)+'px;font-size:'+(window.innerWidth<=700?Math.max(28,Math.min(52,window.innerWidth*.07)):Math.max(42,Math.min(112,window.innerWidth*.082)))+'px;white-space:normal;';
     document.body.appendChild(probe);var base=probe.getBoundingClientRect(),initial=Array.from(probe.children).map(function(el){var r=el.getBoundingClientRect();return {x:r.left-base.left,y:r.top-base.top};});
     var rows=new Map();Array.from(probe.children).forEach(function(el,i){var r=el.getBoundingClientRect(),key=Math.round(initial[i].y);if(!rows.has(key))rows.set(key,[]);rows.get(key).push({i:i,left:initial[i].x,right:initial[i].x+r.width});});rows.forEach(function(row){var left=Math.min.apply(null,row.map(function(r){return r.left;})),right=Math.max.apply(null,row.map(function(r){return r.right;})),offset=(base.width-(right-left))/2-left;row.forEach(function(r){initial[r.i].x+=offset;});});
     probe.style.width='max-content';probe.style.whiteSpace='nowrap';base=probe.getBoundingClientRect();var total=base.width,final=Array.from(probe.children).map(function(el){var r=el.getBoundingClientRect();return {x:r.left-base.left,y:0};});
@@ -209,7 +209,7 @@ setTimeout(async function () {
     titleEl.style.mixBlendMode='normal';titleEl.style.color='var(--text)';
     geometry.style.transform='translate3d(-50%,-50%,0) scale('+mix(1,1.4,smooth(phase(progress,.05,.30))*(1-ending))+') rotate('+mix(0,18,phase(progress,0,.30)*(1-ending))+'deg)';
     titleEl.style.transform = 'translate3d(-50%,' + (mix(0, -Math.min(76, window.innerHeight * .08), titleLift)).toFixed(2) + 'px,0)';
-    titleEl.style.fontSize = 'clamp(42px,8.2vw,112px)';
+    titleEl.style.fontSize = window.innerWidth<=700?'clamp(28px,7vw,52px)':'clamp(42px,8.2vw,112px)';
     var layout=titleLayout,fit=Math.min(1,(window.innerWidth-40)/layout.total),morph=smooth(phase(progress,.03,.22))*(1-ending);
     titleEl.style.width=mix(layout.width,layout.total,morph)+'px';
     titleEl.style.height=layout.height+'px';
