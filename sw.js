@@ -39,6 +39,7 @@ self.addEventListener('fetch',event=>{
           meta.put(metaKey,new Response(String(Date.now()),{headers:{'Content-Type':'text/plain'}}))
         ]).catch(()=>{}));
       }
+      if(saved && (!response || !response.ok))return saved;
       return response;
     }catch(error){
       if(saved)return saved; // Static offline fallback, even if expired.
