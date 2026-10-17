@@ -509,7 +509,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
 </div>
 </footer>
 <!-- Lottie Player Script -->
-<!-- Lottie Player Script --><script src="../js/join-steps.js?v=bf883ed6ef87"></script><script src="/assets/vendor/intl-tel-input/js/intlTelInput.min.js"></script><script>"use strict";
+<!-- Lottie Player Script --><script src="../js/join-steps.js?v=bf883ed6ef87"></script><script src="../js/application-bridge.js?v=20261017"></script><script src="/assets/vendor/intl-tel-input/js/intlTelInput.min.js"></script><script>"use strict";
 const interfaceTranslations = {
   selectedCountryAriaLabel: "تغيير الدولة لرقم الهاتف، المحددة ${countryName} (${dialCode})",
   noCountrySelected: "اختر دولة لرقم الهاتف",
@@ -562,6 +562,8 @@ window.VertexPhoneUI=interfaceTranslations;
     const contractCheck = document.getElementById('contractCheck');
     const submitBtn = document.getElementById('submitBtn');
     const ageInput = document.getElementById('joinAge');
+    const restoredBooking = window.VertexApplication.restore();
+    if (restoredBooking) handleInterviewBooking(restoredBooking);
     
     window.validateVertexPhone=async function(){try{if(iti.promise)await iti.promise;}catch{}const valid=iti.isValidNumber()===true;phoneInput.setCustomValidity(valid?'':"أدخل رقم هاتف دوليًا صالحًا.");phoneInput.setAttribute('aria-invalid',String(!valid));return valid;};phoneInput.addEventListener('input',()=>{phoneInput.setCustomValidity('');phoneInput.removeAttribute('aria-invalid');});phoneInput.addEventListener('countrychange',()=>{phoneInput.setCustomValidity('');phoneInput.removeAttribute('aria-invalid');});
     // Cal.com Embed & State Logic
@@ -569,20 +571,14 @@ window.VertexPhoneUI=interfaceTranslations;
     let interviewBookingData = null;
     let applicationInFlight = false, applicationSubmitted = false, autoBookingUid = null;
 
-    function extractCalBookingInfo(raw) {
-        if (!raw) return { startTime: null, uid: null };
-        const obj = raw.data || raw.detail?.data || raw.detail || raw;
-        const booking = obj.booking || obj;
-        const startTime = booking.startTime || booking.start || booking.date || obj.startTime || obj.start || obj.date || raw.startTime || raw.date || null;
-        const uid = booking.uid || booking.id || obj.uid || obj.id || raw.uid || raw.id || null;
-        return { startTime, uid };
-    }
+    function extractCalBookingInfo(raw) { return window.VertexApplication.extract(raw); }
 
     function handleInterviewBooking(detail) {
         const checkedInfo = extractCalBookingInfo(detail);
-        if (!checkedInfo.uid || !checkedInfo.startTime || !Number.isFinite(Date.parse(checkedInfo.startTime))) return;
+        if (!checkedInfo.uid || !checkedInfo.startTime || !Number.isFinite(Date.parse(checkedInfo.startTime))) { window.VertexApplication.missing(document.getElementById('interviewStatusBox')); return; }
         isInterviewBooked = true;
         interviewBookingData = detail;
+        window.VertexApplication.remember(checkedInfo);
         
         const info = extractCalBookingInfo(detail);
         let dateStr = '';
@@ -789,13 +785,12 @@ window.VertexPhoneUI=interfaceTranslations;
             department: document.getElementById('joinTeam').value, interviewDate: calInfo.startTime,
             interviewBookingUid: String(calInfo.uid), interviewDetails: JSON.stringify(interviewBookingData)};
         try {
-            const response = await fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/createVertexContributor', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(data)});
-            if (!response.ok) throw Error('Application submission failed');
-            const result = await response.json(); if (!result.success) throw Error('Application submission failed');
+            const result = await window.VertexApplication.submit(data);
             applicationSubmitted = true;
+            window.VertexApplication.forget();
             const modal = document.getElementById('successModal'); modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('show'),10); form.reset();
-        } catch(error) { alert('حدث خطأ.'); }
+        } catch(error) { window.VertexApplication.report(error, document.getElementById('interviewStatusBox')); }
         finally { applicationInFlight = false; btn.removeAttribute("aria-busy"); btn.textContent = originalText; btn.disabled = applicationSubmitted || !isInterviewBooked; }
     });
 
