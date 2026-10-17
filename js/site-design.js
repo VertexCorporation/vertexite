@@ -66,7 +66,23 @@ window.addEventListener('pageshow',function(){leaving=false;document.documentEle
   zh:['主题','浅色','深色','系统'],az:['Mövzu','Açıq','Tünd','Sistem']
  };
  function initThemeSelector(){
-  var btn=document.getElementById('themeBtn');if(!btn)return;
+  var btn=document.getElementById('themeBtn');
+  // Text-only pages also need to follow OS changes while the system mode is active.
+  if(!btn){
+   var systemMedia=matchMedia('(prefers-color-scheme: dark)');
+   function syncPageTheme(){
+    var mode=null;try{mode=localStorage.getItem('vertex-theme-mode');}catch(e){}
+    if(mode!=='system')return;
+    var theme=systemMedia.matches?'dark':'light';
+    document.documentElement.setAttribute('data-theme',theme);
+    try{localStorage.setItem('theme',theme);}catch(e){}
+    var favicon=document.getElementById('vertex-favicon');
+    if(favicon)favicon.href='/assets/favicon-'+theme+'.svg';
+    var meta=document.querySelector('meta[name="theme-color"]');
+    if(meta)meta.setAttribute('content',theme==='dark'?'#0F0F10':'#F8F9FA');
+   }
+   syncPageTheme();systemMedia.addEventListener('change',syncPageTheme);return;
+  }
   var lang=(document.documentElement.lang||'en').toLowerCase().split('-')[0];
   var copy=labels[lang]||labels.en;
   var wrapper=document.createElement('div');wrapper.className='theme-switcher';
