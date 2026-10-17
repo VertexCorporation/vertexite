@@ -1,3 +1,23 @@
+// Fit the server-rendered first frame before the scroll scene initializes.
+// The heading stays one line even if fonts finish loading or the viewport changes.
+(function fitFirstFrame() {
+  var title = document.querySelector('.story-static-content .story-title');
+  if (!title) return;
+  function fit() {
+    if (!title.closest('.story-static-content')) {
+      window.removeEventListener('resize', fit);
+      return;
+    }
+    var available = Math.max(1, window.innerWidth - (window.innerWidth < 700 ? 28 : 40));
+    var naturalWidth = Math.max(1, title.scrollWidth);
+    var scale = Math.min(1, available / naturalWidth);
+    title.style.transform = 'translateX(-50%) scale(' + scale.toFixed(4) + ')';
+  }
+  fit();
+  window.addEventListener('resize', fit, {passive:true});
+  if (document.fonts) document.fonts.ready.then(fit);
+})();
+
 setTimeout(async function () {
   'use strict';
 
