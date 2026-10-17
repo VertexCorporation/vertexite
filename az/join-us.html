@@ -807,8 +807,6 @@ window.VertexPhoneUI={ ...interfaceTranslations, countryNames };
     const contractCheck = document.getElementById('contractCheck');
     const submitBtn = document.getElementById('submitBtn');
     const ageInput = document.getElementById('joinAge');
-    const restoredBooking = window.VertexApplication.restore();
-    if (restoredBooking) handleInterviewBooking(restoredBooking);
     
     window.validateVertexPhone=async function(){try{if(iti.promise)await iti.promise;}catch{}const valid=iti.isValidNumber()===true;phoneInput.setCustomValidity(valid?'':"Etibarlı beynəlxalq telefon nömrəsi daxil edin.");phoneInput.setAttribute('aria-invalid',String(!valid));return valid;};phoneInput.addEventListener('input',()=>{phoneInput.setCustomValidity('');phoneInput.removeAttribute('aria-invalid');});phoneInput.addEventListener('countrychange',()=>{phoneInput.setCustomValidity('');phoneInput.removeAttribute('aria-invalid');});
     // Cal.com Embed & State Logic
@@ -864,6 +862,56 @@ window.VertexPhoneUI={ ...interfaceTranslations, countryNames };
         }
     }
 
+    // Cal embed loader
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    Cal("init", "interview", {origin:"https://app.cal.com"});
+    Cal.config = Cal.config || {};
+    Cal.config.forwardQueryParams = true;
+
+    const showInterviewCalendar = () => Cal.ns.interview("inline", {
+        elementOrSelector:"#my-cal-inline-interview",
+        config: {"layout":"month_view","useSlotsViewOnSmallScreen":"true","theme":"auto"},
+        calLink: "team/vertex/interview",
+    });
+    if (window.applicationStepsEnabled) {
+        document.addEventListener('application:show-date', showInterviewCalendar, { once: true });
+    } else {
+        showInterviewCalendar();
+    }
+
+    Cal.ns.interview("ui", {"hideEventTypeDetails":false,"layout":"month_view"});
+
+    // Cal.com Event Listeners
+    Cal.ns.interview("on", {
+        action: "*",
+        callback: (e) => {
+            if (e.detail?.type === "bookingSuccessful" || e.detail?.type === "bookingSuccessfulV2" || e.detail?.action === "bookingSuccessful") {
+                handleInterviewBooking(e.detail);
+            }
+        }
+    });
+
+    Cal.ns.interview("on", {
+        action: "bookingSuccessful",
+        callback: (e) => handleInterviewBooking(e.detail)
+    });
+
+    Cal.ns.interview("on", {
+        action: "bookingSuccessfulV2",
+        callback: (e) => handleInterviewBooking(e.detail)
+    });
+
+    // Window message fallback for Cal.com events
+    window.addEventListener("message", (e) => {
+        try {
+            const frame = document.querySelector('#my-cal-inline-interview iframe');
+            if (!['https://app.cal.com','https://cal.com'].includes(e.origin) || !frame || e.source !== frame.contentWindow) return;
+            if (e.data && (e.data.type === "CAL:bookingSuccessful" || e.data.type === "CAL:bookingSuccessfulV2" || e.data.action === "bookingSuccessful")) {
+                handleInterviewBooking(e.data);
+            }
+        } catch(err) {}
+    });
+
     function checkFormValidity() {
         const checkboxesValid = termsCheck.checked && doctrineCheck.checked && contractCheck.checked;
         const allValid = checkboxesValid && isInterviewBooked;
@@ -871,6 +919,9 @@ window.VertexPhoneUI={ ...interfaceTranslations, countryNames };
         submitBtn.disabled = !allValid;
     }
     
+    const restoredBooking = window.VertexApplication.restore();
+    if (restoredBooking) handleInterviewBooking(restoredBooking);
+
     termsCheck.addEventListener('change', checkFormValidity);
     contractCheck.addEventListener('change', checkFormValidity);
     doctrineCheck.addEventListener('change', checkFormValidity);
