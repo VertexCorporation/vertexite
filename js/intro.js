@@ -213,13 +213,13 @@ setTimeout(async function () {
     var layout=titleLayout,fit=Math.min(1,(window.innerWidth-40)/layout.total),morph=smooth(phase(progress,.03,.22))*(1-ending);
     titleEl.style.width=mix(layout.width,layout.total,morph)+'px';
     titleEl.style.height=layout.height+'px';
-    titleEl.style.display='flex';titleEl.style.flexWrap='wrap';titleEl.style.justifyContent='center';titleEl.style.alignContent='flex-start';titleEl.style.columnGap='.25em';
-    Array.from(titleEl.children).forEach(function(el,i){el.style.position=morph===0?'static':'absolute';el.style.transform=morph===0?'none':'translate3d('+mix(layout.initial[i].x,layout.final[i].x,morph).toFixed(2)+'px,'+mix(layout.initial[i].y,0,morph).toFixed(2)+'px,0)';});
+    titleEl.style.display='block';titleEl.style.flexWrap='nowrap';titleEl.style.justifyContent='initial';titleEl.style.alignContent='initial';titleEl.style.columnGap='0';
+    Array.from(titleEl.children).forEach(function(el,i){el.style.position='absolute';el.style.transform='translate3d('+mix(layout.initial[i].x,layout.final[i].x,morph).toFixed(2)+'px,'+mix(layout.initial[i].y,0,morph).toFixed(2)+'px,0)';});
     var grow=mix(.86,1,smooth(phase(progress,.30,.56)));
     actionsEl.style.top=(titleEl.offsetTop+layout.height+26)+'px';
     actionsEl.style.pointerEvents=actionsIn<.05?'none':'';actionsEl.inert=actionsIn<.05;
     titleEl.style.transform += ' scale('+ (mix(1,fit*grow,morph)).toFixed(4)+')';
-    titleEl.style.willChange='auto';titleEl.style.left=morph===0?'0':'50%';titleEl.style.right=morph===0?'0':'auto';titleEl.style.margin=morph===0?'0 auto':'0';if(morph===0)titleEl.style.transform=titleLift?'translateY('+(-Math.min(76,window.innerHeight*.08)*titleLift).toFixed(2)+'px)':'none';
+    titleEl.style.willChange='auto';titleEl.style.left='50%';titleEl.style.right='auto';titleEl.style.margin='0';
     var titleOpacity=1-.12*Math.sin(Math.PI*phase(progress,.015,.26))*(1-ending);
     contrastTitle.style.cssText=titleEl.style.cssText;contrastTitle.style.mixBlendMode='difference';contrastTitle.style.color='#fff';contrastTitle.style.opacity=String(titleOpacity*contrastBlend);
     Array.from(contrastTitle.children).forEach(function(el,i){el.style.cssText=titleEl.children[i].style.cssText;});
