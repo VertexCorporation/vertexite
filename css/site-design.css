@@ -144,3 +144,75 @@ header .nav-right>.nav-future-cta{font-size:12px;padding:10px 12px;white-space:n
 
 /* Make the decorative wireframe quiet without affecting the actual map geography. */
 .story-geometry svg{stroke-width:.63}
+
+/* Console-consistent header and action refinements. */
+.btn-primary,.story-actions .btn-primary{border-color:transparent!important;transition:background-color 200ms var(--panel-ease),filter 200ms var(--panel-ease),color 200ms var(--panel-ease)}
+@media(hover:hover){
+  .btn-primary:hover,.story-actions .btn-primary:hover,header .nav-right .btn-primary:hover{
+    border-color:transparent!important;box-shadow:none;opacity:1!important;transform:none;filter:brightness(.9)
+  }
+  /* The brightness filter darkens both light and dark filled buttons consistently. */
+}
+@media(prefers-reduced-motion:reduce){.btn-primary,.story-actions .btn-primary{transition:none!important}}
+
+/* Vision: real grid rows share the same visual/content baseline, regardless of translation. */
+.vision-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+  grid-template-areas:"heading heading" "visual copy";
+  align-items:start;column-gap:56px;row-gap:32px;
+}
+.vision-grid>.vision-heading{grid-area:heading;margin:0;min-width:0}
+.vision-grid>.vision-visual{grid-area:visual;min-width:0;display:flex;align-items:flex-start}
+.vision-grid>.vision-text{grid-area:copy;min-width:0;margin:0;padding-top:clamp(18px,2vw,27px)}
+@media(max-width:860px){
+ .vision-grid{grid-template-columns:minmax(0,1fr);grid-template-areas:"heading" "visual" "copy";gap:24px}
+ .vision-grid>.vision-text{padding-top:0}
+}
+@media(min-width:861px) and (max-width:1180px){.vision-grid{column-gap:32px}}
+
+/* Shared anchored popover styling, modeled on Vertex Console's vx-popover. */
+.theme-mode-menu{
+  position:fixed;z-index:120;top:0;left:0;right:auto;
+  width:max-content;min-width:190px;max-width:calc(100vw - 16px);
+  max-height:calc(100dvh - 16px);overflow:auto;
+  padding:0;border:1px solid var(--border-strong);border-radius:12px;
+  background:var(--surface);color:var(--text);box-shadow:0 14px 34px rgba(0,0,0,.18);
+  opacity:0;transform:translateY(4px) scale(.98);transform-origin:top center;
+  pointer-events:none;
+  transition:opacity 200ms var(--panel-ease),transform 200ms var(--panel-ease);
+}
+.theme-mode-menu[hidden]{display:none!important}
+.theme-mode-menu.is-open{opacity:1;transform:translateY(0) scale(1);pointer-events:auto}
+.theme-mode-menu.is-closing{pointer-events:none}
+.theme-menu-heading{
+  display:flex;align-items:center;min-height:43px;padding:11px 15px;
+  margin:0;border-bottom:1px solid var(--border);
+  font-size:13px;font-weight:600;color:var(--text)
+}
+.theme-menu-list{display:flex;flex-direction:column;padding:5px}
+.theme-option{
+  display:flex;align-items:center;gap:12px;width:100%;min-height:40px;padding:9px 11px;
+  border:0;border-radius:6px;background:transparent;color:var(--text-muted);
+  font:inherit;font-size:13px;font-weight:500;text-align:start;cursor:pointer;
+  transition:background-color 120ms var(--panel-ease),color 120ms var(--panel-ease)
+}
+.theme-option:hover,.theme-option:focus-visible{background:var(--hover);color:var(--text)}
+.theme-option .theme-option-icon{display:block;width:17px;height:17px;flex:none}
+.theme-option .theme-option-check{display:block;width:16px;height:16px;margin-inline-start:auto;visibility:hidden;opacity:1}
+.theme-option.is-selected,.theme-option[aria-checked=true]{font-weight:600;color:var(--text)}
+.theme-option.is-selected .theme-option-check,.theme-option[aria-checked=true] .theme-option-check{visibility:visible}
+@media(prefers-reduced-motion:reduce){.theme-mode-menu,.theme-option{transition:none!important}}
+
+/* The old one-shot animation must not override the Console-style enter/exit transitions. */
+.theme-mode-menu:not([hidden]){animation:none!important}
+
+/* Long localized navigation gracefully becomes a hamburger above the nominal breakpoint. */
+#siteHeader.nav-condensed .nav-links,#siteHeader.nav-condensed .nav-right>.nav-future-cta{display:none!important}
+#siteHeader.nav-condensed .menu-btn{display:flex!important}
+#siteHeader.nav-condensed .mobile-menu{display:block!important}
+
+/* Exact Vertex Console easing/durations and popover depth. */
+.theme-mode-menu{transition:opacity 120ms cubic-bezier(.4,0,1,1),transform 120ms cubic-bezier(.4,0,1,1);box-shadow:0 8px 24px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.32)}
+.theme-mode-menu.is-open{transition:opacity 180ms cubic-bezier(.2,.8,.2,1),transform 180ms cubic-bezier(.2,.8,.2,1)}
+html[data-theme="light"] .theme-mode-menu{box-shadow:0 8px 24px rgba(23,25,29,.10),0 2px 8px rgba(23,25,29,.08)}
