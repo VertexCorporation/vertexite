@@ -15,14 +15,68 @@ setIcon(document.getElementById('themeIconSun'),'sun');setIcon(document.getEleme
  function measure(){
   header.classList.remove('nav-condensed');
   if(window.innerWidth<1280)return;
+  const style=getComputedStyle(nav);
   const measured=brand.getBoundingClientRect().width+
     links.scrollWidth+right.getBoundingClientRect().width+
-    2*parseFloat(getComputedStyle(nav).gap||'18');
-  if(measured>nav.clientWidth+1)header.classList.add('nav-condensed');
+    2*parseFloat(style.gap||'18');
+  const available=nav.clientWidth-(parseFloat(style.paddingLeft)||0)-(parseFloat(style.paddingRight)||0);
+  if(measured>available+1)header.classList.add('nav-condensed');
  }
  window.addEventListener('resize',measure,{passive:true});
  if(document.fonts)document.fonts.ready.then(measure);
  measure();
+})();
+
+/* In-page navigation: align the visible heading (not the section's outer padding).
+   An overlaid mobile menu must never change the header's document height. */
+(function initAnchorNavigation(){
+ const header=document.getElementById('siteHeader');
+ const main=document.querySelector('main');
+ if(!header||!main)return;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ function getTarget(hash){
+  if(!hash||hash.length<2)return null;
+  let id;
+  try{id=decodeURIComponent(hash.slice(1));}catch(e){return null;}
+  const node=document.getElementById(id);
+  return node&&main.contains(node)?node:null;
+ }
+ function headingTop(target){
+  const outer=target.getBoundingClientRect().top+window.scrollY;
+  const heading=target.querySelector('.section-head h2,.section-head h1,.team-head h2,.vision-heading h2,.wrap > h2,.wrap > h1');
+  if(heading){
+   const rect=heading.getBoundingClientRect();
+   // content-visibility:auto can skip an offscreen subtree.
+   if(rect.height>0&&rect.width>0)return rect.top+window.scrollY;
+  }
+  return outer+(parseFloat(getComputedStyle(target).paddingTop)||0);
+ }
+ function navigate(hash,smooth){
+  const target=getTarget(hash);
+  if(!target)return false;
+  const heading=target.id==='home'?0:headingTop(target);
+  const headerHeight=header.getBoundingClientRect().height;
+  const top=Math.max(0,heading-headerHeight-20);
+  window.scrollTo({top,behavior:smooth&&!reduced.matches?'smooth':'instant'});
+  return true;
+ }
+ document.addEventListener('click',function(event){
+  const link=event.target.closest('a[href^="#"]');
+  if(!link||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
+  const hash=link.hash;
+  if(!getTarget(hash))return;
+  event.preventDefault();
+  header.classList.remove('menu-open');
+  const menuButton=header.querySelector('#menuBtn');
+  if(menuButton)menuButton.setAttribute('aria-expanded','false');
+  if(location.hash!==hash)history.pushState(null,'',hash);
+  requestAnimationFrame(()=>navigate(hash,true));
+ });
+ window.addEventListener('popstate',()=>{if(location.hash)requestAnimationFrame(()=>navigate(location.hash,false));});
+ window.addEventListener('hashchange',()=>{if(location.hash)requestAnimationFrame(()=>navigate(location.hash,false));});
+ // Links arriving from another page must land on the title after layout settles.
+ window.addEventListener('load',()=>{if(location.hash)requestAnimationFrame(()=>navigate(location.hash,false));},{once:true});
+ window.addEventListener('pageshow',event=>{if(event.persisted&&location.hash)requestAnimationFrame(()=>navigate(location.hash,false));});
 })();
 if('IntersectionObserver' in window){const reveals=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('section-revealed');reveals.unobserve(e.target);}}),{threshold:.04});document.querySelectorAll('main > section:not(.hero):not(.stats):not(.partners-static), main > .cta-band').forEach(el=>reveals.observe(el));}
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
