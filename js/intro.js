@@ -12,7 +12,6 @@ setTimeout(async function () {
   var originalLede = hero.querySelector('.lede');
   var originalActions = Array.prototype.slice.call(hero.querySelectorAll('.hero-actions a'));
   var joinAction=document.querySelector('.nav-right a.btn[href*="join"],.nav-right a.btn[href*="katil"]');
-  var originalStats = statsSection ? Array.prototype.slice.call(statsSection.querySelectorAll('.stat')) : [];
   var originalLogos = sponsorsSection ? sponsorsSection.querySelector('.partners-logos') : null;
   var lang = (document.documentElement.lang || 'en').toLowerCase().split('-')[0];
   var scrollCopy={"tr":"Kaydır","en":"Scroll","de":"Scrollen","fr":"Défiler","es":"Desplazar","it":"Scorri","pt":"Rolar","nl":"Scrollen","ru":"Прокрутите","ar":"مرّر","hi":"स्क्रॉल करें","id":"Gulir","ja":"スクロール","ko":"스크롤","zh":"滚动","az":"Sürüşdür"};
@@ -22,25 +21,81 @@ setTimeout(async function () {
     ru: 'При поддержке', ar: 'بدعم من', hi: 'द्वारा समर्थित', id: 'Didukung oleh',
     ja: 'スポンサー', ko: '후원', zh: '合作伙伴', az: 'Dəstəkləyənlər'
   };
-  var statementCopy = {
-    tr: 'Dünyanın en parlak genç zihinleri tarafından kuruldu.',
-    en: 'Founded by the brightest young minds in the world.'
+  var identityCopy = {
+    "en": [
+      "A vertex is the point where two or more lines meet. In anatomy, it represents the highest point; in astronomy, the zenith; in geometry, a fundamental structural element; in network theory, the node where connections converge; and in optics, the point where light comes into focus.",
+      "That's why we chose the name Vertex, which encompasses all these meanings and more. Founded in Istanbul in 2023, we began operating in over 190 countries. In line with the meaning of Vertex, we will demonstrate our full potential and reach the top together; we will bring prosperity to humanity and shape the technologies of tomorrow."
+    ],
+    "tr": [
+      "Vertex, iki veya daha fazla doğrunun birleştiği noktadır. Anatomide en yüksek noktayı; astronomide başucu noktasını; geometride temel bir yapı elemanını; ağ teorisinde bağlantıların birleştiği merkez düğümü; optikte ise ışığın odaklandığı noktayı temsil eder.",
+      "İşte bu yüzden bütün bu anlamları ve daha fazlasını kapsayan Vertex ismini seçtik. 2023 yılında İstanbul'da kurulduk ve 190'dan fazla ülkede faaliyet göstermeye başladık. Vertex isminin anlamına uygun olarak potansiyelimizin tamamını ortaya koyup hep birlikte zirveye ulaşacağız; insanlığa refah sağlayacak ve geleceğin teknolojilerine yön vereceğiz."
+    ],
+    "de": [
+      "Ein Vertex ist der Punkt, an dem sich zwei oder mehr Linien treffen. In der Anatomie bezeichnet er den höchsten Punkt, in der Astronomie den Zenit, in der Geometrie ein grundlegendes Strukturelement, in der Netzwerktheorie den Knotenpunkt, an dem Verbindungen zusammenlaufen, und in der Optik den Punkt, an dem Licht gebündelt wird.",
+      "Deshalb haben wir den Namen Vertex gewählt, der all diese Bedeutungen und mehr vereint. Wir wurden 2023 in Istanbul gegründet und nahmen unsere Tätigkeit in über 190 Ländern auf. Im Sinne unseres Namens werden wir unser volles Potenzial entfalten und gemeinsam den Gipfel erreichen, zum Wohlstand der Menschheit beitragen und die Technologien von morgen gestalten."
+    ],
+    "fr": [
+      "Un vertex est le point où deux lignes ou plus se rencontrent. En anatomie, il représente le point le plus élevé ; en astronomie, le zénith ; en géométrie, un élément structurel fondamental ; en théorie des réseaux, le nœud où convergent les connexions ; et en optique, le point où la lumière se concentre.",
+      "C'est pourquoi nous avons choisi le nom Vertex, qui réunit toutes ces significations et bien d'autres. Fondés à Istanbul en 2023, nous avons commencé à exercer nos activités dans plus de 190 pays. Fidèles au sens de notre nom, nous révélerons tout notre potentiel et atteindrons ensemble les sommets ; nous contribuerons à la prospérité de l'humanité et façonnerons les technologies de demain."
+    ],
+    "es": [
+      "Un vértice es el punto donde se encuentran dos o más líneas. En anatomía, representa el punto más alto; en astronomía, el cenit; en geometría, un elemento estructural fundamental; en teoría de redes, el nodo donde convergen las conexiones; y en óptica, el punto donde se concentra la luz.",
+      "Por eso elegimos el nombre Vertex, que reúne todos estos significados y muchos más. Fundada en Estambul en 2023, nuestra organización comenzó a operar en más de 190 países. Fieles al significado de Vertex, desplegaremos todo nuestro potencial y alcanzaremos juntos la cima; contribuiremos al bienestar de la humanidad y daremos forma a las tecnologías del mañana."
+    ],
+    "it": [
+      "Un vertice è il punto in cui si incontrano due o più linee. In anatomia rappresenta il punto più alto; in astronomia, lo zenit; in geometria, un elemento strutturale fondamentale; nella teoria delle reti, il nodo in cui convergono le connessioni; e in ottica, il punto in cui la luce si concentra.",
+      "Ecco perché abbiamo scelto il nome Vertex, che racchiude tutti questi significati e molti altri. Fondata a Istanbul nel 2023, la nostra organizzazione ha iniziato a operare in oltre 190 Paesi. Fedeli al significato di Vertex, esprimeremo tutto il nostro potenziale e raggiungeremo insieme la vetta, contribuendo al benessere dell'umanità e plasmando le tecnologie di domani."
+    ],
+    "pt": [
+      "Um vértice é o ponto onde duas ou mais linhas se encontram. Na anatomia, representa o ponto mais alto; na astronomia, o zênite; na geometria, um elemento estrutural fundamental; na teoria das redes, o nó onde as conexões convergem; e na óptica, o ponto onde a luz se concentra.",
+      "Foi por isso que escolhemos o nome Vertex, que reúne todos estes significados e muitos outros. Fundada em Istambul em 2023, a nossa organização começou a atuar em mais de 190 países. Fiéis ao significado de Vertex, vamos alcançar todo o nosso potencial e chegar juntos ao topo, contribuindo para a prosperidade da humanidade e moldando as tecnologias de amanhã."
+    ],
+    "nl": [
+      "Een vertex is het punt waar twee of meer lijnen samenkomen. In de anatomie staat het voor het hoogste punt, in de astronomie voor het zenit, in de meetkunde voor een fundamenteel bouwelement, in de netwerktheorie voor het knooppunt waar verbindingen samenkomen en in de optica voor het punt waar licht wordt gebundeld.",
+      "Daarom kozen we de naam Vertex, die al deze betekenissen en meer omvat. We zijn in 2023 opgericht in Istanbul en begonnen actief te worden in meer dan 190 landen. In lijn met de betekenis van Vertex willen we ons volledige potentieel benutten en samen de top bereiken, bijdragen aan de welvaart van de mensheid en de technologieën van morgen vormgeven."
+    ],
+    "ru": [
+      "Вершина — это точка, в которой сходятся две или более линии. В анатомии она обозначает самую высокую точку, в астрономии — зенит, в геометрии — основополагающий структурный элемент, в теории сетей — узел пересечения связей, а в оптике — точку фокусировки света.",
+      "Именно поэтому мы выбрали название Vertex, объединяющее все эти значения и многое другое. Основанная в Стамбуле в 2023 году, наша компания начала работать более чем в 190 странах. Следуя смыслу названия Vertex, мы раскроем весь свой потенциал и вместе достигнем вершины, будем способствовать процветанию человечества и создавать технологии будущего."
+    ],
+    "ar": [
+      "الرأس هو النقطة التي يلتقي عندها خطان أو أكثر. وفي علم التشريح يمثّل أعلى نقطة، وفي علم الفلك سمت الرأس، وفي الهندسة عنصرًا بنيويًا أساسيًا، وفي نظرية الشبكات العقدة التي تتلاقى عندها الروابط، وفي البصريات النقطة التي يتركز فيها الضوء.",
+      "لهذا اخترنا اسم Vertex الذي يجمع هذه المعاني كلها وأكثر. تأسسنا في إسطنبول عام 2023 وبدأنا العمل في أكثر من 190 دولة. وانطلاقًا من معنى اسم Vertex، سنطلق كامل إمكاناتنا ونصل معًا إلى القمة، وسنسهم في ازدهار البشرية ونشكّل تقنيات الغد."
+    ],
+    "hi": [
+      "वर्टेक्स वह बिंदु है जहाँ दो या अधिक रेखाएँ मिलती हैं। शरीर रचना विज्ञान में यह सबसे ऊँचे बिंदु का, खगोल विज्ञान में शीर्ष बिंदु का, ज्यामिति में एक मूलभूत संरचनात्मक तत्व का, नेटवर्क सिद्धांत में संपर्कों के संगम का और प्रकाशिकी में प्रकाश के केंद्रित होने वाले बिंदु का प्रतीक है।",
+      "इसीलिए हमने Vertex नाम चुना, जिसमें ये सभी अर्थ और बहुत कुछ समाहित है। 2023 में इस्तांबुल में स्थापित होने के बाद हमने 190 से अधिक देशों में कार्य करना शुरू किया। Vertex नाम की भावना के अनुरूप हम अपनी पूरी क्षमता को सामने लाकर साथ मिलकर शिखर तक पहुँचेंगे, मानवता की समृद्धि में योगदान देंगे और कल की तकनीकों को आकार देंगे।"
+    ],
+    "id": [
+      "Vertex adalah titik pertemuan dua garis atau lebih. Dalam anatomi, istilah ini melambangkan titik tertinggi; dalam astronomi, zenit; dalam geometri, elemen struktur mendasar; dalam teori jaringan, simpul tempat berbagai koneksi bertemu; dan dalam optik, titik tempat cahaya terfokus.",
+      "Itulah alasan kami memilih nama Vertex, yang mencakup semua makna tersebut dan lebih banyak lagi. Didirikan di Istanbul pada 2023, kami mulai beroperasi di lebih dari 190 negara. Sesuai makna Vertex, kami akan mengembangkan seluruh potensi kami dan bersama-sama mencapai puncak, meningkatkan kesejahteraan umat manusia, serta membentuk teknologi masa depan."
+    ],
+    "ja": [
+      "頂点とは、2本以上の線が交わる点です。解剖学では最も高い位置、天文学では天頂、幾何学では基本的な構成要素、ネットワーク理論ではつながりが集まる中心のノード、光学では光が集まる焦点を意味します。",
+      "私たちがVertexという名前を選んだのは、こうした意味のすべて、そしてそれ以上の可能性を込めたかったからです。2023年にイスタンブールで設立され、190を超える国々で活動を開始しました。Vertexの名にふさわしく、私たちは可能性を最大限に引き出し、共に頂点を目指し、人類の繁栄に貢献しながら未来のテクノロジーを形づくります。"
+    ],
+    "ko": [
+      "버텍스는 두 개 이상의 선이 만나는 점입니다. 해부학에서는 가장 높은 지점, 천문학에서는 천정, 기하학에서는 기본적인 구조 요소, 네트워크 이론에서는 연결이 모이는 중심 노드, 광학에서는 빛이 집중되는 초점을 뜻합니다.",
+      "우리가 Vertex라는 이름을 선택한 이유는 이 모든 의미와 그 이상의 가능성을 담고 있기 때문입니다. 2023년 이스탄불에서 설립된 우리는 190개 이상의 국가에서 활동을 시작했습니다. Vertex라는 이름에 걸맞게 잠재력을 온전히 발휘하고 함께 정상에 오르며, 인류의 번영에 기여하고 미래의 기술을 만들어 나가겠습니다."
+    ],
+    "zh": [
+      "顶点是两条或多条线相交的点。在解剖学中，它代表最高点；在天文学中，它是天顶；在几何学中，它是基本结构元素；在网络理论中，它是连接汇聚的中心节点；在光学中，它是光线聚焦之处。",
+      "这正是我们选择 Vertex 这个名字的原因：它涵盖了所有这些含义，甚至更多。我们于 2023 年在伊斯坦布尔创立，并开始在 190 多个国家开展业务。秉承 Vertex 之名的寓意，我们将充分释放潜能，携手登上高峰，为人类创造繁荣，并塑造未来的科技。"
+    ],
+    "az": [
+      "Vertex iki və ya daha çox xəttin birləşdiyi nöqtədir. Anatomiyada ən yüksək nöqtəni, astronomiyada zeniti, həndəsədə əsas struktur elementini, şəbəkə nəzəriyyəsində əlaqələrin qovuşduğu mərkəzi düyünü, optikada isə işığın fokuslandığı nöqtəni ifadə edir.",
+      "Məhz buna görə bütün bu mənaları və daha artığını özündə birləşdirən Vertex adını seçdik. 2023-cü ildə İstanbulda təsis olunduq və 190-dan çox ölkədə fəaliyyətə başladıq. Vertex adının mənasına uyğun olaraq bütün potensialımızı ortaya qoyub birlikdə zirvəyə çatacaq, bəşəriyyətin rifahına töhfə verəcək və gələcəyin texnologiyalarını formalaşdıracağıq."
+    ]
   };
 
   var title = originalTitle ? originalTitle.textContent.trim() : 'The Peak of Technology';
-  var statement = statementCopy[lang] || (originalLede ? originalLede.textContent.trim() : 'Founded by the brightest young minds in the world.');
+  var identity = identityCopy[lang] || identityCopy.en;
   var sponsorLabel = sponsorCopy[lang] || sponsorCopy.en;
 
   function actionMarkup(action, className) {
     if (!action) return '';
     return '<a class="btn ' + className + '" href="' + action.getAttribute('href') + '">' + action.textContent.trim() + '</a>';
   }
-
-  var statsMarkup = originalStats.map(function (stat) {
-    var number = stat.querySelector('.num');
-    var label = stat.querySelector('.lab');
-    return '<div class="story-metric"><strong>' + (number ? number.textContent.trim() : '') + '</strong><span>' + (label ? label.textContent.trim() : '') + '</span></div>';
-  }).join('');
 
   var outgoingStage=hero.querySelector('.story-stage').cloneNode(true);
   var outgoingTitle=outgoingStage.querySelector('h1');if(outgoingTitle){var decorativeTitle=document.createElement('div');decorativeTitle.className=outgoingTitle.className;decorativeTitle.innerHTML=outgoingTitle.innerHTML;outgoingTitle.replaceWith(decorativeTitle);}
@@ -53,8 +108,8 @@ setTimeout(async function () {
       '<h1 class="story-title">' + title + '</h1>' +
       '<div class="story-sponsors"><span>' + sponsorLabel + '</span><div class="story-sponsor-logos">' + (originalLogos ? originalLogos.innerHTML : '') + '</div></div>' +
       '<div class="story-globe-wrap"><canvas class="story-globe" aria-label="Graphic globe focused on Türkiye"></canvas></div>' +
-      '<p class="story-statement">' + statement + '</p>' +
-      '<div class="story-metrics">' + statsMarkup + '</div>' +
+      '<p class="story-statement"></p>' +
+      '<p class="story-metrics"></p>' +
       '<div class="story-actions">' + actionMarkup(originalActions[0], 'btn-primary') + actionMarkup(joinAction || originalActions[1], 'btn-ghost') + '</div>' +
       '<div class="story-scroll-cue" aria-hidden="true"><span></span>'+(scrollCopy[lang]||scrollCopy.en)+'</div>' +
     '</div>';
@@ -95,6 +150,8 @@ setTimeout(async function () {
   var canvas = hero.querySelector('.story-globe');
   var statementEl = hero.querySelector('.story-statement');
   var metricsEl = hero.querySelector('.story-metrics');
+  statementEl.textContent = identity[0];
+  metricsEl.textContent = identity[1];
   var actionsEl = hero.querySelector('.story-actions');
   var cueEl = hero.querySelector('.story-scroll-cue');
   actionsEl.addEventListener('click',function(event){var link=event.target.closest('a');if(!link)return;var href=link.getAttribute('href');if(href&&href.charAt(0)==='#'){var target=document.querySelector(href);if(target){event.preventDefault();event.stopPropagation();target.style.animation='none';window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-(header?header.offsetHeight:0),behavior:'instant'});history.replaceState(null,'',href);}}});
