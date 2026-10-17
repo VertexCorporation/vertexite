@@ -38,11 +38,15 @@ footer a{color:var(--text-muted);transition:color 120ms var(--ui-ease)}footer a:
 /* A geometric skyline rises once on entry; no continuously rendered scene. */
 .cta-band::before,.cta-band::after{display:none}.cta-skyline{position:absolute;inset:0;z-index:-1;overflow:hidden;pointer-events:none;color:var(--text);opacity:.13}.cta-skyline svg{width:100%;height:100%;transform:translateY(100%);transition:transform 1200ms cubic-bezier(.16,1,.3,1)}.geometry-active .cta-skyline svg{transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){.cta-skyline svg{transform:none;transition:none}}
+/* Animate the scrollbar alpha per scroller from shared JS. */
 @property --scrollbar-alpha{syntax:'<number>';inherits:true;initial-value:0}
-html,.lang-panel{--scrollbar-alpha:0;transition:--scrollbar-alpha 170ms ease}html.is-scrolling,.lang-panel.is-scrolling{--scrollbar-alpha:1}
-:root{--scroll-rgb:0 0 0}html[data-theme="dark"]{--scroll-rgb:255 255 255}
-*{scrollbar-width:thin;scrollbar-color:rgb(var(--scroll-rgb)/var(--scrollbar-alpha)) transparent}
-::-webkit-scrollbar{width:7px;height:7px;background:transparent}::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}::-webkit-scrollbar-thumb{background:rgb(var(--scroll-rgb)/var(--scrollbar-alpha));border-radius:999px}
+:root{--scroll-rgb:0 0 0}
+html[data-theme="dark"]{--scroll-rgb:255 255 255}
+.lang-panel{--scrollbar-alpha:0}
+*{scrollbar-width:thin;scrollbar-color:rgb(var(--scroll-rgb)/var(--scrollbar-alpha,0)) transparent}
+::-webkit-scrollbar{width:5px;height:4px;background:transparent}
+::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}
+::-webkit-scrollbar-thumb{background:rgb(var(--scroll-rgb)/var(--scrollbar-alpha,0));border-radius:999px}
 @keyframes publicNamesLoop{from{transform:translateX(0)}to{transform:translateX(calc(-1 * var(--name-cycle)))}}
 
 footer .foot-col a,footer .foot-legal a{color:var(--text-muted)}footer .foot-col a:hover,footer .foot-col a:focus-visible,footer .foot-legal a:hover,footer .foot-legal a:focus-visible{color:var(--accent)}
@@ -102,3 +106,41 @@ footer .foot-col a,footer .foot-legal a{color:var(--text-muted)}footer .foot-col
 .language-dropdown .lang-btn > span:first-of-type,
 .language-dropdown .lang-row > span:first-of-type,
 .mobile-menu .m-lang > span:first-of-type{text-transform:capitalize}
+
+/* Unified store CTA icon columns and label baselines, across all locales. */
+.store-badges .store-badge{display:grid;grid-template-columns:30px minmax(0,1fr);align-items:center;justify-content:stretch;gap:12px;min-width:0;padding:12px clamp(10px,1.25vw,18px);text-align:left}
+.store-badges .store-badge>svg{display:block;justify-self:center;width:26px;height:26px;max-width:100%}
+.store-badges .store-badge>span{display:flex;flex-direction:column;min-width:0;text-align:start}
+.store-badges .store-badge :is(small,strong){overflow-wrap:anywhere}
+@media(max-width:520px){.store-badges .store-badge{grid-template-columns:25px minmax(0,1fr);gap:8px;padding:10px}.store-badges .store-badge>svg{width:23px;height:23px}}
+
+/* Navigation follows the actual page sections. Collapse cleanly when all seven entries cannot fit. */
+header .wrap.nav{max-width:1440px;gap:clamp(8px,1vw,18px)}
+header .nav-links{gap:clamp(11px,1.15vw,19px)}
+header .nav-links a{font-size:13px}
+header .nav-right{gap:8px;flex-shrink:0}
+header .nav-right>.nav-future-cta{font-size:12px;padding:10px 12px;white-space:nowrap}
+@media(max-width:1279px){
+ header .nav-links{display:none}
+ header .nav-right>.nav-future-cta{display:none}
+ header .menu-btn{display:flex!important}
+ header .mobile-menu{display:block!important}
+}
+@media(min-width:1280px){header .mobile-menu{display:none!important}}
+@media(max-width:480px){header .nav{gap:6px}header .nav-right{gap:5px}header .lang-btn{padding:0 8px;max-width:124px}}
+
+/* Console-inspired light / dark / system selector, without altering the existing header dimensions. */
+.theme-switcher{position:relative;display:flex;flex-shrink:0}
+.theme-mode-menu{position:absolute;right:0;top:calc(100% + 10px);z-index:90;min-width:186px;padding:6px;border:1px solid var(--border-strong);border-radius:12px;background:var(--surface);color:var(--text);box-shadow:0 12px 34px #0002}
+.theme-mode-menu[hidden]{display:none!important}
+.theme-menu-heading{margin:5px 10px 7px;color:var(--text-muted);font-size:12px;font-weight:650}
+.theme-option{display:flex;align-items:center;gap:10px;width:100%;min-height:42px;padding:9px 10px;border:0;border-radius:7px;background:transparent;color:var(--text);font:inherit;font-size:13px;text-align:start;cursor:pointer}
+.theme-option:hover,.theme-option:focus-visible{background:var(--hover)}
+.theme-option[aria-checked=true]{font-weight:700}
+.theme-option .theme-option-check{margin-inline-start:auto;opacity:0}
+.theme-option[aria-checked=true] .theme-option-check{opacity:1}
+.theme-system-icon{width:17px;height:17px;display:none}
+@media(prefers-reduced-motion:no-preference){.theme-mode-menu:not([hidden]){animation:themeMenuIn 165ms cubic-bezier(.2,.8,.2,1) both}@keyframes themeMenuIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}}
+
+/* Make the decorative wireframe quiet without affecting the actual map geography. */
+.story-geometry svg{stroke-width:.63}
