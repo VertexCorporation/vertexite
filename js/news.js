@@ -114,12 +114,21 @@ function makeElement(tag,className,text) {
     return node;
 }
 function setCoverImage(img,article,lang) {
+    const cover=img.parentElement;
+    const fallbackUrl=new URL(COVER_FALLBACK,location.href).href;
+    const finish=()=>cover.classList.remove('is-loading');
+    img.addEventListener('load',finish);
+    img.addEventListener('error',()=>{
+        if(img.src!==fallbackUrl)img.src=COVER_FALLBACK;
+        else finish();
+    });
     const covers=article.cover||{};
     const path=covers[lang]||covers.en||Object.values(covers)[0];
-    if(!path)return;
+    if(!path){img.src=COVER_FALLBACK;return;}
     let started=false;
     const load=async()=>{
-        if(started)return;started=true;
+        if(started)return;
+        started=true;
         img.src=await getSignedImageUrl(path);
     };
     if('IntersectionObserver' in window) {
@@ -137,10 +146,9 @@ function renderNews(articles,container,lang,strings) {
             Object.values(article.translations||{})[0];
         if(!content||!content.title)return;
         const card=makeElement('article','vertex-news-card');
-        const cover=makeElement('div','vertex-news-cover');
+        const cover=makeElement('div','vertex-news-cover is-loading');
         const image=makeElement('img','vertex-news-image');
-        image.src=COVER_FALLBACK;image.alt='';image.loading='lazy';image.decoding='async';
-        image.addEventListener('error',()=>{if(image.src!==new URL(COVER_FALLBACK,location.href).href)image.src=COVER_FALLBACK;});
+        image.alt='';image.loading='lazy';image.decoding='async';
         cover.appendChild(image);setCoverImage(image,article,lang);
         const contentWrap=makeElement('div','vertex-news-content');
         const dateValue=new Date(article.publishedAt);
