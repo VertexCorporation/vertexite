@@ -256,7 +256,7 @@ setTimeout(async function () {
   metricsEl.textContent = identity[1];
   var actionsEl = hero.querySelector('.story-actions');
   var cueEl = hero.querySelector('.story-scroll-cue');
-  actionsEl.addEventListener('click',function(event){var link=event.target.closest('a');if(!link)return;var href=link.getAttribute('href');if(href&&href.charAt(0)==='#'){var target=document.querySelector(href);if(target){event.preventDefault();event.stopPropagation();target.style.animation='none';window.scrollTo({top:target.getBoundingClientRect().top+window.scrollY-(header?header.offsetHeight:0),behavior:'instant'});history.replaceState(null,'',href);}}});
+  // Internal links bubble to the shared heading-aware anchor navigation handler.
   var context = canvas.getContext('2d');
   if(!context)return;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
