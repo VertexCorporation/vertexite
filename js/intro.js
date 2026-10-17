@@ -395,12 +395,11 @@ setTimeout(async function () {
     titleEl.style.transform = 'translate3d(-50%,' + lift.toFixed(2) + 'px,0) scale(' + (openingFit * motionScale).toFixed(5) + ')';
     titleEl.style.opacity = '1';
     var titleBottom = titleEl.getBoundingClientRect().bottom - stage.getBoundingClientRect().top;
-    // Same button coordinates as the first frame at p=0 and p=1. In between,
-    // follow the floating title without introducing a jump at either edge.
+    // Position actions from the VISIBLE heading's bottom edge in every frame.
+    // The saved static actionsTop can be stale after the title is reparented/scaled,
+    // which previously placed these buttons inside the large closing headline.
     var flowingActionsTop = titleBottom + 26;
-    var startActionsTop = openingFrame ? openingFrame.actionsTop : flowingActionsTop;
-    var followTitle = smooth(phase(progress,.01,.07)) * (1-smooth(phase(progress,.925,.965)));
-    actionsEl.style.top = mix(startActionsTop, flowingActionsTop, followTitle).toFixed(2) + 'px';
+    actionsEl.style.top = flowingActionsTop.toFixed(2) + 'px';
     actionsEl.style.pointerEvents = actionsIn < .05 ? 'none' : '';
     actionsEl.inert = actionsIn < .05;
     if(!reduced){
