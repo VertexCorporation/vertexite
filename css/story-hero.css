@@ -104,7 +104,9 @@ html:lang(ja) :is(.story-title,.story-title-contrast){font-size:clamp(30px,7vw,1
 .story-stage > .story-title-contrast .story-contrast-word{position:static;display:inline-block;margin:0;transform:none!important;white-space:pre}
 @media(max-width:700px){
   .story-stage > :is(.story-title,.story-title-morphed,.story-title-contrast){font-size:clamp(28px,7vw,52px)!important}
+  .story-stage > :is(.story-title-morphed,.story-title-contrast){top:10vh}
 }
 @media(prefers-reduced-motion:reduce){
   .story-stage > :is(.story-title-morphed,.story-title-contrast){display:none}
+  .story-stage > .story-title{width:min(760px,100%);margin:0 auto}
 }
