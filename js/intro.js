@@ -13,6 +13,9 @@ setTimeout(async function () {
   var originalActions = Array.prototype.slice.call(hero.querySelectorAll('.hero-actions a'));
   var joinAction=document.querySelector('.nav-right a.btn[href*="join"],.nav-right a.btn[href*="katil"]');
   var originalLogos = sponsorsSection ? sponsorsSection.querySelector('.partners-logos') : null;
+  var sponsorLogoMarkup = originalLogos ? originalLogos.innerHTML : '';
+  // A second visual-only copy makes the rightward CSS marquee seamless.
+  var sponsorLoopMarkup = sponsorLogoMarkup.replace(/<img\b/g, '<img aria-hidden="true"');
   var lang = (document.documentElement.lang || 'en').toLowerCase().split('-')[0];
   var scrollCopy={"tr":"Kaydır","en":"Scroll","de":"Scrollen","fr":"Défiler","es":"Desplazar","it":"Scorri","pt":"Rolar","nl":"Scrollen","ru":"Прокрутите","ar":"مرّر","hi":"स्क्रॉल करें","id":"Gulir","ja":"スクロール","ko":"스크롤","zh":"滚动","az":"Sürüşdür"};
   var sponsorCopy = {
@@ -106,7 +109,10 @@ setTimeout(async function () {
 
       '<div class="story-geometry" aria-hidden="true"><svg viewBox="0 0 800 800" fill="none" stroke="currentColor"><circle cx="400" cy="400" r="300"/><circle cx="400" cy="400" r="210"/><ellipse cx="400" cy="400" rx="110" ry="300"/><ellipse cx="400" cy="400" rx="230" ry="300"/><ellipse cx="400" cy="400" rx="300" ry="105"/><path d="M400 100 660 250 660 550 400 700 140 550 140 250Z M140 250 660 550 M660 250 140 550 M400 100V700 M100 400H700 M140 250H660 M140 550H660 M250 140 550 660 M550 140 250 660"/><circle cx="400" cy="100" r="5"/><circle cx="660" cy="250" r="5"/><circle cx="140" cy="550" r="5"/></svg></div>' +
       '<h1 class="story-title">' + title + '</h1>' +
-      '<div class="story-sponsors"><span>' + sponsorLabel + '</span><div class="story-sponsor-logos">' + (originalLogos ? originalLogos.innerHTML : '') + '</div></div>' +
+      '<div class="story-sponsors"><span>' + sponsorLabel + '</span><div class="story-sponsor-viewport">' +
+        '<div class="story-sponsor-track"><div class="story-sponsor-group">' + sponsorLogoMarkup + '</div>' +
+        '<div class="story-sponsor-group" aria-hidden="true">' + sponsorLoopMarkup + '</div></div>' +
+      '</div></div>' +
       '<div class="story-globe-wrap"><canvas class="story-globe" aria-label="Graphic globe focused on Türkiye"></canvas></div>' +
       '<p class="story-statement"></p>' +
       '<p class="story-metrics"></p>' +
@@ -259,12 +265,14 @@ setTimeout(async function () {
     var progress = reduced ? 1 : clamp((window.scrollY - hero.offsetTop) / travel, 0, 1);
     var sponsorIn = phase(progress, .06, .17) * (1 - phase(progress, .25, .34));
     var globeIn = phase(progress, .10, .30);
+    // The first story starts as Türkiye turns red; the second waits until the world has filled.
+    // Each paragraph owns a long, non-overlapping scroll interval for unhurried reading.
     var turkeyFill = phase(progress, .42, .56);
-    var worldSpread = phase(progress, .48, .78);
-    var statementIn = phase(progress, .57, .66) * (1 - phase(progress, .71, .78));
-    var metricsIn = phase(progress, .67, .77) * (1 - phase(progress, .82, .89));
-    var ending=smooth(phase(progress,.90,1));
-    var actionsIn = Math.max(1-phase(progress,.015,.09),phase(progress,.92,1));
+    var worldSpread = phase(progress, .50, .79);
+    var statementIn = phase(progress, .42, .50) * (1 - phase(progress, .73, .79));
+    var metricsIn = phase(progress, .79, .85) * (1 - phase(progress, .955, .985));
+    var ending=smooth(phase(progress,.97,1));
+    var actionsIn = Math.max(1-phase(progress,.015,.09),phase(progress,.988,1));
     var titleLift = smooth(phase(progress, .015, .26))*(1-ending);
 
     var headerHide = reduced ? 0 : smooth(phase(progress,.035,.16)) * (1-smooth(phase(progress,.86,.98)));

@@ -62,11 +62,11 @@ html[data-theme="dark"] .story-sponsor-logos img { filter:grayscale(1) opacity(.
 @media(prefers-reduced-motion:reduce){.story-globe{transform:none;filter:none}}
 
 /* Scroll-only geometry and consistent controls. */
-.story-grid{display:none}.story-geometry{width:max(135vw,140vh);top:62%}.hero.story-hero{height:650vh}:is(.story-title,.story-title-contrast){text-wrap:nowrap;width:max-content;max-width:none}.story-globe{transform:scale(calc(2.5 * var(--ending-scale,1)))}
+.story-grid{display:none}.story-geometry{width:max(135vw,140vh);top:62%}.hero.story-hero{height:780vh}:is(.story-title,.story-title-contrast){text-wrap:nowrap;width:max-content;max-width:none}.story-globe{transform:scale(calc(2.5 * var(--ending-scale,1)))}
 .btn,.icon-btn,.store-badge{transition:border-color .2s ease,background-color .2s ease,color .2s ease;box-shadow:none}.btn:hover,.icon-btn:hover,.store-badge:hover{transform:none;border-color:var(--text)}
 .cta-band{position:relative;isolation:isolate;overflow:hidden}.cta-band::before{content:"";position:absolute;inset:-100px 0;z-index:-1;opacity:.12;background:repeating-conic-gradient(from 30deg at 20% 50%,transparent 0deg 59deg,var(--text) 59.2deg 59.6deg,transparent 60deg 120deg);pointer-events:none}.cta-band .wrap{min-height:250px}
 .partner-card img{width:180px;max-width:85%;height:45px;object-fit:contain}
-@media(max-width:700px){.hero.story-hero{height:600vh}:is(.story-title,.story-title-contrast){font-size:clamp(42px,8.2vw,112px)!important}}
+@media(max-width:700px){.hero.story-hero{height:730vh}:is(.story-title,.story-title-contrast){font-size:clamp(42px,8.2vw,112px)!important}}
 @media(prefers-reduced-motion:reduce){.hero.story-hero{height:auto}:is(.story-title,.story-title-contrast){white-space:normal!important;width:100%;max-width:100%}.story-globe{transform:none}.cta-band::before{opacity:.08}}
 
 .story-title-word{position:absolute;left:0;top:0;display:inline-block;white-space:pre}.story-title-probe .story-title-word{position:static;transform:none!important;margin-right:.25em}.story-title-probe .story-title-word:last-child{margin-right:0}
@@ -121,3 +121,64 @@ html:lang(ja) :is(.story-title,.story-title-contrast){font-size:clamp(30px,7vw,1
 .stats .vertex-identity-fallback{display:grid;gap:18px;padding-top:36px;padding-bottom:36px}
 .stats .vertex-identity-fallback p{margin:0;padding:clamp(22px,3vw,36px);border:1px solid rgba(255,255,255,.16);border-radius:18px;background:rgba(16,17,19,.94);color:#f5f5f5;text-align:center;overflow-wrap:break-word;font:500 clamp(16px,1.8vw,23px)/1.5 'Poppins',system-ui,sans-serif}
 @media(max-width:700px){.stats .vertex-identity-fallback{gap:14px;padding-top:22px;padding-bottom:22px}.stats .vertex-identity-fallback p{padding:20px;font-size:15px}}
+
+/* Autonomous, seamless left-to-right sponsor strip. The stage reveal still follows scroll,
+   but the logos move on their own timeline (not tied to the globe or scroll progress). */
+.story-stage > .story-sponsors {
+  box-sizing:border-box;
+  width:min(1120px,calc(100% - 48px));
+  padding:23px 0 26px;
+  overflow:hidden;
+}
+.story-stage > .story-sponsors > span {margin:0 22px 21px;}
+.story-sponsor-viewport {
+  position:relative;
+  width:100%;
+  overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+  mask-image:linear-gradient(to right, transparent 0%, #000 10%, #000 90%, transparent 100%);
+}
+.story-sponsor-track {
+  display:flex;
+  align-items:center;
+  width:max-content;
+  animation:vertexSponsorRight 29s linear infinite;
+  will-change:transform;
+}
+.story-sponsor-group {
+  display:flex;
+  align-items:center;
+  flex:0 0 auto;
+  gap:clamp(35px,4.1vw,64px);
+  padding-inline:clamp(17.5px,2.05vw,32px);
+}
+.story-sponsor-group img {
+  display:block;
+  flex:0 0 auto;
+  width:auto;
+  max-width:clamp(115px,10vw,160px);
+  height:clamp(23px,2.5vw,34px);
+  object-fit:contain;
+  filter:brightness(0);
+  opacity:.92;
+}
+html[data-theme="dark"] .story-sponsor-group img {filter:brightness(0) invert(1);}
+@keyframes vertexSponsorRight {
+  from {transform:translate3d(-50%,0,0);}
+  to {transform:translate3d(0,0,0);}
+}
+.story-sponsor-viewport:hover .story-sponsor-track {animation-play-state:paused;}
+@media(max-width:700px) {
+  .story-stage > .story-sponsors {width:calc(100% - 28px);padding:18px 0 21px;}
+  .story-stage > .story-sponsors > span {margin:0 16px 18px;}
+  .story-sponsor-viewport {
+    -webkit-mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%);
+    mask-image:linear-gradient(to right,transparent 0%,#000 12%,#000 88%,transparent 100%);
+  }
+  .story-sponsor-group {gap:32px;padding-inline:16px;}
+  .story-sponsor-group img {height:24px;max-width:116px;}
+  .story-sponsor-track {animation-duration:24s;}
+}
+@media(prefers-reduced-motion:reduce){
+  .story-sponsor-track {animation:none;transform:none;will-change:auto;}
+}
