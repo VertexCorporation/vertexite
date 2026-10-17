@@ -34,16 +34,20 @@
         var clean = name.trim().toLowerCase().replace(/ı/g, 'i').normalize('NFD').replace(/[\u0300-\u036f]/g, '');
         return clean === 'mustafa caki';
     }
+    function safeProfileSlug(value){
+        var slug=String(value||'').trim().replace(/^\/+|\/+$/g,'');
+        return /^[a-zA-Z0-9_-]{1,120}$/.test(slug)?slug:null;
+    }
     function getProfileSlug(card) {
         if (!card) return null;
         if (typeof card.profileSlug === 'string' && card.profileSlug.trim()) {
-            return card.profileSlug.trim().replace(/^\/+|\/+$/g, '');
+            return safeProfileSlug(card.profileSlug);
         }
         if (typeof card.profileId === 'string' && card.profileId.trim()) {
-            return card.profileId.trim().replace(/^\/+|\/+$/g, '');
+            return safeProfileSlug(card.profileId);
         }
         if (typeof card.slug === 'string' && card.slug.trim()) {
-            return card.slug.trim().replace(/^\/+|\/+$/g, '');
+            return safeProfileSlug(card.slug);
         }
         if (isMustafa(card.name)) {
             return 'mustafa-caki';
@@ -106,7 +110,7 @@
                 item.classList.add('profile-unavailable');
             }
             var role=document.createElement('div');role.className='role';role.textContent=card.position;
-            var social=document.createElement('div');social.className='team-social';(card.links||[]).forEach(function(link){var a=document.createElement('a');a.href=link.url;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',link.label);a.addEventListener('click',function(e){e.stopPropagation();});var img=document.createElement('img');img.alt=link.label;img.src='../assets/'+(link.label.toLowerCase()==='linkedin'?'linkedin.svg':link.label.toLowerCase()==='instagram'?'instagram.svg':'website.svg');a.appendChild(img);social.appendChild(a);});
+            var social=document.createElement('div');social.className='team-social';(Array.isArray(card.links)?card.links:[]).forEach(function(link){if(!link||typeof link.label!=='string')return;var href=safeImage(link.url);if(!href)return;var a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',link.label);a.addEventListener('click',function(e){e.stopPropagation();});var img=document.createElement('img');img.alt=link.label;img.src='../assets/'+(link.label.toLowerCase()==='linkedin'?'linkedin.svg':link.label.toLowerCase()==='instagram'?'instagram.svg':'website.svg');a.appendChild(img);social.appendChild(a);});
             info.append(name,role,social);item.append(wrap,info);track.appendChild(item);
         });track.dispatchEvent(new Event('scroll'));
     }
