@@ -156,7 +156,7 @@ setTimeout(async function () {
       '<div class="story-proof" role="group" aria-label="Vertex statistics"><div class="story-proof-viewport">' +
         '<div class="story-proof-track"><div class="story-proof-group"></div><div class="story-proof-group" aria-hidden="true"></div></div>' +
       '</div></div>' +
-      '<div class="story-globe-wrap"><canvas class="story-globe" aria-label="Graphic globe focused on Türkiye"></canvas></div>' +
+      '<div class="story-globe-wrap"><canvas class="story-globe" aria-label="Animated world globe representing shared prosperity"></canvas></div>' +
       '<p class="story-statement"></p>' +
       '<p class="story-metrics"></p>' +
       '<div class="story-actions">' + actionMarkup(originalActions[0], 'btn-primary') + actionMarkup(joinAction || originalActions[1], 'btn-ghost') + '</div>' +
@@ -250,6 +250,7 @@ setTimeout(async function () {
   proofEl.setAttribute('aria-label', lang === 'tr' ? 'Vertex istatistikleri' : 'Vertex statistics');
   var globeWrap = hero.querySelector('.story-globe-wrap');
   var canvas = hero.querySelector('.story-globe');
+  if(canvas)canvas.setAttribute('aria-label',identity[1]);
   var statementEl = hero.querySelector('.story-statement');
   var metricsEl = hero.querySelector('.story-metrics');
   statementEl.textContent = identity[0];
@@ -261,7 +262,6 @@ setTimeout(async function () {
   if(!context)return;
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var worldFeatures = null;
-  var turkey = null;
   var spreadCountries = [];
   var graticule = d3.geoGraticule10();
   var ticking = false;
@@ -276,7 +276,7 @@ setTimeout(async function () {
     element.style.transform = 'translate3d(-50%,' + ((1 - amount) * distance).toFixed(2) + 'px,0)';
   }
 
-  function drawGlobe(progress, turkeyFill, worldSpread) {
+  function drawGlobe(progress, worldSpread) {
     if (!worldFeatures) return;
     var cssSize = globeWrap.clientWidth;
     var dpr = Math.min(window.devicePixelRatio || 1, 1.25);
@@ -295,8 +295,9 @@ setTimeout(async function () {
     var centre = size / 2;
     var radius = size * .445;
     var turn = smooth(phase(progress, .23, .54));
-    var longitude = mix(-102, 28.9784, turn) + 360 * smooth(phase(progress,.80,.97));
-    var latitude = mix(12, 41.0082, turn);
+    // A neutral Atlantic-facing view emphasizes the world rather than any country.
+    var longitude = mix(-102, -10, turn) + 360 * smooth(phase(progress,.80,.97));
+    var latitude = mix(12, 15, turn);
     var projection = d3.geoOrthographic()
       .translate([centre, centre])
       .scale(radius)
@@ -323,16 +324,6 @@ setTimeout(async function () {
       context.strokeStyle = border;
       context.lineWidth = Math.max(.55, size * .0011); context.stroke();
     });
-
-    if (turkey) {
-      context.save();
-      context.globalAlpha = smooth(turkeyFill);
-      context.beginPath(); path(turkey);
-      context.fillStyle = '#e11d2e'; context.fill();
-      context.strokeStyle = dark ? '#ffffff' : '#9f1120';
-      context.lineWidth = Math.max(1, size * .0021); context.stroke();
-      context.restore();
-    }
 
     if (worldSpread > 0 && spreadCountries.length) {
       spreadCountries.forEach(function (country, index) {
@@ -361,10 +352,9 @@ setTimeout(async function () {
     var progress = reduced ? 1 : clamp((window.scrollY - hero.offsetTop) / travel, 0, 1);
     var sponsorIn = phase(progress, .06, .17) * (1 - phase(progress, .25, .34));
     var globeIn = phase(progress, .10, .30);
-    // The first story starts as Türkiye turns red; the second waits until the world has filled.
-    // Each paragraph owns a long, non-overlapping scroll interval for unhurried reading.
-    var turkeyFill = phase(progress, .42, .56);
-    var worldSpread = phase(progress, .50, .79);
+    // Worldwide highlights begin with the first identity panel, without
+    // privileging any country. The second panel follows the global reveal.
+    var worldSpread = phase(progress, .42, .79);
     var statementIn = phase(progress, .42, .50) * (1 - phase(progress, .73, .79));
     // The second paragraph appears as the countries finish filling, but exits
     // BEFORE the globe has turned 180 degrees (half-turn is at progress .885).
@@ -430,7 +420,7 @@ setTimeout(async function () {
     canvas.style.opacity = String(reduced ? 0 : 1-closingCrossfade);
     globeWrap.style.setProperty('--ending-scale',String(mix(1,.72,closingCrossfade)));
     cueEl.style.opacity = String(1 - phase(progress, .02, .12));
-    drawGlobe(progress, turkeyFill, worldSpread);
+    drawGlobe(progress, worldSpread);
     ticking = false;
   }
 
@@ -441,24 +431,18 @@ setTimeout(async function () {
     }
   }
 
-  Promise.all([
-    fetch('../assets/geo/countries-110m.json', { credentials: 'same-origin' }),
-    fetch('../assets/geo/turkiye-detail.json', { credentials: 'same-origin' })
-  ])
-    .then(function (responses) {
-      responses.forEach(function (response) { if (!response.ok) throw new Error(response.status); });
-      return Promise.all(responses.map(function (response) { return response.json(); }));
+  fetch('../assets/geo/countries-110m.json', { credentials: 'same-origin' })
+    .then(function (response) {
+      if(!response.ok)throw new Error(response.status);
+      return response.json();
     })
-    .then(function (data) {
-      var worldTopology = data[0];
+    .then(function (worldTopology) {
       worldFeatures = topojson.feature(worldTopology, worldTopology.objects.countries).features;
-      turkey = data[1];
-      spreadCountries = worldFeatures
-        .filter(function (country) { return String(country.id) !== '792'; })
-        .sort(function (a, b) {
-          return d3.geoDistance(d3.geoCentroid(a), [28.9784, 41.0082]) -
-            d3.geoDistance(d3.geoCentroid(b), [28.9784, 41.0082]);
-        });
+      // Evenly progressive global sweep: all countries participate, with no
+      // origin country, national flag colour, or distance-to-Türkiye ordering.
+      spreadCountries = worldFeatures.slice().sort(function(a,b){
+        return d3.geoCentroid(a)[0]-d3.geoCentroid(b)[0];
+      });
       render();
     })
     .catch(function () { globeWrap.style.display = 'none'; });
