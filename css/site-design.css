@@ -149,7 +149,7 @@ header .nav-right>.nav-future-cta{font-size:12px;padding:10px 12px;white-space:n
 .btn-primary,.story-actions .btn-primary{border-color:transparent!important;transition:background-color 200ms var(--panel-ease),filter 200ms var(--panel-ease),color 200ms var(--panel-ease)}
 @media(hover:hover){
   .btn-primary:hover,.story-actions .btn-primary:hover,header .nav-right .btn-primary:hover{
-    border-color:transparent!important;outline:none;box-shadow:none;opacity:1!important;transform:none;filter:brightness(.9)
+    border-color:transparent!important;box-shadow:none;opacity:1!important;transform:none;filter:brightness(.9)
   }
   html[data-theme="light"] .btn-primary:hover{background-color:#292c30}
 }
