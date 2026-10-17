@@ -24,6 +24,13 @@ setTimeout(async function () {
     ru: 'При поддержке', ar: 'بدعم من', hi: 'द्वारा समर्थित', id: 'Didukung oleh',
     ja: 'スポンサー', ko: '후원', zh: '合作伙伴', az: 'Dəstəkləyənlər'
   };
+  // Public-facing values are supplied by Vertex; verify against analytics/HR before publishing updates.
+  var proofStatsLabels = {"en":["Countries Reached","Total Downloads","People Who Worked at Vertex","Monthly Active Users","Average Team Age","Years Active","Social Media Reach"],"tr":["Ulaşılan Ülke","Toplam İndirme","Emektar Sayısı","Aylık Aktif Kullanıcı","Ortalama Yaş","Faaliyet Süresi (Yıl)","Sosyal Medya Erişimi"],"de":["Erreichte Länder","Downloads insgesamt","Ehemalige und aktuelle Mitwirkende","Monatlich Aktive Nutzer","Durchschnittsalter","Aktive Jahre","Social-Media-Reichweite"],"fr":["Pays touchés","Téléchargements","Personnes ayant contribué","Utilisateurs actifs mensuels","Âge moyen de l'équipe","Années d'activité","Portée sur les réseaux"],"es":["Países alcanzados","Descargas totales","Personas que han colaborado","Usuarios activos mensuales","Edad media del equipo","Años de actividad","Alcance en redes sociales"],"it":["Paesi raggiunti","Download totali","Persone che hanno contribuito","Utenti attivi mensili","Età media del team","Anni di attività","Copertura sui social"],"pt":["Países alcançados","Downloads totais","Pessoas que contribuíram","Utilizadores ativos mensais","Idade média da equipa","Anos de atividade","Alcance nas redes sociais"],"nl":["Bereikte landen","Totale downloads","Mensen die hebben bijgedragen","Maandelijks actieve gebruikers","Gemiddelde teamleeftijd","Jaren actief","Bereik op sociale media"],"ru":["Страны присутствия","Всего загрузок","Участники за всё время","Активные пользователи в месяц","Средний возраст команды","Лет работы","Охват в соцсетях"],"ar":["الدول التي وصلنا إليها","إجمالي التنزيلات","المساهمون عبر السنوات","المستخدمون النشطون شهريًا","متوسط عمر الفريق","سنوات النشاط","الوصول عبر التواصل الاجتماعي"],"hi":["जुड़े हुए देश","कुल डाउनलोड","अब तक के योगदानकर्ता","मासिक सक्रिय उपयोगकर्ता","टीम की औसत उम्र","सक्रिय वर्ष","सोशल मीडिया पहुँच"],"id":["Negara yang dijangkau","Total unduhan","Orang yang pernah berkontribusi","Pengguna aktif bulanan","Usia rata-rata tim","Tahun beroperasi","Jangkauan media sosial"],"ja":["展開国数","累計ダウンロード","これまでの貢献者","月間アクティブユーザー","チームの平均年齢","活動年数","SNSリーチ"],"ko":["진출 국가","누적 다운로드","역대 기여 인원","월간 활성 사용자","팀 평균 연령","활동 기간(년)","소셜 미디어 도달"],"zh":["覆盖国家","累计下载","历年贡献者","月活跃用户","团队平均年龄","运营年数","社交媒体触达"],"az":["Əhatə olunan ölkələr","Ümumi endirmələr","İndiyədək töhfə verənlər","Aylıq aktiv istifadəçilər","Komandanın orta yaşı","Fəaliyyət ili","Sosial media əhatəsi"]};
+  var proofStatsValues = {
+    tr: ['190+', '100B+', '1B+', '10B+', '16', '3', '10M+'],
+    default: ['190+', '100K+', '1K+', '10K+', '16', '3', '10M+']
+  };
+
   var identityCopy = {
     "en": [
       "A vertex is the point where two or more lines meet. In anatomy, it represents the highest point; in astronomy, the zenith; in geometry, a fundamental structural element; in network theory, the node where connections converge; and in optics, the point where light comes into focus.",
@@ -113,6 +120,9 @@ setTimeout(async function () {
         '<div class="story-sponsor-track"><div class="story-sponsor-group">' + sponsorLogoMarkup + '</div>' +
         '<div class="story-sponsor-group" aria-hidden="true">' + sponsorLoopMarkup + '</div></div>' +
       '</div></div>' +
+      '<div class="story-proof" role="group" aria-label="Vertex statistics"><div class="story-proof-viewport">' +
+        '<div class="story-proof-track"><div class="story-proof-group"></div><div class="story-proof-group" aria-hidden="true"></div></div>' +
+      '</div></div>' +
       '<div class="story-globe-wrap"><canvas class="story-globe" aria-label="Graphic globe focused on Türkiye"></canvas></div>' +
       '<p class="story-statement"></p>' +
       '<p class="story-metrics"></p>' +
@@ -152,6 +162,25 @@ setTimeout(async function () {
   measureTitle();
   if(document.fonts)document.fonts.ready.then(function(){measureTitle();requestRender();});
   var sponsorsEl = hero.querySelector('.story-sponsors');
+  var proofEl = hero.querySelector('.story-proof');
+  var proofGroups = proofEl.querySelectorAll('.story-proof-group');
+  var proofLabels = proofStatsLabels[lang] || proofStatsLabels.en;
+  var proofValues = lang === 'tr' ? proofStatsValues.tr : proofStatsValues.default;
+  for (var pi = 0; pi < proofLabels.length; pi++) {
+    var item = document.createElement('div');
+    item.className = 'story-proof-item';
+    var label = document.createElement('span');
+    label.className = 'story-proof-label';
+    label.textContent = proofLabels[pi];
+    var value = document.createElement('strong');
+    value.className = 'story-proof-value';
+    value.textContent = proofValues[pi];
+    item.appendChild(label);
+    item.appendChild(value);
+    proofGroups[0].appendChild(item);
+    proofGroups[1].appendChild(item.cloneNode(true));
+  }
+  proofEl.setAttribute('aria-label', lang === 'tr' ? 'Vertex istatistikleri' : 'Vertex statistics');
   var globeWrap = hero.querySelector('.story-globe-wrap');
   var canvas = hero.querySelector('.story-globe');
   var statementEl = hero.querySelector('.story-statement');
@@ -304,8 +333,19 @@ setTimeout(async function () {
     contrastTitle.style.opacity=String(titleOpacity*singleOpacity*contrastBlend);
     // Transition the title baseline with its visible layout to avoid panel jumps.
     var titleBottom=mix(titleEl.getBoundingClientRect().bottom,morphTitle.getBoundingClientRect().bottom,morph)-stage.getBoundingClientRect().top;
-    if(!reduced)[sponsorsEl,statementEl,metricsEl].forEach(function(panel){panel.style.top=Math.max(titleBottom+24,Math.min(306,window.innerHeight*.34))+'px';});
+    if(!reduced){
+      // Keep the new statistics card directly below sponsors without colliding with the headline.
+      var sponsorsHeight = sponsorsEl.offsetHeight;
+      var proofHeight = proofEl.offsetHeight;
+      var combinedHeight = sponsorsHeight + proofHeight + 14;
+      var targetTop = Math.max(titleBottom + 20, Math.min(306, window.innerHeight * .34));
+      var sponsorTop = Math.max(titleBottom + 12, Math.min(targetTop, stage.clientHeight - combinedHeight - 34));
+      sponsorsEl.style.top = sponsorTop + 'px';
+      proofEl.style.top = (sponsorTop + sponsorsHeight + 14) + 'px';
+      [statementEl,metricsEl].forEach(function(panel){panel.style.top=Math.max(titleBottom+24,Math.min(306,window.innerHeight*.34))+'px';});
+    }
     reveal(sponsorsEl, sponsorIn, 28);
+    reveal(proofEl, sponsorIn, 28);
     reveal(globeWrap, globeIn, 42);
     reveal(statementEl, statementIn, 34);
     reveal(metricsEl, metricsIn, 34);
