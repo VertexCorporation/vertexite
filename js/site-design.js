@@ -225,6 +225,7 @@ window.addEventListener('pageshow',function(){leaving=false;document.documentEle
         // When another panel opens, remove the previous panel immediately.
         closeTheme(false,true);
         if(otherPanelTrigger.id==='menuBtn')closeLanguageImmediately();
+        if(otherPanelTrigger.id==='langBtn')closeMobileMenu();
       } else if(!menu.contains(target)) {
         closeTheme(false,false);
       }
