@@ -18,6 +18,7 @@
   if (document.fonts) document.fonts.ready.then(fit);
 })();
 
+// Start hydration immediately when dependencies and fonts are ready; do not show a second style after 750 ms.
 setTimeout(async function () {
   'use strict';
 
@@ -407,4 +408,4 @@ setTimeout(async function () {
   new MutationObserver(requestRender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   render();
   stage.classList.add('story-ready');
-},750);
+},0);
