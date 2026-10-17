@@ -44,9 +44,9 @@ footer a{color:var(--text-muted);transition:color 120ms var(--ui-ease)}footer a:
 html[data-theme="dark"]{--scroll-rgb:255 255 255}
 .lang-panel{--scrollbar-alpha:0}
 *{scrollbar-width:thin;scrollbar-color:rgb(var(--scroll-rgb)/var(--scrollbar-alpha,0)) transparent}
-::-webkit-scrollbar{width:5px;height:4px;background:transparent}
+::-webkit-scrollbar{width:4px;height:3px;background:transparent}
 ::-webkit-scrollbar-track,::-webkit-scrollbar-corner{background:transparent}
-::-webkit-scrollbar-thumb{background:rgb(var(--scroll-rgb)/var(--scrollbar-alpha,0));border-radius:999px}
+::-webkit-scrollbar-thumb{background:rgb(var(--scroll-rgb)/var(--scrollbar-alpha,0));border-radius:9999px;border:.5px solid transparent;background-clip:padding-box}
 @keyframes publicNamesLoop{from{transform:translateX(0)}to{transform:translateX(calc(-1 * var(--name-cycle)))}}
 
 footer .foot-col a,footer .foot-legal a{color:var(--text-muted)}footer .foot-col a:hover,footer .foot-col a:focus-visible,footer .foot-legal a:hover,footer .foot-legal a:focus-visible{color:var(--accent)}
@@ -341,7 +341,7 @@ a,button,summary,[role="button"],input[type="button"],input[type="submit"],input
 /* Theme icon crossfade uses the selected mode, not the resolved page color.
    The System icon must animate even when System and the explicit mode look identical. */
 #themeBtn{position:relative}
-#themeBtn > :is(#themeIconSun,#themeIconMoon,.theme-system-icon){
+#themeBtn > :where(#themeIconSun,#themeIconMoon,.theme-system-icon){
   display:block!important;
   position:absolute;
   top:50%;left:50%;
@@ -359,5 +359,18 @@ a,button,summary,[role="button"],input[type="button"],input[type="submit"],input
 html[data-theme="light"] #themeBtn:not([data-theme-mode]) > #themeIconMoon,
 html[data-theme="dark"] #themeBtn:not([data-theme-mode]) > #themeIconSun{opacity:1}
 @media(prefers-reduced-motion:reduce){
-  #themeBtn > :is(#themeIconSun,#themeIconMoon,.theme-system-icon){transition:none!important}
+  #themeBtn > :where(#themeIconSun,#themeIconMoon,.theme-system-icon){transition:none!important}
+}
+
+
+/* System's icon uses a class selector. :where() above keeps the shared
+   hidden-state rule less specific than the active mode selector. */
+/* Remove the duplicate language picker inside the hamburger panel; the
+   accessible language selector in the header stays available. */
+#siteHeader .mobile-menu #mLangBtn{display:none!important}
+
+/* Blink/WebKit allow exact 4px rounded scrollbar styling; Firefox keeps
+   its native 'thin' option. Preserve the animated alpha from the scroller. */
+@supports selector(::-webkit-scrollbar){
+  *{scrollbar-width:auto;scrollbar-color:auto}
 }
