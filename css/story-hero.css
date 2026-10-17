@@ -89,3 +89,22 @@ html:lang(ja) :is(.story-title,.story-title-contrast){font-size:clamp(30px,7vw,1
 /* Mobile headline and hero controls stay legible throughout hydration. */
 @media(max-width:700px){.story-static-content :is(.story-title,.story-title-contrast),.story-stage>:is(.story-title,.story-title-contrast){font-size:clamp(28px,7vw,52px)!important}.story-static-content{width:calc(100% - 40px)}.story-geometry svg{opacity:.12}.story-actions .btn-ghost{background:var(--bg)}}
 .story-outgoing{z-index:0}
+
+/* Two independently laid-out hero titles prevent word collisions during scroll. */
+.hero.story-hero > .story-stage:not(.story-outgoing){z-index:1}
+.story-stage > .story-title,
+.story-stage > .story-title-morphed,
+.story-stage > .story-title-contrast{font-size:clamp(42px,8.2vw,112px);transform-origin:center top}
+.story-stage > .story-title{width:min(1120px,calc(100% - 40px));height:auto;display:flex;flex-wrap:wrap;justify-content:center;align-content:flex-start;column-gap:.25em;white-space:normal;text-wrap:wrap;max-width:none}
+.story-stage > .story-title-morphed,
+.story-stage > .story-title-contrast{position:absolute;top:clamp(78px,13vh,126px);left:50%;width:max-content;height:auto;margin:0;display:flex;flex-wrap:nowrap;justify-content:center;gap:.25em;white-space:nowrap;text-wrap:nowrap;font-family:'Anton','Arial Narrow',sans-serif;font-weight:400;line-height:.96;letter-spacing:.07em;text-transform:uppercase;text-align:center;pointer-events:none}
+.story-stage > .story-title-morphed{z-index:6;color:var(--text)}
+.story-stage > .story-title-contrast{z-index:5}
+.story-stage > :is(.story-title,.story-title-morphed) .story-title-word,
+.story-stage > .story-title-contrast .story-contrast-word{position:static;display:inline-block;margin:0;transform:none!important;white-space:pre}
+@media(max-width:700px){
+  .story-stage > :is(.story-title,.story-title-morphed,.story-title-contrast){font-size:clamp(28px,7vw,52px)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .story-stage > :is(.story-title-morphed,.story-title-contrast){display:none}
+}
