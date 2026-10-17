@@ -67,18 +67,29 @@ setTimeout(async function () {
   var geometry = hero.querySelector('.story-geometry');
   var lastGlobeFrame = '';
   var titleEl = hero.querySelector('.story-title');
-  var contrastTitle=document.createElement('div');contrastTitle.className='story-title-contrast';contrastTitle.setAttribute('aria-hidden','true');titleEl.before(contrastTitle);
   var titleWords=title.split(/\s+/).filter(Boolean),titleLayout=null;
-  titleEl.textContent='';titleEl.setAttribute('aria-label',title);titleWords.forEach(function(word){var span=document.createElement('span');span.textContent=word;span.className='story-title-word';span.setAttribute('aria-hidden','true');titleEl.appendChild(span);});
+  titleEl.textContent='';titleEl.setAttribute('aria-label',title);
+  titleWords.forEach(function(word){var span=document.createElement('span');span.textContent=word;span.className='story-title-word';span.setAttribute('aria-hidden','true');titleEl.appendChild(span);});
+
+  // Crossfade two complete layouts instead of moving individual words through one another.
+  // Both copies are decorative; the original h1 remains the only accessible heading.
+  var morphTitle=document.createElement('div');
+  morphTitle.className='story-title story-title-morphed';morphTitle.setAttribute('aria-hidden','true');
+  morphTitle.replaceChildren(...Array.from(titleEl.children).map(function(el){return el.cloneNode(true);}));
+  titleEl.before(morphTitle);
+
+  var contrastTitle=document.createElement('div');
+  contrastTitle.className='story-title-contrast';contrastTitle.setAttribute('aria-hidden','true');
   contrastTitle.replaceChildren(...Array.from(titleEl.children).map(function(el){var copy=el.cloneNode(true);copy.className='story-contrast-word';return copy;}));
+  morphTitle.before(contrastTitle);
+
   function measureTitle(){
-    var probe=titleEl.cloneNode(true);probe.className='story-title story-title-probe';probe.style.cssText='position:fixed;visibility:hidden;transform:none;left:0;top:0;width:'+Math.min(1120,window.innerWidth-40)+'px;font-size:'+(window.innerWidth<=700?Math.max(28,Math.min(52,window.innerWidth*.07)):Math.max(42,Math.min(112,window.innerWidth*.082)))+'px;white-space:normal;';
-    document.body.appendChild(probe);var base=probe.getBoundingClientRect(),initial=Array.from(probe.children).map(function(el){var r=el.getBoundingClientRect();return {x:r.left-base.left,y:r.top-base.top};});
-    var rows=new Map();Array.from(probe.children).forEach(function(el,i){var r=el.getBoundingClientRect(),key=Math.round(initial[i].y);if(!rows.has(key))rows.set(key,[]);rows.get(key).push({i:i,left:initial[i].x,right:initial[i].x+r.width});});rows.forEach(function(row){var left=Math.min.apply(null,row.map(function(r){return r.left;})),right=Math.max.apply(null,row.map(function(r){return r.right;})),offset=(base.width-(right-left))/2-left;row.forEach(function(r){initial[r.i].x+=offset;});});
-    probe.style.width='max-content';probe.style.whiteSpace='nowrap';base=probe.getBoundingClientRect();var total=base.width,final=Array.from(probe.children).map(function(el){var r=el.getBoundingClientRect();return {x:r.left-base.left,y:0};});
-    titleLayout={height:initial.reduce(function(h,p){return Math.max(h,p.y);},0)+parseFloat(getComputedStyle(probe).lineHeight),initial:initial,final:final,width:Math.min(1120,window.innerWidth-40),total:total};probe.remove();
+    // scrollWidth/scrollHeight are layout measurements, unaffected by our transforms.
+    // No cloned inline word positions survive a resize, orientation change or font load.
+    titleLayout={height:titleEl.scrollHeight,total:morphTitle.scrollWidth,wrappedWidth:titleEl.scrollWidth};
   }
-  measureTitle();document.fonts.ready.then(function(){measureTitle();requestRender();});
+  measureTitle();
+  if(document.fonts)document.fonts.ready.then(function(){measureTitle();requestRender();});
   var sponsorsEl = hero.querySelector('.story-sponsors');
   var globeWrap = hero.querySelector('.story-globe-wrap');
   var canvas = hero.querySelector('.story-globe');
@@ -208,24 +219,26 @@ setTimeout(async function () {
     var contrastBlend=reduced?0:smooth(phase(progress,.30,.36))*(1-smooth(phase(progress,.88,.90)));
     titleEl.style.mixBlendMode='normal';titleEl.style.color='var(--text)';
     geometry.style.transform='translate3d(-50%,-50%,0) scale('+mix(1,1.4,smooth(phase(progress,.05,.30))*(1-ending))+') rotate('+mix(0,18,phase(progress,0,.30)*(1-ending))+'deg)';
-    titleEl.style.transform = 'translate3d(-50%,' + (mix(0, -Math.min(76, window.innerHeight * .08), titleLift)).toFixed(2) + 'px,0)';
-    titleEl.style.fontSize = window.innerWidth<=700?'clamp(28px,7vw,52px)':'clamp(42px,8.2vw,112px)';
-    var layout=titleLayout,fit=Math.min(1,(window.innerWidth-40)/layout.total),morph=smooth(phase(progress,.03,.22))*(1-ending);
-    titleEl.style.width=mix(layout.width,layout.total,morph)+'px';
-    titleEl.style.height=layout.height+'px';
-    titleEl.style.display='block';titleEl.style.flexWrap='nowrap';titleEl.style.justifyContent='initial';titleEl.style.alignContent='initial';titleEl.style.columnGap='0';
-    Array.from(titleEl.children).forEach(function(el,i){el.style.position='absolute';el.style.transform='translate3d('+mix(layout.initial[i].x,layout.final[i].x,morph).toFixed(2)+'px,'+mix(layout.initial[i].y,0,morph).toFixed(2)+'px,0)';});
+    var layout=titleLayout,morph=smooth(phase(progress,.03,.22))*(1-ending);
+    var lift=mix(0,-Math.min(76,window.innerHeight*.08),titleLift);
+    var initialFit=Math.min(1,(window.innerWidth-40)/Math.max(1,layout.wrappedWidth));
+    var finalFit=Math.min(1,(window.innerWidth-40)/Math.max(1,layout.total));
     var grow=mix(.86,1,smooth(phase(progress,.30,.56)));
+    titleEl.style.transform='translate3d(-50%,'+lift.toFixed(2)+'px,0) scale('+initialFit.toFixed(4)+')';
+    var singleTransform='translate3d(-50%,'+lift.toFixed(2)+'px,0) scale('+(finalFit*grow).toFixed(4)+')';
+    morphTitle.style.transform=singleTransform;
+    contrastTitle.style.transform=singleTransform;
     actionsEl.style.top=(titleEl.offsetTop+layout.height+26)+'px';
     actionsEl.style.pointerEvents=actionsIn<.05?'none':'';actionsEl.inert=actionsIn<.05;
-    titleEl.style.transform += ' scale('+ (mix(1,fit*grow,morph)).toFixed(4)+')';
-    titleEl.style.willChange='auto';titleEl.style.left='50%';titleEl.style.right='auto';titleEl.style.margin='0';
     var titleOpacity=1-.12*Math.sin(Math.PI*phase(progress,.015,.26))*(1-ending);
-    contrastTitle.style.cssText=titleEl.style.cssText;contrastTitle.style.mixBlendMode='difference';contrastTitle.style.color='#fff';contrastTitle.style.opacity=String(titleOpacity*contrastBlend);
-    Array.from(contrastTitle.children).forEach(function(el,i){el.style.cssText=titleEl.children[i].style.cssText;});
-    titleEl.style.opacity=String(titleOpacity*(1-contrastBlend));
-    // Keep panels below the actual title, including long translated headings.
-    var titleBottom=Math.max.apply(null,Array.from(titleEl.children).map(function(el){return el.getBoundingClientRect().bottom;}))-stage.getBoundingClientRect().top;
+    var wrappedOpacity=1-smooth(phase(morph,.08,.48));
+    var singleOpacity=smooth(phase(morph,.52,.92));
+    titleEl.style.opacity=String(titleOpacity*wrappedOpacity);
+    morphTitle.style.opacity=String(titleOpacity*singleOpacity*(1-contrastBlend));
+    contrastTitle.style.mixBlendMode='difference';contrastTitle.style.color='#fff';
+    contrastTitle.style.opacity=String(titleOpacity*singleOpacity*contrastBlend);
+    // Transition the title baseline with its visible layout to avoid panel jumps.
+    var titleBottom=mix(titleEl.getBoundingClientRect().bottom,morphTitle.getBoundingClientRect().bottom,morph)-stage.getBoundingClientRect().top;
     if(!reduced)[sponsorsEl,statementEl,metricsEl].forEach(function(panel){panel.style.top=Math.max(titleBottom+24,Math.min(306,window.innerHeight*.34))+'px';});
     reveal(sponsorsEl, sponsorIn, 28);
     reveal(globeWrap, globeIn, 42);
