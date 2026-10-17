@@ -260,3 +260,79 @@ html[data-theme="dark"] .logo-chip::before{opacity:1}
 .vertex-news-cover.is-loading .vertex-news-image{opacity:0}
 @keyframes vertexNewsShimmer{from{background-position:160% 0}to{background-position:-160% 0}}
 @media(prefers-reduced-motion:reduce){.logo-chip::before,.vertex-news-cover::after,.vertex-news-cover .vertex-news-image{transition:none!important}.vertex-news-cover::after{animation:none!important}}
+
+
+/* Responsive interaction polish: preserve accessible keyboard focus, remove
+   browser-native blue tap flashes, and keep page sections independent of the menu. */
+a,button,summary,[role="button"],input[type="button"],input[type="submit"],input[type="checkbox"],select{
+  -webkit-tap-highlight-color:transparent;
+  touch-action:manipulation;
+}
+#siteHeader{position:sticky;top:0}
+#siteHeader .mobile-menu{
+  position:absolute;
+  top:100%;
+  inset-inline:0;
+  z-index:20;
+  width:100%;
+  margin:0;
+  overflow-x:hidden;
+  overflow-y:auto;
+  overscroll-behavior:contain;
+  -webkit-overflow-scrolling:touch;
+  background:var(--surface);
+  border-radius:0 0 12px 12px;
+  box-shadow:0 14px 28px rgba(0,0,0,.10);
+  max-height:0;
+}
+#siteHeader.menu-open .mobile-menu{
+  max-height:min(560px,calc(100vh - 68px - env(safe-area-inset-bottom,0px) - 8px));
+}
+@supports(height:100dvh){
+  #siteHeader.menu-open .mobile-menu{
+    max-height:min(560px,calc(100dvh - 68px - env(safe-area-inset-bottom,0px) - 8px));
+  }
+}
+#siteHeader .mobile-menu nav{
+  padding-bottom:max(18px,env(safe-area-inset-bottom,0px));
+}
+#siteHeader .mobile-menu a.mlink,
+#siteHeader .mobile-menu button.mlink{min-height:44px;display:flex;align-items:center}
+#siteHeader .mobile-menu .m-cta{min-height:44px}
+@media(max-width:1279px){
+  #siteHeader .nav-right .icon-btn{min-width:44px;min-height:44px}
+  #siteHeader .nav{min-width:0}
+  #siteHeader .nav-right{min-width:0}
+}
+@media(max-width:379px){
+  #siteHeader .wrap.nav{padding-inline:16px}
+  #siteHeader .nav-right{gap:5px}
+  #siteHeader .logo-chip span{font-size:18px}
+  #siteHeader .lang-btn{width:44px;min-width:44px;padding:0}
+  #siteHeader .lang-btn>span:first-of-type{
+    position:absolute;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip-path:inset(50%);white-space:nowrap
+  }
+  #siteHeader .lang-btn>.chev{display:none}
+}
+@media(max-width:359px){
+  .wrap{padding-inline:16px}
+  .partner-card{padding-inline:10px}
+  .partner-name{overflow-wrap:anywhere;text-align:center}
+}
+@media(orientation:landscape) and (max-height:500px){
+  #siteHeader .mobile-menu nav{padding-top:0;padding-bottom:12px}
+  .story-stage{min-height:0}
+  .story-static-content{top:clamp(64px,14svh,88px)}
+}
+/* Keep the editorial column comfortable without leaving excessive unused
+   space on 2K/4K displays; the header shares exactly the same --maxw. */
+@media(min-width:1800px){
+  :root{--maxw:clamp(1120px,70vw,1760px)}
+  main .section-head h2{font-size:clamp(32px,2vw,46px)}
+  main .section-head p{font-size:clamp(15px,.9vw,19px)}
+  .vertex-news-title{font-size:clamp(20px,1vw,24px)}
+}
+@media(prefers-reduced-motion:reduce){
+  #siteHeader .mobile-menu{scroll-behavior:auto}
+}
