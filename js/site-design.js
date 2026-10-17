@@ -22,3 +22,8 @@ function enhanceCards(){document.querySelectorAll('#teamTrack .team-card').forEa
 enhanceCards();const team=document.getElementById('teamTrack');if(team)new MutationObserver(enhanceCards).observe(team,{childList:true});
 const panels=document.querySelectorAll('.lang-panel,.mobile-menu,.doctrine-modal-content,.success-modal-content');panels.forEach(p=>p.classList.add('console-panel'));
 }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();})();
+
+/* Animate language navigation without changing regular link behavior. */
+(function(){'use strict';var reduce=matchMedia('(prefers-reduced-motion: reduce)'),leaving=false;
+document.addEventListener('click',function(e){var a=e.target.closest('.lang-panel a.lang-row[href]');if(!a||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target||a.hasAttribute('download')||leaving||reduce.matches)return;var url=new URL(a.href,location.href);if(url.origin!==location.origin||url.href===location.href)return;e.preventDefault();leaving=true;document.documentElement.classList.add('language-leaving');setTimeout(function(){location.assign(url.href)},160)});
+window.addEventListener('pageshow',function(){leaving=false;document.documentElement.classList.remove('language-leaving')});})();
