@@ -199,7 +199,16 @@ async function fetchNews() {
     })().finally(()=>{activeLoad=null;});
     return activeLoad;
 }
-if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded',()=>{if(document.getElementById('news-section'))fetchNews();});
-}else if(document.getElementById('news-section'))fetchNews();
+function bootPublicNews() {
+    const section=document.getElementById('news-section');
+    if(!section)return;
+    if('IntersectionObserver' in window){
+        const observer=new IntersectionObserver(entries=>{
+            if(entries.some(entry=>entry.isIntersecting)){observer.disconnect();fetchNews();}
+        },{rootMargin:'750px'});
+        observer.observe(section);
+    } else fetchNews();
+}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootPublicNews);
+else bootPublicNews();
 export { fetchNews };
