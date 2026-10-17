@@ -10,15 +10,17 @@
   const messages = {
     tr: {
       missing: "Mülakat randevusu oluştu ancak rezervasyon kimliği veya tarihi alınamadı. Başvurunuz henüz kaydedilmedi. Sayfayı kapatmadan destek ekibine bildirin.",
-      failure: "Mülakat randevunuz alınmış olabilir fakat başvurunuz Vertex Konsol'a kaydedilemedi. Yeniden mülakat almanıza gerek yok; Başvuruyu Gönder düğmesini tekrar deneyin.",
+      failure: "Mülakat randevunuz alınmış olabilir fakat başvurunuz Vertex Konsol'a kaydedilemedi. Yeniden mülakat almayın. Sistem otomatik yeniden denedi; gerekirse aşağıdaki 'Kaydı Tekrar Dene' seçeneğini kullanın.",
       conflict: "Bu mülakat randevusu farklı bir e-posta ile ilişkilendirilmiş. Lütfen Vertex ekibiyle iletişime geçin.",
-      confirm: "Başvuru kaydı henüz doğrulanmadı."
+      confirm: "Başvuru kaydı henüz doğrulanmadı.",
+      retry: "Kaydı Tekrar Dene"
     },
     en: {
       missing: "The interview was booked, but its ID or time was not received. Your application has not been saved. Please contact support without closing this page.",
-      failure: "Your interview may be booked, but the application was not saved to Vertex Console. Do not book again; retry Submit Application.",
+      failure: "Your interview may be booked, but the application was not saved to Vertex Console. Do not book again. Automatic retries were attempted; use Retry Saving below if needed.",
       conflict: "This booking is already associated with another email. Please contact the Vertex team.",
-      confirm: "Application storage could not be confirmed."
+      confirm: "Application storage could not be confirmed.",
+      retry: "Retry Saving"
     }
   };
   const t = () => messages[document.documentElement.lang] || messages.en;
@@ -61,36 +63,40 @@
   }
 
   async function submit(data) {
+    // Cal.com emits the booking event; the browser persists immediately and
+    // retries temporary transport errors without making the applicant click again.
+    // The backend uses the booking UID as an idempotency key.
     let lastError;
-    for (let i = 0; i < URLS.length; i++) {
-      let response;
-      try {
-        response = await fetch(URLS[i], {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(data),
-          signal: AbortSignal.timeout(20000),
-          credentials: "omit"
-        });
-      } catch (error) {
-        lastError = error;
-        if (i + 1 < URLS.length) continue;
-        break;
+    const retryable = error => !error?.status || [408, 429, 500, 502, 503, 504].includes(error.status);
+    for (let attempt = 0; attempt < 3; attempt++) {
+      for (let i = 0; i < URLS.length; i++) {
+        let response;
+        try {
+          response = await fetch(URLS[i], {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(data),
+            signal: AbortSignal.timeout(20000),
+            credentials: "omit"
+          });
+        } catch (error) {
+          lastError = error;
+          // The second host is a fallback for transport failures.
+          continue;
+        }
+        let result;
+        try { result = await response.json(); } catch { result = null; }
+        if (response.ok && result?.success === true && typeof result.id === "string" && result.id.length) return result;
+        lastError = Object.assign(new Error("Application storage not confirmed"), { status: response.status });
+        if (![404, 408, 429, 500, 502, 503, 504].includes(response.status)) throw lastError;
       }
-      let result;
-      try { result = await response.json(); } catch { result = null; }
-      if (response.ok && result?.success === true && typeof result.id === "string" && result.id.length) return result;
-      const status = response.status;
-      lastError = Object.assign(new Error("Application storage not confirmed"), { status });
-      // Retry the other official endpoint only on an unavailable alias/server.
-      // Idempotency is enforced server-side by the Cal.com booking UID.
-      if ([404, 502, 503, 504].includes(status) && i + 1 < URLS.length) continue;
-      break;
+      if (!retryable(lastError) || attempt === 2) break;
+      await new Promise(resolve => setTimeout(resolve, attempt === 0 ? 1500 : 4000));
     }
     throw lastError || new Error("Application storage not confirmed");
   }
 
-  function report(error, statusBox) {
+  function report(error, statusBox, onRetry) {
     const message = error?.status === 409 ? t().conflict : t().failure;
     console.error("[APPLICATION] Persistence not confirmed", { status: error?.status || null, kind: error?.name || "error" });
     if (!statusBox) { alert(message); return; }
@@ -105,6 +111,18 @@
     detail.textContent = message;
     content.append(heading, detail);
     statusBox.append(content);
+    // Only an error state offers manual recovery; never a second submit step.
+    if (typeof onRetry === "function" && error?.status !== 409 && error?.status !== 400 && error?.status !== 403) {
+      const retry = document.createElement("button");
+      retry.type = "button";
+      retry.className = "btn btn-primary join-submit-btn";
+      retry.textContent = t().retry;
+      retry.addEventListener("click", () => {
+        retry.disabled = true;
+        onRetry();
+      });
+      statusBox.append(retry);
+    }
     statusBox.setAttribute("role", "alert");
   }
   function missing(statusBox) {
