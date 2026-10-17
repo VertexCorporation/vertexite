@@ -203,3 +203,6 @@ header .nav-right>.nav-future-cta{font-size:12px;padding:10px 12px;white-space:n
 .theme-option.is-selected,.theme-option[aria-checked=true]{font-weight:600;color:var(--text)}
 .theme-option.is-selected .theme-option-check,.theme-option[aria-checked=true] .theme-option-check{visibility:visible}
 @media(prefers-reduced-motion:reduce){.theme-mode-menu,.theme-option{transition:none!important}}
+
+/* The old one-shot animation must not override the Console-style enter/exit transitions. */
+.theme-mode-menu:not([hidden]){animation:none!important}
