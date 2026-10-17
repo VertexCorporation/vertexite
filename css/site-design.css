@@ -97,3 +97,8 @@ footer .foot-col a,footer .foot-legal a{color:var(--text-muted)}footer .foot-col
 .mobile-menu{opacity:0;transform:translateY(4px) scale(.98);transform-origin:top center;transition:max-height 240ms var(--panel-ease),opacity 200ms var(--panel-ease),transform 200ms var(--panel-ease),visibility 0s linear 240ms}header.menu-open .mobile-menu{opacity:1;transform:none;transition:max-height 240ms var(--panel-ease),opacity 200ms var(--panel-ease),transform 200ms var(--panel-ease),visibility 0s}
 
 @media(prefers-reduced-motion:no-preference){html{animation:language-arrive 200ms ease-out both}html.language-leaving{animation:none;opacity:0;transition:opacity 160ms ease-in}@keyframes language-arrive{from{opacity:0}to{opacity:1}}}
+
+/* Present localized language names consistently, including the current selection. */
+.language-dropdown .lang-btn > span:first-of-type,
+.language-dropdown .lang-row > span:first-of-type,
+.mobile-menu .m-lang > span:first-of-type{text-transform:capitalize}
