@@ -209,9 +209,12 @@ window.addEventListener('pageshow',function(){leaving=false;document.documentEle
     var isOpen=false,closeTimer=0,animationFrame=0;
     var motionReduced=matchMedia('(prefers-reduced-motion: reduce)');
     function syncControls(mode){
-      if(sun)sun.style.display=mode==='dark'?'block':'none';
-      if(moon)moon.style.display=mode==='light'?'block':'none';
-      system.style.display=mode==='system'?'block':'none';
+      // Keep all three SVGs mounted so even light ↔ system (light), or
+      // dark ↔ system (dark), can crossfade without a display toggle.
+      if(sun)sun.style.removeProperty('display');
+      if(moon)moon.style.removeProperty('display');
+      system.style.removeProperty('display');
+      btn.dataset.themeMode=mode;
       btn.setAttribute('aria-label',copy[0]+': '+copy[modes.indexOf(mode)+1]);
       options.forEach(function(option){
         var selected=option.dataset.mode===mode;
