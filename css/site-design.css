@@ -206,3 +206,8 @@ header .nav-right>.nav-future-cta{font-size:12px;padding:10px 12px;white-space:n
 
 /* The old one-shot animation must not override the Console-style enter/exit transitions. */
 .theme-mode-menu:not([hidden]){animation:none!important}
+
+/* Long localized navigation gracefully becomes a hamburger above the nominal breakpoint. */
+#siteHeader.nav-condensed .nav-links,#siteHeader.nav-condensed .nav-right>.nav-future-cta{display:none!important}
+#siteHeader.nav-condensed .menu-btn{display:flex!important}
+#siteHeader.nav-condensed .mobile-menu{display:block!important}

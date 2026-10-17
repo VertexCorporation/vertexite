@@ -3,6 +3,27 @@
 function setIcon(el,name){if(!el||!paths[name])return;el.setAttribute('viewBox','0 0 24 24');el.setAttribute('fill','none');el.setAttribute('stroke','currentColor');el.setAttribute('stroke-width','1.8');el.setAttribute('stroke-linecap','round');el.setAttribute('stroke-linejoin','round');el.setAttribute('aria-hidden','true');el.innerHTML=paths[name];}
 function init(){const favicon=document.getElementById('vertex-favicon');const browserTheme=matchMedia('(prefers-color-scheme:dark)');function sync(){if(favicon)favicon.href='/assets/favicon-'+(browserTheme.matches?'dark':'light')+'.svg';}sync();browserTheme.addEventListener('change',sync);
 setIcon(document.getElementById('themeIconSun'),'sun');setIcon(document.getElementById('themeIconMoon'),'moon');setIcon(document.querySelector('#langBtn > svg'),'language');document.querySelectorAll('.chev').forEach(e=>setIcon(e,'chevron-down'));document.querySelectorAll('.team-nav.prev svg').forEach(e=>setIcon(e,'chevron-left'));document.querySelectorAll('.team-nav.next svg').forEach(e=>setIcon(e,'chevron-right'));
+
+/* Localized desktop labels can exceed the minimum desktop breakpoint. */
+(function fitNavigation(){
+ const header=document.getElementById('siteHeader');
+ const nav=header&&header.querySelector('.nav');
+ const links=nav&&nav.querySelector('.nav-links');
+ const brand=nav&&nav.querySelector('.brand');
+ const right=nav&&nav.querySelector('.nav-right');
+ if(!nav||!links||!brand||!right)return;
+ function measure(){
+  header.classList.remove('nav-condensed');
+  if(window.innerWidth<1280)return;
+  const measured=brand.getBoundingClientRect().width+
+    links.scrollWidth+right.getBoundingClientRect().width+
+    2*parseFloat(getComputedStyle(nav).gap||'18');
+  if(measured>nav.clientWidth+1)header.classList.add('nav-condensed');
+ }
+ window.addEventListener('resize',measure,{passive:true});
+ if(document.fonts)document.fonts.ready.then(measure);
+ measure();
+})();
 if('IntersectionObserver' in window){const reveals=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('section-revealed');reveals.unobserve(e.target);}}),{threshold:.04});document.querySelectorAll('main > section:not(.hero):not(.stats):not(.partners-static), main > .cta-band').forEach(el=>reveals.observe(el));}
 const reduced=matchMedia('(prefers-reduced-motion:reduce)');
 const scrollStates=new WeakMap();
