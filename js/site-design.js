@@ -87,9 +87,9 @@ window.addEventListener('pageshow',function(){leaving=false;document.documentEle
     zh:['主题','浅色','深色','系统'],az:['Mövzu','Açıq','Tünd','Sistem']
   };
   var icons = {
-    light:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/>',
-    dark:'<path d="M20.2 15.2A8.5 8.5 0 0 1 8.8 3.8 8.5 8.5 0 1 0 20.2 15.2Z"/>',
-    system:'<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/>',
+    light:'<path d="M8 12a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"/><path d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"/>',
+    dark:'<path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454l0 .008"/>',
+    system:'<path d="M3 5a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1v-10"/><path d="M7 20h10"/><path d="M9 16v4"/><path d="M15 16v4"/>',
     check:'<path d="M5 12l5 5L20 7"/>'
   };
   function svg(kind, className) {
@@ -181,7 +181,7 @@ window.addEventListener('pageshow',function(){leaving=false;document.documentEle
       menu.classList.remove('is-open');menu.classList.add('is-closing');
       menu.setAttribute('aria-hidden','true');menu.inert=true;
       if(instant||motionReduced.matches){menu.hidden=true;menu.classList.remove('is-closing');}
-      else closeTimer=setTimeout(function(){if(!isOpen){menu.hidden=true;menu.classList.remove('is-closing');}},160);
+      else closeTimer=setTimeout(function(){if(!isOpen){menu.hidden=true;menu.classList.remove('is-closing');}},120);
       if(restoreFocus)btn.focus({preventScroll:true});
     }
     function closeLanguageImmediately(){

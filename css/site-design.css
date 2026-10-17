@@ -211,3 +211,8 @@ header .nav-right>.nav-future-cta{font-size:12px;padding:10px 12px;white-space:n
 #siteHeader.nav-condensed .nav-links,#siteHeader.nav-condensed .nav-right>.nav-future-cta{display:none!important}
 #siteHeader.nav-condensed .menu-btn{display:flex!important}
 #siteHeader.nav-condensed .mobile-menu{display:block!important}
+
+/* Exact Vertex Console easing/durations and popover depth. */
+.theme-mode-menu{transition:opacity 120ms cubic-bezier(.4,0,1,1),transform 120ms cubic-bezier(.4,0,1,1);box-shadow:0 8px 24px rgba(0,0,0,.4),0 2px 8px rgba(0,0,0,.32)}
+.theme-mode-menu.is-open{transition:opacity 180ms cubic-bezier(.2,.8,.2,1),transform 180ms cubic-bezier(.2,.8,.2,1)}
+html[data-theme="light"] .theme-mode-menu{box-shadow:0 8px 24px rgba(23,25,29,.10),0 2px 8px rgba(23,25,29,.08)}
