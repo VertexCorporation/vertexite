@@ -336,3 +336,28 @@ a,button,summary,[role="button"],input[type="button"],input[type="submit"],input
 @media(prefers-reduced-motion:reduce){
   #siteHeader .mobile-menu{scroll-behavior:auto}
 }
+
+
+/* Theme icon crossfade uses the selected mode, not the resolved page color.
+   The System icon must animate even when System and the explicit mode look identical. */
+#themeBtn{position:relative}
+#themeBtn > :is(#themeIconSun,#themeIconMoon,.theme-system-icon){
+  display:block!important;
+  position:absolute;
+  top:50%;left:50%;
+  width:17px;height:17px;
+  margin:0;
+  transform:translate(-50%,-50%);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 240ms cubic-bezier(.2,.8,.2,1);
+}
+#themeBtn[data-theme-mode="light"] > #themeIconMoon,
+#themeBtn[data-theme-mode="dark"] > #themeIconSun,
+#themeBtn[data-theme-mode="system"] > .theme-system-icon{opacity:1}
+/* Preserve the right icon before the theme control initializes. */
+html[data-theme="light"] #themeBtn:not([data-theme-mode]) > #themeIconMoon,
+html[data-theme="dark"] #themeBtn:not([data-theme-mode]) > #themeIconSun{opacity:1}
+@media(prefers-reduced-motion:reduce){
+  #themeBtn > :is(#themeIconSun,#themeIconMoon,.theme-system-icon){transition:none!important}
+}
