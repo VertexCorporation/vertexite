@@ -32,6 +32,19 @@ setTimeout(async function () {
   var originalTitle = hero.querySelector('h1');
   var originalLede = hero.querySelector('.lede');
   var originalActions = Array.prototype.slice.call(hero.querySelectorAll('.hero-actions a'));
+  // Snapshot the actual first frame before rebuilding the scroll stage. These are the
+  // pixel positions the final frame must return to, not approximate CSS constants.
+  var originalStatic = hero.querySelector('.story-static-content');
+  var preservedActions = originalStatic && originalStatic.querySelector('.story-actions');
+  var openingTemplate = originalStatic ? originalStatic.cloneNode(true) : null;
+  var firstStageRect = hero.querySelector('.story-stage').getBoundingClientRect();
+  var firstTitleRect = originalTitle && originalTitle.getBoundingClientRect();
+  var firstActionsRect = preservedActions && preservedActions.getBoundingClientRect();
+  var openingFrame = firstTitleRect && firstActionsRect ? {
+    titleTop: firstTitleRect.top - firstStageRect.top,
+    titleWidth: firstTitleRect.width,
+    actionsTop: firstActionsRect.top - firstStageRect.top
+  } : null;
   var joinAction=document.querySelector('.nav-right a.btn[href*="join"],.nav-right a.btn[href*="katil"]');
   var originalLogos = sponsorsSection ? sponsorsSection.querySelector('.partners-logos') : null;
   var sponsorLogoMarkup = originalLogos ? originalLogos.innerHTML : '';
@@ -162,13 +175,19 @@ setTimeout(async function () {
     fallbackTitle.textContent = title;
     stage.querySelector('.story-geometry').after(fallbackTitle);
   }
+  // Reuse the first-frame buttons instead of generating slightly different elements.
+  if (preservedActions) {
+    var animatedActions = stage.querySelector('.story-actions');
+    if (animatedActions) animatedActions.replaceWith(preservedActions);
+  }
   var header = document.querySelector('header');
   var geometry = hero.querySelector('.story-geometry');
   var lastGlobeFrame = '';
   var titleEl = hero.querySelector('.story-title');
   // One-line title: measure its natural (untransformed) width and fit it inside the viewport.
   // Fonts and orientation changes remeasure the exact same heading, not cloned words.
-  titleEl.textContent = title;
+  // Retain the opening markup/word spacing; changing to plain text also changes width.
+  if (!preservedTitle) titleEl.textContent = title;
   titleEl.setAttribute('aria-label', title);
   var titleLayout = null;
   function measureTitle() {
@@ -177,8 +196,38 @@ setTimeout(async function () {
       height: titleEl.scrollHeight
     };
   }
+  // On resize recreate the real static opening layout offscreen, measure it, then
+  // discard the probe. No duplicate heading is left in the DOM or accessibility tree.
+  function measureOpeningFrame() {
+    if (!openingTemplate) return;
+    var probe = openingTemplate.cloneNode(true);
+    probe.style.visibility = 'hidden';
+    probe.style.pointerEvents = 'none';
+    probe.setAttribute('aria-hidden', 'true');
+    probe.inert = true;
+    var probeTitle = probe.querySelector('.story-title');
+    var probeActions = probe.querySelector('.story-actions');
+    if (!probeTitle || !probeActions) return;
+    var decorative = document.createElement('div');
+    decorative.className = probeTitle.className;
+    decorative.innerHTML = probeTitle.innerHTML;
+    probeTitle.replaceWith(decorative);
+    stage.appendChild(probe);
+    var available = Math.max(1, stage.clientWidth - (window.innerWidth < 700 ? 28 : 40));
+    var probeFit = Math.min(1, available / Math.max(1, decorative.scrollWidth));
+    decorative.style.transform = 'translateX(-50%) scale(' + probeFit.toFixed(5) + ')';
+    var frame = stage.getBoundingClientRect();
+    var titleBounds = decorative.getBoundingClientRect();
+    var actionBounds = probeActions.getBoundingClientRect();
+    openingFrame = {
+      titleTop: titleBounds.top - frame.top,
+      titleWidth: titleBounds.width,
+      actionsTop: actionBounds.top - frame.top
+    };
+    probe.remove();
+  }
   measureTitle();
-  if (document.fonts) document.fonts.ready.then(function(){measureTitle();requestRender();});
+  if (document.fonts) document.fonts.ready.then(function(){measureTitle();measureOpeningFrame();requestRender();});
   var sponsorsEl = hero.querySelector('.story-sponsors');
   var proofEl = hero.querySelector('.story-proof');
   var proofGroups = proofEl.querySelectorAll('.story-proof-group');
@@ -329,23 +378,29 @@ setTimeout(async function () {
     stage.style.setProperty('--story-header-space',((1-headerHide)*68).toFixed(1)+'px');
     var geometryOpacity=reduced?0:Math.max(1-smooth(phase(progress,.10,.30)),ending);
     geometry.style.opacity=String(geometryOpacity);
-    // One title uses a consistent difference blend against both ocean and land.
-    titleEl.style.mixBlendMode='difference';
-    titleEl.style.color='#fff';
+    // At the opening and closing edges, opaque text sits above the wireframe.
+    // Only the globe scene needs difference blending for contrast on changing land.
+    stage.classList.toggle('story-globe-contrast', !reduced && progress >= .28 && progress < .87);
     geometry.style.transform='translate3d(-50%,-50%,0) scale('+mix(1,1.4,smooth(phase(progress,.05,.30))*(1-ending))+') rotate('+mix(0,18,phase(progress,0,.30)*(1-ending))+'deg)';
     var layout = titleLayout;
     var lift = -Math.min(76, stage.clientHeight * .08) * titleLift;
-    var fit = Math.min(1, Math.max(0.05, (stage.clientWidth - (window.innerWidth < 700 ? 28 : 40)) / layout.width));
-    // Move up while shrinking, then grow back smoothly; never change line count or opacity.
+    var fallbackFit = Math.min(1, Math.max(.05, (stage.clientWidth - (window.innerWidth < 700 ? 28 : 40)) / layout.width));
+    var openingFit = openingFrame ? openingFrame.titleWidth / layout.width : fallbackFit;
+    var openingTop = openingFrame ? openingFrame.titleTop : Math.min(126, Math.max(78, stage.clientHeight * .13));
+    // The title never disappears or wraps: only its vertical position and scale move.
     var shrink = smooth(phase(progress, .015, .24));
     var grow = smooth(phase(progress, .28, .56));
     var motionScale = mix(mix(1, .84, shrink), 1, grow);
-    var scale = fit * motionScale;
-    titleEl.style.transform = 'translate3d(-50%,' + lift.toFixed(2) + 'px,0) scale(' + scale.toFixed(4) + ')';
+    titleEl.style.top = openingTop.toFixed(2) + 'px';
+    titleEl.style.transform = 'translate3d(-50%,' + lift.toFixed(2) + 'px,0) scale(' + (openingFit * motionScale).toFixed(5) + ')';
     titleEl.style.opacity = '1';
-    // Use the actual transformed single-line heading to place sponsors and paragraphs.
     var titleBottom = titleEl.getBoundingClientRect().bottom - stage.getBoundingClientRect().top;
-    actionsEl.style.top = (titleBottom + 26) + 'px';
+    // Same button coordinates as the first frame at p=0 and p=1. In between,
+    // follow the floating title without introducing a jump at either edge.
+    var flowingActionsTop = titleBottom + 26;
+    var startActionsTop = openingFrame ? openingFrame.actionsTop : flowingActionsTop;
+    var followTitle = smooth(phase(progress,.01,.07)) * (1-smooth(phase(progress,.925,.965)));
+    actionsEl.style.top = mix(startActionsTop, flowingActionsTop, followTitle).toFixed(2) + 'px';
     actionsEl.style.pointerEvents = actionsIn < .05 ? 'none' : '';
     actionsEl.inert = actionsIn < .05;
     if(!reduced){
@@ -403,7 +458,7 @@ setTimeout(async function () {
     .catch(function () { globeWrap.style.display = 'none'; });
 
   window.addEventListener('scroll', requestRender, { passive: true });
-  window.addEventListener('resize', function(){measureTitle();requestRender();}, { passive: true });
+  window.addEventListener('resize', function(){measureTitle();measureOpeningFrame();requestRender();}, { passive: true });
   document.addEventListener('visibilitychange', function () { if (!document.hidden) requestRender(); });
   new MutationObserver(requestRender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   render();
