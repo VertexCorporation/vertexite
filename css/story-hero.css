@@ -288,3 +288,67 @@ html[data-theme="dark"] .story-sponsor-group img {filter:brightness(0) invert(1)
 }
 
 .story-stage>.story-proof{visibility:hidden;}
+
+/* One semantic title, always a single line. CSS covers the first HTML paint;
+   the scroll renderer fits the same element precisely after font loading. */
+.story-static-content .story-title,
+.story-stage > .story-title {
+  box-sizing:content-box;
+  display:block !important;
+  flex-wrap:nowrap !important;
+  width:max-content !important;
+  max-width:none !important;
+  white-space:nowrap !important;
+  text-wrap:nowrap !important;
+  overflow:visible;
+  font-size:clamp(18px,6.8vw,112px) !important;
+  line-height:1.02;
+  color:#fff !important;
+  mix-blend-mode:difference !important;
+  animation:none !important;
+  transition:none !important;
+  will-change:transform;
+}
+.story-static-content .story-title {
+  position:relative;
+  left:50%;
+  margin:0;
+  transform:translateX(-50%);
+  will-change:auto;
+}
+.story-stage > .story-title {
+  position:absolute;
+  left:50%;
+  top:clamp(78px,13vh,126px);
+  margin:0;
+  transform:translate3d(-50%,0,0);
+  transform-origin:center top;
+  opacity:1 !important;
+}
+@media(max-width:700px) {
+  .story-stage > .story-title{top:10vh;}
+}
+/* Extra-long complex-script headings also fit on narrow phones before hydration. */
+@media(max-width:700px){
+  html:lang(hi) .story-static-content .story-title,
+  html:lang(hi) .story-stage > .story-title{font-size:clamp(14px,5.1vw,52px)!important;}
+  html:lang(ja) .story-static-content .story-title,
+  html:lang(ja) .story-stage > .story-title{font-size:clamp(16px,6vw,52px)!important;}
+}
+@media(prefers-reduced-motion:reduce){
+  .story-static-content .story-title,
+  .story-stage > .story-title{
+    width:max-content !important;
+    max-width:none !important;
+    white-space:nowrap !important;
+    text-wrap:nowrap !important;
+  }
+  .story-stage > .story-title{
+    position:relative;
+    top:auto;
+    left:50%;
+    margin:0;
+    transform:translateX(-50%) !important;
+    max-width:none;
+  }
+}

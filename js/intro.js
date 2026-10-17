@@ -107,15 +107,14 @@ setTimeout(async function () {
     return '<a class="btn ' + className + '" href="' + action.getAttribute('href') + '">' + action.textContent.trim() + '</a>';
   }
 
-  var outgoingStage=hero.querySelector('.story-stage').cloneNode(true);
-  var outgoingTitle=outgoingStage.querySelector('h1');if(outgoingTitle){var decorativeTitle=document.createElement('div');decorativeTitle.className=outgoingTitle.className;decorativeTitle.innerHTML=outgoingTitle.innerHTML;outgoingTitle.replaceWith(decorativeTitle);}
-  outgoingStage.classList.add('story-outgoing');outgoingStage.setAttribute('aria-hidden','true');outgoingStage.inert=true;
+  // Keep the same semantic heading across first paint and the scroll scene.
+  // There is no second title to crossfade into and no reflow into two lines.
+  var preservedTitle = originalTitle;
   hero.classList.add('story-hero');hero.classList.remove('story-static');
   hero.innerHTML = '' +
     '<div class="story-stage">' +
 
       '<div class="story-geometry" aria-hidden="true"><svg viewBox="0 0 800 800" fill="none" stroke="currentColor"><circle cx="400" cy="400" r="300"/><circle cx="400" cy="400" r="210"/><ellipse cx="400" cy="400" rx="110" ry="300"/><ellipse cx="400" cy="400" rx="230" ry="300"/><ellipse cx="400" cy="400" rx="300" ry="105"/><path d="M400 100 660 250 660 550 400 700 140 550 140 250Z M140 250 660 550 M660 250 140 550 M400 100V700 M100 400H700 M140 250H660 M140 550H660 M250 140 550 660 M550 140 250 660"/><circle cx="400" cy="100" r="5"/><circle cx="660" cy="250" r="5"/><circle cx="140" cy="550" r="5"/></svg></div>' +
-      '<h1 class="story-title">' + title + '</h1>' +
       '<div class="story-sponsors"><span>' + sponsorLabel + '</span><div class="story-sponsor-viewport">' +
         '<div class="story-sponsor-track"><div class="story-sponsor-group">' + sponsorLogoMarkup + '</div>' +
         '<div class="story-sponsor-group" aria-hidden="true">' + sponsorLoopMarkup + '</div></div>' +
@@ -134,33 +133,31 @@ setTimeout(async function () {
   if (sponsorsSection) sponsorsSection.classList.add('story-relocated');
 
   var stage = hero.querySelector('.story-stage');
+  if (preservedTitle) {
+    stage.querySelector('.story-geometry').after(preservedTitle);
+  } else {
+    var fallbackTitle = document.createElement('h1');
+    fallbackTitle.className = 'story-title';
+    fallbackTitle.textContent = title;
+    stage.querySelector('.story-geometry').after(fallbackTitle);
+  }
   var header = document.querySelector('header');
   var geometry = hero.querySelector('.story-geometry');
   var lastGlobeFrame = '';
   var titleEl = hero.querySelector('.story-title');
-  var titleWords=title.split(/\s+/).filter(Boolean),titleLayout=null;
-  titleEl.textContent='';titleEl.setAttribute('aria-label',title);
-  titleWords.forEach(function(word){var span=document.createElement('span');span.textContent=word;span.className='story-title-word';span.setAttribute('aria-hidden','true');titleEl.appendChild(span);});
-
-  // Crossfade two complete layouts instead of moving individual words through one another.
-  // Both copies are decorative; the original h1 remains the only accessible heading.
-  var morphTitle=document.createElement('div');
-  morphTitle.className='story-title story-title-morphed';morphTitle.setAttribute('aria-hidden','true');
-  morphTitle.replaceChildren(...Array.from(titleEl.children).map(function(el){return el.cloneNode(true);}));
-  titleEl.before(morphTitle);
-
-  var contrastTitle=document.createElement('div');
-  contrastTitle.className='story-title-contrast';contrastTitle.setAttribute('aria-hidden','true');
-  contrastTitle.replaceChildren(...Array.from(titleEl.children).map(function(el){var copy=el.cloneNode(true);copy.className='story-contrast-word';return copy;}));
-  morphTitle.before(contrastTitle);
-
-  function measureTitle(){
-    // scrollWidth/scrollHeight are layout measurements, unaffected by our transforms.
-    // No cloned inline word positions survive a resize, orientation change or font load.
-    titleLayout={height:titleEl.scrollHeight,total:morphTitle.scrollWidth,wrappedWidth:titleEl.scrollWidth};
+  // One-line title: measure its natural (untransformed) width and fit it inside the viewport.
+  // Fonts and orientation changes remeasure the exact same heading, not cloned words.
+  titleEl.textContent = title;
+  titleEl.setAttribute('aria-label', title);
+  var titleLayout = null;
+  function measureTitle() {
+    titleLayout = {
+      width: Math.max(1, titleEl.scrollWidth),
+      height: titleEl.scrollHeight
+    };
   }
   measureTitle();
-  if(document.fonts)document.fonts.ready.then(function(){measureTitle();requestRender();});
+  if (document.fonts) document.fonts.ready.then(function(){measureTitle();requestRender();});
   var sponsorsEl = hero.querySelector('.story-sponsors');
   var proofEl = hero.querySelector('.story-proof');
   var proofGroups = proofEl.querySelectorAll('.story-proof-group');
@@ -302,37 +299,32 @@ setTimeout(async function () {
     var metricsIn = phase(progress, .79, .85) * (1 - phase(progress, .955, .985));
     var ending=smooth(phase(progress,.97,1));
     var actionsIn = Math.max(1-phase(progress,.015,.09),phase(progress,.988,1));
-    var titleLift = smooth(phase(progress, .015, .26))*(1-ending);
+    var titleLift = smooth(phase(progress, .015, .26));
 
     var headerHide = reduced ? 0 : smooth(phase(progress,.035,.16)) * (1-smooth(phase(progress,.86,.98)));
     if(header){header.style.transform=headerHide===0?'none':'translate3d(0,'+(-110*headerHide).toFixed(2)+'%,0)';header.style.opacity=String(1-headerHide);header.inert=headerHide>.95;header.style.pointerEvents=headerHide>.95?'none':'';}
     stage.style.setProperty('--story-header-space',((1-headerHide)*68).toFixed(1)+'px');
     var geometryOpacity=reduced?0:Math.max(1-smooth(phase(progress,.10,.30)),ending);
     geometry.style.opacity=String(geometryOpacity);
-    // Wireframe lines must remain behind solid lettering; invert only the globe phase.
-    var contrastBlend=reduced?0:smooth(phase(progress,.30,.36))*(1-smooth(phase(progress,.88,.90)));
-    titleEl.style.mixBlendMode='normal';titleEl.style.color='var(--text)';
+    // One title uses a consistent difference blend against both ocean and land.
+    titleEl.style.mixBlendMode='difference';
+    titleEl.style.color='#fff';
     geometry.style.transform='translate3d(-50%,-50%,0) scale('+mix(1,1.4,smooth(phase(progress,.05,.30))*(1-ending))+') rotate('+mix(0,18,phase(progress,0,.30)*(1-ending))+'deg)';
-    var layout=titleLayout,morph=smooth(phase(progress,.03,.22))*(1-ending);
-    var lift=mix(0,-Math.min(76,window.innerHeight*.08),titleLift);
-    var initialFit=Math.min(1,(window.innerWidth-40)/Math.max(1,layout.wrappedWidth));
-    var finalFit=Math.min(1,(window.innerWidth-40)/Math.max(1,layout.total));
-    var grow=mix(.86,1,smooth(phase(progress,.30,.56)));
-    titleEl.style.transform='translate3d(-50%,'+lift.toFixed(2)+'px,0) scale('+initialFit.toFixed(4)+')';
-    var singleTransform='translate3d(-50%,'+lift.toFixed(2)+'px,0) scale('+(finalFit*grow).toFixed(4)+')';
-    morphTitle.style.transform=singleTransform;
-    contrastTitle.style.transform=singleTransform;
-    actionsEl.style.top=(titleEl.offsetTop+layout.height+26)+'px';
-    actionsEl.style.pointerEvents=actionsIn<.05?'none':'';actionsEl.inert=actionsIn<.05;
-    var titleOpacity=1-.12*Math.sin(Math.PI*phase(progress,.015,.26))*(1-ending);
-    var wrappedOpacity=1-smooth(phase(morph,.08,.48));
-    var singleOpacity=smooth(phase(morph,.52,.92));
-    titleEl.style.opacity=String(titleOpacity*wrappedOpacity);
-    morphTitle.style.opacity=String(titleOpacity*singleOpacity*(1-contrastBlend));
-    contrastTitle.style.mixBlendMode='difference';contrastTitle.style.color='#fff';
-    contrastTitle.style.opacity=String(titleOpacity*singleOpacity*contrastBlend);
-    // Transition the title baseline with its visible layout to avoid panel jumps.
-    var titleBottom=mix(titleEl.getBoundingClientRect().bottom,morphTitle.getBoundingClientRect().bottom,morph)-stage.getBoundingClientRect().top;
+    var layout = titleLayout;
+    var lift = -Math.min(76, stage.clientHeight * .08) * titleLift;
+    var fit = Math.min(1, Math.max(0.05, (stage.clientWidth - (window.innerWidth < 700 ? 28 : 40)) / layout.width));
+    // Move up while shrinking, then grow back smoothly; never change line count or opacity.
+    var shrink = smooth(phase(progress, .015, .24));
+    var grow = smooth(phase(progress, .28, .56));
+    var motionScale = mix(mix(1, .84, shrink), 1, grow);
+    var scale = fit * motionScale;
+    titleEl.style.transform = 'translate3d(-50%,' + lift.toFixed(2) + 'px,0) scale(' + scale.toFixed(4) + ')';
+    titleEl.style.opacity = '1';
+    // Use the actual transformed single-line heading to place sponsors and paragraphs.
+    var titleBottom = titleEl.getBoundingClientRect().bottom - stage.getBoundingClientRect().top;
+    actionsEl.style.top = (titleBottom + 26) + 'px';
+    actionsEl.style.pointerEvents = actionsIn < .05 ? 'none' : '';
+    actionsEl.inert = actionsIn < .05;
     if(!reduced){
       // Keep the new statistics card directly below sponsors without colliding with the headline.
       var sponsorsHeight = sponsorsEl.offsetHeight;
@@ -392,8 +384,4 @@ setTimeout(async function () {
   new MutationObserver(requestRender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   render();
   stage.classList.add('story-ready');
-  if(!reduced&&stage.animate){hero.appendChild(outgoingStage);outgoingStage.querySelector('.story-geometry').style.opacity='1';
-    stage.animate([{opacity:0},{opacity:1}],{duration:280,easing:'ease-out'});
-    outgoingStage.animate([{opacity:1},{opacity:0}],{duration:280,easing:'ease-out'}).finished.then(function(){outgoingStage.remove();});
-  }
 },750);
