@@ -57,9 +57,15 @@
   back.type = 'button';
   back.className = 'btn application-back-btn';
   back.textContent = backLabel;
-  dateActions.append(back, submit);
+  // A confirmed Cal.com booking is the final action; no second submit button.
+  // Keep the submitter in the form, hidden, for the existing automatic
+  // requestSubmit() path and accessibility-safe form validation.
+  dateActions.append(back);
   date.append(dateActions);
-  form.append(details, date);
+  submit.hidden = true;
+  submit.style.display = 'none';
+  submit.setAttribute('aria-hidden', 'true');
+  form.append(details, date, submit);
   window.applicationStepsEnabled = true;
 
   let stepTransition = 0;
