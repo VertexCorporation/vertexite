@@ -366,22 +366,28 @@ setTimeout(async function () {
     var turkeyFill = phase(progress, .42, .56);
     var worldSpread = phase(progress, .50, .79);
     var statementIn = phase(progress, .42, .50) * (1 - phase(progress, .73, .79));
-    var metricsIn = phase(progress, .79, .85) * (1 - phase(progress, .955, .985));
-    // Restore the opening composition before the navigation and final buttons return.
-    // The globe must vanish first; then the title returns to its original position.
-    var ending=smooth(phase(progress,.955,1));
+    // The second paragraph appears as the countries finish filling, but exits
+    // BEFORE the globe has turned 180 degrees (half-turn is at progress .885).
+    // Give it a short hold, then clear the scene before the closing crossfade.
+    var metricsIn = phase(progress, .79, .815) * (1 - phase(progress, .835, .865));
+    // Globe and original wireframe crossfade while the globe shrinks.
+    // This completes before the title/header/buttons settle into their first frame.
+    var closingCrossfade = smooth(phase(progress, .865, .94));
     var actionsIn = Math.max(1-phase(progress,.015,.09),phase(progress,.97,.995));
     var titleLift = reduced ? 0 : smooth(phase(progress,.015,.26)) * (1-smooth(phase(progress,.925,.965)));
 
     var headerHide = reduced ? 0 : smooth(phase(progress,.035,.16)) * (1-smooth(phase(progress,.965,.995)));
     if(header){header.style.transform=headerHide===0?'none':'translate3d(0,'+(-110*headerHide).toFixed(2)+'%,0)';header.style.opacity=String(1-headerHide);header.inert=headerHide>.95;header.style.pointerEvents=headerHide>.95?'none':'';}
     stage.style.setProperty('--story-header-space',((1-headerHide)*68).toFixed(1)+'px');
-    var geometryOpacity=reduced?0:Math.max(1-smooth(phase(progress,.10,.30)),ending);
-    geometry.style.opacity=String(geometryOpacity);
-    // At the opening and closing edges, opaque text sits above the wireframe.
-    // Only the globe scene needs difference blending for contrast on changing land.
-    stage.classList.toggle('story-globe-contrast', !reduced && progress >= .28 && progress < .87);
-    geometry.style.transform='translate3d(-50%,-50%,0) scale('+mix(1,1.4,smooth(phase(progress,.05,.30))*(1-ending))+') rotate('+mix(0,18,phase(progress,0,.30)*(1-ending))+'deg)';
+    var geometryOpacity = reduced ? 0 : Math.max(1-smooth(phase(progress,.10,.30)),closingCrossfade);
+    geometry.style.opacity = String(geometryOpacity);
+    // Restore the original outlined world as the solid globe fades away.
+    // Maintain heading contrast over filled countries until that transition is almost complete.
+    stage.classList.toggle('story-globe-contrast', !reduced && progress >= .28 && progress < .93);
+    var geometryOpeningScale = mix(1,1.4,smooth(phase(progress,.05,.30)));
+    var geometryScale = mix(geometryOpeningScale,1,closingCrossfade);
+    var geometryRotation = mix(18*phase(progress,0,.30),0,closingCrossfade);
+    geometry.style.transform = 'translate3d(-50%,-50%,0) scale('+geometryScale.toFixed(4)+') rotate('+geometryRotation.toFixed(2)+'deg)';
     var layout = titleLayout;
     var lift = -Math.min(76, stage.clientHeight * .08) * titleLift;
     var fallbackFit = Math.min(1, Math.max(.05, (stage.clientWidth - (window.innerWidth < 700 ? 28 : 40)) / layout.width));
@@ -419,9 +425,10 @@ setTimeout(async function () {
     reveal(statementEl, statementIn, 34);
     reveal(metricsEl, metricsIn, 34);
     reveal(actionsEl, actionsIn, 28);
-    // Fully hide the globe before the heading settles back under the restored header.
-    canvas.style.opacity = String(reduced?0:1-smooth(phase(progress,.875,.93)));
-    globeWrap.style.setProperty('--ending-scale',String(mix(1,.72,smooth(phase(progress,.80,.93)))));
+    // Synchronize the filled-globe fade and shrink with the wireframe reappearance.
+    // At .94 the globe is fully invisible and the original wireframe is at scale 1 / 0deg.
+    canvas.style.opacity = String(reduced ? 0 : 1-closingCrossfade);
+    globeWrap.style.setProperty('--ending-scale',String(mix(1,.72,closingCrossfade)));
     cueEl.style.opacity = String(1 - phase(progress, .02, .12));
     drawGlobe(progress, turkeyFill, worldSpread);
     ticking = false;
