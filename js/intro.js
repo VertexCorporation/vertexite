@@ -18,6 +18,7 @@
   if (document.fonts) document.fonts.ready.then(fit);
 })();
 
+// Hydrate as soon as scripts and fonts are ready; do not keep a visibly different 750 ms preview.
 setTimeout(async function () {
   'use strict';
 
@@ -404,4 +405,4 @@ setTimeout(async function () {
   new MutationObserver(requestRender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   render();
   stage.classList.add('story-ready');
-},750);
+},0);
