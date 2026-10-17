@@ -604,6 +604,13 @@ window.VertexPhoneUI=interfaceTranslations;
         }
 
         checkFormValidity();
+        // Completing the Cal.com booking automatically sends this application.
+        // No second confirmation or submit click is required.
+        const form = document.getElementById('joinForm');
+        if (!applicationSubmitted && !applicationInFlight && autoBookingUid !== String(checkedInfo.uid) && form.checkValidity()) {
+            autoBookingUid = String(checkedInfo.uid);
+            queueMicrotask(() => form.requestSubmit(document.getElementById('submitBtn')));
+        }
     }
 
     function checkFormValidity() {
