@@ -256,14 +256,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (!langs[userLang]) userLang = 'en';
     applyLang(userLang);
 
-    // Extract ID from URL path: /verify/[ID]
+    const types = {
+        merit: ['Merit', 'Liyakat'],
+        tenacity: ['Tenacity', 'Dirayet'],
+        constancy: ['Constancy', 'Metanet'],
+        nobility: ['Nobility', 'Azamet'],
+        majesty: ['Majesty', 'Asalet']
+    };
+
     const pathParts = window.location.pathname.split('/');
-    const certId = pathParts[pathParts.length - 1] === '' ? pathParts[pathParts.length - 2] : pathParts[pathParts.length - 1];
+    const certId = new URLSearchParams(window.location.search).get('id')
+        || (pathParts[pathParts.length - 1] === '' ? pathParts[pathParts.length - 2] : pathParts[pathParts.length - 1]);
 
     const loadingState = document.getElementById('loadingState');
     const successState = document.getElementById('successState');
     const errorState = document.getElementById('errorState');
-    const certDetails = document.getElementById('certDetails');
 
     if (!certId || certId === 'verify' || certId === 'verify.html') {
         loadingState.style.display = 'none';
@@ -271,43 +278,41 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    let revoked = false;
+    let verificationLanguage = userLang;
     try {
-        // Fetch from Firebase Firestore REST API
-        const response = await fetch('https://firestore.googleapis.com/v1/projects/vertex-ai-1618/databases/(default)/documents/contributors/' + certId);
-        
-        if (response.ok) {
-            const data = await response.json();
-            
-            // Extract fields from Firestore REST API format
-            const fields = data.fields || {};
-            const name = fields.name ? fields.name.stringValue : 'Unknown';
-            const lang = fields.language ? fields.language.stringValue : 'en';
-            
-            const hasVerified = fields.hasVerified ? fields.hasVerified.booleanValue : false;
-            
-            if (!hasVerified) {
-                throw new Error('Certificate pending or rejected');
-            }
-            
-            // Re-apply language based on the user's registered application language
-            const d = applyLang(langs[lang] ? lang : 'en');
-            
-            // Format date from document createTime
-            const dateObj = new Date(data.createTime);
-            const dateStr = dateObj.toLocaleDateString('en-GB'); // DD/MM/YYYY
+        const verificationUrl = new URL('https://europe-west1-vertex-ai-1618.cloudfunctions.net/verifyVertexCertificate');
+        verificationUrl.searchParams.set('id', certId);
+        const response = await fetch(verificationUrl, {
+            cache: 'no-store',
+            headers: { Accept: 'application/json' }
+        });
+        if (!response.ok) throw new Error('Certificate verification failed');
 
-            // Populate UI
-            document.getElementById('certName').textContent = name;
-            document.getElementById('certType').textContent = d.valType;
-            document.getElementById('certDate').textContent = dateStr;
-            
-            loadingState.style.display = 'none';
-            successState.style.display = 'block';
-        } else {
-            throw new Error('Certificate not found');
+        const data = await response.json();
+        revoked = data.revoked === true;
+        const type = Object.hasOwn(types, data.certificateType) ? types[data.certificateType] : null;
+        if (data.valid !== true || data.certificateId !== certId || typeof data.name !== 'string' || !data.name.trim() || !type) {
+            throw new Error('Certificate is not valid');
         }
-    } catch (err) {
-        console.error(err);
+
+        verificationLanguage = langs[data.language] ? data.language : 'en';
+        applyLang(verificationLanguage);
+        const date = data.issuedAt ? new Date(data.issuedAt) : null;
+        const dateStr = data.formattedDate || (date && Number.isFinite(date.getTime()) ? date.toLocaleDateString('en-GB') : '-');
+        document.getElementById('certId').textContent = certId;
+        document.getElementById('certName').textContent = data.name;
+        document.getElementById('certType').textContent = typeof data.certificateName === 'string' && data.certificateName
+            ? data.certificateName
+            : type[verificationLanguage === 'tr' ? 1 : 0];
+        document.getElementById('certDate').textContent = dateStr;
+
+        loadingState.style.display = 'none';
+        successState.style.display = 'block';
+    } catch {
+        if (revoked) {
+            document.querySelector('#errorState h1').textContent = verificationLanguage === 'tr' ? 'İptal Edilmiş Sertifika' : 'Revoked Certificate';
+        }
         loadingState.style.display = 'none';
         errorState.style.display = 'block';
     }
@@ -563,6 +568,10 @@ document.addEventListener('DOMContentLoaded', async () => {
           <span class="cert-label">Date Issued:</span>
           <span class="cert-value" id="certDate">-</span>
         </div>
+        <div class="cert-row">
+          <span class="cert-label">ID:</span>
+          <span class="cert-value" id="certId">-</span>
+        </div>
       </div>
       <a href="/" class="home-link">Return to Vertex</a>
     </div>
@@ -578,86 +587,5 @@ document.addEventListener('DOMContentLoaded', async () => {
     </div>
   </div>
 
-<script>
-document.addEventListener('DOMContentLoaded', async () => {
-    // Determine language based on browser
-    const userLang = navigator.language.substring(0, 2);
-    const isTr = userLang === 'tr';
-    
-    // UI elements to translate if Turkish
-    if(isTr) {
-        document.title = "Sertifika Doğrulama | Vertex";
-        document.querySelector('#loadingState h1').textContent = "Doğrulanıyor...";
-        document.querySelector('#loadingState .desc').textContent = "Lütfen sertifika güvenli veritabanımızda kontrol edilirken bekleyin.";
-        
-        document.querySelector('#successState h1').textContent = "Sertifika Geçerli";
-        document.querySelector('#successState .desc').textContent = "Bu sertifika orijinaldir ve Vertex veritabanına güvenli bir şekilde kaydedilmiştir.";
-        document.querySelector('#successState .home-link').textContent = "Ana Sayfaya Dön";
-        
-        document.querySelector('#errorState h1').textContent = "Geçersiz Sertifika";
-        document.querySelector('#errorState .desc').textContent = "Bu sertifika bulunamadı veya iptal edilmiş. Bunun bir hata olduğunu düşünüyorsanız, lütfen Vertex Destek ile iletişime geçin.";
-        document.querySelector('#errorState .home-link').textContent = "Ana Sayfaya Dön";
-        
-        document.querySelectorAll('.cert-label')[0].textContent = "Verilen Kişi:";
-        document.querySelectorAll('.cert-label')[1].textContent = "Tür:";
-        document.querySelectorAll('.cert-label')[2].textContent = "Veriliş Tarihi:";
-    }
-
-    // Extract ID from URL path: /verify/[ID]
-    const pathParts = window.location.pathname.split('/');
-    const certId = pathParts[pathParts.length - 1] === '' ? pathParts[pathParts.length - 2] : pathParts[pathParts.length - 1];
-
-    const loadingState = document.getElementById('loadingState');
-    const successState = document.getElementById('successState');
-    const errorState = document.getElementById('errorState');
-    const certDetails = document.getElementById('certDetails');
-
-    if (!certId || certId === 'verify' || certId === 'verify.html') {
-        loadingState.style.display = 'none';
-        errorState.style.display = 'block';
-        return;
-    }
-
-    try {
-        // Fetch from Firebase Firestore REST API
-        const response = await fetch('https://firestore.googleapis.com/v1/projects/vertex-ai-1618/databases/(default)/documents/contributors/' + certId);
-        
-        if (response.ok) {
-            const data = await response.json();
-            
-            // Extract fields from Firestore REST API format
-            const fields = data.fields || {};
-            const name = fields.name ? fields.name.stringValue : 'Unknown';
-            const lang = fields.language ? fields.language.stringValue : 'en';
-            
-            const hasVerified = fields.hasVerified ? fields.hasVerified.booleanValue : false;
-            
-            if (!hasVerified) {
-                throw new Error('Certificate pending or rejected');
-            }
-            
-            const certType = lang === 'tr' ? 'Liyakat Sertifikası' : 'Merit Certificate';
-            
-            // Format date from document createTime
-            const dateObj = new Date(data.createTime);
-            const dateStr = dateObj.toLocaleDateString('en-GB'); // DD/MM/YYYY
-
-            // Populate UI
-            document.getElementById('certName').textContent = name;
-            document.getElementById('certType').textContent = certType;
-            document.getElementById('certDate').textContent = dateStr;
-            
-            loadingState.style.display = 'none';
-            successState.style.display = 'block';
-        } else {
-            throw new Error('Certificate not found');
-        }
-    } catch (err) {
-        console.error(err);
-        loadingState.style.display = 'none';
-        errorState.style.display = 'block';
-    }
-});
-</script>
-</body>
+ </body>
 </html>
