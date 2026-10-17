@@ -132,7 +132,7 @@ function setCoverImage(img,article,lang) {
 function renderNews(articles,container,lang,strings) {
     const visible=visibleNews(articles).slice(0,NEWS_LIMIT);
     const grid=document.createDocumentFragment();
-    visible.forEach(article=>{
+    visible.forEach((article,index)=>{
         const content=(article.translations||{})[lang]||(article.translations||{}).en||
             Object.values(article.translations||{})[0];
         if(!content||!content.title)return;
@@ -150,24 +150,36 @@ function renderNews(articles,container,lang,strings) {
         }
         contentWrap.appendChild(makeElement('h3','vertex-news-title',content.title));
         const summaryText=content.summary || (content.content ? content.content.slice(0,170)+'…' : '');
-        const summary=makeElement('p','vertex-news-summary',summaryText);
-        contentWrap.appendChild(summary);
+        const copy=makeElement('div','vertex-news-copy');
+        const summaryPanel=makeElement('div','vertex-news-summary-panel');
+        const summaryInner=makeElement('div','vertex-news-panel-inner');
+        summaryInner.appendChild(makeElement('p','vertex-news-summary',summaryText));
+        summaryPanel.appendChild(summaryInner);
         const detail=makeElement('div','vertex-news-detail');
-        detail.hidden=true;
-        detail.appendChild(makeElement('p','vertex-news-body',content.content||summaryText));
+        detail.id='vertex-news-detail-'+index;
+        detail.inert=true;
+        detail.setAttribute('aria-hidden','true');
+        const detailInner=makeElement('div','vertex-news-panel-inner');
+        detailInner.appendChild(makeElement('p','vertex-news-body',content.content||summaryText));
         const source=Array.isArray(article.references)?validURL(article.references[0]):'';
         if(source){
             const link=makeElement('a','vertex-news-source',strings.source+' ↗');
-            link.href=source;link.target='_blank';link.rel='noopener noreferrer';detail.appendChild(link);
+            link.href=source;link.target='_blank';link.rel='noopener noreferrer';detailInner.appendChild(link);
         }
-        contentWrap.appendChild(detail);
+        detail.appendChild(detailInner);
+        copy.append(summaryPanel,detail);
+        contentWrap.appendChild(copy);
         const button=makeElement('button','vertex-news-toggle',strings.readMore+' ↓');
         button.type='button';button.setAttribute('aria-expanded','false');
+        button.setAttribute('aria-controls',detail.id);
         button.addEventListener('click',()=>{
-            const expanded=button.getAttribute('aria-expanded')==='true';
-            button.setAttribute('aria-expanded',String(!expanded));
-            detail.hidden=expanded;summary.hidden=!expanded;
-            button.textContent=expanded?strings.readMore+' ↓':strings.close+' ↑';
+            const expand=button.getAttribute('aria-expanded')!=='true';
+            card.classList.toggle('is-expanded',expand);
+            button.setAttribute('aria-expanded',String(expand));
+            detail.inert=!expand;
+            detail.setAttribute('aria-hidden',String(!expand));
+            summaryPanel.setAttribute('aria-hidden',String(expand));
+            button.textContent=expand?strings.close+' ↑':strings.readMore+' ↓';
         });
         contentWrap.appendChild(button);
         card.append(cover,contentWrap);grid.appendChild(card);
