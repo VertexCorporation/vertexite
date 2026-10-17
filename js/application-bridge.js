@@ -112,14 +112,19 @@
     content.append(heading, detail);
     statusBox.append(content);
     // Only an error state offers manual recovery; never a second submit step.
-    if (typeof onRetry === "function" && error?.status !== 409 && error?.status !== 400 && error?.status !== 403) {
+    const retrySubmission = typeof onRetry === "function" ? onRetry : () => {
+      const form = document.getElementById("joinForm");
+      const submitter = document.getElementById("submitBtn");
+      if (form && submitter && !submitter.disabled) form.requestSubmit(submitter);
+    };
+    if (error?.status !== 409 && error?.status !== 400 && error?.status !== 403) {
       const retry = document.createElement("button");
       retry.type = "button";
       retry.className = "btn btn-primary join-submit-btn";
       retry.textContent = t().retry;
       retry.addEventListener("click", () => {
         retry.disabled = true;
-        onRetry();
+        retrySubmission();
       });
       statusBox.append(retry);
     }
