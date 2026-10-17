@@ -156,13 +156,13 @@ setTimeout(async function () {
     context.fillStyle = ocean; context.fill();
     context.beginPath(); path(graticule);
     context.strokeStyle = dark ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.09)';
-    context.lineWidth = Math.max(1, size * .0014); context.stroke();
+    context.lineWidth = Math.max(.65, size * .00095); context.stroke();
 
     worldFeatures.forEach(function (country) {
       context.beginPath(); path(country);
       context.fillStyle = land; context.fill();
       context.strokeStyle = border;
-      context.lineWidth = Math.max(.7, size * .0015); context.stroke();
+      context.lineWidth = Math.max(.55, size * .0011); context.stroke();
     });
 
     if (turkey) {
@@ -171,7 +171,7 @@ setTimeout(async function () {
       context.beginPath(); path(turkey);
       context.fillStyle = '#e11d2e'; context.fill();
       context.strokeStyle = dark ? '#ffffff' : '#9f1120';
-      context.lineWidth = Math.max(1.2, size * .0025); context.stroke();
+      context.lineWidth = Math.max(1, size * .0021); context.stroke();
       context.restore();
     }
 
@@ -185,14 +185,14 @@ setTimeout(async function () {
         context.beginPath(); path(country);
         context.fillStyle = spreadLand; context.fill();
         context.strokeStyle = dark ? '#11141a' : '#ffffff';
-        context.lineWidth = Math.max(.65, size * .0014); context.stroke();
+        context.lineWidth = Math.max(.5, size * .0010); context.stroke();
         context.restore();
       });
     }
 
     context.beginPath(); path({ type: 'Sphere' });
     context.strokeStyle = dark ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.28)';
-    context.lineWidth = Math.max(1, size * .0024); context.stroke();
+    context.lineWidth = Math.max(.7, size * .0017); context.stroke();
   }
 
   function render() {

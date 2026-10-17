@@ -4,7 +4,31 @@ function setIcon(el,name){if(!el||!paths[name])return;el.setAttribute('viewBox',
 function init(){const favicon=document.getElementById('vertex-favicon');const browserTheme=matchMedia('(prefers-color-scheme:dark)');function sync(){if(favicon)favicon.href='/assets/favicon-'+(browserTheme.matches?'dark':'light')+'.svg';}sync();browserTheme.addEventListener('change',sync);
 setIcon(document.getElementById('themeIconSun'),'sun');setIcon(document.getElementById('themeIconMoon'),'moon');setIcon(document.querySelector('#langBtn > svg'),'language');document.querySelectorAll('.chev').forEach(e=>setIcon(e,'chevron-down'));document.querySelectorAll('.team-nav.prev svg').forEach(e=>setIcon(e,'chevron-left'));document.querySelectorAll('.team-nav.next svg').forEach(e=>setIcon(e,'chevron-right'));
 if('IntersectionObserver' in window){const reveals=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('section-revealed');reveals.unobserve(e.target);}}),{threshold:.04});document.querySelectorAll('main > section:not(.hero):not(.stats):not(.partners-static), main > .cta-band').forEach(el=>reveals.observe(el));}
-const reduced=matchMedia('(prefers-reduced-motion:reduce)');const timers=new WeakMap();document.addEventListener('scroll',function(event){const el=event.target===document?document.documentElement:event.target;if(!(el instanceof Element))return;el.classList.add('is-scrolling');clearTimeout(timers.get(el));timers.set(el,setTimeout(()=>el.classList.remove('is-scrolling'),850));},{capture:true,passive:true});
+const reduced=matchMedia('(prefers-reduced-motion:reduce)');
+const scrollStates=new WeakMap();
+function fadeScrollbar(el,target,duration){
+ let state=scrollStates.get(el);
+ if(!state){state={value:0,frame:0,idle:0};scrollStates.set(el,state);}
+ if(state.frame)cancelAnimationFrame(state.frame);
+ if(reduced.matches){state.value=target;el.style.setProperty('--scrollbar-alpha',String(target));return;}
+ const start=performance.now(),from=state.value;
+ function frame(now){
+  const t=Math.min(1,(now-start)/duration),smooth=t*t*(3-2*t);
+  state.value=from+(target-from)*smooth;
+  el.style.setProperty('--scrollbar-alpha',state.value.toFixed(3));
+  state.frame=t<1?requestAnimationFrame(frame):0;
+ }
+ state.frame=requestAnimationFrame(frame);
+}
+document.addEventListener('scroll',function(event){
+ const el=event.target===document?document.documentElement:event.target;
+ if(!(el instanceof Element))return;
+ let state=scrollStates.get(el);
+ if(!state){state={value:0,frame:0,idle:0};scrollStates.set(el,state);}
+ clearTimeout(state.idle);
+ fadeScrollbar(el,1,120);
+ state.idle=setTimeout(()=>fadeScrollbar(el,0,320),700);
+},{capture:true,passive:true});
 const cta=document.querySelector('.cta-band');if(cta){
  const sky=document.createElement('div');sky.className='cta-skyline';sky.setAttribute('aria-hidden','true');
  let buildings='',windows='';const heights=[80,135,104,190,150,220,166,115,200,145,230,175,125,195,155,105];
@@ -27,3 +51,88 @@ const panels=document.querySelectorAll('.lang-panel,.mobile-menu,.doctrine-modal
 (function(){'use strict';var reduce=matchMedia('(prefers-reduced-motion: reduce)'),leaving=false;
 document.addEventListener('click',function(e){var a=e.target.closest('.lang-panel a.lang-row[href]');if(!a||e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey||a.target||a.hasAttribute('download')||leaving||reduce.matches)return;var url=new URL(a.href,location.href);if(url.origin!==location.origin||url.href===location.href)return;e.preventDefault();leaving=true;document.documentElement.classList.add('language-leaving');setTimeout(function(){location.assign(url.href)},160)});
 window.addEventListener('pageshow',function(){leaving=false;document.documentElement.classList.remove('language-leaving')});})();
+
+/* Public theme settings: same three modes and persisted preference as Vertex Console. */
+(function(){
+ 'use strict';
+ var labels={
+  tr:['Tema','Açık','Koyu','Sistem'],en:['Theme','Light','Dark','System'],
+  de:['Design','Hell','Dunkel','System'],fr:['Thème','Clair','Sombre','Système'],
+  es:['Tema','Claro','Oscuro','Sistema'],it:['Tema','Chiaro','Scuro','Sistema'],
+  pt:['Tema','Claro','Escuro','Sistema'],nl:['Thema','Licht','Donker','Systeem'],
+  ru:['Тема','Светлая','Тёмная','Система'],ar:['المظهر','فاتح','داكن','النظام'],
+  hi:['थीम','लाइट','डार्क','सिस्टम'],id:['Tema','Terang','Gelap','Sistem'],
+  ja:['テーマ','ライト','ダーク','システム'],ko:['테마','라이트','다크','시스템'],
+  zh:['主题','浅色','深色','系统'],az:['Mövzu','Açıq','Tünd','Sistem']
+ };
+ function initThemeSelector(){
+  var btn=document.getElementById('themeBtn');if(!btn)return;
+  var lang=(document.documentElement.lang||'en').toLowerCase().split('-')[0];
+  var copy=labels[lang]||labels.en;
+  var wrapper=document.createElement('div');wrapper.className='theme-switcher';
+  btn.before(wrapper);wrapper.appendChild(btn);btn.type='button';
+  btn.setAttribute('aria-haspopup','menu');btn.setAttribute('aria-expanded','false');
+  var menu=document.createElement('div');menu.className='theme-mode-menu';menu.id='vertex-theme-menu';menu.hidden=true;menu.setAttribute('role','menu');btn.setAttribute('aria-controls',menu.id);
+  var title=document.createElement('div');title.className='theme-menu-heading';title.textContent=copy[0];menu.appendChild(title);
+  var modes=['light','dark','system'],buttons=[];
+  modes.forEach(function(mode,index){
+   var option=document.createElement('button');option.type='button';option.className='theme-option';
+   option.dataset.mode=mode;option.setAttribute('role','menuitemradio');
+   var label=document.createElement('span');label.textContent=copy[index+1];
+   var tick=document.createElement('span');tick.className='theme-option-check';tick.setAttribute('aria-hidden','true');tick.textContent='✓';
+   option.append(label,tick);menu.appendChild(option);buttons.push(option);
+  });
+  wrapper.appendChild(menu);
+  var sun=btn.querySelector('#themeIconSun'),moon=btn.querySelector('#themeIconMoon');
+  var systemIcon=document.createElementNS('http://www.w3.org/2000/svg','svg');
+  systemIcon.setAttribute('viewBox','0 0 24 24');systemIcon.setAttribute('fill','none');systemIcon.setAttribute('stroke','currentColor');
+  systemIcon.setAttribute('stroke-width','1.8');systemIcon.setAttribute('stroke-linecap','round');systemIcon.setAttribute('stroke-linejoin','round');
+  systemIcon.classList.add('theme-system-icon');systemIcon.setAttribute('aria-hidden','true');
+  systemIcon.innerHTML='<rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8M12 17v4"/>';
+  btn.appendChild(systemIcon);
+  var media=window.matchMedia('(prefers-color-scheme: dark)');
+  function modeFromStorage(){
+   var mode=null,legacy=null;
+   try{mode=localStorage.getItem('vertex-theme-mode');legacy=localStorage.getItem('theme');}catch(e){}
+   return modes.indexOf(mode)>=0?mode:(legacy==='dark'||legacy==='light'?legacy:'system');
+  }
+  function apply(mode){
+   var effective=mode==='system'?(media.matches?'dark':'light'):mode;
+   document.documentElement.setAttribute('data-theme',effective);
+   document.documentElement.setAttribute('data-theme-mode',mode);
+   try{localStorage.setItem('vertex-theme-mode',mode);localStorage.setItem('theme',effective);}catch(e){}
+   var meta=document.querySelector('meta[name="theme-color"]');
+   if(meta)meta.setAttribute('content',effective==='dark'?'#0F0F10':'#F8F9FA');
+   var favicon=document.getElementById('vertex-favicon');
+   if(favicon)favicon.href='/assets/favicon-'+effective+'.svg';
+   if(sun)sun.style.display=mode==='dark'?'block':'none';
+   if(moon)moon.style.display=mode==='light'?'block':'none';
+   systemIcon.style.display=mode==='system'?'block':'none';
+   btn.setAttribute('aria-label',copy[0]+': '+copy[modes.indexOf(mode)+1]);
+   buttons.forEach(function(b){b.setAttribute('aria-checked',String(b.dataset.mode===mode));});
+  }
+  function close(returnFocus){
+   menu.hidden=true;btn.setAttribute('aria-expanded','false');
+   if(returnFocus)btn.focus();
+  }
+  document.addEventListener('click',function(e){
+   if(e.target.closest('#themeBtn')===btn){
+    // Existing localized pages still attach a legacy two-mode click handler.
+    // Capture prevents that handler from replacing the three-mode preference.
+    e.preventDefault();e.stopPropagation();
+    var open=menu.hidden;
+    menu.hidden=!open;btn.setAttribute('aria-expanded',String(open));
+    if(open)buttons.find(function(b){return b.getAttribute('aria-checked')==='true';})?.focus();
+   }
+  },true);
+  buttons.forEach(function(option){option.addEventListener('click',function(){
+   apply(option.dataset.mode);close(true);
+  });});
+  document.addEventListener('click',function(e){if(!wrapper.contains(e.target))close(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'&&!menu.hidden){e.preventDefault();close(true);}});
+  media.addEventListener('change',function(){apply(modeFromStorage());});
+  apply(modeFromStorage());
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initThemeSelector);
+ else initThemeSelector();
+})();
