@@ -374,3 +374,9 @@ html[data-theme="dark"] #themeBtn:not([data-theme-mode]) > #themeIconSun{opacity
 @supports selector(::-webkit-scrollbar){
   *{scrollbar-width:auto;scrollbar-color:auto}
 }
+
+/* On phones the global .wrap padding shorthand resets .foot-bottom's top
+   padding to zero. Restore breathing room below its divider without affecting desktop. */
+@media(max-width:860px){
+  footer .wrap.foot-bottom{padding-top:30px}
+}
