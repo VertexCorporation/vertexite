@@ -184,6 +184,15 @@ setTimeout(async function () {
   var geometry = hero.querySelector('.story-geometry');
   var lastGlobeFrame = '';
   var titleEl = hero.querySelector('.story-title');
+  // Difference blending is discrete (normal/difference cannot interpolate).
+  // Keep one semantic heading and paint a decorative, pixel-aligned copy
+  // behind it; scrolling crossfades their alpha instead of switching modes.
+  var blendTitleEl = document.createElement('div');
+  blendTitleEl.className = 'story-title story-title--blend';
+  blendTitleEl.innerHTML = titleEl.innerHTML;
+  blendTitleEl.setAttribute('aria-hidden', 'true');
+  blendTitleEl.inert = true;
+  titleEl.after(blendTitleEl);
   // One-line title: measure its natural (untransformed) width and fit it inside the viewport.
   // Fonts and orientation changes remeasure the exact same heading, not cloned words.
   // Retain the opening markup/word spacing; changing to plain text also changes width.
@@ -370,9 +379,10 @@ setTimeout(async function () {
     stage.style.setProperty('--story-header-space',((1-headerHide)*68).toFixed(1)+'px');
     var geometryOpacity = reduced ? 0 : Math.max(1-smooth(phase(progress,.10,.30)),closingCrossfade);
     geometry.style.opacity = String(geometryOpacity);
-    // Restore the original outlined world as the solid globe fades away.
-    // Maintain heading contrast over filled countries until that transition is almost complete.
-    stage.classList.toggle('story-globe-contrast', !reduced && progress >= .28 && progress < .93);
+    // Paint both heading styles together during the globe reveal and retreat.
+    // The normal text recedes as difference-blended text comes forward, then
+    // reverses with the globe's closing crossfade. No abrupt blend-mode switch.
+    var headingBlend = reduced ? 0 : smooth(phase(progress, .23, .33)) * (1 - closingCrossfade);
     var geometryOpeningScale = mix(1,1.4,smooth(phase(progress,.05,.30)));
     var geometryScale = mix(geometryOpeningScale,1,closingCrossfade);
     var geometryRotation = mix(18*phase(progress,0,.30),0,closingCrossfade);
@@ -386,9 +396,12 @@ setTimeout(async function () {
     var shrink = smooth(phase(progress, .015, .24));
     var grow = smooth(phase(progress, .28, .56));
     var motionScale = mix(mix(1, .84, shrink), 1, grow);
-    titleEl.style.top = openingTop.toFixed(2) + 'px';
-    titleEl.style.transform = 'translate3d(-50%,' + lift.toFixed(2) + 'px,0) scale(' + (openingFit * motionScale).toFixed(5) + ')';
-    titleEl.style.opacity = '1';
+    var titleTop = openingTop.toFixed(2) + 'px';
+    var titleTransform = 'translate3d(-50%,' + lift.toFixed(2) + 'px,0) scale(' + (openingFit * motionScale).toFixed(5) + ')';
+    titleEl.style.top = blendTitleEl.style.top = titleTop;
+    titleEl.style.transform = blendTitleEl.style.transform = titleTransform;
+    titleEl.style.setProperty('--story-solid-opacity', (1 - headingBlend).toFixed(3));
+    blendTitleEl.style.setProperty('--story-blend-opacity', headingBlend.toFixed(3));
     var titleBottom = titleEl.getBoundingClientRect().bottom - stage.getBoundingClientRect().top;
     // Position actions from the VISIBLE heading's bottom edge in every frame.
     // The saved static actionsTop can be stale after the title is reparented/scaled,

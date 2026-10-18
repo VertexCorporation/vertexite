@@ -353,16 +353,27 @@ html[data-theme="dark"] .story-sponsor-group img {filter:brightness(0) invert(1)
   }
 }
 
-/* Opening and closing must have opaque, fully foreground text. A blend mode
-   made the wireframe show through the title even with a higher z-index. */
+/* Keep the accessible heading opaque at the endpoints and dissolve between
+   two independently composited text treatments while the globe is visible.
+   mix-blend-mode itself is discrete, so switching it on a single node snaps. */
 .story-static-content .story-title,
 .story-stage > .story-title {
   z-index:9 !important;
   color:var(--text) !important;
   mix-blend-mode:normal !important;
 }
-.story-stage.story-globe-contrast > .story-title {
+.story-stage > .story-title:not(.story-title--blend) {
+  opacity:var(--story-solid-opacity,1) !important;
+}
+.story-stage > .story-title.story-title--blend {
+  z-index:8 !important;
   color:#fff !important;
   mix-blend-mode:difference !important;
+  opacity:var(--story-blend-opacity,0) !important;
+  pointer-events:none;
+  user-select:none;
 }
 .story-stage > .story-geometry { z-index:1; }
+@media (prefers-reduced-motion:reduce) {
+  .story-stage > .story-title.story-title--blend {display:none !important;}
+}
