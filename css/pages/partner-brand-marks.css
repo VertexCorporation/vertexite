@@ -18,34 +18,30 @@ html[data-theme="dark"] .partners-logos .partner-logo-img.partner-logo-img--bran
 html[data-theme="dark"] .partners-logos .partner-logo-img.partner-logo-img--brand:hover{
   filter:grayscale(1) brightness(0) invert(1) opacity(1);
 }
-/* Use the existing Teknopark İstanbul photograph without a white rectangle. */
-.partner-card img.teknopark-authentic{
+/* Local transparent wordmark: avoid the white rectangle and photo blending
+   in the sponsor strip across both light and dark themes. */
+.partner-card img.teknopark-wordmark{
   width:min(100%,185px);
-  height:98px;
+  height:52px;
   max-width:185px;
-  max-height:98px;
-  object-fit:cover;
+  max-height:52px;
+  object-fit:contain;
   object-position:center;
   opacity:1;
-  mix-blend-mode:multiply;
-  filter:none;
+  mix-blend-mode:normal;
 }
-.partner-logo-img.teknopark-authentic{
-  width:125px;
-  height:66px;
-  max-width:125px;
-  max-height:66px;
-  object-fit:cover;
+.partner-logo-img.teknopark-wordmark{
+  width:auto;
+  height:clamp(25px,2.3vw,34px);
+  max-width:min(220px,90vw);
+  max-height:none;
+  object-fit:contain;
   object-position:center;
-  mix-blend-mode:multiply;
+  mix-blend-mode:normal;
 }
-html[data-theme="dark"] .teknopark-authentic{
-  filter:grayscale(1) invert(1);
-  mix-blend-mode:screen;
-}
-/* The top-row mark also needs its contrast-preserving blend mode in dark theme. */
-html[data-theme="dark"] .partners-logos .partner-logo-img.teknopark-authentic{
-  mix-blend-mode:screen;
+html[data-theme="dark"] .teknopark-wordmark{
+  filter:brightness(0) invert(1);
+  mix-blend-mode:normal;
 }
 .partner-card .partner-brand-mark{
   width:auto;
