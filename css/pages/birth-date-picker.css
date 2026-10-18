@@ -129,7 +129,14 @@ html[data-theme="dark"] .vx-date-select-trigger:hover,
 html[data-theme="dark"] .vx-date-select-trigger[aria-expanded="true"]{background:#292929;border-color:#6c6c6c}
 .vx-date-select-trigger:focus-visible{outline:2px solid var(--text-muted);outline-offset:2px}
 .vx-date-select-value{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.vx-date-select-chevron{font-size:16px;line-height:1;color:var(--text-muted);transition:transform 180ms ease}
+.vx-date-select-chevron{
+ display:grid;place-items:center;align-self:center;flex:0 0 18px;
+ width:18px;height:18px;margin:0;padding:0;
+ line-height:0;color:var(--text-muted);
+ transform:rotate(0deg);transform-origin:center center;
+ transition:transform 180ms ease;
+}
+.vx-date-select-chevron svg{display:block;width:16px;height:16px}
 .vx-date-select-trigger[aria-expanded="true"] .vx-date-select-chevron{transform:rotate(180deg)}
 .vx-date-menu[hidden]{display:none!important}
 .vx-date-menu{
@@ -180,7 +187,8 @@ html[data-theme="dark"] .join-card .vx-birth-trigger:hover{background:#1e1e1e;bo
  .vx-date-menu{max-width:190px}
 }
 @media(prefers-reduced-motion:reduce){
- .vx-date-panel,.vx-date-menu,.vx-date-select-trigger,.vx-date-select-chevron{
+ .vx-date-panel,.vx-date-menu,.vx-date-select-trigger{
  transition:none!important;transform:none!important;will-change:auto
  }
+ .vx-date-select-chevron{transition:none!important;will-change:auto}
 }
