@@ -3,7 +3,7 @@
     var ENDPOINT = 'https://listsiteteam-o5h7dmtija-ew.a.run.app/';
     var current = null, timer, loading = false;
     var lang=(document.documentElement.lang||'en').toLowerCase().split('-')[0];
-    var cacheKey='team:'+lang;
+    var cacheKey='directory-20261018:'+lang;
     var fallbackImages=Object.create(null);
     function fill(id, values, itemClass) {
         var track = document.getElementById(id);
@@ -85,7 +85,7 @@
     }
     function renderCards(rows) {
         var track=document.getElementById('teamTrack'); if(!track)return;
-        if(!Array.isArray(rows) || !rows.length)return; // Never erase the HTML backup on empty/error responses.
+        if(!Array.isArray(rows))return; // An intentionally emptied directory must not resurrect the HTML backup.
         track.replaceChildren(); var container=track.closest('.team-scroll-wrap'); if(container)container.hidden=false;
         var lang = (document.documentElement.lang || 'en').toLowerCase();
         var supportedLangs = ['ar','az','de','en','es','fr','hi','id','it','ja','ko','nl','pt','ru','tr','zh'];
@@ -96,11 +96,12 @@
             var photo=document.createElement('img');photo.className='team-photo';photo.alt=card.name;photo.width=400;photo.height=400;photo.loading='lazy';photo.decoding='async';photo.src=safeImage(card.imageUrl)||fallbackImages[normalizeName(card.name)]||'../assets/logo.svg';
             photo.onerror=function(){var backup=fallbackImages[normalizeName(card.name)];if(backup && photo.src!==new URL(backup,location.href).href){photo.src=backup;return;}photo.remove();wrap.classList.add('team-photo-missing');wrap.textContent=card.name.slice(0,1);};wrap.appendChild(photo);
             var info=document.createElement('div');info.className='team-info';var name=document.createElement('h3');name.textContent=card.name;
-            var slug=getProfileSlug(card);
-            var profile=slug?'/'+currentLang+'/'+slug:null;
+            var hasBio=typeof card.bio==='string'&&card.bio.trim().length>0;
+            var profile=hasBio&&/^[a-zA-Z0-9_-]{1,128}$/.test(card.id||'')
+              ? '/'+currentLang+'/profile.html?id='+encodeURIComponent(card.id) : null;
             if(profile){
                 item.classList.add('has-profile');
-                if(slug)item.dataset.profileSlug=slug;
+                item.dataset.profileId=card.id;
                 var link=document.createElement('a');link.className='team-profile-link';link.href=profile;link.textContent=card.name;name.replaceChildren(link);
                 var photoLink=document.createElement('a');photoLink.href=profile;photoLink.setAttribute('aria-label',card.name);photoLink.setAttribute('tabindex','-1');photoLink.setAttribute('aria-hidden','true');photoLink.appendChild(photo);wrap.appendChild(photoLink);
                 item.addEventListener('click',function(e){if(e.target.closest('.team-social')||e.target.closest('a'))return;window.location.href=profile;});
@@ -133,7 +134,7 @@
             var transport=cache?cache.fetchJSON(ENDPOINT,options,10000):fetch(ENDPOINT,options).then(function(r){if(!r.ok)throw Error('unavailable');return r.json();});
             return transport.then(function(json){var data=json&&json.result;if(!valid(data))throw Error('invalid team response');return data;});
         }
-        var task=cache?cache.load(cacheKey,request,valid,{cooldownMs:120000}):request().then(function(value){return {value:value,source:'network'};});
+        var task=cache?cache.load(cacheKey,request,valid,{ttl:60000,cooldownMs:120000}):request().then(function(value){return {value:value,source:'network'};});
         return task.then(function(result){
             // A fresh cache has already been painted; never thrash the cards on every reload.
             if(result.source==='network'||!current)apply(result.value);
