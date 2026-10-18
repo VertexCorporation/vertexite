@@ -22,7 +22,7 @@
   min-width:0;
   padding:0;
 }
-.vision-grid>.mission-statement {grid-area:mission}
+.vision-grid>.mission-statement {grid-area:mission; width:100%; margin-left:auto; text-align:right}
 .vision-grid>.vision-panel {
   min-width:0;
   max-width:100%;
