@@ -42,8 +42,6 @@
 .more-info-card--featured {
   grid-area:feature;
   width:100%;
-  max-width:min(100%,1120px);
-  justify-self:center;
   grid-template-columns:clamp(52px,5vw,66px) 1px minmax(0,1fr);
   min-height:225px;
   aspect-ratio:auto;
@@ -58,9 +56,7 @@
   align-self:center;
   color:var(--text);
   opacity:.83;
-  transform:scale(1);
-  transform-origin:center;
-  transition:transform 350ms var(--tile-ease),opacity 240ms var(--tile-ease);
+  transition:opacity 240ms var(--tile-ease);
 }
 .more-info-icon svg{width:100%;height:auto;aspect-ratio:1;display:block}
 .more-info-divider {
@@ -110,7 +106,6 @@
 }
 .more-info-card:is(:hover,:focus-visible) .more-info-icon {
   opacity:1;
-  transform:scale(1.09);
 }
 .more-info-card:is(:hover,:focus-visible) .more-info-arrow{opacity:1;transform:translate(0,0)}
 .more-info-card:is(:hover,:focus-visible) .more-info-divider{background:var(--text-muted)}
@@ -152,7 +147,6 @@ html[dir="rtl"] .more-info-card:is(:hover,:focus-visible) .more-info-arrow{trans
 }
 @media(prefers-reduced-motion:reduce){
   .more-info-card,.more-info-icon,.more-info-arrow,.more-info-divider{transition:none!important}
-  .more-info-card:is(:hover,:focus-visible) .more-info-icon{transform:none}
 }
 
 #more-info{scroll-margin-top:clamp(85px,10vh,125px)}
