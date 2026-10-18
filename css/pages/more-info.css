@@ -58,7 +58,7 @@
   align-self:center;
   color:var(--text);
   opacity:.83;
-  transform:translateY(0) rotate(0deg);
+  transform:scale(1);
   transform-origin:center;
   transition:transform 350ms var(--tile-ease),opacity 240ms var(--tile-ease);
 }
@@ -110,7 +110,7 @@
 }
 .more-info-card:is(:hover,:focus-visible) .more-info-icon {
   opacity:1;
-  transform:translateY(-3px) rotate(-4deg);
+  transform:scale(1.09);
 }
 .more-info-card:is(:hover,:focus-visible) .more-info-arrow{opacity:1;transform:translate(0,0)}
 .more-info-card:is(:hover,:focus-visible) .more-info-divider{background:var(--text-muted)}

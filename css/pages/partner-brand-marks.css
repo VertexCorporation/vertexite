@@ -1,12 +1,52 @@
-
-/* Keep partner marks legible without distorting their original logo proportions. */
+/* Brand sizing and monochrome partner marquee assets. */
 .partner-logo-img.partner-logo-img--brand{
   height:clamp(25px,2.3vw,34px);
   max-width:min(220px,90vw);
   object-fit:contain;
+}
+/* Match the same neutral, low-contrast treatment as the other supporters.
+   Keep brand marks monochrome even while hovered. */
+.partners-logos .partner-logo-img.partner-logo-img--brand{
+  filter:grayscale(1) opacity(.4);
+}
+.partners-logos .partner-logo-img.partner-logo-img--brand:hover{
+  filter:grayscale(1) opacity(1);
+}
+html[data-theme="dark"] .partners-logos .partner-logo-img.partner-logo-img--brand{
+  filter:grayscale(1) brightness(0) invert(1) opacity(.4);
+}
+html[data-theme="dark"] .partners-logos .partner-logo-img.partner-logo-img--brand:hover{
+  filter:grayscale(1) brightness(0) invert(1) opacity(1);
+}
+/* Use the existing Teknopark İstanbul photograph without a white rectangle. */
+.partner-card img.teknopark-authentic{
+  width:min(100%,185px);
+  height:98px;
+  max-width:185px;
+  max-height:98px;
+  object-fit:cover;
+  object-position:center;
+  opacity:1;
+  mix-blend-mode:multiply;
   filter:none;
 }
-html[data-theme="dark"] .partner-logo-img.partner-logo-img--brand{filter:none}
+.partner-logo-img.teknopark-authentic{
+  width:125px;
+  height:66px;
+  max-width:125px;
+  max-height:66px;
+  object-fit:cover;
+  object-position:center;
+  mix-blend-mode:multiply;
+}
+html[data-theme="dark"] .teknopark-authentic{
+  filter:grayscale(1) invert(1);
+  mix-blend-mode:screen;
+}
+/* The top-row mark also needs its contrast-preserving blend mode in dark theme. */
+html[data-theme="dark"] .partners-logos .partner-logo-img.teknopark-authentic{
+  mix-blend-mode:screen;
+}
 .partner-card .partner-brand-mark{
   width:auto;
   max-width:min(92%,185px);
@@ -15,42 +55,12 @@ html[data-theme="dark"] .partner-logo-img.partner-logo-img--brand{filter:none}
   object-fit:contain;
   opacity:1;
 }
-.partner-card .partner-brand-mark--teknopark{
-  max-height:52px;
-}
-
-/* Use the observed Teknopark İstanbul wordmark rather than a hand-drawn imitation.
-   The remote JPG includes a white background; blend it into the page by theme. */
-.partner-card img.teknopark-authentic{
- width:min(100%,185px);
- height:98px;
- max-width:185px;
- max-height:98px;
- object-fit:cover;
- object-position:center;
- opacity:1;
- filter:none;
- mix-blend-mode:multiply;
-}
-.partner-logo-img.teknopark-authentic{
- width:125px;
- height:66px;
- max-width:125px;
- max-height:66px;
- object-fit:cover;
- object-position:center;
- filter:none;
- mix-blend-mode:multiply;
-}
-html[data-theme="dark"] .teknopark-authentic{
- filter:grayscale(1) invert(1)!important;
- mix-blend-mode:screen!important;
-}
-/* Existing GitLab SVG reserves large amounts of blank space inside its viewBox. */
+.partner-card .partner-brand-mark--teknopark{max-height:52px}
+/* Original GitLab wordmark includes wide SVG viewBox padding. */
 .partner-card img[src*="gitlab-wordmark.svg"]{
- width:min(100%,260px);
- height:auto;
- max-width:260px;
- max-height:none;
- opacity:1;
+  width:min(100%,260px);
+  height:auto;
+  max-width:260px;
+  max-height:none;
+  opacity:1;
 }

@@ -1,0 +1,24 @@
+/* Vertex news cards share the border, surface and interaction language
+   of project, sponsor and document cards. Content expand/collapse is unchanged. */
+.vertex-news-card{
+  background:var(--bg);
+  border:1px solid var(--border);
+  border-radius:var(--radius-m);
+  box-shadow:none;
+  transition:border-color 230ms cubic-bezier(.2,.8,.2,1),
+             background-color 230ms cubic-bezier(.2,.8,.2,1);
+}
+.vertex-news-card:hover,
+.vertex-news-card:focus-within{
+  background:var(--surface);
+  border-color:var(--text-muted);
+  box-shadow:none;
+  transform:none;
+}
+.vertex-news-cover{
+  border-bottom:1px solid var(--border);
+  border-radius:0;
+}
+@media(prefers-reduced-motion:reduce){
+  .vertex-news-card{transition:none!important}
+}
