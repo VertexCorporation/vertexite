@@ -154,3 +154,6 @@ html[dir="rtl"] .more-info-card:is(:hover,:focus-visible) .more-info-arrow{trans
   .more-info-card,.more-info-icon,.more-info-arrow,.more-info-divider{transition:none!important}
   .more-info-card:is(:hover,:focus-visible) .more-info-icon{transform:none}
 }
+
+#more-info{scroll-margin-top:clamp(85px,10vh,125px)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}

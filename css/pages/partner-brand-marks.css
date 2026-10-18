@@ -18,3 +18,39 @@ html[data-theme="dark"] .partner-logo-img.partner-logo-img--brand{filter:none}
 .partner-card .partner-brand-mark--teknopark{
   max-height:52px;
 }
+
+/* Use the observed Teknopark İstanbul wordmark rather than a hand-drawn imitation.
+   The remote JPG includes a white background; blend it into the page by theme. */
+.partner-card img.teknopark-authentic{
+ width:min(100%,185px);
+ height:98px;
+ max-width:185px;
+ max-height:98px;
+ object-fit:cover;
+ object-position:center;
+ opacity:1;
+ filter:none;
+ mix-blend-mode:multiply;
+}
+.partner-logo-img.teknopark-authentic{
+ width:125px;
+ height:66px;
+ max-width:125px;
+ max-height:66px;
+ object-fit:cover;
+ object-position:center;
+ filter:none;
+ mix-blend-mode:multiply;
+}
+html[data-theme="dark"] .teknopark-authentic{
+ filter:grayscale(1) invert(1)!important;
+ mix-blend-mode:screen!important;
+}
+/* Existing GitLab SVG reserves large amounts of blank space inside its viewBox. */
+.partner-card img[src*="gitlab-wordmark.svg"]{
+ width:min(100%,260px);
+ height:auto;
+ max-width:260px;
+ max-height:none;
+ opacity:1;
+}
