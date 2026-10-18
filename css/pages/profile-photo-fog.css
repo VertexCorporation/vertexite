@@ -1,0 +1,10 @@
+/* Four-edge portrait fog on the original founder biography pages. */
+.profile-photo-box{position:relative;isolation:isolate}
+.profile-photo-box::after{
+ content:"";position:absolute;inset:-1px;z-index:2;pointer-events:none;
+ border-radius:inherit;
+ background:
+  linear-gradient(90deg,var(--surface,#171719) 0%,transparent 20%,transparent 80%,var(--surface,#171719) 100%),
+  linear-gradient(180deg,var(--surface,#171719) 0%,transparent 20%,transparent 80%,var(--surface,#171719) 100%);
+ opacity:.55;
+}
