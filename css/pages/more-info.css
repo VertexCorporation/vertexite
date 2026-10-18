@@ -8,7 +8,7 @@
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
   grid-template-areas:
-    ". feature feature ."
+    "feature feature feature feature"
     "doc2 doc3 doc4 doc5"
     "doc6 doc7 doc8 doc9";
   gap:clamp(12px,1.5vw,20px);
@@ -17,11 +17,11 @@
   --tile-ease:cubic-bezier(.2,.8,.2,1);
   display:grid;
   grid-template-columns:clamp(30px,3vw,42px) 1px minmax(0,1fr);
-  align-items:start;
+  align-items:center;
   gap:clamp(11px,1.3vw,17px);
   position:relative;
   min-width:0;
-  min-height:255px;
+  min-height:290px;
   aspect-ratio:1 / 1;
   padding:clamp(16px,1.6vw,25px);
   color:var(--text);
@@ -41,6 +41,9 @@
 .more-info-card:nth-child(9){grid-area:doc9}
 .more-info-card--featured {
   grid-area:feature;
+  width:100%;
+  max-width:min(100%,1120px);
+  justify-self:center;
   grid-template-columns:clamp(52px,5vw,66px) 1px minmax(0,1fr);
   min-height:225px;
   aspect-ratio:auto;
@@ -52,6 +55,7 @@
   align-items:center;
   justify-content:center;
   width:100%;
+  align-self:center;
   color:var(--text);
   opacity:.83;
   transform:translateY(0) rotate(0deg);
@@ -63,16 +67,17 @@
   width:1px;
   height:100%;
   min-height:100px;
+  align-self:stretch;
   background:var(--border);
   transition:background-color 230ms var(--tile-ease);
 }
 .more-info-card--featured .more-info-divider{min-height:125px}
-.more-info-content{display:flex;flex-direction:column;min-width:0;gap:13px;padding-right:3px}
+.more-info-content{display:flex;flex-direction:column;justify-content:center;min-width:0;gap:12px;padding-right:3px}
 .more-info-title {
   margin:0;
   padding-right:15px;
   color:var(--text);
-  font-size:clamp(14px,1.05vw,17px);
+  font-size:clamp(13.5px,.98vw,16px);
   font-weight:700;
   line-height:1.25;
   letter-spacing:-.015em;
@@ -80,14 +85,14 @@
 }
 .more-info-description {
   color:var(--text-muted);
-  font-size:clamp(12px,.85vw,13px);
-  line-height:1.58;
+  font-size:clamp(11.5px,.82vw,12.75px);
+  line-height:1.53;
   font-weight:400;
   margin:0;
   overflow-wrap:break-word;
 }
-.more-info-card--featured .more-info-title{font-size:clamp(19px,1.9vw,25px)}
-.more-info-card--featured .more-info-description{font-size:clamp(13px,1.1vw,15px);max-width:60ch;line-height:1.65}
+.more-info-card--featured .more-info-title{font-size:clamp(20px,1.95vw,26px)}
+.more-info-card--featured .more-info-description{font-size:clamp(13px,1.1vw,15px);max-width:68ch;line-height:1.62}
 .more-info-arrow {
   position:absolute;
   top:15px;

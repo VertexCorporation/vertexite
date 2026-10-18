@@ -1,0 +1,20 @@
+
+/* Keep partner marks legible without distorting their original logo proportions. */
+.partner-logo-img.partner-logo-img--brand{
+  height:clamp(25px,2.3vw,34px);
+  max-width:min(220px,90vw);
+  object-fit:contain;
+  filter:none;
+}
+html[data-theme="dark"] .partner-logo-img.partner-logo-img--brand{filter:none}
+.partner-card .partner-brand-mark{
+  width:auto;
+  max-width:min(92%,185px);
+  height:auto;
+  max-height:44px;
+  object-fit:contain;
+  opacity:1;
+}
+.partner-card .partner-brand-mark--teknopark{
+  max-height:52px;
+}
