@@ -27,7 +27,7 @@ const source=document.getElementById("joinBirthDate");
 if(!source||source.type!=="date"||source.dataset.vertexPicker)return;
 const lang=(document.documentElement.lang||"en").split("-")[0].toLowerCase(),i18n=words[lang]||words.en,locale=lang==="zh"?"zh-CN":lang==="pt"?"pt-PT":lang;
 const today=new Date(),maxDate=parse(source.max)||today,maxISO=toISO(maxDate.getFullYear(),maxDate.getMonth(),maxDate.getDate()),maxYear=maxDate.getFullYear(),minYear=Math.max(1900,maxYear-123);
-let year=Math.max(minYear,maxYear-18),month=today.getMonth(),opened=false;
+let year=Math.max(minYear,maxYear-18),month=today.getMonth(),opened=false,hideTimer=null;
 const anchor=node("div","vx-birth-anchor");source.parentNode.insertBefore(anchor,source);anchor.append(source);
 source.classList.add("vx-birth-source");source.tabIndex=-1;source.setAttribute("aria-hidden","true");source.dataset.vertexPicker="ready";
 const trigger=node("button","vx-birth-trigger");trigger.type="button";trigger.id="vx-birth-trigger";trigger.setAttribute("aria-haspopup","dialog");trigger.setAttribute("aria-expanded","false");trigger.setAttribute("aria-label",i18n[4]);
@@ -41,13 +41,77 @@ const header=node("div","vx-date-head"),previous=node("button","vx-date-arrow","
 const selects=node("div","vx-date-selects"),monthSelect=node("select","vx-date-month"),yearSelect=node("select","vx-date-year");monthSelect.setAttribute("aria-label",i18n[5]);yearSelect.setAttribute("aria-label",i18n[6]);
 for(let m=0;m<12;m++){const opt=node("option","",new Intl.DateTimeFormat(locale,{month:"long"}).format(new Date(2024,m,1)));opt.value=String(m);monthSelect.append(opt)}
 for(let y=maxYear;y>=minYear;y--){const opt=node("option","",String(y));opt.value=String(y);yearSelect.append(opt)}
-selects.append(monthSelect,yearSelect);header.append(previous,selects,next);
+// Use styled, searchable menus rather than the browser's native square selects.
+let activeMenu=null;
+const menus=[];
+function closeMenu(){
+ for(const entry of menus){
+   entry.menu.classList.remove("is-open");
+   entry.button.setAttribute("aria-expanded","false");
+   setTimeout(()=>{if(!entry.menu.classList.contains("is-open"))entry.menu.hidden=true},170);
+ }
+ activeMenu=null;
+}
+function createMenu(select,kind){
+ const wrap=node("div","vx-date-select-wrap");
+ const button=node("button","vx-date-select-trigger");
+ button.type="button";button.setAttribute("aria-haspopup","listbox");button.setAttribute("aria-expanded","false");button.setAttribute("aria-label",kind==="year"?i18n[6]:i18n[5]);
+ const value=node("span","vx-date-select-value");
+ const chev=node("span","vx-date-select-chevron","⌄");chev.setAttribute("aria-hidden","true");
+ button.append(value,chev);
+ const menu=node("div","vx-date-menu");menu.hidden=true;
+ const list=node("div","vx-date-menu-list");list.setAttribute("role","listbox");list.setAttribute("aria-label",kind==="year"?i18n[6]:i18n[5]);
+ let search=null;
+ if(kind==="year"){
+   const searchWrap=node("div","vx-date-menu-search-wrap");
+   search=node("input","vx-date-menu-search");
+   search.type="search";search.autocomplete="off";search.inputMode="numeric";
+   search.placeholder=i18n[6];search.setAttribute("aria-label",i18n[6]);
+   searchWrap.append(search);menu.append(searchWrap);
+ }
+ menu.append(list);select.hidden=true;select.tabIndex=-1;select.setAttribute("aria-hidden","true");
+ wrap.append(select,button,menu);menus.push({kind,select,button,value,menu,list,search});
+ button.addEventListener("click",()=>{
+   const wasActive=activeMenu===menu&&!menu.hidden;
+   closeMenu();
+   if(wasActive)return;
+   activeMenu=menu;menu.hidden=false;button.setAttribute("aria-expanded","true");
+   if(search){search.value="";filterMenu();search.focus({preventScroll:true})}
+   else list.querySelector(".is-selected")?.focus({preventScroll:true});
+   requestAnimationFrame(()=>{if(activeMenu===menu)menu.classList.add("is-open")});
+ });
+ function filterMenu(){
+   const phrase=(search?.value||"").trim();
+   for(const option of list.children)option.hidden=phrase!==""&&!option.textContent.includes(phrase);
+ }
+ search?.addEventListener("input",filterMenu);
+ const options=Array.from(select.options);
+ for(const option of options){
+   const choice=node("button","vx-date-menu-choice",option.textContent);
+   choice.type="button";choice.dataset.value=option.value;choice.setAttribute("role","option");
+   choice.addEventListener("click",()=>{
+     select.value=option.value;select.dispatchEvent(new Event("change",{bubbles:true}));
+     closeMenu();button.focus({preventScroll:true})
+   });
+   list.append(choice);
+ }
+ return wrap;
+}
+selects.append(createMenu(monthSelect,"month"),createMenu(yearSelect,"year"));header.append(previous,selects,next);
 const weekdays=node("div","vx-date-weekdays"),grid=node("div","vx-date-grid");grid.setAttribute("role","grid");
 for(let d=0;d<7;d++)weekdays.append(node("span","",new Intl.DateTimeFormat(locale,{weekday:"short"}).format(new Date(2024,0,d+1))));
 panel.append(header,weekdays,grid);
 function showValue(){const dt=parse(source.value);display.textContent=dt?new Intl.DateTimeFormat(locale,{day:"2-digit",month:"2-digit",year:"numeric"}).format(dt):"GG.AA.YYYY";display.classList.toggle("vx-birth-placeholder",!dt);trigger.classList.toggle("vx-birth-invalid",!error.hidden)}
 function render(){
 monthSelect.value=String(month);yearSelect.value=String(year);
+for(const entry of menus){
+ const current=entry.select.options[entry.select.selectedIndex];
+ entry.value.textContent=current?.textContent||"";
+ for(const item of entry.list.children){
+   const selected=item.dataset.value===entry.select.value;
+   item.classList.toggle("is-selected",selected);item.setAttribute("aria-selected",String(selected))
+ }
+}
 previous.disabled=year===minYear&&month===0;next.disabled=year===maxYear&&month>=maxDate.getMonth();
 grid.replaceChildren();const offset=(new Date(year,month,1).getDay()+6)%7;for(let k=0;k<offset;k++)grid.append(node("span","vx-date-empty"));
 const days=new Date(year,month+1,0).getDate();
@@ -63,15 +127,26 @@ const width=Math.min(348,window.innerWidth-24);panel.style.width=`${width}px`;pa
 const height=panel.offsetHeight,below=window.innerHeight-rect.bottom,top=below>=height+8||below>=rect.top?rect.bottom+8:rect.top-height-8;
 panel.style.top=`${Math.max(12,Math.min(top,window.innerHeight-height-12))}px`;
 }
-function close(){if(!opened)return;opened=false;panel.hidden=true;trigger.setAttribute("aria-expanded","false");window.removeEventListener("resize",position);window.removeEventListener("scroll",position,true)}
+function close(){
+ if(!opened)return;
+ opened=false;closeMenu();panel.classList.remove("is-open");panel.setAttribute("inert","");
+ trigger.setAttribute("aria-expanded","false");window.removeEventListener("resize",position);window.removeEventListener("scroll",position,true);
+ clearTimeout(hideTimer);hideTimer=setTimeout(()=>{if(!opened)panel.hidden=true},210);
+}
 function toggle(){
-if(opened){close();return}const dt=parse(source.value);if(dt){year=dt.getFullYear();month=dt.getMonth()}render();opened=true;panel.hidden=false;trigger.setAttribute("aria-expanded","true");position();window.addEventListener("resize",position);window.addEventListener("scroll",position,true)
+if(opened){close();return}
+ clearTimeout(hideTimer);
+ const dt=parse(source.value);if(dt){year=dt.getFullYear();month=dt.getMonth()}
+ render();opened=true;panel.hidden=false;panel.removeAttribute("inert");
+ trigger.setAttribute("aria-expanded","true");position();
+ requestAnimationFrame(()=>{if(opened)panel.classList.add("is-open")});
+ window.addEventListener("resize",position);window.addEventListener("scroll",position,true)
 }
 trigger.addEventListener("click",toggle);previous.addEventListener("click",()=>step(-1));next.addEventListener("click",()=>step(1));
 monthSelect.addEventListener("change",()=>{month=Number(monthSelect.value);if(year===maxYear&&month>maxDate.getMonth())month=maxDate.getMonth();render()});
 yearSelect.addEventListener("change",()=>{year=Number(yearSelect.value);if(year===maxYear&&month>maxDate.getMonth())month=maxDate.getMonth();render()});
-document.addEventListener("pointerdown",e=>{if(opened&&!panel.contains(e.target)&&!anchor.contains(e.target))close()});
-document.addEventListener("keydown",e=>{if(opened&&e.key==="Escape"){e.preventDefault();close();trigger.focus({preventScroll:true})}});
+document.addEventListener("pointerdown",e=>{if(!opened)return;if(activeMenu&&!activeMenu.contains(e.target)&&!menus.some(x=>x.button.contains(e.target)))closeMenu();if(!panel.contains(e.target)&&!anchor.contains(e.target))close()});
+document.addEventListener("keydown",e=>{if(!opened||e.key!=="Escape")return;e.preventDefault();if(activeMenu){const focused=menus.find(x=>x.menu===activeMenu);closeMenu();focused?.button.focus({preventScroll:true})}else{close();trigger.focus({preventScroll:true})}});
 source.addEventListener("invalid",e=>{e.preventDefault();error.hidden=false;trigger.setAttribute("aria-invalid","true");showValue();trigger.focus({preventScroll:true})});
 source.addEventListener("change",()=>{error.hidden=true;trigger.removeAttribute("aria-invalid");showValue()});
 source.form?.addEventListener("reset",()=>requestAnimationFrame(()=>{error.hidden=true;trigger.removeAttribute("aria-invalid");showValue();close()}));
