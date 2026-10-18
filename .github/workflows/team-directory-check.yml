@@ -1,0 +1,40 @@
+name: Public team directory regression
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'js/site-team.js'
+      - 'js/team-profile.js'
+      - 'css/pages/team-directory.css'
+      - 'css/pages/team-profile.css'
+      - 'css/pages/profile-photo-fog.css'
+      - '**/index.html'
+      - '**/profile.html'
+      - '**/mustafa-caki.html'
+      - 'tests/team-directory.test.cjs'
+      - '.github/workflows/team-directory-check.yml'
+  pull_request:
+    paths:
+      - 'js/site-team.js'
+      - 'js/team-profile.js'
+      - 'css/pages/team-directory.css'
+      - 'css/pages/team-profile.css'
+      - 'css/pages/profile-photo-fog.css'
+      - '**/index.html'
+      - '**/profile.html'
+      - '**/mustafa-caki.html'
+      - 'tests/team-directory.test.cjs'
+      - '.github/workflows/team-directory-check.yml'
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify team and biography contracts across all locales
+        run: npm run test:team
