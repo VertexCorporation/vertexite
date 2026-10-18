@@ -1,0 +1,30 @@
+/* Shared product section styling across all localized homepages. */
+/* Products */
+  .products{border-top:1px solid var(--border);}
+  .product-layout{display:grid; grid-template-columns:1.3fr 1fr; gap:20px;}
+  .product-feature{border:1px solid var(--border); border-radius:var(--radius-m); padding:32px; background:transparent; display:flex; flex-direction:column; justify-content:space-between; min-height:260px; text-decoration:none; transition:border-color var(--dur) ease;}
+  .product-feature:hover{border-color:var(--text-muted);}
+  .product-feature .tag{font-size:12.5px; font-weight:700; color:var(--accent); margin-bottom:14px;}
+  .product-feature h3{font-size:21px; margin:0 0 10px; letter-spacing:-.01em; color:var(--text);}
+  .product-feature p{color:var(--text-muted); font-size:clamp(15.5px,1.3vw,18px); line-height:1.7; margin:0; max-width:480px;}
+  .product-link{display:block; text-decoration:none; color:inherit;}
+  .store-badges{display:grid; grid-template-columns:repeat(2,1fr); gap:10px;}
+  .store-badge{display:inline-flex; align-items:center; gap:10px; padding:8px 16px 8px 12px; border:1px solid var(--border); border-radius:10px; background:var(--bg); text-decoration:none; color:var(--text); transition:border-color var(--dur) ease, transform var(--dur) ease;}
+  .store-badge:hover{border-color:var(--text-muted); border-color:var(--text);}
+  .store-badge svg{width:22px; height:22px; flex-shrink:0;}
+  .store-badge span{display:flex; flex-direction:column; line-height:1.25;}
+  .store-badge small{font-size:9.5px; font-weight:500; color:var(--text-muted); letter-spacing:.02em;}
+  .store-badge strong{font-size:15px; font-weight:700;}
+  .store-badges .store-badge{justify-content:center;}
+  .product-list{display:grid; grid-template-rows:repeat(2,minmax(0,1fr)); gap:1px; border:1px solid var(--border); border-radius:var(--radius-m); overflow:hidden;}
+  .product-row{padding:clamp(22px,2.2vw,30px); background:var(--bg); border-bottom:1px solid var(--border); transition:background var(--dur) ease; text-decoration:none; display:flex; flex-direction:column; justify-content:center; min-width:0;}
+  .product-row:last-child{border-bottom:none;}
+  .product-row:hover h4{color:var(--accent);}
+  .product-row .tag-row{display:flex; align-items:center; gap:8px; margin-bottom:6px;}
+  .product-row .tag{font-size:11px; font-weight:700; color:var(--text-muted);}
+  .badge-soon{display:inline-block; font-size:10.5px; font-weight:700; padding:2.5px 8px; border-radius:20px; background:var(--accent-soft); color:var(--accent);}
+  .product-row h4{font-size:clamp(19px,1.6vw,22px); margin:0 0 9px; font-weight:700; color:var(--text);}
+  .product-row p{font-size:clamp(14.5px,1.2vw,16px); color:var(--text-muted); line-height:1.65; margin:0; max-width:55ch;}
+  .product-row:hover{background:var(--surface);}
+  .product-row:focus-visible{outline:2px solid var(--text);outline-offset:-3px;}
+  @media(max-width:860px){.product-list{grid-template-rows:none;grid-auto-rows:minmax(150px,auto)}}
