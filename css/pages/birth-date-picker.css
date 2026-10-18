@@ -1,0 +1,80 @@
+/* Vertex birth date calendar. The real date input retains validation and ISO storage. */
+.join-card .vx-birth-anchor{position:relative;width:100%;min-width:0}
+.join-card .vx-birth-source{
+ position:absolute!important;width:1px!important;height:1px!important;left:0;top:0;
+ opacity:0!important;pointer-events:none!important;clip-path:inset(50%);
+ padding:0!important;border:0!important;overflow:hidden!important;
+}
+.join-card .vx-birth-trigger{
+ display:flex;align-items:center;justify-content:space-between;gap:12px;
+ width:100%;min-height:50px;padding:12px 15px;
+ border:1px solid var(--border);border-radius:14px;
+ background:var(--bg);color:var(--text);font:inherit;font-size:14.5px;
+ text-align:left;cursor:pointer;transition:border-color .2s,box-shadow .2s,background .2s;
+}
+.join-card .vx-birth-trigger:hover{border-color:var(--text-muted);background:var(--surface)}
+.join-card .vx-birth-trigger:focus-visible,
+.join-card .vx-birth-trigger[aria-expanded="true"]{
+ outline:none;border-color:var(--text-muted);box-shadow:0 0 0 3px var(--accent-soft);
+}
+.join-card .vx-birth-trigger.vx-birth-invalid{border-color:#c86a6a}
+.join-card .vx-birth-placeholder{color:var(--text-muted)}
+.join-card .vx-birth-icon{display:flex;align-items:center;justify-content:center;flex:none;color:var(--text-muted)}
+.join-card .vx-birth-error:not([hidden]){display:block;margin-top:7px;font-size:12px;color:#c86a6a}
+.vx-date-panel[hidden]{display:none!important}
+.vx-date-panel{
+ position:fixed;z-index:10000;box-sizing:border-box;
+ background:var(--bg);color:var(--text);border:1px solid var(--border);
+ border-radius:20px;box-shadow:0 22px 58px rgba(0,0,0,.24),0 5px 16px rgba(0,0,0,.12);
+ padding:15px;overflow-y:auto;overflow-x:hidden;
+ -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+ font-family:inherit;font-size:13px;direction:ltr;
+}
+html[data-theme="dark"] .vx-date-panel{
+ background:#15171b;border-color:#343740;
+ box-shadow:0 24px 65px rgba(0,0,0,.56),0 4px 18px rgba(0,0,0,.3);
+}
+.vx-date-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.vx-date-arrow{
+ display:flex;justify-content:center;align-items:center;flex:none;
+ border:1px solid transparent;border-radius:11px;width:34px;height:36px;
+ color:var(--text);background:transparent;font-family:inherit;font-size:24px;
+ line-height:1;cursor:pointer;transition:background .18s,border-color .18s;
+}
+.vx-date-arrow:hover:not(:disabled){background:var(--surface);border-color:var(--border)}
+.vx-date-arrow:disabled{opacity:.23;cursor:not-allowed}
+.vx-date-selects{display:grid;grid-template-columns:minmax(0,1fr) 90px;gap:6px;flex:1;min-width:0}
+.vx-date-selects select{
+ width:100%;height:36px;min-width:0;border-radius:10px;border:1px solid var(--border);
+ background:var(--surface);color:var(--text);font:inherit;font-size:12.5px;
+ padding:0 7px;cursor:pointer;outline:none;
+}
+.vx-date-selects select:focus-visible,.vx-date-arrow:focus-visible,
+.vx-date-day:focus-visible{outline:2px solid var(--text-muted);outline-offset:2px}
+.vx-date-selects option{background:var(--bg);color:var(--text)}
+.vx-date-weekdays,.vx-date-grid{
+ display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:4px;
+ text-align:center;
+}
+.vx-date-weekdays{margin-bottom:7px}
+.vx-date-weekdays span{font-size:11px;font-weight:600;color:var(--text-muted);padding:5px 0}
+.vx-date-empty{aspect-ratio:1/1}
+.vx-date-day{
+ display:flex;align-items:center;justify-content:center;aspect-ratio:1/1;
+ border:1px solid transparent;border-radius:11px;
+ background:transparent;color:var(--text);font:inherit;font-size:13.5px;
+ cursor:pointer;transition:background .16s,color .16s,transform .16s;
+}
+.vx-date-day:hover:not(:disabled){background:var(--surface-2);transform:translateY(-1px)}
+.vx-date-day.is-today:not(.is-selected){border-color:var(--text-muted)}
+.vx-date-day.is-selected,.vx-date-day.is-selected:hover:not(:disabled){
+ background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700;
+}
+.vx-date-day:disabled{opacity:.23;cursor:not-allowed}
+@media(max-width:480px){
+ .vx-date-panel{padding:11px;border-radius:17px}
+ .vx-date-weekdays,.vx-date-grid{gap:3px}
+}
+@media(prefers-reduced-motion:reduce){
+ .join-card .vx-birth-trigger,.vx-date-arrow,.vx-date-day{transition:none!important}
+}
