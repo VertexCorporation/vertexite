@@ -11,7 +11,8 @@
     "test:home-layout": "node tests/home-layout-browser.cjs",
     "test:final-polish": "node tests/final-polish-browser.cjs",
     "test:interactions": "node tests/interaction-browser.cjs",
-    "test:profile": "node tests/test-profile-card-navigation.cjs"
+    "test:profile": "node tests/test-profile-card-navigation.cjs",
+    "test:team": "node --test tests/team-directory.test.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"
