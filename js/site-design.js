@@ -313,3 +313,120 @@ window.addEventListener('pageshow',function(){leaving=false;document.documentEle
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);
   else init();
 })();
+
+
+/* Vertex wheel momentum: gentle ease-out for discrete desktop mouse wheels.
+   Trackpads, touch gestures, nested scrollers and reduced-motion users retain native scrolling. */
+(function vertexWheelMomentum(){
+  'use strict';
+  if (window.__vertexWheelMomentum || !window.requestAnimationFrame || !window.matchMedia) return;
+  window.__vertexWheelMomentum = true;
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const desktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)');
+  const timeConstant = 125; // ms: ~98% of the remaining distance is covered in 0.5 seconds
+  const fineInputCooldown = 900; // keep trackpad gestures fully native, including their inertia
+  let fineInputUntil = 0;
+  let raf = 0;
+  let previousFrame = 0;
+  let currentY = window.scrollY;
+  let targetY = currentY;
+  let lastWrittenY = currentY;
+
+  function maximumScroll(){
+    const root = document.scrollingElement || document.documentElement;
+    return Math.max(0, root.scrollHeight - window.innerHeight);
+  }
+  function cancel(){
+    if (raf) window.cancelAnimationFrame(raf);
+    raf = 0;
+    previousFrame = 0;
+    currentY = targetY = lastWrittenY = window.scrollY;
+  }
+  function nativeScrollArea(element){
+    for (let node = element; node && node !== document.documentElement; node = node.parentElement || (node.getRootNode && node.getRootNode().host)) {
+      if (!(node instanceof Element)) break;
+      if (node.matches('textarea, select, input[type="number"], input[type="range"], [contenteditable], [role="dialog"], [role="listbox"], [role="menu"], [data-native-wheel]')) return true;
+      if (node === document.body) break;
+      const style = window.getComputedStyle(node);
+      if (/(auto|scroll|overlay)/.test(style.overflowY) && node.scrollHeight > node.clientHeight + 2) return true;
+      if (/(auto|scroll|overlay)/.test(style.overflowX) && node.scrollWidth > node.clientWidth + 2) return true;
+    }
+    return false;
+  }
+  function advance(now){
+    raf = 0;
+    // Relinquish control if another script, keyboard, or scroll bar moved the page.
+    if (Math.abs(window.scrollY - lastWrittenY) > 3) { cancel(); return; }
+    const max = maximumScroll();
+    targetY = Math.max(0, Math.min(max, targetY));
+    const dt = previousFrame ? Math.min(48, now - previousFrame) : 16.67;
+    previousFrame = now;
+    const ease = 1 - Math.exp(-Math.max(1, dt) / timeConstant);
+    currentY += (targetY - currentY) * ease;
+    if (Math.abs(targetY - currentY) < 0.5) currentY = targetY;
+    lastWrittenY = currentY;
+    window.scrollTo({top: currentY, behavior: 'instant'});
+    if (Math.abs(targetY - currentY) >= 0.5) raf = window.requestAnimationFrame(advance);
+    else previousFrame = 0;
+  }
+  function onWheel(event){
+    if (event.defaultPrevented || event.ctrlKey || event.shiftKey || event.altKey || event.metaKey ||
+        reducedMotion.matches || !desktopPointer.matches || !event.isTrusted ||
+        !event.deltaY || nativeScrollArea(event.target)) {
+      if (raf) cancel();
+      return;
+    }
+    const now = performance.now();
+    const absY = Math.abs(event.deltaY);
+    // Pixel-mode trackpad events are usually fine-grained or diagonal.
+    // Let the browser apply its built-in gesture momentum instead of double-smoothing it.
+    if (event.deltaMode === 0) {
+      if (absY < 60 || Math.abs(event.deltaX) > 1 || !Number.isInteger(event.deltaY)) {
+        fineInputUntil = now + fineInputCooldown;
+        if (raf) cancel();
+        return;
+      }
+      if (now < fineInputUntil) { if (raf) cancel(); return; }
+    }
+    const max = maximumScroll();
+    if (max < 2) return;
+    const pixelDelta = event.deltaMode === 1 ? event.deltaY * 20 :
+      event.deltaMode === 2 ? event.deltaY * window.innerHeight : event.deltaY;
+    const delta = Math.max(-320, Math.min(320, pixelDelta));
+    const position = window.scrollY;
+    // Avoid trapping overscroll or introducing momentum at the document edges.
+    if ((delta > 0 && position >= max - 1) || (delta < 0 && position <= 1)) {
+      if (raf) cancel();
+      return;
+    }
+    if (raf && Math.sign(delta) !== Math.sign(targetY - currentY)) {
+      // Reverse instantly on the next wheel notch rather than fighting the old target.
+      currentY = targetY = position;
+      lastWrittenY = position;
+    }
+    const nextTarget = Math.max(0, Math.min(max, (raf ? targetY : position) + delta));
+    if (Math.abs(nextTarget - position) < 0.5) return;
+    event.preventDefault();
+    if (!raf) {
+      currentY = position;
+      previousFrame = 0;
+      lastWrittenY = position;
+    }
+    targetY = nextTarget;
+    if (!raf) raf = window.requestAnimationFrame(advance);
+  }
+
+  window.addEventListener('wheel', onWheel, {passive: false});
+  window.addEventListener('scroll', function(){
+    if (raf && Math.abs(window.scrollY - lastWrittenY) > 3) cancel();
+  }, {passive: true});
+  document.addEventListener('pointerdown', cancel, {passive: true, capture: true});
+  document.addEventListener('keydown', function(event){
+    if (['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key)) cancel();
+  }, true);
+  document.addEventListener('visibilitychange', function(){if (document.hidden) cancel();});
+  window.addEventListener('resize', cancel, {passive: true});
+  reducedMotion.addEventListener('change', cancel);
+  desktopPointer.addEventListener('change', cancel);
+})();
