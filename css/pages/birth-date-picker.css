@@ -182,6 +182,11 @@ html[data-theme="dark"] .vx-date-day.is-selected{background:#e9e9e9;color:#12121
 html[data-theme="dark"] .vx-date-arrow:hover:not(:disabled){background:#292929;border-color:#393939}
 html[data-theme="dark"] .join-card .vx-birth-trigger{background:#171717;border-color:#373737}
 html[data-theme="dark"] .join-card .vx-birth-trigger:hover{background:#1e1e1e;border-color:#666}
+/* Centered mobile dialogs must scale about their own center; otherwise the
+   opening animation looks shifted even when the fixed left edge is correct. */
+@media(max-width:600px){
+ .vx-date-panel{transform-origin:top center}
+}
 @media(max-width:480px){
  .vx-date-panel{padding:11px;border-radius:15px}
  .vx-date-menu{max-width:190px}
