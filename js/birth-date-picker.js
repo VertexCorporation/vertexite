@@ -123,8 +123,21 @@ btn.addEventListener("click",()=>{source.value=value;error.hidden=true;trigger.r
 }}
 function step(delta){const date=new Date(year,month+delta,1);if(date.getFullYear()<minYear||date.getFullYear()>maxYear||(date.getFullYear()===maxYear&&date.getMonth()>maxDate.getMonth()))return;year=date.getFullYear();month=date.getMonth();render()}
 function position(){
-if(!opened)return;const rect=trigger.getBoundingClientRect();if(rect.bottom<0||rect.top>window.innerHeight){close();return}
-const width=Math.min(348,window.innerWidth-24);panel.style.width=`${width}px`;panel.style.left=`${Math.max(12,Math.min(rect.left,window.innerWidth-width-12))}px`;panel.style.maxHeight=`${Math.max(220,window.innerHeight-24)}px`;
+if(!opened)return;
+const rect=trigger.getBoundingClientRect();
+if(rect.bottom<0||rect.top>window.innerHeight){close();return}
+// On phones, center within the *visible* viewport instead of aligning to the
+// input's left edge. VisualViewport also handles zoom and the soft keyboard.
+const mobile=window.matchMedia("(max-width: 600px)").matches;
+const viewport=window.visualViewport;
+const visibleLeft=mobile&&viewport?viewport.offsetLeft:0;
+const visibleWidth=mobile&&viewport?viewport.width:window.innerWidth;
+const width=Math.min(348,Math.max(0,visibleWidth-24));
+panel.style.width=`${width}px`;
+panel.style.left=`${mobile
+ ? visibleLeft+(visibleWidth-width)/2
+ : Math.max(12,Math.min(rect.left,window.innerWidth-width-12))}px`;
+panel.style.maxHeight=`${Math.max(220,window.innerHeight-24)}px`;
 const height=panel.offsetHeight,below=window.innerHeight-rect.bottom,top=below>=height+8||below>=rect.top?rect.bottom+8:rect.top-height-8;
 panel.style.top=`${Math.max(12,Math.min(top,window.innerHeight-height-12))}px`;
 }
@@ -132,6 +145,8 @@ function close(){
  if(!opened)return;
  opened=false;closeMenu();panel.classList.remove("is-open");panel.setAttribute("inert","");
  trigger.setAttribute("aria-expanded","false");window.removeEventListener("resize",position);window.removeEventListener("scroll",position,true);
+ window.visualViewport?.removeEventListener("resize",position);
+ window.visualViewport?.removeEventListener("scroll",position);
  clearTimeout(hideTimer);hideTimer=setTimeout(()=>{if(!opened)panel.hidden=true},210);
 }
 function toggle(){
@@ -141,7 +156,9 @@ if(opened){close();return}
  render();opened=true;panel.hidden=false;panel.removeAttribute("inert");
  trigger.setAttribute("aria-expanded","true");position();
  requestAnimationFrame(()=>{if(opened)panel.classList.add("is-open")});
- window.addEventListener("resize",position);window.addEventListener("scroll",position,true)
+ window.addEventListener("resize",position);window.addEventListener("scroll",position,true);
+ window.visualViewport?.addEventListener("resize",position);
+ window.visualViewport?.addEventListener("scroll",position)
 }
 trigger.addEventListener("click",toggle);previous.addEventListener("click",()=>step(-1));next.addEventListener("click",()=>step(1));
 monthSelect.addEventListener("change",()=>{month=Number(monthSelect.value);if(year===maxYear&&month>maxDate.getMonth())month=maxDate.getMonth();render()});
