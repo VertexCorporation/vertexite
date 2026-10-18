@@ -356,13 +356,12 @@ setTimeout(async function () {
     // privileging any country. The second panel follows the global reveal.
     var worldSpread = phase(progress, .42, .79);
     var statementIn = phase(progress, .42, .50) * (1 - phase(progress, .73, .79));
-    // The second paragraph appears as the countries finish filling, but exits
-    // BEFORE the globe has turned 180 degrees (half-turn is at progress .885).
-    // Give it a short hold, then clear the scene before the closing crossfade.
-    var metricsIn = phase(progress, .79, .815) * (1 - phase(progress, .835, .865));
     // Globe and original wireframe crossfade while the globe shrinks.
     // This completes before the title/header/buttons settle into their first frame.
     var closingCrossfade = smooth(phase(progress, .865, .94));
+    // Keep the second paragraph fully visible until the globe starts shrinking.
+    // Fade it out on the exact same timeline as the closing world transition.
+    var metricsIn = phase(progress, .79, .815) * (1 - closingCrossfade);
     var actionsIn = Math.max(1-phase(progress,.015,.09),phase(progress,.97,.995));
     var titleLift = reduced ? 0 : smooth(phase(progress,.015,.26)) * (1-smooth(phase(progress,.925,.965)));
 
