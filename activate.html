@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="tr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<title>Hesabını Etkinleştir | Vertex</title>
+<style>
+:root{font-family:system-ui,sans-serif;color-scheme:light dark;background:#111;color:#f5f5f5}body{margin:0;min-height:100svh;display:grid;place-items:center;padding:24px;box-sizing:border-box}main{width:min(100%,440px);padding:32px;border:1px solid #555;border-radius:20px;box-sizing:border-box}h1{font-size:28px;margin:0 0 16px}p{line-height:1.6;color:#ccc}button{font:inherit;width:100%;padding:14px 20px;border:0;border-radius:12px;background:#f5f5f5;color:#111;cursor:pointer;margin-top:16px}button:disabled{opacity:.55;cursor:wait}button:focus-visible,a:focus-visible{outline:3px solid #93baff;outline-offset:4px}a{color:inherit}#status{min-height:3em}small{color:#aaa}
+</style>
+</head>
+<body><main><h1>Vertex hesabın hazır.</h1><p>Şifreni belirleyerek hesabını ve sana tanımlanan üyelik haklarını kullanmaya başlayabilirsin.</p><p id="status" role="status" aria-live="polite">Bu davet 3 gün geçerlidir.</p><button id="begin" type="button">Şifremi belirle</button><p><small>Zaten giriş yapabiliyorsan mevcut hesabını kullanabilirsin.</small></p><a href="https://admin.vertexishere.com/">Vertex Konsol’a git</a></main>
+<script type="module">
+import {initializeApp} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
+import {getFunctions,httpsCallable} from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js';
+const token=new URLSearchParams(location.hash.slice(1)).get('token')||'';
+history.replaceState(null,'',location.pathname);
+const button=document.getElementById('begin'),status=document.getElementById('status');
+const app=initializeApp({apiKey:'AIzaSyBEp_LYyZWnvdhdJzvRf_h8U6rEEq2Iyp4',authDomain:'vertex-ai-1618.firebaseapp.com',projectId:'vertex-ai-1618',appId:'1:561391430514:web:b20fa666a893a7c4b10beb'});
+if(!/^[A-Za-z0-9_-]{43}$/.test(token)){button.hidden=true;status.textContent='Davet bağlantısı eksik veya geçersiz. E-postandaki bağlantıyı yeniden aç.';}
+button.addEventListener('click',async()=>{
+ if(button.disabled)return;button.disabled=true;status.textContent='Şifre belirleme sayfan hazırlanıyor…';
+ try{
+  const {data}=await httpsCallable(getFunctions(app,'europe-west1'),'exchangePersonnelInvitation')({token});
+  const url=new URL(data.url);
+  if(url.origin!=='https://vertexishere.com'||url.pathname!=='/actions.html'||url.searchParams.get('mode')!=='resetPassword')throw Error('Invalid destination');
+  location.replace(url.href);
+ }catch(error){
+  status.textContent=error.code==='functions/resource-exhausted'?'Lütfen bir dakika sonra yeniden dene.':error.code==='functions/permission-denied'?'Davetin süresi dolmuş veya hesabın zaten etkinleştirilmiş. Mevcut hesabınla giriş yapabilir ya da yeni davet isteyebilirsin.':'Bağlantı şu anda hazırlanamadı. Lütfen yeniden dene.';
+  button.disabled=false;
+ }
+});
+</script></body></html>

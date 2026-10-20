@@ -269,7 +269,7 @@
             getAuth,
             applyActionCode,
             verifyPasswordResetCode,
-            confirmPasswordReset, signInWithEmailAndPassword, sendEmailVerification, signOut
+            confirmPasswordReset, signInWithEmailAndPassword, signOut
         } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
         import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-functions.js";
@@ -418,15 +418,16 @@
                             if (signed.user.emailVerified) {
                                 await httpsCallable(getFunctions(app, 'europe-west1'), 'completePersonnelActivation')({});
                             } else {
-                                await sendEmailVerification(signed.user);
-                                updateText(t.resetSuccessTitle, document.documentElement.lang === 'tr' ? 'Şifreniz hazır. Personel erişimi için e-postanıza gönderilen doğrulama bağlantısını açın.' : 'Your password is ready. Open the verification link sent to your email to activate personnel access.');
+                                await signOut(auth);
+                                updateText(t.resetSuccessTitle, document.documentElement.lang === 'tr' ? 'Şifreniz hazır. Hesap doğrulama durumu kontrol edilemedi; lütfen yeniden giriş yapın.' : 'Your password is ready. Account verification could not be confirmed; please sign in again.');
                                 showStatusAnimation('success'); return;
                             }
                             await signOut(auth);
                         }
                         } catch (accessError) {
+                            await signOut(auth).catch(() => {});
                             passwordInput.value = '';
-                            updateText(t.resetSuccessTitle, document.documentElement.lang === 'tr' ? 'Şifreniz kaydedildi. Personel erişimi giriş yaptığınızda tekrar kontrol edilecek.' : 'Your password is saved. Personnel access will be checked at sign-in.');
+                            updateText(t.resetSuccessTitle, document.documentElement.lang === 'tr' ? 'Şifreniz kaydedildi. Personel erişimi şu anda etkinleştirilemedi; lütfen destek ekibiyle iletişime geçin.' : 'Your password is saved. Personnel access could not be activated; please contact support.');
                             showStatusAnimation('success'); return;
                         }
                         updateText(t.resetSuccessTitle, t.resetSuccessSubtitle);

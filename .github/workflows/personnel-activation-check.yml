@@ -1,0 +1,25 @@
+name: Personnel activation regression
+on:
+  push:
+    branches: [main]
+    paths: [activate.html, actions.html, tests/personnel-activation-browser.cjs, .github/workflows/personnel-activation-check.yml]
+  pull_request:
+    paths: [activate.html, actions.html, tests/personnel-activation-browser.cjs, .github/workflows/personnel-activation-check.yml]
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - name: Test invitations without touching production accounts
+        run: node tests/personnel-activation-browser.cjs
