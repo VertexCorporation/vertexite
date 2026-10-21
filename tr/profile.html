@@ -2,14 +2,48 @@
 <html lang="tr">
 <head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,follow"><title>Vertex | Profile</title>
-<link rel="icon" href="/assets/favicon-light.svg" type="image/svg+xml">
+<script>
+(function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
+</script>
+<link id="vertex-favicon" rel="icon" href="/assets/favicon-light.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/assets/fonts/fonts.css">
-<link rel="stylesheet" href="/css/pages/team-profile.css?v=directory261018a">
-<script defer src="/js/team-profile.js?v=directory261018a"></script></head>
-<body><header class="vp-bar"><div class="vp-container vp-bar-inner">
-<a class="vp-wordmark" href="/tr/">VERTEX</a>
-<a class="vp-back" id="vp-back" href="/tr/#team"></a>
-</div></header>
+<link rel="stylesheet" href="/css/layout/site-shell.css?v=profiles261021">
+<link rel="stylesheet" href="/css/site-design.css?v=profiles261021">
+<link rel="stylesheet" href="/css/pages/team-profile.css?v=profiles261021">
+<script defer src="/js/site-shell.js?v=profiles261021"></script>
+<script defer src="/js/site-design.js?v=thememodefade261017a"></script>
+<script defer src="/js/team-links.js?v=profiles261021"></script>
+<script defer src="/js/team-profile.js?v=profiles261021"></script></head>
+<body>
+<header id="siteHeader">
+<div class="wrap nav">
+<a class="brand" href="/tr/#home">
+<span class="logo-chip"><img alt="Vertex logo" decoding="async" fetchpriority="high" src="../assets/logo.svg" width="225" height="225"><span>Vertex</span></span>
+</a>
+<ul class="nav-links">
+<li><a href="/tr/#home">Ana Sayfa</a></li>
+<li><a href="/tr/#projects">Projeler</a></li>
+<li><a href="/tr/#ecosystem">Ekosistem</a></li>
+<li><a href="/tr/#team">Ekip</a></li>
+<li><a href="/tr/#vision">Vizyon</a></li>
+<li><a href="/tr/#partners">Sponsorlar</a></li>
+<li><a href="/tr/#news-section">Haberler</a></li>
+<li><a href="/tr/#more-info">Hakkımızda</a></li>
+</ul>
+<div class="nav-right">
+<div class="language-dropdown" id="langWrap">
+<button aria-expanded="false" aria-haspopup="menu" class="icon-btn lang-btn" id="langBtn">
+<svg fill="none" height="15" stroke="currentColor" stroke-width="1.6" viewBox="0 0 24 24" width="15"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg>
+<span>Türkçe</span><svg class="chev" fill="none" height="10" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" viewBox="0 0 24 24" width="10"><path d="M6 9l6 6 6-6"></path></svg></button><div class="lang-panel" role="menu"><a class="lang-row active" href="../tr/" role="menuitem"><span>Türkçe</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../en/" role="menuitem"><span>İngilizce</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../de/" role="menuitem"><span>Almanca</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../fr/" role="menuitem"><span>Fransızca</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../es/" role="menuitem"><span>İspanyolca</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../it/" role="menuitem"><span>İtalyanca</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../pt/" role="menuitem"><span>Portekizce</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../nl/" role="menuitem"><span>Felemenkçe</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../ru/" role="menuitem"><span>Rusça</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../ar/" role="menuitem"><span>Arapça</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../hi/" role="menuitem"><span>Hintçe</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../id/" role="menuitem"><span>Endonezce</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../ja/" role="menuitem"><span>Japonca</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../ko/" role="menuitem"><span>Korece</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../zh/" role="menuitem"><span>Çince</span><span aria-hidden="true" class="tick">✓</span></a><a class="lang-row" href="../az/" role="menuitem"><span>Azerbaycan dili</span><span aria-hidden="true" class="tick">✓</span></a></div>
+</div>
+<button aria-label="Temayı değiştir" class="icon-btn" id="themeBtn">
+<svg fill="none" height="17" id="themeIconSun" stroke="currentColor" stroke-width="1.7" style="display:none" viewBox="0 0 24 24" width="17"><circle cx="12" cy="12" r="4.2"></circle><path d="M12 2.5v2.5M12 19v2.5M4.6 4.6l1.8 1.8M17.6 17.6l1.8 1.8M2.5 12H5M19 12h2.5M4.6 19.4l1.8-1.8M17.6 6.4l1.8-1.8"></path></svg>
+<svg fill="none" height="17" id="themeIconMoon" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" width="17"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"></path></svg>
+</button><button aria-controls="mobileMenu" aria-expanded="false" aria-label="Menu" class="icon-btn menu-btn" id="menuBtn"><span></span><span></span></button>
+<a class="btn btn-primary nav-future-cta" href="aramiza-katil.html">Aramıza Katıl</a>
+</div>
+</div><div class="mobile-menu" id="mobileMenu"><nav aria-label="Mobile" class="wrap"><a class="mlink" href="/tr/#home">Ana Sayfa</a><a class="mlink" href="/tr/#projects">Projeler</a><a class="mlink" href="/tr/#ecosystem">Ekosistem</a><a class="mlink" href="/tr/#team">Ekip</a><a class="mlink" href="/tr/#vision">Vizyon</a><a class="mlink" href="/tr/#partners">Sponsorlar</a><a class="mlink" href="/tr/#news-section">Haberler</a><a class="mlink" href="/tr/#more-info">Hakkımızda</a><button aria-haspopup="menu" class="mlink m-lang" id="mLangBtn" type="button"><svg fill="none" height="18" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg><span>Türkçe</span><svg class="chev-r" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24" width="14"><path d="M9 6l6 6-6 6"></path></svg></button><a class="btn btn-primary m-cta" href="aramiza-katil.html">Aramıza Katıl</a></nav></div>
+</header>
 <main class="vp-container vp-main">
 <div class="vp-status" id="vp-error" hidden role="status"></div>
 <section class="vp-profile" id="vp-content" hidden aria-label="Profile">
@@ -18,4 +52,38 @@
 <div class="vp-grid"><article class="vp-bio" id="vp-bio"></article>
 <aside class="vp-links" id="vp-links-pane"><h2 id="vp-links-title"></h2><div id="vp-links"></div></aside></div>
 </section></main>
+<footer>
+<div class="wrap foot-grid">
+<div class="foot-brand">
+<span class="logo-chip"><img alt="Vertex logo" decoding="async" loading="lazy" src="../assets/logo.svg" width="225" height="225"><span>Vertex</span></span>
+<p>İşte bu yüzden bütün bu anlamları ve daha fazlasını kapsayan Vertex ismini seçtik. 2023 yılında İstanbul'da kurulduk ve 190'dan fazla ülkede faaliyet göstermeye başladık. Vertex isminin anlamına uygun olarak potansiyelimizin tamamını ortaya koyup hep birlikte zirveye ulaşacağız; insanlığa refah sağlayacak ve geleceğin teknolojilerine yön vereceğiz.</p>
+</div>
+<div class="foot-links">
+<div class="foot-col">
+<h2>Projeler</h2>
+<a href="https://cortexishere.com" rel="noopener" target="_blank">Cortex</a>
+<a href="https://mergenishere.com" rel="noopener" target="_blank">Mergen</a><a href="https://allyishere.com" rel="noopener" target="_blank">Ally</a>
+</div>
+<div class="foot-col">
+<h2>Şirket</h2>
+<a href="/tr/#home">Hakkımızda</a>
+<a href="/tr/#team">Ekip</a>
+<a href="/tr/#vision">Vizyon</a>
+</div>
+<div class="foot-col">
+<h2>İletişim</h2>
+<a href="mailto:contact@vertexishere.com">E-posta Gönder</a><a href="https://www.linkedin.com/company/vertexcorporation" rel="noopener" target="_blank">LinkedIn</a>
+<a href="https://www.instagram.com/vertexcorpltd" rel="noopener" target="_blank">Instagram</a><a href="https://x.com/VertexCorpLTD" rel="noopener" target="_blank">X</a>
+</div>
+</div>
+</div>
+<div class="wrap foot-bottom">
+<div>© 2026 Vertex Corporation Ltd. Tüm hakları saklıdır.</div>
+<div>20 Wenlock Road, London, N1 7GU, United Kingdom · +44 7400 412824</div>
+<div class="foot-legal">
+<a href="/tr/gizlilik-politikasi" rel="noopener" target="_blank">Gizlilik Politikası</a>
+<a href="/tr/hizmet-sartlari" rel="noopener" target="_blank">Kullanım Şartları</a>
+</div>
+</div>
+</footer>
 </body></html>

@@ -380,3 +380,16 @@ html[data-theme="dark"] #themeBtn:not([data-theme-mode]) > #themeIconSun{opacity
 @media(max-width:860px){
   footer .wrap.foot-bottom{padding-top:30px}
 }
+
+/* Technology cards need room for both illustrations and long localized titles. */
+.tech-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+.tech-card,.tech-card-content{min-width:0}
+.tech-card h3,.tech-card .stack{overflow-wrap:break-word}
+@media(max-width:1000px){.tech-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){
+ .tech-grid{grid-template-columns:minmax(0,1fr);gap:16px}
+ .tech-visual-wrapper{height:190px}
+ .tech-card-content{padding:22px 24px}
+ .tech-card h3{font-size:19px}
+ .tech-card .stack{font-size:14px}
+}
