@@ -58,12 +58,14 @@ const server=http.createServer((req,res)=>{
     await page.keyboard.press('Escape');assert.equal(await page.locator('#menuBtn').getAttribute('aria-expanded'),'false');
    }
    for(const theme of ['light','dark']){
-    await page.evaluate(t=>document.documentElement.setAttribute('data-theme',t),theme);
-    assert.equal(await page.evaluate(()=>getComputedStyle(document.body).backgroundColor),theme==='dark'?'rgb(15, 15, 16)':'rgb(248, 249, 250)');
+    await page.locator('#themeBtn').click();
+    await page.locator('.theme-option[data-mode="'+theme+'"]').click();
+    const expected=theme==='dark'?'rgb(15, 15, 16)':'rgb(248, 249, 250)';
+    await page.waitForFunction(color=>getComputedStyle(document.body).backgroundColor===color,expected);
    }
    if(lang==='en'&&width===390)await page.screenshot({path:path.join(root,'test-results/mobile-biography.png'),fullPage:true});
    assert.deepEqual(errors,[],lang+' '+width+' runtime errors');await page.close();
    console.log('PASS '+lang+' at '+width+'px');
   }
- }finally{await browser.close();server.close();}
+ }catch(error){for(const page of browser.contexts().flatMap(context=>context.pages()))await page.screenshot({path:path.join(root,'test-results/failure.png'),fullPage:true}).catch(()=>{});throw error;}finally{await browser.close();server.close();}
 })().catch(error=>{console.error(error);server.close();process.exitCode=1;});
