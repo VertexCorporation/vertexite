@@ -29,6 +29,7 @@ const server=http.createServer((req,res)=>{
    });
    await page.goto(base+'/'+lang+'/');
    await page.locator('[data-profile-id="test-0"]').waitFor();
+   await page.evaluate(()=>document.fonts.ready);
    const geometry=await page.evaluate(()=>{
     const rect=selector=>document.querySelector(selector).getBoundingClientRect();
     const content=rect('#projects .wrap'),feature=rect('.product-feature'),layout=rect('.product-layout'),tech=rect('.tech-card');
@@ -48,6 +49,7 @@ const server=http.createServer((req,res)=>{
    if(lang==='en'&&width===390){
     for(const [id,name] of [['#projects','projects'],['#ecosystem','ecosystem'],['#team','team']]){
      await page.evaluate(selector=>{const heading=document.querySelector(selector+' .section-head');window.scrollTo(0,heading.getBoundingClientRect().top+scrollY-90);},id);
+     await page.evaluate(()=>new Promise(resolve=>requestAnimationFrame(()=>requestAnimationFrame(resolve))));
      await page.screenshot({path:path.join(root,'test-results/mobile-'+name+'.png')});
     }
    }
