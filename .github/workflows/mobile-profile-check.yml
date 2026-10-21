@@ -1,0 +1,28 @@
+name: Mobile homepage and biography checks
+on:
+  pull_request:
+    paths: ['css/**', 'js/**', '**/index.html', '**/profile.html', 'tests/mobile-team-browser.cjs', '.github/workflows/mobile-profile-check.yml']
+  push:
+    branches: [main]
+    paths: ['css/**', 'js/**', '**/index.html', '**/profile.html', 'tests/mobile-team-browser.cjs', '.github/workflows/mobile-profile-check.yml']
+permissions:
+  contents: read
+jobs:
+  responsive:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci
+      - run: npm run test:team
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/mobile-team-browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mobile-profile-screenshots
+          path: test-results/

@@ -28,3 +28,16 @@
   .product-row:hover{background:var(--surface);}
   .product-row:focus-visible{outline:2px solid var(--text);outline-offset:-3px;}
   @media(max-width:860px){.product-list{grid-template-rows:none;grid-auto-rows:minmax(150px,auto)}}
+
+/* Keep project copy and store actions readable after the desktop rules load. */
+.product-layout > *, .product-feature, .product-link {min-width:0}
+@media(max-width:860px){
+ .product-layout{grid-template-columns:minmax(0,1fr);gap:16px}
+ .product-feature{padding:24px;min-height:0;gap:24px}
+ .product-feature p{max-width:none;font-size:15px;line-height:1.7}
+ .product-list{grid-template-rows:none;grid-auto-rows:auto}
+ .product-row{padding:24px;min-height:150px}
+ .store-badge{min-width:0;padding:12px 10px;min-height:52px}
+ .store-badge strong{font-size:14px}
+}
+@media(max-width:380px){.store-badges{grid-template-columns:minmax(0,1fr)}}

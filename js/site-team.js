@@ -111,7 +111,16 @@
                 item.classList.add('profile-unavailable');
             }
             var role=document.createElement('div');role.className='role';role.textContent=card.position;
-            var social=document.createElement('div');social.className='team-social';(Array.isArray(card.links)?card.links:[]).forEach(function(link){if(!link||typeof link.label!=='string')return;var href=safeImage(link.url);if(!href)return;var a=document.createElement('a');a.href=href;a.target='_blank';a.rel='noopener noreferrer';a.setAttribute('aria-label',link.label);a.addEventListener('click',function(e){e.stopPropagation();});var img=document.createElement('img');img.alt=link.label;img.src='../assets/'+(link.label.toLowerCase()==='linkedin'?'linkedin.svg':link.label.toLowerCase()==='instagram'?'instagram.svg':'website.svg');a.appendChild(img);social.appendChild(a);});
+            var social=document.createElement('div');social.className='team-social';
+            (Array.isArray(card.links)?card.links:[]).forEach(function(link){
+                var normalized=window.VertexTeamLinks.normalize(link);if(!normalized)return;
+                var a=document.createElement('a');a.href=normalized.href;
+                if(normalized.key!=='email'){a.target='_blank';a.rel='noopener noreferrer';}
+                a.setAttribute('aria-label',normalized.label+' · '+card.name);a.title=normalized.label;
+                a.addEventListener('click',function(e){e.stopPropagation();});
+                var img=document.createElement('img');img.alt='';img.src=normalized.icon;
+                a.appendChild(img);social.appendChild(a);
+            });
             info.append(name,role,social);item.append(wrap,info);track.appendChild(item);
         });track.dispatchEvent(new Event('scroll'));
     }

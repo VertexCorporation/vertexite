@@ -25,8 +25,6 @@ const words=copy[lang]||copy.en;
 document.documentElement.lang=lang;
 if(lang==='ar')document.documentElement.dir='rtl';
 const el=id=>document.getElementById(id);
-el('vp-back').textContent='← '+words[0];
-el('vp-back').href='/'+lang+'/#team';
 el('vp-links-title').textContent=words[1];
 function unavailable(msg){
  el('vp-content').hidden=true;el('vp-error').hidden=false;
@@ -59,15 +57,23 @@ async function load(){
   card.bio.trim().split(/\n\s*\n/).forEach(paragraph=>{const p=document.createElement('p');p.textContent=paragraph.trim();bio.append(p)});
   const links=el('vp-links');links.replaceChildren();
   for(const link of (Array.isArray(card.links)?card.links:[])){
-   const url=safeUrl(link.url);if(!url||!link.label)continue;
-   const a=document.createElement('a');a.className='vp-link';a.href=url;a.target='_blank';a.rel='noopener noreferrer';
-   const logo=document.createElement('img');logo.alt='';const k=link.label.toLowerCase();
-   logo.src='/assets/'+(k==='linkedin'?'linkedin.svg':k==='instagram'?'instagram.svg':'website.svg');
-   const text=document.createElement('span');text.textContent=link.label+' ↗';a.append(logo,text);links.append(a);
+   const normalized=window.VertexTeamLinks.normalize(link);if(!normalized)continue;
+   const a=document.createElement('a');a.className='vp-link';a.href=normalized.href;if(normalized.key!=='email'){a.target='_blank';a.rel='noopener noreferrer';}
+   const logo=document.createElement('img');logo.alt='';
+   logo.src=normalized.icon;
+   const text=document.createElement('span');text.textContent=normalized.label+(normalized.key==='email'?'':' ↗');a.append(logo,text);links.append(a);
   }
   el('vp-links-pane').hidden=!links.children.length;
   el('vp-content').hidden=false;el('vp-error').hidden=true;
  }catch(error){unavailable(words[3]);console.warn('[profile] unavailable',error)}
+}
+// Language switching keeps the selected person on the equivalent profile route.
+const profileId=new URLSearchParams(location.search).get('id');
+if(profileId&&/^[a-zA-Z0-9_-]{1,128}$/.test(profileId)){
+ document.querySelectorAll('.lang-row').forEach(link=>{
+  const target=new URL(link.href);target.pathname=target.pathname.replace(/\/$/,'')+'/profile.html';
+  target.searchParams.set('id',profileId);link.href=target.href;
+ });
 }
 load();
 })();
