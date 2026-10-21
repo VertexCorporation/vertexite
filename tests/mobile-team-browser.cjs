@@ -45,7 +45,12 @@ const server=http.createServer((req,res)=>{
    assert.equal(geometry.clipped,false,'team content must not clip');assert.equal(geometry.socials,5);
    assert.ok(geometry.fog.includes('linear-gradient'));
    assert.equal(await page.locator('.team-card.profile-unavailable .team-profile-link').count(),0);
-   if(lang==='en'&&width===390){await page.locator('#projects').scrollIntoViewIfNeeded();await page.screenshot({path:path.join(root,'test-results/mobile-projects.png')});}
+   if(lang==='en'&&width===390){
+    for(const [id,name] of [['#projects','projects'],['#ecosystem','ecosystem'],['#team','team']]){
+     await page.evaluate(selector=>{const heading=document.querySelector(selector+' .section-head');window.scrollTo(0,heading.getBoundingClientRect().top+scrollY-90);},id);
+     await page.screenshot({path:path.join(root,'test-results/mobile-'+name+'.png')});
+    }
+   }
    await page.locator('.team-profile-link').first().click();
    await page.locator('#vp-content:not([hidden])').waitFor();
    assert.equal(await page.locator('#siteHeader').count(),1);assert.equal(await page.locator('footer').count(),1);

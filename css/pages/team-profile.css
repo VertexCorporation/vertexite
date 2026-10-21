@@ -1,6 +1,7 @@
 /* Dynamic leader biographies share the site's monochrome profile language. */
 :root{--vp-bg:var(--bg);--vp-surface:var(--bg);--vp-text:var(--text);--vp-muted:var(--text-muted);--vp-border:var(--border)}
 .vp-container{max-width:1150px;margin-inline:auto;padding-inline:clamp(20px,5vw,48px)}
+.vp-profile{padding:0}
 .vp-main{padding-block:clamp(44px,7vw,90px) 100px;min-height:calc(100svh - 76px)}
 .vp-heading{display:flex;align-items:center;gap:clamp(18px,4vw,34px);margin-bottom:52px}
 .vp-photo{position:relative;isolation:isolate;flex:0 0 clamp(110px,16vw,160px);width:clamp(110px,16vw,160px);height:clamp(110px,16vw,160px);border:0;border-radius:16px;overflow:hidden;background:var(--vp-surface)}
