@@ -104,16 +104,20 @@ document.addEventListener('scroll',function(event){
  fadeScrollbar(el,1,120);
  state.idle=setTimeout(()=>fadeScrollbar(el,0,320),700);
 },{capture:true,passive:true});
-const cta=document.querySelector('.cta-band');if(cta){
- const sky=document.createElement('div');sky.className='cta-skyline';sky.setAttribute('aria-hidden','true');
+const cta=document.querySelector('.cta-band');
+document.querySelectorAll('.cta-band,.vp-main,.profile-page').forEach(container=>{
+ const isProfile=container.matches('.vp-main,.profile-page');
+ const sky=document.createElement('div');sky.className=isProfile?'profile-skyline':'cta-skyline';sky.setAttribute('aria-hidden','true');
  let buildings='',windows='';const heights=[80,135,104,190,150,220,166,115,200,145,230,175,125,195,155,105];
  heights.forEach((height,i)=>{const x=i*92-10,w=66,ground=310,y=ground-height,mid=x+w/2,split=i%3===0;
  buildings+='<path class="city-building" d="M'+x+' '+ground+'V'+y+(split?'L'+mid+' '+(y-14)+'L'+(x+w)+' '+y:'H'+(x+w))+'V'+ground+'Z"/>';
  if(!split)buildings+='<path class="city-roof-detail" opacity=".6" d="M'+(x+7)+' '+y+'V'+(y-7)+'H'+(x+w-7)+'V'+y+(i%4===1?' M'+mid+' '+(y-7)+'v-16':'')+'"/>';
  for(let row=y+16;row<ground-12;row+=17)for(let col=x+10;col<x+w-8;col+=13){windows+='M'+col+' '+row+'h6v6h-6Z ';}
  });
- sky.innerHTML='<svg viewBox="0 0 1440 310" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width=".85"><g class="sky-clouds" opacity=".45"><path d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/><path transform="translate(1440)" d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/></g><g class="city-buildings">'+buildings+'<path class="city-ground" d="M0 310H1440"/><path class="city-windows" d="'+windows+'" opacity=".42" stroke-width=".65"/></g></svg>';cta.appendChild(sky);
-}
+ sky.innerHTML='<svg viewBox="0 0 1440 310" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width=".85"><g class="sky-clouds" opacity=".45"><path d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/><path transform="translate(1440)" d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/></g><g class="city-buildings">'+buildings+'<path class="city-ground" d="M0 310H1440"/><path class="city-windows" d="'+windows+'" opacity=".42" stroke-width=".65"/></g></svg>';
+ if(isProfile)sky.querySelector('.sky-clouds').remove();
+ container.appendChild(sky);
+});
 if(cta&&'IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>cta.classList.toggle('geometry-active',e.isIntersecting&&!reduced.matches))).observe(cta);
 const diagrams=document.querySelectorAll('[data-diagram]');if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.target.classList.toggle('diagram-active',e.isIntersecting)),{threshold:.15});diagrams.forEach(el=>observer.observe(el));}
 const players=document.querySelectorAll('lottie-player[data-lottie-src]');if(players.length&&!reduced.matches&&'IntersectionObserver' in window){let loading;const observer=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;const p=e.target;if(!loading)loading=new Promise((resolve,reject)=>{const s=document.createElement('script');s.src='/js/vendor/lottie-player.js';s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});loading.then(()=>{if(p.isConnected)p.setAttribute('src',p.dataset.lottieSrc);}).catch(()=>{});observer.unobserve(p);}),{rootMargin:'150px'});players.forEach(p=>observer.observe(p));}
@@ -430,3 +434,4 @@ window.addEventListener('pageshow',function(){leaving=false;document.documentEle
   reducedMotion.addEventListener('change', cancel);
   desktopPointer.addEventListener('change', cancel);
 })();
+

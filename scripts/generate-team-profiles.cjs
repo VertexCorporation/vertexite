@@ -18,12 +18,13 @@ for(const lang of langs){
  '<link rel="stylesheet" href="/assets/fonts/fonts.css">\n'+
  '<link rel="stylesheet" href="/css/layout/site-shell.css?v=profiles261021">\n'+
  '<link rel="stylesheet" href="/css/site-design.css?v=profiles261021">\n'+
- '<link rel="stylesheet" href="/css/pages/team-profile.css?v=profiles261021">\n'+
+ '<link rel="stylesheet" href="/css/pages/team-profile.css?v=biography261022">\n'+
  '<script defer src="/js/site-shell.js?v=profiles261021"></script>\n'+
- '<script defer src="/js/site-design.js?v=thememodefade261017a"></script>\n'+
+ '<script defer src="/js/site-design.js?v=biography261022"></script>\n'+
  '<script defer src="/js/team-links.js?v=profiles261021"></script>\n'+
  '<script defer src="/js/team-profile.js?v=profiles261021"></script></head>\n<body>\n'+
  localize(header)+'\n'+main+'\n'+localize(footer)+'\n</body></html>\n';
  fs.writeFileSync(path.join(root,lang,'profile.html'),html);
 }
 console.log('Generated 16 biography pages from homepage navigation and footer.');
+

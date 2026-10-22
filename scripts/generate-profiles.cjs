@@ -146,6 +146,11 @@ for (const lang of languages) {
   html = html.replace(/<main>[\s\S]*?<\/main>/, mainContent);
   html = html.replace(/<main class="profile-page wrap">[\s\S]*?<\/main>/, mainContent);
 
+  // Preserve the shared portrait mask and biography entrance when regenerating.
+  html = html.replace(/<link[^>]*href="\/css\/pages\/profile-photo-fog\.css[^"]*"[^>]*>/g, '');
+  html = html.replace('</head>', '<link rel="stylesheet" href="/css/pages/profile-photo-fog.css?v=biography261022"></head>');
+  html = html.replace(/site-design\.js(?:\?v=[^"]*)?/g, 'site-design.js?v=biography261022');
+
   // Bump site-design.css query param
   html = html.replace(/site-design\.css(?:\?v=[^"]*)?/g, 'site-design.css?v=caki20261017v2');
 
@@ -155,3 +160,4 @@ for (const lang of languages) {
 }
 
 console.log('Profile generation complete for all 16 languages with full native translations.');
+

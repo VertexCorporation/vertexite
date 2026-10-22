@@ -1,14 +1,12 @@
+@import url("./profile-photo-fog.css?v=biography261022");
 /* Dynamic leader biographies share the site's monochrome profile language. */
 :root{--vp-bg:var(--bg);--vp-surface:var(--bg);--vp-text:var(--text);--vp-muted:var(--text-muted);--vp-border:var(--border)}
 .vp-container{max-width:1150px;margin-inline:auto;padding-inline:clamp(20px,5vw,48px)}
 .vp-profile{padding:0}
-.vp-main{padding-block:clamp(44px,7vw,90px) 100px;min-height:calc(100svh - 76px)}
+.vp-main{padding-block:clamp(24px,3vw,40px) 100px;min-height:calc(100svh - 76px)}
 .vp-heading{display:flex;align-items:center;gap:clamp(18px,4vw,34px);margin-bottom:52px}
 .vp-photo{position:relative;isolation:isolate;flex:0 0 clamp(110px,16vw,160px);width:clamp(110px,16vw,160px);height:clamp(110px,16vw,160px);border:0;border-radius:16px;overflow:hidden;background:var(--vp-surface)}
 .vp-photo img{width:100%;height:100%;object-fit:cover;display:block}
-.vp-photo::after{content:"";position:absolute;inset:-1px;pointer-events:none;z-index:2;
- background:linear-gradient(90deg,var(--vp-surface) 0%,transparent 20%,transparent 80%,var(--vp-surface) 100%),
- linear-gradient(180deg,var(--vp-surface) 0%,transparent 20%,transparent 80%,var(--vp-surface) 100%);opacity:.56}
 .vp-heading h1{font-size:clamp(27px,4vw,44px);line-height:1.2;letter-spacing:-.045em;margin:0 0 7px;overflow-wrap:anywhere}
 .vp-role{margin:0;color:var(--vp-muted);font-size:clamp(12px,1.4vw,16px)}
 .vp-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,270px);gap:clamp(32px,6vw,90px)}
@@ -20,10 +18,11 @@
 .vp-link img{width:20px;height:20px;object-fit:contain;filter:var(--logo-filter)}
 .vp-status{color:var(--vp-muted)}
 [hidden]{display:none!important}
-@media(max-width:700px){.vp-heading{margin-bottom:35px;gap:18px}.vp-grid{grid-template-columns:minmax(0,1fr);gap:30px}.vp-heading h1{font-size:26px}.vp-main{padding-top:45px}}
+@media(max-width:700px){.vp-heading{margin-bottom:35px;gap:18px}.vp-grid{grid-template-columns:minmax(0,1fr);gap:30px}.vp-heading h1{font-size:26px}.vp-main{padding-top:24px}}
 
 .vp-heading h1{font-family:Poppins,system-ui,sans-serif;text-transform:none;font-weight:700}
 .vp-link{min-height:44px;margin-block:4px}
 .vp-links{align-self:start}
 .vp-heading>div:last-child{min-width:0}
 @media(max-width:400px){.vp-heading{align-items:flex-start;flex-direction:column}.vp-heading h1{font-size:30px}}
+
