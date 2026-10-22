@@ -115,8 +115,11 @@ document.querySelectorAll('.cta-band,.vp-main,.profile-page').forEach(container=
  for(let row=y+16;row<ground-12;row+=17)for(let col=x+10;col<x+w-8;col+=13){windows+='M'+col+' '+row+'h6v6h-6Z ';}
  });
  sky.innerHTML='<svg viewBox="0 0 1440 310" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width=".85"><g class="sky-clouds" opacity=".45"><path d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/><path transform="translate(1440)" d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/></g><g class="city-buildings">'+buildings+'<path class="city-ground" d="M0 310H1440"/><path class="city-windows" d="'+windows+'" opacity=".42" stroke-width=".65"/></g></svg>';
- if(isProfile)sky.querySelector('.sky-clouds').remove();
- container.appendChild(sky);
+ if(isProfile){
+  sky.querySelector('.sky-clouds').remove();
+  const stage=document.createElement('div');stage.className='profile-stage';
+  container.before(stage);stage.append(container,sky);
+ }else container.appendChild(sky);
 });
 if(cta&&'IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>cta.classList.toggle('geometry-active',e.isIntersecting&&!reduced.matches))).observe(cta);
 const diagrams=document.querySelectorAll('[data-diagram]');if('IntersectionObserver' in window){const observer=new IntersectionObserver(entries=>entries.forEach(e=>e.target.classList.toggle('diagram-active',e.isIntersecting)),{threshold:.15});diagrams.forEach(el=>observer.observe(el));}
