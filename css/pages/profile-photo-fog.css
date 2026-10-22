@@ -1,10 +1,24 @@
-/* Four-edge portrait fog on the original founder biography pages. */
-.profile-photo-box{position:relative;isolation:isolate}
-.profile-photo-box::after{
- content:"";position:absolute;inset:-1px;z-index:2;pointer-events:none;
- border-radius:inherit;
- background:
-  linear-gradient(90deg,var(--surface,#171719) 0%,transparent 20%,transparent 80%,var(--surface,#171719) 100%),
-  linear-gradient(180deg,var(--surface,#171719) 0%,transparent 20%,transparent 80%,var(--surface,#171719) 100%);
- opacity:.55;
+/* Fade the portrait pixels themselves so cutout edges disappear in either theme. */
+:is(.profile-photo-box,.vp-photo){background:transparent!important;border:0!important;box-shadow:none!important}
+:is(.profile-photo-box,.vp-photo)::after{content:none}
+:is(.profile-photo-box,.vp-photo)>img{
+ -webkit-mask-image:linear-gradient(to right,transparent,#000 18%,#000 82%,transparent),linear-gradient(to bottom,transparent,#000 18%,#000 78%,transparent);
+ -webkit-mask-composite:source-in;
+ mask-image:linear-gradient(to right,transparent,#000 18%,#000 82%,transparent),linear-gradient(to bottom,transparent,#000 18%,#000 78%,transparent);
+ mask-composite:intersect;
 }
+/* One quiet, enlarged skyline behind every biography, with no ongoing motion. */
+:is(.profile-page,.vp-main){position:relative;isolation:isolate;padding-top:clamp(24px,3vw,40px)}
+:is(.profile-page>article,.vp-profile){position:relative;z-index:1}
+.profile-skyline{position:fixed;inset:auto 0 0;height:clamp(400px,75svh,850px);z-index:-1;pointer-events:none;color:var(--text);opacity:.09;overflow:hidden;
+ -webkit-mask-image:linear-gradient(to bottom,transparent,#000 36%);mask-image:linear-gradient(to bottom,transparent,#000 36%)}
+.profile-skyline svg{display:block;width:100%;max-width:none;height:100%}
+.profile-skyline .city-buildings{mask-image:none}
+.profile-skyline .city-building{fill:none}
+@media(prefers-reduced-motion:no-preference){
+ :is(.profile-page>article,.vp-profile){animation:biographyEnter 600ms cubic-bezier(.2,.8,.2,1) both}
+ .profile-skyline{animation:biographySkylineEnter 950ms cubic-bezier(.2,.8,.2,1) both}
+ @keyframes biographyEnter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+ @keyframes biographySkylineEnter{from{opacity:0;transform:translateY(64px)}to{opacity:.09;transform:none}}
+}
+
