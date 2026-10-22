@@ -110,7 +110,7 @@
                 item.dataset.profileAvailable='false';
                 item.classList.add('profile-unavailable');
             }
-            var role=document.createElement('div');role.className='role';role.textContent=card.position;
+            var role=document.createElement('div');role.className='role';role.textContent=window.VertexTeamLinks.roleTitle(card,currentLang);
             var social=document.createElement('div');social.className='team-social';
             (Array.isArray(card.links)?card.links:[]).forEach(function(link){
                 var normalized=window.VertexTeamLinks.normalize(link);if(!normalized)return;

@@ -50,7 +50,7 @@ async function load(){
   if(!card||typeof card.bio!=='string'||!card.bio.trim()){unavailable(words[2]);return}
   document.title=card.name+' | Vertex';
   el('vp-name').textContent=card.name;
-  el('vp-role').textContent=card.position+' · Vertex';
+  el('vp-role').textContent=window.VertexTeamLinks.roleTitle(card,lang)+' · Vertex';
   const photo=safeUrl(card.imageUrl);
   if(photo){const img=document.createElement('img');img.alt=card.name;img.src=photo;img.width=160;img.height=160;el('vp-photo').append(img)}
   const bio=el('vp-bio');bio.replaceChildren();
