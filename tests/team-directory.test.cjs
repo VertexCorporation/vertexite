@@ -13,7 +13,7 @@ test('every localized homepage loads the new managed directory and equal-card st
  assert.match(css,/#team \.team-photo-wrap::after\{/);
  for(const lang of langs){
   const html=read(lang+'/index.html');
-  assert.match(html,/css\/pages\/team-directory\.css\?v=profiles261021/);
+  assert.match(html,/css\/pages\/team-directory\.css\?v=fog261023/);
   assert.match(html,/js\/site-team\.js\?v=profiles261021/);
   assert.match(html,/id="teamTrack"/);
  }
@@ -30,7 +30,7 @@ test('each localized biography route uses the same safely rendered live data',()
   assert.match(html,/<section class="vp-profile"/);
   assert.match(html,/id="vp-bio"/);
   assert.match(html,/team-profile\.js\?v=profiles261021/);
-  assert.match(html,/team-profile\.css\?v=biography261022/);
+  assert.match(html,/team-profile\.css\?v=staged261023/);
  }
 });
 
@@ -41,9 +41,9 @@ test('the original founder portraits and new biographies share four-sided fog',(
  assert.match(fog,/linear-gradient\(to right,transparent/);
  assert.match(fog,/linear-gradient\(to bottom,transparent/);
  assert.match(fog,/mask-composite:intersect/);
- assert.match(dynamicFog,/@import url\("\.\/profile-photo-fog\.css\?v=biography261022"\)/);
+ assert.match(dynamicFog,/@import url\("\.\/profile-photo-fog\.css\?v=staged261023"\)/);
  for(const lang of langs){
-  assert.match(read(lang+'/mustafa-caki.html'),/profile-photo-fog\.css\?v=biography261022/);
+  assert.match(read(lang+'/mustafa-caki.html'),/profile-photo-fog\.css\?v=staged261023/);
  }
 });
 
