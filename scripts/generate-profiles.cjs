@@ -148,7 +148,7 @@ for (const lang of languages) {
 
   // Preserve the shared portrait mask and biography entrance when regenerating.
   html = html.replace(/<link[^>]*href="\/css\/pages\/profile-photo-fog\.css[^"]*"[^>]*>/g, '');
-  html = html.replace('</head>', '<link rel="stylesheet" href="/css/pages/profile-photo-fog.css?v=staged261023"></head>');
+  html = html.replace('</head>', '<link rel="stylesheet" href="/css/pages/profile-photo-fog.css?v=staged300261023"></head>');
   html = html.replace(/site-design\.js(?:\?v=[^"]*)?/g, 'site-design.js?v=biography261022');
 
   // Bump site-design.css query param

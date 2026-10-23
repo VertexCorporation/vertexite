@@ -18,7 +18,7 @@ for(const lang of langs){
  '<link rel="stylesheet" href="/assets/fonts/fonts.css">\n'+
  '<link rel="stylesheet" href="/css/layout/site-shell.css?v=profiles261021">\n'+
  '<link rel="stylesheet" href="/css/site-design.css?v=profiles261021">\n'+
- '<link rel="stylesheet" href="/css/pages/team-profile.css?v=staged261023">\n'+
+ '<link rel="stylesheet" href="/css/pages/team-profile.css?v=staged300261023">\n'+
  '<script defer src="/js/site-shell.js?v=profiles261021"></script>\n'+
  '<script defer src="/js/site-design.js?v=biography261022"></script>\n'+
  '<script defer src="/js/team-links.js?v=profiles261021"></script>\n'+
