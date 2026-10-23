@@ -18,7 +18,7 @@
 .profile-skyline .city-buildings{mask-image:none}
 .profile-skyline .city-building{fill:none}
 @media(prefers-reduced-motion:no-preference){
- :is(.profile-page>article,.vp-profile){animation:biographyEnter 600ms cubic-bezier(.2,.8,.2,1) both}
+ :is(.profile-page>article,.vp-profile){animation:biographyEnter 600ms cubic-bezier(.2,.8,.2,1) 1s both}
  .profile-skyline{animation:biographySkylineEnter 950ms cubic-bezier(.2,.8,.2,1) both}
  @keyframes biographyEnter{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
  @keyframes biographySkylineEnter{from{opacity:0;transform:translateY(64px)}to{opacity:.09;transform:none}}

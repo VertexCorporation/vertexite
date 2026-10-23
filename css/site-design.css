@@ -258,6 +258,7 @@ html[data-theme="dark"] .logo-chip::before{opacity:1}
 .vertex-news-cover.is-loading::after{opacity:1;animation-play-state:running}
 .vertex-news-cover .vertex-news-image{transition:opacity 260ms ease}
 .vertex-news-cover.is-loading .vertex-news-image{opacity:0}
+.vertex-news-cover.is-cached::after,.vertex-news-cover.is-cached .vertex-news-image{transition:none}
 @keyframes vertexNewsShimmer{from{background-position:160% 0}to{background-position:-160% 0}}
 @media(prefers-reduced-motion:reduce){.logo-chip::before,.vertex-news-cover::after,.vertex-news-cover .vertex-news-image{transition:none!important}.vertex-news-cover::after{animation:none!important}}
 

@@ -113,14 +113,69 @@ function makeElement(tag,className,text) {
     if(text!=null)node.textContent=text;
     return node;
 }
+// Cache public cover bytes by their stable storage path, not the expiring signed URL.
+// This survives reloads and language navigation; failures never replace a saved image.
+const COVER_CACHE = 'vertex-news-covers-v1';
+const COVER_TTL = 7 * 24 * 60 * 60 * 1000;
+const coverSources = new Map();
+async function getCoverSource(path) {
+    if (coverSources.has(path)) return coverSources.get(path).then(source => ({...source, cached:true}));
+    const promise = (async () => {
+        let cache;
+        const key = new URL('/__vertex_news_cover', location.href);
+        key.searchParams.set('path', path);
+        try {
+            cache = await window.caches.open(COVER_CACHE);
+            const saved = await cache.match(key.href);
+            const age = saved ? Date.now() - Number(saved.headers.get('x-vertex-saved-at')) : NaN;
+            if (saved && age >= 0 && age < COVER_TTL) {
+                return {url: URL.createObjectURL(await saved.blob()), cached: true};
+            }
+            if (saved) await cache.delete(key.href);
+        } catch (_) { /* Private browsing or storage limits: use normal HTTP caching. */ }
+        const url = await getSignedImageUrl(path);
+        if (!cache || url === COVER_FALLBACK) return {url, cached: false};
+        try {
+            const abort = new AbortController();
+            const timer = setTimeout(() => abort.abort(), 12000);
+            let blob;
+            try {
+                const response = await fetch(url, {credentials:'omit', signal:abort.signal});
+                if (!response.ok) throw new Error('cover unavailable');
+                blob = await response.blob();
+            } finally { clearTimeout(timer); }
+            if (!blob.type.startsWith('image/') || !blob.size || blob.size > 4 * 1024 * 1024) {
+                return {url, cached:false};
+            }
+            try {
+                await cache.delete(key.href);
+                await cache.put(key.href, new Response(blob, {headers: {
+                    'Content-Type':blob.type, 'x-vertex-saved-at':String(Date.now())
+                }}));
+                const keys = await cache.keys();
+                await Promise.all(keys.slice(0, Math.max(0, keys.length - 48)).map(old => cache.delete(old)));
+            } catch (_) { /* A full cache must not stop the cover from displaying. */ }
+            return {url:URL.createObjectURL(blob), cached:false};
+        } catch (_) { return {url, cached:false}; } // CORS failures still allow an ordinary <img>.
+    })();
+    coverSources.set(path, promise);
+    const result = await promise;
+    // Retry unavailable covers on the next render instead of memorizing the fallback.
+    if (result.url === COVER_FALLBACK) coverSources.delete(path);
+    return result;
+}
 function setCoverImage(img,article,lang) {
     const cover=img.parentElement;
     const fallbackUrl=new URL(COVER_FALLBACK,location.href).href;
-    const finish=()=>cover.classList.remove('is-loading');
+    let loadingTimer;
+    const finish=()=>{clearTimeout(loadingTimer);cover.classList.remove('is-loading');};
     img.addEventListener('load',finish);
     img.addEventListener('error',()=>{
+        finish();
+        const covers=article.cover||{};
+        const path=covers[lang]||covers.en||Object.values(covers)[0];
+        coverSources.delete(path);
         if(img.src!==fallbackUrl)img.src=COVER_FALLBACK;
-        else finish();
     });
     const covers=article.cover||{};
     const path=covers[lang]||covers.en||Object.values(covers)[0];
@@ -129,7 +184,15 @@ function setCoverImage(img,article,lang) {
     const load=async()=>{
         if(started)return;
         started=true;
-        img.src=await getSignedImageUrl(path);
+        // Cached/quick images paint directly, without replaying a loading animation.
+        loadingTimer=setTimeout(()=>cover.classList.add('is-loading'),150);
+        const source=await getCoverSource(path);
+        if(source.cached) {
+            cover.classList.add('is-cached');
+            finish();
+        }
+        img.src=source.url;
+        if(img.complete && img.naturalWidth>0)finish();
     };
     if('IntersectionObserver' in window) {
         const observer=new IntersectionObserver(entries=>{
@@ -146,7 +209,7 @@ function renderNews(articles,container,lang,strings) {
             Object.values(article.translations||{})[0];
         if(!content||!content.title)return;
         const card=makeElement('article','vertex-news-card');
-        const cover=makeElement('div','vertex-news-cover is-loading');
+        const cover=makeElement('div','vertex-news-cover');
         const image=makeElement('img','vertex-news-image');
         image.alt='';image.loading='lazy';image.decoding='async';
         cover.appendChild(image);setCoverImage(image,article,lang);

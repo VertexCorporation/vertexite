@@ -38,7 +38,7 @@ const server=http.createServer((req,res)=>{
      portrait:rect('.team-photo-wrap').width,portraitHeight:rect('.team-photo-wrap').height,
      clipped:cards.some(card=>card.scrollHeight>card.clientHeight+1),
      socials:cards[0].querySelectorAll('.team-social a').length,
-     fog:getComputedStyle(document.querySelector('.team-photo-wrap'),'::after').backgroundImage};
+     fog:getComputedStyle(document.querySelector('.team-photo')).maskImage};
    });
    if(width<=860)assert.ok(Math.abs(geometry.feature-geometry.available)<2,JSON.stringify({width,lang,geometry}));
    if(width<=700)assert.ok(geometry.tech>width-90,'technology card must use phone width');
