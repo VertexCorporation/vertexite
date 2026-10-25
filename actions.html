@@ -415,22 +415,18 @@
                             const signed = await signInWithEmailAndPassword(auth, resetEmail, passwordInput.value);
                             passwordInput.value = '';
                             await signed.user.reload();
-                            if (signed.user.emailVerified) {
-                                await httpsCallable(getFunctions(app, 'europe-west1'), 'completePersonnelActivation')({});
-                            } else {
-                                await signOut(auth);
-                                updateText(t.resetSuccessTitle, document.documentElement.lang === 'tr' ? 'Şifreniz hazır. Hesap doğrulama durumu kontrol edilemedi; lütfen yeniden giriş yapın.' : 'Your password is ready. Account verification could not be confirmed; please sign in again.');
-                                showStatusAnimation('success'); return;
-                            }
+                            // The server reads current Firebase ownership. A completed
+                            // password action needs no second verification email.
+                            await httpsCallable(getFunctions(app, 'europe-west1'), 'completePersonnelActivation')({});
                             await signOut(auth);
                         }
                         } catch (accessError) {
                             await signOut(auth).catch(() => {});
                             passwordInput.value = '';
-                            updateText(t.resetSuccessTitle, document.documentElement.lang === 'tr' ? 'Şifreniz kaydedildi. Personel erişimi şu anda etkinleştirilemedi; lütfen destek ekibiyle iletişime geçin.' : 'Your password is saved. Personnel access could not be activated; please contact support.');
+                            updateText(t.resetSuccessTitle, document.documentElement.lang === 'tr' ? 'Şifreniz kaydedildi. <a href="https://admin.vertexishere.com/">Vertex Konsol’a giriş yapın</a>; erişiminiz girişte yeniden kontrol edilecek.' : 'Your password is saved. <a href="https://admin.vertexishere.com/">Sign in to Vertex Console</a>; access will be checked again at sign-in.');
                             showStatusAnimation('success'); return;
                         }
-                        updateText(t.resetSuccessTitle, t.resetSuccessSubtitle);
+                        updateText(t.resetSuccessTitle, new URLSearchParams(location.search).get('personnel') === '1' ? (document.documentElement.lang === 'tr' ? 'Şifreniz hazır. <a href="https://admin.vertexishere.com/">Vertex Konsol’a giriş yapın</a>.' : 'Your password is ready. <a href="https://admin.vertexishere.com/">Sign in to Vertex Console</a>.') : t.resetSuccessSubtitle);
                         showStatusAnimation('success');
                     } catch (error) {
                         console.error("Password reset confirmation failed:", error.code, error.message);
