@@ -14,7 +14,7 @@ test('every localized homepage loads the new managed directory and equal-card st
  for(const lang of langs){
   const html=read(lang+'/index.html');
   assert.match(html,/css\/pages\/team-directory\.css\?v=fog261023/);
-  assert.match(html,/js\/site-team\.js\?v=profiles261021/);
+  assert.match(html,/js\/site-team\.js\?v=bios261025/);
   assert.match(html,/id="teamTrack"/);
  }
 });
@@ -22,14 +22,14 @@ test('every localized homepage loads the new managed directory and equal-card st
 test('each localized biography route uses the same safely rendered live data',()=>{
  const js=read('js/team-profile.js');
  assert.match(js,/new URLSearchParams\(location\.search\)\.get\('id'\)/);
- assert.match(js,/card\.bio\.trim\(\)/);
+ assert.match(js,/VertexTeamLinks\.biography\(card,lang\)/);
  assert.match(js,/p\.textContent=paragraph\.trim\(\)/);
  assert.match(js,/new URL\(value\)/);
  for(const lang of langs){
   const html=read(lang+'/profile.html');
   assert.match(html,/<section class="vp-profile"/);
   assert.match(html,/id="vp-bio"/);
-  assert.match(html,/team-profile\.js\?v=profiles261021/);
+  assert.match(html,/team-profile\.js\?v=bios261025/);
   assert.match(html,/team-profile\.css\?v=staged300261023/);
  }
 });
@@ -49,7 +49,7 @@ test('the original founder portraits and new biographies share four-sided fog',(
 
 test('the directory never offers a biography link for empty bios',()=>{
  const js=read('js/site-team.js');
- assert.match(js,/var hasBio=typeof card\.bio==='string'&&card\.bio\.trim\(\)\.length>0/);
+ assert.match(js,/var hasBio=!!window\.VertexTeamLinks\.biography\(card,currentLang\)/);
  assert.match(js,/var profile=hasBio&&/);
  assert.match(js,/item\.classList\.add\('profile-unavailable'\)/);
  assert.match(js,/profile\.html\?id=/);
@@ -85,3 +85,16 @@ test('public social links accept only supported buttons and safe protocols',()=>
   assert.equal(normalize({label:'Email',url}),null);
  }
 });
+
+ test('biography locale selection preserves source fallback and legacy cards',()=>{
+ const vm=require('node:vm'),context={window:{},URL};
+ vm.runInNewContext(read('js/team-links.js'),context);
+ const biography=context.window.VertexTeamLinks.biography;
+ const card={biographies:{tr:'Türkçe',en:'English',ar:'عربي'},bioSourceLang:'tr',bio:'Legacy'};
+ for(const [lang,expected] of [['tr','Türkçe'],['en','English'],['ar','عربي'],['de','Türkçe']])assert.equal(biography(card,lang),expected);
+ assert.equal(biography({bio:' Legacy only '},'en'),'Legacy only');
+ assert.equal(biography({biographies:{en:'English'}},'de'),'English');
+ assert.equal(biography({biographies:{tr:'  ',en:42}},'tr'),'');
+ assert.equal(biography(null,'en'),'');
+ assert.equal(biography(card,'__proto__'),'Türkçe');
+ });

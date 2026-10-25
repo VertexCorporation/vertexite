@@ -3,7 +3,7 @@
     var ENDPOINT = 'https://listsiteteam-o5h7dmtija-ew.a.run.app/';
     var current = null, timer, loading = false;
     var lang=(document.documentElement.lang||'en').toLowerCase().split('-')[0];
-    var cacheKey='directory-20261018:'+lang;
+    var cacheKey='directory-bios-20261025:'+lang;
     var fallbackImages=Object.create(null);
     function fill(id, values, itemClass) {
         var track = document.getElementById(id);
@@ -96,7 +96,7 @@
             var photo=document.createElement('img');photo.className='team-photo';photo.alt=card.name;photo.width=400;photo.height=400;photo.loading='lazy';photo.decoding='async';photo.src=safeImage(card.imageUrl)||fallbackImages[normalizeName(card.name)]||'../assets/logo.svg';
             photo.onerror=function(){var backup=fallbackImages[normalizeName(card.name)];if(backup && photo.src!==new URL(backup,location.href).href){photo.src=backup;return;}photo.remove();wrap.classList.add('team-photo-missing');wrap.textContent=card.name.slice(0,1);};wrap.appendChild(photo);
             var info=document.createElement('div');info.className='team-info';var name=document.createElement('h3');name.textContent=card.name;
-            var hasBio=typeof card.bio==='string'&&card.bio.trim().length>0;
+            var hasBio=!!window.VertexTeamLinks.biography(card,currentLang);
             var profile=hasBio&&/^[a-zA-Z0-9_-]{1,128}$/.test(card.id||'')
               ? '/'+currentLang+'/profile.html?id='+encodeURIComponent(card.id) : null;
             if(profile){

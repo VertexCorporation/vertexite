@@ -19,5 +19,11 @@
  function roleTitle(card,lang){
   return (card.positionCode||card.position)==='CDO' ? designTitles[lang]||designTitles.en : card.position;
  }
- window.VertexTeamLinks={normalize,roleTitle};
+ function biography(card,lang){
+  const bios=card?.biographies;
+  const value=code=>Object.hasOwn(bios||{},code)&&typeof bios[code]==='string'?bios[code].trim():'';
+  return value(lang)||value(card?.bioSourceLang)||
+   (typeof card?.bio==='string'?card.bio.trim():'')||value('en')||value('tr');
+ }
+ window.VertexTeamLinks={normalize,roleTitle,biography};
 })();

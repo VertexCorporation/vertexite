@@ -47,14 +47,15 @@ async function load(){
   if(!response.ok)throw Error('Network');
   const result=(await response.json()).result;
   const card=Array.isArray(result?.cards)?result.cards.find(x=>x.id===id):null;
-  if(!card||typeof card.bio!=='string'||!card.bio.trim()){unavailable(words[2]);return}
+  const biography=window.VertexTeamLinks.biography(card,lang);
+  if(!card||!biography){unavailable(words[2]);return}
   document.title=card.name+' | Vertex';
   el('vp-name').textContent=card.name;
   el('vp-role').textContent=window.VertexTeamLinks.roleTitle(card,lang)+' · Vertex';
   const photo=safeUrl(card.imageUrl);
   if(photo){const img=document.createElement('img');img.alt=card.name;img.src=photo;img.width=160;img.height=160;el('vp-photo').append(img)}
   const bio=el('vp-bio');bio.replaceChildren();
-  card.bio.trim().split(/\n\s*\n/).forEach(paragraph=>{const p=document.createElement('p');p.textContent=paragraph.trim();bio.append(p)});
+  biography.split(/\n\s*\n/).forEach(paragraph=>{const p=document.createElement('p');p.textContent=paragraph.trim();bio.append(p)});
   const links=el('vp-links');links.replaceChildren();
   for(const link of (Array.isArray(card.links)?card.links:[])){
    const normalized=window.VertexTeamLinks.normalize(link);if(!normalized)continue;
