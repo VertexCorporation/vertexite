@@ -57,8 +57,7 @@ async function load(){
   const bio=el('vp-bio');bio.replaceChildren();
   biography.split(/\n\s*\n/).forEach(paragraph=>{const p=document.createElement('p');p.textContent=paragraph.trim();bio.append(p)});
   const links=el('vp-links');links.replaceChildren();
-  for(const link of (Array.isArray(card.links)?card.links:[])){
-   const normalized=window.VertexTeamLinks.normalize(link);if(!normalized)continue;
+  for(const normalized of window.VertexTeamLinks.ordered(card.links)){
    const a=document.createElement('a');a.className='vp-link';a.href=normalized.href;if(normalized.key!=='email'){a.target='_blank';a.rel='noopener noreferrer';}
    const logo=document.createElement('img');logo.alt='';
    logo.src=normalized.icon;

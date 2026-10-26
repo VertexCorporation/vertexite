@@ -53,3 +53,14 @@
 .mod-track.names-static .mod-item{max-width:100%;white-space:normal;overflow-wrap:anywhere}
 .mod-track.names-static .mod-item:last-child{padding-right:0}
 .mod-track.names-static .mod-item:last-child::after{content:none}
+
+/* Five contacts fit a full card; compact cards use staggered 3+2 rows. */
+#team .team-card .team-info{container-type:inline-size}
+#team .team-info .team-social{flex-wrap:nowrap;gap:6px;width:100%}
+#team .team-social a{flex:0 0 36px;width:36px;height:36px;box-sizing:border-box}
+@container (max-width:210px){
+ #team .team-info .team-social:has(a:nth-child(5)):not(:has(a:nth-child(6))){display:grid;grid-template-columns:repeat(6,18px);gap:6px;justify-content:center}
+ #team .team-social:has(a:nth-child(5)):not(:has(a:nth-child(6))) a{grid-column:span 2;width:42px;height:42px}
+ #team .team-social:has(a:nth-child(5)):not(:has(a:nth-child(6))) a:nth-child(4){grid-column:2 / span 2}
+ #team .team-social:has(a:nth-child(5)):not(:has(a:nth-child(6))) a:nth-child(5){grid-column:4 / span 2}
+}

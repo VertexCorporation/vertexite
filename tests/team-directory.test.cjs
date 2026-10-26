@@ -13,8 +13,8 @@ test('every localized homepage loads the new managed directory and equal-card st
  assert.match(css,/#team \.team-photo-wrap::after\{/);
  for(const lang of langs){
   const html=read(lang+'/index.html');
-  assert.match(html,/css\/pages\/team-directory\.css\?v=fitnames261026/);
-  assert.match(html,/js\/site-team\.js\?v=fitnames261026/);
+  assert.match(html,/css\/pages\/team-directory\.css\?v=social261026/);
+  assert.match(html,/js\/site-team\.js\?v=social261026/);
   assert.match(html,/id="teamTrack"/);
  }
 });
@@ -29,7 +29,7 @@ test('each localized biography route uses the same safely rendered live data',()
   const html=read(lang+'/profile.html');
   assert.match(html,/<section class="vp-profile"/);
   assert.match(html,/id="vp-bio"/);
-  assert.match(html,/team-profile\.js\?v=bios261025/);
+  assert.match(html,/team-profile\.js\?v=social261026/);
   assert.match(html,/team-profile\.css\?v=polish261026/);
  }
 });
@@ -98,3 +98,10 @@ test('public social links accept only supported buttons and safe protocols',()=>
  assert.equal(biography(null,'en'),'');
  assert.equal(biography(card,'__proto__'),'Türkçe');
  });
+
+test('contacts have a stable social order with email last, regardless of saved order',()=>{
+ const vm=require('node:vm'),context={window:{},URL};vm.runInNewContext(read('js/team-links.js'),context);
+ const links=[{label:'Email',url:'mailto:hello@example.com'},{label:'TikTok',url:'https://tiktok.com/@test'},{label:'Instagram',url:'https://instagram.com/test'},{label:'LinkedIn',url:'https://linkedin.com/in/test'},{label:'X',url:'https://x.com/test'}];
+ assert.equal(context.window.VertexTeamLinks.ordered(links).map(x=>x.key).join(','),'linkedin,instagram,x,tiktok,email');
+ assert.equal(links[0].label,'Email');
+});

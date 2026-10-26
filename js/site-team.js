@@ -116,8 +116,7 @@
             }
             var role=document.createElement('div');role.className='role';role.textContent=window.VertexTeamLinks.roleTitle(card,currentLang);
             var social=document.createElement('div');social.className='team-social';
-            (Array.isArray(card.links)?card.links:[]).forEach(function(link){
-                var normalized=window.VertexTeamLinks.normalize(link);if(!normalized)return;
+            window.VertexTeamLinks.ordered(card.links).forEach(function(normalized){
                 var a=document.createElement('a');a.href=normalized.href;
                 if(normalized.key!=='email'){a.target='_blank';a.rel='noopener noreferrer';}
                 a.setAttribute('aria-label',normalized.label+' · '+card.name);a.title=normalized.label;
