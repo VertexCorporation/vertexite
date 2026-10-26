@@ -17,12 +17,12 @@ for(const lang of langs){
  '<link id="vertex-favicon" rel="icon" href="/assets/favicon-light.svg" type="image/svg+xml">\n'+
  '<link rel="stylesheet" href="/assets/fonts/fonts.css">\n'+
  '<link rel="stylesheet" href="/css/layout/site-shell.css?v=profiles261021">\n'+
- '<link rel="stylesheet" href="/css/site-design.css?v=profiles261021">\n'+
- '<link rel="stylesheet" href="/css/pages/team-profile.css?v=staged300261023">\n'+
+ '<link rel="stylesheet" href="/css/site-design.css?v=polish261026d">\n'+
+ '<link rel="stylesheet" href="/css/pages/team-profile.css?v=polish261026d">\n'+
  '<script defer src="/js/site-shell.js?v=profiles261021"></script>\n'+
- '<script defer src="/js/site-design.js?v=biography261022"></script>\n'+
- '<script defer src="/js/team-links.js?v=profiles261021"></script>\n'+
- '<script defer src="/js/team-profile.js?v=profiles261021"></script></head>\n<body>\n'+
+ '<script defer src="/js/site-design.js?v=polish261026d"></script>\n'+
+ '<script defer src="/js/team-links.js?v=social261026d"></script>\n'+
+ '<script defer src="/js/team-profile.js?v=social261026d"></script></head>\n<body>\n'+
  localize(header)+'\n'+main+'\n'+localize(footer)+'\n</body></html>\n';
  fs.writeFileSync(path.join(root,lang,'profile.html'),html);
 }
