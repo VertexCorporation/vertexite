@@ -15,6 +15,7 @@
 .profile-skyline{position:absolute;inset:var(--profile-skyline-top,0px) 0 0;height:auto;z-index:-1;pointer-events:none;color:var(--text);opacity:.09;overflow:hidden;
  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 36%);mask-image:linear-gradient(to bottom,transparent,#000 36%)}
 .profile-skyline svg{display:block;width:100%;max-width:none;height:100%}
+@media(prefers-reduced-motion:no-preference){.profile-skyline{transition:height 800ms cubic-bezier(.2,.8,.2,1)}}
 .profile-skyline .city-buildings{mask-image:none}
 .profile-skyline .city-building{fill:none}
 /* Keep hover entry and exit equally soft on both biography layouts. */
