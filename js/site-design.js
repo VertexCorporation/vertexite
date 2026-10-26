@@ -124,6 +124,7 @@ document.querySelectorAll('.cta-band,.vp-main,.profile-page').forEach(container=
   const svg=sky.querySelector('svg');
   svg.setAttribute('viewBox','0 73 1440 237');
   svg.setAttribute('preserveAspectRatio','none');
+  let skylineMeasured=false;
   function fitProfileSkyline(){
    const portrait=container.querySelector('.vp-photo,.profile-photo-box,.profile-heading>img');
    if(!portrait)return;
@@ -131,6 +132,9 @@ document.querySelectorAll('.cta-band,.vp-main,.profile-page').forEach(container=
    while(node&&node!==stage){top+=node.offsetTop;node=node.offsetParent;}
    top=Math.max(0,top);
    stage.style.setProperty('--profile-skyline-top',top.toFixed(2)+'px');
+   const height=Math.max(0,stage.getBoundingClientRect().height-top);
+   if(!skylineMeasured){sky.style.transition='none';sky.style.height=height+'px';skylineMeasured=true;requestAnimationFrame(()=>{sky.style.transition='';});}
+   else sky.style.height=height+'px';
   }
   if('ResizeObserver' in window){
    const observer=new ResizeObserver(fitProfileSkyline);
