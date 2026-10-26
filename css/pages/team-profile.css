@@ -1,4 +1,4 @@
-@import url("./profile-photo-fog.css?v=staged300261023");
+@import url("./profile-photo-fog.css?v=polish261026");
 /* Dynamic leader biographies share the site's monochrome profile language. */
 :root{--vp-bg:var(--bg);--vp-surface:var(--bg);--vp-text:var(--text);--vp-muted:var(--text-muted);--vp-border:var(--border)}
 .vp-container{max-width:1150px;margin-inline:auto;padding-inline:clamp(20px,5vw,48px)}

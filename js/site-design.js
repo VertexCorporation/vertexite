@@ -119,6 +119,28 @@ document.querySelectorAll('.cta-band,.vp-main,.profile-page').forEach(container=
   sky.querySelector('.sky-clouds').remove();
   const stage=document.createElement('div');stage.className='profile-stage';
   container.before(stage);stage.append(container,sky);
+  // Stretch the skyline from the portrait's bottom to the footer, even when
+  // translated content, fonts or the async biography change the page height.
+  const svg=sky.querySelector('svg');
+  svg.setAttribute('viewBox','0 73 1440 237');
+  svg.setAttribute('preserveAspectRatio','none');
+  function fitProfileSkyline(){
+   const portrait=container.querySelector('.vp-photo,.profile-photo-box,.profile-heading>img');
+   if(!portrait)return;
+   let top=portrait.offsetHeight,node=portrait;
+   while(node&&node!==stage){top+=node.offsetTop;node=node.offsetParent;}
+   top=Math.max(0,top);
+   stage.style.setProperty('--profile-skyline-top',top.toFixed(2)+'px');
+  }
+  if('ResizeObserver' in window){
+   const observer=new ResizeObserver(fitProfileSkyline);
+   observer.observe(container);
+   const portrait=container.querySelector('.vp-photo,.profile-photo-box,.profile-heading>img');
+   if(portrait)observer.observe(portrait);
+  }
+  window.addEventListener('resize',fitProfileSkyline,{passive:true});
+  if(document.fonts)document.fonts.ready.then(fitProfileSkyline);
+  fitProfileSkyline();
  }else container.appendChild(sky);
 });
 if(cta&&'IntersectionObserver' in window)new IntersectionObserver(es=>es.forEach(e=>cta.classList.toggle('geometry-active',e.isIntersecting&&!reduced.matches))).observe(cta);

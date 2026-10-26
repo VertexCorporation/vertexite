@@ -102,7 +102,7 @@
 }
 .more-info-card:is(:hover,:focus-visible) {
   border-color:var(--text-muted);
-  background:var(--surface);
+  background:var(--hover);
 }
 .more-info-card:is(:hover,:focus-visible) .more-info-icon {
   opacity:1;

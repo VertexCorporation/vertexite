@@ -30,7 +30,7 @@ test('each localized biography route uses the same safely rendered live data',()
   assert.match(html,/<section class="vp-profile"/);
   assert.match(html,/id="vp-bio"/);
   assert.match(html,/team-profile\.js\?v=bios261025/);
-  assert.match(html,/team-profile\.css\?v=staged300261023/);
+  assert.match(html,/team-profile\.css\?v=polish261026/);
  }
 });
 
@@ -41,9 +41,9 @@ test('the original founder portraits and new biographies share four-sided fog',(
  assert.match(fog,/linear-gradient\(to right,transparent/);
  assert.match(fog,/linear-gradient\(to bottom,transparent/);
  assert.match(fog,/mask-composite:intersect/);
- assert.match(dynamicFog,/@import url\("\.\/profile-photo-fog\.css\?v=staged300261023"\)/);
+ assert.match(dynamicFog,/@import url\("\.\/profile-photo-fog\.css\?v=polish261026"\)/);
  for(const lang of langs){
-  assert.match(read(lang+'/mustafa-caki.html'),/profile-photo-fog\.css\?v=staged300261023/);
+  assert.match(read(lang+'/mustafa-caki.html'),/profile-photo-fog\.css\?v=polish261026/);
  }
 });
 

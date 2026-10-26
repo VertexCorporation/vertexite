@@ -11,7 +11,7 @@
     var available = Math.max(1, window.innerWidth - (window.innerWidth < 700 ? 28 : 40));
     var naturalWidth = Math.max(1, title.scrollWidth);
     var scale = Math.min(1, available / naturalWidth);
-    title.style.transform = 'translateX(-50%) scale(' + scale.toFixed(4) + ')';
+    title.style.transform = 'translateX(-50%) scale(' + scale.toFixed(4) + ',' + (scale * (window.innerWidth < 700 ? 1.18 : 1)).toFixed(4) + ')';
   }
   fit();
   window.addEventListener('resize', fit, {passive:true});
@@ -224,7 +224,7 @@ setTimeout(async function () {
     stage.appendChild(probe);
     var available = Math.max(1, stage.clientWidth - (window.innerWidth < 700 ? 28 : 40));
     var probeFit = Math.min(1, available / Math.max(1, decorative.scrollWidth));
-    decorative.style.transform = 'translateX(-50%) scale(' + probeFit.toFixed(5) + ')';
+    decorative.style.transform = 'translateX(-50%) scale(' + probeFit.toFixed(5) + ',' + (probeFit * (window.innerWidth < 700 ? 1.18 : 1)).toFixed(5) + ')';
     var frame = stage.getBoundingClientRect();
     var titleBounds = decorative.getBoundingClientRect();
     var actionBounds = probeActions.getBoundingClientRect();
@@ -397,7 +397,7 @@ setTimeout(async function () {
     var grow = smooth(phase(progress, .28, .56));
     var motionScale = mix(mix(1, .84, shrink), 1, grow);
     var titleTop = openingTop.toFixed(2) + 'px';
-    var titleTransform = 'translate3d(-50%,' + lift.toFixed(2) + 'px,0) scale(' + (openingFit * motionScale).toFixed(5) + ')';
+    var titleTransform = 'translate3d(-50%,' + lift.toFixed(2) + 'px,0) scale(' + (openingFit * motionScale).toFixed(5) + ',' + (openingFit * motionScale * (window.innerWidth < 700 ? 1.18 : 1)).toFixed(5) + ')';
     titleEl.style.top = blendTitleEl.style.top = titleTop;
     titleEl.style.transform = blendTitleEl.style.transform = titleTransform;
     titleEl.style.setProperty('--story-solid-opacity', (1 - headingBlend).toFixed(3));
@@ -415,11 +415,11 @@ setTimeout(async function () {
       var sponsorsHeight = sponsorsEl.offsetHeight;
       var proofHeight = proofEl.offsetHeight;
       var combinedHeight = sponsorsHeight + proofHeight + 14;
-      var targetTop = Math.max(titleBottom + 20, Math.min(306, window.innerHeight * .34));
+      var targetTop = Math.max(titleBottom + 20, Math.min(306, stage.clientHeight * .34));
       var sponsorTop = Math.max(titleBottom + 12, Math.min(targetTop, stage.clientHeight - combinedHeight - 34));
       sponsorsEl.style.top = sponsorTop + 'px';
       proofEl.style.top = (sponsorTop + sponsorsHeight + 14) + 'px';
-      [statementEl,metricsEl].forEach(function(panel){panel.style.top=Math.max(titleBottom+24,Math.min(306,window.innerHeight*.34))+'px';});
+      [statementEl,metricsEl].forEach(function(panel){panel.style.top=Math.max(titleBottom+24,Math.min(306,stage.clientHeight*.34))+'px';});
     }
     reveal(sponsorsEl, sponsorIn, 28);
     reveal(proofEl, sponsorIn, 28);
@@ -461,6 +461,8 @@ setTimeout(async function () {
 
   window.addEventListener('scroll', requestRender, { passive: true });
   window.addEventListener('resize', function(){measureTitle();measureOpeningFrame();requestRender();}, { passive: true });
+  if(window.visualViewport)window.visualViewport.addEventListener('resize',requestRender,{passive:true});
+  if('ResizeObserver' in window)new ResizeObserver(requestRender).observe(stage);
   document.addEventListener('visibilitychange', function () { if (!document.hidden) requestRender(); });
   new MutationObserver(requestRender).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
   render();

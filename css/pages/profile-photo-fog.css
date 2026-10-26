@@ -12,7 +12,7 @@
 /* One quiet, enlarged skyline behind every biography, with no ongoing motion. */
 :is(.profile-page,.vp-main){position:relative;isolation:isolate;padding-top:clamp(24px,3vw,40px)}
 :is(.profile-page>article,.vp-profile){position:relative;z-index:1}
-.profile-skyline{position:absolute;inset:auto 0 0;height:min(100%,clamp(400px,75svh,850px));z-index:-1;pointer-events:none;color:var(--text);opacity:.09;overflow:hidden;
+.profile-skyline{position:absolute;inset:var(--profile-skyline-top,0px) 0 0;height:auto;z-index:-1;pointer-events:none;color:var(--text);opacity:.09;overflow:hidden;
  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 36%);mask-image:linear-gradient(to bottom,transparent,#000 36%)}
 .profile-skyline svg{display:block;width:100%;max-width:none;height:100%}
 .profile-skyline .city-buildings{mask-image:none}
@@ -24,3 +24,14 @@
  @keyframes biographySkylineEnter{from{opacity:0;transform:translateY(64px)}to{opacity:.09;transform:none}}
 }
 
+
+/* Follow the biography until its footer boundary, below the shared navigation. */
+:is(.profile-links,.vp-links){position:sticky;top:88px;align-self:start;max-height:calc(100svh - 108px);overflow-y:auto}
+@media(max-width:700px){
+ :is(.profile-layout,.vp-grid)>:is(.profile-links,.vp-links){grid-row:1;z-index:3;padding:12px 16px;border:1px solid var(--border);border-radius:12px;background:color-mix(in srgb,var(--bg) 78%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px)}
+ :is(.profile-links,.vp-links) h2{font-size:15px;margin:0 0 6px}
+ .vp-links #vp-links{display:flex;gap:20px;overflow-x:auto}
+ .vp-links .vp-link{flex:none;margin:0;min-height:36px}
+ .profile-links{display:flex;align-items:center;gap:20px;overflow-x:auto}
+ .profile-links h2,.profile-links a{flex:none;margin:0!important}
+}

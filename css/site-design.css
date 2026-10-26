@@ -1,6 +1,6 @@
 /* Shared public UI: Vertex Console tokens, controls, motion and loading. */
-:root,html[data-theme="light"]{--bg:#F8F9FA;--surface:#FFFFFF;--surface-2:#EFF1F3;--text:#17191D;--text-muted:#707782;--border:#E3E5E8;--border-strong:#D4D7DB;--hover:#EFF1F3;--action:#191B1F;--action-ink:#FFF;--header-bg:rgba(248,249,250,.9);--header-bg-scrolled:rgba(248,249,250,.96);--header-shadow:none;--radius-s:8px;--radius-m:12px;--dur:170ms;--ui-ease:cubic-bezier(.2,.8,.2,1);--status-success:#2E8B67;--status-error:#C2482F;}
-html[data-theme="dark"]{--bg:#0F0F10;--surface:#171717;--surface-2:#212121;--text:#F5F5F5;--text-muted:#858585;--border:#292929;--border-strong:#353535;--hover:#242424;--action:#F5F5F5;--action-ink:#171717;--header-bg:rgba(15,15,16,.9);--header-bg-scrolled:rgba(15,15,16,.96);--header-shadow:none;--status-success:#3FB68B;--status-error:#E5654E;}
+:root,html[data-theme="light"]{--bg:#F8F9FA;--surface:#FFFFFF;--surface-2:#EFF1F3;--text:#17191D;--text-muted:#707782;--border:#E3E5E8;--border-strong:#D4D7DB;--hover:#EFF1F3;--action:#191B1F;--action-ink:#FFF;--header-bg:rgba(248,249,250,.64);--header-bg-scrolled:rgba(248,249,250,.74);--header-shadow:none;--radius-s:8px;--radius-m:12px;--dur:170ms;--ui-ease:cubic-bezier(.2,.8,.2,1);--status-success:#2E8B67;--status-error:#C2482F;}
+html[data-theme="dark"]{--bg:#0F0F10;--surface:#171717;--surface-2:#212121;--text:#F5F5F5;--text-muted:#858585;--border:#292929;--border-strong:#353535;--hover:#242424;--action:#F5F5F5;--action-ink:#171717;--header-bg:rgba(15,15,16,.64);--header-bg-scrolled:rgba(15,15,16,.74);--header-shadow:none;--status-success:#3FB68B;--status-error:#E5654E;}
 .btn,.icon-btn,.store-badge,button{border-radius:8px;transition:background-color 120ms var(--ui-ease),border-color 120ms var(--ui-ease),color 120ms var(--ui-ease),opacity 120ms var(--ui-ease);box-shadow:none;}
 .btn{min-height:40px;padding:10px 16px;font-size:14px;font-weight:500;border:1px solid var(--border-strong);}
 .btn-primary,.story-actions .btn-primary{background:var(--action);color:var(--action-ink);border-color:transparent;}
@@ -27,7 +27,7 @@ input,select,textarea{border-color:var(--border-strong);border-radius:8px;backgr
 .cta-band::before{background:none;border:1px solid var(--text);width:360px;height:360px;inset:auto;left:8%;top:50%;transform:translateY(-50%) rotate(25deg);opacity:.1;animation:ctaGeometry 20s ease-in-out infinite;animation-play-state:paused;}
 .cta-band::after{content:'';position:absolute;width:290px;height:290px;border:1px solid var(--text);border-radius:50%;right:8%;top:50%;opacity:.09;z-index:-1;pointer-events:none;transform:translateY(-50%) rotate(0);animation:ctaGeometry 26s ease-in-out infinite reverse;animation-play-state:paused;}
 .cta-band.geometry-active::before,.cta-band.geometry-active::after{animation-play-state:running;}@keyframes ctaGeometry{0%,100%{transform:translateY(-50%) rotate(25deg) scale(.85)}50%{transform:translateY(-46%) rotate(65deg) scale(1.1)}}
-.story-sponsors,.story-statement,.story-metrics{background:var(--surface);border-color:var(--border);box-shadow:none;backdrop-filter:none;}
+.story-stage>:is(.story-sponsors,.story-proof,.story-statement,.story-metrics){background:var(--story-panel);border-color:var(--story-panel-border);box-shadow:var(--story-panel-shadow);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);}
 .story-quick-status{color:var(--text-muted);font-size:13px;}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.skeleton::after{animation:none!important}.cta-band::before,.cta-band::after{animation:none!important}.story-actions{position:relative!important;top:auto!important;}}
 /* Stable header geometry prevents threshold/layout feedback while scrolling. */
@@ -394,3 +394,10 @@ html[data-theme="dark"] #themeBtn:not([data-theme-mode]) > #themeIconSun{opacity
  .tech-card h3{font-size:19px}
  .tech-card .stack{font-size:14px}
 }
+
+/* Both hamburger strokes share one centre and identical geometry. */
+#siteHeader .menu-btn{position:relative;gap:0;flex-shrink:0}
+#siteHeader .menu-btn span{position:absolute;left:50%;top:50%;width:18px;height:2px;flex:none;transform-origin:center;transform:translate(-50%,-50%) translateY(-3.5px)}
+#siteHeader .menu-btn span:last-child{transform:translate(-50%,-50%) translateY(3.5px)}
+#siteHeader.menu-open .menu-btn span:first-child{transform:translate(-50%,-50%) rotate(45deg)}
+#siteHeader.menu-open .menu-btn span:last-child{transform:translate(-50%,-50%) rotate(-45deg)}
