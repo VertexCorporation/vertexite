@@ -114,7 +114,18 @@ document.querySelectorAll('.cta-band,.vp-main,.profile-page').forEach(container=
  if(!split)buildings+='<path class="city-roof-detail" opacity=".6" d="M'+(x+7)+' '+y+'V'+(y-7)+'H'+(x+w-7)+'V'+y+(i%4===1?' M'+mid+' '+(y-7)+'v-16':'')+'"/>';
  for(let row=y+16;row<ground-12;row+=17)for(let col=x+10;col<x+w-8;col+=13){windows+='M'+col+' '+row+'h6v6h-6Z ';}
  });
- sky.innerHTML='<svg viewBox="0 0 1440 310" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width=".85"><g class="sky-clouds" opacity=".45"><path d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/><path transform="translate(1440)" d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/></g><g class="city-buildings">'+buildings+'<path class="city-ground" d="M0 310H1440"/><path class="city-windows" d="'+windows+'" opacity=".42" stroke-width=".65"/></g></svg>';
+ // A sparse, six-building skyline for phone-sized biography pages.
+ // Avoid squeezing the desktop's sixteen buildings into a narrow viewport.
+ let mobileBuildings='',mobileWindows='';
+ const mobileHeights=[182,232,205,227,192,221];
+ mobileHeights.forEach((height,i)=>{
+  const x=i*240+18,w=166,ground=310,y=ground-height,mid=x+w/2,split=i%3===0;
+  mobileBuildings+='<path class="city-building" d="M'+x+' '+ground+'V'+y+(split?'L'+mid+' '+(y-9)+'L'+(x+w)+' '+y:'H'+(x+w))+'V'+ground+'Z"/>';
+  if(!split)mobileBuildings+='<path class="city-roof-detail" opacity=".6" d="M'+(x+14)+' '+y+'v-9H'+(x+w-14)+'v9"/>';
+  for(let row=y+24;row<ground-15;row+=24)for(let col=x+26;col<x+w-20;col+=36)
+   mobileWindows+='M'+col+' '+row+'h12v9h-12Z ';
+ });
+ sky.innerHTML='<svg viewBox="0 0 1440 310" preserveAspectRatio="xMidYMax slice" fill="none" stroke="currentColor" stroke-width=".85"><g class="sky-clouds" opacity=".45"><path d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/><path transform="translate(1440)" d="M-300 32h160m35 0h70 M100 66h140m30 0h50 M620 22h180m25 0h75 M1000 82h190"/></g><g class="city-buildings city-buildings-desktop">'+buildings+'<path class="city-ground" d="M0 310H1440"/><path class="city-windows" d="'+windows+'" opacity=".42" stroke-width=".65"/></g>'+(isProfile?'<g class="city-buildings city-buildings-mobile">'+mobileBuildings+'<path class="city-ground" d="M0 310H1440"/><path class="city-windows" d="'+mobileWindows+'" opacity=".42" stroke-width=".8"/></g>':'')+'</svg>';
  if(isProfile){
   sky.querySelector('.sky-clouds').remove();
   const stage=document.createElement('div');stage.className='profile-stage';

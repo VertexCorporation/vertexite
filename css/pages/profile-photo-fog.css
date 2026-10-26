@@ -18,6 +18,18 @@
 @media(prefers-reduced-motion:no-preference){.profile-skyline{transition:height 800ms cubic-bezier(.2,.8,.2,1)}}
 .profile-skyline .city-buildings{mask-image:none}
 .profile-skyline .city-building{fill:none}
+/* Six wider, taller buildings on phones. Desktop retains all 16. */
+.profile-skyline .city-buildings-mobile{display:none}
+@media(max-width:700px){
+ .profile-skyline .city-buildings-desktop{display:none}
+ .profile-skyline .city-buildings-mobile{display:inline}
+ /* Reveal more of the rooftops toward the top of the biography. */
+ .profile-skyline{
+  -webkit-mask-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.35) 10%,#000 28%);
+  mask-image:linear-gradient(to bottom,transparent,rgba(0,0,0,.35) 10%,#000 28%);
+ }
+}
+
 /* Keep hover entry and exit equally soft on both biography layouts. */
 :is(.profile-links,.vp-links) a{transition:color 240ms cubic-bezier(.2,.8,.2,1),background-color 240ms cubic-bezier(.2,.8,.2,1)}
 @media(prefers-reduced-motion:reduce){:is(.profile-links,.vp-links) a{transition:none!important}}

@@ -74,6 +74,21 @@ const server=http.createServer((req,res)=>{
    assert.equal(await page.locator('#vp-links a[href="mailto:test@example.com"]').count(),1);
    assert.equal(await page.locator('#vp-links a').last().getAttribute('data-social'),'email');
    assert.equal(await page.locator('.profile-skyline').evaluate(el=>getComputedStyle(el).visibility),'visible');
+   const skyline=await page.locator('.profile-skyline').evaluate(el=>{
+    const mobile=el.querySelector('.city-buildings-mobile'),desktop=el.querySelector('.city-buildings-desktop');
+    return {mobileBuildings:mobile?.querySelectorAll('.city-building').length,
+      desktopBuildings:desktop?.querySelectorAll('.city-building').length,
+      mobileDisplay:getComputedStyle(mobile).display,desktopDisplay:getComputedStyle(desktop).display};
+   });
+   assert.equal(skyline.mobileBuildings,6,'mobile skyline contains six larger towers');
+   assert.equal(skyline.desktopBuildings,16,'desktop skyline retains its sixteen towers');
+   if(width<=700){
+    assert.notEqual(skyline.mobileDisplay,'none','mobile skyline is visible');
+    assert.equal(skyline.desktopDisplay,'none','dense skyline is hidden on phones');
+   }else{
+    assert.equal(skyline.mobileDisplay,'none','mobile skyline is hidden on desktop');
+    assert.notEqual(skyline.desktopDisplay,'none','desktop skyline remains visible');
+   }
    assert.ok((await page.locator('.lang-row').first().getAttribute('href')).includes('/profile.html?id=test-0'));
    assert.ok((await page.locator('.nav-links a').first().getAttribute('href')).includes('/'+lang+'/#home'));
    if(width<=768){
