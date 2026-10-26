@@ -19,7 +19,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run test:team
-      - run: npx playwright install --with-deps chromium
+      - run: npx playwright install chromium
       - run: node tests/mobile-team-browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
