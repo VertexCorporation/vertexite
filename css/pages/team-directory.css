@@ -69,3 +69,7 @@
 /* The filled X badge has a white knockout: preserve both tones. */
 #team .team-social a[data-social="x"] img{filter:none}
 html[data-theme="dark"] #team .team-social a[data-social="x"] img{filter:invert(1)}
+
+/* TikTok follows the same filled monochrome badge treatment as X. */
+#team .team-social a[data-social="tiktok"] img{filter:none}
+html[data-theme="dark"] #team .team-social a[data-social="tiktok"] img{filter:invert(1)}

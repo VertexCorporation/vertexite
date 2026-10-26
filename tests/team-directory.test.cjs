@@ -115,3 +115,15 @@ test('brand X icon stays filled and weekly stars have rounded filled corners',()
  assert.match(read('css/site-design.css'),/\.weekly-star svg\{[^}]*fill:currentColor;[^}]*stroke-linejoin:round/);
  assert.match(read('css/pages/team-directory.css'),/data-social="x"\] img\{filter:invert\(1\)\}/);
 });
+
+test('TikTok matches X as a filled two-tone rounded-square in both themes',()=>{
+ const tiktok=read('assets/tiktok.svg');
+ assert.match(tiktok,/<rect[^>]+rx="4"[^>]+fill="#000"/);
+ assert.match(tiktok,/<path[^>]+fill="#fff"/);
+ for(const [file,selector] of [['css/pages/team-directory.css','#team .team-social a'],['css/pages/team-profile.css','.vp-link']]){
+  const css=read(file);
+  assert.ok(css.includes(selector+'[data-social="tiktok"] img{filter:none}'));
+  assert.ok(css.includes('html[data-theme="dark"] '+selector+'[data-social="tiktok"] img{filter:invert(1)}'));
+ }
+ assert.match(read('js/team-links.js'),/solid261026e/);
+});

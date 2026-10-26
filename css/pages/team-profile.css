@@ -30,3 +30,6 @@
 /* Retain the black square and white X in both themes. */
 .vp-link[data-social="x"] img{filter:none}
 html[data-theme="dark"] .vp-link[data-social="x"] img{filter:invert(1)}
+
+.vp-link[data-social="tiktok"] img{filter:none}
+html[data-theme="dark"] .vp-link[data-social="tiktok"] img{filter:invert(1)}
