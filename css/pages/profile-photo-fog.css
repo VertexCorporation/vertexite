@@ -17,6 +17,9 @@
 .profile-skyline svg{display:block;width:100%;max-width:none;height:100%}
 .profile-skyline .city-buildings{mask-image:none}
 .profile-skyline .city-building{fill:none}
+/* Keep hover entry and exit equally soft on both biography layouts. */
+:is(.profile-links,.vp-links) a{transition:color 240ms cubic-bezier(.2,.8,.2,1),background-color 240ms cubic-bezier(.2,.8,.2,1)}
+@media(prefers-reduced-motion:reduce){:is(.profile-links,.vp-links) a{transition:none!important}}
 @media(prefers-reduced-motion:no-preference){
  :is(.profile-page>article,.vp-profile){animation:biographyEnter 600ms cubic-bezier(.2,.8,.2,1) 300ms both}
  .profile-skyline{animation:biographySkylineEnter 950ms cubic-bezier(.2,.8,.2,1) both}
