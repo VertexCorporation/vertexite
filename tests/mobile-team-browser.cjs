@@ -38,12 +38,26 @@ const server=http.createServer((req,res)=>{
      portrait:rect('.team-photo-wrap').width,portraitHeight:rect('.team-photo-wrap').height,
      clipped:cards.some(card=>card.scrollHeight>card.clientHeight+1),
      socials:cards[0].querySelectorAll('.team-social a').length,
+     socialLayout:(()=>{
+      const host=cards[0].querySelector('.team-social');
+      const buttons=[...host.querySelectorAll('a')].map(a=>{const r=a.getBoundingClientRect();return {cx:r.x+r.width/2,top:r.top}});
+      return {width:host.clientWidth,overflow:host.scrollWidth-host.clientWidth,buttons};
+     })(),
      fog:getComputedStyle(document.querySelector('.team-photo')).maskImage};
    });
    if(width<=860)assert.ok(Math.abs(geometry.feature-geometry.available)<2,JSON.stringify({width,lang,geometry}));
    if(width<=700)assert.ok(geometry.tech>width-90,'technology card must use phone width');
    assert.ok(Math.abs(geometry.portrait-geometry.portraitHeight)<2,'portrait must stay square');
    assert.equal(geometry.clipped,false,'team content must not clip');assert.equal(geometry.socials,5);
+   const social=geometry.socialLayout,spots=social.buttons,near=(a,b)=>Math.abs(a-b)<4;
+   assert.ok(social.overflow<=1,'social links must not overflow the card');
+   if(social.width<=190){
+    assert.ok(spots.slice(0,3).every(x=>near(x.top,spots[0].top)),'first three icons share a row');
+    assert.ok(spots.slice(3).every(x=>near(x.top,spots[3].top)),'last two icons share a row');
+    assert.ok(spots[3].top>spots[0].top,'small cards use staggered 3+2 icons');
+    assert.ok(near(spots[3].cx,(spots[0].cx+spots[1].cx)/2),'fourth icon centered between first two');
+    assert.ok(near(spots[4].cx,(spots[1].cx+spots[2].cx)/2),'fifth icon centered between second and third');
+   }else assert.ok(spots.every(x=>near(x.top,spots[0].top)),'wide cards keep five icons in a row');
    assert.ok(geometry.fog.includes('linear-gradient'));
    assert.equal(await page.locator('.team-card.profile-unavailable .team-profile-link').count(),0);
    if(lang==='en'&&width===390){
@@ -58,6 +72,8 @@ const server=http.createServer((req,res)=>{
    assert.equal(await page.locator('#siteHeader').count(),1);assert.equal(await page.locator('footer').count(),1);
    assert.equal(await page.locator('#vp-back').count(),0);assert.equal(await page.locator('#vp-photo img').count(),1);assert.equal(await page.locator('#vp-links a').count(),5);
    assert.equal(await page.locator('#vp-links a[href="mailto:test@example.com"]').count(),1);
+   assert.equal(await page.locator('#vp-links a').last().getAttribute('data-social'),'email');
+   assert.equal(await page.locator('.profile-skyline').evaluate(el=>getComputedStyle(el).visibility),'visible');
    assert.ok((await page.locator('.lang-row').first().getAttribute('href')).includes('/profile.html?id=test-0'));
    assert.ok((await page.locator('.nav-links a').first().getAttribute('href')).includes('/'+lang+'/#home'));
    if(width<=768){
