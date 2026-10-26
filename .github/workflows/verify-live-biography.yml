@@ -1,0 +1,51 @@
+name: Verify live biography skyline
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-live-biography.yml
+permissions:
+  contents: read
+jobs:
+  smoke:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - name: Verify live HTML, JS and CSS served by vertexishere.com
+        shell: bash
+        run: |
+          set -euo pipefail
+          host="https://vertexishere.com"
+          fetch() { curl -fLsS --compressed --connect-timeout 10 --max-time 25 --retry 2 --retry-delay 2 "$1"; }
+          echo "Checking deployed files on $host"
+          found=0
+          for attempt in {1..9}; do
+            if fetch "$host/js/site-design.js?skyline-check=$GITHUB_SHA" > /tmp/live-site-design.js &&
+               fetch "$host/css/pages/profile-photo-fog.css?skyline-check=$GITHUB_SHA" > /tmp/live-fog.css &&
+               grep -Fq 'mobileHeights=[182,232,205,227,192,221]' /tmp/live-site-design.js &&
+               grep -Fq '.profile-skyline .city-buildings-mobile{display:inline}' /tmp/live-fog.css; then
+              found=1
+              echo "Live six-building skyline and responsive CSS confirmed."
+              break
+            fi
+            echo "Attempt $attempt: live assets not yet current; retrying."
+            sleep 15
+          done
+          if [[ "$found" != 1 ]]; then
+            echo "::error::Live skyline assets could not be confirmed on $host"
+            exit 1
+          fi
+          langs=(ar az de en es fr hi id it ja ko nl pt ru tr zh)
+          for lang in "${langs[@]}"; do
+            dynamic="$host/$lang/profile.html?skyline-check=$GITHUB_SHA"
+            legacy="$host/$lang/mustafa-caki.html?skyline-check=$GITHUB_SHA"
+            fetch "$dynamic" > /tmp/live-biography.html
+            grep -Fq 'site-design.js?v=polish261026f' /tmp/live-biography.html || { echo "::error::Outdated site-design.js in $dynamic"; exit 1; }
+            grep -Fq 'team-profile.css?v=polish261026f' /tmp/live-biography.html || { echo "::error::Outdated team-profile.css in $dynamic"; exit 1; }
+            fetch "$legacy" > /tmp/live-founder.html
+            grep -Fq 'site-design.js?v=polish261026f' /tmp/live-founder.html || { echo "::error::Outdated site-design.js in $legacy"; exit 1; }
+            grep -Fq 'profile-photo-fog.css?v=polish261026f' /tmp/live-founder.html || { echo "::error::Outdated skyline CSS in $legacy"; exit 1; }
+            echo "PASS $lang: dynamic and founder biography HTML are live"
+          done
+          echo "Live deployment verified across all 16 languages (32 pages), plus JS and CSS assets."
