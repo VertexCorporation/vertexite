@@ -12,6 +12,7 @@
         track.replaceChildren();
         if (block) block.hidden = !values.length;
         var container = track.parentElement;
+        track.classList.add('names-static');
         track.style.animation = 'none'; track.style.width = 'max-content'; track.style.flexWrap = 'nowrap';
         track.style.justifyContent = 'flex-start'; container.style.maskImage = ''; container.style.webkitMaskImage = '';
         function append(duplicate) { values.forEach(function (name) {
@@ -21,7 +22,10 @@
         append(false);
         if (!values.length) return;
         var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        if (!reduced) {
+        // Loop only when multiple real names overflow the available width.
+        // Measure before duplicating, otherwise one name becomes two moving copies.
+        if (!reduced && values.length > 1 && track.scrollWidth > container.clientWidth + 1) {
+            track.classList.remove('names-static');
             append(true); track.style.setProperty('--name-cycle',(track.children[values.length].getBoundingClientRect().left-track.children[0].getBoundingClientRect().left)+'px'); track.style.animation = ''; track.style.animationName='publicNamesLoop'; track.style.animationDuration = '10s';
         } else {
             track.style.width = '100%'; track.style.flexWrap = 'wrap'; track.style.justifyContent = 'center';
@@ -165,10 +169,18 @@
             var cached=window.VertexPublicCache&&window.VertexPublicCache.read(cacheKey);
             if(!cached||!cached.fresh)load();
         });
-        window.addEventListener('resize',function(){
+        function resizeNames(){
             if(!current)return;
             clearTimeout(timer);timer=setTimeout(function(){fill('modTrack',names(current.staff),'mod-item');fill('staffTrack',names([].concat(current.mods||[],current.chefs||[])).sort(function(a,b){return a.localeCompare(b,lang);}), 'mod-item');fill('honorTrack',names(current.honors),'mod-item');fill('weeklyStarsTrack',names(current.weeklyStars),'mod-item weekly-star');},120);
-        });
+        }
+        window.addEventListener('resize',resizeNames);
+        if(document.fonts)document.fonts.ready.then(resizeNames);
+        if(window.ResizeObserver){
+            var observer=new ResizeObserver(resizeNames);
+            ['modTrack','staffTrack','honorTrack','weeklyStarsTrack'].forEach(function(id){
+                var track=document.getElementById(id);if(track)observer.observe(track.parentElement);
+            });
+        }
     }
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
 })();

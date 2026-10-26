@@ -47,3 +47,9 @@
 #team .team-social a:hover{background:var(--hover)}
 #team .team-social img{width:19px;height:19px}
 #team .team-card:not(.skeleton)::before,#team .team-card:not(.skeleton)::after{content:none}
+
+/* Short name lists are centered once, without duplicate names or a final separator. */
+.mod-track.names-static{gap:16px 0}
+.mod-track.names-static .mod-item{max-width:100%;white-space:normal;overflow-wrap:anywhere}
+.mod-track.names-static .mod-item:last-child{padding-right:0}
+.mod-track.names-static .mod-item:last-child::after{content:none}
