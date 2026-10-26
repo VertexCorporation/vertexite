@@ -41,7 +41,7 @@ test('the original founder portraits and new biographies share four-sided fog',(
  assert.match(fog,/linear-gradient\(to right,transparent/);
  assert.match(fog,/linear-gradient\(to bottom,transparent/);
  assert.match(fog,/mask-composite:intersect/);
- assert.match(dynamicFog,/@import url\("\.\/profile-photo-fog\.css\?v=polish261026"\)/);
+ assert.match(dynamicFog,/@import url\("\.\/profile-photo-fog\.css\?v=polish261026[a-z]*"\)/);
  for(const lang of langs){
   assert.match(read(lang+'/mustafa-caki.html'),/profile-photo-fog\.css\?v=polish261026/);
  }
