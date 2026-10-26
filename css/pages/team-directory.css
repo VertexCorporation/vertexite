@@ -65,3 +65,7 @@
  #team .team-social:has(a:nth-child(5)):not(:has(a:nth-child(6))) a:nth-child(4){grid-column:2 / span 2}
  #team .team-social:has(a:nth-child(5)):not(:has(a:nth-child(6))) a:nth-child(5){grid-column:4 / span 2}
 }
+
+/* The filled X badge has a white knockout: preserve both tones. */
+#team .team-social a[data-social="x"] img{filter:none}
+html[data-theme="dark"] #team .team-social a[data-social="x"] img{filter:invert(1)}

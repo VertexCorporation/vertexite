@@ -16,7 +16,7 @@
         track.style.animation = 'none'; track.style.width = 'max-content'; track.style.flexWrap = 'nowrap';
         track.style.justifyContent = 'flex-start'; container.style.maskImage = ''; container.style.webkitMaskImage = '';
         function append(duplicate) { values.forEach(function (name) {
-            var span = document.createElement('span'); span.className = itemClass; span.textContent = name;if(itemClass.includes('weekly-star')){var star=document.createElementNS('http://www.w3.org/2000/svg','svg');star.setAttribute('viewBox','0 0 24 24');star.setAttribute('aria-hidden','true');star.innerHTML='<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z"/>';span.prepend(star);}
+            var span = document.createElement('span'); span.className = itemClass; span.textContent = name;if(itemClass.includes('weekly-star')){var star=document.createElementNS('http://www.w3.org/2000/svg','svg');star.setAttribute('viewBox','0 0 24 24');star.setAttribute('aria-hidden','true');star.innerHTML='<path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.3l-5.6 2.9 1.1-6.2L3 9.6l6.2-.9Z" stroke-linejoin="round" stroke-linecap="round"/>';span.prepend(star);}
             if (duplicate) span.setAttribute('aria-hidden', 'true'); track.appendChild(span);
         }); }
         append(false);
@@ -119,7 +119,7 @@
             window.VertexTeamLinks.ordered(card.links).forEach(function(normalized){
                 var a=document.createElement('a');a.href=normalized.href;
                 if(normalized.key!=='email'){a.target='_blank';a.rel='noopener noreferrer';}
-                a.setAttribute('aria-label',normalized.label+' · '+card.name);a.title=normalized.label;
+                a.setAttribute('aria-label',normalized.label+' · '+card.name);a.title=normalized.label;a.dataset.social=normalized.key;
                 a.addEventListener('click',function(e){e.stopPropagation();});
                 var img=document.createElement('img');img.alt='';img.src=normalized.icon;
                 a.appendChild(img);social.appendChild(a);

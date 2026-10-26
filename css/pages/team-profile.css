@@ -1,4 +1,4 @@
-@import url("./profile-photo-fog.css?v=polish261026");
+@import url("./profile-photo-fog.css?v=polish261026c");
 /* Dynamic leader biographies share the site's monochrome profile language. */
 :root{--vp-bg:var(--bg);--vp-surface:var(--bg);--vp-text:var(--text);--vp-muted:var(--text-muted);--vp-border:var(--border)}
 .vp-container{max-width:1150px;margin-inline:auto;padding-inline:clamp(20px,5vw,48px)}
@@ -26,3 +26,7 @@
 .vp-heading>div:last-child{min-width:0}
 @media(max-width:400px){.vp-heading{align-items:flex-start;flex-direction:column}.vp-heading h1{font-size:30px}}
 
+
+/* Retain the black square and white X in both themes. */
+.vp-link[data-social="x"] img{filter:none}
+html[data-theme="dark"] .vp-link[data-social="x"] img{filter:invert(1)}

@@ -105,3 +105,13 @@ test('contacts have a stable social order with email last, regardless of saved o
  assert.equal(context.window.VertexTeamLinks.ordered(links).map(x=>x.key).join(','),'linkedin,instagram,x,tiktok,email');
  assert.equal(links[0].label,'Email');
 });
+
+test('brand X icon stays filled and weekly stars have rounded filled corners',()=>{
+ const x=read('assets/x.svg');
+ assert.match(x,/<rect[^>]+fill="#000"/);
+ assert.match(x,/<path[^>]+fill="#fff"/);
+ assert.match(read('js/site-team.js'),/a\.dataset\.social=normalized\.key/);
+ assert.match(read('js/team-profile.js'),/a\.dataset\.social=normalized\.key/);
+ assert.match(read('css/site-design.css'),/\.weekly-star svg\{[^}]*fill:currentColor;[^}]*stroke-linejoin:round/);
+ assert.match(read('css/pages/team-directory.css'),/data-social="x"\] img\{filter:invert\(1\)\}/);
+});
