@@ -13,8 +13,8 @@ test('every localized homepage loads the new managed directory and equal-card st
  assert.match(css,/#team \.team-photo-wrap::after\{/);
  for(const lang of langs){
   const html=read(lang+'/index.html');
-  assert.match(html,/css\/pages\/team-directory\.css\?v=fog261023/);
-  assert.match(html,/js\/site-team\.js\?v=bios261025/);
+  assert.match(html,/css\/pages\/team-directory\.css\?v=fitnames261026/);
+  assert.match(html,/js\/site-team\.js\?v=fitnames261026/);
   assert.match(html,/id="teamTrack"/);
  }
 });
