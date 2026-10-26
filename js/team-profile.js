@@ -65,6 +65,8 @@ async function load(){
   }
   el('vp-links-pane').hidden=!links.children.length;
   el('vp-content').hidden=false;el('vp-error').hidden=true;
+  // Notify the skyline after biography text and links are in the real layout.
+  el('vp-content').dispatchEvent(new Event('vertex:profile-ready',{bubbles:true}));
  }catch(error){unavailable(words[3]);console.warn('[profile] unavailable',error)}
 }
 // Language switching keeps the selected person on the equivalent profile route.
