@@ -1,72 +1,108 @@
 / /en/ 301
 /verify/* /verify 200
-/muze /tr/ 302
-/team/mustafa-caki /en/mustafa-caki 301
-/team/mustafa-caki/ /en/mustafa-caki 301
+/muze /tr/ 301
+/muze/ /tr/ 301
+/muze.html /tr/ 301
 
-/ar/team/mustafa-caki /ar/mustafa-caki 301
-/ar/team/mustafa-caki/ /ar/mustafa-caki 301
-/ar/mustafa-caki/ /ar/mustafa-caki 301
+# Legacy founder URLs: preserve language and deep links to data-driven profiles.
+/team/mustafa-caki /en/profile.html?slug=mustafa-caki 301
+/team/mustafa-caki/ /en/profile.html?slug=mustafa-caki 301
 
-/az/team/mustafa-caki /az/mustafa-caki 301
-/az/team/mustafa-caki/ /az/mustafa-caki 301
-/az/mustafa-caki/ /az/mustafa-caki 301
+/ar/team/mustafa-caki /ar/profile.html?slug=mustafa-caki 301
+/ar/team/mustafa-caki/ /ar/profile.html?slug=mustafa-caki 301
+/ar/mustafa-caki /ar/profile.html?slug=mustafa-caki 301
+/ar/mustafa-caki/ /ar/profile.html?slug=mustafa-caki 301
+/ar/mustafa-caki.html /ar/profile.html?slug=mustafa-caki 301
 
-/de/team/mustafa-caki /de/mustafa-caki 301
-/de/team/mustafa-caki/ /de/mustafa-caki 301
-/de/mustafa-caki/ /de/mustafa-caki 301
+/az/team/mustafa-caki /az/profile.html?slug=mustafa-caki 301
+/az/team/mustafa-caki/ /az/profile.html?slug=mustafa-caki 301
+/az/mustafa-caki /az/profile.html?slug=mustafa-caki 301
+/az/mustafa-caki/ /az/profile.html?slug=mustafa-caki 301
+/az/mustafa-caki.html /az/profile.html?slug=mustafa-caki 301
 
-/en/team/mustafa-caki /en/mustafa-caki 301
-/en/team/mustafa-caki/ /en/mustafa-caki 301
-/en/mustafa-caki/ /en/mustafa-caki 301
+/de/team/mustafa-caki /de/profile.html?slug=mustafa-caki 301
+/de/team/mustafa-caki/ /de/profile.html?slug=mustafa-caki 301
+/de/mustafa-caki /de/profile.html?slug=mustafa-caki 301
+/de/mustafa-caki/ /de/profile.html?slug=mustafa-caki 301
+/de/mustafa-caki.html /de/profile.html?slug=mustafa-caki 301
 
-/es/team/mustafa-caki /es/mustafa-caki 301
-/es/team/mustafa-caki/ /es/mustafa-caki 301
-/es/mustafa-caki/ /es/mustafa-caki 301
+/en/team/mustafa-caki /en/profile.html?slug=mustafa-caki 301
+/en/team/mustafa-caki/ /en/profile.html?slug=mustafa-caki 301
+/en/mustafa-caki /en/profile.html?slug=mustafa-caki 301
+/en/mustafa-caki/ /en/profile.html?slug=mustafa-caki 301
+/en/mustafa-caki.html /en/profile.html?slug=mustafa-caki 301
 
-/fr/team/mustafa-caki /fr/mustafa-caki 301
-/fr/team/mustafa-caki/ /fr/mustafa-caki 301
-/fr/mustafa-caki/ /fr/mustafa-caki 301
+/es/team/mustafa-caki /es/profile.html?slug=mustafa-caki 301
+/es/team/mustafa-caki/ /es/profile.html?slug=mustafa-caki 301
+/es/mustafa-caki /es/profile.html?slug=mustafa-caki 301
+/es/mustafa-caki/ /es/profile.html?slug=mustafa-caki 301
+/es/mustafa-caki.html /es/profile.html?slug=mustafa-caki 301
 
-/hi/team/mustafa-caki /hi/mustafa-caki 301
-/hi/team/mustafa-caki/ /hi/mustafa-caki 301
-/hi/mustafa-caki/ /hi/mustafa-caki 301
+/fr/team/mustafa-caki /fr/profile.html?slug=mustafa-caki 301
+/fr/team/mustafa-caki/ /fr/profile.html?slug=mustafa-caki 301
+/fr/mustafa-caki /fr/profile.html?slug=mustafa-caki 301
+/fr/mustafa-caki/ /fr/profile.html?slug=mustafa-caki 301
+/fr/mustafa-caki.html /fr/profile.html?slug=mustafa-caki 301
 
-/id/team/mustafa-caki /id/mustafa-caki 301
-/id/team/mustafa-caki/ /id/mustafa-caki 301
-/id/mustafa-caki/ /id/mustafa-caki 301
+/hi/team/mustafa-caki /hi/profile.html?slug=mustafa-caki 301
+/hi/team/mustafa-caki/ /hi/profile.html?slug=mustafa-caki 301
+/hi/mustafa-caki /hi/profile.html?slug=mustafa-caki 301
+/hi/mustafa-caki/ /hi/profile.html?slug=mustafa-caki 301
+/hi/mustafa-caki.html /hi/profile.html?slug=mustafa-caki 301
 
-/it/team/mustafa-caki /it/mustafa-caki 301
-/it/team/mustafa-caki/ /it/mustafa-caki 301
-/it/mustafa-caki/ /it/mustafa-caki 301
+/id/team/mustafa-caki /id/profile.html?slug=mustafa-caki 301
+/id/team/mustafa-caki/ /id/profile.html?slug=mustafa-caki 301
+/id/mustafa-caki /id/profile.html?slug=mustafa-caki 301
+/id/mustafa-caki/ /id/profile.html?slug=mustafa-caki 301
+/id/mustafa-caki.html /id/profile.html?slug=mustafa-caki 301
 
-/ja/team/mustafa-caki /ja/mustafa-caki 301
-/ja/team/mustafa-caki/ /ja/mustafa-caki 301
-/ja/mustafa-caki/ /ja/mustafa-caki 301
+/it/team/mustafa-caki /it/profile.html?slug=mustafa-caki 301
+/it/team/mustafa-caki/ /it/profile.html?slug=mustafa-caki 301
+/it/mustafa-caki /it/profile.html?slug=mustafa-caki 301
+/it/mustafa-caki/ /it/profile.html?slug=mustafa-caki 301
+/it/mustafa-caki.html /it/profile.html?slug=mustafa-caki 301
 
-/ko/team/mustafa-caki /ko/mustafa-caki 301
-/ko/team/mustafa-caki/ /ko/mustafa-caki 301
-/ko/mustafa-caki/ /ko/mustafa-caki 301
+/ja/team/mustafa-caki /ja/profile.html?slug=mustafa-caki 301
+/ja/team/mustafa-caki/ /ja/profile.html?slug=mustafa-caki 301
+/ja/mustafa-caki /ja/profile.html?slug=mustafa-caki 301
+/ja/mustafa-caki/ /ja/profile.html?slug=mustafa-caki 301
+/ja/mustafa-caki.html /ja/profile.html?slug=mustafa-caki 301
 
-/nl/team/mustafa-caki /nl/mustafa-caki 301
-/nl/team/mustafa-caki/ /nl/mustafa-caki 301
-/nl/mustafa-caki/ /nl/mustafa-caki 301
+/ko/team/mustafa-caki /ko/profile.html?slug=mustafa-caki 301
+/ko/team/mustafa-caki/ /ko/profile.html?slug=mustafa-caki 301
+/ko/mustafa-caki /ko/profile.html?slug=mustafa-caki 301
+/ko/mustafa-caki/ /ko/profile.html?slug=mustafa-caki 301
+/ko/mustafa-caki.html /ko/profile.html?slug=mustafa-caki 301
 
-/pt/team/mustafa-caki /pt/mustafa-caki 301
-/pt/team/mustafa-caki/ /pt/mustafa-caki 301
-/pt/mustafa-caki/ /pt/mustafa-caki 301
+/nl/team/mustafa-caki /nl/profile.html?slug=mustafa-caki 301
+/nl/team/mustafa-caki/ /nl/profile.html?slug=mustafa-caki 301
+/nl/mustafa-caki /nl/profile.html?slug=mustafa-caki 301
+/nl/mustafa-caki/ /nl/profile.html?slug=mustafa-caki 301
+/nl/mustafa-caki.html /nl/profile.html?slug=mustafa-caki 301
 
-/ru/team/mustafa-caki /ru/mustafa-caki 301
-/ru/team/mustafa-caki/ /ru/mustafa-caki 301
-/ru/mustafa-caki/ /ru/mustafa-caki 301
+/pt/team/mustafa-caki /pt/profile.html?slug=mustafa-caki 301
+/pt/team/mustafa-caki/ /pt/profile.html?slug=mustafa-caki 301
+/pt/mustafa-caki /pt/profile.html?slug=mustafa-caki 301
+/pt/mustafa-caki/ /pt/profile.html?slug=mustafa-caki 301
+/pt/mustafa-caki.html /pt/profile.html?slug=mustafa-caki 301
 
-/tr/team/mustafa-caki /tr/mustafa-caki 301
-/tr/team/mustafa-caki/ /tr/mustafa-caki 301
-/tr/mustafa-caki/ /tr/mustafa-caki 301
+/ru/team/mustafa-caki /ru/profile.html?slug=mustafa-caki 301
+/ru/team/mustafa-caki/ /ru/profile.html?slug=mustafa-caki 301
+/ru/mustafa-caki /ru/profile.html?slug=mustafa-caki 301
+/ru/mustafa-caki/ /ru/profile.html?slug=mustafa-caki 301
+/ru/mustafa-caki.html /ru/profile.html?slug=mustafa-caki 301
 
-/zh/team/mustafa-caki /zh/mustafa-caki 301
-/zh/team/mustafa-caki/ /zh/mustafa-caki 301
-/zh/mustafa-caki/ /zh/mustafa-caki 301
+/tr/team/mustafa-caki /tr/profile.html?slug=mustafa-caki 301
+/tr/team/mustafa-caki/ /tr/profile.html?slug=mustafa-caki 301
+/tr/mustafa-caki /tr/profile.html?slug=mustafa-caki 301
+/tr/mustafa-caki/ /tr/profile.html?slug=mustafa-caki 301
+/tr/mustafa-caki.html /tr/profile.html?slug=mustafa-caki 301
+
+/zh/team/mustafa-caki /zh/profile.html?slug=mustafa-caki 301
+/zh/team/mustafa-caki/ /zh/profile.html?slug=mustafa-caki 301
+/zh/mustafa-caki /zh/profile.html?slug=mustafa-caki 301
+/zh/mustafa-caki/ /zh/profile.html?slug=mustafa-caki 301
+/zh/mustafa-caki.html /zh/profile.html?slug=mustafa-caki 301
 
 # Retired Cortex download landing pages: preserve deep links without serving stale content.
 /ar/download https://cortexishere.com 301

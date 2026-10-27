@@ -39,13 +39,12 @@ jobs:
           langs=(ar az de en es fr hi id it ja ko nl pt ru tr zh)
           for lang in "${langs[@]}"; do
             dynamic="$host/$lang/profile.html?skyline-check=$GITHUB_SHA"
-            legacy="$host/$lang/mustafa-caki.html?skyline-check=$GITHUB_SHA"
+            legacy="$host/$lang/mustafa-caki"
             fetch "$dynamic" > /tmp/live-biography.html
             grep -Fq 'site-design.js?v=polish261026f' /tmp/live-biography.html || { echo "::error::Outdated site-design.js in $dynamic"; exit 1; }
             grep -Fq 'team-profile.css?v=polish261026f' /tmp/live-biography.html || { echo "::error::Outdated team-profile.css in $dynamic"; exit 1; }
-            fetch "$legacy" > /tmp/live-founder.html
-            grep -Fq 'site-design.js?v=polish261026f' /tmp/live-founder.html || { echo "::error::Outdated site-design.js in $legacy"; exit 1; }
-            grep -Fq 'profile-photo-fog.css?v=polish261026f' /tmp/live-founder.html || { echo "::error::Outdated skyline CSS in $legacy"; exit 1; }
-            echo "PASS $lang: dynamic and founder biography HTML are live"
+            final_url="$(curl -fLsS -o /dev/null -w '%{url_effective}' --connect-timeout 10 --max-time 25 "$legacy")"
+            [[ "$final_url" == "$host/$lang/profile.html?slug=mustafa-caki" ]] || { echo "::error::Legacy redirect did not reach managed profile: $legacy => $final_url"; exit 1; }
+            echo "PASS $lang: managed biography and legacy redirect are live"
           done
-          echo "Live deployment verified across all 16 languages (32 pages), plus JS and CSS assets."
+          echo "Live dynamic biographies and legacy redirects verified in 16 languages, plus JS and CSS assets."

@@ -10,7 +10,6 @@ on:
       - 'css/pages/profile-photo-fog.css'
       - '**/index.html'
       - '**/profile.html'
-      - '**/mustafa-caki.html'
       - 'tests/team-directory.test.cjs'
       - '.github/workflows/team-directory-check.yml'
   pull_request:
@@ -22,7 +21,6 @@ on:
       - 'css/pages/profile-photo-fog.css'
       - '**/index.html'
       - '**/profile.html'
-      - '**/mustafa-caki.html'
       - 'tests/team-directory.test.cjs'
       - '.github/workflows/team-directory-check.yml'
 permissions:

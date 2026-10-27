@@ -2,17 +2,11 @@
   "name": "vertex-public-site",
   "private": true,
   "scripts": {
-    "test:personnel": "node tests/personnel-browser.cjs",
+    "test": "node --test tests/*.test.cjs",
+    "test:team": "node --test tests/team-directory.test.cjs",
     "test:seo": "node scripts/audit-seo.cjs",
-    "test:experience": "node tests/experience-browser.cjs",
-    "test:weekly-stars": "node tests/weekly-stars-browser.cjs",
-    "test:refresh": "node tests/website-refresh.cjs",
-    "preview": "node tests/serve.cjs",
-    "test:home-layout": "node tests/home-layout-browser.cjs",
-    "test:final-polish": "node tests/final-polish-browser.cjs",
-    "test:interactions": "node tests/interaction-browser.cjs",
-    "test:profile": "node tests/test-profile-card-navigation.cjs",
-    "test:team": "node --test tests/team-directory.test.cjs"
+    "test:mobile": "node tests/mobile-team-browser.cjs",
+    "test:personnel": "node tests/personnel-activation-browser.cjs"
   },
   "devDependencies": {
     "playwright": "1.62.1"
