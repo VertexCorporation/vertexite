@@ -34,8 +34,11 @@ function safeUrl(value){
  try{const url=new URL(value);return url.protocol==='https:'&&!url.username&&!url.password?url.href:null;}catch{return null}
 }
 async function load(){
- const id=new URLSearchParams(location.search).get('id');
- if(!id||!/^[a-zA-Z0-9_-]{1,128}$/.test(id)){unavailable(words[2]);return}
+ const query=new URLSearchParams(location.search);
+ const id=query.get('id'),slug=query.get('slug');
+ const validId=!!id&&/^[a-zA-Z0-9_-]{1,128}$/.test(id);
+ const founderSlug=!id&&slug==='mustafa-caki';
+ if(!validId&&!founderSlug){unavailable(words[2]);return}
  try{
   const controller=new AbortController();
   const timeout=setTimeout(()=>controller.abort(),12000);
@@ -46,7 +49,8 @@ async function load(){
   });}finally{clearTimeout(timeout)}
   if(!response.ok)throw Error('Network');
   const result=(await response.json()).result;
-  const card=Array.isArray(result?.cards)?result.cards.find(x=>x.id===id):null;
+  const isFounder=card=>card?.positionCode==='CEO'&&String(card.name||'').toLocaleLowerCase('tr').replace(/ı/g,'i').normalize('NFD').replace(/[\u0300-\u036f]/g,'')==='mustafa caki';
+  const card=Array.isArray(result?.cards)?result.cards.find(x=>validId?x.id===id:isFounder(x)):null;
   const biography=window.VertexTeamLinks.biography(card,lang);
   if(!card||!biography){unavailable(words[2]);return}
   document.title=card.name+' | Vertex';
@@ -70,11 +74,13 @@ async function load(){
  }catch(error){unavailable(words[3]);console.warn('[profile] unavailable',error)}
 }
 // Language switching keeps the selected person on the equivalent profile route.
-const profileId=new URLSearchParams(location.search).get('id');
-if(profileId&&/^[a-zA-Z0-9_-]{1,128}$/.test(profileId)){
+const profileQuery=new URLSearchParams(location.search);
+const profileId=profileQuery.get('id'),profileSlug=profileQuery.get('slug');
+const preserveId=!!profileId&&/^[a-zA-Z0-9_-]{1,128}$/.test(profileId);
+if(preserveId||(!profileId&&profileSlug==='mustafa-caki')){
  document.querySelectorAll('.lang-row').forEach(link=>{
   const target=new URL(link.href);target.pathname=target.pathname.replace(/\/$/,'')+'/profile.html';
-  target.searchParams.set('id',profileId);link.href=target.href;
+  target.searchParams.set(preserveId?'id':'slug',preserveId?profileId:profileSlug);link.href=target.href;
  });
 }
 load();
