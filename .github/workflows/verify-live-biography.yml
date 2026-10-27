@@ -57,7 +57,8 @@ jobs:
             grep -Fq 'site-design.js?v=polish261026f' /tmp/live-biography.html || { echo "::error::Outdated site-design.js in $dynamic"; exit 1; }
             grep -Fq 'team-profile.css?v=polish261026f' /tmp/live-biography.html || { echo "::error::Outdated team-profile.css in $dynamic"; exit 1; }
             final_url="$(curl -fLsS -o /dev/null -w '%{url_effective}' --connect-timeout 10 --max-time 25 "$legacy")"
-            [[ "$final_url" == "$host/$lang/profile.html?slug=mustafa-caki" ]] || { echo "::error::Legacy redirect did not reach managed profile: $legacy => $final_url"; exit 1; }
+            # Cloudflare Pages canonicalizes .html routes to extensionless URLs.
+            [[ "$final_url" == "$host/$lang/profile?slug=mustafa-caki" || "$final_url" == "$host/$lang/profile.html?slug=mustafa-caki" ]] || { echo "::error::Legacy redirect did not reach managed profile: $legacy => $final_url"; exit 1; }
             echo "PASS $lang: managed biography and legacy redirect are live"
           done
           echo "Live dynamic biographies and legacy redirects verified in 16 languages, plus JS and CSS assets."
