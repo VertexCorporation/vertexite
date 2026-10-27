@@ -34,5 +34,5 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
-      - name: Verify team and biography contracts across all locales
-        run: npm run test:team
+      - name: Run all unit tests including team and biography regressions
+        run: npm test
