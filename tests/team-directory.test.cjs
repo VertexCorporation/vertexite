@@ -39,13 +39,13 @@ test('each localized biography route uses the same safely rendered live data',()
 test('dynamic biographies retain their shared portrait fog without static founder pages',()=>{
  const fog=read('css/pages/profile-photo-fog.css');
  const dynamicFog=read('css/pages/team-profile.css');
- assert.match(fog,/:is\\(\\.profile-photo-box,\\.vp-photo\\)>img/);
- assert.match(fog,/linear-gradient\\(to right,transparent/);
- assert.match(fog,/linear-gradient\\(to bottom,transparent/);
+ assert.match(fog,/:is\(\.profile-photo-box,\.vp-photo\)>img/);
+ assert.match(fog,/linear-gradient\(to right,transparent/);
+ assert.match(fog,/linear-gradient\(to bottom,transparent/);
  assert.match(fog,/mask-composite:intersect/);
- assert.match(dynamicFog,/@import url\\(\"\\.\\/profile-photo-fog\\.css\\?v=polish261026[a-z]*\"\\)/);
+ assert.match(dynamicFog,/@import url\(\"\.\/profile-photo-fog\.css\?v=polish261026[a-z]*\"\)/);
  for(const lang of langs){
-  assert.match(read(lang+'/profile.html'),/team-profile\\.css\\?v=polish261026/);
+  assert.match(read(lang+'/profile.html'),/team-profile\.css\?v=polish261026/);
   assert.equal(fs.existsSync(path.join(root,lang,'mustafa-caki.html')),false);
  }
 });
@@ -60,7 +60,7 @@ test('old founder routes preserve language and use a managed profile rather than
   assert.ok(!sitemap.includes('/'+lang+'/mustafa-caki'));
  }
  assert.match(js,/profileSlug==='mustafa-caki'/);
- assert.match(js,/isFounder\\(x\\)/);
+ assert.match(js,/isFounder\(x\)/);
 });
 
 test('the directory never offers a biography link for empty bios',()=>{
