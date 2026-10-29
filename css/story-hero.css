@@ -388,3 +388,8 @@ html[data-theme="dark"] .story-sponsor-group img {filter:brightness(0) invert(1)
  .story-static-content .story-title,.story-stage>.story-title{font-size:clamp(20px,7.6vw,58px)!important;letter-spacing:.035em}
  .story-static-content .story-title{transform:translateX(-50%) scaleY(1.18);transform-origin:center top}
 }
+
+/* Static first paint stays readable while optional resources are in flight. */
+.story-static .story-static-content{display:flex;flex-direction:column;align-items:center;gap:24px}
+.story-static .story-static-content .story-title{position:static!important;left:auto!important;width:100%!important;max-width:100%!important;transform:none!important;white-space:normal!important;text-wrap:balance!important;font-size:clamp(24px,6vw,76px)!important;line-height:1.15}
+.story-static .story-static-content .story-actions{position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:100%;padding:0!important}

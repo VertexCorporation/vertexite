@@ -143,7 +143,7 @@
         loading=true;
         function request(){
             var options={method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:{lang:lang}})};
-            var transport=cache?cache.fetchJSON(ENDPOINT,options,10000):fetch(ENDPOINT,options).then(function(r){if(!r.ok)throw Error('unavailable');return r.json();});
+            var transport=cache?cache.fetchJSON(ENDPOINT,options,25000):fetch(ENDPOINT,options).then(function(r){if(!r.ok)throw Error('unavailable');return r.json();});
             return transport.then(function(json){var data=json&&json.result;if(!valid(data))throw Error('invalid team response');return data;});
         }
         var task=cache?cache.load(cacheKey,request,valid,{ttl:60000,cooldownMs:120000}):request().then(function(value){return {value:value,source:'network'};});

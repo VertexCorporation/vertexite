@@ -1,12 +1,13 @@
 /* Shared theme, language and mobile navigation behavior. */
 (function(){'use strict';
   /* Tema: kalıcı + sistem tercihi + doğru ikon (light'ta ay, dark'ta güneş göster) */
+  if(window.__vertexShellReady)return;window.__vertexShellReady=true;
   const themeBtn = document.getElementById('themeBtn');
   const sunIcon = document.getElementById('themeIconSun');
   const moonIcon = document.getElementById('themeIconMoon');
   function syncThemeIcons(isDark){
-    sunIcon.style.display = isDark ? 'block' : 'none';
-    moonIcon.style.display = isDark ? 'none' : 'block';
+    if(sunIcon)sunIcon.style.display = isDark ? 'block' : 'none';
+    if(moonIcon)moonIcon.style.display = isDark ? 'none' : 'block';
   }
   function applyTheme(t){
     document.documentElement.setAttribute('data-theme', t);
@@ -21,7 +22,7 @@
     }
     applyTheme(t);
   })();
-  themeBtn.addEventListener('click', () => {
+  if(themeBtn)themeBtn.addEventListener('click', () => {
     const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     applyTheme(isDark ? 'light' : 'dark');
   });

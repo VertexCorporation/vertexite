@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="/css/layout/site-shell.css?v=profiles261021">
 <link rel="stylesheet" href="/css/site-design.css?v=polish261026d">
 <link rel="stylesheet" href="/css/pages/team-profile.css?v=polish261026f">
-<script defer src="/js/site-shell.js?v=profiles261021"></script>
+
 <script defer src="/js/site-design.js?v=polish261026f"></script>
 <script defer src="/js/team-links.js?v=social261026e"></script>
 <script defer src="/js/team-profile.js?v=social261026d"></script></head>
@@ -44,6 +44,98 @@
 </div>
 </div><div class="mobile-menu" id="mobileMenu"><nav aria-label="Mobile" class="wrap"><a class="mlink" href="/zh/#home">首页</a><a class="mlink" href="/zh/#projects">项目</a><a class="mlink" href="/zh/#ecosystem">生态系统</a><a class="mlink" href="/zh/#team">团队</a><a class="mlink" href="/zh/#vision">Vision</a><a class="mlink" href="/zh/#partners">合作伙伴</a><a class="mlink" href="/zh/#news-section">新闻</a><a class="mlink" href="/zh/#more-info">关于我们</a><button aria-haspopup="menu" class="mlink m-lang" id="mLangBtn" type="button"><svg fill="none" height="18" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg><span>中文</span><svg class="chev-r" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24" width="14"><path d="M9 6l6 6-6 6"></path></svg></button><a class="btn btn-primary m-cta" href="join-us.html">加入我们</a></nav></div>
 </header>
+<script data-vertex-shell data-source="/js/site-shell.js">
+/* Shared theme, language and mobile navigation behavior. */
+(function(){'use strict';
+  /* Tema: kalıcı + sistem tercihi + doğru ikon (light'ta ay, dark'ta güneş göster) */
+  if(window.__vertexShellReady)return;window.__vertexShellReady=true;
+  const themeBtn = document.getElementById('themeBtn');
+  const sunIcon = document.getElementById('themeIconSun');
+  const moonIcon = document.getElementById('themeIconMoon');
+  function syncThemeIcons(isDark){
+    if(sunIcon)sunIcon.style.display = isDark ? 'block' : 'none';
+    if(moonIcon)moonIcon.style.display = isDark ? 'none' : 'block';
+  }
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    try{ localStorage.setItem('theme', t); }catch(e){}
+    syncThemeIcons(t === 'dark');
+  }
+  (function initTheme(){
+    let t = null;
+    try{ t = localStorage.getItem('theme'); }catch(e){}
+    if(t !== 'light' && t !== 'dark'){
+      t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    }
+    applyTheme(t);
+  })();
+  if(themeBtn)themeBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    applyTheme(isDark ? 'light' : 'dark');
+  });
+
+/* Dil paneli (butona bağlı) */
+  const langWrap = document.getElementById('langWrap');
+  const langBtn = document.getElementById('langBtn');
+  const mLangBtn = document.getElementById('mLangBtn');
+  function closeLang(){
+    if(langWrap) langWrap.classList.remove('open');
+    if(langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  }
+  if(langBtn && langWrap){
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = langWrap.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', (e) => { if(!langWrap.contains(e.target)) closeLang(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLang(); });
+  }
+  if(mLangBtn && langWrap){
+    mLangBtn.addEventListener('click', () => {
+      const h = document.getElementById('siteHeader');
+      if(h) h.classList.remove('menu-open');
+      const mb = document.getElementById('menuBtn');
+      if(mb) mb.setAttribute('aria-expanded', 'false');
+      const open = langWrap.classList.toggle('open');
+      if(langBtn) langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  /* Header: scroll'da cam + incelme, mobil menü */
+  (function(){
+    var header = document.getElementById('siteHeader') || document.querySelector('header');
+    if(!header) return;
+    var ticking = false;
+    function onScroll(){
+      header.classList.toggle('scrolled', window.scrollY > 8);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+    }, {passive:true});
+    onScroll();
+    var menuBtn = document.getElementById('menuBtn');
+    if(!menuBtn) return;
+    function closeMenu(){
+      header.classList.remove('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+    menuBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = header.classList.toggle('menu-open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    header.querySelectorAll('.mobile-menu a').forEach(function(a){
+      a.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+    window.addEventListener('resize', function(){ if(window.innerWidth > 860) closeMenu(); });
+  })();
+
+})();
+
+</script>
 <main class="vp-container vp-main">
 <div class="vp-status" id="vp-error" hidden role="status"></div>
 <section class="vp-profile" id="vp-content" hidden aria-label="Profile">

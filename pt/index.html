@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html data-theme="light" lang="pt">
 <head>
-<link href="../css/story-hero.css?v=polish261026" rel="stylesheet"/>
+<link href="../css/story-hero.css?v=recovery261029" rel="stylesheet"/>
 <script>
 (function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
@@ -56,6 +56,98 @@
 </div>
 </div><div class="mobile-menu" id="mobileMenu"><nav aria-label="Mobile" class="wrap"><a class="mlink" href="#home">Início</a><a class="mlink" href="#projects">Projetos</a><a class="mlink" href="#ecosystem">Ecossistema</a><a class="mlink" href="#team">Equipe</a><a class="mlink" href="#vision">Vision</a><a class="mlink" href="#partners">Parceiros</a><a class="mlink" href="#news-section">Notícias</a><a class="mlink" href="#more-info">Sobre nós</a><button aria-haspopup="menu" class="mlink m-lang" id="mLangBtn" type="button"><svg fill="none" height="18" stroke="currentColor" stroke-width="1.7" viewBox="0 0 24 24" width="18"><circle cx="12" cy="12" r="9"></circle><path d="M3 12h18M12 3c2.5 2.6 3.8 5.7 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.7-3.8-9s1.3-6.4 3.8-9z"></path></svg><span>português</span><svg class="chev-r" fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" viewBox="0 0 24 24" width="14"><path d="M9 6l6 6-6 6"></path></svg></button><a class="btn btn-primary m-cta" href="join-us.html">Junte-se a nós</a></nav></div>
 </header>
+<script data-vertex-shell data-source="/js/site-shell.js">
+/* Shared theme, language and mobile navigation behavior. */
+(function(){'use strict';
+  /* Tema: kalıcı + sistem tercihi + doğru ikon (light'ta ay, dark'ta güneş göster) */
+  if(window.__vertexShellReady)return;window.__vertexShellReady=true;
+  const themeBtn = document.getElementById('themeBtn');
+  const sunIcon = document.getElementById('themeIconSun');
+  const moonIcon = document.getElementById('themeIconMoon');
+  function syncThemeIcons(isDark){
+    if(sunIcon)sunIcon.style.display = isDark ? 'block' : 'none';
+    if(moonIcon)moonIcon.style.display = isDark ? 'none' : 'block';
+  }
+  function applyTheme(t){
+    document.documentElement.setAttribute('data-theme', t);
+    try{ localStorage.setItem('theme', t); }catch(e){}
+    syncThemeIcons(t === 'dark');
+  }
+  (function initTheme(){
+    let t = null;
+    try{ t = localStorage.getItem('theme'); }catch(e){}
+    if(t !== 'light' && t !== 'dark'){
+      t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+    }
+    applyTheme(t);
+  })();
+  if(themeBtn)themeBtn.addEventListener('click', () => {
+    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    applyTheme(isDark ? 'light' : 'dark');
+  });
+
+/* Dil paneli (butona bağlı) */
+  const langWrap = document.getElementById('langWrap');
+  const langBtn = document.getElementById('langBtn');
+  const mLangBtn = document.getElementById('mLangBtn');
+  function closeLang(){
+    if(langWrap) langWrap.classList.remove('open');
+    if(langBtn) langBtn.setAttribute('aria-expanded', 'false');
+  }
+  if(langBtn && langWrap){
+    langBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const open = langWrap.classList.toggle('open');
+      langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    document.addEventListener('click', (e) => { if(!langWrap.contains(e.target)) closeLang(); });
+    document.addEventListener('keydown', (e) => { if(e.key === 'Escape') closeLang(); });
+  }
+  if(mLangBtn && langWrap){
+    mLangBtn.addEventListener('click', () => {
+      const h = document.getElementById('siteHeader');
+      if(h) h.classList.remove('menu-open');
+      const mb = document.getElementById('menuBtn');
+      if(mb) mb.setAttribute('aria-expanded', 'false');
+      const open = langWrap.classList.toggle('open');
+      if(langBtn) langBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  }
+
+  /* Header: scroll'da cam + incelme, mobil menü */
+  (function(){
+    var header = document.getElementById('siteHeader') || document.querySelector('header');
+    if(!header) return;
+    var ticking = false;
+    function onScroll(){
+      header.classList.toggle('scrolled', window.scrollY > 8);
+      ticking = false;
+    }
+    window.addEventListener('scroll', function(){
+      if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
+    }, {passive:true});
+    onScroll();
+    var menuBtn = document.getElementById('menuBtn');
+    if(!menuBtn) return;
+    function closeMenu(){
+      header.classList.remove('menu-open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }
+    menuBtn.addEventListener('click', function(e){
+      e.stopPropagation();
+      var open = header.classList.toggle('menu-open');
+      menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+    header.querySelectorAll('.mobile-menu a').forEach(function(a){
+      a.addEventListener('click', closeMenu);
+    });
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') closeMenu(); });
+    window.addEventListener('resize', function(){ if(window.innerWidth > 860) closeMenu(); });
+  })();
+
+})();
+
+</script>
 <main>
 <section class="hero story-hero story-static" id="home"><div class="story-stage"><div class="story-geometry" aria-hidden="true" style="transform:translate3d(-50%,-50%,0)"><svg viewBox="0 0 800 800" fill="none" stroke="currentColor"><circle cx="400" cy="400" r="300"/><circle cx="400" cy="400" r="210"/><ellipse cx="400" cy="400" rx="110" ry="300"/><ellipse cx="400" cy="400" rx="230" ry="300"/><ellipse cx="400" cy="400" rx="300" ry="105"/><path d="M400 100 660 250 660 550 400 700 140 550 140 250Z M140 250 660 550 M660 250 140 550 M400 100V700 M100 400H700 M140 250H660 M140 550H660 M250 140 550 660 M550 140 250 660"/><circle cx="400" cy="100" r="5"/><circle cx="660" cy="250" r="5"/><circle cx="140" cy="550" r="5"/></svg></div><div class="story-static-content"><h1 class="story-title"><span class="story-title-word">O</span> <span class="story-title-word">Pico</span> <span class="story-title-word">da</span> <span class="story-title-word">Tecnologia</span></h1><div class="hero-actions story-actions"><a class="btn btn-primary" href="#projects">Começar a Explorar</a><a class="btn btn-ghost" href="join-us.html">Junte-se a nós</a></div></div><p class="lede" hidden>Vertex, onde se encontram as mentes jovens mais brilhantes do mundo, está revolucionando o setor tecnológico!</p><div class="story-scroll-cue" aria-hidden="true"><span></span>Rolar</div></div></section>
 <section class="stats">
@@ -187,7 +279,7 @@
 
 </div>
 <div class="team-scroll-wrap">
-<div class="team-track" id="teamTrack"><div class="team-card"><div class="team-photo-wrap"><a href="/pt/profile.html?slug=mustafa-caki" aria-label="Mustafa Çakı"><img class="team-photo" src="/assets/team/mustafa-caki-cutout.webp?v=20261017v2" alt="Mustafa Çakı" loading="lazy" decoding="async" width="1084" height="1084"></a></div><div class="team-info"><h3><a href="/pt/profile.html?slug=mustafa-caki">Mustafa Çakı</a></h3><div class="role">Cofundador e CEO</div><div class="team-social"><a href="https://www.linkedin.com/in/mustawtfa/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="/assets/linkedin.svg" alt="" width="24" height="24"></a><a href="https://www.instagram.com/mustawtfa/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="/assets/instagram.svg" alt="" width="360" height="360"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><img class="team-photo" src="/assets/team/mehmet_uras.jpg" alt="Uras Baz" loading="lazy" decoding="async" width="697" height="1024"></div><div class="team-info"><h3>Uras Baz</h3><div class="role">Diretor de Tecnologia</div><div class="team-social"></div></div></div><div class="team-card"><div class="team-photo-wrap"><img class="team-photo" src="/assets/team/ekin_burcak.jpeg" alt="Ekin Burçak Korkmaz" loading="lazy" decoding="async" width="363" height="480"></div><div class="team-info"><h3>Ekin Burçak Korkmaz</h3><div class="role">Diretor de Operações</div><div class="team-social"><a href="https://www.linkedin.com/in/ekin-bur%C3%A7ak-korkmaz-1aa9ba3a7" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="/assets/linkedin.svg" alt="" width="24" height="24"></a><a href="https://www.instagram.com/ekinburcakorkmaz" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="/assets/instagram.svg" alt="" width="360" height="360"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><img class="team-photo" src="/assets/team/ecrinamajpegolan.jpeg" alt="Ecrin Hacıömeroğlu" loading="lazy" decoding="async" width="800" height="600"></div><div class="team-info"><h3>Ecrin Hacıömeroğlu</h3><div class="role">Diretor de Comunicação</div><div class="team-social"></div></div></div><div class="team-card"><div class="team-photo-wrap"><img class="team-photo" src="/assets/team/azra_koncaoglu.jpeg" alt="Azra Koncaoğlu" loading="lazy" decoding="async" width="438" height="491"></div><div class="team-info"><h3>Azra Koncaoğlu</h3><div class="role">CHRO</div><div class="team-social"><a href="https://www.linkedin.com/in/azra-koncao%C4%9Flu-aaaba741b" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><img src="/assets/linkedin.svg" alt="" width="24" height="24"></a><a href="https://www.instagram.com/nyzszm" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="/assets/instagram.svg" alt="" width="360" height="360"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><img class="team-photo" src="/assets/team/idil_baspinar.jpeg" alt="İdil Başpınar" loading="lazy" decoding="async" width="768" height="1364"></div><div class="team-info"><h3>İdil Başpınar</h3><div class="role">Chief Marketing Officer (CMO)</div><div class="team-social"></div></div></div><div class="team-card"><div class="team-photo-wrap"><img class="team-photo" src="/assets/team/suzan_almira_akgul.jpeg" alt="Suzan Almira Akgül" loading="lazy" decoding="async" width="856" height="730"></div><div class="team-info"><h3>Suzan Almira Akgül</h3><div class="role">Diretora de Tecnologias de Comunicação (CITO)</div><div class="team-social"><a href="https://www.instagram.com/akgul_almira" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="/assets/instagram.svg" alt="" width="360" height="360"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><img class="team-photo" src="/assets/team/efe_sahin.jpeg" alt="Efe Şahin" loading="lazy" decoding="async" width="370" height="480"></div><div class="team-info"><h3>Efe Şahin</h3><div class="role">Diretor de Design (CDO)</div><div class="team-social"><a href="https://www.instagram.com/16efesahin" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><img src="/assets/instagram.svg" alt="" width="360" height="360"></a></div></div></div></div>
+<div class="team-track" id="teamTrack"><div class="team-card"><div class="team-photo-wrap"><a href="/pt/profile.html?slug=mustafa-caki" aria-label="Mustafa Çakı"><img class="team-photo" src="https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Fdb872ce9a22c4f2a23157b2d49be75c7231428d6776171c00d98c9c59b7811ff.webp?alt=media&amp;token=532f86d8-fc9a-4b33-b709-20bc5bab4e96" alt="Mustafa Çakı" loading="lazy" decoding="async" width="400" height="400"></a></div><div class="team-info"><h3><a href="/pt/profile.html?slug=mustafa-caki">Mustafa Çakı</a></h3><div class="role">Chief Executive Officer (CEO)</div><div class="team-social"><a href="https://linkedin.com/in/mustawtfa" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><img src="/assets/linkedin.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="https://instagram.com/mustawtfa" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><img src="/assets/instagram.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="https://x.com/mustawtfa" aria-label="X" target="_blank" rel="noopener noreferrer"><img src="/assets/x.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="https://www.tiktok.com/@mustawtfa" aria-label="TikTok" target="_blank" rel="noopener noreferrer"><img src="/assets/tiktok.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="mailto:mustafa@vertexishere.com" aria-label="Email" target="_blank" rel="noopener noreferrer"><img src="/assets/email.svg?v=solid261026e" alt="" width="24" height="24"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><a href="/pt/profile.html?id=2ce29720-750b-4371-bf94-6848e620ad79" aria-label="Arhan Şahin"><img class="team-photo" src="https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Fdefaa0bbb207df7bd6225da3306b3d14cde43acb2eb800306e2749bfc5ed2aa8.jpg?alt=media&amp;token=26a964ab-3998-443d-ae56-4ba185bfda26" alt="Arhan Şahin" loading="lazy" decoding="async" width="400" height="400"></a></div><div class="team-info"><h3><a href="/pt/profile.html?id=2ce29720-750b-4371-bf94-6848e620ad79">Arhan Şahin</a></h3><div class="role">Chief Technology Officer (CTO)</div><div class="team-social"><a href="mailto:arhan@vertexishere.com" aria-label="Email" target="_blank" rel="noopener noreferrer"><img src="/assets/email.svg?v=solid261026e" alt="" width="24" height="24"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><a href="/pt/profile.html?id=card_4aecda1fb147ff53d52405a5532699d6" aria-label="Ekin Burçak Korkmaz"><img class="team-photo" src="https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Fd24f2869733cd79a9c0371aed2350d6deb730e0bb2e4a18e30878826e3c998bc.png?alt=media&amp;token=89822ac3-2d0b-4ae9-b51f-c088b119f1f5" alt="Ekin Burçak Korkmaz" loading="lazy" decoding="async" width="400" height="400"></a></div><div class="team-info"><h3><a href="/pt/profile.html?id=card_4aecda1fb147ff53d52405a5532699d6">Ekin Burçak Korkmaz</a></h3><div class="role">Chief Operating Officer (COO)</div><div class="team-social"><a href="https://www.linkedin.com/in/ekin-bur%C3%A7ak-korkmaz-1aa9ba3a7" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><img src="/assets/linkedin.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="https://www.instagram.com/ekinburcakorkmaz" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><img src="/assets/instagram.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="mailto:ekin@vertexishere.com" aria-label="Email" target="_blank" rel="noopener noreferrer"><img src="/assets/email.svg?v=solid261026e" alt="" width="24" height="24"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><a href="/pt/profile.html?id=bbca4bed-64e1-49aa-b425-c3a4694609ea" aria-label="Selen Erdoğan"><img class="team-photo" src="https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2F5993090ed9309cf1bd0e59c8a44baa6620e0a60b4a2e5f70f89ac38c3e6cfe91.png?alt=media&amp;token=9f64198a-9b87-4a90-9e4c-5e3742359752" alt="Selen Erdoğan" loading="lazy" decoding="async" width="400" height="400"></a></div><div class="team-info"><h3><a href="/pt/profile.html?id=bbca4bed-64e1-49aa-b425-c3a4694609ea">Selen Erdoğan</a></h3><div class="role">Chief Financial Officer (CFO)</div><div class="team-social"><a href="mailto:selen@vertexishere.com" aria-label="Email" target="_blank" rel="noopener noreferrer"><img src="/assets/email.svg?v=solid261026e" alt="" width="24" height="24"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><a href="/pt/profile.html?id=a51a1271-c437-43f7-a9c8-d9bac6ee005f" aria-label="Ali Andaç Akdeniz"><img class="team-photo" src="https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2F6789fcbb5bbd5d62cf5596c0d6e6585ace3a2fe472f86005ea75e9fff82eb1ff.png?alt=media&amp;token=c1ef4de8-bec5-455d-81c0-bcbd43504f84" alt="Ali Andaç Akdeniz" loading="lazy" decoding="async" width="400" height="400"></a></div><div class="team-info"><h3><a href="/pt/profile.html?id=a51a1271-c437-43f7-a9c8-d9bac6ee005f">Ali Andaç Akdeniz</a></h3><div class="role">Chief Marketing Officer (CMO)</div><div class="team-social"><a href="mailto:ali@vertexishere.com" aria-label="Email" target="_blank" rel="noopener noreferrer"><img src="/assets/email.svg?v=solid261026e" alt="" width="24" height="24"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><img class="team-photo" src="https://vertexishere.com/assets/team/azra_koncaoglu.jpeg" alt="Azra Koncaoğlu" loading="lazy" decoding="async" width="400" height="400"></div><div class="team-info"><h3>Azra Koncaoğlu</h3><div class="role">Chief Human Resources Officer (CHRO)</div><div class="team-social"><a href="https://www.linkedin.com/in/azra-koncao%C4%9Flu-aaaba741b" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><img src="/assets/linkedin.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="https://www.instagram.com/nyzszm" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><img src="/assets/instagram.svg?v=solid261026e" alt="" width="24" height="24"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><a href="/pt/profile.html?id=card_f5c6947476d125f0be3b18ec86fbdc5d" aria-label="Efe Şahin"><img class="team-photo" src="https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Feeb8df59df0ddb78fa682ef9cee1a11530137d3faac39a010de4e83daf8e7e15.png?alt=media&amp;token=332abcce-1a29-48b1-958d-35d8ffb72b2f" alt="Efe Şahin" loading="lazy" decoding="async" width="400" height="400"></a></div><div class="team-info"><h3><a href="/pt/profile.html?id=card_f5c6947476d125f0be3b18ec86fbdc5d">Efe Şahin</a></h3><div class="role">Diretor de Design (CDO)</div><div class="team-social"><a href="https://www.instagram.com/16efesahin" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><img src="/assets/instagram.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="https://x.com/efeyikullaniyov" aria-label="X" target="_blank" rel="noopener noreferrer"><img src="/assets/x.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="mailto:efe@vertexishere.com" aria-label="Email" target="_blank" rel="noopener noreferrer"><img src="/assets/email.svg?v=solid261026e" alt="" width="24" height="24"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><a href="/pt/profile.html?id=card_959ed4408a23078b0e15ee05bea6dead" aria-label="Ecrin Hacıömeroğlu"><img class="team-photo" src="https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Ff532f5a600b5b8ae63ad69c8f45d879e6a57760d3b254fc563d9680b4414ec26.png?alt=media&amp;token=586ff576-e043-4f48-9521-bbd4cfc01d43" alt="Ecrin Hacıömeroğlu" loading="lazy" decoding="async" width="400" height="400"></a></div><div class="team-info"><h3><a href="/pt/profile.html?id=card_959ed4408a23078b0e15ee05bea6dead">Ecrin Hacıömeroğlu</a></h3><div class="role">Chief Communications Officer (CCO)</div><div class="team-social"><a href="mailto:ecrin@vertexishere.com" aria-label="Email" target="_blank" rel="noopener noreferrer"><img src="/assets/email.svg?v=solid261026e" alt="" width="24" height="24"></a></div></div></div><div class="team-card"><div class="team-photo-wrap"><a href="/pt/profile.html?id=card_e0e06ad554cc471bce2b56b3c989519b" aria-label="Almira Akgül"><img class="team-photo" src="https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Fdf6e7d56c45f9610907e67e297b748a0723d387e788ad466b2274dc4fee1b6cd.png?alt=media&amp;token=18a32c22-1ddc-4f93-9259-b52ed5d6a600" alt="Almira Akgül" loading="lazy" decoding="async" width="400" height="400"></a></div><div class="team-info"><h3><a href="/pt/profile.html?id=card_e0e06ad554cc471bce2b56b3c989519b">Almira Akgül</a></h3><div class="role">Chief Information Technology Officer (CITO)</div><div class="team-social"><a href="https://www.instagram.com/akgul_almira" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><img src="/assets/instagram.svg?v=solid261026e" alt="" width="24" height="24"></a><a href="mailto:almira@vertexishere.com" aria-label="Email" target="_blank" rel="noopener noreferrer"><img src="/assets/email.svg?v=solid261026e" alt="" width="24" height="24"></a></div></div></div></div>
 </div>
 </div>
 </div>
@@ -313,7 +405,7 @@
 </div>
 </div>
 </footer>
-<script defer src="/js/site-shell.js?v=profiles261021"></script>
+
 <!-- Lottie Player Script --><script>
 /* Performans: görünürlükte oynat/duraklat + SW */
   (function(){
@@ -344,12 +436,13 @@
       });
     }
   })();</script>
-<script defer src="../js/vendor/d3-array.min.js"></script>
-<script defer src="../js/vendor/d3-geo.min.js"></script>
-<script defer src="../js/vendor/topojson-client.min.js"></script>
-<script defer src="../js/intro.js?v=polish261026"></script>
+<script data-vertex-intro-bootstrap>
+(function(){
+function load(src){return new Promise(function(resolve,reject){var s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=function(){s.remove();reject(new Error(src));};document.head.appendChild(s);});}
+Promise.all([load('/js/vendor/d3-array.min.js').then(function(){return load('/js/vendor/d3-geo.min.js');}),load('/js/vendor/topojson-client.min.js')]).then(function(){return load('/js/intro.js?v=recovery261029');}).catch(function(){document.querySelector('.hero').classList.add('story-unavailable');});
+})();</script>
 <script defer src="/js/team-links.js?v=social261026e"></script>
-<script src="../js/site-team.js?v=social261026d" defer></script>
+<script src="../js/site-team.js?v=social261026d-recovery261029" defer></script>
 <script type="module" src="../js/news.js?v=covers261023"></script>
 <script defer src="/js/more-info-translations.js?v=docs261018a"></script>
 <script defer src="/js/more-info.js?v=docs261018a"></script>
