@@ -429,7 +429,7 @@ setTimeout(async function () {
     reveal(actionsEl, actionsIn, 28);
     // Synchronize the filled-globe fade and shrink with the wireframe reappearance.
     // At .94 the globe is fully invisible and the original wireframe is at scale 1 / 0deg.
-    canvas.style.opacity = String(reduced ? 0 : 1-closingCrossfade);
+    canvas.style.opacity = String(reduced ? 1 : 1-closingCrossfade);
     globeWrap.style.setProperty('--ending-scale',String(mix(1,.72,closingCrossfade)));
     cueEl.style.opacity = String(1 - phase(progress, .02, .12));
     drawGlobe(progress, worldSpread);
@@ -443,7 +443,7 @@ setTimeout(async function () {
     }
   }
 
-  fetch('../assets/geo/countries-110m.json', { credentials: 'same-origin' })
+  fetch('/assets/geo/countries-110m.json', { credentials: 'same-origin' })
     .then(function (response) {
       if(!response.ok)throw new Error(response.status);
       return response.json();

@@ -393,3 +393,10 @@ html[data-theme="dark"] .story-sponsor-group img {filter:brightness(0) invert(1)
 .story-static .story-static-content{display:flex;flex-direction:column;align-items:center;gap:24px}
 .story-static .story-static-content .story-title{position:static!important;left:auto!important;width:100%!important;max-width:100%!important;transform:none!important;white-space:normal!important;text-wrap:balance!important;font-size:clamp(24px,6vw,76px)!important;line-height:1.15}
 .story-static .story-static-content .story-actions{position:static!important;inset:auto!important;transform:none!important;margin:0!important;width:100%;padding:0!important}
+
+/* Reduced motion preserves the globe and readable content without scroll animation. */
+@media(prefers-reduced-motion:reduce){
+ .story-stage > .story-title{left:auto!important;top:auto!important;width:100%!important;max-width:100%!important;white-space:normal!important;text-wrap:balance!important;transform:none!important;overflow-wrap:anywhere}
+ .story-globe-wrap{position:relative!important;inset:auto!important;transform:none!important;width:min(400px,100%)!important;margin:24px auto!important;aspect-ratio:1}
+ .story-globe{transform:none!important;opacity:1!important}
+}
