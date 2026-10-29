@@ -400,3 +400,7 @@ html[data-theme="dark"] .story-sponsor-group img {filter:brightness(0) invert(1)
  .story-globe-wrap{position:relative!important;inset:auto!important;transform:none!important;width:min(400px,100%)!important;margin:24px auto!important;aspect-ratio:1}
  .story-globe{transform:none!important;opacity:1!important}
 }
+
+/* Match fallback logo contrast to the animated sponsor strip. */
+.partners-static .partner-logo-img{filter:brightness(0);opacity:.65}
+html[data-theme="dark"] .partners-static .partner-logo-img{filter:brightness(0) invert(1)}
