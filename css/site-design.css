@@ -263,10 +263,10 @@ html[data-theme="dark"] .logo-chip::before{opacity:1}
 @media(prefers-reduced-motion:reduce){.logo-chip::before,.vertex-news-cover::after,.vertex-news-cover .vertex-news-image{transition:none!important}.vertex-news-cover::after{animation:none!important}}
 
 
-/* Responsive interaction polish: preserve accessible keyboard focus, remove
-   browser-native blue tap flashes, and keep page sections independent of the menu. */
+/* Avoid Android/iOS native tap flashes on cards and nested elements.
+   Keyboard :focus-visible outlines remain fully accessible. */
+html,body,body *{-webkit-tap-highlight-color:transparent}
 a,button,summary,[role="button"],input[type="button"],input[type="submit"],input[type="checkbox"],select{
-  -webkit-tap-highlight-color:transparent;
   touch-action:manipulation;
 }
 #siteHeader{position:sticky;top:0}

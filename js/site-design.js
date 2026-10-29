@@ -27,54 +27,78 @@ setIcon(document.getElementById('themeIconSun'),'sun');setIcon(document.getEleme
  measure();
 })();
 
-/* In-page navigation: align the visible heading (not the section's outer padding).
-   An overlaid mobile menu must never change the header's document height. */
+/* Track the heading while lazy sections above it expand during mobile navigation. */
 (function initAnchorNavigation(){
- const header=document.getElementById('siteHeader');
- const main=document.querySelector('main');
+ const header=document.getElementById('siteHeader'),main=document.querySelector('main');
  if(!header||!main)return;
  const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+ let frame=0,settleTimer=0,navigationId=0;
  function getTarget(hash){
   if(!hash||hash.length<2)return null;
-  let id;
-  try{id=decodeURIComponent(hash.slice(1));}catch(e){return null;}
+  let id;try{id=decodeURIComponent(hash.slice(1));}catch(e){return null;}
   const node=document.getElementById(id);
   return node&&main.contains(node)?node:null;
  }
  function headingTop(target){
   const outer=target.getBoundingClientRect().top+window.scrollY;
   const heading=target.querySelector('.section-head h2,.section-head h1,.team-head h2,.vision-heading h2,.wrap > h2,.wrap > h1');
-  if(heading){
-   const rect=heading.getBoundingClientRect();
-   // content-visibility:auto can skip an offscreen subtree.
-   if(rect.height>0&&rect.width>0)return rect.top+window.scrollY;
-  }
+  if(heading){const r=heading.getBoundingClientRect();if(r.height>0&&r.width>0)return r.top+window.scrollY;}
   return outer+(parseFloat(getComputedStyle(target).paddingTop)||0);
  }
+ function destination(hash){
+  const target=getTarget(hash);if(!target)return null;
+  return Math.max(0,(target.id==='home'?0:headingTop(target))-header.getBoundingClientRect().height-20);
+ }
+ function cancelNavigation(){
+  navigationId++;
+  if(frame)cancelAnimationFrame(frame);
+  if(settleTimer)clearTimeout(settleTimer);
+  frame=0;settleTimer=0;
+ }
+ function align(hash){const top=destination(hash);if(top!==null)window.scrollTo({top,behavior:'instant'});}
  function navigate(hash,smooth){
-  const target=getTarget(hash);
-  if(!target)return false;
-  const heading=target.id==='home'?0:headingTop(target);
-  const headerHeight=header.getBoundingClientRect().height;
-  const top=Math.max(0,heading-headerHeight-20);
-  window.scrollTo({top,behavior:smooth&&!reduced.matches?'smooth':'instant'});
-  return true;
+  cancelNavigation();
+  const initial=destination(hash);if(initial===null)return false;
+  const id=navigationId,from=window.scrollY;
+  function settle(){
+   if(id!==navigationId)return;
+   align(hash);
+   frame=requestAnimationFrame(()=>{frame=0;if(id===navigationId)align(hash);});
+   settleTimer=setTimeout(()=>{settleTimer=0;if(id===navigationId)align(hash);},220);
+  }
+  if(!smooth||reduced.matches||Math.abs(initial-from)<2){settle();return true;}
+  const started=performance.now();
+  const duration=Math.min(900,Math.max(420,320+Math.abs(initial-from)*.08));
+  function tick(now){
+   if(id!==navigationId)return;
+   const goal=destination(hash);if(goal===null){cancelNavigation();return;}
+   const t=Math.max(0,Math.min(1,(now-started)/duration)),ease=1-Math.pow(1-t,3);
+   window.scrollTo({top:from+(goal-from)*ease,behavior:'instant'});
+   if(t<1)frame=requestAnimationFrame(tick);
+   else{frame=0;settle();}
+  }
+  frame=requestAnimationFrame(tick);return true;
  }
  document.addEventListener('click',function(event){
   const link=event.target.closest('a[href^="#"]');
   if(!link||event.defaultPrevented||event.button!==0||event.metaKey||event.ctrlKey||event.shiftKey||event.altKey)return;
-  const hash=link.hash;
-  if(!getTarget(hash))return;
+  const hash=link.hash;if(!getTarget(hash))return;
   event.preventDefault();
   header.classList.remove('menu-open');
   const menuButton=header.querySelector('#menuBtn');
   if(menuButton)menuButton.setAttribute('aria-expanded','false');
   if(location.hash!==hash)history.pushState(null,'',hash);
-  requestAnimationFrame(()=>navigate(hash,true));
+  navigate(hash,true);
  });
- window.addEventListener('popstate',()=>{if(location.hash)requestAnimationFrame(()=>navigate(location.hash,false));});
+ // Real gestures override the programmatic animation immediately.
+ document.addEventListener('pointerdown',cancelNavigation,{capture:true,passive:true});
+ document.addEventListener('touchstart',cancelNavigation,{capture:true,passive:true});
+ window.addEventListener('wheel',cancelNavigation,{passive:true});
+ document.addEventListener('keydown',event=>{
+  if(['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' ','Spacebar'].includes(event.key))cancelNavigation();
+ },true);
+ window.addEventListener('popstate',()=>{if(location.hash)requestAnimationFrame(()=>navigate(location.hash,false));else cancelNavigation();});
  window.addEventListener('hashchange',()=>{if(location.hash)requestAnimationFrame(()=>navigate(location.hash,false));});
- // Links arriving from another page must land on the title after layout settles.
  window.addEventListener('load',()=>{if(location.hash)requestAnimationFrame(()=>navigate(location.hash,false));},{once:true});
  window.addEventListener('pageshow',event=>{if(event.persisted&&location.hash)requestAnimationFrame(()=>navigate(location.hash,false));});
 })();
