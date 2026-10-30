@@ -510,7 +510,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
 </div>
 </footer>
 <!-- Lottie Player Script -->
-<!-- Lottie Player Script --><script src="../js/join-steps.js?v=20261017c"></script><script src="../js/birth-date-picker.js?v=20261018c"></script><script src="../js/application-bridge.js?v=20261017c"></script><script src="/assets/vendor/intl-tel-input/js/intlTelInput.min.js"></script><script>"use strict";
+<!-- Lottie Player Script --><script src="../js/join-steps.js?v=optional261030"></script><script src="../js/birth-date-picker.js?v=20261018c"></script><script src="../js/application-bridge.js?v=optional261030"></script><script src="/assets/vendor/intl-tel-input/js/intlTelInput.min.js"></script><script>"use strict";
 const interfaceTranslations = {
   selectedCountryAriaLabel: "Cambiar país para el número de teléfono, seleccionado ${countryName} (${dialCode})",
   noCountrySelected: "Selecciona el país para el número de teléfono",
@@ -665,11 +665,12 @@ window.VertexPhoneUI=interfaceTranslations;
 
     function checkFormValidity() {
         const checkboxesValid = termsCheck.checked && doctrineCheck.checked && contractCheck.checked;
-        const allValid = checkboxesValid && isInterviewBooked;
+        const allValid = checkboxesValid;
         
         submitBtn.disabled = !allValid;
     }
     
+    const applicationRequestId = crypto.randomUUID();
     const restoredBooking = window.VertexApplication.restore();
     if (restoredBooking) handleInterviewBooking(restoredBooking);
 
@@ -829,15 +830,15 @@ window.VertexPhoneUI=interfaceTranslations;
     document.getElementById('joinForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         const form = e.currentTarget, btn = document.getElementById('submitBtn');
-        if (applicationInFlight || applicationSubmitted || !isInterviewBooked || !form.checkValidity()) return;
+        if (applicationInFlight || applicationSubmitted || !form.checkValidity()) return;
         if(!await window.validateVertexPhone() || applicationInFlight || applicationSubmitted)return;
         applicationInFlight = true; btn.disabled = true; btn.setAttribute("aria-busy","true"); const originalText = btn.textContent; btn.textContent = '…';
         const calInfo = extractCalBookingInfo(interviewBookingData);
         const data = {name: document.getElementById('joinName').value, email: document.getElementById('joinEmail').value,
             phone: iti.getNumber(), birthDate: document.getElementById('joinBirthDate').value, linkedin: document.getElementById('joinLinkedin').value,
             github: document.getElementById('joinGithub').value, about: document.getElementById('joinAbout').value, language: 'es',
-            department: document.getElementById('joinTeam').value, interviewDate: calInfo.startTime,
-            interviewBookingUid: String(calInfo.uid), interviewDetails: JSON.stringify(interviewBookingData)};
+            department: document.getElementById('joinTeam').value, applicationRequestId, interviewDate: isInterviewBooked ? calInfo.startTime : null,
+            interviewBookingUid: isInterviewBooked ? String(calInfo.uid) : null, interviewDetails: isInterviewBooked ? JSON.stringify(interviewBookingData) : ''};
         try {
             const result = await window.VertexApplication.submit(data);
             applicationSubmitted = true;
@@ -845,7 +846,7 @@ window.VertexPhoneUI=interfaceTranslations;
             const modal = document.getElementById('successModal'); modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('show'),10); form.reset();
         } catch(error) { window.VertexApplication.report(error, document.getElementById('interviewStatusBox')); }
-        finally { applicationInFlight = false; btn.removeAttribute("aria-busy"); btn.textContent = originalText; btn.disabled = applicationSubmitted || !isInterviewBooked; }
+        finally { applicationInFlight = false; btn.removeAttribute("aria-busy"); btn.textContent = originalText; btn.disabled = applicationSubmitted; }
     });
 
 })();

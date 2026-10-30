@@ -10,14 +10,14 @@
   const messages = {
     tr: {
       missing: "Mülakat randevusu oluştu ancak rezervasyon kimliği veya tarihi alınamadı. Başvurunuz henüz kaydedilmedi. Sayfayı kapatmadan destek ekibine bildirin.",
-      failure: "Mülakat randevunuz alınmış olabilir fakat başvurunuz Vertex Konsol'a kaydedilemedi. Yeniden mülakat almayın. Sistem otomatik yeniden denedi; gerekirse aşağıdaki 'Kaydı Tekrar Dene' seçeneğini kullanın.",
-      conflict: "Bu mülakat randevusu farklı bir e-posta ile ilişkilendirilmiş. Lütfen Vertex ekibiyle iletişime geçin.",
+      failure: "Başvurunuz Vertex Konsol'a kaydedilemedi. Sistem otomatik yeniden denedi; gerekirse aşağıdaki 'Kaydı Tekrar Dene' seçeneğini kullanın.",
+      conflict: "Bu başvuru kaydı farklı bir e-posta ile ilişkilendirilmiş. Lütfen Vertex ekibiyle iletişime geçin.",
       confirm: "Başvuru kaydı henüz doğrulanmadı.",
       retry: "Kaydı Tekrar Dene"
     },
     en: {
       missing: "The interview was booked, but its ID or time was not received. Your application has not been saved. Please contact support without closing this page.",
-      failure: "Your interview may be booked, but the application was not saved to Vertex Console. Do not book again. Automatic retries were attempted; use Retry Saving below if needed.",
+      failure: "Your application was not saved to Vertex Console. Automatic retries were attempted; use Retry Saving below if needed.",
       conflict: "This booking is already associated with another email. Please contact the Vertex team.",
       confirm: "Application storage could not be confirmed.",
       retry: "Retry Saving"

@@ -57,15 +57,17 @@
   back.type = 'button';
   back.className = 'btn application-back-btn';
   back.textContent = backLabel;
-  // A confirmed Cal.com booking is the final action; no second submit button.
-  // Keep the submitter in the form, hidden, for the existing automatic
-  // requestSubmit() path and accessibility-safe form validation.
+  // Booking still submits automatically. The date step also accepts an
+  // application without a booking when scheduling is unavailable.
   dateActions.append(back);
   date.append(dateActions);
   submit.hidden = true;
-  submit.style.display = 'none';
-  submit.setAttribute('aria-hidden', 'true');
+  submit.style.display = '';
+  submit.removeAttribute('aria-hidden');
   form.append(details, date, submit);
+  const note = document.createElement('p');
+  note.textContent = document.documentElement.lang === 'tr' ? 'Uygun mülakat tarihi bulunmuyorsa başvurunuzu randevu almadan gönderebilirsiniz. Ekibimiz sizinle iletişime geçecektir.' : 'If interview booking is unavailable, you can submit your application without a booking. Our team will contact you.';
+  date.append(note);
   window.applicationStepsEnabled = true;
 
   let stepTransition = 0;
@@ -82,6 +84,7 @@
     }
     details.hidden = showDate;
     date.hidden = !showDate;
+    submit.hidden = !showDate;
     if(!reduced&&target.animate)target.animate([{opacity:0,transform:'translateY(4px) scale(.99)'},{opacity:1,transform:'none'}],{duration:200,easing:'cubic-bezier(.2,.8,.2,1)'});
     if (showDate) document.dispatchEvent(new Event('application:show-date'));
     form.scrollIntoView({ block: 'start', behavior: 'auto' });
