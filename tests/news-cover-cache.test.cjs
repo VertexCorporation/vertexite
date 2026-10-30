@@ -13,7 +13,7 @@ function setup(options={}) {
  };
  const context={URL,Response,Blob,AbortController,console,location:{href:'https://vertexishere.com/en/'},
   window:{caches:{open:async()=>{if(options.noStorage)throw Error('blocked');return cache;}}},
-  document:{readyState:'loading',addEventListener(){}},setTimeout,clearTimeout,
+  document:{readyState:'loading',getElementById(){return null;},addEventListener(){}},setTimeout,clearTimeout,
   fetch:async()=>{fetches++;if(options.fail)throw Error('network');return new Response(new Blob(['cover'],{type:'image/png'}));}
  };
  vm.createContext(context);vm.runInContext(source+'\nthis.loadCover=getCoverSource;this.mountCover=setCoverImage;',context);

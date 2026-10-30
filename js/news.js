@@ -292,6 +292,6 @@ function bootPublicNews() {
         observer.observe(section);
     } else fetchNews();
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootPublicNews);
+if(!document.getElementById('news-section') && document.readyState==='loading')document.addEventListener('DOMContentLoaded',bootPublicNews);
 else bootPublicNews();
 export { fetchNews };
