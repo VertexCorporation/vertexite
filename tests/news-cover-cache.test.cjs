@@ -47,11 +47,20 @@ test('persistent cache evicts old entries rather than growing without limit',asy
  const page=setup();for(let i=0;i<51;i++)await page.load('https://images.example/cover-'+i+'.png');
  assert.equal(page.entries.size,48);
 });
-test('a persisted image paints without shimmer and cancels its delayed loader',async()=>{
+test('cached covers keep shimmer until the image load event and then crossfade',async()=>{
  const first=setup();await first.load(cover);const page=setup({entries:first.entries});
  const classes=new Set(),events={};const parent={classList:{add:c=>classes.add(c),remove:c=>classes.delete(c)}};
- const img={parentElement:parent,complete:true,naturalWidth:100,addEventListener:(event,fn)=>{events[event]=fn;}};
+ const img={parentElement:parent,complete:false,naturalWidth:0,addEventListener:(event,fn)=>{events[event]=fn;}};
  page.mount(img,{cover:{en:cover}},'en');
- await new Promise(resolve=>setTimeout(resolve,180));
- assert.ok(classes.has('is-cached'));assert.equal(classes.has('is-loading'),false);assert.equal(page.fetches(),0);
+ assert.equal(classes.has('is-loading'),true);
+ await new Promise(resolve=>setTimeout(resolve,10));
+ assert.equal(classes.has('is-loading'),true);assert.equal(classes.has('is-cached'),false);assert.equal(page.fetches(),0);
+ events.load();assert.equal(classes.has('is-loading'),false);
+});
+test('network covers show shimmer immediately and keep it while a fallback loads',async()=>{
+ const page=setup();const classes=new Set(),events={};const parent={classList:{add:c=>classes.add(c),remove:c=>classes.delete(c)}};
+ let src='';const img={parentElement:parent,complete:false,naturalWidth:0,addEventListener:(event,fn)=>{events[event]=fn;},get src(){return src;},set src(v){src=new URL(v,'https://vertexishere.com/en/').href;}};
+ page.mount(img,{cover:{en:cover}},'en');assert.ok(classes.has('is-loading'));
+ await new Promise(resolve=>setTimeout(resolve,10));assert.equal(page.fetches(),1);assert.ok(classes.has('is-loading'));
+ events.error();assert.ok(classes.has('is-loading'));events.load();assert.equal(classes.has('is-loading'),false);
 });

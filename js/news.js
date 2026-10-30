@@ -167,15 +167,15 @@ async function getCoverSource(path) {
 function setCoverImage(img,article,lang) {
     const cover=img.parentElement;
     const fallbackUrl=new URL(COVER_FALLBACK,location.href).href;
-    let loadingTimer;
-    const finish=()=>{clearTimeout(loadingTimer);cover.classList.remove('is-loading');};
+    cover.classList.add('is-loading');
+    const finish=()=>cover.classList.remove('is-loading');
     img.addEventListener('load',finish);
     img.addEventListener('error',()=>{
-        finish();
         const covers=article.cover||{};
         const path=covers[lang]||covers.en||Object.values(covers)[0];
         coverSources.delete(path);
         if(img.src!==fallbackUrl)img.src=COVER_FALLBACK;
+        else finish();
     });
     const covers=article.cover||{};
     const path=covers[lang]||covers.en||Object.values(covers)[0];
@@ -184,14 +184,9 @@ function setCoverImage(img,article,lang) {
     const load=async()=>{
         if(started)return;
         started=true;
-        // Cached/quick images paint directly, without replaying a loading animation.
-        loadingTimer=setTimeout(()=>cover.classList.add('is-loading'),150);
-        const source=await getCoverSource(path);
-        if(source.cached) {
-            cover.classList.add('is-cached');
-            finish();
-        }
-        img.src=source.url;
+        // Preserve shimmer and crossfade for both network and cached covers.
+        try { img.src=(await getCoverSource(path)).url; }
+        catch (_) { img.src=COVER_FALLBACK; }
         if(img.complete && img.naturalWidth>0)finish();
     };
     if('IntersectionObserver' in window) {
