@@ -33,22 +33,34 @@ function unavailable(msg){
 function safeUrl(value){
  try{const url=new URL(value);return url.protocol==='https:'&&!url.username&&!url.password?url.href:null;}catch{return null}
 }
+let loading=false;
 async function load(){
+ if(loading)return;
+ loading=true;
+ el('vp-error').hidden=false;
+ el('vp-error').textContent=lang==='tr'?'Profil yükleniyor…':'Loading profile…';
  const query=new URLSearchParams(location.search);
  const id=query.get('id'),slug=query.get('slug');
  const validId=!!id&&/^[a-zA-Z0-9_-]{1,128}$/.test(id);
  const founderSlug=!id&&slug==='mustafa-caki';
- if(!validId&&!founderSlug){unavailable(words[2]);return}
+ if(!validId&&!founderSlug){unavailable(words[2]);loading=false;return}
  try{
-  const controller=new AbortController();
-  const timeout=setTimeout(()=>controller.abort(),12000);
-  let response;
-  try{response=await fetch('https://listsiteteam-o5h7dmtija-ew.a.run.app/',{
-   method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',
-   body:JSON.stringify({data:{lang}}),signal:controller.signal
-  });}finally{clearTimeout(timeout)}
-  if(!response.ok)throw Error('Network');
-  const result=(await response.json()).result;
+  const cache=window.VertexPublicCache;
+  const key='directory-bios-20261025:'+lang;
+  const valid=value=>Array.isArray(value?.cards);
+  async function request(){
+   const response=await cache.fetchJSON('https://listsiteteam-o5h7dmtija-ew.a.run.app/',{
+    method:'POST',headers:{'Content-Type':'application/json'},credentials:'omit',body:JSON.stringify({data:{lang}})
+   },25000);
+   if(!valid(response?.result))throw Error('Invalid directory');
+   return response.result;
+  }
+  const snapshot=cache.read(key);
+  const result=snapshot&&valid(snapshot.value)&&snapshot.value.cards.some(card=>
+   (validId?card.id===id:card.positionCode==='CEO')&&window.VertexTeamLinks.biography(card,lang))
+   ? snapshot.value : (await cache.load(key,request,valid,{ttl:0,cooldownMs:1000})).value;
+  // Render the saved public biography immediately; refresh stale data for the next visit.
+  if(snapshot&&result===snapshot.value&&snapshot.age>60000)request().then(value=>cache.save(key,value)).catch(()=>{});
   const isFounder=card=>card?.positionCode==='CEO'&&String(card.name||'').toLocaleLowerCase('tr').replace(/ı/g,'i').normalize('NFD').replace(/[\u0300-\u036f]/g,'')==='mustafa caki';
   const card=Array.isArray(result?.cards)?result.cards.find(x=>validId?x.id===id:isFounder(x)):null;
   const biography=window.VertexTeamLinks.biography(card,lang);
@@ -57,6 +69,7 @@ async function load(){
   el('vp-name').textContent=card.name;
   el('vp-role').textContent=window.VertexTeamLinks.roleTitle(card,lang)+' · Vertex';
   const photo=safeUrl(card.imageUrl);
+  el('vp-photo').replaceChildren();
   if(photo){const img=document.createElement('img');img.alt=card.name;img.src=photo;img.width=160;img.height=160;el('vp-photo').append(img)}
   const bio=el('vp-bio');bio.replaceChildren();
   biography.split(/\n\s*\n/).forEach(paragraph=>{const p=document.createElement('p');p.textContent=paragraph.trim();bio.append(p)});
@@ -71,7 +84,12 @@ async function load(){
   el('vp-content').hidden=false;el('vp-error').hidden=true;
   // Notify the skyline after biography text and links are in the real layout.
   el('vp-content').dispatchEvent(new Event('vertex:profile-ready',{bubbles:true}));
- }catch(error){unavailable(words[3]);console.warn('[profile] unavailable',error)}
+ }catch(error){
+  unavailable(words[3]);
+  const retry=document.createElement('button');retry.type='button';retry.className='btn';
+  retry.textContent=lang==='tr'?'Tekrar dene':'Try again';retry.addEventListener('click',load);el('vp-error').append(retry);
+  console.warn('[profile] unavailable',error);
+ }finally{loading=false;}
 }
 // Language switching keeps the selected person on the equivalent profile route.
 const profileQuery=new URLSearchParams(location.search);

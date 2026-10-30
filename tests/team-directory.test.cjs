@@ -31,7 +31,7 @@ test('each localized biography route uses the same safely rendered live data',()
   const html=read(lang+'/profile.html');
   assert.match(html,/<section class="vp-profile"/);
   assert.match(html,/id="vp-bio"/);
-  assert.match(html,/team-profile\.js\?v=social261026/);
+  assert.match(html,/profile-scene\.js\?v=/);
   assert.match(html,/team-profile\.css\?v=polish261026/);
  }
 });
