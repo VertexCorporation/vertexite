@@ -16,7 +16,7 @@ document.addEventListener('click',e=>{const b=e.target.closest('[data-details]')
 const arrow=e.target.closest('[data-rail-step]');if(arrow){const rail=arrow.closest('.origin-inline-benefits').querySelector('.origin-benefit-rail');rail.scrollBy({left:Number(arrow.dataset.railStep)*rail.clientWidth*.8,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}});
 document.querySelectorAll('[data-details]').forEach(b=>b.setAttribute('aria-expanded','false'));
 if(lang==='tr'){document.getElementById('origin-prev').setAttribute('aria-label','Önceki ekran');document.getElementById('origin-next').setAttribute('aria-label','Sonraki ekran');document.querySelector('.origin-dots [data-goto="0"]').setAttribute('aria-label','Tanıtım');}
-go(0);
+go(Math.max(0,['INTRODUCTION','NODE','GRAPH','NETWORK'].indexOf(new URLSearchParams(location.search).get('screen')||'INTRODUCTION')));
 /* Deterministic orthographic globe: coastlines → nodes → edges → outer network. */
 const canvas=document.getElementById('origin-world'),ctx=canvas.getContext('2d');if(!ctx)return;
 const motion=matchMedia('(prefers-reduced-motion: reduce)'),pause=document.getElementById('motion-toggle');let paused=motion.matches,frame=0,last=0,elapsed=0,width=0,height=0,land=[];
