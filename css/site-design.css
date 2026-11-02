@@ -401,3 +401,6 @@ html[data-theme="dark"] #themeBtn:not([data-theme-mode]) > #themeIconSun{opacity
 #siteHeader .menu-btn span:last-child{transform:translate(-50%,-50%) translateY(3.5px)}
 #siteHeader.menu-open .menu-btn span:first-child{transform:translate(-50%,-50%) rotate(45deg)}
 #siteHeader.menu-open .menu-btn span:last-child{transform:translate(-50%,-50%) rotate(-45deg)}
+
+/* Origin entry: a quiet violet accent with an occasional passing highlight. */
+.origin-cta{position:relative;isolation:isolate;overflow:hidden;background:color-mix(in srgb,var(--surface) 88%,#9584c4)!important;border-color:color-mix(in srgb,var(--border-strong) 65%,#9584c4)!important;color:var(--text)!important}.origin-cta::after{content:'';position:absolute;inset:-80% -40%;background:linear-gradient(105deg,transparent 42%,#bfb0ed40 50%,transparent 58%);transform:translateX(-100%);animation:originShimmer 7s ease-in-out infinite;pointer-events:none}.origin-cta:hover{background:color-mix(in srgb,var(--surface) 76%,#9584c4)!important}@keyframes originShimmer{0%,65%{transform:translateX(-100%)}90%,100%{transform:translateX(100%)}}@media(prefers-reduced-motion:reduce){.origin-cta::after{animation:none}}
