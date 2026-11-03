@@ -51,28 +51,30 @@
 
   // A listbox adds consistent motion while keeping the existing select as the
   // single value and validation source consumed by the application integration.
-  const select = document.getElementById('joinTeam');
+  for (const select of [document.getElementById('joinTeam'),document.getElementById('beacon-year')].filter(Boolean)) {
+  const selectId=select.id;
   if (!select) return;
-  const label = document.querySelector('label[for="joinTeam"]');
-  if (label) label.id ||= 'joinTeamLabel';
+  const label = document.querySelector('label[for="'+selectId+'"]');
+  if (label) label.id ||= selectId+'Label';
   const wrap = document.createElement('div'); wrap.className = 'application-select';
   select.before(wrap); wrap.append(select);
   const button = document.createElement('button'); button.type = 'button'; button.className = 'application-select-trigger';
-  button.id = 'joinTeamTrigger'; button.setAttribute('role','combobox'); button.setAttribute('aria-haspopup','listbox');button.setAttribute('aria-expanded','false');button.setAttribute('aria-required',String(select.required));
-  button.setAttribute('aria-labelledby',`${label?.id || ''} joinTeamValue`.trim());
-  const value = document.createElement('span');value.id = 'joinTeamValue';button.append(value);
-  const list = document.createElement('div');list.id = 'joinTeamOptions';list.className = 'application-options';list.hidden = true;list.setAttribute('role','listbox');if(label)list.setAttribute('aria-labelledby',label.id);
+  button.id = selectId+'Trigger'; button.setAttribute('role','combobox'); button.setAttribute('aria-haspopup','listbox');button.setAttribute('aria-expanded','false');button.setAttribute('aria-required',String(select.required));
+  button.setAttribute('aria-labelledby',`${label?.id || ''} ${selectId}Value`.trim());
+  const value = document.createElement('span');value.id = selectId+'Value';button.append(value);
+  const list = document.createElement('div');list.id = selectId+'Options';list.className = 'application-options';list.hidden = true;list.setAttribute('role','listbox');if(label)list.setAttribute('aria-labelledby',label.id);
   button.setAttribute('aria-controls',list.id);
-  const error = document.createElement('small');error.id = 'joinTeamError';error.className = 'application-select-error';error.hidden = true;error.setAttribute('role','alert');button.setAttribute('aria-describedby',error.id);
+  const error = document.createElement('small');error.id = selectId+'Error';error.className = 'application-select-error';error.hidden = true;error.setAttribute('role','alert');button.setAttribute('aria-describedby',error.id);
   wrap.append(button,list,error);
   const options = [...select.options].filter(o=>!o.disabled && o.value), items = options.map((option,i)=>{
-    const item = document.createElement('div'); item.className = 'application-option';item.id = `joinTeamOption-${i}`;item.setAttribute('role','option');item.textContent = option.textContent;list.append(item);
+    const item = document.createElement('div'); item.className = 'application-option';item.id = `${selectId}Option-${i}`;item.setAttribute('role','option');item.textContent = option.textContent;list.append(item);
     item.addEventListener('pointerdown',e=>e.preventDefault());
     item.addEventListener('click',()=>choose(i));return item;
   });
   let open = false, active = 0, typed = '', typeTimer;
   function sync() {
     value.textContent = select.selectedOptions[0]?.textContent || '';
+    button.classList.toggle('is-placeholder',!select.value);
     items.forEach((item,i)=>item.setAttribute('aria-selected',String(select.value===options[i].value)));
     if (select.validity.valid) {error.hidden = true;button.removeAttribute('aria-invalid');}
   }
@@ -110,4 +112,5 @@
   // The source stays focusable for native validation/programmatic integrations,
   // but only the enhanced combobox is exposed to keyboard and screen readers.
   select.classList.add('enhanced-select-source');select.tabIndex=-1;select.setAttribute('aria-hidden','true');sync();
+  }
 })();

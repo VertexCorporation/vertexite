@@ -29,3 +29,9 @@
 .beacon-application{max-width:none;padding:0;margin:0}.beacon-application .join-hero{padding-top:44px}.beacon-application .join-hero h1{font-family:'Anton','Arial Narrow',sans-serif;font-size:clamp(30px,4vw,44px);line-height:1.15;letter-spacing:.07em;font-weight:400;margin:0 0 16px;white-space:normal}.beacon-application .join-hero .join-lede{font-size:16.5px;line-height:1.6;color:var(--text-muted)}.beacon-application .join-card{background:color-mix(in srgb,var(--surface) 70%,transparent);backdrop-filter:blur(12px)}.beacon-application #joinForm[hidden]{display:none}.beacon-application .form-group input[type=tel]{padding-inline-start:var(--iti-selected-country-width,90px)}.beacon-application .checkbox-group{grid-column:1/-1}.beacon-application .join-submit-btn{grid-column:1/-1}.beacon-application .form-group select option{color:var(--text)}
 
 .beacon-application .form-grid>.full-width{grid-column:1/-1}
+
+.beacon-application #joinForm input[type=checkbox]:checked{background:#F4C95D;border-color:#F4C95D}
+.beacon-application #joinForm input[type=checkbox]:checked::after{border-color:#171717}
+.beacon-application .checkbox-label a{text-decoration:underline;text-underline-offset:3px}
+.beacon-application .application-select-trigger.is-placeholder{color:var(--text-muted)}
+.beacon-application #joinTeamTrigger{white-space:normal;text-align:start;line-height:1.5;height:auto;min-height:48px}
