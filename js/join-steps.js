@@ -10,18 +10,38 @@
  back.type='button';back.className='btn application-back-btn';back.textContent=backLabel;date.append(back);details.append(actions);
  const submitLabel=submit.textContent;submit.hidden=false;submit.style.display='';submit.removeAttribute('aria-hidden');actions.append(submit);form.append(details,date);
  const feedback=document.getElementById('interviewStatusBox');if(feedback){feedback.classList.add('application-feedback');feedback.setAttribute('aria-live','polite');form.append(feedback);}
+ let embedReady=false,verified=false,verifiedAt=0;
  let mode='pending',booked=false,transition=0,resetVersion=0,waitingForMode=false,resolveMode;
  const modeReady=new Promise(resolve=>{resolveMode=resolve;});form.dataset.applicationMode=mode;window.applicationStepsEnabled=true;
  function toDetails(){transition++;details.hidden=false;date.hidden=true;back.disabled=false;}
  function activate(available){
   if(booked||mode==='direct'||available&&mode!=='pending')return;
   clearTimeout(healthTimer);mode=available?'calendar':'direct';form.dataset.applicationMode=mode;date.classList.remove('application-calendar-probe');date.removeAttribute('aria-hidden');date.inert=false;date.hidden=true;
-  submit.textContent=available?nextLabel:submitLabel;
+  setActionLabel(available?nextLabel:submitLabel);
   if(!available){toDetails();date.remove();}
   resolveMode();
  }
+ let labelVersion=0;
+ function setActionLabel(value){
+  const previous=submit.textContent;if(previous===value)return;
+  submit.setAttribute('aria-label',value);const version=++labelVersion;
+  if(matchMedia('(prefers-reduced-motion:reduce)').matches||!submit.animate){submit.textContent=value;return;}
+  const oldText=document.createElement('span'),newText=document.createElement('span');
+  oldText.textContent=previous;oldText.setAttribute('aria-hidden','true');newText.textContent=value;
+  oldText.className=newText.className='application-action-label';submit.replaceChildren(oldText,newText);
+  Promise.all([oldText.animate([{opacity:1},{opacity:0}],{duration:220,easing:'ease-in-out',fill:'forwards'}).finished,newText.animate([{opacity:0},{opacity:1}],{duration:220,easing:'ease-in-out',fill:'forwards'}).finished]).catch(()=>{}).then(()=>{if(version===labelVersion&&newText.parentNode===submit)submit.replaceChildren(newText);});
+ }
+ async function verifyPublication(){
+  try{
+   const response=await fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/getInterviewAvailability',{cache:'no-store',signal:AbortSignal.timeout(8500)});
+   const result=response.ok?await response.json():null;
+   verified=result?.available===true&&Number.isFinite(result.checkedAt)&&Math.abs(Date.now()-result.checkedAt)<30000;verifiedAt=Date.now();
+  }catch{verified=false;}
+  return verified;
+ }
  async function chooseDate(){
   if(mode!=='calendar')return;
+  if(Date.now()-verifiedAt>15000){submit.setAttribute('aria-busy','true');const available=await verifyPublication();submit.removeAttribute('aria-busy');if(!available){activate(false);form.requestSubmit(submit);return;}}
   if(window.validateVertexPhone&&!await window.validateVertexPhone()){document.getElementById('joinPhone').reportValidity();return;}
   const invalid=[...details.querySelectorAll('input,textarea,select')].find(input=>!input.checkValidity());if(invalid){invalid.reportValidity();return;}
   const ticket=++transition,reduced=matchMedia('(prefers-reduced-motion:reduce)').matches;
@@ -29,7 +49,8 @@
   details.hidden=true;date.hidden=false;if(!reduced&&date.animate)date.animate([{opacity:0},{opacity:1}],{duration:180,easing:'ease-out'});form.scrollIntoView({block:'start',behavior:'auto'});back.focus({preventScroll:true});
  }
  const healthTimer=setTimeout(()=>activate(false),10000);
- window.JoinApplicationCalendar={ready:()=>activate(true),unavailable:()=>activate(false),booked:()=>{if(mode==='pending')activate(true);booked=true;clearTimeout(healthTimer);},get mode(){return mode;}};
+ window.JoinApplicationCalendar={ready:()=>{embedReady=true;if(verified)activate(true);},unavailable:()=>activate(false),booked:()=>{if(mode==='pending')activate(true);booked=true;clearTimeout(healthTimer);},get mode(){return mode;}};
+ void verifyPublication().then(available=>{if(!available)activate(false);else if(embedReady)activate(true);});
  back.addEventListener('click',()=>{if(mode==='calendar'){toDetails();details.querySelector('input,textarea,select')?.focus({preventScroll:true});}});
  form.addEventListener('submit',event=>{
   if(mode==='direct'||booked)return;

@@ -24,3 +24,8 @@
 .vertex-join-page .application-actions>.join-submit-btn{width:100%;flex:1 1 100%}
 .vertex-join-page .application-calendar-probe{position:fixed;left:-10000px;top:0;width:800px;height:650px;overflow:hidden;opacity:0;pointer-events:none}
 .vertex-join-page .application-feedback{margin:0}
+
+/* Use Vertex typography, including while the action label crossfades. */
+.vertex-join-page #submitBtn,.vertex-join-page .application-back-btn{font-family:var(--font-sub,'Poppins',sans-serif);font-size:14px;font-weight:500;line-height:1.5}
+.vertex-join-page #submitBtn{display:grid;place-items:center;min-height:48px}
+.vertex-join-page #submitBtn .application-action-label{grid-area:1/1;font:inherit;color:inherit;pointer-events:none}

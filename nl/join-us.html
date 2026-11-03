@@ -417,7 +417,7 @@
     .join-card{padding:24px 20px;}
     .join-wrap{padding:28px 20px 56px;}
   }</style>
-<link href="https://eleven-public-cdn.elevenlabs.io" rel="preconnect"/><link href="/assets/vendor/intl-tel-input/css/intlTelInput.css" rel="stylesheet"/><link href="../css/pages/join-steps.css?v=apply261103k" rel="stylesheet"/><link href="../css/pages/birth-date-picker.css?v=20261018c" rel="stylesheet"/><link id="vertex-favicon" rel="icon" href="/assets/favicon-light.svg" type="image/svg+xml">
+<link href="https://eleven-public-cdn.elevenlabs.io" rel="preconnect"/><link href="/assets/vendor/intl-tel-input/css/intlTelInput.css" rel="stylesheet"/><link href="../css/pages/join-steps.css?v=calverified261103n" rel="stylesheet"/><link href="../css/pages/birth-date-picker.css?v=20261018c" rel="stylesheet"/><link id="vertex-favicon" rel="icon" href="/assets/favicon-light.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/css/site-design.css?v=apply261103k">
 <script defer src="/js/site-design.js?v=polish261026"></script>
 <script defer src="/js/application-motion.js?v=select261103l"></script>
@@ -511,7 +511,7 @@ That might we need is present in the noble blood in our veins; the absolute peak
 </div>
 </footer>
 <!-- Lottie Player Script -->
-<!-- Lottie Player Script --><script src="../js/join-steps.js?v=join261103m"></script><script src="../js/birth-date-picker.js?v=20261018c"></script><script src="../js/application-bridge.js?v=optional261030"></script><script src="/assets/vendor/intl-tel-input/js/intlTelInput.min.js"></script><script>"use strict";
+<!-- Lottie Player Script --><script src="../js/join-steps.js?v=calverified261103n"></script><script src="../js/birth-date-picker.js?v=20261018c"></script><script src="../js/application-bridge.js?v=optional261030"></script><script src="/assets/vendor/intl-tel-input/js/intlTelInput.min.js"></script><script>"use strict";
 const interfaceTranslations = {
   selectedCountryAriaLabel: "Land van telefoonnummer wijzigen, geselecteerd ${countryName} (${dialCode})",
   noCountrySelected: "Selecteer land van telefoonnummer",
@@ -833,7 +833,7 @@ window.VertexPhoneUI=interfaceTranslations;
         const form = e.currentTarget, btn = document.getElementById('submitBtn');
         if (applicationInFlight || applicationSubmitted || !form.checkValidity()) return;
         if(!await window.validateVertexPhone() || applicationInFlight || applicationSubmitted)return;
-        applicationInFlight = true; btn.disabled = true; btn.setAttribute("aria-busy","true"); const originalText = btn.textContent; btn.textContent = '…';
+        applicationInFlight = true; btn.disabled = true; btn.setAttribute("aria-busy","true"); const originalText = btn.getAttribute('aria-label') || btn.textContent; btn.textContent = '…';
         const calInfo = extractCalBookingInfo(interviewBookingData);
         const data = {name: document.getElementById('joinName').value, email: document.getElementById('joinEmail').value,
             phone: iti.getNumber(), birthDate: document.getElementById('joinBirthDate').value, linkedin: document.getElementById('joinLinkedin').value,
