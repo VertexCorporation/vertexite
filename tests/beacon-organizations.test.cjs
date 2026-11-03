@@ -1,0 +1,10 @@
+const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+async function run(count,reduced=false){
+ class El{constructor(){this.children=[];this.hidden=true;this.props={};this.style={setProperty:(k,v)=>this.props[k]=v};this.classes=new Set();this.classList={add:c=>this.classes.add(c),remove:c=>this.classes.delete(c)};}append(...nodes){this.children.push(...nodes)}replaceChildren(){this.children=[]}cloneNode(){const copy=new El();copy.children=[...this.children];return copy}setAttribute(k,v){this[k]=v}}
+ const section=new El(),viewport=new El(),track=new El();viewport.clientWidth=1280;section.querySelector=selector=>selector.includes('viewport')?viewport:track;
+ const rows=Array.from({length:count},(_,n)=>({name:'Organization '+n,logoUrl:'https://firebasestorage.googleapis.com/logo'+n}));
+ vm.runInNewContext(fs.readFileSync('js/beacon-organizations.js','utf8'),{document:{getElementById:()=>section,createElement:()=>new El()},matchMedia:()=>({matches:reduced,addEventListener(){}}),fetch:async()=>({ok:true,json:async()=>({organizations:rows})}),AbortSignal:{timeout(){}},ResizeObserver:class{observe(){}}});await new Promise(setImmediate);return{section,track};
+}
+test('no organizations leaves the entire public panel hidden',async()=>{const result=await run(0);assert.equal(result.section.hidden,true);assert.equal(result.track.children.length,0)});
+test('five organizations stay static without visual duplicates',async()=>{const result=await run(5);assert.equal(result.section.hidden,false);assert.equal(result.track.children.length,5);assert.equal(result.track.classes.has('is-flowing'),false)});
+test('six organizations flow with aria-hidden duplicates; reduced motion stays static',async()=>{const moving=await run(6);assert.equal(moving.track.classes.has('is-flowing'),true);assert.equal(moving.track.props['--cycle-width'],'996px');assert.equal(moving.track.children[1]['aria-hidden'],'true');const still=await run(6,true);assert.equal(still.track.classes.has('is-flowing'),false);assert.equal(still.track.children.length,6)});

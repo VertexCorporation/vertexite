@@ -1,0 +1,7 @@
+/* Shared opening rhythm for both application forms. */
+.beacon-application .join-hero,.vertex-join-page .join-hero{padding:44px 0 8px;text-align:center}
+.beacon-application .join-hero h1,.vertex-join-page .join-hero h1{margin:0 0 16px;line-height:1.15}
+.beacon-application .join-hero .join-lede,.vertex-join-page .join-hero .join-lede{margin:0 auto;line-height:1.6}
+.beacon-application .join-wrap,.vertex-join-page .join-wrap{padding-top:36px}
+.vertex-join-page .join-card{background:color-mix(in srgb,var(--surface) 70%,transparent);backdrop-filter:blur(12px)}
+@media(max-width:640px){.beacon-application .join-wrap,.vertex-join-page .join-wrap{padding-top:28px}}

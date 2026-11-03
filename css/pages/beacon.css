@@ -58,3 +58,23 @@
 .beacon-layout .beacon-apply{justify-content:center;gap:0;min-width:240px;min-height:60px;padding:16px 32px;font-size:17px;font-weight:500;background:var(--action);color:var(--action-ink);border:1px solid transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
 .beacon-layout .beacon-apply:hover{background:var(--action);border-color:var(--text);opacity:.92}
 @media(max-width:700px){.beacon-layout .beacon-join{justify-self:stretch}.beacon-layout .beacon-apply{width:auto;max-width:100%;min-width:min(240px,100%)}}
+
+/* Restore the Beacon action's soft yellow glass while retaining its centered size. */
+.beacon-layout .beacon-apply{background:color-mix(in srgb,var(--beacon-accent) 10%,transparent);color:var(--text);border-color:var(--border-strong);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.beacon-layout .beacon-apply:hover{background:color-mix(in srgb,var(--beacon-accent) 18%,transparent);border-color:var(--text-muted);opacity:1}
+.beacon-pillars{gap:24px;margin-top:28px;align-items:stretch}
+.beacon-pillars span{text-align:center;min-width:0;font-size:12px;line-height:1.6;padding-top:14px}
+.beacon-organizations{grid-column:1/-1;min-width:0;width:100%;align-self:end}
+.beacon-organizations[hidden]{display:none}
+.beacon-layout:has(.beacon-organizations:not([hidden])){grid-template-rows:1fr auto auto;row-gap:30px;padding-bottom:24px}
+.beacon-logos-viewport{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 48px,#000 calc(100% - 48px),transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 48px,#000 calc(100% - 48px),transparent);padding:10px 0}
+.beacon-logos-track,.beacon-logos-group{display:flex;align-items:center;gap:24px}
+.beacon-logos-track{justify-content:center;flex-wrap:wrap}
+.beacon-logos-group{flex-shrink:0}
+.beacon-organization{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:142px;flex:0 0 142px;min-height:92px;text-align:center;color:var(--text-muted);font-size:11px;line-height:1.4}
+.beacon-organization img{width:116px;height:52px;object-fit:contain}
+.beacon-logos-track.is-flowing{width:max-content;flex-wrap:nowrap;justify-content:flex-start;gap:24px;animation:beaconOrganizationsFlow var(--flow-duration,40s) linear infinite}
+.beacon-logos-viewport:hover .is-flowing{animation-play-state:paused}
+@keyframes beaconOrganizationsFlow{from{transform:translateX(calc(-1 * var(--cycle-width)))}to{transform:translateX(0)}}
+@media(prefers-reduced-motion:reduce){.beacon-logos-track.is-flowing{animation:none;transform:none}.beacon-logos-viewport{overflow-x:auto}.beacon-logos-group[aria-hidden=true]{display:none}}
+@media(max-width:700px){.beacon-layout:has(.beacon-organizations:not([hidden])){grid-template-rows:auto auto auto auto}.beacon-pillars{gap:18px}.beacon-pillars span{font-size:11px}.beacon-logos-viewport{mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 24px,#000 calc(100% - 24px),transparent)}}
