@@ -1,7 +1,7 @@
 'use strict';
 const {test}=require('node:test'),assert=require('node:assert/strict');
 const {sceneAt,unitNodes,nodeBirth,globeFrame}=require('../js/origin-motion.js');
-const {entryTarget,stablePosition}=require('../js/section-entry.js');
+const {entryTarget}=require('../js/section-entry.js');
 test('Origin globe extends beyond both viewport edges at mobile and desktop sizes',()=>{
  for(const [width,height]of [[320,740],[390,844],[768,1024],[1440,900],[2560,1440]]){const f=globeFrame(width,height);assert.ok(f.cx-f.radius<=0);assert.ok(f.cx+f.radius>=width);}
 });
@@ -14,19 +14,18 @@ test('early nodes appear across both hemispheres instead of starting offscreen a
 test('cross-page entry accepts only real homepage sections and strips arbitrary targets',()=>{
  for(const id of ['home','projects','ecosystem','team','vision','partners','news-section','more-info'])assert.equal(entryTarget('?section='+id),id);for(const q of ['','?section=javascript:alert(1)','?section=origin-checkout','?section=../team'])assert.equal(entryTarget(q),null);
 });
-test('section entry waits through material layout changes before revealing',()=>{
- assert.equal(stablePosition(null,2400),false);assert.equal(stablePosition(2400,2540),false);assert.equal(stablePosition(2540,2540.4),true);assert.equal(stablePosition(2540,2541),false);
+test('fragment links take precedence over legacy query links',()=>{
+ assert.equal(entryTarget('?section=team','#home'),'home');
+ assert.equal(entryTarget('?lang=tr','#projects'),'projects');
+ assert.equal(entryTarget('','#%E0%A4%A'),null);
 });
-test('cross-page scroll corrections remain hidden until the final target is ready',async()=>{
- const fs=require('node:fs'),vm=require('node:vm');const classes=new Set(),frames=new Map(),scrolls=[],historyWrites=[];let scrollY=0,next=0;
+test('legacy entry shows content immediately, positions once and keeps other query parameters',()=>{
+ const fs=require('node:fs'),vm=require('node:vm'),historyWrites=[],scrolls=[],styles=[];let scrollY=0;
  const heading={getBoundingClientRect:()=>({top:1200-scrollY}),hasAttribute:()=>false,setAttribute(){},focus(options){assert.equal(options.preventScroll,true);}};
  const target={id:'team',classList:{add(){}},querySelector:()=>heading};
- const root={classList:{add:n=>classes.add(n),remove:n=>classes.delete(n)}};
- const document={documentElement:root,readyState:'complete',fonts:{ready:Promise.resolve()},head:{append(){}},createElement:()=>({}),getElementById:id=>id==='team'?target:id==='siteHeader'?{getBoundingClientRect:()=>({height:68})}:null,querySelector:()=>({classList:{contains:()=>true}}),addEventListener(){},removeEventListener(){}};
- const window={get scrollY(){return scrollY;},addEventListener(){},removeEventListener(){},scrollTo({top}){scrolls.push({top,pending:classes.has('section-entry-pending')});scrollY=top;}};
- vm.runInNewContext(fs.readFileSync(require.resolve('../js/section-entry.js'),'utf8'),{document,window,location:{search:'?section=team',href:'https://vertexishere.com/tr/?section=team'},history:{state:null,replaceState(_a,_b,url){historyWrites.push(url);}},URL,URLSearchParams,Number,Math,performance:{now:()=>0},setTimeout:()=>1,clearTimeout(){},requestAnimationFrame:fn=>{frames.set(++next,fn);return next;},cancelAnimationFrame:id=>frames.delete(id)});
- assert.ok(classes.has('section-entry-pending'));
- await new Promise(setImmediate);
- for(let t=0;t<600&&frames.size;t+=40){const batch=[...frames.values()];frames.clear();for(const fn of batch)fn(t);await Promise.resolve();}
- assert.ok(scrolls.length>1);assert.ok(scrolls.every(s=>s.pending));assert.equal(scrollY,1112);assert.equal(classes.has('section-entry-pending'),false);assert.deepEqual(historyWrites,['/tr/#team']);
+ const document={readyState:'complete',head:{append(style){styles.push(style.textContent);}},createElement:()=>({remove(){}}),getElementById:id=>id==='team'?target:id==='siteHeader'?{getBoundingClientRect:()=>({height:68})}:null,addEventListener(){},removeEventListener(){}};
+ const window={get scrollY(){return scrollY;},addEventListener(){},removeEventListener(){},scrollTo({top}){scrolls.push(top);scrollY=top;}};
+ vm.runInNewContext(fs.readFileSync(require.resolve('../js/section-entry.js'),'utf8'),{document,window,location:{search:'?lang=tr&section=team',hash:'',href:'https://vertexishere.com/tr/?lang=tr&section=team'},history:{state:null,replaceState(_a,_b,url){historyWrites.push(url);}},URL,URLSearchParams,Math,requestAnimationFrame:fn=>fn()});
+ assert.deepEqual(scrolls,[1112]);assert.deepEqual(historyWrites,['/tr/?lang=tr','/tr/?lang=tr#team']);
+ assert.ok(styles.every(s=>!s.includes('visibility')&&!s.includes('opacity')));
 });

@@ -19,8 +19,7 @@ document.querySelectorAll('a[href^="/en/#"],a[href="/en/join-us.html"]').forEach
 const foot=document.querySelector('.foot-brand p');if(foot)foot.textContent='Vertex ismini tüm bu anlamları ve daha fazlasını kapsadığı için seçtik. 2023’te İstanbul’da kurulan Vertex, 190’dan fazla ülkede faaliyet göstermeye başladı. Birlikte potansiyelimizi ortaya koyacak, insanlığın refahına katkıda bulunacak ve yarının teknolojilerini şekillendireceğiz.';
 document.querySelectorAll('.origin-slide').forEach((el,i)=>el.setAttribute('aria-label',`${i+1} / 4 — ${['Tanıtım','EDGE','GRAPH','NETWORK'][i]}`));const region=document.querySelector('.origin-stage');if(region)region.setAttribute('aria-label','Origin programı ve üyelikleri');const dots=document.querySelector('.origin-dots');if(dots)dots.setAttribute('aria-label','Origin ekranını seç');document.querySelectorAll('.foot-legal a').forEach(a=>a.href=a.getAttribute('href').replace('/en/','/tr/'));
 }
-// Hand off the destination before native fragment scrolling can race hydration.
-document.querySelectorAll('a[href]').forEach(a=>{let url;try{url=new URL(a.href,location.href);}catch{return;}if(url.origin!==location.origin||!/^\/(?:tr|en|ar|az|de|fr|es|it|pt|nl|ru|hi|id|ja|ko|zh)\/$/.test(url.pathname)||!['home','projects','ecosystem','team','vision','partners','news-section','more-info'].includes(url.hash.slice(1)))return;url.searchParams.set('section',url.hash.slice(1));url.hash='';a.href=url.pathname+url.search;});
+// Keep canonical fragment URLs so navigation needs only one document load.
 })();
 
 
