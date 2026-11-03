@@ -41,8 +41,10 @@
 
 /* One viewport composition, with the shared footer below the opening scene. */
 .beacon-layout>section{padding-block:0}
-.beacon-layout{min-height:calc(100svh - var(--beacon-header-height,69px));grid-template-rows:1fr auto;align-content:stretch;align-items:start;padding-top:24px;padding-bottom:64px}
+.beacon-layout{min-height:calc(100svh - var(--beacon-header-height,68px));grid-template-rows:1fr auto;align-content:stretch;align-items:start;padding-top:24px;padding-bottom:64px}
 .beacon-intro,.beacon-about{align-self:start}
 .beacon-layout .beacon-title{margin-top:0}
 @media(min-width:701px){.beacon-about{padding-top:0}.beacon-about .beacon-tagline{line-height:1.2}.beacon-join{align-self:end}}
-@media(max-width:700px){.beacon-layout{min-height:calc(100svh - var(--beacon-header-height,69px));grid-template-rows:auto auto auto;align-content:start;row-gap:48px;padding-top:24px;padding-bottom:42px}.beacon-join{align-self:start}}
+@media(max-width:700px){.beacon-layout{min-height:calc(100svh - var(--beacon-header-height,68px));grid-template-rows:auto auto auto;align-content:start;row-gap:48px;padding-top:24px;padding-bottom:42px}.beacon-join{align-self:start}}
+
+@media(min-width:701px){.beacon-layout .beacon-about{padding-top:9px}}
