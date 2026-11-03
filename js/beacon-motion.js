@@ -7,6 +7,7 @@ function nodeBirth(index,count){return index%9===0?.7+((index*73)%count)/count*2
 function globeFrame(width,height){return {cx:width*.36,cy:height*.49,radius:Math.max(width*.76,height*.68)};}
 if(typeof module==='object'&&module.exports){module.exports={sceneAt,unitNodes,nodeBirth,globeFrame};return;}
 const canvas=document.getElementById('beacon-world');if(!canvas)return;const ctx=canvas.getContext('2d');if(!ctx)return;
+const neutral=canvas.dataset.variant==='neutral';
 const reduced=matchMedia('(prefers-reduced-motion: reduce)');
 let nodes=[],edges=[],cycle=-1;
 function regenerate(){
@@ -24,7 +25,7 @@ function resize(){const nextWidth=canvas.parentElement.clientWidth,nextHeight=ca
  width=nextWidth;height=nextHeight;const dpr=Math.min(devicePixelRatio||1,1.75);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);paint();}
 function paint(){
  const currentCycle=Math.floor(elapsed/32);if(currentCycle!==cycle){cycle=currentCycle;regenerate();}
- ctx.clearRect(0,0,width,height);const s=sceneAt(reduced.matches?18:elapsed),dark=document.documentElement.dataset.theme==='dark',ink=dark?'211,211,222':'58,56,72',violet='244,201,93',angle=elapsed*.03;
+ ctx.clearRect(0,0,width,height);const s=sceneAt(reduced.matches?18:elapsed),dark=document.documentElement.dataset.theme==='dark',ink=dark?'211,211,222':'58,56,72',violet=neutral?ink:'244,201,93',angle=elapsed*.03;
  if(canvas.dataset.phase!==s.phase)canvas.dataset.phase=s.phase;
  function path(points,alpha,color=ink,lineWidth=.7){ctx.beginPath();let pen=false;for(const p of points){if(p[2]<0){pen=false;continue;}if(pen)ctx.lineTo(p[0],p[1]);else{ctx.moveTo(p[0],p[1]);pen=true;}}ctx.lineWidth=lineWidth;ctx.strokeStyle=`rgba(${color},${alpha})`;ctx.stroke();}
  for(let lat=-60;lat<=60;lat+=30){const a=lat*Math.PI/180;path(Array.from({length:100},(_,i)=>{const l=i/99*Math.PI*2;return project([Math.cos(a)*Math.cos(l),Math.sin(a),Math.cos(a)*Math.sin(l)],angle);}),.2*s.earth);}
@@ -34,7 +35,7 @@ function paint(){
  land.forEach(arc=>path(arc.map(p=>project(p,angle+.075*s.shell,1+.09*s.shell)),.6*s.shell*(1-s.reset),violet,.85));
  const base=nodes.map(p=>project(p,angle)),shellScale=1+.09*s.shell,outer=nodes.map(p=>project(p,angle+.075*s.shell,shellScale));
  // Birth ranks are scattered across the globe, rather than sweeping offscreen from a pole.
- nodes.forEach((_,i)=>{const visibility=smooth(nodeBirth(i,nodes.length),nodeBirth(i,nodes.length)+1.4,s.time)*(1-s.reset),p=base[i];if(p[2]<0||visibility===0)return;ctx.beginPath();ctx.arc(p[0],p[1],2+(.5+.5*Math.sin(elapsed*.75+i))*.65,0,Math.PI*2);ctx.fillStyle=`rgba(${violet},${visibility*(.55+.3*p[2])})`;ctx.fill();if(i%9===0){ctx.beginPath();ctx.arc(p[0],p[1],38,0,Math.PI*2);const glow=ctx.createRadialGradient(p[0],p[1],0,p[0],p[1],38);glow.addColorStop(0,`rgba(${violet},${visibility*.25})`);glow.addColorStop(1,`rgba(${violet},0)`);ctx.fillStyle=glow;ctx.fill();}});
+ nodes.forEach((_,i)=>{const visibility=smooth(nodeBirth(i,nodes.length),nodeBirth(i,nodes.length)+1.4,s.time)*(1-s.reset),p=base[i];if(p[2]<0||visibility===0)return;ctx.beginPath();ctx.arc(p[0],p[1],2+(.5+.5*Math.sin(elapsed*.75+i))*.65,0,Math.PI*2);ctx.fillStyle=`rgba(${violet},${visibility*(.55+.3*p[2])})`;ctx.fill();if(!neutral&&i%9===0){ctx.beginPath();ctx.arc(p[0],p[1],38,0,Math.PI*2);const glow=ctx.createRadialGradient(p[0],p[1],0,p[0],p[1],38);glow.addColorStop(0,`rgba(${violet},${visibility*.25})`);glow.addColorStop(1,`rgba(${violet},0)`);ctx.fillStyle=glow;ctx.fill();}});
  edges.forEach(([i,j])=>{const birth=Math.max(nodeBirth(i,nodes.length),nodeBirth(j,nodes.length))+1.3,growth=smooth(birth,birth+2.2,s.time)*(1-s.reset);if(growth===0)return;const a=outer[i],b=outer[j];if(a[2]<-.04||b[2]<-.04)return;ctx.beginPath();ctx.moveTo(a[0],a[1]);ctx.lineTo(a[0]+(b[0]-a[0])*growth,a[1]+(b[1]-a[1])*growth);ctx.lineWidth=.9;ctx.strokeStyle=`rgba(${violet},${growth*(.23+.3*Math.max(0,(a[2]+b[2])/2))})`;ctx.stroke();});
  outer.forEach((p,i)=>{if(p[2]<0)return;const strength=s.shell*(.45+.4*p[2]);ctx.beginPath();ctx.arc(p[0],p[1],i%9===0?2.8:1.6,0,Math.PI*2);ctx.fillStyle=`rgba(${violet},${strength})`;ctx.fill();});
 }

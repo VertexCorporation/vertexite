@@ -72,9 +72,16 @@
     item.addEventListener('click',()=>choose(i));return item;
   });
   let open = false, active = 0, typed = '', typeTimer;
+  function fitValue() {
+    if(selectId!=='joinTeam'||!document.getElementById('beacon-year'))return;
+    let size=12;button.style.fontSize=size+'px';
+    while(size>8&&value.scrollWidth>value.clientWidth+1){size-=.25;button.style.fontSize=size+'px';}
+  }
+  if(selectId==='joinTeam'&&document.getElementById('beacon-year')){new ResizeObserver(fitValue).observe(button);document.fonts?.ready.then(fitValue);}
   function sync() {
     value.textContent = select.selectedOptions[0]?.textContent || '';
     button.classList.toggle('is-placeholder',!select.value);
+    fitValue();
     items.forEach((item,i)=>item.setAttribute('aria-selected',String(select.value===options[i].value)));
     if (select.validity.valid) {error.hidden = true;button.removeAttribute('aria-invalid');}
   }

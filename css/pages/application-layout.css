@@ -5,3 +5,11 @@
 .beacon-application .join-wrap,.vertex-join-page .join-wrap{padding-top:36px}
 .vertex-join-page .join-card{background:color-mix(in srgb,var(--surface) 70%,transparent);backdrop-filter:blur(12px)}
 @media(max-width:640px){.beacon-application .join-wrap,.vertex-join-page .join-wrap{padding-top:28px}}
+
+/* Both application forms use the same surface and control height. */
+:is(.beacon-application,.vertex-join-page) .join-card .vx-birth-trigger{background:var(--surface);border:1px solid var(--border-strong);border-radius:10px;min-height:48px;height:48px;padding:12px 14px;font-size:14px}
+:is(.beacon-application,.vertex-join-page) #joinForm .form-group>input:not([type=checkbox]):not(.vx-birth-source),:is(.beacon-application,.vertex-join-page) #joinForm .iti input[type=tel],:is(.beacon-application,.vertex-join-page) .application-select-trigger{height:48px;min-height:48px;box-sizing:border-box}
+.beacon-application #joinTeamTrigger{font-size:12px;white-space:nowrap;line-height:1.3;height:48px;min-height:48px;padding-inline:12px;gap:10px}
+.beacon-application #joinTeamValue{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.beacon-application #joinTeamOptions .application-option{font-size:12px;line-height:1.5}
+:is(.beacon-application,.vertex-join-page) .form-group{min-width:0}

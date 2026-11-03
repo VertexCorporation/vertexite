@@ -17,3 +17,10 @@
 @media (max-width: 640px) {
   .join-card .application-step { grid-template-columns: 1fr; }
 }
+/* Author display rules must never override the application mode. */
+.vertex-join-page #joinForm [hidden]{display:none!important}
+.vertex-join-page .application-actions,.vertex-join-page #submitBtn,.vertex-join-page .application-feedback{grid-column:1/-1;width:100%;box-sizing:border-box}
+.vertex-join-page .application-actions{min-width:0}
+.vertex-join-page .application-actions>.join-submit-btn{width:100%;flex:1 1 100%}
+.vertex-join-page .application-calendar-probe{position:fixed;left:-10000px;top:0;width:800px;height:650px;overflow:hidden;opacity:0;pointer-events:none}
+.vertex-join-page .application-feedback{margin:0}
