@@ -7,18 +7,26 @@ function nodeBirth(index,count){return index%9===0?.7+((index*73)%count)/count*2
 function globeFrame(width,height){return {cx:width*.36,cy:height*.49,radius:Math.max(width*.76,height*.68)};}
 if(typeof module==='object'&&module.exports){module.exports={sceneAt,unitNodes,nodeBirth,globeFrame};return;}
 const canvas=document.getElementById('beacon-world');if(!canvas)return;const ctx=canvas.getContext('2d');if(!ctx)return;
-const reduced=matchMedia('(prefers-reduced-motion: reduce)'),nodes=unitNodes(),edges=[];
-nodes.forEach((p,i)=>nodes.forEach((q,j)=>{if(j>i&&Math.hypot(p[0]-q[0],p[1]-q[1],p[2]-q[2])<.32)edges.push([i,j]);}));
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+let nodes=[],edges=[],cycle=-1;
+function regenerate(){
+ nodes=unitNodes().map(p=>{const q=p.map(v=>v+(Math.random()-.5)*.11),n=Math.hypot(...q);return q.map(v=>v/n)});
+ edges=[];nodes.forEach((p,i)=>nodes.forEach((q,j)=>{if(j>i&&Math.hypot(p[0]-q[0],p[1]-q[1],p[2]-q[2])<.33)edges.push([i,j])}));
+}
+regenerate();
 let width=0,height=0,land=[],frame=0,previous=0,elapsed=0,lastPaint=0;
 function project(p,angle,scale=1){const layout=globeFrame(width,height),x=p[0]*Math.cos(angle)+p[2]*Math.sin(angle),z=p[2]*Math.cos(angle)-p[0]*Math.sin(angle);const y=p[1]*.97-z*.24,depth=z*.97+p[1]*.24;return [layout.cx+x*layout.radius*scale,layout.cy-y*layout.radius*scale,depth];}
 function resize(){width=canvas.parentElement.clientWidth;height=canvas.parentElement.clientHeight;const dpr=Math.min(devicePixelRatio||1,1.75);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);paint();}
 function paint(){
+ const currentCycle=Math.floor(elapsed/32);if(currentCycle!==cycle){cycle=currentCycle;regenerate();}
  ctx.clearRect(0,0,width,height);const s=sceneAt(reduced.matches?18:elapsed),dark=document.documentElement.dataset.theme==='dark',ink=dark?'211,211,222':'58,56,72',violet=dark?'244,201,93':'145,96,0',angle=elapsed*.03;
  if(canvas.dataset.phase!==s.phase)canvas.dataset.phase=s.phase;
  function path(points,alpha,color=ink,lineWidth=.7){ctx.beginPath();let pen=false;for(const p of points){if(p[2]<0){pen=false;continue;}if(pen)ctx.lineTo(p[0],p[1]);else{ctx.moveTo(p[0],p[1]);pen=true;}}ctx.lineWidth=lineWidth;ctx.strokeStyle=`rgba(${color},${alpha})`;ctx.stroke();}
  for(let lat=-60;lat<=60;lat+=30){const a=lat*Math.PI/180;path(Array.from({length:100},(_,i)=>{const l=i/99*Math.PI*2;return project([Math.cos(a)*Math.cos(l),Math.sin(a),Math.cos(a)*Math.sin(l)],angle);}),.2*s.earth);}
  for(let lon=0;lon<180;lon+=30){const l=lon*Math.PI/180;path(Array.from({length:120},(_,i)=>{const a=i/119*Math.PI*2;return project([Math.cos(a)*Math.cos(l),Math.sin(a),Math.cos(a)*Math.sin(l)],angle);}),.17*s.earth);}
  land.forEach(arc=>path(arc.map(p=>project(p,angle)),.64*s.earth));
+ // Coastlines return on the new shell, then merge with the original globe at the loop boundary.
+ land.forEach(arc=>path(arc.map(p=>project(p,angle+.075*s.shell,1+.09*s.shell)),.6*s.shell*(1-s.reset),violet,.85));
  const base=nodes.map(p=>project(p,angle)),shellScale=1+.09*s.shell,outer=nodes.map(p=>project(p,angle+.075*s.shell,shellScale));
  // Birth ranks are scattered across the globe, rather than sweeping offscreen from a pole.
  nodes.forEach((_,i)=>{const visibility=smooth(nodeBirth(i,nodes.length),nodeBirth(i,nodes.length)+1.4,s.time)*(1-s.reset),p=base[i];if(p[2]<0||visibility===0)return;ctx.beginPath();ctx.arc(p[0],p[1],2+(.5+.5*Math.sin(elapsed*.75+i))*.65,0,Math.PI*2);ctx.fillStyle=`rgba(${violet},${visibility*(.55+.3*p[2])})`;ctx.fill();if(i%9===0){ctx.beginPath();ctx.arc(p[0],p[1],38,0,Math.PI*2);const glow=ctx.createRadialGradient(p[0],p[1],0,p[0],p[1],38);glow.addColorStop(0,`rgba(${violet},${visibility*.25})`);glow.addColorStop(1,`rgba(${violet},0)`);ctx.fillStyle=glow;ctx.fill();}});

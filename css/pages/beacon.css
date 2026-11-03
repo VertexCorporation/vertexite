@@ -19,3 +19,9 @@
 @keyframes beaconShimmer{from{background-position:100% 0}to{background-position:0% 0}}@keyframes beaconGather{0%{color:var(--text);text-shadow:none}75%{color:var(--beacon-accent);text-shadow:0 0 24px var(--beacon-accent)}100%{color:var(--beacon-accent);text-shadow:none}}
 @media(max-width:700px){.beacon-layout{grid-template-columns:1fr;grid-template-rows:auto;gap:38px;padding:32px 20px 30px;min-height:calc(100svh - 75px)}.beacon-title{font-size:clamp(36px,10.5vw,68px)}.beacon-label{font-size:9px;margin-bottom:18px}.beacon-tagline{font-size:27px}.beacon-about{max-width:100%}.beacon-about h2{font-size:25px}.beacon-join{justify-self:stretch;text-align:left}.beacon-apply{width:100%;justify-content:space-between}.beacon-atmosphere{background:linear-gradient(180deg,color-mix(in srgb,var(--bg) 65%,transparent),color-mix(in srgb,var(--bg) 85%,transparent))}}
 @media(prefers-reduced-motion:reduce){.beacon-title,.beacon-title b{animation:none}.beacon-title{background:none;color:var(--text)}}
+
+/* Compact opening rails; empty institution slots take no space. */
+.beacon-layout{padding-top:22px;gap:35px 10%}.beacon-about{padding-top:0}.beacon-join{grid-column:2}.beacon-page footer{position:relative;background:color-mix(in srgb,var(--bg) 88%,transparent)}
+.beacon-apply{background:color-mix(in srgb,var(--beacon-accent) 10%,transparent);color:var(--text);border:1px solid var(--border-strong);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);font-family:inherit;font-size:13px;font-weight:500}
+.beacon-apply:hover{background:color-mix(in srgb,var(--beacon-accent) 18%,transparent);border-color:var(--text-muted)}
+@media(max-width:700px){.beacon-layout{padding-top:16px;gap:28px;min-height:0;padding-bottom:42px}.beacon-join{grid-column:1}.beacon-page footer .foot-grid{gap:26px}}

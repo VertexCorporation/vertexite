@@ -417,3 +417,8 @@ html[data-theme="dark"]{--beacon-accent:#F4C95D;--beacon-hover:#FFE19A}
 .beacon-main h1 span{color:var(--beacon-accent)}
 .beacon-main p{max-width:580px;margin:0 auto 24px;color:var(--text-muted);line-height:1.7}
 .beacon-main .btn{justify-self:center}
+
+/* Program entry points share the site's quiet glass button treatment. */
+.origin-cta,.beacon-cta{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border-strong)!important;color:var(--text)!important}
+.origin-cta{background:color-mix(in srgb,#9584c4 10%,transparent)!important}.origin-cta:hover{background:color-mix(in srgb,#9584c4 18%,transparent)!important}
+.beacon-cta{background:color-mix(in srgb,var(--beacon-accent) 10%,transparent)!important}.beacon-cta:hover{background:color-mix(in srgb,var(--beacon-accent) 18%,transparent)!important}
