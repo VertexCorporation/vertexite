@@ -1,20 +1,37 @@
-/* Vertex Origin: inline benefits, accessible slides, locale-aware checkout links. */
+/* Origin is a scroll experience. All memberships remain reachable without motion. */
 (()=>{'use strict';
-const {plans,ui}=window.OriginText,lang=window.OriginLocale,esc=window.OriginEscape;
-const slides=[...document.querySelectorAll('.origin-slide')],track=document.querySelector('.origin-track');let current=0,start=null;
-function go(index,focus=false){current=Math.max(0,Math.min(3,index));track.style.transform=`translateX(-${current*100}%)`;slides.forEach((s,i)=>{s.inert=i!==current;s.setAttribute('aria-hidden',String(i!==current));});document.getElementById('origin-prev').hidden=current===0;document.getElementById('origin-next').hidden=current===3;document.getElementById('origin-counter').textContent=`0${current+1} / 04 — ${[lang==='tr'?'TANITIM':'INTRODUCTION','EDGE','GRAPH','NETWORK'][current]}`;document.querySelectorAll('.origin-dots button').forEach((b,i)=>{if(i===current)b.setAttribute('aria-current','true');else b.removeAttribute('aria-current');});const title=document.querySelector('.origin-title');if(title){title.classList.remove('title-animate');if(current===0)requestAnimationFrame(()=>title.classList.add('title-animate'));}requestAnimationFrame(fitStage);if(focus)document.querySelector(`.origin-dots [data-goto="${current}"]`).focus({preventScroll:true});}
-document.querySelectorAll('[data-goto]').forEach(b=>b.addEventListener('click',()=>go(Number(b.dataset.goto),slides[current].contains(document.activeElement))));
-document.getElementById('origin-prev').onclick=()=>go(current-1,true);document.getElementById('origin-next').onclick=()=>go(current+1,true);
-document.querySelector('.origin-main').addEventListener('keydown',e=>{if(e.target.closest('.origin-benefit-rail')||/INPUT|SELECT|TEXTAREA/.test(e.target.tagName)||e.altKey||e.ctrlKey||e.metaKey)return;if(e.key==='ArrowRight'||e.key==='ArrowLeft'){e.preventDefault();go(current+(e.key==='ArrowRight'?1:-1),true);}});
-const stage=document.querySelector('.origin-stage');function fitStage(){stage.style.height=Math.ceil(slides[current].getBoundingClientRect().height)+'px';}if('ResizeObserver' in window){const sizeObserver=new ResizeObserver(()=>requestAnimationFrame(fitStage));slides.forEach(slide=>sizeObserver.observe(slide));}window.addEventListener('resize',fitStage,{passive:true});if(document.fonts)document.fonts.ready.then(fitStage);stage.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'&&!e.target.closest('.origin-benefit-rail'))start={x:e.clientX,y:e.clientY};});stage.addEventListener('pointerup',e=>{if(!start)return;const dx=e.clientX-start.x,dy=e.clientY-start.y;start=null;if(Math.abs(dx)>65&&Math.abs(dx)>Math.abs(dy)*1.5)go(current+(dx<0?1:-1));});stage.addEventListener('pointercancel',()=>{start=null;});
-function rail(name){const p=plans[name];return `<div class="origin-benefit-viewport"><ol class="origin-benefit-rail" tabindex="0" aria-label="${name} ${esc(ui.counter)}">${p.benefits.map((x,i)=>`<li><span>${String(i+1).padStart(2,'0')} / ${name}</span><p>${esc(x)}</p></li>`).join('')}</ol></div><div class="origin-benefit-toolbar"><span>${p.benefits.length} ${esc(ui.counter)}</span><div><button type="button" data-rail-step="-1" aria-label="${esc(ui.previous)}">←</button><button type="button" data-rail-step="1" aria-label="${esc(ui.next)}">→</button></div></div><details class="origin-inline-conditions"><summary>${esc(ui.conditions)}</summary><p>${esc(p.conditions)}</p></details>${name==='NODE'?`<details class="origin-inline-conditions"><summary>${esc(ui.customize)}</summary><p>${esc(ui.unpriced)}</p><ul>${ui.addons.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></details>`:''}`;}
-function toggleBenefits(button,name){let panel=document.getElementById('origin-benefits-'+name);if(!panel){panel=document.createElement('div');panel.id='origin-benefits-'+name;panel.className='origin-inline-benefits';panel.hidden=true;panel.innerHTML=rail(name);if(name==='NODE')document.querySelector('.origin-node').after(panel);else document.querySelector(`.origin-slide[data-plan="${name}"] .origin-highlights`).after(panel);button.dataset.originalText=button.textContent;button.setAttribute('aria-controls',panel.id);}
-const opening=panel.hidden;panel.hidden=!opening;button.setAttribute('aria-expanded',String(opening));button.textContent=opening?ui.back:button.dataset.originalText;
-const slide=button.closest('.origin-slide');if(slide){slide.classList.toggle('benefits-open',opening);slide.querySelector('.origin-highlights').hidden=opening;}
-if(opening){panel.classList.remove('benefits-enter');void panel.offsetWidth;panel.classList.add('benefits-enter');} }
-document.addEventListener('click',e=>{const b=e.target.closest('[data-details]');if(b){const name=b.dataset.details;if(plans[name])toggleBenefits(b,name);else{const p=document.getElementById('origin-inline-portfolio');if(!p.innerHTML)p.innerHTML=`<h2>${esc(ui.portfolio)}</h2><p>${esc(ui.portfolioLead)}</p><div class="origin-empty"><h3>${esc(ui.portfolioEmpty)}</h3><p>${esc(ui.portfolioEmptyText)}</p></div><h3>${esc(ui.visibility)}</h3>${ui.portfolioRules.map(x=>`<p>${esc(x)}</p>`).join('')}<p>${esc(ui.activity)}</p><p>${esc(ui.endorsement)}</p>`;p.hidden=!p.hidden;b.setAttribute('aria-expanded',String(!p.hidden));}return;}
-const arrow=e.target.closest('[data-rail-step]');if(arrow){const rail=arrow.closest('.origin-inline-benefits').querySelector('.origin-benefit-rail');rail.scrollBy({left:Number(arrow.dataset.railStep)*rail.clientWidth*.8,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'instant':'smooth'});}});
-document.querySelectorAll('[data-details]').forEach(b=>b.setAttribute('aria-expanded','false'));
-if(lang==='tr'){document.getElementById('origin-prev').setAttribute('aria-label','Önceki ekran');document.getElementById('origin-next').setAttribute('aria-label','Sonraki ekran');document.querySelector('.origin-dots [data-goto="0"]').setAttribute('aria-label','Tanıtım');}
-go(Math.max(0,['INTRODUCTION','EDGE','GRAPH','NETWORK'].indexOf(new URLSearchParams(location.search).get('screen')||'INTRODUCTION')));
+const {plans,ui}=window.OriginText,lang=window.OriginLocale,tr=lang==='tr',esc=window.OriginEscape;
+const reduced=matchMedia('(prefers-reduced-motion: reduce)');
+document.querySelector('.origin-explore')?.addEventListener('click',event=>{event.preventDefault();document.getElementById('origin-memberships').scrollIntoView({behavior:reduced.matches?'instant':'smooth',block:'start'});document.getElementById('memberships-heading').focus({preventScroll:true});});
+document.getElementById('memberships-heading').tabIndex=-1;
+const reveal=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add('is-visible');reveal.unobserve(entry.target);}}),{threshold:.12});
+document.querySelectorAll('.origin-reveal').forEach(el=>reveal.observe(el));
+document.querySelectorAll('[data-details]').forEach(button=>{
+ const name=button.dataset.details,p=plans[name];if(!p)return;
+ const panel=document.createElement('div');panel.className='origin-plan-benefits';panel.id='origin-benefits-'+name;panel.hidden=true;
+ panel.innerHTML=`<ol>${p.benefits.map(x=>`<li>${esc(x)}</li>`).join('')}</ol><details class="origin-inline-conditions"><summary>${esc(ui.conditions)}</summary><p>${esc(p.conditions)}</p></details>`;
+ button.closest('.origin-plan-copy').append(panel);button.setAttribute('aria-controls',panel.id);button.setAttribute('aria-expanded','false');const initial=button.textContent;
+ button.addEventListener('click',()=>{panel.hidden=!panel.hidden;button.setAttribute('aria-expanded',String(!panel.hidden));button.textContent=panel.hidden?initial:ui.back;});
+});
+document.querySelector('[data-portfolio-heading]').textContent=ui.portfolio;
+document.querySelector('[data-portfolio-lead]').textContent=ui.portfolioLead;
+document.querySelector('[data-portfolio-conditions]').textContent=ui.conditions;
+document.getElementById('origin-portfolio-rules').innerHTML=[...ui.portfolioRules,ui.activity,ui.endorsement].map(x=>`<p>${esc(x)}</p>`).join('');
+const walls=document.getElementById('origin-walls'),portfolio=document.getElementById('origin-portfolio-list');
+portfolio.textContent=ui.portfolioEmptyText;
+function publicRow(row){const el=document.createElement('span');el.className='origin-wall-person';el.textContent=row.name;return el;}
+function drawWall(tier,people){
+ const valid=people.filter(row=>typeof row.name==='string'&&row.name.trim());if(!valid.length)return;
+ const section=document.createElement('section'),title=document.createElement('h2'),viewport=document.createElement('div'),rail=document.createElement('div');
+ title.textContent=tier+' '+(tr?'Duvarı':'Wall');section.className='origin-wall';section.append(title);viewport.className='origin-wall-viewport';rail.className='origin-wall-track';
+ for(const row of valid)rail.append(publicRow(row));
+ if(valid.length>=6){rail.classList.add('is-flowing');const copy=document.createElement('div');copy.className='origin-wall-duplicate';copy.setAttribute('aria-hidden','true');valid.forEach(row=>copy.append(publicRow(row)));rail.append(copy);rail.style.setProperty('--wall-duration',Math.max(30,valid.length*5)+'s');}
+ viewport.append(rail);section.append(viewport);walls.append(section);walls.hidden=false;
+}
+async function loadCommunity(){try{
+ const response=await fetch('https://europe-west1-vertex-ai-1618.cloudfunctions.net/getPublicOriginCommunity',{signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error();const data=await response.json();
+ for(const tier of ['NODE','EDGE','GRAPH','NETWORK'])drawWall(tier,data.walls?.[tier]||[]);
+ if(Array.isArray(data.startups)&&data.startups.length){portfolio.replaceChildren();for(const row of data.startups){const card=document.createElement('article');card.className='origin-startup';const name=document.createElement('h3'),description=document.createElement('p'),meta=document.createElement('small');name.textContent=row.name;description.textContent=row.description;meta.textContent=[row.sector,row.tier,row.founder].filter(Boolean).join(' · ');card.append(name,description,meta);try{const url=new URL(row.website);if(url.protocol==='https:'){const link=document.createElement('a');link.href=url.href;link.rel='noopener noreferrer';link.target='_blank';link.textContent=tr?'Girişimi keşfet ↗':'Explore startup ↗';card.append(link);}}catch{}portfolio.append(card);}}
+ }catch{/* Empty walls stay absent; never fabricate participants. */}}
+loadCommunity();
 })();
