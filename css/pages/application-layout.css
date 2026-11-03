@@ -21,3 +21,22 @@
 .iti--fullscreen-popup.iti--detached-country-selector{justify-content:flex-end;transition:padding-bottom 160ms cubic-bezier(.2,.8,.2,1)}
 .iti--fullscreen-popup .iti__country-selector{max-height:min(520px,100%)}
 @media(prefers-reduced-motion:reduce){.iti--fullscreen-popup.iti--detached-country-selector{transition:none}}
+
+/* Give the Join Us content the same breathing room at both ends. */
+.vertex-join-page>main{box-sizing:border-box;min-height:calc(100svh - 68px);display:flex;flex-direction:column;justify-content:center;padding-block:28px}
+.vertex-join-page>main .join-hero{padding-top:0}
+.vertex-join-page>main .join-wrap{width:100%;box-sizing:border-box;padding-bottom:0}
+
+/* Rotate a centered chevron in a fixed square; its footprint never changes. */
+:is(.vertex-join-page,.beacon-application) .application-select-trigger::after,
+:is(.vertex-join-page,.beacon-application) .iti__arrow{
+ width:16px;height:16px;min-width:16px;flex:0 0 16px;border:0;background:currentColor;transform:rotate(0);transform-origin:50% 50%;
+ -webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px 16px no-repeat;
+ mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='m4 6 4 4 4-4' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px 16px no-repeat;
+ transition:transform 200ms var(--panel-ease)
+}
+:is(.vertex-join-page,.beacon-application) .application-select-trigger[aria-expanded=true]::after,
+:is(.vertex-join-page,.beacon-application) .iti__arrow--up{transform:rotate(180deg)}
+:is(.vertex-join-page,.beacon-application) .iti__arrow,
+:is(.vertex-join-page,.beacon-application) .iti__arrow--up{margin-top:0}
+@media(prefers-reduced-motion:reduce){:is(.vertex-join-page,.beacon-application) .application-select-trigger::after,:is(.vertex-join-page,.beacon-application) .iti__arrow{transition:none}}
