@@ -22,3 +22,7 @@ document.querySelectorAll('.origin-slide').forEach((el,i)=>el.setAttribute('aria
 // Hand off the destination before native fragment scrolling can race hydration.
 document.querySelectorAll('a[href]').forEach(a=>{let url;try{url=new URL(a.href,location.href);}catch{return;}if(url.origin!==location.origin||!/^\/(?:tr|en|ar|az|de|fr|es|it|pt|nl|ru|hi|id|ja|ko|zh)\/$/.test(url.pathname)||!['home','projects','ecosystem','team','vision','partners','news-section','more-info'].includes(url.hash.slice(1)))return;url.searchParams.set('section',url.hash.slice(1));url.hash='';a.href=url.pathname+url.search;});
 })();
+
+
+// Origin-specific legal documents follow the program language.
+document.querySelectorAll('[data-origin-terms]').forEach(a=>{a.href=window.OriginLocale==='tr'?'/tr/origin-kullanim-kosullari':'/en/origin-terms-of-use';a.textContent=window.OriginLocale==='tr'?'Origin Kullanım Koşulları':'Origin Terms of Use';});
