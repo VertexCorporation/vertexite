@@ -72,16 +72,42 @@
     item.addEventListener('click',()=>choose(i));return item;
   });
   let open = false, active = 0, typed = '', typeTimer;
+  let valueAnimation=null,valueRevision=0,pendingText=null;
+  const fitting=selectId==='joinTeam'&&!!document.getElementById('beacon-year');
+  const measure=fitting?document.createElement('canvas').getContext('2d'):null;
   function fitValue() {
-    if(selectId!=='joinTeam'||!document.getElementById('beacon-year'))return;
-    let size=12;button.style.fontSize=size+'px';
-    while(size>8&&value.scrollWidth>value.clientWidth+1){size-=.25;button.style.fontSize=size+'px';}
+    if(!fitting)return;
+    const maxSize=12;button.style.fontSize=maxSize+'px';
+    const width=value.clientWidth;if(width<=0)return;
+    const style=getComputedStyle(value);
+    if(measure){
+      measure.font=style.fontStyle+' '+style.fontWeight+' '+maxSize+'px '+style.fontFamily;
+      const spacing=Number.parseFloat(style.letterSpacing)||0;
+      const natural=measure.measureText(value.textContent).width+Math.max(0,value.textContent.length-1)*spacing;
+      const size=Math.min(maxSize,maxSize*Math.max(1,width-4)/Math.max(1,natural));
+      button.style.fontSize=Math.max(4,Math.floor(size*100)/100)+'px';
+    }
+    // Guard against font-metric rounding and browser text-layout differences.
+    let size=Number.parseFloat(button.style.fontSize)||maxSize;
+    while(size>4&&value.scrollWidth>value.clientWidth){size-=.1;button.style.fontSize=Math.max(4,size)+'px';}
   }
-  if(selectId==='joinTeam'&&document.getElementById('beacon-year')){new ResizeObserver(fitValue).observe(button);document.fonts?.ready.then(fitValue);}
+  if(fitting){new ResizeObserver(fitValue).observe(button);document.fonts?.ready.then(fitValue);}
+  function paintValue(text) {
+    if(pendingText===text)return;
+    const first=pendingText===null;pendingText=text;const revision=++valueRevision;
+    valueAnimation?.cancel();
+    const paint=()=>{value.textContent=text;fitValue();};
+    if(first||reduced.matches||!value.animate){paint();return;}
+    valueAnimation=value.animate([{opacity:1},{opacity:0}],{duration:75,easing:'ease-out',fill:'forwards'});
+    valueAnimation.finished.then(()=>{
+      if(revision!==valueRevision)return;
+      valueAnimation.cancel();paint();
+      if(!reduced.matches)valueAnimation=value.animate([{opacity:0},{opacity:1}],{duration:145,easing:'ease-out'});
+    }).catch(()=>{});
+  }
   function sync() {
-    value.textContent = select.selectedOptions[0]?.textContent || '';
+    paintValue(select.selectedOptions[0]?.textContent || '');
     button.classList.toggle('is-placeholder',!select.value);
-    fitValue();
     items.forEach((item,i)=>item.setAttribute('aria-selected',String(select.value===options[i].value)));
     if (select.validity.valid) {error.hidden = true;button.removeAttribute('aria-invalid');}
   }
@@ -101,7 +127,7 @@
     panelMotion(list,open);
   }
   function choose(i) {
-    select.value = options[i].value;select.dispatchEvent(new Event('input',{bubbles:true}));select.dispatchEvent(new Event('change',{bubbles:true}));sync();toggle(false);button.focus({preventScroll:true});
+    select.value = options[i].value;select.dispatchEvent(new Event('input',{bubbles:true}));select.dispatchEvent(new Event('change',{bubbles:true}));toggle(false);button.focus({preventScroll:true});
   }
   button.addEventListener('click',()=>toggle(!open));
   button.addEventListener('keydown',e=>{

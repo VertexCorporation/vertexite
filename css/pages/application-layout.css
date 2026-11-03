@@ -13,3 +13,11 @@
 .beacon-application #joinTeamValue{display:block;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .beacon-application #joinTeamOptions .application-option{font-size:12px;line-height:1.5}
 :is(.beacon-application,.vertex-join-page) .form-group{min-width:0}
+
+/* Full institution names shrink to fit instead of being replaced by an ellipsis. */
+.beacon-application #joinTeamValue{flex:1 1 0;width:0;text-overflow:clip}
+/* Bottom-anchored phone sheets follow the library's Visual Viewport keyboard inset. */
+:is(.beacon-page,.vertex-join-page) .iti--fullscreen-popup .iti__close-button{display:none!important}
+.iti--fullscreen-popup.iti--detached-country-selector{justify-content:flex-end;transition:padding-bottom 160ms cubic-bezier(.2,.8,.2,1)}
+.iti--fullscreen-popup .iti__country-selector{max-height:min(520px,100%)}
+@media(prefers-reduced-motion:reduce){.iti--fullscreen-popup.iti--detached-country-selector{transition:none}}
