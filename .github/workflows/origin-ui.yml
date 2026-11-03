@@ -1,0 +1,29 @@
+name: Origin responsive experience checks
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - origin*.html
+      - js/origin*.js
+      - css/pages/origin.css
+      - tests/origin-browser.cjs
+      - .github/workflows/origin-ui.yml
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: node tests/origin-browser.cjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: origin-responsive-screens
+          path: tests/results/origin
