@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <!-- Meta Tags: Essential for character encoding, responsiveness, and compatibility -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Beacon Gizlilik Politikası</title>
+
+  <!-- Assets: Favicon and Google Fonts for consistent branding and typography -->
+  
+  <link rel="stylesheet" href="/assets/fonts/fonts.css?v=c12fbbd8b60e">
+  <link rel="stylesheet" href="/assets/fonts/fonts.css?v=c12fbbd8b60e">
+  <noscript><link rel="stylesheet" href="/assets/fonts/fonts.css?v=c12fbbd8b60e"></noscript>
+
+  <!-- Internal CSS: Styles for the entire page (Consistent with other legal pages) -->
+  <style>
+    :root {
+      --background-color: #f4f7f9;
+      --content-bg-color: #ffffff;
+      --text-primary-color: #1a202c;
+      --text-secondary-color: #4a5568;
+      --link-color: #3182ce;
+      --link-hover-color: #2b6cb0;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --triangle-color: #e2e8f0;
+      --warning-bg-color: #fffaf0;
+      --warning-border-color: #f6e05e;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scrollbar-width: thin;
+      scrollbar-color: #000 transparent;
+    }
+
+    body {
+      font-family: 'Ubuntu',system-ui,-apple-system,sans-serif;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color);
+      color: var(--text-primary-color);
+      overflow-x: hidden;
+    }
+
+    body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    body::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background-color: #000;
+      border-radius: 20px;
+    }
+
+    body::-webkit-scrollbar-thumb:hover {
+      background-color: #333;
+    }
+
+    body::-webkit-scrollbar-button {
+      display: none;
+    }
+
+    .triangles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .triangles li {
+      position: absolute;
+      display: block;
+      list-style: none;
+      width: 20px;
+      height: 20px;
+      background: var(--triangle-color);
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: triangleAnimate 25s linear infinite;
+      bottom: -180px;
+    }
+
+    .triangles li:nth-child(1) {
+      left: 25%;
+      width: 80px;
+      height: 80px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(2) {
+      left: 10%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 2s;
+      animation-duration: 12s;
+    }
+
+    .triangles li:nth-child(3) {
+      left: 70%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 4s;
+    }
+
+    .triangles li:nth-child(4) {
+      left: 40%;
+      width: 60px;
+      height: 60px;
+      animation-delay: 0s;
+      animation-duration: 18s;
+    }
+
+    .triangles li:nth-child(5) {
+      left: 65%;
+      width: 20px;
+      height: 20px;
+      animation-delay: 0s;
+    }
+
+    .triangles li:nth-child(6) {
+      left: 75%;
+      width: 110px;
+      height: 110px;
+      animation-delay: 3s;
+    }
+
+    .triangles li:nth-child(7) {
+      left: 35%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 7s;
+    }
+
+    .triangles li:nth-child(8) {
+      left: 50%;
+      width: 25px;
+      height: 25px;
+      animation-delay: 15s;
+      animation-duration: 45s;
+    }
+
+    .triangles li:nth-child(9) {
+      left: 20%;
+      width: 15px;
+      height: 15px;
+      animation-delay: 2s;
+      animation-duration: 35s;
+    }
+
+    .triangles li:nth-child(10) {
+      left: 85%;
+      width: 150px;
+      height: 150px;
+      animation-delay: 0s;
+      animation-duration: 11s;
+    }
+
+    @keyframes triangleAnimate {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+        border-radius: 0;
+      }
+
+      100% {
+        transform: translateY(-120vh) rotate(720deg);
+        opacity: 0;
+        border-radius: 50%;
+      }
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 50px auto;
+      background: var(--content-bg-color);
+      padding: 50px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px var(--shadow-color);
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1s forwards;
+    }
+
+    h1,
+    h2 {
+      color: var(--text-primary-color);
+      font-weight: 700;
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 2.8em;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      margin-top: 40px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    p,
+    ul,
+    li {
+      color: var(--text-secondary-color);
+      font-size: 1.05em;
+    }
+
+    p {
+      margin: 20px 0;
+    }
+
+    ul {
+      margin-left: 25px;
+      padding-left: 10px;
+    }
+
+    li {
+      margin-bottom: 12px;
+    }
+
+    a {
+      color: var(--link-color);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--link-hover-color);
+      text-decoration: underline;
+    }
+
+    .disclaimer {
+      background-color: var(--warning-bg-color);
+      border-left: 4px solid var(--warning-border-color);
+      padding: 15px 20px;
+      margin-top: 20px;
+      border-radius: 4px;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        padding: 30px;
+        margin: 30px 15px;
+      }
+
+      h1 {
+        font-size: 2.2em;
+      }
+
+      h2 {
+        font-size: 1.6em;
+      }
+    }
+  </style>
+
+    
+    
+    
+    
+    
+    
+    
+
+
+    <meta property="og:title" content="Vertex Gizlilik Politikası">
+    <meta property="og:description" content="Vertex Gizlilik Politikası">
+    <meta property="og:image" content="https://vertexishere.com/assets/og-image.png?v=cd7b9dbd49d6"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:type" content="image/png"><meta property="og:image:alt" content="Vertex">
+    <meta property="og:url" content="https://vertexishere.com/tr/gizlilik-politikasi">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+<style>h1{font-family:'Anton','Arial Narrow',sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.07em}h2,h3,h4,h5,h6{font-family:'Poppins',system-ui,-apple-system,sans-serif}</style><link id="vertex-favicon" rel="icon" href="/assets/favicon-light.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/site-design.css?v=polish261026">
+<script defer src="/js/site-design.js?v=polish261026"></script>
+<meta name="description" content="Vertex Gizlilik Politikası"><link rel="alternate" hreflang="tr" href="https://vertexishere.com/tr/gizlilik-politikasi"><link rel="alternate" hreflang="en" href="https://vertexishere.com/en/privacy-policy"><link rel="alternate" hreflang="de" href="https://vertexishere.com/de/datenschutzrichtlinie"><link rel="alternate" hreflang="fr" href="https://vertexishere.com/fr/politique-de-confidentialite"><link rel="alternate" hreflang="es" href="https://vertexishere.com/es/politica-de-privacidad"><link rel="alternate" hreflang="it" href="https://vertexishere.com/it/informativa-sulla-privacy"><link rel="alternate" hreflang="pt" href="https://vertexishere.com/pt/politica-de-privacidade"><link rel="alternate" hreflang="nl" href="https://vertexishere.com/nl/privacybeleid"><link rel="alternate" hreflang="ru" href="https://vertexishere.com/ru/politika-konfidencialnosti"><link rel="alternate" hreflang="ar" href="https://vertexishere.com/ar/siyasat-al-khususiyya"><link rel="alternate" hreflang="hi" href="https://vertexishere.com/hi/gopaniyata-niti"><link rel="alternate" hreflang="id" href="https://vertexishere.com/id/kebijakan-privasi"><link rel="alternate" hreflang="ja" href="https://vertexishere.com/ja/puraibashi-porishi"><link rel="alternate" hreflang="ko" href="https://vertexishere.com/ko/gaein-jeongbo-cheori-bangchim"><link rel="alternate" hreflang="zh" href="https://vertexishere.com/zh/yinsi-zhengce"><link rel="alternate" hreflang="az" href="https://vertexishere.com/az/mexfilik-siyaseti"><link rel="alternate" hreflang="x-default" href="https://vertexishere.com/en/privacy-policy"><link rel="canonical" href="https://vertexishere.com/tr/beacon-privacy-policy"></head>
+
+<body>
+  
+
+  <div class="container"><h1>Beacon Gizlilik Politikası</h1><p style="text-align:center;font-style:italic">Son güncelleme: 3 Kasım 2026</p><h2>1. Veri sorumlusu ve kapsam</h2><p>Beacon programı bakımından veri sorumlusu Vertex Corporation LTD’dir. İletişim: <a href="mailto:contact@vertexishere.com">contact@vertexishere.com</a>. Bu bildirim başvuru ve program katılımını kapsar; uygulama ve etkinlik belgeleri ayrıca uygulanır. Mevcut form yalnızca ön yüz önizlemesidir: önizleme işlemi form alanlarını Vertex’e iletmez, başvuru oluşturmaz ve tarayıcı depolamasına kaydetmez. Sitenin sunulması sırasında teknik istek bilgileri genel <a href="gizlilik-politikasi.html">Vertex Gizlilik Politikası</a> kapsamında işlenebilir.</p><h2>2. Veriler ve amaçlar</h2><p>Gönderim etkinleştirildiğinde ad ve iletişim bilgileri, yaş ve güvenlik kontrolleri için doğum tarihi, ülke/şehir, isteğe bağlı LinkedIn ve site bağlantıları, kurum adı ve türü, görev, motivasyon ve faaliyet planı; uygunluk değerlendirmesi, kurumsal yetkinin doğrulanması, iletişim ve program yönetimi amacıyla kullanılacaktır. Açık alanlara kimlik belgesi, özel nitelikli veri, başkaları hakkında iddia veya ilgisiz hassas bilgi yazmayın. Mesleki bağlantı paylaşımı sınırsız geçmiş araştırmasına izin vermez.</p><h2>3. Hukuki sebepler ve isteğe bağlı yayımlama</h2><p>Uygulanabildiği ölçüde talep edilen sözleşme öncesi adımlar ve katılım yönetimi sözleşmeyle bağlantılı gerekliliğe; uygunluk, güvenlik ve kötüye kullanımın önlenmesi kişilerin haklarıyla dengelenen meşru menfaate; yasal yükümlülükler ilgili kanuni sebebe dayanabilir. İsteğe bağlı kamuya açık profil veya ilgisiz pazarlama için zorunlu kabul kutusundan ayrı uygun tercih veya hukuki dayanak gerekir. Form alanları otomatik yayımlanmaz. Ad, kurum ve profil görünürlüğü listeleme öncesinde ayrıca belirlenir. Bu önizlemede otomatik kabul veya ret kararı verilmez.</p><h2>4. Alıcılar ve uluslararası işleme</h2><p>Değerlendirme ve program yönetimi için gerekli olan yetkili kişiler erişebilir. Operasyonel hizmet sağlayıcılar uygun düzenlemelerle veri işleyebilir; hukuken gerekli açıklamalar yapılabilir. Başvuru bilgileri satılmaz. Canlı gönderim açılmadan önce gönderim sağlayıcısı, gerçek alıcılar, işleme yerleri ve gerekiyorsa uluslararası aktarım güvenceleri açıklanmalıdır; bu önizleme bir gönderim sağlayıcısı devreye almaz.</p><h2>5. Saklama ve güvenlik</h2><p>Önizlemede alan değerleri yalnızca açık sayfada bulunur; sayfa kapatılınca veya yenilenince kaybolur. Sunucuda başvuru kaydı oluşmaz. Canlı veri toplama öncesinde başvuru sahipleri, katılımcılar ve gerekli hukuki kayıtlar için saklama süreleri veya kriterleri belirlenip açıklanır. Canlı işlemede erişim sınırlandırması, uygun güvenlik ve ihtiyaç sona erdiğinde silme veya anonimleştirme uygulanır.</p><h2>6. Tercihleriniz ve haklarınız</h2><p>Uygulanabilir hukuk uyarınca erişim, düzeltme, silme, işlemeyi sınırlandırma ve mümkün olduğu ölçüde taşınabilirlik talep edebilir; rızaya dayalı işlemede rızanızı geri alabilir ve meşru menfaate dayalı işlemeye itiraz edebilirsiniz. Yukarıdaki adresten Vertex’e ulaşabilirsiniz. Birleşik Krallık ICO’ya <a href="https://ico.org.uk/make-a-complaint/">ico.org.uk</a> üzerinden veya yetkili yerel denetim makamına şikâyet hakkınız saklıdır. İsteğe bağlı bağlantılar olmadan form tamamlanabilir; zorunlu alanlar canlı başvurularda tam değerlendirme için gerekli bilgiler olarak formda gösterilir.</p><h2>7. Ayrı hizmetler ve güncellemeler</h2><p>Cortex gibi uygulamalar kendi gizlilik belgelerine tabidir. Etkinlik katılımı ve kayıtları için <a href="https://events.vertexishere.com/tr/gizlilik-politikasi.html">Vertex Events Gizlilik Politikası</a> uygulanır. Güncellenen Beacon belgelerinde tarih belirtilir; verilerin yeni kullanımından önce önemli değişiklikler bildirilir. Katılım kuralları için <a href="beacon-terms-of-use">Beacon Kullanım Koşulları</a> metnini okuyun.</p></div>
+</body>
+
+</html>
