@@ -48,3 +48,13 @@
 @media(max-width:700px){.beacon-layout{min-height:calc(100svh - var(--beacon-header-height,68px));grid-template-rows:auto auto auto;align-content:start;row-gap:48px;padding-top:24px;padding-bottom:42px}.beacon-join{align-self:start}}
 
 @media(min-width:701px){.beacon-layout .beacon-about{padding-top:9px}}
+
+/* Keep Beacon's light in the same yellow in both themes. */
+.beacon-page{--beacon-accent:#F4C95D;--beacon-hover:#FFE19A}
+/* The right rail reaches the same content edge as the left heading. */
+.beacon-layout .beacon-about{max-width:none;width:100%;min-width:0}
+/* A centered, solid primary action, matching the main Join Us control. */
+.beacon-layout .beacon-join{grid-column:1/-1;justify-self:center;text-align:center}
+.beacon-layout .beacon-apply{justify-content:center;gap:0;min-width:240px;min-height:60px;padding:16px 32px;font-size:17px;font-weight:500;background:var(--action);color:var(--action-ink);border:1px solid transparent;backdrop-filter:none;-webkit-backdrop-filter:none}
+.beacon-layout .beacon-apply:hover{background:var(--action);border-color:var(--text);opacity:.92}
+@media(max-width:700px){.beacon-layout .beacon-join{justify-self:stretch}.beacon-layout .beacon-apply{width:auto;max-width:100%;min-width:min(240px,100%)}}

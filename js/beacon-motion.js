@@ -24,7 +24,7 @@ function resize(){const nextWidth=canvas.parentElement.clientWidth,nextHeight=ca
  width=nextWidth;height=nextHeight;const dpr=Math.min(devicePixelRatio||1,1.75);canvas.width=Math.round(width*dpr);canvas.height=Math.round(height*dpr);ctx.setTransform(dpr,0,0,dpr,0,0);paint();}
 function paint(){
  const currentCycle=Math.floor(elapsed/32);if(currentCycle!==cycle){cycle=currentCycle;regenerate();}
- ctx.clearRect(0,0,width,height);const s=sceneAt(reduced.matches?18:elapsed),dark=document.documentElement.dataset.theme==='dark',ink=dark?'211,211,222':'58,56,72',violet=dark?'244,201,93':'145,96,0',angle=elapsed*.03;
+ ctx.clearRect(0,0,width,height);const s=sceneAt(reduced.matches?18:elapsed),dark=document.documentElement.dataset.theme==='dark',ink=dark?'211,211,222':'58,56,72',violet='244,201,93',angle=elapsed*.03;
  if(canvas.dataset.phase!==s.phase)canvas.dataset.phase=s.phase;
  function path(points,alpha,color=ink,lineWidth=.7){ctx.beginPath();let pen=false;for(const p of points){if(p[2]<0){pen=false;continue;}if(pen)ctx.lineTo(p[0],p[1]);else{ctx.moveTo(p[0],p[1]);pen=true;}}ctx.lineWidth=lineWidth;ctx.strokeStyle=`rgba(${color},${alpha})`;ctx.stroke();}
  for(let lat=-60;lat<=60;lat+=30){const a=lat*Math.PI/180;path(Array.from({length:100},(_,i)=>{const l=i/99*Math.PI*2;return project([Math.cos(a)*Math.cos(l),Math.sin(a),Math.cos(a)*Math.sin(l)],angle);}),.2*s.earth);}
