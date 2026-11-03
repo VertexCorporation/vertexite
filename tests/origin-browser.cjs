@@ -9,7 +9,7 @@ const server=http.createServer((req,res)=>{const u=new URL(req.url,'http://local
   await page.goto('http://127.0.0.1:'+server.address().port+'/origin?lang=tr');await page.locator('[data-node-caption]').filter({hasText:'100'}).waitFor();await page.locator('.origin-wall').first().waitFor();
   assert.equal(await page.locator('.origin-controls,.origin-node,.origin-concept').count(),0);
   assert.equal(await page.locator('.origin-wall').count(),2);assert.equal(await page.locator('.origin-wall-track.is-flowing').count(),1);assert.equal(await page.locator('.origin-wall-person').filter({hasText:'Test Node'}).count(),5);
-  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1));
+  assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),JSON.stringify(await page.evaluate(()=>[...document.querySelectorAll('main *')].filter(e=>e.getBoundingClientRect().right>innerWidth+1).map(e=>({tag:e.tagName,class:e.className,width:e.getBoundingClientRect().width})).slice(0,12))));
   assert(await page.evaluate(()=>document.querySelector('footer').getBoundingClientRect().top>=innerHeight));
   assert.equal(await page.locator('.origin-title').evaluate(el=>getComputedStyle(el).animationName),'none');
   await page.getByRole('link',{name:'Üyelikleri Keşfet',exact:true}).click();await page.locator('#memberships-heading').waitFor({state:'visible'});
