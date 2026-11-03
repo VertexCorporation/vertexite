@@ -1,0 +1,31 @@
+  /* Başvuru formu (hayalet stil) */
+  .join-hero{padding:88px 0 8px; text-align:center;}
+  .join-hero h1{font-size:clamp(30px,4vw,44px); line-height:1.15; letter-spacing:.07em; font-weight:400; margin:0 0 16px;}
+  .join-hero .join-lede{font-size:16.5px; line-height:1.6; color:var(--text-muted); max-width:520px; margin:0 auto;}
+  .join-wrap{max-width:760px; margin:0 auto; padding:36px 28px 72px;}
+  .join-card{border:1px solid var(--border); border-radius:16px; padding:36px; background:transparent;}
+  .form-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px;}
+  .form-group{display:flex; flex-direction:column; gap:8px; min-width:0;}
+  .form-group.full-width{grid-column:1 / -1;}
+  .form-group label{font-size:13.5px; font-weight:700;}
+  .form-group input, .form-group textarea, .form-group select{width:100%; padding:12px 14px; border-radius:10px; border:1px solid var(--border); background:transparent; color:var(--text); font:inherit; font-size:14.5px; outline:none; transition:border-color var(--dur) ease;}
+  .form-group input:focus, .form-group textarea:focus, .form-group select:focus{border-color:var(--text-muted);}
+  .form-group textarea{min-height:120px; resize:vertical;}
+  .form-group select option{color:#111;}
+  .iti{width:100%;}
+  .iti__flag-container, .iti__selected-flag{background:transparent !important;}
+  .iti__country-list{background:var(--bg); border:1px solid var(--border);}
+  .iti__country-name, .iti__dial-code{color:var(--text);}
+  .iti__country:hover, .iti__country.iti__highlight{background:var(--surface);}
+  .checkbox-group{display:flex; flex-direction:column; gap:12px;}
+  .checkbox-label{display:flex; gap:10px; font-size:13.5px; color:var(--text-muted); cursor:pointer; align-items:flex-start; line-height:1.55;}
+  .checkbox-label input{width:18px; height:18px; margin-top:2px; flex-shrink:0; accent-color:var(--accent); cursor:pointer;}
+  .checkbox-label a{color:var(--text); font-weight:600;}
+  .join-submit-btn{width:100%; padding:14px; font-size:15px;}
+  .join-submit-btn:disabled{opacity:.45; cursor:not-allowed; transform:none;}
+
+@media(max-width:640px){.form-grid{grid-template-columns:1fr}.join-card{padding:24px 20px}.join-wrap{padding:28px 20px 56px}}
+
+.beacon-application{max-width:none;padding:0;margin:0}.beacon-application .join-hero{padding-top:44px}.beacon-application .join-hero h1{font-family:'Anton','Arial Narrow',sans-serif;font-size:clamp(30px,4vw,44px);line-height:1.15;letter-spacing:.07em;font-weight:400;margin:0 0 16px;white-space:normal}.beacon-application .join-hero .join-lede{font-size:16.5px;line-height:1.6;color:var(--text-muted)}.beacon-application .join-card{background:color-mix(in srgb,var(--surface) 70%,transparent);backdrop-filter:blur(12px)}.beacon-application #joinForm[hidden]{display:none}.beacon-application .form-group input[type=tel]{padding-inline-start:var(--iti-selected-country-width,90px)}.beacon-application .checkbox-group{grid-column:1/-1}.beacon-application .join-submit-btn{grid-column:1/-1}.beacon-application .form-group select option{color:var(--text)}
+
+.beacon-application .form-grid>.full-width{grid-column:1/-1}
