@@ -1,5 +1,4 @@
-/beacon /beacon.html 200
-/beacon/ /beacon.html 200
+/beacon/ /beacon 301
 /origin/ /origin 301
 / /en/ 301
 /verify/* /verify 200
