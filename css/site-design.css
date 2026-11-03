@@ -404,3 +404,16 @@ html[data-theme="dark"] #themeBtn:not([data-theme-mode]) > #themeIconSun{opacity
 
 /* Origin entry: a quiet violet accent with an occasional passing highlight. */
 .origin-cta{position:relative;isolation:isolate;overflow:hidden;background:color-mix(in srgb,var(--surface) 88%,#9584c4)!important;border-color:color-mix(in srgb,var(--border-strong) 65%,#9584c4)!important;color:var(--text)!important}.origin-cta::after{content:'';position:absolute;inset:-80% -40%;background:linear-gradient(105deg,transparent 42%,#bfb0ed40 50%,transparent 58%);transform:translateX(-100%);animation:originShimmer 7s ease-in-out infinite;pointer-events:none}.origin-cta:hover{background:color-mix(in srgb,var(--surface) 76%,#9584c4)!important}@keyframes originShimmer{0%,65%{transform:translateX(-100%)}90%,100%{transform:translateX(100%)}}@media(prefers-reduced-motion:reduce){.origin-cta::after{animation:none}}
+
+/* Beacon: a warm guiding light, with readable amber in the light theme. */
+:root{--beacon-accent:#916000;--beacon-hover:#704900}
+html[data-theme="dark"]{--beacon-accent:#F4C95D;--beacon-hover:#FFE19A}
+#siteHeader .nav-links a.beacon-link,#siteHeader .mobile-menu a.beacon-link{color:var(--beacon-accent);font-weight:600}
+#siteHeader .nav-links a.beacon-link:hover,#siteHeader .mobile-menu a.beacon-link:hover{color:var(--beacon-hover)}
+#siteHeader a.beacon-link:focus-visible{outline-color:var(--beacon-accent)}
+.beacon-main{min-height:100svh;display:grid;place-content:center;padding:140px 24px 80px;text-align:center;background:radial-gradient(ellipse at 50% 35%,color-mix(in srgb,var(--beacon-accent) 10%,transparent),transparent 65%)}
+.beacon-main .beacon-eyebrow{color:var(--beacon-accent);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.beacon-main h1{font-size:clamp(48px,9vw,100px);line-height:1.1;margin:20px 0;letter-spacing:-.04em}
+.beacon-main h1 span{color:var(--beacon-accent)}
+.beacon-main p{max-width:580px;margin:0 auto 24px;color:var(--text-muted);line-height:1.7}
+.beacon-main .btn{justify-self:center}
