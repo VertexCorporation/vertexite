@@ -34,3 +34,7 @@
 /* Match Origin's opening rhythm and keep the actual slogan prominent. */
 .beacon-layout{padding-top:28px}.beacon-about p.beacon-tagline{font-size:clamp(24px,2.6vw,36px);line-height:1.35;font-weight:400;color:var(--text);letter-spacing:-.04em;margin:0 0 22px}.beacon-background{height:100vh;height:100lvh;bottom:auto}
 @media(max-width:700px){.beacon-layout{padding-top:24px}.beacon-about p.beacon-tagline{font-size:27px;line-height:1.4}}
+
+/* Remove the generic 72px section padding that inflated both mobile gaps. */
+@media(max-width:700px){.beacon-layout{row-gap:48px}.beacon-layout>section{padding-block:0}.beacon-layout .beacon-title{margin-bottom:0}.beacon-layout .beacon-join{margin-top:0}}
+.beacon-application input[type="checkbox"]{accent-color:#F4C95D}

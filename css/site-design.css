@@ -422,3 +422,7 @@ html[data-theme="dark"]{--beacon-accent:#F4C95D;--beacon-hover:#FFE19A}
 .origin-cta,.beacon-cta{backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid var(--border-strong)!important;color:var(--text)!important}
 .origin-cta{background:color-mix(in srgb,#9584c4 10%,transparent)!important}.origin-cta:hover{background:color-mix(in srgb,#9584c4 18%,transparent)!important}
 .beacon-cta{background:color-mix(in srgb,var(--beacon-accent) 10%,transparent)!important}.beacon-cta:hover{background:color-mix(in srgb,var(--beacon-accent) 18%,transparent)!important}
+
+/* Navigation stays monochrome; program colors belong inside their pages. */
+#siteHeader .nav-links a.beacon-link,#siteHeader .mobile-menu a.beacon-link{color:var(--text-muted)!important;font-weight:inherit}
+#siteHeader .nav-links a.beacon-link:hover,#siteHeader .mobile-menu a.beacon-link:hover{color:var(--text)!important}
