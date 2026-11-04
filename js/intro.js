@@ -200,9 +200,12 @@ setTimeout(async function () {
   titleEl.setAttribute('aria-label', title);
   var titleLayout = null;
   function measureTitle() {
+    var style = getComputedStyle(titleEl);
+    var height = parseFloat(style.height);
+    if (style.boxSizing !== 'border-box') height += parseFloat(style.paddingTop) + parseFloat(style.paddingBottom) + parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
     titleLayout = {
       width: Math.max(1, titleEl.scrollWidth),
-      height: titleEl.scrollHeight
+      height: height
     };
   }
   // On resize recreate the real static opening layout offscreen, measure it, then
@@ -285,9 +288,16 @@ setTimeout(async function () {
     element.style.transform = 'translate3d(-50%,' + ((1 - amount) * distance).toFixed(2) + 'px,0)';
   }
 
-  function drawGlobe(progress, worldSpread) {
+  // Keep only the current orientation, never a growing cache of scroll frames.
+  // Native paths retain the exact D3 canvas coordinates (no SVG rounding).
+  var globeGeometry = null;
+  var globeBase = document.createElement('canvas');
+  var baseContext = globeBase.getContext('2d');
+  var baseSignature = '';
+  var globePalette = null;
+
+  function drawGlobe(progress, worldSpread, cssSize) {
     if (!worldFeatures) return;
-    var cssSize = globeWrap.clientWidth;
     var dpr = Math.min(window.devicePixelRatio || 1, 1.25);
     var visualScale = 2.5;
     var size = Math.max(700, Math.min(window.innerWidth < 700 ? 1100 : 1920, Math.round(cssSize * visualScale * dpr)));
@@ -297,61 +307,91 @@ setTimeout(async function () {
       context.imageSmoothingEnabled = true;
       context.imageSmoothingQuality = 'high';
     }
-
-    var signature = [progress.toFixed(3), size, document.documentElement.getAttribute('data-theme')].join(':');
-    if(signature === lastGlobeFrame)return;
-    lastGlobeFrame = signature;
-    var centre = size / 2;
-    var radius = size * .445;
+    var theme = document.documentElement.getAttribute('data-theme');
+    if (!globePalette || globePalette.theme !== theme) {
+      globePalette = { theme: theme, ocean: getComputedStyle(document.documentElement).getPropertyValue('--bg').trim() };
+    }
+    var dark = theme === 'dark';
     var turn = smooth(phase(progress, .23, .54));
-    // A neutral Atlantic-facing view emphasizes the world rather than any country.
     var longitude = mix(-102, -10, turn) + 360 * smooth(phase(progress,.80,.97));
     var latitude = mix(12, 15, turn);
-    var projection = d3.geoOrthographic()
-      .translate([centre, centre])
-      .scale(radius)
-      .rotate([-longitude, -latitude])
-      .clipAngle(90)
-      .precision(.3);
-    var path = d3.geoPath(projection, context);
-    var dark = document.documentElement.getAttribute('data-theme') === 'dark';
-    var ocean = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
-    var land = dark ? '#4d5158' : '#c8c9c5';
-    var spreadLand = dark ? '#ffffff' : '#000000';
-    var border = dark ? '#0e1013' : '#fafaf9';
-
-    context.clearRect(0, 0, size, size);
-    context.beginPath(); path({ type: 'Sphere' });
-    context.fillStyle = ocean; context.fill();
-    context.beginPath(); path(graticule);
-    context.strokeStyle = dark ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.09)';
-    context.lineWidth = Math.max(.65, size * .00095); context.stroke();
-
-    worldFeatures.forEach(function (country) {
-      context.beginPath(); path(country);
-      context.fillStyle = land; context.fill();
-      context.strokeStyle = border;
-      context.lineWidth = Math.max(.55, size * .0011); context.stroke();
-    });
-
+    // Progress alone is not a drawing input: the globe holds still during much
+    // of the story. Do not repaint it merely because another panel is moving.
+    var geometryKey = [size, longitude, latitude].join(':');
+    var signature = [geometryKey, worldSpread, theme, globePalette.ocean].join(':');
+    if (signature === lastGlobeFrame) return;
+    lastGlobeFrame = signature;
+    if (!globeGeometry || globeGeometry.key !== geometryKey) {
+      var projection = d3.geoOrthographic()
+        .translate([size / 2, size / 2]).scale(size * .445)
+        .rotate([-longitude, -latitude]).clipAngle(90).precision(.3);
+      var nativePaths = typeof Path2D === 'function';
+      var projectPath = d3.geoPath(projection);
+      function makePath(feature) {
+        if (!nativePaths) return feature;
+        var result = new Path2D();
+        projectPath.context(result)(feature);
+        return result;
+      }
+      globeGeometry = {
+        key: geometryKey, nativePaths: nativePaths, projectPath: projectPath,
+        sphere: makePath({type: 'Sphere'}), grid: makePath(graticule),
+        countries: new Map(worldFeatures.map(function(country) { return [country, makePath(country)]; }))
+      };
+    }
+    function prepare(ctx, shape) {
+      if (!globeGeometry.nativePaths) {
+        ctx.beginPath(); globeGeometry.projectPath.context(ctx)(shape);
+      }
+    }
+    function fill(ctx, shape) {
+      if (globeGeometry.nativePaths) ctx.fill(shape); else ctx.fill();
+    }
+    function stroke(ctx, shape) {
+      if (globeGeometry.nativePaths) ctx.stroke(shape); else ctx.stroke();
+    }
+    // Ocean, graticule and neutral land do not change during the colour sweep.
+    // Rasterize them once at the original backing resolution, without scaling.
+    var nextBaseSignature = [geometryKey, theme, globePalette.ocean].join(':');
+    var base = baseContext || context;
+    if (!baseContext || baseSignature !== nextBaseSignature) {
+      if (baseContext && globeBase.width !== size) globeBase.width = globeBase.height = size;
+      base.clearRect(0, 0, size, size);
+      prepare(base, globeGeometry.sphere);
+      base.fillStyle = globePalette.ocean; fill(base, globeGeometry.sphere);
+      prepare(base, globeGeometry.grid);
+      base.strokeStyle = dark ? 'rgba(255,255,255,.08)' : 'rgba(0,0,0,.09)';
+      base.lineWidth = Math.max(.65, size * .00095); stroke(base, globeGeometry.grid);
+      worldFeatures.forEach(function(country) {
+        var shape = globeGeometry.countries.get(country);
+        prepare(base, shape);
+        base.fillStyle = dark ? '#4d5158' : '#c8c9c5'; fill(base, shape);
+        base.strokeStyle = dark ? '#0e1013' : '#fafaf9';
+        base.lineWidth = Math.max(.55, size * .0011); stroke(base, shape);
+      });
+      baseSignature = nextBaseSignature;
+    }
+    if (baseContext) {
+      context.clearRect(0, 0, size, size);
+      context.drawImage(globeBase, 0, 0);
+    }
     if (worldSpread > 0 && spreadCountries.length) {
-      spreadCountries.forEach(function (country, index) {
+      spreadCountries.forEach(function(country, index) {
         var order = index / Math.max(1, spreadCountries.length - 1);
         var countryFade = smooth(phase(worldSpread, order * .84, order * .84 + .16));
         if (countryFade <= 0) return;
-        context.save();
-        context.globalAlpha = countryFade;
-        context.beginPath(); path(country);
-        context.fillStyle = spreadLand; context.fill();
+        var shape = globeGeometry.countries.get(country);
+        context.save(); context.globalAlpha = countryFade;
+        prepare(context, shape);
+        context.fillStyle = dark ? '#ffffff' : '#000000'; fill(context, shape);
         context.strokeStyle = dark ? '#11141a' : '#ffffff';
-        context.lineWidth = Math.max(.5, size * .0010); context.stroke();
+        context.lineWidth = Math.max(.5, size * .0010); stroke(context, shape);
         context.restore();
       });
     }
-
-    context.beginPath(); path({ type: 'Sphere' });
+    prepare(context, globeGeometry.sphere);
     context.strokeStyle = dark ? 'rgba(255,255,255,.35)' : 'rgba(0,0,0,.28)';
-    context.lineWidth = Math.max(.7, size * .0017); context.stroke();
+    context.lineWidth = Math.max(.7, size * .0017); stroke(context, globeGeometry.sphere);
   }
 
   function render() {
@@ -359,6 +399,10 @@ setTimeout(async function () {
     if(bounds.bottom<0||bounds.top>window.innerHeight){if(header){header.style.transform='';header.style.opacity='';header.style.pointerEvents='';header.inert=false;}ticking=false;return;}
     var travel = Math.max(1, hero.offsetHeight - stage.offsetHeight);
     var progress = reduced ? 1 : clamp((window.scrollY - hero.offsetTop) / travel, 0, 1);
+    // Read layout before changing any styles in this frame.
+    var stageWidth = stage.clientWidth, stageHeight = stage.clientHeight;
+    var globeWidth = globeWrap.clientWidth;
+    var sponsorsHeight = sponsorsEl.offsetHeight, proofHeight = proofEl.offsetHeight;
     var sponsorIn = phase(progress, .06, .17) * (1 - phase(progress, .25, .34));
     var globeIn = phase(progress, .10, .30);
     // Worldwide highlights begin with the first identity panel, without
@@ -388,10 +432,10 @@ setTimeout(async function () {
     var geometryRotation = mix(18*phase(progress,0,.30),0,closingCrossfade);
     geometry.style.transform = 'translate3d(-50%,-50%,0) scale('+geometryScale.toFixed(4)+') rotate('+geometryRotation.toFixed(2)+'deg)';
     var layout = titleLayout;
-    var lift = -Math.min(76, stage.clientHeight * .08) * titleLift;
-    var fallbackFit = Math.min(1, Math.max(.05, (stage.clientWidth - (window.innerWidth < 700 ? 28 : 40)) / layout.width));
+    var lift = -Math.min(76, stageHeight * .08) * titleLift;
+    var fallbackFit = Math.min(1, Math.max(.05, (stageWidth - (window.innerWidth < 700 ? 28 : 40)) / layout.width));
     var openingFit = openingFrame ? openingFrame.titleWidth / layout.width : fallbackFit;
-    var openingTop = openingFrame ? openingFrame.titleTop : Math.min(126, Math.max(78, stage.clientHeight * .13));
+    var openingTop = openingFrame ? openingFrame.titleTop : Math.min(126, Math.max(78, stageHeight * .13));
     // The title never disappears or wraps: only its vertical position and scale move.
     var shrink = smooth(phase(progress, .015, .24));
     var grow = smooth(phase(progress, .28, .56));
@@ -402,7 +446,11 @@ setTimeout(async function () {
     titleEl.style.transform = blendTitleEl.style.transform = titleTransform;
     titleEl.style.setProperty('--story-solid-opacity', (1 - headingBlend).toFixed(3));
     blendTitleEl.style.setProperty('--story-blend-opacity', headingBlend.toFixed(3));
-    var titleBottom = titleEl.getBoundingClientRect().bottom - stage.getBoundingClientRect().top;
+    // Match the CSS values exactly, including their rounding, without forcing
+    // layout after updating the heading's transform (origin: center top).
+    var titleBottom = reduced
+      ? titleEl.getBoundingClientRect().bottom - stage.getBoundingClientRect().top
+      : Number(openingTop.toFixed(2)) + Number(lift.toFixed(2)) + layout.height * Number((openingFit * motionScale * (window.innerWidth < 700 ? 1.18 : 1)).toFixed(5));
     // Position actions from the VISIBLE heading's bottom edge in every frame.
     // The saved static actionsTop can be stale after the title is reparented/scaled,
     // which previously placed these buttons inside the large closing headline.
@@ -412,14 +460,12 @@ setTimeout(async function () {
     actionsEl.inert = actionsIn < .05;
     if(!reduced){
       // Keep the new statistics card directly below sponsors without colliding with the headline.
-      var sponsorsHeight = sponsorsEl.offsetHeight;
-      var proofHeight = proofEl.offsetHeight;
       var combinedHeight = sponsorsHeight + proofHeight + 14;
-      var targetTop = Math.max(titleBottom + 20, Math.min(306, stage.clientHeight * .34));
-      var sponsorTop = Math.max(titleBottom + 12, Math.min(targetTop, stage.clientHeight - combinedHeight - 34));
+      var targetTop = Math.max(titleBottom + 20, Math.min(306, stageHeight * .34));
+      var sponsorTop = Math.max(titleBottom + 12, Math.min(targetTop, stageHeight - combinedHeight - 34));
       sponsorsEl.style.top = sponsorTop + 'px';
       proofEl.style.top = (sponsorTop + sponsorsHeight + 14) + 'px';
-      [statementEl,metricsEl].forEach(function(panel){panel.style.top=Math.max(titleBottom+24,Math.min(306,stage.clientHeight*.34))+'px';});
+      [statementEl,metricsEl].forEach(function(panel){panel.style.top=Math.max(titleBottom+24,Math.min(306,stageHeight*.34))+'px';});
     }
     reveal(sponsorsEl, sponsorIn, 28);
     reveal(proofEl, sponsorIn, 28);
@@ -432,7 +478,8 @@ setTimeout(async function () {
     canvas.style.opacity = String(reduced ? 1 : 1-closingCrossfade);
     globeWrap.style.setProperty('--ending-scale',String(mix(1,.72,closingCrossfade)));
     cueEl.style.opacity = String(1 - phase(progress, .02, .12));
-    drawGlobe(progress, worldSpread);
+    // Hidden opening/closing frames cannot contribute pixels to the scene.
+    if ((reduced || globeIn > 0) && (reduced || closingCrossfade < 1)) drawGlobe(progress, worldSpread, globeWidth);
     ticking = false;
   }
 
@@ -452,9 +499,10 @@ setTimeout(async function () {
       worldFeatures = topojson.feature(worldTopology, worldTopology.objects.countries).features;
       // Evenly progressive global sweep: all countries participate, with no
       // origin country, national flag colour, or distance-to-Türkiye ordering.
-      spreadCountries = worldFeatures.slice().sort(function(a,b){
-        return d3.geoCentroid(a)[0]-d3.geoCentroid(b)[0];
-      });
+      spreadCountries = worldFeatures.map(function(country) {
+        return { country: country, longitude: d3.geoCentroid(country)[0] };
+      }).sort(function(a,b) { return a.longitude - b.longitude; })
+        .map(function(entry) { return entry.country; });
       render();
     })
     .catch(function () { globeWrap.style.display = 'none'; });
