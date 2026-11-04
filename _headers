@@ -13,3 +13,6 @@
 /origin-checkout.html
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' https://js.stripe.com; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://*.stripe.com; frame-src https://*.stripe.com https://*.link.com; connect-src 'self' https://*.stripe.com https://*.link.com https://europe-west1-vertex-ai-1618.cloudfunctions.net; base-uri 'self'; form-action 'self'; object-src 'none'
   Referrer-Policy: no-referrer
+
+/assets/fonts/*
+  Access-Control-Allow-Origin: *
