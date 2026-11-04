@@ -35,3 +35,6 @@
 /* Give desktop navigation and the three memberships the same generous rail. */
 .origin-page{--maxw:1280px}
 @media(min-width:901px){.origin-section-heading{margin-bottom:26px}.origin-memberships{align-items:stretch}.origin-plan-copy>p:not(.origin-fine){min-height:72px;margin-block:0}.origin-membership .origin-highlights{min-height:127px;margin-block:18px}.origin-membership .origin-price{margin-block:20px}.origin-membership .origin-actions{margin-block:16px}}
+
+/* Localized Origin: long labels, bounded language menu, and Arabic reading order. */
+.origin-page .lang-panel{max-height:min(70svh,520px);overflow-y:auto;overscroll-behavior:contain}.origin-page .lang-row{text-align:start}.origin-membership h3{overflow-wrap:anywhere}.origin-membership .origin-actions a{white-space:normal}.origin-page[dir=rtl] .origin-vision,.origin-page[dir=rtl] .origin-plan-copy{text-align:start}html[dir=rtl] .origin-page .origin-title{text-align:right}html[dir=rtl] .origin-page .origin-eyebrow{letter-spacing:normal}html[dir=rtl] .origin-page .origin-highlights{direction:rtl}html[dir=rtl] .origin-page .checkout-card input[type=email],html[dir=rtl] .origin-page .checkout-card input[type=tel]{direction:ltr;text-align:left}html[dir=rtl] .origin-page .origin-plan-benefits ol{padding-left:0;padding-right:20px}html[dir=rtl] .origin-page .origin-back-control svg{transform:scaleX(-1)}
