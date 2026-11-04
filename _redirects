@@ -1,3 +1,37 @@
+# Localized Origin URLs share the canonical Origin experience and social image.
+/ar/origin /origin?lang=ar 302
+/ar/origin/ /origin?lang=ar 302
+/az/origin /origin?lang=az 302
+/az/origin/ /origin?lang=az 302
+/de/origin /origin?lang=de 302
+/de/origin/ /origin?lang=de 302
+/en/origin /origin?lang=en 302
+/en/origin/ /origin?lang=en 302
+/es/origin /origin?lang=es 302
+/es/origin/ /origin?lang=es 302
+/fr/origin /origin?lang=fr 302
+/fr/origin/ /origin?lang=fr 302
+/hi/origin /origin?lang=hi 302
+/hi/origin/ /origin?lang=hi 302
+/id/origin /origin?lang=id 302
+/id/origin/ /origin?lang=id 302
+/it/origin /origin?lang=it 302
+/it/origin/ /origin?lang=it 302
+/ja/origin /origin?lang=ja 302
+/ja/origin/ /origin?lang=ja 302
+/ko/origin /origin?lang=ko 302
+/ko/origin/ /origin?lang=ko 302
+/nl/origin /origin?lang=nl 302
+/nl/origin/ /origin?lang=nl 302
+/pt/origin /origin?lang=pt 302
+/pt/origin/ /origin?lang=pt 302
+/ru/origin /origin?lang=ru 302
+/ru/origin/ /origin?lang=ru 302
+/tr/origin /origin?lang=tr 302
+/tr/origin/ /origin?lang=tr 302
+/zh/origin /origin?lang=zh 302
+/zh/origin/ /origin?lang=zh 302
+
 /origin/ /origin 301
 / /en/ 301
 /verify/* /verify 200
