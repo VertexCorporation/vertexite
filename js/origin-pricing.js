@@ -1,7 +1,7 @@
 /* Public prices are descriptive; the server reserves and validates every offer. */
 (()=>{'use strict';const lang=window.OriginLocale,plans=window.OriginText.plans,ui=window.OriginText.ui,copy=window.OriginText.pricing,fmt=window.OriginFormat;
 const catalog={NODE:{limit:25,launchAmount:10000,standardAmount:25000},EDGE:{limit:10,launchAmount:25000,standardAmount:50000},GRAPH:{limit:5,launchAmount:50000,standardAmount:100000},NETWORK:{limit:1,launchAmount:100000,standardAmount:250000}};
-const money=value=>new Intl.NumberFormat(lang,{style:'currency',currency:'TRY',maximumFractionDigits:0}).format(value/100);
+const money=value=>new Intl.NumberFormat(lang,{style:'currency',currency:'TRY',currencyDisplay:'narrowSymbol',maximumFractionDigits:0}).format(value/100);
 function label(plan,offer){return `${money(offer.amount)} · ${plan==='NODE'?ui.once:ui.month} · ${offer.kind==='launch'?ui.launchOffer:ui.standardPrice}`;}
 function note(plan,offer){const p=catalog[plan],normal=money(p.standardAmount)+(plan==='NODE'?'':' '+ui.month);if(offer.kind==='standard')return offer.claimed>=p.limit?copy[1]:copy[2];return fmt(copy[p.limit===1?6:0],{limit:new Intl.NumberFormat(lang).format(p.limit),normal});}
 function apply(plan,offer){if(!catalog[plan]||!offer||!['launch','standard'].includes(offer.kind)||!Number.isInteger(offer.amount))return;plans[plan].price=label(plan,offer);const caption=document.querySelector('[data-node-caption]');if(plan==='NODE'&&caption)caption.textContent=label(plan,offer)+' · '+note(plan,offer);
