@@ -294,6 +294,7 @@ setTimeout(async function () {
   var globeBase = document.createElement('canvas');
   var baseContext = globeBase.getContext('2d');
   var baseSignature = '';
+  var completedBaseCountries = 0;
   var globePalette = null;
 
   function drawGlobe(progress, worldSpread, cssSize) {
@@ -354,7 +355,23 @@ setTimeout(async function () {
     // Rasterize them once at the original backing resolution, without scaling.
     var nextBaseSignature = [geometryKey, theme, globePalette.ocean].join(':');
     var base = baseContext || context;
-    if (!baseContext || baseSignature !== nextBaseSignature) {
+    var completeCount = 0;
+    while (completeCount < spreadCountries.length) {
+      var order = completeCount / Math.max(1, spreadCountries.length - 1);
+      if (smooth(phase(worldSpread, order * .84, order * .84 + .16)) !== 1) break;
+      completeCount++;
+    }
+    function paintCountry(ctx, country, alpha) {
+      var shape = globeGeometry.countries.get(country);
+      ctx.save(); ctx.globalAlpha = alpha;
+      prepare(ctx, shape);
+      ctx.fillStyle = dark ? '#ffffff' : '#000000'; fill(ctx, shape);
+      ctx.strokeStyle = dark ? '#11141a' : '#ffffff';
+      ctx.lineWidth = Math.max(.5, size * .0010); stroke(ctx, shape);
+      ctx.restore();
+    }
+    if (!baseContext || baseSignature !== nextBaseSignature || completeCount < completedBaseCountries) {
+      completedBaseCountries = 0;
       if (baseContext && globeBase.width !== size) globeBase.width = globeBase.height = size;
       base.clearRect(0, 0, size, size);
       prepare(base, globeGeometry.sphere);
@@ -371,22 +388,22 @@ setTimeout(async function () {
       });
       baseSignature = nextBaseSignature;
     }
+    // Fully revealed countries become part of the cached base in their original
+    // paint order. Only the currently fading band is repainted on each scroll.
+    // Reverse scrolling rebuilds the base; no stale completed countries remain.
+    for (var ci = completedBaseCountries; ci < completeCount; ci++) paintCountry(base, spreadCountries[ci], 1);
+    completedBaseCountries = completeCount;
     if (baseContext) {
       context.clearRect(0, 0, size, size);
       context.drawImage(globeBase, 0, 0);
     }
     if (worldSpread > 0 && spreadCountries.length) {
       spreadCountries.forEach(function(country, index) {
+        if (index < completeCount) return;
         var order = index / Math.max(1, spreadCountries.length - 1);
         var countryFade = smooth(phase(worldSpread, order * .84, order * .84 + .16));
         if (countryFade <= 0) return;
-        var shape = globeGeometry.countries.get(country);
-        context.save(); context.globalAlpha = countryFade;
-        prepare(context, shape);
-        context.fillStyle = dark ? '#ffffff' : '#000000'; fill(context, shape);
-        context.strokeStyle = dark ? '#11141a' : '#ffffff';
-        context.lineWidth = Math.max(.5, size * .0010); stroke(context, shape);
-        context.restore();
+        paintCountry(context, country, countryFade);
       });
     }
     prepare(context, globeGeometry.sphere);
