@@ -1,17 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#0f0f10"/><svg x="190" y="190" width="240" height="240" viewBox="0 0 225 225">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630"><rect width="1200" height="630" fill="#0f0f10"/><g fill="#f5f5f5"><svg x="234.8311818181818" y="198.92045454545456" width="230.11363636363637" height="230.11363636363637" viewBox="0 0 225 225">
   <!-- Outer Triangle -->
-  <polygon points="112.5,38 200.5,189 24.5,189" fill="none" stroke="white" stroke-width="15" stroke-linejoin="round" />
-
+  <polygon points="112.5,38 200.5,189 24.5,189" fill="none" stroke="#f5f5f5" stroke-width="15" stroke-linejoin="round" />
+  
   <!-- Top Dash -->
-  <line x1="112.5" y1="82" x2="112.5" y2="109" stroke="white" stroke-width="10" stroke-linecap="round" />
-
+  <line x1="112.5" y1="82" x2="112.5" y2="109" stroke="#f5f5f5" stroke-width="10" stroke-linecap="round" />
+  
   <!-- Center Y-shape -->
-  <path d="M 112.5,125 L 112.5,137 L 102,143 M 112.5,137 L 123,143" fill="none" stroke="white" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
-
+  <path d="M 112.5,125 L 112.5,137 L 102,143 M 112.5,137 L 123,143" fill="none" stroke="#f5f5f5" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+  
   <!-- Bottom-Left Dash -->
-  <line x1="84.5" y1="153.5" x2="64.5" y2="165.5" stroke="white" stroke-width="10" stroke-linecap="round" />
-
+  <line x1="84.5" y1="153.5" x2="64.5" y2="165.5" stroke="#f5f5f5" stroke-width="10" stroke-linecap="round" />
+  
   <!-- Bottom-Right Dash -->
-  <line x1="140.5" y1="153.5" x2="160.5" y2="165.5" stroke="white" stroke-width="10" stroke-linecap="round" />
-
-</svg><text x="470" y="370" fill="#f5f5f5" font-family="Arial,sans-serif" font-size="135" font-weight="700">Vertex</text></svg>
+  <line x1="140.5" y1="153.5" x2="160.5" y2="165.5" stroke="#f5f5f5" stroke-width="10" stroke-linecap="round" />
+</svg><g transform="translate(479.888 365) scale(0.136 -0.136)"><path transform="translate(0 0)" d="M721 702 472 0H258L9 702H191L365 172L540 702Z"/><path transform="translate(730 0)" d="M585 238H198Q202 186 231.5 158.5Q261 131 304 131Q368 131 393 185H575Q561 130 524.5 86.0Q488 42 433.0 17.0Q378 -8 310 -8Q228 -8 164.0 27.0Q100 62 64.0 127.0Q28 192 28 279Q28 366 63.5 431.0Q99 496 163.0 531.0Q227 566 310 566Q391 566 454.0 532.0Q517 498 552.5 435.0Q588 372 588 288Q588 264 585 238ZM413 333Q413 377 383.0 403.0Q353 429 308 429Q265 429 235.5 404.0Q206 379 199 333Z"/><path transform="translate(1346 0)" d="M408 564V383H361Q297 383 265.0 355.5Q233 328 233 259V0H62V558H233V465Q263 511 308.0 537.5Q353 564 408 564Z"/><path transform="translate(1774 0)" d="M373 145V0H286Q193 0 141.0 45.5Q89 91 89 194V416H21V558H89V694H260V558H372V416H260V192Q260 167 272.0 156.0Q284 145 312 145Z"/><path transform="translate(2180 0)" d="M585 238H198Q202 186 231.5 158.5Q261 131 304 131Q368 131 393 185H575Q561 130 524.5 86.0Q488 42 433.0 17.0Q378 -8 310 -8Q228 -8 164.0 27.0Q100 62 64.0 127.0Q28 192 28 279Q28 366 63.5 431.0Q99 496 163.0 531.0Q227 566 310 566Q391 566 454.0 532.0Q517 498 552.5 435.0Q588 372 588 288Q588 264 585 238ZM413 333Q413 377 383.0 403.0Q353 429 308 429Q265 429 235.5 404.0Q206 379 199 333Z"/><path transform="translate(2796 0)" d="M392 0 285 155 195 0H10L194 285L5 558H197L304 404L394 558H579L392 277L584 0Z"/></g></g></svg>
