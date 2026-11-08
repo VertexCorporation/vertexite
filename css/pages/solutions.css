@@ -1,3 +1,4 @@
+@font-face{font-family:"Vertex Old Turkic";src:url("/assets/fonts/noto-sans-old-turkic.ttf") format("truetype");font-style:normal;font-weight:400;font-display:swap}
 /* Enterprise services share the site's theme and section-entry animation. */
 .solutions{border-top:1px solid var(--border);scroll-margin-top:100px}
 .solutions .section-head{max-width:760px}
@@ -20,7 +21,7 @@
 .solution-window{width:68%;height:132px;border:1px solid var(--border-strong,var(--text-muted));border-radius:10px;background:var(--bg);box-shadow:0 15px 25px #00000009;transform:perspective(700px) rotateY(-10deg) rotateX(5deg);transition:transform .5s ease}
 .solution-card:hover .solution-window{transform:perspective(700px) rotateY(0) rotateX(0)}
 .solution-window>div{height:27px;border-bottom:1px solid var(--border);display:flex;gap:5px;align-items:center;padding:0 10px;direction:ltr}.solution-window i{width:4px;height:4px;border-radius:50%;background:var(--text-muted)}
-.solution-window>span{display:block;margin:14px 16px 0;height:8px;background:var(--border);border-radius:3px;transform-origin:left;animation:solution-build 4s ease-in-out infinite;animation-play-state:paused}.solution-window>span:nth-of-type(1){width:38%;background:var(--text-muted)}.solution-window>span:nth-of-type(2){width:70%;animation-delay:.2s}.solution-window>span:nth-of-type(3){width:52%;animation-delay:.4s}
+.solution-window>span{display:block;margin:14px 16px 0;height:8px;background:var(--border);border-radius:3px;transform-origin:left;transform:scaleX(.82);opacity:.65;transition:transform .45s ease,opacity .45s ease}.solution-window>span:nth-of-type(1){width:38%;background:var(--text-muted)}.solution-window>span:nth-of-type(2){width:70%;transition-delay:.06s}.solution-window>span:nth-of-type(3){width:52%;transition-delay:.12s}
 /* Ten nodes: two named side nodes, four above and four below. */
 .solution-network{width:92%;max-width:320px;height:180px;direction:ltr}
 .solution-network .network-diagram{width:100%;height:100%;overflow:visible}
@@ -31,7 +32,7 @@
 .solution-card:hover .network-orbit{transform:scale(.72)}
 .solution-visual.diagram-active *,.solution-visual.diagram-active *:after{animation-play-state:running}
 @keyframes solution-transfer{0%{left:0;opacity:0}15%{opacity:.8}85%{opacity:.8}100%{left:100%;opacity:0}}
-@keyframes solution-build{0%,100%{transform:scaleX(.82);opacity:.45}45%,65%{transform:scaleX(1);opacity:1}}
+.solution-card:hover .solution-window>span{transform:scaleX(1.12);opacity:1}
 @keyframes solution-connect{to{stroke-dashoffset:-110}}
 @media(max-width:1000px){.solutions-grid{gap:14px}.solution-copy{padding:24px 20px}.solution-visual{height:180px}.solution-flow i{width:40px;height:50px}.solution-flow i:before{left:12px;top:17px}.solution-flow i:nth-of-type(2):before{top:15px}}
 @media(max-width:720px){.solutions-grid{grid-template-columns:1fr}.solution-visual{height:200px}.solution-copy{padding:26px}.solutions-action a{text-align:center}.solution-flow{max-width:270px}}
@@ -44,3 +45,6 @@
 .solution-flow b:after{animation-duration:1.4s}
 .solution-flow b:nth-of-type(2):after{animation-delay:.7s}
 @media(prefers-reduced-motion:reduce){.network-orbit,.solution-flow i svg{transition:none}.solution-card:hover .network-orbit{transform:none}}
+
+.network-nodes text.network-rune{font-family:"Vertex Old Turkic";font-size:13px;font-weight:400}
+@media(prefers-reduced-motion:reduce){.solution-window>span{transition:none}}
