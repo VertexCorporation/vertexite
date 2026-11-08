@@ -1,6 +1,6 @@
 /* Resolve section links before first paint; never hide the destination page. */
 (function(){'use strict';
-const sections=['home','projects','ecosystem','team','vision','partners','news-section','more-info'];
+const sections=['home','projects','solutions','ecosystem','team','vision','partners','news-section','more-info'];
 function entryTarget(search,hash=''){const legacy=new URLSearchParams(search).get('section');let fragment;try{fragment=decodeURIComponent(hash.slice(1));}catch{return null;}return sections.includes(fragment)?fragment:sections.includes(legacy)?legacy:null;}
 if(typeof module==='object'&&module.exports){module.exports={entryTarget};return;}
 const id=entryTarget(location.search,location.hash);if(!id)return;

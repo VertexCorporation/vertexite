@@ -45,8 +45,9 @@ if(data){
   set('[data-details="'+tier+'"]',format(ui.details,{count:copy.plans[tier].benefits.length}));set('[data-checkout="'+tier+'"]',format(ui.choose,{plan:tier}));
  });
 }
+const solutionLabels={"en": "Solutions", "tr": "Çözümler", "de": "Lösungen", "fr": "Solutions", "es": "Soluciones", "it": "Soluzioni", "pt": "Soluções", "nl": "Oplossingen", "ru": "Решения", "ar": "الحلول", "hi": "समाधान", "id": "Solusi", "ja": "ソリューション", "ko": "솔루션", "zh": "解决方案", "az": "Həllər"};
 const hashes=['home','projects','ecosystem','team','vision','partners','news-section','more-info'];
-document.querySelectorAll('.nav-links a,.mobile-menu a.mlink').forEach(a=>{const url=new URL(a.href);const index=hashes.indexOf(url.hash.slice(1));if(index>=0)a.textContent=shell[lang].nav[index];});
+document.querySelectorAll('.nav-links a,.mobile-menu a.mlink').forEach(a=>{const url=new URL(a.href);const index=hashes.indexOf(url.hash.slice(1));if(url.hash==='#solutions')a.textContent=solutionLabels[lang];else if(index>=0)a.textContent=shell[lang].nav[index];});
 document.querySelectorAll('a[href^="/en/#"],a[href^="/tr/#"],a[href="/en/join-us.html"],a[href="/tr/join-us.html"]').forEach(a=>a.href=a.getAttribute('href').replace(/^\/(en|tr)\//,'/'+lang+'/'));
 set('.nav-future-cta,.mobile-menu .m-cta',ui.joinUs);set('[data-origin-language]',names[lang]);
 const foot=shell[lang].footer;if(foot.length>=16){set('.foot-brand p',foot[0]);const cols=document.querySelectorAll('.foot-col');if(cols.length===3){cols[0].querySelector('h2').textContent=foot[1];cols[1].querySelector('h2').textContent=foot[5];cols[1].querySelectorAll('a').forEach((a,i)=>a.textContent=foot[6+i]);cols[2].querySelector('h2').textContent=foot[9];cols[2].querySelector('a').textContent=foot[10];}}
