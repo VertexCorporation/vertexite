@@ -21,11 +21,14 @@
 .solution-card:hover .solution-window{transform:perspective(700px) rotateY(0) rotateX(0)}
 .solution-window>div{height:27px;border-bottom:1px solid var(--border);display:flex;gap:5px;align-items:center;padding:0 10px;direction:ltr}.solution-window i{width:4px;height:4px;border-radius:50%;background:var(--text-muted)}
 .solution-window>span{display:block;margin:14px 16px 0;height:8px;background:var(--border);border-radius:3px;transform-origin:left;animation:solution-build 4s ease-in-out infinite;animation-play-state:paused}.solution-window>span:nth-of-type(1){width:38%;background:var(--text-muted)}.solution-window>span:nth-of-type(2){width:70%;animation-delay:.2s}.solution-window>span:nth-of-type(3){width:52%;animation-delay:.4s}
-.solution-network{position:relative;width:86%;max-width:300px;height:150px;direction:ltr}
-.solution-network svg{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:var(--text-muted);stroke-width:1;stroke-dasharray:4 7;animation:solution-connect 15s linear infinite;animation-play-state:paused}
-.solution-network b{position:absolute;background:var(--bg);border:1px solid var(--border-strong,var(--text-muted));border-radius:7px;padding:7px 11px;font-size:11px;font-weight:500;line-height:1.3}
-.solution-network b:nth-of-type(1){left:0;top:16px}.solution-network b:nth-of-type(2){right:0;top:16px}.solution-network b:nth-of-type(3){right:0;bottom:16px}
-.solution-network i{position:absolute;left:calc(50% - 17px);top:calc(50% - 17px);width:34px;height:34px;border:1px solid currentColor;border-radius:9px;background:var(--bg);transform:rotate(45deg);box-shadow:0 0 0 7px color-mix(in srgb,var(--text) 4%,transparent)}
+/* Ten nodes: two named side nodes, four above and four below. */
+.solution-network{width:92%;max-width:320px;height:180px;direction:ltr}
+.solution-network .network-diagram{width:100%;height:100%;overflow:visible}
+.network-orbit{transform-origin:150px 90px;transition:transform .55s cubic-bezier(.2,.8,.2,1)}
+.network-tethers{fill:none;stroke:var(--text-muted);stroke-width:1;stroke-dasharray:3 6;animation:solution-connect 15s linear infinite;animation-play-state:paused}
+.network-nodes rect,.network-hub{fill:var(--bg);stroke:var(--text-muted);stroke-width:1}
+.network-nodes text{fill:var(--text);text-anchor:middle;dominant-baseline:middle;font-family:inherit;font-size:10px;font-weight:500}
+.solution-card:hover .network-orbit{transform:scale(.72)}
 .solution-visual.diagram-active *,.solution-visual.diagram-active *:after{animation-play-state:running}
 @keyframes solution-transfer{0%{left:0;opacity:0}15%{opacity:.8}85%{opacity:.8}100%{left:100%;opacity:0}}
 @keyframes solution-build{0%,100%{transform:scaleX(.82);opacity:.45}45%,65%{transform:scaleX(1);opacity:1}}
@@ -33,18 +36,11 @@
 @media(max-width:1000px){.solutions-grid{gap:14px}.solution-copy{padding:24px 20px}.solution-visual{height:180px}.solution-flow i{width:40px;height:50px}.solution-flow i:before{left:12px;top:17px}.solution-flow i:nth-of-type(2):before{top:15px}}
 @media(max-width:720px){.solutions-grid{grid-template-columns:1fr}.solution-visual{height:200px}.solution-copy{padding:26px}.solutions-action a{text-align:center}.solution-flow{max-width:270px}}
 @media(prefers-reduced-motion:reduce){.solution-card,.solution-window,.solutions-action svg{transition:none}.solution-card:hover{transform:none}.solution-visual *,.solution-visual *:after{animation:none!important}}
-/* Two taut connections pull both products toward the central hub on hover. */
-.solution-network b:nth-of-type(1),.solution-network b:nth-of-type(2){top:calc(50% - 16px);bottom:auto;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
-.solution-network svg{transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-origin:center}
-.solution-card:hover .solution-network svg{transform:scaleX(.62)}
-.solution-card:hover .solution-network b:first-of-type{transform:translateX(40px)}
-.solution-card:hover .solution-network b:nth-of-type(2){transform:translateX(-40px)}
+/* Icons fill only on hover; no glow, pulsing or drop shadow. */
+.solution-flow i{display:grid;place-items:center;box-shadow:none}
+.solution-flow i:before{content:none}
+.solution-flow i svg{width:24px;height:24px;fill:transparent;stroke:currentColor;stroke-width:1.5;stroke-linejoin:round;stroke-linecap:round;transition:fill .25s ease;filter:none}
+.solution-card:hover .solution-flow i svg{fill:currentColor}
 .solution-flow b:after{animation-duration:1.4s}
 .solution-flow b:nth-of-type(2):after{animation-delay:.7s}
-.solution-flow i:before{background:currentColor;animation:solution-fill 2.8s ease-in-out infinite;animation-play-state:paused}
-.solution-flow i:nth-of-type(2):before{animation-delay:.7s}
-.solution-flow i:last-child:before{background:none;animation-delay:1.4s}
-@keyframes solution-fill{0%,100%{opacity:.25;filter:drop-shadow(0 0 0 transparent)}40%,65%{opacity:1;filter:drop-shadow(0 0 4px currentColor)}}
-@media(prefers-reduced-motion:reduce){.solution-network b,.solution-network svg{transition:none}.solution-card:hover .solution-network svg,.solution-card:hover .solution-network b{transform:none}}
-.solution-flow i:last-child:before{background:currentColor;border:0;width:18px;height:16px;transform:none;clip-path:polygon(0 48%,14% 34%,39% 60%,85% 9%,100% 23%,40% 90%)}
-.solution-visual.diagram-active .solution-flow i:before{animation-play-state:running}
+@media(prefers-reduced-motion:reduce){.network-orbit,.solution-flow i svg{transition:none}.solution-card:hover .network-orbit{transform:none}}
