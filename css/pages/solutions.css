@@ -47,3 +47,4 @@
 @keyframes solution-fill{0%,100%{opacity:.25;filter:drop-shadow(0 0 0 transparent)}40%,65%{opacity:1;filter:drop-shadow(0 0 4px currentColor)}}
 @media(prefers-reduced-motion:reduce){.solution-network b,.solution-network svg{transition:none}.solution-card:hover .solution-network svg,.solution-card:hover .solution-network b{transform:none}}
 .solution-flow i:last-child:before{background:currentColor;border:0;width:18px;height:16px;transform:none;clip-path:polygon(0 48%,14% 34%,39% 60%,85% 9%,100% 23%,40% 90%)}
+.solution-visual.diagram-active .solution-flow i:before{animation-play-state:running}
