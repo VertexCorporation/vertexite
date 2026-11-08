@@ -33,3 +33,17 @@
 @media(max-width:1000px){.solutions-grid{gap:14px}.solution-copy{padding:24px 20px}.solution-visual{height:180px}.solution-flow i{width:40px;height:50px}.solution-flow i:before{left:12px;top:17px}.solution-flow i:nth-of-type(2):before{top:15px}}
 @media(max-width:720px){.solutions-grid{grid-template-columns:1fr}.solution-visual{height:200px}.solution-copy{padding:26px}.solutions-action a{text-align:center}.solution-flow{max-width:270px}}
 @media(prefers-reduced-motion:reduce){.solution-card,.solution-window,.solutions-action svg{transition:none}.solution-card:hover{transform:none}.solution-visual *,.solution-visual *:after{animation:none!important}}
+/* Two taut connections pull both products toward the central hub on hover. */
+.solution-network b:nth-of-type(1),.solution-network b:nth-of-type(2){top:calc(50% - 16px);bottom:auto;transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.solution-network svg{transition:transform .5s cubic-bezier(.2,.8,.2,1);transform-origin:center}
+.solution-card:hover .solution-network svg{transform:scaleX(.62)}
+.solution-card:hover .solution-network b:first-of-type{transform:translateX(40px)}
+.solution-card:hover .solution-network b:nth-of-type(2){transform:translateX(-40px)}
+.solution-flow b:after{animation-duration:1.4s}
+.solution-flow b:nth-of-type(2):after{animation-delay:.7s}
+.solution-flow i:before{background:currentColor;animation:solution-fill 2.8s ease-in-out infinite;animation-play-state:paused}
+.solution-flow i:nth-of-type(2):before{animation-delay:.7s}
+.solution-flow i:last-child:before{background:none;animation-delay:1.4s}
+@keyframes solution-fill{0%,100%{opacity:.25;filter:drop-shadow(0 0 0 transparent)}40%,65%{opacity:1;filter:drop-shadow(0 0 4px currentColor)}}
+@media(prefers-reduced-motion:reduce){.solution-network b,.solution-network svg{transition:none}.solution-card:hover .solution-network svg,.solution-card:hover .solution-network b{transform:none}}
+.solution-flow i:last-child:before{background:currentColor;border:0;width:18px;height:16px;transform:none;clip-path:polygon(0 48%,14% 34%,39% 60%,85% 9%,100% 23%,40% 90%)}
