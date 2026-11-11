@@ -266,8 +266,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     };
 
     const pathParts = window.location.pathname.split('/');
-    const certId = new URLSearchParams(window.location.search).get('id')
-        || (pathParts[pathParts.length - 1] === '' ? pathParts[pathParts.length - 2] : pathParts[pathParts.length - 1]);
+    const isCertificateAlias = pathParts[1] === 'certificates';
+    const pathId = pathParts[pathParts.length - 1] === '' ? pathParts[pathParts.length - 2] : pathParts[pathParts.length - 1];
+    const certId = isCertificateAlias ? pathId.replace(/\.html$/, '') : new URLSearchParams(window.location.search).get('id') || pathId;
 
     const loadingState = document.getElementById('loadingState');
     const successState = document.getElementById('successState');
@@ -283,7 +284,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     let verificationLanguage = userLang;
     try {
         const verificationUrl = new URL('https://europe-west1-vertex-ai-1618.cloudfunctions.net/verifyVertexCertificate');
-        verificationUrl.searchParams.set('id', certId);
+        verificationUrl.searchParams.set(isCertificateAlias ? 'slug' : 'id', certId);
         const response = await fetch(verificationUrl, {
             cache: 'no-store',
             headers: { Accept: 'application/json' }
@@ -293,10 +294,15 @@ document.addEventListener('DOMContentLoaded', async () => {
         const data = await response.json();
         revoked = data.revoked === true;
         const type = Object.hasOwn(types, data.certificateType) ? types[data.certificateType] : null;
-        if (data.valid !== true || data.certificateId !== certId || typeof data.name !== 'string' || !data.name.trim() || !type) {
+        if (data.valid !== true || (!isCertificateAlias && data.certificateId !== certId) || typeof data.name !== 'string' || !data.name.trim() || !type) {
             throw new Error('Certificate is not valid');
         }
 
+        if (isCertificateAlias) {
+            if (data.publicSlug !== certId || typeof data.certificateId !== 'string' || !/^[A-Za-z0-9_-]{1,150}$/.test(data.certificateId)) throw new Error('Invalid certificate alias.');
+            window.location.replace('/verify/' + encodeURIComponent(data.certificateId));
+            return;
+        }
         verificationLanguage = langs[data.language] ? data.language : 'en';
         applyLang(verificationLanguage);
         const date = data.issuedAt ? new Date(data.issuedAt) : null;
