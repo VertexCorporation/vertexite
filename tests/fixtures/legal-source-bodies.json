@@ -1,0 +1,372 @@
+[
+  {
+    "path": "tr/gizlilik-politikasi.html",
+    "id": "vertex-privacy--tr",
+    "hash": "80a4edd178dd31114100abbbd1eb18aecac2ac52840510db4ffde6480d483c31"
+  },
+  {
+    "path": "ar/siyasat-al-khususiyya.html",
+    "id": "vertex-privacy--ar",
+    "hash": "27ba6de1ba1b2205a71f42e388b97c4539d442342238628b6b4e57005e07b89a"
+  },
+  {
+    "path": "az/mexfilik-siyaseti.html",
+    "id": "vertex-privacy--az",
+    "hash": "42abe2afa66868fc84ba53c782b5b43a2c39e1c7c24610a5d917265bb8755359"
+  },
+  {
+    "path": "de/datenschutzrichtlinie.html",
+    "id": "vertex-privacy--de",
+    "hash": "fa1fa83dc13ab62efa37b01e35d25d458e5a84dd40fd0a6b3fd884c13da259d8"
+  },
+  {
+    "path": "es/politica-de-privacidad.html",
+    "id": "vertex-privacy--es",
+    "hash": "d96e884da01f78061885d54208951dea4465fa10b0705561b5f680768f0a7cff"
+  },
+  {
+    "path": "fr/politique-de-confidentialite.html",
+    "id": "vertex-privacy--fr",
+    "hash": "62826e5fc99f96eddb55b828b7d50a717851ae2c38ebe8a54e029c9165c2e9f7"
+  },
+  {
+    "path": "hi/gopaniyata-niti.html",
+    "id": "vertex-privacy--hi",
+    "hash": "e66b617d89c4c9d0e74038fc6abd1b1c663409f9ff5762ee28e80f6973fb8fab"
+  },
+  {
+    "path": "id/kebijakan-privasi.html",
+    "id": "vertex-privacy--id",
+    "hash": "23483f9a641e44c059b4f7334bc2498b091ce7e8ce9ce1d164dbd1b56a4038a0"
+  },
+  {
+    "path": "it/informativa-sulla-privacy.html",
+    "id": "vertex-privacy--it",
+    "hash": "65a703547a5255de348b030d83bef0872bc87d6ae3bdfa83d400a1b06766208c"
+  },
+  {
+    "path": "ja/puraibashi-porishi.html",
+    "id": "vertex-privacy--ja",
+    "hash": "fe39742dfa9a169d1714c8d83405d91170c64391bb289262e0eb9cfe5fe9f827"
+  },
+  {
+    "path": "ko/gaein-jeongbo-cheori-bangchim.html",
+    "id": "vertex-privacy--ko",
+    "hash": "1a7e276ead0007fd8756a03ecc6f20e945fa293af8b5c4e206abdd1175ee637e"
+  },
+  {
+    "path": "nl/privacybeleid.html",
+    "id": "vertex-privacy--nl",
+    "hash": "e1183fe7bf0183f8d15044e9a506f5c0713fdd0f1641d138bca6a1d7b305e08d"
+  },
+  {
+    "path": "pt/politica-de-privacidade.html",
+    "id": "vertex-privacy--pt",
+    "hash": "11601b53bf6e977d5b9462321781d8a5e484d6f1aef96f1767234ec191784a54"
+  },
+  {
+    "path": "ru/politika-konfidencialnosti.html",
+    "id": "vertex-privacy--ru",
+    "hash": "5f0b3d9649fc5a82f664e2112277bdc3cfb10553e0b04a6dd50963ca2f578abb"
+  },
+  {
+    "path": "zh/yinsi-zhengce.html",
+    "id": "vertex-privacy--zh",
+    "hash": "a8a1b8654afaf7b19eccf72378c4e7321959e402a9fb483bd79f06cfe02a5967"
+  },
+  {
+    "path": "en/privacy-policy.html",
+    "id": "vertex-privacy--en",
+    "hash": "cf6ae699a3d837d8d60f45e70cb1c839a2bf21105d559e987c7a5112d557df1d"
+  },
+  {
+    "path": "cortex-privacy-policy.html",
+    "id": "cortex-privacy--en",
+    "hash": "c16ae78694047f973bd646b865e3233f4d45ea590a60f06988445e5ed10dc936"
+  },
+  {
+    "path": "all-star-privacy-policy.html",
+    "id": "all-star-privacy--en",
+    "hash": "21b9842e59490d6ad2856e56bb85c8f270c01ac375d194d368279a5df6814a52"
+  },
+  {
+    "path": "tr/hizmet-sartlari.html",
+    "id": "vertex-terms--tr",
+    "hash": "8515354899d5813f59a232d9a4250a018deb90a4aa8c5bc2b0eb2e940c780eee"
+  },
+  {
+    "path": "ar/shurut-al-khidma.html",
+    "id": "vertex-terms--ar",
+    "hash": "23b43e912d149d001d5a9e980c512e207599ec7a44c2fd750c1c4be29b4e247b"
+  },
+  {
+    "path": "az/xidmet-sertleri.html",
+    "id": "vertex-terms--az",
+    "hash": "697fcbccbb5e2b253e649f1c78aec8ad59c85925aa3ed1980d3527d4c14ffc5e"
+  },
+  {
+    "path": "de/nutzungsbedingungen.html",
+    "id": "vertex-terms--de",
+    "hash": "86f1b4e559f575f40f7acfb5ddb467a58014e35ca1e307b0737349299f4544a7"
+  },
+  {
+    "path": "es/terminos-de-servicio.html",
+    "id": "vertex-terms--es",
+    "hash": "a9b697a46f4dbf297b286a718ad96d202a5a204cf27baf2a418f622e952f7780"
+  },
+  {
+    "path": "fr/conditions-d-utilisation.html",
+    "id": "vertex-terms--fr",
+    "hash": "46d499fb08a50e44f72cf2f51d323d70091ed15b21eb8d326c7b989d2a39127d"
+  },
+  {
+    "path": "hi/seva-ki-shartein.html",
+    "id": "vertex-terms--hi",
+    "hash": "cf17e36b4810aed14d4ba2ff1e0d38703e8e41a1bcaee2c97666eccf6e5b8c9d"
+  },
+  {
+    "path": "id/syarat-layanan.html",
+    "id": "vertex-terms--id",
+    "hash": "0c7967c1f5e4a2285352b1f9a51edde166b8246796d8eb29aa1c46ebf6c06b4f"
+  },
+  {
+    "path": "it/termini-di-servizio.html",
+    "id": "vertex-terms--it",
+    "hash": "69a3f47af1d7996591b322abe9082e88715bf8a346c62b787ba7164c2c208250"
+  },
+  {
+    "path": "ja/riyou-kiyaku.html",
+    "id": "vertex-terms--ja",
+    "hash": "2bf78dc8f5b411b0fed8b45e218a1b6d805e6d78edb1eacd99c247dc9e85822d"
+  },
+  {
+    "path": "ko/iyong-yakgwan.html",
+    "id": "vertex-terms--ko",
+    "hash": "673b837c56d15eadb2540f6b51742f7988786191cc050390b0af33dc5a7320b3"
+  },
+  {
+    "path": "nl/servicevoorwaarden.html",
+    "id": "vertex-terms--nl",
+    "hash": "37eb400ff2fddb18c65d49276e208f5e5b3feeb1b3ecba7fc023377ffba34d0f"
+  },
+  {
+    "path": "pt/termos-de-servico.html",
+    "id": "vertex-terms--pt",
+    "hash": "ef649ca13177b81f6c5f22e794f3dbb0434ab51b6f118f4e9507b694cd502d20"
+  },
+  {
+    "path": "ru/usloviya-obsluzhivaniya.html",
+    "id": "vertex-terms--ru",
+    "hash": "7a9b9f62b47666e4e2e425a60bb6764b2f356905d18df74f886ec29a2e434a36"
+  },
+  {
+    "path": "zh/fuwu-tiaokuan.html",
+    "id": "vertex-terms--zh",
+    "hash": "da5e70e957d3dbbb2e7a7671912f0b92daabcfd3fd8e88cf1c57c2cfe4401f03"
+  },
+  {
+    "path": "en/terms-of-service.html",
+    "id": "vertex-terms--en",
+    "hash": "afe7d4baed14e20a3b22af547ebab04670aaeb13bb045b468c0be96f04975e61"
+  },
+  {
+    "path": "cortex-terms-of-service.html",
+    "id": "cortex-terms--en",
+    "hash": "fa11b4bf27f75cfcc6083fa908c13ac59707538a66e78c87d5a726346b8bee1f"
+  },
+  {
+    "path": "all-star-terms-of-service.html",
+    "id": "all-star-terms--en",
+    "hash": "1cb1cd7c207398677fb56ba4df103ffd6378659030ad72c769153f2af12d8de8"
+  },
+  {
+    "path": "tr/vertex-kadro-sozlesmesi.html",
+    "id": "vertex-team-contract--tr",
+    "hash": "78902b99cc5409940fa9bce235ceb1057f14d744e481f4984c9074f49f4fa12e"
+  },
+  {
+    "path": "tr/aramiza-katil.html",
+    "id": "vertex-doctrine--tr",
+    "hash": "2d4198a7cf4d63cc3ac49c0917656a0203bda3ac55bdca30cb7948ce0f4e0894"
+  },
+  {
+    "path": "en/vertex-team-contract.html",
+    "id": "vertex-team-contract--en",
+    "hash": "0e0a22634223644ec949a2aaf2c728d8be6c5371007e67b1cd18dd5c04683241"
+  },
+  {
+    "path": "en/join-us.html",
+    "id": "vertex-doctrine--en",
+    "hash": "62a7e0d34591a051a3818878d6a8c381ad512a0e9e5bb5d1a1d2b0dfc50a43b0"
+  },
+  {
+    "path": "ar/vertex-team-contract.html",
+    "id": "vertex-team-contract--ar",
+    "hash": "2335ad8e81eefd1f67b8c51cfe5261b422377455f82bc30fc60415859f94b965"
+  },
+  {
+    "path": "ar/join-us.html",
+    "id": "vertex-doctrine--ar",
+    "hash": "63c486351b48314b431eb23a3d6eb846935e3111129decee585141a33fe4d0a8"
+  },
+  {
+    "path": "az/vertex-kadro-sozlesmesi.html",
+    "id": "vertex-team-contract--az",
+    "hash": "3d3862d733edbb1489539384b670fe74021c693507ec0bdd98fb984b343174ca"
+  },
+  {
+    "path": "az/join-us.html",
+    "id": "vertex-doctrine--az",
+    "hash": "fd3d895dbcb02ff56d8ce2be1e4a1245d7e6a7c180388de110c791f4147dc43c"
+  },
+  {
+    "path": "de/vertex-team-contract.html",
+    "id": "vertex-team-contract--de",
+    "hash": "2327ca566536a8ee7cd96154371082587ada73a9a0f0426e128cdad43a7b8cea"
+  },
+  {
+    "path": "de/join-us.html",
+    "id": "vertex-doctrine--de",
+    "hash": "153f070554c6ac97e73fecd9704fc77aa3fd26032940c735b754aa782f0f7244"
+  },
+  {
+    "path": "es/vertex-team-contract.html",
+    "id": "vertex-team-contract--es",
+    "hash": "874c964a0575ec795ea77c264883b00aef118241357e748f54c6b0205a3de47f"
+  },
+  {
+    "path": "es/join-us.html",
+    "id": "vertex-doctrine--es",
+    "hash": "09176379c139b487db3c55c1bb5c3a620dae8f197e0eee496fe875a76272a854"
+  },
+  {
+    "path": "fr/vertex-team-contract.html",
+    "id": "vertex-team-contract--fr",
+    "hash": "fb165233fb3be362989ed7cb718ca7faef4bcaebdbc79985757efe30c584e31c"
+  },
+  {
+    "path": "fr/join-us.html",
+    "id": "vertex-doctrine--fr",
+    "hash": "10df74a947ea87ae0cd2705170d14a285946125d4b65fa671fcc3986b8e61da1"
+  },
+  {
+    "path": "hi/vertex-team-contract.html",
+    "id": "vertex-team-contract--hi",
+    "hash": "36d0adc0868cec18a30344ff8970cebe7665d89663f4c1413dd83cd03a7b342a"
+  },
+  {
+    "path": "hi/join-us.html",
+    "id": "vertex-doctrine--hi",
+    "hash": "156dcec2b7431d03fd98c635f0e365df775dd3782fd2da224e93cc6f50a7beed"
+  },
+  {
+    "path": "id/vertex-team-contract.html",
+    "id": "vertex-team-contract--id",
+    "hash": "071de11e8a2b5fc6dc7586245dd7cc3d1a44c9044b5e88ba6ea186db82429261"
+  },
+  {
+    "path": "id/join-us.html",
+    "id": "vertex-doctrine--id",
+    "hash": "9df1d4c4d2dec87b7c714d810a18a33c5ea37efb566320fb83d826ed51169fd4"
+  },
+  {
+    "path": "it/vertex-team-contract.html",
+    "id": "vertex-team-contract--it",
+    "hash": "fef78bdd6c4677fa1e4e95f4287ee62460d3581b20a80f24f49a2e9e0186621f"
+  },
+  {
+    "path": "it/join-us.html",
+    "id": "vertex-doctrine--it",
+    "hash": "a13f723142393d76511ef6722a08b4147ab935659f3dc553defdcfc7b79b022c"
+  },
+  {
+    "path": "ja/vertex-team-contract.html",
+    "id": "vertex-team-contract--ja",
+    "hash": "2d3eedb62748f305eb7abb2591de443ab097b5a481ee956be5e760740a324e86"
+  },
+  {
+    "path": "ja/join-us.html",
+    "id": "vertex-doctrine--ja",
+    "hash": "f482357a20a7145a3e8821bf6b852b7802b26a09370f23a07f5608eab93ed594"
+  },
+  {
+    "path": "ko/vertex-team-contract.html",
+    "id": "vertex-team-contract--ko",
+    "hash": "becb72ef7f33ac00b600435c46d5956a987f498a2949b484b245683492ce4a1c"
+  },
+  {
+    "path": "ko/join-us.html",
+    "id": "vertex-doctrine--ko",
+    "hash": "6762027c7ebbedf5957af509329bd80878375563a3f4826198b2f0db4ddbdd06"
+  },
+  {
+    "path": "nl/vertex-team-contract.html",
+    "id": "vertex-team-contract--nl",
+    "hash": "1ee62d50ec74920ef1bd12c5ecaa5910b74d13cad677503c45db42521fa5c6cf"
+  },
+  {
+    "path": "nl/join-us.html",
+    "id": "vertex-doctrine--nl",
+    "hash": "c80f190c8963d3bd95dbf0737dbec2f79bdd9d25e1efb1a9db4fd6ea5460caff"
+  },
+  {
+    "path": "pt/vertex-team-contract.html",
+    "id": "vertex-team-contract--pt",
+    "hash": "69014af39842c7cc9f838e40089337e072ee382578a6ac266832936f8d31a5d5"
+  },
+  {
+    "path": "pt/join-us.html",
+    "id": "vertex-doctrine--pt",
+    "hash": "c61e90fb3508cb760bfdf6eba296a683e059dd3c52f4c4c1ac56a3567220de78"
+  },
+  {
+    "path": "ru/vertex-team-contract.html",
+    "id": "vertex-team-contract--ru",
+    "hash": "086b340ce5f79973f7b088379673f29958ffad3455ff15309e97d74dfa717a22"
+  },
+  {
+    "path": "ru/join-us.html",
+    "id": "vertex-doctrine--ru",
+    "hash": "e8e8f98ccb4d61958375b1741146f853490d7a0bc030e70f16cd5b02e63b141b"
+  },
+  {
+    "path": "zh/vertex-team-contract.html",
+    "id": "vertex-team-contract--zh",
+    "hash": "2739e53b07c1dd3d94ca6856930fc3c0c40ae4a48f9b2501420870e0ca16071b"
+  },
+  {
+    "path": "zh/join-us.html",
+    "id": "vertex-doctrine--zh",
+    "hash": "0072cc2a9d60506815a6cb1c96b2b0047ed602669cb823affc5dfbd6ea58dd1d"
+  },
+  {
+    "path": "tr/beacon-privacy-policy.html",
+    "id": "beacon-privacy--tr",
+    "hash": "cf6096e0de2d6aa73d9c35e2b8d72f3fc2477ad06fc446dada750488092752df"
+  },
+  {
+    "path": "tr/beacon-terms-of-use.html",
+    "id": "beacon-terms--tr",
+    "hash": "3ba2d12dc87fa1d6d469ab2a069563476cc35b5f80fd8417d289fddcd495067e"
+  },
+  {
+    "path": "tr/origin-kullanim-kosullari.html",
+    "id": "origin-terms--tr",
+    "hash": "906a06a8b812b3a3c3eb896d227e374f9c1f72775935349b7a8058276edb7661"
+  },
+  {
+    "path": "en/beacon-privacy-policy.html",
+    "id": "beacon-privacy--en",
+    "hash": "c243468573b9e48a14bef0d4c56b0bab7052a1126452a6ea0aa827279f7239c5"
+  },
+  {
+    "path": "en/beacon-terms-of-use.html",
+    "id": "beacon-terms--en",
+    "hash": "161ab5841d063291b0b1ca72a97e080ba185df8e70ba795b8bf7e698fb50f51a"
+  },
+  {
+    "path": "en/origin-terms-of-use.html",
+    "id": "origin-terms--en",
+    "hash": "551c87546a28e8cf20897647b4bba30aec4b13b647d00c444f65f8c64f60680a"
+  }
+]
