@@ -63,16 +63,17 @@ async function directory(lang, ctx) {
     const key = new Request(origin + '/__profile-directory-v1?lang=' + lang);
     let cached;
     try { cached = await cache?.match(key); } catch {}
-    if (cached) {
-      const value = cleanCards(await cached.json()); memory.set(lang,{value,at:Date.now()}); return value;
+    if (cached && Date.now() - Number(cached.headers.get('X-Profile-Fetched-At') || 0) < 60000) {
+      const value = cleanCards(await cached.json()); memory.set(lang,{value,at:Number(cached.headers.get('X-Profile-Fetched-At'))}); return value;
     }
     const response = await fetch(endpoint, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:{lang}}),signal:AbortSignal.timeout(8000)});
     if (!response.ok) throw Error('Public directory unavailable');
     const body = await response.text();
     if (body.length > 4000000) throw Error('Oversized public directory');
     const value = cleanCards(JSON.parse(body).result);
-    memory.set(lang,{value,at:Date.now()});
-    if (cache) ctx.waitUntil(cache.put(key,new Response(JSON.stringify(value),{headers:{'Content-Type':'application/json','Cache-Control':'public, max-age=60'}})).catch(()=>{}));
+    const at = Date.now();
+    memory.set(lang,{value,at});
+    if (cache) ctx.waitUntil(cache.put(key,new Response(JSON.stringify(value),{headers:{'Content-Type':'application/json','Cache-Control':'public, max-age=60','X-Profile-Fetched-At':String(at)}})).catch(()=>{}));
     return value;
   })();
   pending.set(lang,task);

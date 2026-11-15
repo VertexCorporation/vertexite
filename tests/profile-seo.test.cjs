@@ -59,6 +59,17 @@ test('routing excludes console, checkout, legal pages and ordinary assets',()=>{
  assert(routes.include.every(p=>/profile|mustafa-caki/.test(p)));
  assert(fs.readFileSync('robots.txt','utf8').includes('Sitemap: https://vertexishere.com/sitemap-profiles.xml'));
 });
+test('reading an aging edge-cache entry cannot extend the published data freshness window',async()=>{
+ const {default:handler}=await worker,oldFetch=global.fetch,oldCaches=global.caches,oldNow=Date.now;
+ let time=oldNow(),calls=0;const at=time-59000;Date.now=()=>time;
+ global.caches={default:{match:async()=>new Response(JSON.stringify({cards:[card]}),{headers:{'X-Profile-Fetched-At':String(at)}}),put:async()=>{}}};
+ global.fetch=async()=>{calls++;return new Response(JSON.stringify({result:{cards:[card]}}));};
+ const env={ASSETS:{fetch:async()=>new Response(template,{headers:{'Content-Type':'text/html'}})}},ctx={waitUntil:()=>{}};
+ try{
+  await handler.fetch(new Request('https://vertexishere.com/de/mustafa-caki'),env,ctx);assert.equal(calls,0);
+  time+=2000;await handler.fetch(new Request('https://vertexishere.com/de/mustafa-caki'),env,ctx);assert.equal(calls,1);
+ }finally{global.fetch=oldFetch;global.caches=oldCaches;Date.now=oldNow;}
+});
 test('optimized public portraits are source-specific and new Console photos retain their live URL',async()=>{
  const map=JSON.parse(source.match(/const photoVariants = (.*);/)[1]);
  for(const asset of Object.values(map)){assert(fs.existsSync('.'+asset));assert(fs.statSync('.'+asset).size<100000);}

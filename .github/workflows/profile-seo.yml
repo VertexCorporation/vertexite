@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['_worker.js', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
+    paths: ['_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
   pull_request:
-    paths: ['_worker.js', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
+    paths: ['_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
 permissions:
   contents: read
 jobs:
