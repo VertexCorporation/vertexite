@@ -247,7 +247,7 @@
 
 
 const interfaceTranslations = {
-  selectedCountryAriaLabel: "Telefon nömrəsi üçün ölkəni dəyiş, hazırda seçilmiş ${countryName} (${dialCode})",
+  selectedCountryAriaLabel: "${dialCode} — Telefon nömrəsi üçün ölkəni dəyiş, hazırda seçilmiş ${countryName} (${dialCode})",
   noCountrySelected: "Telefon nömrəsi üçün ölkə seç",
   countryListAriaLabel: "Ölkələr siyahısı",
   searchPlaceholder: "Axtarış",

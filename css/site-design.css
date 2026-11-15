@@ -444,3 +444,7 @@ html[data-theme="dark"]{--beacon-accent:#F4C95D;--beacon-hover:#FFE19A}
  .vertex-home main>#projects{contain-intrinsic-size:auto 1400px}
  .vertex-home main>#solutions{contain-intrinsic-size:auto 1800px}
 }
+
+/* Voice/touch users need a full-size target for every linked team name. */
+#team .team-profile-link{display:inline-flex;align-items:center;min-height:44px}
+footer .foot-col>h2,footer .footer-col>h2{font-size:13px;line-height:1.5;letter-spacing:.08em;font-weight:600}

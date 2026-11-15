@@ -30,11 +30,11 @@ const today=new Date(),maxDate=parse(source.max)||today,maxISO=toISO(maxDate.get
 let year=Math.max(minYear,maxYear-18),month=today.getMonth(),opened=false,hideTimer=null;
 const anchor=node("div","vx-birth-anchor");source.parentNode.insertBefore(anchor,source);anchor.append(source);
 source.classList.add("vx-birth-source");source.tabIndex=-1;source.setAttribute("aria-hidden","true");source.dataset.vertexPicker="ready";
-const trigger=node("button","vx-birth-trigger");trigger.type="button";trigger.id="vx-birth-trigger";trigger.setAttribute("aria-haspopup","dialog");trigger.setAttribute("aria-expanded","false");trigger.setAttribute("aria-label",i18n[4]);
-const display=node("span","vx-birth-value vx-birth-placeholder","GG.AA.YYYY");const icon=node("span","vx-birth-icon");icon.setAttribute("aria-hidden","true");
+const trigger=node("button","vx-birth-trigger");trigger.type="button";trigger.id="vx-birth-trigger";trigger.setAttribute("aria-haspopup","dialog");trigger.setAttribute("aria-expanded","false");trigger.setAttribute("aria-describedby","vx-birth-help");
+const display=node("span","vx-birth-value vx-birth-placeholder","GG.AA.YYYY");display.id="vx-birth-value";trigger.setAttribute("aria-labelledby","vx-birth-value");const help=node("span","vx-birth-help",i18n[4]);help.id="vx-birth-help";help.hidden=true;anchor.append(help);const icon=node("span","vx-birth-icon");icon.setAttribute("aria-hidden","true");
 icon.innerHTML='<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M7 3v4M17 3v4M3 10h18"/></svg>';
 trigger.append(display,icon);anchor.append(trigger);
-const label=anchor.parentElement?.querySelector('label[for="joinBirthDate"]');if(label)label.htmlFor=trigger.id;
+const label=anchor.parentElement?.querySelector('label[for="joinBirthDate"]');if(label){label.htmlFor=trigger.id;label.id=label.id||'vx-birth-label';trigger.setAttribute('aria-labelledby',label.id+' vx-birth-value');}
 const error=node("span","vx-birth-error",i18n[1]);error.hidden=true;error.setAttribute("role","alert");anchor.after(error);
 const panel=node("div","vx-date-panel");panel.id="vx-birth-calendar";panel.hidden=true;panel.setAttribute("role","dialog");panel.setAttribute("aria-label",i18n[0]);trigger.setAttribute("aria-controls",panel.id);document.body.append(panel);
 const header=node("div","vx-date-head"),previous=node("button","vx-date-arrow","‹"),next=node("button","vx-date-arrow","›");previous.type=next.type="button";previous.setAttribute("aria-label",i18n[2]);next.setAttribute("aria-label",i18n[3]);
