@@ -25,6 +25,9 @@ const words=copy[lang]||copy.en;
 document.documentElement.lang=lang;
 if(lang==='ar')document.documentElement.dir='rtl';
 const el=id=>document.getElementById(id);
+const serverPayload=(()=>{try{const value=JSON.parse(el('vp-data')?.textContent||'null');return value?.version===1&&value.lang===lang&&/^[a-zA-Z0-9_-]{1,128}$/.test(value.card?.id)?value:null}catch{return null}})();
+const rendered=serverPayload?.card;
+
 el('vp-links-title').textContent=words[1];
 function unavailable(msg){
  el('vp-content').hidden=true;el('vp-error').hidden=false;
@@ -37,10 +40,9 @@ let loading=false;
 async function load(){
  if(loading)return;
  loading=true;
- el('vp-error').hidden=false;
- el('vp-error').textContent=lang==='tr'?'Profil yükleniyor…':'Loading profile…';
+ if(!rendered){el('vp-error').hidden=false;el('vp-error').textContent=lang==='tr'?'Profil yükleniyor…':'Loading profile…';}
  const query=new URLSearchParams(location.search);
- const id=query.get('id'),slug=query.get('slug');
+ const id=query.get('id')||rendered?.id,slug=query.get('slug');
  const validId=!!id&&/^[a-zA-Z0-9_-]{1,128}$/.test(id);
  const founderSlug=!id&&slug==='mustafa-caki';
  if(!validId&&!founderSlug){unavailable(words[2]);loading=false;return}
@@ -55,8 +57,8 @@ async function load(){
    if(!valid(response?.result))throw Error('Invalid directory');
    return response.result;
   }
-  const snapshot=cache.read(key);
-  const result=snapshot&&valid(snapshot.value)&&snapshot.value.cards.some(card=>
+  const snapshot=rendered?null:cache.read(key);
+  const result=rendered?{cards:[rendered]}:snapshot&&valid(snapshot.value)&&snapshot.value.cards.some(card=>
    (validId?card.id===id:card.positionCode==='CEO')&&window.VertexTeamLinks.biography(card,lang))
    ? snapshot.value : (await cache.load(key,request,valid,{ttl:0,cooldownMs:1000})).value;
   // Render the saved public biography immediately; refresh stale data for the next visit.
@@ -65,12 +67,12 @@ async function load(){
   const card=Array.isArray(result?.cards)?result.cards.find(x=>validId?x.id===id:isFounder(x)):null;
   const biography=window.VertexTeamLinks.biography(card,lang);
   if(!card||!biography){unavailable(words[2]);return}
-  document.title=card.name+' | Vertex';
+  document.title=card.name+' | '+window.VertexTeamLinks.roleTitle(card,lang)+' · Vertex';
   el('vp-name').textContent=card.name;
   el('vp-role').textContent=window.VertexTeamLinks.roleTitle(card,lang)+' · Vertex';
   const photo=safeUrl(card.imageUrl);
   el('vp-photo').replaceChildren();
-  if(photo){const img=document.createElement('img');img.alt=card.name;img.src=photo;img.width=160;img.height=160;el('vp-photo').append(img)}
+  if(photo){const img=document.createElement('img');img.alt=card.name;img.src=photo;img.width=160;img.height=160;img.fetchPriority='high';img.decoding='async';el('vp-photo').append(img)}
   const bio=el('vp-bio');bio.replaceChildren();
   biography.split(/\n\s*\n/).forEach(paragraph=>{const p=document.createElement('p');p.textContent=paragraph.trim();bio.append(p)});
   const links=el('vp-links');links.replaceChildren();
@@ -93,11 +95,11 @@ async function load(){
 }
 // Language switching keeps the selected person on the equivalent profile route.
 const profileQuery=new URLSearchParams(location.search);
-const profileId=profileQuery.get('id'),profileSlug=profileQuery.get('slug');
+const profileId=profileQuery.get('id')||rendered?.id,profileSlug=profileQuery.get('slug');
 const preserveId=!!profileId&&/^[a-zA-Z0-9_-]{1,128}$/.test(profileId);
 if(preserveId||(!profileId&&profileSlug==='mustafa-caki')){
  document.querySelectorAll('.lang-row').forEach(link=>{
-  const target=new URL(link.href);target.pathname=target.pathname.replace(/\/$/,'')+'/profile.html';
+  const target=new URL(link.href);const targetLang=target.pathname.split('/').filter(Boolean)[0];if(serverPayload?.urls?.[targetLang]){link.href=serverPayload.urls[targetLang];return;}target.pathname=target.pathname.replace(/\/$/,'')+'/profile.html';
   target.searchParams.set(preserveId?'id':'slug',preserveId?profileId:profileSlug);link.href=target.href;
  });
 }

@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "include": [
+    "/*/profile",
+    "/*/profile.html",
+    "/*/mustafa-caki",
+    "/*/mustafa-caki/",
+    "/*/mustafa-caki.html",
+    "/*/team/mustafa-caki",
+    "/*/team/mustafa-caki/",
+    "/team/mustafa-caki",
+    "/team/mustafa-caki/",
+    "/sitemap-profiles.xml"
+  ],
+  "exclude": []
+}

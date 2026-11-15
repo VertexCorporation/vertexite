@@ -1,3 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://vertexishere.com/sitemap.xml
+Sitemap: https://vertexishere.com/sitemap-profiles.xml
