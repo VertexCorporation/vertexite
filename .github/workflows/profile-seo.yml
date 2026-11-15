@@ -35,7 +35,8 @@ jobs:
           set -euo pipefail
           ready=0
           for attempt in {1..20}; do
-            if curl -fsS --max-time 25 https://vertexishere.com/tr/mustafa > /tmp/profile.html && grep -q 'data-server-rendered="true"' /tmp/profile.html; then
+            if curl -fsS --max-time 25 https://vertexishere.com/tr/mustafa > /tmp/profile.html && grep -q 'data-server-rendered="true"' /tmp/profile.html &&
+               curl -fsS --compressed --max-time 25 https://vertexishere.com/js/hero-scene.js > /tmp/live-hero.js && cmp -s js/hero-scene.js /tmp/live-hero.js; then
               ready=1
               break
             fi
