@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['performance-pages.json', 'sitemap.xml', 'scripts/public-page-inventory.cjs', '**/index.html', '**/beacon.html', 'js/intro.js', 'js/hero-scene.js', '_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
+    paths: ['assets/fonts/**', 'performance-pages.json', 'sitemap.xml', 'scripts/public-page-inventory.cjs', '**/index.html', '**/beacon.html', 'js/intro.js', 'js/hero-scene.js', '_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
   pull_request:
-    paths: ['performance-pages.json', 'sitemap.xml', 'scripts/public-page-inventory.cjs', '**/index.html', '**/beacon.html', 'js/intro.js', 'js/hero-scene.js', '_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
+    paths: ['assets/fonts/**', 'performance-pages.json', 'sitemap.xml', 'scripts/public-page-inventory.cjs', '**/index.html', '**/beacon.html', 'js/intro.js', 'js/hero-scene.js', '_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
 permissions:
   contents: read
 jobs:
@@ -35,11 +35,12 @@ jobs:
         run: |
           set -euo pipefail
           design_version=$(sha256sum css/site-design.css | cut -c1-12)
+          font_version=$(sha256sum assets/fonts/fonts.css | cut -c1-12)
           ready=0
           for attempt in {1..20}; do
             if curl -fsS --max-time 25 https://vertexishere.com/tr/mustafa > /tmp/profile.html && grep -q 'data-server-rendered="true"' /tmp/profile.html &&
                curl -fsS --compressed --max-time 25 https://vertexishere.com/js/hero-scene.js > /tmp/live-hero.js && cmp -s js/hero-scene.js /tmp/live-hero.js &&
-               curl -fsS --max-time 25 https://vertexishere.com/tr/ > /tmp/live-home.html && grep -Fq "site-design.css?v=$design_version" /tmp/live-home.html; then
+               curl -fsS --max-time 25 https://vertexishere.com/tr/ > /tmp/live-home.html && grep -Fq "site-design.css?v=$design_version" /tmp/live-home.html && grep -Fq "fonts.css?v=$font_version" /tmp/live-home.html; then
               ready=1
               break
             fi
