@@ -102,7 +102,7 @@
             var info=document.createElement('div');info.className='team-info';var name=document.createElement('h3');name.textContent=card.name;
             var hasBio=!!window.VertexTeamLinks.biography(card,currentLang);
             var profile=hasBio&&/^[a-zA-Z0-9_-]{1,128}$/.test(card.id||'')
-              ? '/'+currentLang+'/profile.html?id='+encodeURIComponent(card.id) : null;
+              ? (card.positionCode==='CEO'&&isMustafa(card.name) ? '/'+currentLang+'/mustafa' : '/'+currentLang+'/profile.html?id='+encodeURIComponent(card.id)) : null;
             if(profile){
                 item.classList.add('has-profile');
                 item.dataset.profileId=card.id;

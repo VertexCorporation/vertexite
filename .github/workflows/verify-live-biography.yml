@@ -40,7 +40,7 @@ jobs:
           # redirecting Google to a noindex client-only shell.
           ready=0
           for attempt in {1..20}; do
-            if fetch "$host/tr/mustafa-caki" > /tmp/live-biography.html && grep -Fq 'data-server-rendered="true"' /tmp/live-biography.html; then
+            if fetch "$host/tr/mustafa" > /tmp/live-biography.html && grep -Fq 'data-server-rendered="true"' /tmp/live-biography.html; then
               ready=1
               break
             fi
@@ -49,10 +49,10 @@ jobs:
           [[ "$ready" == 1 ]]
           langs=(ar az de en es fr hi id it ja ko nl pt ru tr zh)
           for lang in "${langs[@]}"; do
-            fetch "$host/$lang/mustafa-caki" > /tmp/live-biography.html
+            fetch "$host/$lang/mustafa" > /tmp/live-biography.html
             grep -Fq 'data-server-rendered="true"' /tmp/live-biography.html
             grep -Fq 'index,follow,max-image-preview:large' /tmp/live-biography.html
             grep -Fq 'application/ld+json' /tmp/live-biography.html
-            grep -Fq "https://vertexishere.com/$lang/mustafa-caki" /tmp/live-biography.html
+            grep -Fq "https://vertexishere.com/$lang/mustafa" /tmp/live-biography.html
             echo "PASS $lang: public biography HTML, canonical and Person markup"
           done
