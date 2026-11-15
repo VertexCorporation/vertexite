@@ -161,10 +161,16 @@
         captureBackup();
         // The server-rendered team cards are the built-in fallback on first visit.
         if(!backupPresent())showLoading();
-        load();
-        window.addEventListener('online',function(){if(!document.hidden)load();});
+        var activated=false;
+        function activate(){if(activated)return;activated=true;load();}
+        var teamSection=document.getElementById('team');
+        if(teamSection&&window.IntersectionObserver){
+            var entryObserver=new IntersectionObserver(function(entries){if(entries.some(function(entry){return entry.isIntersecting;})){entryObserver.disconnect();activate();}},{rootMargin:'1000px'});
+            entryObserver.observe(teamSection);
+        }else activate();
+        window.addEventListener('online',function(){if(activated&&!document.hidden)load();});
         document.addEventListener('visibilitychange',function(){
-            if(document.hidden)return;
+            if(document.hidden||!activated)return;
             var cached=window.VertexPublicCache&&window.VertexPublicCache.read(cacheKey);
             if(!cached||!cached.fresh)load();
         });

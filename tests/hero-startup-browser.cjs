@@ -1,0 +1,20 @@
+'use strict';
+const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),http=require('node:http');
+const root=path.resolve(__dirname,'..'),types={'.html':'text/html','.js':'text/javascript','.css':'text/css','.json':'application/json','.svg':'image/svg+xml','.woff2':'font/woff2'};
+const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://localhost').pathname;if(name.endsWith('/'))name+='index.html';const file=path.join(root,name);if(!file.startsWith(root+path.sep)||!fs.existsSync(file)){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file));});
+(async()=>{await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base='http://127.0.0.1:'+server.address().port,browser=await chromium.launch({headless:true});
+try{fs.mkdirSync('test-results',{recursive:true});for(const width of [390,1440]){
+ const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'no-preference'}),requests=[],errors=[];
+ page.on('request',r=>requests.push(r.url()));page.on('pageerror',e=>errors.push(e.message));
+ await page.route('**/*',route=>route.request().url().startsWith(base)?route.continue():route.abort());
+ await page.goto(base+'/tr/');await page.locator('.story-ready').waitFor();
+ assert(await page.locator('#home h1').isVisible());assert(await page.locator('#home .story-actions a').first().isVisible());
+ assert(!requests.some(url=>url.includes('globe-libs.js')||url.includes('countries-110m.json')),'opening frame must not request geographic dependencies');
+ await page.screenshot({path:'test-results/home-opening-'+width+'.png'});
+ await page.evaluate(()=>window.scrollTo(0,innerHeight*2.5));
+ await page.waitForFunction(()=>window.d3&&window.topojson&&document.querySelector('.story-globe').width!==300);
+ assert(requests.filter(url=>url.includes('globe-libs.js')).length===1);
+ assert(requests.filter(url=>url.includes('countries-110m.json')).length===1);
+ await page.screenshot({path:'test-results/home-globe-'+width+'.png'});
+ assert.deepEqual(errors,[]);console.log('PASS opening frame and lazy globe:',width);await page.close();
+}}finally{await browser.close();server.close();}})().catch(error=>{console.error(error);server.close();process.exitCode=1;});

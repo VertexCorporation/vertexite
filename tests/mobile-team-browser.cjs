@@ -28,6 +28,7 @@ const server=http.createServer((req,res)=>{
     return route.request().url().startsWith(base)?route.continue():route.abort();
    });
    await page.goto(base+'/'+lang+'/');
+   await page.locator('#team').scrollIntoViewIfNeeded();
    await page.locator('[data-profile-id="test-0"]').waitFor();
    await page.evaluate(()=>document.fonts.ready);
    const geometry=await page.evaluate(()=>{

@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 1,
+  "repositories": [
+    {
+      "name": "Cortex",
+      "description": "Core of Artificial Intelligence",
+      "language": "Dart",
+      "stars": 47,
+      "forks": 10,
+      "url": "https://github.com/VertexCorporation/Cortex"
+    },
+    {
+      "name": "Mergen",
+      "description": "",
+      "language": "Python",
+      "stars": 11,
+      "forks": 1,
+      "url": "https://github.com/VertexCorporation/Mergen"
+    },
+    {
+      "name": "Edge",
+      "description": "The missing link.",
+      "language": "Python",
+      "stars": 4,
+      "forks": 2,
+      "url": "https://github.com/VertexCorporation/Edge"
+    },
+    {
+      "name": "Ally",
+      "description": "",
+      "language": "Dart",
+      "stars": 4,
+      "forks": 2,
+      "url": "https://github.com/VertexCorporation/Ally"
+    },
+    {
+      "name": "CozmosAR",
+      "description": "A New Layer of Reality.",
+      "language": "C#",
+      "stars": 1,
+      "forks": 0,
+      "url": "https://github.com/VertexCorporation/CozmosAR"
+    },
+    {
+      "name": "Synapse",
+      "description": "The Power Behind Intelligence",
+      "language": "JavaScript",
+      "stars": 1,
+      "forks": 0,
+      "url": "https://github.com/VertexCorporation/Synapse"
+    },
+    {
+      "name": "AllStar",
+      "description": "shitty game but hella addictive ",
+      "language": "C#",
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/VertexCorporation/AllStar"
+    },
+    {
+      "name": "CozmosVR",
+      "description": "A New Layer of Reality.",
+      "language": "Other",
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/VertexCorporation/CozmosVR"
+    },
+    {
+      "name": "partnersite",
+      "description": "the partners website for vertex.",
+      "language": "CSS",
+      "stars": 0,
+      "forks": 0,
+      "url": "https://github.com/VertexCorporation/partnersite"
+    },
+    {
+      "name": "adminsite",
+      "description": "the admin website for vertex.",
+      "language": "JavaScript",
+      "stars": 0,
+      "forks": 1,
+      "url": "https://github.com/VertexCorporation/adminsite"
+    }
+  ]
+}

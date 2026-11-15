@@ -1,67 +1,10 @@
-// GitHub API'den repo verisi çek (saatlik cache ile)
-const ORG = 'VertexCorporation';
-const CACHE_KEY = 'vertex_repos_cache';
-const HOUR_KEY = 'vertex_repos_hour';
-
-async function fetchRepos() {
-  try {
-    const now = new Date();
-    const currentHour = now.getHours();
-    const cachedHour = parseInt(localStorage.getItem(HOUR_KEY) || '-1');
-    
-    // Aynı saatte ise cache'den döndür
-    if (cachedHour === currentHour) {
-      const cached = localStorage.getItem(CACHE_KEY);
-      if (cached) {
-        console.log(`✅ Cache'den yükleniyor (Saat: ${currentHour}:00)`);
-        const cached_repos = JSON.parse(cached);
-        console.log(`📊 İlk repo: ${cached_repos[0].name} (${cached_repos[0].stars} ⭐)`);
-        return cached_repos;
-      }
-    }
-    
-    // Yeni saate girdiyse API'den çek
-    console.log(`🔄 API'den çekiliyor (Saat: ${currentHour}:00)...`);
-    const response = await fetch(`https://api.github.com/users/${ORG}/repos?per_page=100`);
-    const repos = await response.json();
-    
-    const IGNORED_REPOS = ['vertexite', 'cozmosite', 'cortexite', 'allyishere', 'eventsite'];
-
-    const processed = repos
-      .filter(repo => !IGNORED_REPOS.includes(repo.name.toLowerCase()))
-      .map(repo => ({
-        name: repo.name,
-        description: repo.description || '',
-        language: repo.language || 'Other',
-        stars: repo.stargazers_count,
-        forks: repo.forks_count,
-        url: repo.html_url
-      }));
-    
-    // Star'a göre sırala (yüksekten düşüğe) - b - a = büyükleri başa
-    processed.sort((a, b) => b.stars - a.stars);
-    
-    console.log(`📊 İlk 3 repo:`);
-    processed.slice(0, 3).forEach(r => console.log(`  ⭐ ${r.name}: ${r.stars} stars`));
-    
-    // Cache'e kaydet
-    localStorage.setItem(CACHE_KEY, JSON.stringify(processed));
-    localStorage.setItem(HOUR_KEY, String(currentHour));
-    console.log(`✅ ${processed.length} repo kaydedildi (Saat: ${currentHour}:00)`);
-    
-    return processed;
-  } catch (error) {
-    console.error('API Error:', error);
-    
-    // Hata durumunda cache'den döndür
-    const cached = localStorage.getItem(CACHE_KEY);
-    if (cached) {
-      console.log('⚠️  API hatası, cache kullanılıyor');
-      return JSON.parse(cached);
-    }
-    return [];
-  }
+// Only a generated, public-only catalogue is fetched by visitors. GitHub rate
+// limits cannot break the docs page and no privileged token reaches the browser.
+async function fetchRepos(){
+ try{const response=await fetch('/assets/data/public-repositories.json');if(!response.ok)throw Error('catalogue unavailable');const data=await response.json();if(data.schemaVersion!==1||!Array.isArray(data.repositories))throw Error('invalid catalogue');return data.repositories.filter(repo=>typeof repo.name==='string'&&/^https:\/\/github\.com\/VertexCorporation\/[A-Za-z0-9_.-]+$/.test(repo.url));}
+ catch{return [];}
 }
+function repoEscape(value){return String(value??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
 function createRepoCard(repo, lang = 'en') {
   const translations = {
@@ -83,6 +26,7 @@ function createRepoCard(repo, lang = 'en') {
     az: { view: 'Repo\'yu Kəş Et', active: 'Aktiv' }
   };
 
+  repo={...repo,name:repoEscape(repo.name),description:repoEscape(repo.description),language:repoEscape(repo.language),url:repoEscape(repo.url),stars:Number(repo.stars)||0,forks:Number(repo.forks)||0};
   const t = translations[lang] || translations.en;
   const langColor = {
     'Python': '#3572A5',
@@ -111,7 +55,7 @@ function createRepoCard(repo, lang = 'en') {
         <span class="meta-item">⭐ ${repo.stars}</span>
         <span class="meta-item">🔱 ${repo.forks}</span>
       </div>
-      <a href="${repo.url}" target="_blank" class="btn btn-outline btn-repo">${t.view}</a>
+      <a href="${repo.url}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-repo">${t.view}</a>
     </div>`;
 }
 

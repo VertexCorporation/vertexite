@@ -20,6 +20,7 @@ jobs:
       - run: npm ci
       - run: npm run test:team
       - run: npx playwright install chromium
+      - run: node tests/hero-startup-browser.cjs
       - run: node tests/mobile-team-browser.cjs
       - uses: actions/upload-artifact@v4
         if: always()
