@@ -1,6 +1,6 @@
 /* Shared public UI: Vertex Console tokens, controls, motion and loading. */
-:root,html[data-theme="light"]{--bg:#F8F9FA;--surface:#FFFFFF;--surface-2:#EFF1F3;--text:#17191D;--text-muted:#707782;--border:#E3E5E8;--border-strong:#D4D7DB;--hover:#EFF1F3;--action:#191B1F;--action-ink:#FFF;--header-bg:rgba(248,249,250,.64);--header-bg-scrolled:rgba(248,249,250,.74);--header-shadow:none;--radius-s:8px;--radius-m:12px;--dur:170ms;--ui-ease:cubic-bezier(.2,.8,.2,1);--status-success:#2E8B67;--status-error:#C2482F;}
-html[data-theme="dark"]{--bg:#0F0F10;--surface:#171717;--surface-2:#212121;--text:#F5F5F5;--text-muted:#858585;--border:#292929;--border-strong:#353535;--hover:#242424;--action:#F5F5F5;--action-ink:#171717;--header-bg:rgba(15,15,16,.64);--header-bg-scrolled:rgba(15,15,16,.74);--header-shadow:none;--status-success:#3FB68B;--status-error:#E5654E;}
+:root,html[data-theme="light"]{--bg:#F8F9FA;--surface:#FFFFFF;--surface-2:#EFF1F3;--text:#17191D;--text-muted:#626A75;--border:#E3E5E8;--border-strong:#D4D7DB;--hover:#EFF1F3;--action:#191B1F;--action-ink:#FFF;--header-bg:rgba(248,249,250,.64);--header-bg-scrolled:rgba(248,249,250,.74);--header-shadow:none;--radius-s:8px;--radius-m:12px;--dur:170ms;--ui-ease:cubic-bezier(.2,.8,.2,1);--status-success:#2E8B67;--status-error:#C2482F;}
+html[data-theme="dark"]{--bg:#0F0F10;--surface:#171717;--surface-2:#212121;--text:#F5F5F5;--text-muted:#979797;--border:#292929;--border-strong:#353535;--hover:#242424;--action:#F5F5F5;--action-ink:#171717;--header-bg:rgba(15,15,16,.64);--header-bg-scrolled:rgba(15,15,16,.74);--header-shadow:none;--status-success:#3FB68B;--status-error:#E5654E;}
 .btn,.icon-btn,.store-badge,button{border-radius:8px;transition:background-color 120ms var(--ui-ease),border-color 120ms var(--ui-ease),color 120ms var(--ui-ease),opacity 120ms var(--ui-ease);box-shadow:none;}
 .btn{min-height:40px;padding:10px 16px;font-size:14px;font-weight:500;border:1px solid var(--border-strong);}
 .btn-primary,.story-actions .btn-primary{background:var(--action);color:var(--action-ink);border-color:transparent;}
@@ -426,3 +426,10 @@ html[data-theme="dark"]{--beacon-accent:#F4C95D;--beacon-hover:#FFE19A}
 /* Navigation stays monochrome; program colors belong inside their pages. */
 #siteHeader .nav-links a.beacon-link{color:var(--text-muted)!important;font-weight:500}#siteHeader .mobile-menu a.beacon-link{color:var(--text-muted)!important;font-weight:600}
 #siteHeader .nav-links a.beacon-link:hover,#siteHeader .mobile-menu a.beacon-link:hover{color:var(--text)!important}
+
+/* Closed language menus should not shape/download every alphabet before the hero.
+   Discrete visibility keeps the existing opacity/transform close animation. */
+@supports (content-visibility:hidden) and (transition-behavior:allow-discrete){
+ .language-dropdown:not(.open) .lang-panel{content-visibility:hidden;transition:opacity 200ms var(--panel-ease),transform 200ms var(--panel-ease),visibility 0s linear 200ms,content-visibility 200ms allow-discrete}
+ .language-dropdown.open .lang-panel{content-visibility:visible}
+}
