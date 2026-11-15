@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "faces": [
+    {
+      "family": "Anton",
+      "weight": 400,
+      "source": "font-1.woff2",
+      "file": "critical-anton-400-5d37824c1ce4.woff2",
+      "unicodeRange": "U+011E,U+011F,U+0130,U+015E,U+015F",
+      "originalBytes": 31356,
+      "bytes": 3628,
+      "sourceSha256": "0d17b7880f389deeb6663a52fa4eadc6d9116bdda725f0aa1f3d404fbb7d3d59"
+    },
+    {
+      "family": "Ubuntu",
+      "weight": 400,
+      "source": "font-34.woff2",
+      "file": "critical-ubuntu-400-1581c21fec6e.woff2",
+      "unicodeRange": "U+011E,U+011F,U+0130,U+015E,U+015F",
+      "originalBytes": 46980,
+      "bytes": 5180,
+      "sourceSha256": "7db064fa5c5d305d684608744d621aa724ec4f1c6b00bb647697f4d8d3e78df1"
+    },
+    {
+      "family": "Ubuntu",
+      "weight": 500,
+      "source": "font-40.woff2",
+      "file": "critical-ubuntu-500-40860f4a98dc.woff2",
+      "unicodeRange": "U+011E,U+011F,U+0130,U+015E,U+015F",
+      "originalBytes": 42480,
+      "bytes": 4584,
+      "sourceSha256": "a90dec375bfc6a8b7c568da98f28b844916c5973e346f12eb55f016177e254df"
+    },
+    {
+      "family": "Ubuntu",
+      "weight": 700,
+      "source": "font-46.woff2",
+      "file": "critical-ubuntu-700-dd19bf0fdf74.woff2",
+      "unicodeRange": "U+011E,U+011F,U+0130,U+015E,U+015F",
+      "originalBytes": 38020,
+      "bytes": 4268,
+      "sourceSha256": "30073583012b73a5c05c290e601325850ddbc7c7a1241561ec9264b8744c2a86"
+    }
+  ]
+}

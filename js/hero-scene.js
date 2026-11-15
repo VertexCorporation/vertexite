@@ -29,8 +29,9 @@ setTimeout(async function () {
   if (!hero) return;
 
   // Match the first HTML frame before measuring or replacing its title.
-  if(document.fonts){await Promise.race([document.fonts.load('112px Anton', hero.querySelector('h1').textContent).catch(function(){}),new Promise(function(resolve){setTimeout(resolve,1500);})]);}
-  var titleFontReady = !document.fonts || document.fonts.check('112px Anton',hero.querySelector('h1').textContent);
+  var titleFontText=hero.querySelector('h1').textContent.toLocaleUpperCase(document.documentElement.lang||'en');
+  if(document.fonts){await Promise.race([document.fonts.load('112px Anton', titleFontText).catch(function(){}),new Promise(function(resolve){setTimeout(resolve,1500);})]);}
+  var titleFontReady = !document.fonts || document.fonts.check('112px Anton',titleFontText);
   var originalTitle = hero.querySelector('h1');
   var originalLede = hero.querySelector('.lede');
   var originalActions = Array.prototype.slice.call(hero.querySelectorAll('.hero-actions a'));

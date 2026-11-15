@@ -6,7 +6,7 @@
 (function(){try{var t=localStorage.getItem('theme');if(t!=='light'&&t!=='dark'){t=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';}document.documentElement.setAttribute('data-theme',t);}catch(e){}})();
 </script>
 <link id="vertex-favicon" rel="icon" href="/assets/favicon-light.svg" type="image/svg+xml">
-<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/fonts/fonts.css?v=e591b2dd38b1">
 <link rel="stylesheet" href="/css/layout/site-shell.css?v=profiles261021">
 <link rel="stylesheet" href="/css/site-design.css?v=fddd540a2da8">
 <link rel="stylesheet" href="/css/pages/team-profile.css?v=polish261026f">
@@ -115,7 +115,7 @@
     window.addEventListener('scroll', function(){
       if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
     }, {passive:true});
-    onScroll();
+    window.addEventListener('pageshow',function(){window.requestAnimationFrame(onScroll);},{once:true});
     var menuBtn = document.getElementById('menuBtn');
     if(!menuBtn) return;
     function closeMenu(){

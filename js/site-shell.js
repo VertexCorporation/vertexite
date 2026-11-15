@@ -67,7 +67,7 @@
     window.addEventListener('scroll', function(){
       if(!ticking){ window.requestAnimationFrame(onScroll); ticking = true; }
     }, {passive:true});
-    onScroll();
+    window.addEventListener('pageshow',function(){window.requestAnimationFrame(onScroll);},{once:true});
     var menuBtn = document.getElementById('menuBtn');
     if(!menuBtn) return;
     function closeMenu(){
