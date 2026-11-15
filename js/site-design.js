@@ -12,9 +12,10 @@ setIcon(document.getElementById('themeIconSun'),'sun');setIcon(document.getEleme
  const brand=nav&&nav.querySelector('.brand');
  const right=nav&&nav.querySelector('.nav-right');
  if(!nav||!links||!brand||!right)return;
+ const desktopNavigation=window.matchMedia('(min-width:1280px)');
  function measure(){
+  if(!desktopNavigation.matches){header.classList.remove('nav-condensed');return;}
   header.classList.remove('nav-condensed');
-  if(window.innerWidth<1280)return;
   const style=getComputedStyle(nav);
   const measured=brand.getBoundingClientRect().width+
     links.scrollWidth+right.getBoundingClientRect().width+
