@@ -1,0 +1,66 @@
+name: Profile SEO and live Lighthouse
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ['_worker.js', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
+  pull_request:
+    paths: ['_worker.js', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
+permissions:
+  contents: read
+jobs:
+  validate:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: npm test
+      - run: npm run test:seo
+  live-audit:
+    if: github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Wait for the production-rendered biography
+        shell: bash
+        run: |
+          set -euo pipefail
+          ready=0
+          for attempt in {1..20}; do
+            if curl -fsS --max-time 25 https://vertexishere.com/tr/mustafa-caki > /tmp/profile.html && grep -q 'data-server-rendered="true"' /tmp/profile.html; then
+              ready=1
+              break
+            fi
+            sleep 12
+          done
+          [[ "$ready" == 1 ]]
+          grep -q 'index,follow,max-image-preview:large' /tmp/profile.html
+          curl -fsS --max-time 25 https://vertexishere.com/sitemap-profiles.xml > /tmp/profiles.xml
+          grep -q 'https://vertexishere.com/tr/mustafa-caki' /tmp/profiles.xml
+      - name: Measure mobile and desktop scores on the homepage and biography
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p lighthouse-results
+          for page in homepage biography; do
+            url=https://vertexishere.com/tr/
+            [[ "$page" != biography ]] || url=https://vertexishere.com/tr/mustafa-caki
+            for mode in mobile desktop; do
+              args=()
+              [[ "$mode" != desktop ]] || args+=(--preset=desktop)
+              npm exec --yes --package=lighthouse@13.6.0 -- lighthouse "$url" "${args[@]}" --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output-path="lighthouse-results/$page-$mode.json" --quiet
+            done
+          done
+          node scripts/summarize-lighthouse.cjs | tee -a "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: live-lighthouse
+          path: lighthouse-results
