@@ -3,6 +3,10 @@ const {test}=require('node:test'),assert=require('node:assert/strict'),vm=requir
 const fs=require('node:fs');
 const html=fs.readFileSync(process.argv[2]||require('node:path').join(__dirname,'../verify.html'),'utf8');
 const code=html.match(/<script>([\s\S]*?)<\/script>/)[1];
+test('certificate routes use one shared rule without recipient-specific redirects',()=>{
+ const redirects=fs.readFileSync(require('node:path').join(__dirname,'../_redirects'),'utf8');
+ assert.deepEqual(redirects.split(/\r?\n/).filter(line=>line.startsWith('/certificates/')),['/certificates/* /verify 200']);
+});
 function environment(path,response,query=''){
  let loaded,redirect=null;
  const nodes=new Map();const node=k=>{if(!nodes.has(k))nodes.set(k,{style:{},textContent:''});return nodes.get(k)};
