@@ -1,5 +1,5 @@
 (function(){"use strict";const interfaceTranslations = {
-  selectedCountryAriaLabel: "${dialCode} — Alterar país para o número de telefone, selecionado ${countryName} (${dialCode})",
+  selectedCountryAriaLabel: "${dialCode} — Alterar país para o número de telefone, selecionado ${countryName}",
   noCountrySelected: "Selecionar país para o número de telefone",
   countryListAriaLabel: "Lista de países",
   searchPlaceholder: "Procurar",

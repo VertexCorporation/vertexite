@@ -29,6 +29,7 @@ setTimeout(async function () {
 
   // Match the first HTML frame before measuring or replacing its title.
   if(document.fonts){await Promise.race([document.fonts.load('112px Anton', hero.querySelector('h1').textContent).catch(function(){}),new Promise(function(resolve){setTimeout(resolve,1500);})]);}
+  var titleFontReady = !document.fonts || document.fonts.check('112px Anton',hero.querySelector('h1').textContent);
   var originalTitle = hero.querySelector('h1');
   var originalLede = hero.querySelector('.lede');
   var originalActions = Array.prototype.slice.call(hero.querySelectorAll('.hero-actions a'));
@@ -239,7 +240,7 @@ setTimeout(async function () {
     probe.remove();
   }
   measureTitle();
-  if (document.fonts) document.fonts.ready.then(function(){measureTitle();measureOpeningFrame();requestRender();});
+  if (document.fonts && !titleFontReady) document.fonts.ready.then(function(){measureTitle();measureOpeningFrame();requestRender();});
   var sponsorsEl = hero.querySelector('.story-sponsors');
   var proofEl = hero.querySelector('.story-proof');
   var proofGroups = proofEl.querySelectorAll('.story-proof-group');
