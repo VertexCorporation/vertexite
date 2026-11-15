@@ -3,9 +3,9 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ['_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
+    paths: ['performance-pages.json', 'sitemap.xml', 'scripts/public-page-inventory.cjs', '**/index.html', '**/beacon.html', 'js/intro.js', 'js/hero-scene.js', '_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
   pull_request:
-    paths: ['_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
+    paths: ['performance-pages.json', 'sitemap.xml', 'scripts/public-page-inventory.cjs', '**/index.html', '**/beacon.html', 'js/intro.js', 'js/hero-scene.js', '_worker.js', 'css/site-design.css', 'tests/theme-contrast.test.cjs', '_routes.json', 'robots.txt', 'js/team-profile.js', 'js/profile-scene.js', '**/profile.html', 'tests/profile-seo.test.cjs', '.github/workflows/profile-seo.yml']
 permissions:
   contents: read
 jobs:
@@ -19,6 +19,7 @@ jobs:
           node-version: '22'
       - run: npm test
       - run: npm run test:seo
+      - run: node scripts/build-sitemap.cjs --check
   live-audit:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
@@ -34,7 +35,7 @@ jobs:
           set -euo pipefail
           ready=0
           for attempt in {1..20}; do
-            if curl -fsS --max-time 25 https://vertexishere.com/tr/mustafa-caki > /tmp/profile.html && grep -q 'data-server-rendered="true"' /tmp/profile.html; then
+            if curl -fsS --max-time 25 https://vertexishere.com/tr/mustafa > /tmp/profile.html && grep -q 'data-server-rendered="true"' /tmp/profile.html; then
               ready=1
               break
             fi
@@ -43,21 +44,20 @@ jobs:
           [[ "$ready" == 1 ]]
           grep -q 'index,follow,max-image-preview:large' /tmp/profile.html
           curl -fsS --max-time 25 https://vertexishere.com/sitemap-profiles.xml > /tmp/profiles.xml
-          grep -q 'https://vertexishere.com/tr/mustafa-caki' /tmp/profiles.xml
-      - name: Measure mobile and desktop scores on the homepage and biography
+          grep -q 'https://vertexishere.com/tr/mustafa' /tmp/profiles.xml
+      - name: Measure all public page classes on mobile and desktop
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p lighthouse-results
-          for page in homepage biography; do
-            url=https://vertexishere.com/tr/
-            [[ "$page" != biography ]] || url=https://vertexishere.com/tr/mustafa-caki
+          while IFS=$'\t' read -r page path; do
+            url="https://vertexishere.com$path"
             for mode in mobile desktop; do
               args=()
               [[ "$mode" != desktop ]] || args+=(--preset=desktop)
               npm exec --yes --package=lighthouse@13.6.0 -- lighthouse "$url" "${args[@]}" --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output-path="lighthouse-results/$page-$mode.json" --quiet
             done
-          done
+          done < <(node -e 'for(const p of require("./performance-pages.json").pages)console.log(p.name+"\t"+p.path)')
           node scripts/summarize-lighthouse.cjs | tee -a "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
         if: always()

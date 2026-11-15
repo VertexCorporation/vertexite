@@ -1,0 +1,13 @@
+{
+  "targets": {"performance": 100, "accessibility": 100, "best-practices": 100, "seo": 100},
+  "devices": ["mobile", "desktop"],
+  "pages": [
+    {"name":"homepage", "path":"/tr/", "class":"opening-scene", "critical":"heading, navigation, actions", "deferred":"below-fold section layout and optional media"},
+    {"name":"biography", "path":"/tr/mustafa", "class":"published-profile", "critical":"server-rendered public biography and portrait", "deferred":"decorative skyline"},
+    {"name":"beacon", "path":"/tr/beacon", "class":"program", "critical":"program description and apply action", "deferred":"decorative globe and organization directory"},
+    {"name":"origin", "path":"/origin", "class":"program", "critical":"program description and plans", "deferred":"decorative globe"},
+    {"name":"application", "path":"/tr/aramiza-katil", "class":"form", "critical":"form labels and navigation", "deferred":"optional interview availability"},
+    {"name":"documentation", "path":"/tr/dokumantasyon", "class":"documentation", "critical":"headings and article content", "deferred":"optional embeds"},
+    {"name":"legal", "path":"/tr/gizlilik-politikasi", "class":"legal-reader", "critical":"published legal content", "deferred":"none"}
+  ]
+}

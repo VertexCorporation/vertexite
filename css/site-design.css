@@ -433,3 +433,14 @@ html[data-theme="dark"]{--beacon-accent:#F4C95D;--beacon-hover:#FFE19A}
  .language-dropdown:not(.open) .lang-panel{content-visibility:hidden;transition:opacity 200ms var(--panel-ease),transform 200ms var(--panel-ease),visibility 0s linear 200ms,content-visibility 200ms allow-discrete}
  .language-dropdown.open .lang-panel{content-visibility:visible}
 }
+
+/* Public homepage: retain semantic content and find-in-page while deferring
+   layout/paint/font shaping of the sections below the opening viewport. */
+.vertex-home main>section:not(.hero):not(.story-relocated){content-visibility:auto;contain-intrinsic-size:auto 700px}
+.vertex-home main>#projects{contain-intrinsic-size:auto 1000px}
+.vertex-home main>#team{contain-intrinsic-size:auto 1300px}
+.vertex-home main>#solutions{contain-intrinsic-size:auto 1000px}
+@media(max-width:700px){
+ .vertex-home main>#projects{contain-intrinsic-size:auto 1400px}
+ .vertex-home main>#solutions{contain-intrinsic-size:auto 1800px}
+}

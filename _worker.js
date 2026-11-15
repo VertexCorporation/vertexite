@@ -29,7 +29,7 @@ function founder(card) {
   return card?.positionCode === 'CEO' && String(card.name).toLocaleLowerCase('tr').replace(/ı/g,'i').normalize('NFD').replace(/[\u0300-\u036f]/g,'') === 'mustafa caki';
 }
 function profileUrl(card, lang) {
-  return origin + '/' + lang + (founder(card) ? '/mustafa-caki' : '/profile?id=' + encodeURIComponent(card.id));
+  return origin + '/' + lang + (founder(card) ? '/mustafa' : '/profile?id=' + encodeURIComponent(card.id));
 }
 function socialLinks(card) {
   const aliases = {linkedin:'linkedin',instagram:'instagram',twitter:'x',x:'x',tiktok:'tiktok',mail:'email',email:'email','e-mail':'email'};
@@ -129,7 +129,7 @@ export default {
     const url = new URL(request.url), parts = url.pathname.split('/').filter(Boolean);
     const sitemap = url.pathname === '/sitemap-profiles.xml';
     const lang = languages.includes(parts[0]) ? parts[0] : null;
-    const alias = (lang && (parts[1] === 'mustafa-caki' || parts[1] === 'mustafa-caki.html' || (parts[1] === 'team' && parts[2] === 'mustafa-caki'))) || url.pathname.replace(/\/$/,'') === '/team/mustafa-caki';
+    const alias = (lang && (parts[1] === 'mustafa' || parts[1] === 'mustafa.html' || parts[1] === 'mustafa-caki' || parts[1] === 'mustafa-caki.html' || (parts[1] === 'team' && parts[2] === 'mustafa-caki'))) || url.pathname.replace(/\/$/,'') === '/team/mustafa-caki';
     const profile = lang && parts.length === 2 && ['profile','profile.html'].includes(parts[1]);
     if (!sitemap && !alias && !profile) return env.ASSETS.fetch(request);
     if (!['GET','HEAD'].includes(request.method)) return new Response(null,{status:405,headers:{Allow:'GET, HEAD','X-Robots-Tag':'noindex'}});
@@ -141,7 +141,7 @@ export default {
         return new Response(request.method==='HEAD' ? null : renderSitemap(data.cards),{headers:{'Content-Type':'application/xml; charset=utf-8','Cache-Control':'public, max-age=60','X-Content-Type-Options':'nosniff'}});
       }
       const id = url.searchParams.get('id'), slug = alias ? 'mustafa-caki' : url.searchParams.get('slug');
-      if ((!id && slug !== 'mustafa-caki') || (id && (!ids.test(id) || slug))) return errorResponse(404,'Profile not found');
+      if ((!id && !['mustafa','mustafa-caki'].includes(slug)) || (id && (!ids.test(id) || slug))) return errorResponse(404,'Profile not found');
       const data = await directory(language,ctx);
       const card = data.cards.find(c=>id ? c.id === id : founder(c));
       if (!card || !biography(card,language)) return errorResponse(404,'Profile not found');

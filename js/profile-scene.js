@@ -163,7 +163,7 @@ async function load(){
  const query=new URLSearchParams(location.search);
  const id=query.get('id')||rendered?.id,slug=query.get('slug');
  const validId=!!id&&/^[a-zA-Z0-9_-]{1,128}$/.test(id);
- const founderSlug=!id&&slug==='mustafa-caki';
+ const founderSlug=!id&&['mustafa','mustafa-caki'].includes(slug);
  if(!validId&&!founderSlug){unavailable(words[2]);loading=false;return}
  try{
   const cache=window.VertexPublicCache;
@@ -216,7 +216,7 @@ async function load(){
 const profileQuery=new URLSearchParams(location.search);
 const profileId=profileQuery.get('id')||rendered?.id,profileSlug=profileQuery.get('slug');
 const preserveId=!!profileId&&/^[a-zA-Z0-9_-]{1,128}$/.test(profileId);
-if(preserveId||(!profileId&&profileSlug==='mustafa-caki')){
+if(preserveId||(!profileId&&['mustafa','mustafa-caki'].includes(profileSlug))){
  document.querySelectorAll('.lang-row').forEach(link=>{
   const target=new URL(link.href);const targetLang=target.pathname.split('/').filter(Boolean)[0];if(serverPayload?.urls?.[targetLang]){link.href=serverPayload.urls[targetLang];return;}target.pathname=target.pathname.replace(/\/$/,'')+'/profile.html';
   target.searchParams.set(preserveId?'id':'slug',preserveId?profileId:profileSlug);link.href=target.href;

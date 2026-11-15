@@ -11,14 +11,14 @@ test('all languages render indexable names, biographies, canonical and matching 
   assert(html.includes('<p>Public biography '+lang+'</p>'));
   assert.match(html,/id="vp-content" data-server-rendered="true"/);
   assert.match(html,/<meta name="robots" content="index,follow,max-image-preview:large">/);
-  assert(html.includes('rel="canonical" href="https://vertexishere.com/'+lang+'/mustafa-caki"'));
+  assert(html.includes('rel="canonical" href="https://vertexishere.com/'+lang+'/mustafa"'));
   assert.equal((html.match(/rel="canonical"/g)||[]).length,1);
   assert.match(html,/<meta name="description" content="Mustafa Çakı/);
   const schema=JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1]);
   assert.equal(schema['@type'],'ProfilePage');assert.equal(schema.mainEntity['@type'],'Person');assert.equal(schema.mainEntity.name,'Mustafa Çakı');
   assert.equal(schema.mainEntity.sameAs.length,1);assert.equal(schema.inLanguage,lang);
   const data=JSON.parse(html.match(/id="vp-data">([\s\S]*?)<\/script>/)[1]);assert.deepEqual(Object.keys(data.card.biographies),[lang]);
-  assert.equal(data.urls.tr,'https://vertexishere.com/tr/mustafa-caki');
+  assert.equal(data.urls.tr,'https://vertexishere.com/tr/mustafa');
  }
 });
 test('names, biography, URLs and JSON cannot inject HTML; replacement tokens remain literal',async()=>{
@@ -43,20 +43,21 @@ test('HTTP profile routes return 200, alias redirects, real 404/503 and HEAD; no
  const ctx={waitUntil:()=>{}};
  global.fetch=async(url,options)=>{calls++;assert.equal(url,'https://listsiteteam-o5h7dmtija-ew.a.run.app/');assert.deepEqual(Object.keys(options.headers),['Content-Type']);assert(!JSON.stringify(options).includes('SECRET'));return new Response(JSON.stringify({result:{cards:[card,other]}}));};
  try{
-  let response=await handler.fetch(new Request('https://vertexishere.com/tr/mustafa-caki',{headers:{Cookie:'SECRET',Authorization:'SECRET'}}),env,ctx);
+  let response=await handler.fetch(new Request('https://vertexishere.com/tr/mustafa',{headers:{Cookie:'SECRET',Authorization:'SECRET'}}),env,ctx);
   assert.equal(response.status,200);assert.equal(response.headers.get('X-Vertex-Profile'),'server-rendered-v1');assert((await response.text()).includes('<p>Public biography tr</p>'));
-  response=await handler.fetch(new Request('https://vertexishere.com/tr/profile?id=public-ceo'),env,ctx);assert.equal(response.status,301);assert.equal(response.headers.get('Location'),'https://vertexishere.com/tr/mustafa-caki');
+  response=await handler.fetch(new Request('https://vertexishere.com/tr/mustafa-caki'),env,ctx);assert.equal(response.status,301);assert.equal(response.headers.get('Location'),'https://vertexishere.com/tr/mustafa');
+  response=await handler.fetch(new Request('https://vertexishere.com/tr/profile?id=public-ceo'),env,ctx);assert.equal(response.status,301);assert.equal(response.headers.get('Location'),'https://vertexishere.com/tr/mustafa');
   response=await handler.fetch(new Request('https://vertexishere.com/tr/profile?id=other'),env,ctx);assert.equal(response.status,200);
   response=await handler.fetch(new Request('https://vertexishere.com/tr/profile?id=missing'),env,ctx);assert.equal(response.status,404);assert.equal(response.headers.get('X-Robots-Tag'),'noindex');
-  response=await handler.fetch(new Request('https://vertexishere.com/tr/mustafa-caki',{method:'HEAD'}),env,ctx);assert.equal(response.status,200);assert.equal(await response.text(),'');assert.equal(calls,1);
+  response=await handler.fetch(new Request('https://vertexishere.com/tr/mustafa',{method:'HEAD'}),env,ctx);assert.equal(response.status,200);assert.equal(await response.text(),'');assert.equal(calls,1);
   response=await handler.fetch(new Request('https://vertexishere.com/tr/profile',{method:'POST'}),env,ctx);assert.equal(response.status,405);
-  global.fetch=async()=>{throw Error('offline');};response=await handler.fetch(new Request('https://vertexishere.com/ja/mustafa-caki'),env,ctx);assert.equal(response.status,503);assert.equal(response.headers.get('Retry-After'),'60');
+  global.fetch=async()=>{throw Error('offline');};response=await handler.fetch(new Request('https://vertexishere.com/ja/mustafa'),env,ctx);assert.equal(response.status,503);assert.equal(response.headers.get('Retry-After'),'60');
  }finally{global.fetch=original;}
 });
 test('routing excludes console, checkout, legal pages and ordinary assets',()=>{
  const routes=JSON.parse(fs.readFileSync('_routes.json','utf8'));
  assert(!routes.include.includes('/*'));assert(routes.include.includes('/sitemap-profiles.xml'));
- assert(routes.include.every(p=>/profile|mustafa-caki/.test(p)));
+ assert(routes.include.every(p=>/profile|mustafa/.test(p)));
  assert(fs.readFileSync('robots.txt','utf8').includes('Sitemap: https://vertexishere.com/sitemap-profiles.xml'));
 });
 test('reading an aging edge-cache entry cannot extend the published data freshness window',async()=>{
@@ -66,8 +67,8 @@ test('reading an aging edge-cache entry cannot extend the published data freshne
  global.fetch=async()=>{calls++;return new Response(JSON.stringify({result:{cards:[card]}}));};
  const env={ASSETS:{fetch:async()=>new Response(template,{headers:{'Content-Type':'text/html'}})}},ctx={waitUntil:()=>{}};
  try{
-  await handler.fetch(new Request('https://vertexishere.com/de/mustafa-caki'),env,ctx);assert.equal(calls,0);
-  time+=2000;await handler.fetch(new Request('https://vertexishere.com/de/mustafa-caki'),env,ctx);assert.equal(calls,1);
+  await handler.fetch(new Request('https://vertexishere.com/de/mustafa'),env,ctx);assert.equal(calls,0);
+  time+=2000;await handler.fetch(new Request('https://vertexishere.com/de/mustafa'),env,ctx);assert.equal(calls,1);
  }finally{global.fetch=oldFetch;global.caches=oldCaches;Date.now=oldNow;}
 });
 test('optimized public portraits are source-specific and new Console photos retain their live URL',async()=>{

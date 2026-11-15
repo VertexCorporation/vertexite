@@ -3,6 +3,9 @@
   "include": [
     "/*/profile",
     "/*/profile.html",
+    "/*/mustafa",
+    "/*/mustafa/",
+    "/*/mustafa.html",
     "/*/mustafa-caki",
     "/*/mustafa-caki/",
     "/*/mustafa-caki.html",

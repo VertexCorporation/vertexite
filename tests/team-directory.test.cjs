@@ -53,13 +53,13 @@ test('dynamic biographies retain their shared portrait fog without static founde
 test('old founder routes preserve language and use a managed profile rather than a fixed ID',()=>{
  const redirects=read('_redirects'),sitemap=read('sitemap.xml'),js=read('js/team-profile.js');
  for(const lang of langs){
-  const route='/'+lang+'/profile.html?slug=mustafa-caki';
+  const route='/'+lang+'/mustafa';
   assert.ok(redirects.includes('/'+lang+'/mustafa-caki '+route+' 301'));
   assert.ok(redirects.includes('/'+lang+'/mustafa-caki.html '+route+' 301'));
   assert.ok(read(lang+'/index.html').includes(route));
   assert.ok(!sitemap.includes('/'+lang+'/mustafa-caki'));
  }
- assert.match(js,/profileSlug==='mustafa-caki'/);
+ assert.match(js,/\['mustafa','mustafa-caki'\]\.includes\(profileSlug\)/);
  assert.match(js,/isFounder\(x\)/);
 });
 
