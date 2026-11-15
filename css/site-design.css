@@ -448,3 +448,8 @@ html[data-theme="dark"]{--beacon-accent:#F4C95D;--beacon-hover:#FFE19A}
 /* Voice/touch users need a full-size target for every linked team name. */
 #team .team-profile-link{display:inline-flex;align-items:center;min-height:44px}
 footer .foot-col>h2,footer .footer-col>h2{font-size:13px;line-height:1.5;letter-spacing:.08em;font-weight:600}
+
+/* Static fallback cards and live directory cards share the same touch area. */
+#team .team-info h3>a{display:inline-flex;align-items:center;min-height:44px}
+html[data-theme="light"] .repo-status{color:#146b39;background:#e5f5e9}
+html[data-theme="dark"] .repo-status{color:#79e3a1;background:#153622}
