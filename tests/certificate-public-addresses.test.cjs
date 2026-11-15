@@ -25,3 +25,8 @@ test('verify URLs retain case-sensitive IDs and do not redirect',async()=>{
  const e=environment('/verify/AbC_Def',{valid:true,certificateId:'AbC_Def',certificateType:'merit',name:'Recipient'});
  await e.run();assert.equal(e.ctx.request.searchParams.get('id'),'AbC_Def');assert.equal(e.redirect(),null);assert.equal(e.nodes.get('certName').textContent,'Recipient');
 });
+test('manual role certificates display the stored role title',async()=>{
+ const e=environment('/verify/Example_Role',{valid:true,certificateId:'Example_Role',certificateType:'role',certificateName:'Chief Operations Officer',name:'Example Recipient'});
+ await e.run();assert.equal(e.nodes.get('certType').textContent,'Chief Operations Officer');
+});
+
