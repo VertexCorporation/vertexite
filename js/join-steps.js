@@ -18,7 +18,7 @@
   if(booked||mode==='direct'||available&&mode!=='pending')return;
   clearTimeout(healthTimer);mode=available?'calendar':'direct';form.dataset.applicationMode=mode;date.classList.remove('application-calendar-probe');date.removeAttribute('aria-hidden');date.inert=false;date.hidden=true;
   setActionLabel(available?nextLabel:submitLabel);
-  if(!available){toDetails();date.remove();}
+  if(!available){toDetails();date.hidden=true;date.inert=true;date.setAttribute('aria-hidden','true');}
   resolveMode();
  }
  let labelVersion=0;

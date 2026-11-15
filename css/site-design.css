@@ -453,3 +453,7 @@ footer .foot-col>h2,footer .footer-col>h2{font-size:13px;line-height:1.5;letter-
 #team .team-info h3>a{display:inline-flex;align-items:center;min-height:44px}
 html[data-theme="light"] .repo-status{color:#146b39;background:#e5f5e9}
 html[data-theme="dark"] .repo-status{color:#79e3a1;background:#153622}
+
+/* Reserve the actual one/two-column team grid before it is laid out. */
+@media(max-width:849px){.vertex-home main>#team{contain-intrinsic-size:auto 2700px}}
+@media(max-width:519px){.vertex-home main>#team{contain-intrinsic-size:auto 5500px}}

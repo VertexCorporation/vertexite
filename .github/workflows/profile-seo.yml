@@ -56,6 +56,7 @@ jobs:
             for mode in mobile desktop; do
               args=()
               [[ "$mode" != desktop ]] || args+=(--preset=desktop)
+              [[ "$page/$mode" != homepage/mobile ]] || args+=(--save-assets)
               npm exec --yes --package=lighthouse@13.6.0 -- lighthouse "$url" "${args[@]}" --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output-path="lighthouse-results/$page-$mode.json" --quiet
             done
           done < <(node -e 'for(const p of require("./performance-pages.json").pages)console.log(p.name+"\t"+p.path)')
