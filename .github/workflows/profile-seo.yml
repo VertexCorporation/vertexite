@@ -20,6 +20,7 @@ jobs:
       - run: npm test
       - run: npm run test:seo
       - run: node scripts/build-sitemap.cjs --check
+      - run: node scripts/version-design-css.cjs --check
   live-audit:
     if: github.event_name != 'pull_request'
     runs-on: ubuntu-24.04
@@ -33,10 +34,12 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
+          design_version=$(sha256sum css/site-design.css | cut -c1-12)
           ready=0
           for attempt in {1..20}; do
             if curl -fsS --max-time 25 https://vertexishere.com/tr/mustafa > /tmp/profile.html && grep -q 'data-server-rendered="true"' /tmp/profile.html &&
-               curl -fsS --compressed --max-time 25 https://vertexishere.com/js/hero-scene.js > /tmp/live-hero.js && cmp -s js/hero-scene.js /tmp/live-hero.js; then
+               curl -fsS --compressed --max-time 25 https://vertexishere.com/js/hero-scene.js > /tmp/live-hero.js && cmp -s js/hero-scene.js /tmp/live-hero.js &&
+               curl -fsS --max-time 25 https://vertexishere.com/tr/ > /tmp/live-home.html && grep -Fq "site-design.css?v=$design_version" /tmp/live-home.html; then
               ready=1
               break
             fi
@@ -56,6 +59,7 @@ jobs:
             for mode in mobile desktop; do
               args=()
               [[ "$mode" != desktop ]] || args+=(--preset=desktop)
+              [[ "$page/$mode" != homepage/mobile ]] || args+=(--save-assets)
               npm exec --yes --package=lighthouse@13.6.0 -- lighthouse "$url" "${args[@]}" --only-categories=performance,accessibility,best-practices,seo --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage" --output=json --output-path="lighthouse-results/$page-$mode.json" --quiet
             done
           done < <(node -e 'for(const p of require("./performance-pages.json").pages)console.log(p.name+"\t"+p.path)')
