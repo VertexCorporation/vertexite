@@ -3,6 +3,12 @@
 const languages = ['ar','az','de','en','es','fr','hi','id','it','ja','ko','nl','pt','ru','tr','zh'];
 const designTitles = {"tr":"Tasarım Direktörü (CDO)","en":"Chief Design Officer (CDO)","de":"Designvorstand (CDO)","es":"Director de Diseño (CDO)","fr":"Directeur du Design (CDO)","it":"Direttore del Design (CDO)","ja":"最高デザイン責任者 (CDO)","ko":"최고디자인책임자 (CDO)","pt":"Diretor de Design (CDO)","ru":"Директор по дизайну (CDO)","zh":"首席设计官 (CDO)","ar":"الرئيس التنفيذي للتصميم (CDO)","hi":"मुख्य डिजाइन अधिकारी (CDO)","id":"Direktur Desain (CDO)","nl":"Directeur Ontwerp (CDO)","az":"Dizayn Direktoru (CDO)"};
 const origin = 'https://vertexishere.com';
+const photoVariants = {"https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2F2f87e5dc17c3a041c6e3e659fa9ee431901575fb02ca86034a4ec0d311978f4a.png":"/assets/team/optimized-a2b2e41b727efc13.webp","https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2F18d0a45bf26e56d18a0741277d68157f0eace2dc0b3aba55766c664b0935c3d8.png":"/assets/team/optimized-6543b8e5f3a24269.webp","https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Fd24f2869733cd79a9c0371aed2350d6deb730e0bb2e4a18e30878826e3c998bc.png":"/assets/team/optimized-0f9329f6a824355c.webp","https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2F6789fcbb5bbd5d62cf5596c0d6e6585ace3a2fe472f86005ea75e9fff82eb1ff.png":"/assets/team/optimized-8139f801d983d216.webp","https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Feeb8df59df0ddb78fa682ef9cee1a11530137d3faac39a010de4e83daf8e7e15.png":"/assets/team/optimized-6d012e2077f00040.webp","https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Fbffc6621ea7e10651ab9a93a79f7833b8c2b2f1f33222e5c6d73076b32ba0a6a.png":"/assets/team/optimized-6fc059891c5452fd.webp","https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Ff532f5a600b5b8ae63ad69c8f45d879e6a57760d3b254fc563d9680b4414ec26.png":"/assets/team/optimized-f48e07831bf6dc58.webp","https://firebasestorage.googleapis.com/v0/b/vertex-ai-1618.firebasestorage.app/o/site-team%2Fphotos%2Fdf6e7d56c45f9610907e67e297b748a0723d387e788ad466b2274dc4fee1b6cd.png":"/assets/team/optimized-7833709e5029c9f9.webp"};
+function optimizedPhoto(value) {
+  if (!value) return null;
+  const url = new URL(value), key = url.origin + url.pathname;
+  return photoVariants[key] ? origin + photoVariants[key] : value;
+}
 const endpoint = 'https://listsiteteam-o5h7dmtija-ew.a.run.app/';
 const ids = /^[a-zA-Z0-9_-]{1,128}$/;
 const memory = new Map();
@@ -79,7 +85,7 @@ function fill(html, id, content) {
 }
 function renderProfile(template, card, lang, indexable = true) {
   if (card.positionCode === 'CDO') card = {...card,position:designTitles[lang] || designTitles.en};
-  const text = biography(card,lang), canonical = profileUrl(card,lang), links = socialLinks(card), image = safeUrl(card.imageUrl);
+  const text = biography(card,lang), canonical = profileUrl(card,lang), links = socialLinks(card), image = optimizedPhoto(safeUrl(card.imageUrl));
   const title = card.name + ' | ' + card.position + ' · Vertex';
   const description = (card.name + ' — ' + card.position + '. ' + text.replace(/\s+/g,' ')).slice(0,160);
   const alternates = languages.filter(l => translated(card,l));

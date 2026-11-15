@@ -59,3 +59,12 @@ test('routing excludes console, checkout, legal pages and ordinary assets',()=>{
  assert(routes.include.every(p=>/profile|mustafa-caki/.test(p)));
  assert(fs.readFileSync('robots.txt','utf8').includes('Sitemap: https://vertexishere.com/sitemap-profiles.xml'));
 });
+test('optimized public portraits are source-specific and new Console photos retain their live URL',async()=>{
+ const map=JSON.parse(source.match(/const photoVariants = (.*);/)[1]);
+ for(const asset of Object.values(map)){assert(fs.existsSync('.'+asset));assert(fs.statSync('.'+asset).size<100000);}
+ const {renderProfile}=await worker,sourceUrl=Object.keys(map)[0];
+ const html=renderProfile(template,{...card,imageUrl:sourceUrl+'?alt=media&token=rotated'},'tr');
+ assert(html.includes('https://vertexishere.com'+map[sourceUrl]));
+ const changed=renderProfile(template,{...card,imageUrl:'https://images.example.com/new-photo.png'},'tr');
+ assert(changed.includes('https://images.example.com/new-photo.png'));
+});
