@@ -4,10 +4,12 @@ const root=path.resolve(__dirname,'..'),types={'.html':'text/html','.js':'text/j
 const server=http.createServer((req,res)=>{let name=new URL(req.url,'http://localhost').pathname;if(name.endsWith('/'))name+='index.html';const file=path.join(root,name);if(!file.startsWith(root+path.sep)||!fs.existsSync(file)){res.writeHead(404);res.end();return;}res.setHeader('Content-Type',types[path.extname(file)]||'application/octet-stream');res.end(fs.readFileSync(file));});
 (async()=>{await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));const base='http://127.0.0.1:'+server.address().port,browser=await chromium.launch({headless:true});
 try{fs.mkdirSync('test-results',{recursive:true});for(const width of [390,1440]){
- const page=await browser.newPage({viewport:{width,height:900},reducedMotion:'no-preference'}),requests=[],errors=[];
+ const page=await browser.newPage({viewport:{width,height:900},isMobile:width<700,hasTouch:width<700,deviceScaleFactor:width<700?1.75:1,reducedMotion:'no-preference'}),requests=[],errors=[];
  page.on('request',r=>requests.push(r.url()));page.on('pageerror',e=>errors.push(e.message));
  await page.route('**/*',route=>route.request().url().startsWith(base)?route.continue():route.abort());
  await page.goto(base+'/tr/');await page.locator('.story-ready').waitFor();
+ const viewport=await page.evaluate(()=>({inner:innerWidth,client:document.documentElement.clientWidth,scroll:document.documentElement.scrollWidth,desktop:matchMedia('(min-width:1280px)').matches}));
+ console.log('Viewport geometry:',width,JSON.stringify(viewport));assert(viewport.scroll<=width+1,'public homepage must not overflow the mobile layout viewport');
  assert(await page.locator('#home h1').isVisible());assert(await page.locator('#home .story-actions a').first().isVisible());
  assert(!requests.some(url=>url.includes('globe-libs.js')||url.includes('countries-110m.json')),'opening frame must not request geographic dependencies');
  await page.screenshot({path:'test-results/home-opening-'+width+'.png'});
