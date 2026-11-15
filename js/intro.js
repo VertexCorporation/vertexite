@@ -25,7 +25,7 @@ setTimeout(async function () {
   var hero = document.querySelector('.hero#home');
   var statsSection = document.querySelector('.stats');
   var sponsorsSection = document.querySelector('.partners-static');
-  if (!hero || !window.d3 || !window.topojson) return;
+  if (!hero) return;
 
   // Match the first HTML frame before measuring or replacing its title.
   if(document.fonts){await Promise.race([document.fonts.load('112px Anton', hero.querySelector('h1').textContent).catch(function(){}),new Promise(function(resolve){setTimeout(resolve,1500);})]);}
@@ -275,7 +275,7 @@ setTimeout(async function () {
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var worldFeatures = null;
   var spreadCountries = [];
-  var graticule = d3.geoGraticule10();
+  var graticule = null;
   var ticking = false;
 
   function clamp(value, min, max) { return Math.min(max, Math.max(min, value)); }
@@ -416,6 +416,7 @@ setTimeout(async function () {
     if(bounds.bottom<0||bounds.top>window.innerHeight){if(header){header.style.transform='';header.style.opacity='';header.style.pointerEvents='';header.inert=false;}ticking=false;return;}
     var travel = Math.max(1, hero.offsetHeight - stage.offsetHeight);
     var progress = reduced ? 1 : clamp((window.scrollY - hero.offsetTop) / travel, 0, 1);
+    if(reduced || progress > .01) ensureWorld();
     // Read layout before changing any styles in this frame.
     var stageWidth = stage.clientWidth, stageHeight = stage.clientHeight;
     var globeWidth = globeWrap.clientWidth;
@@ -507,22 +508,26 @@ setTimeout(async function () {
     }
   }
 
-  fetch('/assets/geo/countries-110m.json', { credentials: 'same-origin' })
-    .then(function (response) {
-      if(!response.ok)throw new Error(response.status);
-      return response.json();
-    })
-    .then(function (worldTopology) {
-      worldFeatures = topojson.feature(worldTopology, worldTopology.objects.countries).features;
-      // Evenly progressive global sweep: all countries participate, with no
-      // origin country, national flag colour, or distance-to-Türkiye ordering.
-      spreadCountries = worldFeatures.map(function(country) {
-        return { country: country, longitude: d3.geoCentroid(country)[0] };
-      }).sort(function(a,b) { return a.longitude - b.longitude; })
-        .map(function(entry) { return entry.country; });
-      render();
-    })
-    .catch(function () { globeWrap.style.display = 'none'; });
+  // The opening wireframe and heading need no geographic libraries or data.
+  // Begin loading before the user reaches the globe phase; reduced motion
+  // shows the static globe immediately and therefore loads it on entry.
+  var worldTask;
+  function ensureWorld(){
+    if(worldTask)return worldTask;
+    worldTask=new Promise(function(resolve,reject){
+      if(window.d3&&window.topojson){resolve();return;}
+      var script=document.createElement('script');script.src='/js/globe-libs.js?v=f8771b9a7084';
+      script.onload=function(){window.d3&&window.topojson?resolve():reject(Error('Geographic libraries unavailable'));};script.onerror=reject;document.head.appendChild(script);
+    }).then(function(){return fetch('/assets/geo/countries-110m.json',{credentials:'same-origin'});})
+      .then(function(response){if(!response.ok)throw Error(response.status);return response.json();})
+      .then(function(worldTopology){
+        graticule=d3.geoGraticule10();
+        worldFeatures=topojson.feature(worldTopology,worldTopology.objects.countries).features;
+        spreadCountries=worldFeatures.map(function(country){return {country:country,longitude:d3.geoCentroid(country)[0]};}).sort(function(a,b){return a.longitude-b.longitude;}).map(function(entry){return entry.country;});
+        requestRender();
+      }).catch(function(){globeWrap.style.display='none';});
+    return worldTask;
+  }
 
   window.addEventListener('scroll', requestRender, { passive: true });
   window.addEventListener('resize', function(){measureTitle();measureOpeningFrame();requestRender();}, { passive: true });
