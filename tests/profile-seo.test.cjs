@@ -60,6 +60,43 @@ test('routing excludes console, checkout, legal pages and ordinary assets',()=>{
  assert(routes.include.every(p=>/profile|mustafa/.test(p)));
  assert(fs.readFileSync('robots.txt','utf8').includes('Sitemap: https://vertexishere.com/sitemap-profiles.xml'));
 });
+test('a corrupt edge cache entry triggers a fresh directory request with time for a cold start',async t=>{
+ const {default:handler}=await worker;
+ t.mock.method(AbortSignal,'timeout',ms=>{
+  assert.equal(ms,20000);
+  return new AbortController().signal;
+ });
+ t.mock.method(global,'fetch',async()=>Response.json({result:{cards:[card]}}));
+ const oldCaches=global.caches;
+ global.caches={default:{match:async()=>new Response('invalid JSON',{headers:{'X-Profile-Fetched-At':String(Date.now())}}),put:async()=>{}}};
+ try{
+  const env={ASSETS:{fetch:async()=>new Response(template,{headers:{'Content-Type':'text/html'}})}};
+  const response=await handler.fetch(new Request('https://vertexishere.com/fr/mustafa'),env,{waitUntil:()=>{}});
+  assert.equal(response.status,200);
+  assert.match(await response.text(),/<p>Public biography fr<\/p>/);
+ }finally{global.caches=oldCaches;}
+});
+test('a directory outage serves a non-cacheable profile shell and preserves HTTP errors',async t=>{
+ const {default:handler}=await worker;
+ t.mock.method(global,'fetch',async()=>new Response(null,{status:503}));
+ for(const path of ['/az/mustafa','/az/profile?id=other','/sitemap-profiles.xml']){
+  const url='https://vertexishere.com'+path;
+  const env={ASSETS:{fetch:async req=>{
+   assert.equal(new URL(req.url).pathname,'/az/profile');
+   return new Response(template,{headers:{'Content-Type':'text/html'}});
+  }}};
+  const response=await handler.fetch(new Request(url),env,{});
+  assert.equal(response.status,503);
+  assert.equal(response.headers.get('X-Robots-Tag'),'noindex');
+  assert.equal(response.headers.get('Cache-Control'),'no-store');
+  const html=await response.text();
+  if(path.endsWith('.xml')) assert.match(html,/<h1>Profile temporarily unavailable<\/h1>/);
+  else assert.match(html,/<section[^>]+id="vp-content" hidden/);
+  const head=await handler.fetch(new Request(url,{method:'HEAD'}),env,{});
+  assert.equal(head.status,503);
+  assert.equal(await head.text(),'');
+ }
+});
 test('reading an aging edge-cache entry cannot extend the published data freshness window',async()=>{
  const {default:handler}=await worker,oldFetch=global.fetch,oldCaches=global.caches,oldNow=Date.now;
  let time=oldNow(),calls=0;const at=time-59000;Date.now=()=>time;

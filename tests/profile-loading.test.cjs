@@ -1,13 +1,14 @@
 const {test}=require('node:test'),assert=require('node:assert/strict'),vm=require('node:vm'),fs=require('node:fs'),path=require('node:path');
 const source=fs.readFileSync(path.join(__dirname,'../js/team-profile.js'),'utf8');
 const card={id:'chief-1',name:'Example Chief',biography:'First paragraph\n\nSecond paragraph',links:{}};
-function fixture(cached,fail,hydrated=false){
+function fixture(cached,fail,hydrated=false,location={pathname:'/tr/profile',search:'?id=chief-1'},profile=card){
  const els=new Map();function element(){return {hidden:true,children:[],textContent:'',events:{},append(...x){this.children.push(...x)},replaceChildren(...x){this.children=x},addEventListener(e,fn){this.events[e]=fn},dispatchEvent(){}};}
  const el=id=>{if(!els.has(id))els.set(id,element());return els.get(id)};
- let requests=0;const cache={read:()=>cached?{value:{cards:[card]},age:0}:null,load:async(k,fn)=>({value:await fn()}),save(){},fetchJSON:async()=>{requests++;if(fail.value)throw Error('offline');return {result:{cards:[card]}}}};
- const context={URL,URLSearchParams,Event,console:{warn(){}},location:{pathname:'/tr/profile',search:'?id=chief-1'},document:{documentElement:{},getElementById:el,querySelectorAll:()=>[],createElement:element},window:{VertexPublicCache:cache,VertexTeamLinks:{biography:c=>c?.biography,roleTitle:()=> 'Chief',ordered:()=>[]}}};
+ const link={href:'https://vertexishere.com/en/'};
+ let requests=0;const cache={read:()=>cached?{value:{cards:[profile]},age:0}:null,load:async(k,fn)=>({value:await fn()}),save(){},fetchJSON:async()=>{requests++;if(fail.value)throw Error('offline');return {result:{cards:[profile]}}}};
+ const context={URL,URLSearchParams,Event,console:{warn(){}},location,document:{documentElement:{},getElementById:el,querySelectorAll:()=>[link],createElement:element},window:{VertexPublicCache:cache,VertexTeamLinks:{biography:c=>c?.biography,roleTitle:()=> 'Chief',ordered:()=>[]}}};
  if(hydrated)el('vp-data').textContent=JSON.stringify({version:1,lang:'tr',card});
- vm.runInNewContext(source,context);return {el,requests:()=>requests,tick:()=>new Promise(r=>setImmediate(r))};
+ vm.runInNewContext(source,context);return {el,link,requests:()=>requests,tick:()=>new Promise(r=>setImmediate(r))};
 }
 test('homepage snapshot opens a biography without waiting for another network request',async()=>{
  const f=fixture(true,{value:true});await f.tick();assert.equal(f.requests(),0);assert.equal(f.el('vp-content').hidden,false);assert.equal(f.el('vp-name').textContent,'Example Chief');assert.equal(f.el('vp-bio').children.length,2);
@@ -17,3 +18,13 @@ test('direct profile entry recovers through retry after a failed network request
 });
 
 test('server-rendered biographies hydrate without a second directory request or loading copy',async()=>{const f=fixture(false,{value:true},true);await f.tick();assert.equal(f.requests(),0);assert.equal(f.el('vp-content').hidden,false);assert.equal(f.el('vp-error').hidden,true);assert.equal(f.el('vp-name').textContent,'Example Chief');});
+
+test('the short biography URL can load the founder from a homepage snapshot without server data',async()=>{
+ const founder={...card,name:'Mustafa Çakı',positionCode:'CEO'};
+ const f=fixture(true,{value:true},false,{pathname:'/tr/mustafa',search:''},founder);
+ await f.tick();
+ assert.equal(f.requests(),0);
+ assert.equal(f.el('vp-content').hidden,false);
+ assert.equal(f.el('vp-name').textContent,'Mustafa Çakı');
+ assert.equal(f.link.href,'https://vertexishere.com/en/mustafa');
+});
