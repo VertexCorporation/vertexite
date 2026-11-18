@@ -27,6 +27,8 @@ if(lang==='ar')document.documentElement.dir='rtl';
 const el=id=>document.getElementById(id);
 const serverPayload=(()=>{try{const value=JSON.parse(el('vp-data')?.textContent||'null');return value?.version===1&&value.lang===lang&&/^[a-zA-Z0-9_-]{1,128}$/.test(value.card?.id)?value:null}catch{return null}})();
 const rendered=serverPayload?.card;
+const founderPath=/\/(?:mustafa(?:-caki)?(?:\.html)?)\/?$/.test(location.pathname);
+const isFounder=card=>card?.positionCode==='CEO'&&String(card.name||'').toLocaleLowerCase('tr').replace(/ı/g,'i').normalize('NFD').replace(/[\u0300-\u036f]/g,'')==='mustafa caki';
 
 el('vp-links-title').textContent=words[1];
 function unavailable(msg){
@@ -44,7 +46,7 @@ async function load(){
  const query=new URLSearchParams(location.search);
  const id=query.get('id')||rendered?.id,slug=query.get('slug');
  const validId=!!id&&/^[a-zA-Z0-9_-]{1,128}$/.test(id);
- const founderSlug=!id&&['mustafa','mustafa-caki'].includes(slug);
+ const founderSlug=!id&&(founderPath||['mustafa','mustafa-caki'].includes(slug));
  if(!validId&&!founderSlug){unavailable(words[2]);loading=false;return}
  try{
   const cache=window.VertexPublicCache;
@@ -59,11 +61,10 @@ async function load(){
   }
   const snapshot=rendered?null:cache.read(key);
   const result=rendered?{cards:[rendered]}:snapshot&&valid(snapshot.value)&&snapshot.value.cards.some(card=>
-   (validId?card.id===id:card.positionCode==='CEO')&&window.VertexTeamLinks.biography(card,lang))
+   (validId?card.id===id:isFounder(card))&&window.VertexTeamLinks.biography(card,lang))
    ? snapshot.value : (await cache.load(key,request,valid,{ttl:0,cooldownMs:1000})).value;
   // Render the saved public biography immediately; refresh stale data for the next visit.
   if(snapshot&&result===snapshot.value&&snapshot.age>60000)request().then(value=>cache.save(key,value)).catch(()=>{});
-  const isFounder=card=>card?.positionCode==='CEO'&&String(card.name||'').toLocaleLowerCase('tr').replace(/ı/g,'i').normalize('NFD').replace(/[\u0300-\u036f]/g,'')==='mustafa caki';
   const card=Array.isArray(result?.cards)?result.cards.find(x=>validId?x.id===id:isFounder(x)):null;
   const biography=window.VertexTeamLinks.biography(card,lang);
   if(!card||!biography){unavailable(words[2]);return}
@@ -97,10 +98,12 @@ async function load(){
 const profileQuery=new URLSearchParams(location.search);
 const profileId=profileQuery.get('id')||rendered?.id,profileSlug=profileQuery.get('slug');
 const preserveId=!!profileId&&/^[a-zA-Z0-9_-]{1,128}$/.test(profileId);
-if(preserveId||(!profileId&&['mustafa','mustafa-caki'].includes(profileSlug))){
+if(preserveId||(!profileId&&(founderPath||['mustafa','mustafa-caki'].includes(profileSlug)))){
  document.querySelectorAll('.lang-row').forEach(link=>{
-  const target=new URL(link.href);const targetLang=target.pathname.split('/').filter(Boolean)[0];if(serverPayload?.urls?.[targetLang]){link.href=serverPayload.urls[targetLang];return;}target.pathname=target.pathname.replace(/\/$/,'')+'/profile.html';
-  target.searchParams.set(preserveId?'id':'slug',preserveId?profileId:profileSlug);link.href=target.href;
+  const target=new URL(link.href);const targetLang=target.pathname.split('/').filter(Boolean)[0];if(serverPayload?.urls?.[targetLang]){link.href=serverPayload.urls[targetLang];return;}
+  if(!preserveId){link.href=new URL('/'+targetLang+'/mustafa',target).href;return;}
+  target.pathname=target.pathname.replace(/\/$/,'')+'/profile.html';
+  target.searchParams.set('id',profileId);link.href=target.href;
  });
 }
 load();

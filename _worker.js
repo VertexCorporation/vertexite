@@ -10,6 +10,7 @@ function optimizedPhoto(value) {
   return photoVariants[key] ? origin + photoVariants[key] : value;
 }
 const endpoint = 'https://listsiteteam-o5h7dmtija-ew.a.run.app/';
+const directoryTimeoutMs = 20000;
 const ids = /^[a-zA-Z0-9_-]{1,128}$/;
 const memory = new Map();
 const pending = new Map();
@@ -61,12 +62,16 @@ async function directory(lang, ctx) {
   const task = (async () => {
     const cache = globalThis.caches?.default;
     const key = new Request(origin + '/__profile-directory-v1?lang=' + lang);
-    let cached;
-    try { cached = await cache?.match(key); } catch {}
-    if (cached && Date.now() - Number(cached.headers.get('X-Profile-Fetched-At') || 0) < 60000) {
-      const value = cleanCards(await cached.json()); memory.set(lang,{value,at:Number(cached.headers.get('X-Profile-Fetched-At'))}); return value;
-    }
-    const response = await fetch(endpoint, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:{lang}}),signal:AbortSignal.timeout(8000)});
+    try {
+      const cached = await cache?.match(key);
+      const at = Number(cached?.headers.get('X-Profile-Fetched-At') || 0);
+      if (cached && Date.now() - at < 60000) {
+        const value = cleanCards(await cached.json());
+        memory.set(lang,{value,at});
+        return value;
+      }
+    } catch {} // A bad cache entry is a miss, so refresh it from the directory.
+    const response = await fetch(endpoint, {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({data:{lang}}),signal:AbortSignal.timeout(directoryTimeoutMs)});
     if (!response.ok) throw Error('Public directory unavailable');
     const body = await response.text();
     if (body.length > 4000000) throw Error('Oversized public directory');
@@ -124,6 +129,11 @@ function renderSitemap(cards) {
 function errorResponse(status, message) {
   return new Response('<!doctype html><html lang="en"><meta charset="utf-8"><meta name="robots" content="noindex,follow"><title>Vertex | Profile</title><h1>' + message + '</h1><a href="/en/#team">Vertex</a></html>',{status,headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'no-store','X-Robots-Tag':'noindex','X-Content-Type-Options':'nosniff',...(status===503?{'Retry-After':'60'}:{})}});
 }
+async function profileTemplate(env, origin, lang) {
+  const response = await env.ASSETS.fetch(new Request(new URL('/' + lang + '/profile',origin)));
+  if (!response.ok || !response.headers.get('Content-Type')?.includes('text/html')) throw Error('Profile shell unavailable');
+  return response.text();
+}
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url), parts = url.pathname.split('/').filter(Boolean);
@@ -134,8 +144,8 @@ export default {
     if (!sitemap && !alias && !profile) return env.ASSETS.fetch(request);
     if (!['GET','HEAD'].includes(request.method)) return new Response(null,{status:405,headers:{Allow:'GET, HEAD','X-Robots-Tag':'noindex'}});
     if (url.hostname === 'www.vertexishere.com') return Response.redirect(origin + url.pathname + url.search,301);
+    const language = lang || 'en';
     try {
-      const language = lang || 'en';
       if (sitemap) {
         const data = await directory('en',ctx);
         return new Response(request.method==='HEAD' ? null : renderSitemap(data.cards),{headers:{'Content-Type':'application/xml; charset=utf-8','Cache-Control':'public, max-age=60','X-Content-Type-Options':'nosniff'}});
@@ -147,13 +157,20 @@ export default {
       if (!card || !biography(card,language)) return errorResponse(404,'Profile not found');
       const canonical = new URL(profileUrl(card,language));
       if (url.pathname !== canonical.pathname || (founder(card) && url.search)) return Response.redirect(new URL(canonical.pathname + canonical.search,url.origin).href,301);
-      const templateUrl = new URL('/' + language + '/profile',url.origin);
-      const template = await env.ASSETS.fetch(new Request(templateUrl,{method:'GET'}));
-      if (!template.ok || !template.headers.get('Content-Type')?.includes('text/html')) throw Error('Profile shell unavailable');
-      const html = renderProfile(await template.text(),card,language,!url.hostname.endsWith('.pages.dev'));
+      const template = await profileTemplate(env,url.origin,language);
+      const html = renderProfile(template,card,language,!url.hostname.endsWith('.pages.dev'));
       return new Response(request.method==='HEAD' ? null : html,{headers:{'Content-Type':'text/html; charset=utf-8','Cache-Control':'public, max-age=60','X-Content-Type-Options':'nosniff','Referrer-Policy':'strict-origin-when-cross-origin','X-Vertex-Profile':'server-rendered-v1'}});
-    } catch {
-      return errorResponse(503,'Profile temporarily unavailable');
+    } catch (error) {
+      console.warn('[profile] Server rendering failed', {language, sitemap, errorType:error?.name});
+      const unavailable = errorResponse(503,'Profile temporarily unavailable');
+      if (request.method === 'HEAD') return new Response(null,{status:503,headers:unavailable.headers});
+      if (sitemap) return unavailable;
+      try {
+        const template = await profileTemplate(env,url.origin,language);
+        return new Response(template,{status:503,headers:unavailable.headers});
+      } catch {
+        return unavailable;
+      }
     }
   },
 };
