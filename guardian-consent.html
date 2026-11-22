@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="referrer" content="no-referrer">
+  <title>Veli onayı | Vertex</title>
+  <link rel="stylesheet" href="/css/pages/guardian-consent.css">
+  <script defer src="/js/guardian-consent.js"></script>
+</head>
+<body>
+  <main>
+    <h1 id="guardianTitle">Vertex Deneyim Programı</h1>
+    <p id="guardianStatus" role="status">Veli bağlantısı kontrol ediliyor…</p>
+    <section id="guardianInformation" hidden>
+      <h2 id="guardianApplicant"></h2>
+      <div id="guardianProgramme"></div>
+      <h2 id="guardianPrivacyTitle">Kişisel veriler hakkında bilgilendirme</h2>
+      <p id="guardianPrivacy"></p>
+      <p><a id="guardianPrivacyLink" href="/tr/gizlilik-politikasi">Vertex Gizlilik Politikası</a></p>
+      <form id="guardianDecision">
+        <label><input type="checkbox" required> <span id="guardianDeclaration"></span></label>
+        <div class="actions">
+          <button type="submit" name="decision" value="approved" id="guardianApprove">Katılımı onaylıyorum</button>
+          <button type="submit" name="decision" value="declined" id="guardianDecline">Onay vermiyorum</button>
+        </div>
+      </form>
+    </section>
+    <noscript>Bu bağlantıyı kullanmak için JavaScript’i etkinleştirin.</noscript>
+  </main>
+</body>
+</html>

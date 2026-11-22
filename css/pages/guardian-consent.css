@@ -1,0 +1,11 @@
+:root { color-scheme: light dark; font: 16px/1.55 system-ui, sans-serif; }
+body { margin: 0; padding: clamp(24px, 8vw, 80px) 20px; background: Canvas; color: CanvasText; }
+main { max-width: 40rem; margin: auto; }
+h1 { font-size: clamp(1.7rem, 5vw, 2.5rem); line-height: 1.16; }
+h2 { margin-top: 1.65rem; font-size: 1.18rem; }
+form { border-top: 1px solid GrayText; margin-top: 1.75rem; padding-top: 1.25rem; }
+label { display: flex; gap: .55rem; align-items: baseline; }
+.actions { display: flex; gap: .6rem; flex-wrap: wrap; margin-top: 1rem; }
+button { font: inherit; border: 1px solid CanvasText; border-radius: .55rem; padding: .65rem .95rem; cursor: pointer; }
+button[value=approved] { background: CanvasText; color: Canvas; }
+button:disabled { cursor: wait; opacity: .65; }

@@ -13,14 +13,22 @@
       failure: "Başvurunuz Vertex Konsol'a kaydedilemedi. Sistem otomatik yeniden denedi; gerekirse aşağıdaki 'Kaydı Tekrar Dene' seçeneğini kullanın.",
       conflict: "Bu başvuru kaydı farklı bir e-posta ile ilişkilendirilmiş. Lütfen Vertex ekibiyle iletişime geçin.",
       confirm: "Başvuru kaydı henüz doğrulanmadı.",
-      retry: "Kaydı Tekrar Dene"
+      retry: "Kaydı Tekrar Dene",
+      guardian: "Veli e-postası henüz gönderilemedi. Bu sayfayı açık tutup kaydı tekrar deneyin.",
+      guardianExpired: "Veli bağlantısının süresi doldu. Yeni bağlantı için Vertex ile iletişime geçin.",
+      guardianRequired: "Velinin adını, soyadını ve senden farklı bir e-posta adresini gir.",
+      minimumAge: "Başvurmak için 14 yaşını doldurmuş olmalısın."
     },
     en: {
       missing: "The interview was booked, but its ID or time was not received. Your application has not been saved. Please contact support without closing this page.",
       failure: "Your application was not saved to Vertex Console. Automatic retries were attempted; use Retry Saving below if needed.",
       conflict: "This booking is already associated with another email. Please contact the Vertex team.",
       confirm: "Application storage could not be confirmed.",
-      retry: "Retry Saving"
+      retry: "Retry Saving",
+      guardian: "The guardian email could not be sent yet. Keep this page open and retry.",
+      guardianExpired: "The guardian link expired. Contact Vertex for a new link.",
+      guardianRequired: "Enter your guardian’s full name and a different email address.",
+      minimumAge: "You must be at least 14 years old to apply."
     }
   };
   const t = () => messages[document.documentElement.lang] || messages.en;
@@ -86,8 +94,13 @@
         }
         let result;
         try { result = await response.json(); } catch { result = null; }
-        if (response.ok && result?.success === true && typeof result.id === "string" && result.id.length) return result;
-        lastError = Object.assign(new Error("Application storage not confirmed"), { status: response.status });
+        if (response.ok && result?.success === true && typeof result.id === "string" && result.id.length) {
+          if (data.guardianEmail && !["pending","approved","declined"].includes(result.guardianConsentStatus)) {
+            throw Object.assign(new Error("Guardian email not confirmed"),{status:503,code:"guardian-delivery-pending"});
+          }
+          return result;
+        }
+        lastError = Object.assign(new Error("Application storage not confirmed"), { status: response.status, code: result?.code });
         if (![404, 408, 429, 500, 502, 503, 504].includes(response.status)) throw lastError;
       }
       if (!retryable(lastError) || attempt === 2) break;
@@ -97,7 +110,12 @@
   }
 
   function report(error, statusBox, onRetry) {
-    const message = error?.status === 409 ? t().conflict : t().failure;
+    const feedback = {
+      "guardian-delivery-pending":"guardian", "guardian-delivery-failed":"guardian",
+      "guardian-expired":"guardianExpired", "guardian-required":"guardianRequired",
+      "under-minimum-age":"minimumAge"
+    };
+    const message = t()[feedback[error?.code]] || (error?.status === 409 ? t().conflict : t().failure);
     console.error("[APPLICATION] Persistence not confirmed", { status: error?.status || null, kind: error?.name || "error" });
     if (!statusBox) { alert(message); return; }
     statusBox.className = "interview-status-box";
@@ -117,7 +135,7 @@
       const submitter = document.getElementById("submitBtn");
       if (form && submitter && !submitter.disabled) form.requestSubmit(submitter);
     };
-    if (error?.status !== 409 && error?.status !== 400 && error?.status !== 403) {
+    if (error?.status !== 409 && error?.status !== 400 && error?.status !== 403 && error?.status !== 410) {
       const retry = document.createElement("button");
       retry.type = "button";
       retry.className = "btn btn-primary join-submit-btn";

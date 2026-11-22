@@ -29,3 +29,24 @@
 .vertex-join-page #submitBtn,.vertex-join-page .application-back-btn{font-family:var(--font-sub,'Poppins',sans-serif);font-size:14px;font-weight:500;line-height:1.5}
 .vertex-join-page #submitBtn{display:grid;place-items:center;min-height:48px}
 .vertex-join-page #submitBtn .application-action-label{grid-area:1/1;font:inherit;color:inherit;pointer-events:none}
+
+.vertex-join-page .application-guardian {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: subgrid;
+  row-gap: 14px;
+  min-width: 0;
+  animation: application-guardian-reveal 240ms ease-out both;
+}
+.vertex-join-page .application-guardian h2,
+.vertex-join-page .application-guardian p { grid-column: 1 / -1; margin: 0; }
+.vertex-join-page .application-guardian h2 { font-size: 1rem; }
+.vertex-join-page .application-guardian p { color: var(--text-muted); font-size: .875rem; }
+.vertex-join-page .application-age-warning { margin: 0; color: var(--text); font-size: .875rem; }
+@keyframes application-guardian-reveal {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vertex-join-page .application-guardian { animation: none; }
+}

@@ -165,7 +165,7 @@ monthSelect.addEventListener("change",()=>{month=Number(monthSelect.value);if(ye
 yearSelect.addEventListener("change",()=>{year=Number(yearSelect.value);if(year===maxYear&&month>maxDate.getMonth())month=maxDate.getMonth();render()});
 document.addEventListener("pointerdown",e=>{if(!opened)return;if(activeMenu&&!activeMenu.contains(e.target)&&!menus.some(x=>x.button.contains(e.target)))closeMenu();if(!panel.contains(e.target)&&!anchor.contains(e.target))close()});
 document.addEventListener("keydown",e=>{if(!opened||e.key!=="Escape")return;e.preventDefault();if(activeMenu){const focused=menus.find(x=>x.menu===activeMenu);closeMenu();focused?.button.focus({preventScroll:true})}else{close();trigger.focus({preventScroll:true})}});
-source.addEventListener("invalid",e=>{e.preventDefault();error.hidden=false;trigger.setAttribute("aria-invalid","true");showValue();trigger.focus({preventScroll:true})});
+source.addEventListener("invalid",e=>{e.preventDefault();error.textContent=source.validity.customError?source.validationMessage:i18n[1];error.hidden=false;trigger.setAttribute("aria-invalid","true");showValue();trigger.focus({preventScroll:true})});
 source.addEventListener("change",()=>{error.hidden=true;trigger.removeAttribute("aria-invalid");showValue()});
 source.form?.addEventListener("reset",()=>requestAnimationFrame(()=>{error.hidden=true;trigger.removeAttribute("aria-invalid");showValue();close()}));
 showValue();
