@@ -13,7 +13,7 @@
     age:'Başvurmak için 13 yaşının üzerinde olmalı ve 14 yaşını doldurmuş olmalısın.',
     different:'Velinin e-posta adresi başvuru adresinden farklı olmalı.',
     fullName:'Velinin adını ve soyadını gir.',
-    pending:'Başvurun alındı. Velinin e-posta adresine bilgilendirme ve onay bağlantısı gönderdik. Üyeliğin için veli onayı gerekiyor.'
+    pending:'Başvurun alındı. Bilgilendirme ve onay bağlantısı velinin e-posta adresine gönderilmek üzere sıraya alındı. Üyeliğin için veli onayı gerekiyor.'
   } : {
     heading:'Guardian information',
     detail:'When you apply, your parent or legal guardian will receive programme information and an approval link by email.',
@@ -22,7 +22,7 @@
     age:'You must be at least 14 years old to apply.',
     different:'The guardian’s email address must be different from yours.',
     fullName:'Enter the guardian’s first and last name.',
-    pending:'Your application has been received. We emailed your guardian the programme information and an approval link. Guardian approval is required for membership.'
+    pending:'Your application has been received. The programme information and approval link are queued for email to your guardian. Guardian approval is required for membership.'
   };
 
   const group = document.createElement('section');
