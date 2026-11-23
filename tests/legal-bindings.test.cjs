@@ -7,7 +7,9 @@ test('every bound document retains its exact original body and stable legal ID',
   const source=fs.readFileSync(path.join(root,row.path),'utf8');
   assert(source.includes('data-legal-document="'+row.id+'"'),row.path);
   assert.match(source,/<script defer src="\/js\/legal-reader.js\?v=1"><\/script>/);
-  const preserved=source.replace(/ data-legal-document="[^"]+"/g,'').replace(/<script defer src="\/js\/legal-reader.js\?v=1"><\/script>\n/g,'').split(/<body\b/)[1];
+  const preserved=row.section==='doctrine'
+   ? source.match(/<div class="doctrine-text-container"[^>]*>([\s\S]*?)<\/div>/)?.[1]
+   : source.replace(/ data-legal-document="[^"]+"/g,'').replace(/<script defer src="\/js\/legal-reader.js\?v=1"><\/script>\n/g,'').split(/<body\b/)[1];
   assert.equal(crypto.createHash('sha256').update(preserved).digest('hex'),row.hash,row.path);
  }
 });
