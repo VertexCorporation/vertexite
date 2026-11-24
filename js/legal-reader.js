@@ -186,15 +186,18 @@
       target.replaceChildren(safeFragment(data.html));
       target.dataset.legalVersion = String(data.version);
       target.dataset.legalHash = data.hash;
-      status.textContent = message[1] + ': ' + data.version;
       if (target.id === 'doctrineScroll') {
+        status.remove();
         const check = document.getElementById('doctrineCheck');
         if (check) {
           check.checked = false;
           check.dispatchEvent(new Event('change', { bubbles: true }));
         }
         target.scrollTop = 0;
-      } else if (data.title) document.title = data.title;
+      } else {
+        status.textContent = message[1] + ': ' + data.version;
+        if (data.title) document.title = data.title;
+      }
       document.dispatchEvent(
         new CustomEvent('vertex:legal-loaded', { detail: { id, version: data.version, hash: data.hash } }),
       );
