@@ -114,19 +114,23 @@ footer .foot-col a,footer .foot-legal a{color:var(--text-muted)}footer .foot-col
 .store-badges .store-badge :is(small,strong){overflow-wrap:anywhere}
 @media(max-width:520px){.store-badges .store-badge{grid-template-columns:25px minmax(0,1fr);gap:8px;padding:10px}.store-badges .store-badge>svg{width:23px;height:23px}}
 
-/* Navigation uses the same content width and side padding as the page sections. */
-header .wrap.nav{max-width:var(--maxw);gap:clamp(8px,1vw,18px)}
+/* Give localized desktop navigation room to fit before using the mobile menu. */
+header .wrap.nav{max-width:max(var(--maxw),1320px);gap:clamp(8px,1vw,18px)}
 header .nav-links{gap:clamp(11px,1.15vw,19px)}
 header .nav-links a{font-size:13px}
 header .nav-right{gap:8px;flex-shrink:0}
 header .nav-right>.nav-future-cta{font-size:12px;padding:10px 12px;white-space:nowrap}
-@media(max-width:1279px){
+@media(max-width:1099px){
  header .nav-links{display:none}
  header .nav-right>.nav-future-cta{display:none}
  header .menu-btn{display:flex!important}
  header .mobile-menu{display:block!important}
 }
-@media(min-width:1280px){header .mobile-menu{display:none!important}}
+@media(min-width:1100px){header .mobile-menu{display:none!important}}
+@media(min-width:1100px) and (max-width:1199px){
+ header .nav-links{gap:8px}
+ header .nav-links a{font-size:12px}
+}
 @media(max-width:480px){header .nav{gap:6px}header .nav-right{gap:5px}header .lang-btn{padding:0 8px;max-width:124px}}
 
 /* Console-inspired light / dark / system selector, without altering the existing header dimensions. */
