@@ -39,6 +39,10 @@
   min-width: 0;
   animation: application-guardian-reveal 240ms ease-out both;
 }
+.vertex-join-page .application-guardian > .form-group {
+  align-self: stretch;
+  justify-content: space-between;
+}
 .vertex-join-page .application-guardian h2,
 .vertex-join-page .application-guardian p { grid-column: 1 / -1; margin: 0; }
 .vertex-join-page .application-guardian h2 { font-size: 1rem; }

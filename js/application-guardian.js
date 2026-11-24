@@ -7,9 +7,9 @@
   const tr = document.documentElement.lang === 'tr';
   const copy = tr ? {
     heading:'Veli bilgilendirmesi',
-    detail:'Başvurunu gönderdiğinde velin veya yasal temsilcin, programa ilişkin bilgi ve onay bağlantısını e-postayla alacak.',
-    name:'Velinin veya yasal temsilcinin adı soyadı',
-    email:'Velinin veya yasal temsilcinin e-posta adresi',
+    detail:'Başvurunu gönderdiğinde yasal temsilcin (velin veya vasin) programa ilişkin bilgi ve onay bağlantısını e-postayla alacak.',
+    name:'Yasal temsilcinin adı soyadı',
+    email:'Yasal temsilcinin e-postası',
     age:'Başvurmak için 13 yaşının üzerinde olmalı ve 14 yaşını doldurmuş olmalısın.',
     different:'Velinin e-posta adresi başvuru adresinden farklı olmalı.',
     fullName:'Velinin adını ve soyadını gir.',
@@ -17,8 +17,8 @@
   } : {
     heading:'Guardian information',
     detail:'When you apply, your parent or legal guardian will receive programme information and an approval link by email.',
-    name:'Parent or legal guardian’s full name',
-    email:'Parent or legal guardian’s email address',
+    name:'Guardian’s full name',
+    email:'Guardian’s email address',
     age:'You must be at least 14 years old to apply.',
     different:'The guardian’s email address must be different from yours.',
     fullName:'Enter the guardian’s first and last name.',
